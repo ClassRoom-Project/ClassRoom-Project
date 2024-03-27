@@ -1,15 +1,6 @@
 ---
 name: classRoom project issue template
 about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
-
----
-
----
-name: Custom Issue Template
-about: Issue Template
 title: "[이슈 타입] - 이슈 설명"
 labels: ''
 assignees: ''
