@@ -1,11 +1,11 @@
-import { fetchClassInfo } from '@/api/supabase/fetchClassInfo';
+import { fetchClassInfoToReserve } from '@/api/supabase/fetchClassInfo';
 import Image from 'next/image';
 import React from 'react';
 
 const ClassInfo = async ({ classId }: { classId: string | null }) => {
   console.log(classId);
 
-  // const classInfo = await fetchClassInfo({ classId });
+  // const classInfo = await fetchClassInfoToReserve({ classId });
   // console.log(classInfo);
 
   return (
