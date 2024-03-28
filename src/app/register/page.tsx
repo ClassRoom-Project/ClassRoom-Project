@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import CategoryDropdown from '@/components/register/CategoryDropdown';
 
 declare global {
   interface Window {
@@ -7,10 +8,7 @@ declare global {
   }
 }
 
-
-export default function RegisterPage() {
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [subCategory, setSubCategory] = useState('');
+const page = () => {
   const [className, setClassName] = useState('');
   const [classContent, setClassContent] = useState('');
   const [personnel, setPersonnel] = useState('');
@@ -36,33 +34,22 @@ export default function RegisterPage() {
           }
           fullAddress += (extraAddress !== '' ? ` (${extraAddress})` : '');
         }
-
         setAddress(fullAddress); // 주소 상태 업데이트
       }
     }).open();
   };
 
-  // 스크립트 동적 로드
+  // 주소 api : 스크립트 동적 로드
   const loadPostCode = () => {
     const script = document.createElement('script');
     script.src = "//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js";
     document.head.appendChild(script);
   };
 
-  // 컴포넌트 마운트 시 스크립트 로드
+  // 주소 api : 컴포넌트 마운트 시 스크립트 로드
   React.useEffect(() => {
     loadPostCode();
   }, []);
-
-  // 카테고리가 변경될 때 실행할 함수
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCategory(event.target.value);
-  };
-
-  // 소분류(해시태그) 입력값이 변경될 때 실행할 함수
-  const handleSubCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSubCategory(event.target.value);
-  };
 
   const handleClassNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setClassName(event.target.value);
@@ -84,7 +71,6 @@ export default function RegisterPage() {
     setPrice(event.target.value);
   };
 
-  // 시간 변경 핸들러 함수
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedTime(event.target.value);
   };
@@ -96,28 +82,7 @@ export default function RegisterPage() {
         <div>프로필</div>
       </div>
       <div className='border p-4 flex flex-col item-center mt-4'>
-        <div className='w-full max-w-md'>
-          <div className="flex items-center space-x-2">
-            <div>
-              {/* 카테고리 드롭다운 */}
-              <select value={selectedCategory} onChange={handleCategoryChange}>
-                <option value="">카테고리 선택</option>
-                <option value="요리">요리</option>
-                <option value="공예&공방">공예&공방</option>
-                <option value="운동">운동</option>
-                <option value="교육">교육</option>
-                <option value="악기&음악">악기&음악</option>
-                <option value="뷰티">뷰티</option>
-                <option value="기타">기타</option>
-              </select>
-            </div>
-            <p>소분류</p>
-            <div>
-              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={subCategory} onChange={handleSubCategoryChange} placeholder="해시태그를 입력해주세요"/>
-            </div>
-          </div>
-        </div>
-
+        <CategoryDropdown />
         <div className="flex items-center space-x-2">
           <p>클래스명</p>
           <div>
@@ -193,5 +158,7 @@ export default function RegisterPage() {
         <button>등록하기</button>
       </div>
     </div>
-  );
+  )
 }
+
+export default page
