@@ -1,18 +1,18 @@
+import React from 'react';
 import Address from '@/components/register/Address';
 import ClassContent from '@/components/register/ClassContent';
 import ClassName from '@/components/register/ClassName';
 import Personnel from '@/components/register/Personnel';
 import Price from '@/components/register/Price';
 import TimeSelect from '@/components/register/TimeSelect';
-import React from 'react';
+import Image from 'next/image';
+import plus from '../../../public/plus.png';
+import mainImage from '../../../public/mainImage.png';
+import plusImage from '../../../public/plusImage.png';
 
 const page = () => {
   return (
     <div className='w-[1600px] h-[800px] p-4'>
-      <div className='flex justify-end space-x-4'>
-        <div>알림</div>
-        <div>프로필</div>
-      </div>
       <div className='border p-4 flex flex-col item-center mt-4'>
         <ClassName />
         <ClassContent />
@@ -23,9 +23,10 @@ const page = () => {
         {/* 날짜 달력 api 사용 */}
         <TimeSelect />
       </div>
-      <div className="mt-4">
-        <div>이미지 추가 버튼</div>
-        <div>이미지</div>
+      <div className="mt-4 flex items-center space-x-4">
+        <Image src={plus} alt="plus" className="h-[100px] w-[100px]" />
+        <Image src={mainImage} alt="mainImage" className="h-[100px] w-[100px]" />
+        <Image src={plusImage} alt="plusImage" className="h-[100px] w-[100px]" />
         <button>등록하기</button>
       </div>
     </div>
