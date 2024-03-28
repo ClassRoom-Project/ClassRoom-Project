@@ -1,8 +1,9 @@
 'use client';
 
+import { Class } from '@/types/class';
 import React, { useState } from 'react';
 
-const PriceCalculator = () => {
+const PriceCalculator = ({ price }: { price: Class['price'] }) => {
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityDecrease = () => {
