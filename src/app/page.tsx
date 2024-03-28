@@ -1,6 +1,8 @@
-import Image from "next/image";
-import MainPage from "./main/page";
+import React from 'react';
+import MainPage from './main/page';
 
-export default function Home() {
+const page = () => {
   return <MainPage />;
-}
+};
+
+export default page;
