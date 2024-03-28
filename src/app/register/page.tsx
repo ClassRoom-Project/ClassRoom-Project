@@ -18,10 +18,6 @@ export default function RegisterPage() {
   const [address, setAddress] = useState('');
   const [detailAddress, setDetailAddress] = useState('');
   const [selectedTime, setSelectedTime] = useState('');
-  // 추가된 상태 관리
-  const [timeHour, setTimeHour] = useState('');
-  const [timeMinute, setTimeMinute] = useState('');
-  const [timePeriod, setTimePeriod] = useState('');
 
   // 우편번호 찾기 모달을 여는 함수
   const openPostCode = () => {
@@ -92,24 +88,6 @@ export default function RegisterPage() {
     setSelectedTime(event.target.value);
   };
 
-  // 시간, 분, 오전/오후 선택을 위한 옵션
-  const hours = Array.from({ length: 12 }, (_, i) => i + 1);
-  const minutes = Array.from({ length: 60 }, (_, i) => i);
-  const periods = ['오전', '오후'];
-
-  // 시간 변경 핸들러 함수
-  const handleTimeHourChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTimeHour(event.target.value);
-  };
-
-  const handleTimeMinuteChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTimeMinute(event.target.value);
-  };
-
-  const handleTimePeriodChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTimePeriod(event.target.value);
-  };
-
   return (
     <div className='p-4'>
       <div className='flex justify-end space-x-4'>
@@ -118,22 +96,24 @@ export default function RegisterPage() {
       </div>
       <div className='border p-4 flex flex-col item-center mt-4'>
         <div className='w-full max-w-md'>
-          <div>
-            {/* 카테고리 드롭다운 */}
-            <select value={selectedCategory} onChange={handleCategoryChange}>
-              <option value="">카테고리 선택</option>
-              <option value="요리">요리</option>
-              <option value="공예&공방">공예&공방</option>
-              <option value="운동">운동</option>
-              <option value="교육">교육</option>
-              <option value="악기&음악">악기&음악</option>
-              <option value="뷰티">뷰티</option>
-              <option value="기타">기타</option>
-            </select>
-          </div>
-          <div>소분류</div>
-          <div>
-            <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={subCategory} onChange={handleSubCategoryChange} placeholder="해시태그를 입력해주세요"/>
+          <div className="flex items-center space-x-2">
+            <div>
+              {/* 카테고리 드롭다운 */}
+              <select value={selectedCategory} onChange={handleCategoryChange}>
+                <option value="">카테고리 선택</option>
+                <option value="요리">요리</option>
+                <option value="공예&공방">공예&공방</option>
+                <option value="운동">운동</option>
+                <option value="교육">교육</option>
+                <option value="악기&음악">악기&음악</option>
+                <option value="뷰티">뷰티</option>
+                <option value="기타">기타</option>
+              </select>
+            </div>
+            <div>소분류</div>
+            <div>
+              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={subCategory} onChange={handleSubCategoryChange} placeholder="해시태그를 입력해주세요"/>
+            </div>
           </div>
         </div>
         <div>클래스명</div>
@@ -151,7 +131,7 @@ export default function RegisterPage() {
           </div>
           <div>최소인원</div>
           <div>
-            <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={minNumber} onChange={handleMinNumberChange} placeholder="치소인원 입력"/>
+            <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={minNumber} onChange={handleMinNumberChange} placeholder="최소인원 입력"/>
           </div>
         </div>
         <div>가격</div>
@@ -187,25 +167,6 @@ export default function RegisterPage() {
             value={selectedTime}
             onChange={handleTimeChange}
           />
-          <div>
-            <select value={timePeriod} onChange={handleTimePeriodChange}>
-              {periods.map((period) => (
-                <option key={period} value={period}>{period}</option>
-              ))}
-            </select>
-            <select value={timeHour} onChange={handleTimeHourChange}>
-              {hours.map((hour) => (
-                <option key={hour} value={hour}>{hour}</option>
-              ))}
-            </select>
-            시
-            <select value={timeMinute} onChange={handleTimeMinuteChange}>
-              {minutes.map((minute) => (
-                <option key={minute} value={minute}>{minute}</option>
-              ))}
-            </select>
-            분
-          </div>
         </div>
       </div>
       <div className="mt-4">
