@@ -2,6 +2,11 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
+<<<<<<< HEAD
+=======
+import Layout from '@/components/common/layout';
+import MainLayout from '@/components/main/MainLayout';
+>>>>>>> 45fb172191204f27c09595af1d47a7a9dc68d5cf
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -11,9 +16,13 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
+<<<<<<< HEAD
   children,
   admin,
   signin
+=======
+  children
+>>>>>>> 45fb172191204f27c09595af1d47a7a9dc68d5cf
 }: Readonly<{
   children: React.ReactNode;
   admin: React.ReactNode;
@@ -22,11 +31,18 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
+<<<<<<< HEAD
         <QueryProvider>
           {children}
           {admin}
           {signin}
         </QueryProvider>
+=======
+        <Layout>
+          <MainLayout />
+          <QueryProvider>{children}</QueryProvider>
+        </Layout>
+>>>>>>> 45fb172191204f27c09595af1d47a7a9dc68d5cf
       </body>
     </html>
   );
