@@ -1,9 +1,8 @@
-'use client';
-
 import React, { useState } from 'react';
 import EditTeacherInfo from './EditTeacherInfo';
 import EditProfile from '../EditProfile';
 import MyClass from './MyClass';
+import { UserType } from '@/types/user';
 
 const TeacherMyPage = () => {
   const [activePage, setActivePage] = useState('editProfile');
