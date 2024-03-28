@@ -1,20 +1,9 @@
 import { fetchClassInfoToReserve } from '@/api/supabase/fetchClassInfo';
-import { Class } from '@/types/class';
 import Image from 'next/image';
 import React from 'react';
 
 const ClassInfo = async ({ classId }: { classId: string | null }) => {
-  console.log(classId);
-
   const classInfo = await fetchClassInfoToReserve({ classId });
-  console.log(classInfo);
-
-  // const formatPrice = (price: number) => {
-  //   switch (price) {
-  //     case price.length === 3:
-  //     return
-  //   }
-  // }
 
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">

@@ -3,6 +3,7 @@ import { supabase } from './supabase';
 import { Class } from '@/types/class';
 
 export const fetchClassInfoToReserve = async ({ classId }: { classId: string | null }) => {
+  console.log(classId);
   const { data: classInfo, error }: PostgrestSingleResponse<Class> = await supabase
     .from('class')
     .select('category, title, location, price, image')
