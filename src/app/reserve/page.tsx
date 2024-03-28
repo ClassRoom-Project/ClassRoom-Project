@@ -8,7 +8,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { ci
   const classId = searchParams.cid;
   const classInfo = await fetchClassInfoToReserve({ classId });
 
-  // 필요한거 rid, cid, reserve_price, reserve_date, reserve_time, reserve_image?
+  // 필요한거 rid(자동생성), cid, reserve_price, reserve_date, reserve_time, reserve_image?
   return (
     <div className="w-[1600px] h-[800px]">
       <h1 className="text-xl">예약하기</h1>

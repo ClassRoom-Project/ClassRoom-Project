@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 const DateTimePicker = () => {
   const timeList = ['14:30:00', '16:30:00'];
-  const [selectedTime, setSelectedTime] = useState('');
+  const [selectedTime, setSelectedTime] = useState(timeList[0]);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
@@ -36,7 +36,7 @@ const DateTimePicker = () => {
       </div>
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
-        <span>2024-03-26 16:00</span>
+        <span>2024-03-26 {selectedTime.slice(0, 5)}</span>
       </div>
     </div>
   );
