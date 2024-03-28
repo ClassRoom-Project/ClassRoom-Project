@@ -1,5 +1,3 @@
-'use client';
-
 import ClassInfo from '@/components/reserve/ClassInfo';
 import DateTimePicker from '@/components/reserve/DateTimePicker';
 import QuantitySelector from '@/components/reserve/QuantitySelector';
@@ -7,9 +5,9 @@ import ReserveButton from '@/components/reserve/ReserveButton';
 import { useSearchParams } from 'next/navigation';
 
 export default function ReservePage() {
-  const searchParams = useSearchParams();
-  const classId = searchParams.get('cid');
-  console.log(searchParams.get('cid'));
+  // const searchParams = useSearchParams();
+  // const classId = searchParams.get('cid');
+  // console.log(searchParams.get('cid'));
   // a1b2c3d4-e5f6-4aeb-bcf5-6fa40fc0b0e1
 
   return (
@@ -18,7 +16,7 @@ export default function ReservePage() {
       <div className="flex w-full h-full bg-gray-200 p-6">
         <DateTimePicker />
         <div className="flex flex-col justify-between items-center w-full p-6">
-          <ClassInfo classId={classId} />
+          <ClassInfo classId={'a1b2c3d4-e5f6-4aeb-bcf5-6fa40fc0b0e1'} />
           <QuantitySelector />
           <ReserveButton />
         </div>

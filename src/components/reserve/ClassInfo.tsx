@@ -1,12 +1,13 @@
 import { fetchClassInfoToReserve } from '@/api/supabase/fetchClassInfo';
+import { Class } from '@/types/class';
 import Image from 'next/image';
 import React from 'react';
 
 const ClassInfo = async ({ classId }: { classId: string | null }) => {
   console.log(classId);
 
-  // const classInfo = await fetchClassInfoToReserve({ classId });
-  // console.log(classInfo);
+  const classInfo = await fetchClassInfoToReserve({ classId });
+  console.log(classInfo);
 
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
@@ -18,7 +19,7 @@ const ClassInfo = async ({ classId }: { classId: string | null }) => {
         unoptimized={true}
       />
       <div className="flex flex-col">
-        <span>[카테고리] 클래스 이름</span>
+        <span>{`[${classInfo?.category}] ${classInfo?.title}`}</span>
         <span>위치</span>
         <span>가격</span>
       </div>

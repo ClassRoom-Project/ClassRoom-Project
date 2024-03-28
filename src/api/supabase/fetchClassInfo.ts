@@ -1,17 +1,18 @@
+import { PostgrestResponse, PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from './supabase';
-
-// SSR..?
-export const revalidate = 0;
+import { Class } from '@/types/class';
 
 export const fetchClassInfoToReserve = async ({ classId }: { classId: string | null }) => {
-  const { data, error } = await supabase
+  const { data: classInfo, error }: PostgrestSingleResponse<Class> = await supabase
     .from('class')
     .select('category, title, location, price')
-    .eq('class_id', classId);
+    .eq('class_id', classId)
+    .single();
 
   if (error) {
     console.error('클래스 정보 불러오기 오류 => ', error);
-    return alert('클래스를 불러오는 동안 오류가 발생했습니다.');
+    return;
   }
-  return data;
+
+  return classInfo;
 };
