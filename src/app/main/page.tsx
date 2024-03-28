@@ -1,3 +1,10 @@
-export default function MainPage() {
-  return <div>MainPage</div>;
-}
+import MainLayout from '@/components/main/MainLayout';
+const page = () => {
+  return (
+    <>
+      <div>Main</div>
+    </>
+  );
+};
+
+export default page;
