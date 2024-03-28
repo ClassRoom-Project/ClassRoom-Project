@@ -12,14 +12,11 @@ const PriceCalculator = ({ price }: { price: Class['price'] }) => {
     }
   };
 
-  if (quantity < 0) {
-  }
-
   return (
     <div className="flex flex-col gap-2 text-lg items-center w-80 p-4 border border-solid border-black">
       <div className="flex w-full justify-between gap-4">
         <span className="w-16 text-right">금액</span>
-        <span> 50,000 </span>
+        <span> {price.toLocaleString()} 원</span>
       </div>
       <div className="flex w-full justify-between gap-4">
         <span className="w-16 text-right">인원</span>
@@ -31,7 +28,7 @@ const PriceCalculator = ({ price }: { price: Class['price'] }) => {
       </div>
       <div className="flex w-full justify-between gap-4">
         <span className="w-16 text-right">총 금액</span>
-        <span> 50,000 </span>
+        <span> {(price * quantity).toLocaleString()} 원 </span>
       </div>
     </div>
   );
