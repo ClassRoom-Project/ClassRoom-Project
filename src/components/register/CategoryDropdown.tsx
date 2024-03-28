@@ -13,7 +13,7 @@ const CategoryDropdown = () => {
         setSubCategory(event.target.value);
       };
   return (
-    <div className='w-full max-w-md'>
+    <div className='w-full max-w-md my-2'>
           <div className="flex items-center space-x-2">
             <div>
               {/* 카테고리 드롭다운 */}
