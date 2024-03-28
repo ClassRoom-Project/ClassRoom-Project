@@ -1,7 +1,13 @@
+import { fetchClassInfo } from '@/api/supabase/fetchClassInfo';
 import Image from 'next/image';
 import React from 'react';
 
-const ClassInfo = () => {
+const ClassInfo = async ({ classId }: { classId: string | null }) => {
+  console.log(classId);
+
+  // const classInfo = await fetchClassInfo({ classId });
+  // console.log(classInfo);
+
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
       <Image
