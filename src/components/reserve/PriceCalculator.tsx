@@ -1,6 +1,6 @@
 import React from 'react';
 
-const QuantitySelector = () => {
+const PriceCalculator = () => {
   return (
     <div className="flex flex-col gap-2 text-lg items-center w-80 p-4 border border-solid border-black">
       <div className="flex w-full justify-between gap-4">
@@ -23,4 +23,4 @@ const QuantitySelector = () => {
   );
 };
 
-export default QuantitySelector;
+export default PriceCalculator;

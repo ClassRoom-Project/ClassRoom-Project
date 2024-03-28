@@ -1,8 +1,7 @@
 import ClassInfo from '@/components/reserve/ClassInfo';
 import DateTimePicker from '@/components/reserve/DateTimePicker';
-import QuantitySelector from '@/components/reserve/QuantitySelector';
+import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
-import { useSearchParams } from 'next/navigation';
 
 export default function ReservePage({ searchParams }: { searchParams: { cid: string } }) {
   const classId = searchParams.cid;
@@ -14,7 +13,7 @@ export default function ReservePage({ searchParams }: { searchParams: { cid: str
         <DateTimePicker />
         <div className="flex flex-col justify-between items-center w-full p-6">
           <ClassInfo classId={classId} />
-          <QuantitySelector />
+          <PriceCalculator />
           <ReserveButton />
         </div>
       </div>
