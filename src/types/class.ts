@@ -3,4 +3,5 @@ export type Class = {
   title: string;
   location: string;
   price: number;
+  image: string;
 };

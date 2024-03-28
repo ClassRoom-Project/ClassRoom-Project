@@ -5,7 +5,7 @@ import { Class } from '@/types/class';
 export const fetchClassInfoToReserve = async ({ classId }: { classId: string | null }) => {
   const { data: classInfo, error }: PostgrestSingleResponse<Class> = await supabase
     .from('class')
-    .select('category, title, location, price')
+    .select('category, title, location, price, image')
     .eq('class_id', classId)
     .single();
 

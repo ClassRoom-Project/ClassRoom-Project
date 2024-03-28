@@ -9,19 +9,26 @@ const ClassInfo = async ({ classId }: { classId: string | null }) => {
   const classInfo = await fetchClassInfoToReserve({ classId });
   console.log(classInfo);
 
+  // const formatPrice = (price: number) => {
+  //   switch (price) {
+  //     case price.length === 3:
+  //     return
+  //   }
+  // }
+
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
       <Image
         width={100}
         height={100}
-        src={`https://www.datocms-assets.com/23496/1647375064-sfadf.png?auto=format&fit=max&w=1200`}
+        src={classInfo?.image[0] ? classInfo?.image[0] : 'default image'}
         alt="클래스 이미지"
         unoptimized={true}
       />
       <div className="flex flex-col">
         <span>{`[${classInfo?.category}] ${classInfo?.title}`}</span>
-        <span>위치</span>
-        <span>가격</span>
+        <span>{classInfo?.location}</span>
+        <span>{classInfo?.price.toLocaleString('ko-KR')}원</span>
       </div>
     </div>
   );
