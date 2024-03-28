@@ -1,7 +1,10 @@
-import React from 'react';
-
+import MainLayout from '@/components/main/MainLayout';
 const page = () => {
-  return <div>hi</div>;
+  return (
+    <>
+      <div>Main</div>
+    </>
+  );
 };
 
 export default page;
