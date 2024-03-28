@@ -28,7 +28,7 @@ const EditProfile = () => {
             <input type="text" className="border" />
           </div>
         </div>
-        <div className="m-4 p-4">
+        <div className="m-4 p-4 flex gap-4">
           <EditButton />
           <CancleButton />
         </div>
