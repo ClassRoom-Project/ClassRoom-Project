@@ -19,14 +19,14 @@ const StudentMyPage = () => {
           프로필 수정하기
         </span>
         <span
-          onClick={() => setActivePage('editTeacherInfo')}
-          className={`p-4 m-4 ${activePage === 'editTeacherInfo' ? 'font-bold cursor-pointer' : ''}`}
+          onClick={() => setActivePage('reservedClass')}
+          className={`p-4 m-4 ${activePage === 'reservedClass' ? 'font-bold cursor-pointer' : ''}`}
         >
           내가 예약한 클래스 보기
         </span>
         <span
-          onClick={() => setActivePage('myClass')}
-          className={`p-4 m-4 ${activePage === 'myClass' ? 'font-bold cursor-pointer' : ''}`}
+          onClick={() => setActivePage('myComments')}
+          className={`p-4 m-4 ${activePage === 'myComments' ? 'font-bold cursor-pointer' : ''}`}
         >
           내가 쓴 댓글 보기
         </span>
@@ -34,9 +34,9 @@ const StudentMyPage = () => {
       <div className="m-4 p-4">
         {activePage === 'editProfile' ? (
           <EditProfile />
-        ) : activePage === 'editTeacherInfo' ? (
+        ) : activePage === 'reservedClass' ? (
           <MyReservedClass />
-        ) : activePage === 'myClass' ? (
+        ) : activePage === 'myComments' ? (
           <MyComments />
         ) : (
           ''

@@ -4,8 +4,8 @@ import TeacherMyPage from '@/components/mypage/teacher/TeacherMyPage';
 const MyPage = () => {
   // 일단 admin :  teacher = true / student = false 이라고 가정
 
-  const admin = true;
-  // const admin = false;
+  // const admin = true;
+  const admin = false;
 
   return (
     <div>
