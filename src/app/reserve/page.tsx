@@ -2,7 +2,6 @@ import ClassInfo from '@/components/reserve/ClassInfo';
 import DateTimePicker from '@/components/reserve/DateTimePicker';
 import QuantitySelector from '@/components/reserve/QuantitySelector';
 import ReserveButton from '@/components/reserve/ReserveButton';
-import Image from 'next/image';
 
 export default function ReservePage() {
   return (
