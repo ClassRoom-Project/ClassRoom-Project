@@ -7,6 +7,7 @@ declare global {
   }
 }
 
+
 export default function RegisterPage() {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [subCategory, setSubCategory] = useState('');
@@ -89,7 +90,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className='p-4'>
+    <div className='w-[1600px] h-[800px] p-4'>
       <div className='flex justify-end space-x-4'>
         <div>알림</div>
         <div>프로필</div>
@@ -110,22 +111,29 @@ export default function RegisterPage() {
                 <option value="기타">기타</option>
               </select>
             </div>
-            <div>소분류</div>
+            <p>소분류</p>
             <div>
               <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={subCategory} onChange={handleSubCategoryChange} placeholder="해시태그를 입력해주세요"/>
             </div>
           </div>
         </div>
-        <div>클래스명</div>
-        <div>
-            <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={className} onChange={handleClassNameChange} placeholder="클래스 제목을 입력해주세요"/>
+
+        <div className="flex items-center space-x-2">
+          <p>클래스명</p>
+          <div>
+              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={className} onChange={handleClassNameChange} placeholder="클래스 제목을 입력해주세요"/>
+          </div>
         </div>
-        <div>클래스 설명</div>
-        <div>
-            <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={classContent} onChange={handleClassContentChange} placeholder="클래스의 상세 설명을 입력해주세요"/>
+
+        <div className="flex items-center space-x-2">
+          <p>클래스 설명</p>
+          <div>
+              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={classContent} onChange={handleClassContentChange} placeholder="클래스의 상세 설명을 입력해주세요"/>
+          </div>
         </div>
-        <div>
-          <div>정원</div>
+
+        <div className="flex items-center space-x-2">
+          <p>정원</p>
           <div>
             <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={personnel} onChange={handlePersonnelChange} placeholder="정원 입력"/>
           </div>
@@ -134,39 +142,49 @@ export default function RegisterPage() {
             <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={minNumber} onChange={handleMinNumberChange} placeholder="최소인원 입력"/>
           </div>
         </div>
-        <div>가격</div>
-        <div>
-            <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={price} onChange={handlePriceChange} placeholder="가격"/>
-        </div>
-        <div>위치</div>
+
         <div className="flex items-center space-x-2">
-          <div className="flex items-center">
-            <input
-              className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="주소"
-            />
-            <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={openPostCode}>주소 검색</button>
+          <p>가격</p>
+          <div>
+              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={price} onChange={handlePriceChange} placeholder="가격"/>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-2">
+          <p>위치</p>
+          <div className="flex items-center space-x-2">
+            <div className="flex items-center">
+              <input
+                className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
+                type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                placeholder="주소"
+              />
+              <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={openPostCode}>주소 검색</button>
+            </div>
           </div>
         </div>
         <input
-            className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
-            type="text"
-            value={detailAddress}
-            onChange={(e) => setDetailAddress(e.target.value)}
-            placeholder="상세 주소"
-          />
+              className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
+              type="text"
+              value={detailAddress}
+              onChange={(e) => setDetailAddress(e.target.value)}
+              placeholder="상세 주소"
+        />
+
         <div>날짜</div>
         {/* 날짜 달력 api 사용 */}
-        <div>시간선택</div>
-        <div>
-          <input
-            type="time"
-            value={selectedTime}
-            onChange={handleTimeChange}
-          />
+
+        <div className="flex items-center space-x-2">
+          <div>시간선택</div>
+          <div>
+            <input
+              type="time"
+              value={selectedTime}
+              onChange={handleTimeChange}
+            />
+          </div>
         </div>
       </div>
       <div className="mt-4">
