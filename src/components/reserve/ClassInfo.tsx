@@ -3,7 +3,6 @@ import Image from 'next/image';
 import React from 'react';
 
 const ClassInfo = async ({ classInfo }: { classInfo: Class }) => {
-  console.log(classInfo);
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
       <Image

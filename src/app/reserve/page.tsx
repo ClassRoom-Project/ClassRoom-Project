@@ -7,8 +7,8 @@ import ReserveButton from '@/components/reserve/ReserveButton';
 export default async function ReservePage({ searchParams }: { searchParams: { cid: string } }) {
   const classId = searchParams.cid;
   const classInfo = await fetchClassInfoToReserve({ classId });
-  console.log(classInfo);
 
+  // 필요한거 rid, cid, reserve_price, reserve_date, reserve_time, reserve_image?
   return (
     <div className="w-[1600px] h-[800px]">
       <h1 className="text-xl">예약하기</h1>
