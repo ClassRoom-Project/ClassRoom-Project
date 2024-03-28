@@ -5,6 +5,7 @@ import ClassName from '@/components/register/ClassName';
 import Personnel from '@/components/register/Personnel';
 import Price from '@/components/register/Price';
 import TimeSelect from '@/components/register/TimeSelect';
+
 import Image from 'next/image';
 import plus from '../../../public/plus.png';
 import mainImage from '../../../public/mainImage.png';
