@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
-<<<<<<< HEAD
-=======
-import Layout from '@/components/common/layout';
+
 import MainLayout from '@/components/main/MainLayout';
->>>>>>> 45fb172191204f27c09595af1d47a7a9dc68d5cf
+import Layout from '@/components/common/layout';
+import Link from 'next/link';
+import LoginPage from './login/page';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,33 +16,24 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-<<<<<<< HEAD
   children,
-  admin,
-  signin
-=======
-  children
->>>>>>> 45fb172191204f27c09595af1d47a7a9dc68d5cf
+  admin
 }: Readonly<{
   children: React.ReactNode;
   admin: React.ReactNode;
-  signin: React.ReactNode;
 }>) {
   return (
     <html lang="ko">
       <body className={inter.className}>
-<<<<<<< HEAD
-        <QueryProvider>
-          {children}
-          {admin}
-          {signin}
-        </QueryProvider>
-=======
         <Layout>
           <MainLayout />
-          <QueryProvider>{children}</QueryProvider>
+          {/* Parallel Routes 여기에서 링크로 설정해주기 */}
+          <Link href="/login"></Link>
+          <QueryProvider>
+            {children}
+            {admin}
+          </QueryProvider>
         </Layout>
->>>>>>> 45fb172191204f27c09595af1d47a7a9dc68d5cf
       </body>
     </html>
   );

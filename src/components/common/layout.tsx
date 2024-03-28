@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-export default function Layout() {
-  return <div>Layout</div>;
-}
-=======
 import Link from 'next/link';
 import React, { PropsWithChildren } from 'react';
 
@@ -34,4 +29,3 @@ const Layout = ({ children }: PropsWithChildren) => {
 };
 
 export default Layout;
->>>>>>> 45fb172191204f27c09595af1d47a7a9dc68d5cf
