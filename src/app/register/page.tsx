@@ -10,11 +10,13 @@ import Image from 'next/image';
 import plus from '../../../public/plus.png';
 import mainImage from '../../../public/mainImage.png';
 import plusImage from '../../../public/plusImage.png';
+import CategoryDropdown from '@/components/register/CategoryDropdown';
 
 const page = () => {
   return (
     <div className='w-[1600px] h-[800px] p-4'>
       <div className='border p-4 flex flex-col item-center mt-4'>
+        <CategoryDropdown />
         <ClassName />
         <ClassContent />
         <Personnel />
