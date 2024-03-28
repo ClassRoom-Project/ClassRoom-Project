@@ -1,8 +1,19 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 const PriceCalculator = () => {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleQuantityDecrease = () => {
+    if (quantity !== 0) {
+      setQuantity((prev) => prev - 1);
+    }
+  };
+
+  if (quantity < 0) {
+  }
+
   return (
     <div className="flex flex-col gap-2 text-lg items-center w-80 p-4 border border-solid border-black">
       <div className="flex w-full justify-between gap-4">
@@ -12,9 +23,9 @@ const PriceCalculator = () => {
       <div className="flex w-full justify-between gap-4">
         <span className="w-16 text-right">인원</span>
         <div className="flex w-16 justify-between gap-2">
-          <button> - </button>
-          <span> 1 </span>
-          <button> + </button>
+          <button onClick={handleQuantityDecrease}> - </button>
+          <span> {quantity} </span>
+          <button onClick={() => setQuantity((prev) => prev + 1)}> + </button>
         </div>
       </div>
       <div className="flex w-full justify-between gap-4">
