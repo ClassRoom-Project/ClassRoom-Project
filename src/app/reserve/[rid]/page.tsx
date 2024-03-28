@@ -1,3 +1,4 @@
+import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import React from 'react';
 
 const reservationCompletePage = ({ params }: { params: { rid: string } }) => {
@@ -31,10 +32,7 @@ const reservationCompletePage = ({ params }: { params: { rid: string } }) => {
             <span className="w-52 text-center"> 50,000원 </span>
           </div>
         </div>
-        <div className="flex gap-32">
-          <button className="bg-white w-48 p-4 text-center self-end">메인페이지 바로가기</button>
-          <button className="bg-white w-48 p-4 text-center self-end">예약 상세 보기</button>
-        </div>
+        <NavigationButtons />
       </div>
     </div>
   );
