@@ -2,10 +2,10 @@
 import React, { useState } from 'react'
 
 const Price = () => {
-    const [price, setPrice] = useState('');
-    const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPrice(event.target.value);
-      };
+  const [price, setPrice] = useState('');
+  const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrice(event.target.value);
+  };
   return (
     <div className="flex items-center space-x-2 my-2">
         <p>가격</p>

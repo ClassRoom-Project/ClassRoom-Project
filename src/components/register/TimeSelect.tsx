@@ -17,8 +17,8 @@ const TimeSelect = () => {
                 value={selectedTime}
                 onChange={handleTimeChange}
                 />
-            </div>
-            </div>
+        </div>
+        </div>
     )
 }
 
