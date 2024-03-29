@@ -9,7 +9,7 @@ const DateTimePicker = () => {
   const timeList = ['14:30:00', '16:30:00']; // 추후 class 테이블에서 불러와야함
   const [selectedTime, setSelectedTime] = useState(timeList[0]);
 
-  const today = new Date();
+  const today = format(new Date() as Date, 'yyyy-MM-dd');
   const [date, setDate] = useState<DateType | string>(today);
 
   const handleTimeClick = (time: string) => {
