@@ -23,7 +23,7 @@ const DateTimePicker = () => {
       <div>
         <h1 className="mb-1">날짜 선택</h1>
         <div>
-          <Calendar onChange={onChange} value={value} />
+          <Calendar onChange={onChange} value={value} calendarType="gregory" locale="ko" />
         </div>
       </div>
       <div>
