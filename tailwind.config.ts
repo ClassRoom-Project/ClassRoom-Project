@@ -10,20 +10,22 @@ const config: Config = {
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))', // 기존 정의된 그라데이션
+        'custom-radial': 'radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(240,250,249,1) 0%, rgba(254,241,241,1) 100%)' // 새로운 그라데이션 추가
       }
     }
   },
   plugins: [require('daisyui')],
   daisyui: {
-    themes: true, // false: only light + dark | true: all themes | array: specific themes like this ["light", "dark", "cupcake"]
-    darkTheme: 'light', // name of one of the included themes for dark mode
-    base: true, // applies background color and foreground color for root element by default
-    styled: true, // include daisyUI colors and design decisions for all components
-    utils: true, // adds responsive and modifier utility classes
-    prefix: '', // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
-    logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
-    themeRoot: ':root' // The element that receives theme color CSS variables
+    themes: true,
+    darkTheme: 'light',
+    base: true,
+    styled: true,
+    utils: true,
+    prefix: '',
+    logs: true,
+    themeRoot: ':root'
   }
 };
+
 export default config;
