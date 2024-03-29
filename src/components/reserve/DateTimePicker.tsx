@@ -1,5 +1,6 @@
 'use client';
 
+import { format } from 'date-fns';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
@@ -12,18 +13,30 @@ const DateTimePicker = () => {
     setSelectedTime(time);
   };
 
-  type ValuePiece = Date | null;
+  const today = new Date();
+  const [date, setDate] = useState<DateType>(today);
 
-  type Value = ValuePiece | [ValuePiece, ValuePiece];
+  const handleDateChange = (newDate: DateType) => {
+    setDate(newDate);
+  };
 
-  const [value, onChange] = useState<Value>(new Date());
+  console.log(format(date as Date, 'yyyy-MM-dd'));
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
       <div>
         <h1 className="mb-1">날짜 선택</h1>
         <div>
-          <Calendar onChange={onChange} value={value} calendarType="gregory" locale="ko" />
+          <Calendar
+            defaultView="month"
+            onChange={handleDateChange}
+            formatDay={(_locale, date) => date.getDate().toString()} // 달력에서 '일' 제거하고 숫자만 보이게
+            value={date}
+            calendarType="gregory"
+            locale="ko-KR"
+            next2Label={null}
+            prev2Label={null}
+          />
         </div>
       </div>
       <div>
