@@ -6,21 +6,14 @@ const MainPage = () => {
       <div className="flex justify-between">
         <div className="w-full">
           <h2 className="text-lg font-semibold mb-4">신규 클래스</h2>
-          <div className="flex space-x-4 overflow-x-auto">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-          </div>
+          <div className="flex space-x-4 overflow-x-auto"></div>
         </div>
       </div>
+
       <div className="flex justify-between my-8">
         <div className="w-full">
-          <h2 className="text-lg font-semibold mb-4">인기 클래스</h2>
-          <div className="flex space-x-4 overflow-x-auto">
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-          </div>
+          <h2 className="h-[3000px] bg-black text-lg font-semibold mb-4">인기 클래스</h2>
+          <div className="flex space-x-4 overflow-x-auto"></div>
         </div>
       </div>
     </div>
