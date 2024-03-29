@@ -23,13 +23,14 @@ export type ReserveStoreType = {
   setClassId: (classId: string) => void;
 };
 
-const useReserveClass =
-  create <
-  ReserveStoreType>((set) => {
-    classId: ''
-    setClassId: (classId: ReserveInfo['classId']) => {
-      set((state) => ({classId: }));
-    };
-  });
+const useReserveClass = create<ReserveStoreType>((set) => ({
+  reserveInfo: defaultInitState,
+  setClassId: (classId) => {
+    set((state) => ({
+      reserveInfo: { ...state.reserveInfo, classId: classId }
+    }));
+    console.log(classId);
+  }
+}));
 
 export default useReserveClass;

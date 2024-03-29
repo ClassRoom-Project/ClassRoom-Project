@@ -1,6 +1,6 @@
 'use client';
 
-import useReserveClass from '@/store/reserveClass';
+import useReserveClass from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useStore } from 'zustand';

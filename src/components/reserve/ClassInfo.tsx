@@ -1,8 +1,14 @@
+'use client';
+
+import useReserveClass from '@/store/reserveClassStore';
 import { Class } from '@/types/class';
 import Image from 'next/image';
 import React from 'react';
 
-const ClassInfo = async ({ classInfo }: { classInfo: Class }) => {
+const ClassInfo = ({ classInfo }: { classInfo: Class }) => {
+  const setClassId = useReserveClass((state) => state.setClassId);
+  setClassId(classInfo.class_id);
+
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
       <Image

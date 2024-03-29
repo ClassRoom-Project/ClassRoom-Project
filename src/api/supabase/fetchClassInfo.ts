@@ -2,7 +2,7 @@ import { PostgrestResponse, PostgrestSingleResponse } from '@supabase/supabase-j
 import { supabase } from './supabase';
 import { Class } from '@/types/class';
 
-export const fetchClassInfoToReserve = async ({ classId }: { classId: string }) => {
+export const fetchClassInfo = async ({ classId }: { classId: string }) => {
   console.log(classId);
   const { data: classInfo, error }: PostgrestSingleResponse<Class> = await supabase
     .from('class')
