@@ -4,7 +4,7 @@ import './globals.css';
 import { QueryProvider } from './provider';
 
 import Link from 'next/link';
-import UserLayout from '@/components/main/UserLayout';
+import UserLayout from '@/components/common/UserLayout';
 import BorderLayout from '@/components/common/BorderLayout';
 
 const inter = Inter({ subsets: ['latin'] });
