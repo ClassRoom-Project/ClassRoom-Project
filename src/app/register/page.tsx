@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { supabase } from '@/api/supabase/supabase';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
+import { v4 as uuidv4 } from 'uuid';
 
 import Image from 'next/image';
 import Plus from '../../../public/plus.png';
@@ -11,6 +12,11 @@ interface AddressData {
     addressType: string;
     bname: string;
     buildingName: string;
+}
+
+interface ImageFileWithPreview {
+  file: File;
+  preview: string;
 }
 
 const RegisterPage = () => {
@@ -26,6 +32,11 @@ const RegisterPage = () => {
   const [detailAddress, setDetailAddress] = useState('');
   const [selectDay, setSelectDay] = useState(''); // 달력
   const [selectedTime, setSelectedTime] = useState('');
+  const [totalTime, setTotalTime] = useState('');
+
+  const [images, setImages] = useState<ImageFileWithPreview[]>([]);
+  const [mainImage, setMainImge] = useState('');
+  const [selectedImages, setSelectedImages] = useState([]);
   
   // Daum Postcode Popup을 사용하기 위한 스크립트 URL
   const scriptUrl = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
@@ -53,13 +64,22 @@ const RegisterPage = () => {
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
+    //const mainImage = images[0];
+
+    const userId = "223e4567-e89b-12d3-a456-426614174002";
+    const classId = uuidv4();
+
     const { data, error } = await supabase
       .from('class')
       .insert([
-        { category: category,
+        { 
+          user_id: userId,
+          class_id: classId,
+          category: category,
           hashtag: subCategory, 
           title: className, 
-          description: classContent, 
+          description: classContent,
+          quantity: personnel,
           max_ppl: maxNumber,
           min_ppl: minNumber,
           price: price,
@@ -67,16 +87,37 @@ const RegisterPage = () => {
           detailLocation: detailAddress,
           date: null,
           time: selectedTime,
-          quantity: personnel,
-          image: null
+          totalTime: totalTime,
+          image: images,
+          //mainImage: mainImage,
         },
       ]);
-    
     if (error) {
       console.error('Supabase에 데이터 저장 중 오류 발생:', error);
     } else {
       console.log('데이터 저장 성공:', data);
     }
+  };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      if (images.length >= 5) {
+        alert('최대 5개의 이미지만 추가할 수 있습니다.');
+        return;
+      }
+
+      const file = event.target.files[0];
+      const preview = URL.createObjectURL(file);
+      setImages([...images, { file, preview }]);
+    }
+  };
+
+  // 이미지 맨 앞으로 이동하는 함수 (이 함수를 컴포넌트 안에 추가)
+  const handleMoveToFront = (index:number) => {
+    const selectedImage = images[index];
+    const remainingImages = images.filter((_, i) => i !== index);
+    const newImages = [selectedImage, ...remainingImages];
+    setImages(newImages);
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -113,6 +154,10 @@ const RegisterPage = () => {
 
   const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedTime(event.target.value);
+  };
+  
+  const handleTotalTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTotalTime(event.target.value);
   };
 
   return (
@@ -217,12 +262,39 @@ const RegisterPage = () => {
                 />
             </div>
         </div>
+
+        <div className="flex items-center space-x-2 my-2">
+          <p>총 소요시간</p>
+          <div>
+              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={totalTime} onChange={handleTotalTimeChange} placeholder="총 소요시간 입력"/>
+          </div>
+        </div>
       </div>
 
-      <div className="mt-4 flex items-center space-x-4">
-        <Image src={Plus} alt="plus" className="h-[100px] w-[100px]" />
-        <button onClick={handleSubmit}>등록하기</button>
+      <div className="flex items-center space-x-4">
+        {/* 이미지 선택 버튼 */}
+        {images.length < 5 && (
+          <label htmlFor="image-upload" className="cursor-pointer">
+            <Image src={Plus} alt="plus" width={100} height={100} />
+            <input id="image-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+          </label>
+        )}
+        {/* 이미지 미리보기 */}
+        {images.map((image, index) => (
+          <div key={index} className="h-[100px] w-[100px] relative">
+            <Image src={image.preview} alt={`preview ${index}`} layout="fill" objectFit="cover" />
+            {/* 이미지 오른쪽 위에 배치될 버튼 */}
+            <button 
+              className="absolute top-0 right-0 rounded-full bg-red-500 text-white w-6 h-6 flex items-center justify-center" 
+              onClick={() => handleMoveToFront(index)}
+            >
+              &gt;
+            </button>
+          </div>
+        ))}
+        <button onClick={handleSubmit} className="h-[100px]">등록하기</button>
       </div>
+
     </div>
   )
 }
