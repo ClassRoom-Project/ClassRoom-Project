@@ -1,13 +1,16 @@
 'use client';
 
+import useReserveClass from '@/store/reserveClass';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { useStore } from 'zustand';
 
 const ReserveButton = () => {
   const router = useRouter();
   // 인원 0 일때 alert 로직 필요
   // 예약 정보 맞는지 한번더 확인해주는거 있으면 좋을듯
   // => 모달창으로 정보 한번더 보여주거나, 그냥 정보 맞는지 확인하세요 정도
+
   return (
     <button
       onClick={() => {

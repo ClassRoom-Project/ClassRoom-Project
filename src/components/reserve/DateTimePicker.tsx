@@ -60,7 +60,7 @@ const DateTimePicker = () => {
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
         <span>
-          {date} {selectedTime.slice(0, 5)}
+          {`${date}`} {selectedTime.slice(0, 5)}
         </span>
       </div>
     </div>
