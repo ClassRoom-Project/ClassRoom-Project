@@ -4,9 +4,10 @@ import './globals.css';
 import { QueryProvider } from './provider';
 
 import MainLayout from '@/components/main/MainLayout';
-import Layout from '@/components/common/layout';
+
 import Link from 'next/link';
 import LoginPage from './login/page';
+import Layout from '@/components/common/Layout';
 
 const inter = Inter({ subsets: ['latin'] });
 

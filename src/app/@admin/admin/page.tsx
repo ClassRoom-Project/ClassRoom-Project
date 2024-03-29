@@ -19,7 +19,7 @@ export default function AdminModal() {
   };
 
   return (
-    <div className="max-w-xl mx-auto">
+    <div className="shadow-lg w-full h-full flex bg-black bg-opacity-70 justify-center align-middle items-center ">
       <div className="flex flex-col items-center">
         <p>로고</p>
         <button value="선생님" name="admin" type="button" onClick={onAdminSubmit}>
