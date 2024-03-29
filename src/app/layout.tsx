@@ -7,7 +7,7 @@ import MainLayout from '@/components/main/MainLayout';
 
 import Link from 'next/link';
 import LoginPage from './login/page';
-import Layout from '@/components/common/layout';
+import Layout from '@/components/common/Layout';
 
 const inter = Inter({ subsets: ['latin'] });
 
