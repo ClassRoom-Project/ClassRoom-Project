@@ -5,6 +5,7 @@ import { QueryProvider } from './provider';
 
 import Link from 'next/link';
 import Layout from '@/components/common/layout';
+import MainLayout from '@/components/main/MainLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,8 +25,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={inter.className}>
         <Layout>
-          {' '}
-          {/* Parallel Routes 여기에서 링크로 설정해주기 */}
+          <MainLayout /> {/* Parallel Routes 여기에서 링크로 설정해주기 */}
           <Link href="/login"></Link>
           <QueryProvider>
             {children}

@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import React, { PropsWithChildren } from 'react';
-import defaultImage from "../../../public/기본프로필사진.png"
+import defaultImage from '../../../public/기본프로필사진.png';
 
 const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <div className="flex  justify-between items-center h-[100px] border-b-[1px] border-solid border-gray-300">
+      <div className="flex  justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
         <div>Logo</div>
         <div className="flex">
           <div>alarm</div>
