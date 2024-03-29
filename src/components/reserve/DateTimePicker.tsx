@@ -1,5 +1,6 @@
 'use client';
 
+import useReserveClass from '@/store/reserveClassStore';
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
@@ -10,7 +11,10 @@ const DateTimePicker = () => {
   const [selectedTime, setSelectedTime] = useState(timeList[0]);
 
   const today = format(new Date(), 'yyyy-MM-dd');
-  const [date, setDate] = useState<DateType | string>(today);
+  const [date, setDate] = useState<string>(today);
+
+  const setDateAndTime = useReserveClass((state) => state.setDateAndTime);
+  setDateAndTime(date, selectedTime);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
