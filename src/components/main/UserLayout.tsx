@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { PropsWithChildren } from 'react';
 import defaultImage from '../../../public/기본프로필사진.png';
 
-const MainLayout = ({ children }: PropsWithChildren) => {
+const UserLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="flex  justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
@@ -17,4 +17,4 @@ const MainLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default MainLayout;
+export default UserLayout;

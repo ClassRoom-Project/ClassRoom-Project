@@ -4,8 +4,8 @@ import './globals.css';
 import { QueryProvider } from './provider';
 
 import Link from 'next/link';
-import Layout from '@/components/common/layout';
-import MainLayout from '@/components/main/MainLayout';
+import UserLayout from '@/components/main/UserLayout';
+import BorderLayout from '@/components/common/BorderLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,14 +24,15 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <Layout>
-          <MainLayout /> {/* Parallel Routes 여기에서 링크로 설정해주기 */}
+        <BorderLayout>
+          <UserLayout />
+          {/* Parallel Routes 여기에서 링크로 설정해주기 */}
           <Link href="/login"></Link>
           <QueryProvider>
             {children}
             {admin}
           </QueryProvider>
-        </Layout>
+        </BorderLayout>
       </body>
     </html>
   );
