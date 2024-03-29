@@ -1,6 +1,6 @@
 'use client';
 
-import useReserveClass from '@/store/reserveClassStore';
+import useReserveStore from '@/store/reserveClassStore';
 import { ClassType } from '@/types';
 import React, { useState } from 'react';
 
@@ -8,10 +8,8 @@ const PriceCalculator = ({ price }: { price: ClassType['price'] }) => {
   const [quantity, setQuantity] = useState(1);
 
   const totalPrice = price * quantity;
-  // const setPriceAndQuantity = useReserveClass((state) => state.setPriceAndQuantity);
-  // setPriceAndQuantity(totalPrice, quantity);
 
-  const setReserveInfo = useReserveClass((state) => state.setReserveInfo);
+  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
   setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
 
   // 클래스의 max 인원 고려 필요

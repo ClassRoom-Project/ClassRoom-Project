@@ -1,15 +1,13 @@
 'use client';
 
-import useReserveClass from '@/store/reserveClassStore';
+import useReserveStore from '@/store/reserveClassStore';
 import { ClassType } from '@/types';
 import Image from 'next/image';
 import React from 'react';
 
 const ClassInfo = ({ classInfo, classId }: { classInfo: ClassType; classId: string }) => {
-  // const setClassId = useReserveClass((state) => state.setClassId);
-  // setClassId(classId);
 
-  const setReserveInfo = useReserveClass((state) => state.setReserveInfo);
+  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
   setReserveInfo({ classId: classId });
 
   return (

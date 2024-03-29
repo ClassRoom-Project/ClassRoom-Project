@@ -1,13 +1,13 @@
 'use client';
 
-import useReserveClass from '@/store/reserveClassStore';
+import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const ReserveButton = () => {
   const router = useRouter();
 
-  const reserveInfo = useReserveClass((state) => state.reserveInfo);
+  const reserveInfo = useReserveStore((state) => state.reserveInfo);
 
   const handleReserveButtonClick = () => {
     console.log(reserveInfo);

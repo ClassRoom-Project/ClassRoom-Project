@@ -1,6 +1,6 @@
 'use client';
 
-import useReserveClass from '@/store/reserveClassStore';
+import useReserveStore from '@/store/reserveClassStore';
 import { DateType } from '@/types';
 import { format } from 'date-fns';
 import React, { useState } from 'react';
@@ -14,7 +14,7 @@ const DateTimePicker = () => {
   const today = format(new Date(), 'yyyy-MM-dd');
   const [date, setDate] = useState<string>(today);
 
-  const setReserveInfo = useReserveClass((state) => state.setReserveInfo);
+  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
   setReserveInfo({ reserveDate: date, reserveTime: selectedTime });
 
   const handleTimeClick = (time: string) => {

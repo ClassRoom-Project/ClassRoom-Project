@@ -15,7 +15,7 @@ export type ReserveStoreType = {
   setReserveInfo: ({}) => void;
 };
 
-const useReserveClass = create<ReserveStoreType>((set) => ({
+const useReserveStore = create<ReserveStoreType>((set) => ({
   reserveInfo: defaultInitState,
 
   setReserveInfo: (updateInfo) => {
@@ -29,4 +29,4 @@ const useReserveClass = create<ReserveStoreType>((set) => ({
   }
 }));
 
-export default useReserveClass;
+export default useReserveStore;
