@@ -33,7 +33,7 @@ export default NextAuth({
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       // 사용자의 계정 유형(선생님/학생)에 따른 로직을 구현
-      // 사용자가 선생님으로 가입하면 Supabase의 사용자 테이블에 admin을 true로 설정
+      // 사용자가 선생님으로 가입하면 Supabase의 사용자 테이블에 teacher을 true로 설정
       // 사용자를 Supabase 데이터베이스에 저장하는 로직을 추가
       return true;
     },

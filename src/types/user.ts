@@ -1,6 +1,6 @@
-interface AdminType {
-  isAdmin: boolean;
-  setIsAdmin: (isAdmin: boolean) => void;
+interface TeacherType {
+  isTeacher: boolean;
+  setIsTeacher: (isTeacher: boolean) => void;
 }
 
 interface UserType {

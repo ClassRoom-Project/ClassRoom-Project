@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 
-const useAdminStore = create<AdminType>((set) => ({
-  isAdmin: true,
-  setIsAdmin: (isAdmin: boolean) => set({ isAdmin })
+const useTeacherStore = create<TeacherType>((set) => ({
+  isTeacher: true,
+  setIsTeacher: (isTeacher: boolean) => set({ isTeacher })
 }));
 
-export default useAdminStore;
+export default useTeacherStore;

@@ -1,11 +1,11 @@
-import Link from 'next/link';
 import React, { PropsWithChildren } from 'react';
 
-const Layout = ({ children }: PropsWithChildren) => {
+const BorderLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <header className="fixed top-0 left-0 right-0 h-[15px] bg-[#F0F6FF] z-50"></header>
-      <div className="fixed p-3 top-0 bottom-0 min-h-screen flex flex-col justify-between items-center left-0 w-[100px] bg-[#F0F6FF] z-40">
+
+      <div className="fixed p-3 top-0 bottom-0 min-h-screen flex flex-col justify-between items-center left-0 w-[100px]bg-[#F0F6FF] z-40">
         <div className=" mt-[100px]">
           <div>class</div>
           <div>chat</div>
@@ -17,11 +17,16 @@ const Layout = ({ children }: PropsWithChildren) => {
           <div>logout</div>
         </div>
       </div>
+
       <div className="fixed top-0 bottom-0 min-h-screen right-0 w-[15px] bg-[#F0F6FF] z-40"></div>
-      <main className="pt-[15px] pl-[100px] pr-[15px]">{children}</main>
+
+      <main className="bg-[#F0F6FF] p-[15px] pl-[100px]">
+        <div className="h-full bg-white rounded-[20px] p-[5px]">{children}</div>
+      </main>
+
       <footer className="fixed bottom-0 left-0 right-0 h-[15px] bg-[#F0F6FF] z-50"></footer>
     </>
   );
 };
 
-export default Layout;
+export default BorderLayout;
