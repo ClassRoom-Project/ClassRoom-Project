@@ -6,18 +6,18 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const DateTimePicker = () => {
-  const timeList = ['14:30:00', '16:30:00'];
+  const timeList = ['14:30:00', '16:30:00']; // 추후 class 테이블에서 불러와야함
   const [selectedTime, setSelectedTime] = useState(timeList[0]);
+
+  const today = new Date();
+  const [date, setDate] = useState<DateType | string>(today);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
   };
 
-  const today = new Date();
-  const [date, setDate] = useState<DateType>(today);
-
   const handleDateChange = (newDate: DateType) => {
-    setDate(newDate);
+    setDate(format(newDate as Date, 'yyyy-MM-dd'));
   };
 
   console.log(format(date as Date, 'yyyy-MM-dd'));
@@ -59,7 +59,9 @@ const DateTimePicker = () => {
       </div>
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
-        <span>2024-03-26 {selectedTime.slice(0, 5)}</span>
+        <span>
+          {date} {selectedTime.slice(0, 5)}
+        </span>
       </div>
     </div>
   );
