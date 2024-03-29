@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React, { PropsWithChildren } from 'react';
-import defaultImage from "../../../public/기본프로필사진.png"
+import defaultImage from '../../../public/기본프로필사진.png';
 
 const MainLayout = ({ children }: PropsWithChildren) => {
   return (
