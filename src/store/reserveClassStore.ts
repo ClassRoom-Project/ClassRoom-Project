@@ -22,7 +22,7 @@ export type ReserveStoreType = {
   reserveInfo: ReserveInfo;
   setClassId: (classId: string) => void;
   setDateAndTime: (date: string, time: string) => void;
-  setPrice: (price: number) => void;
+  setPriceAndQuantity: (totalPrice: number, totalQuantity: number) => void;
 };
 
 const useReserveClass = create<ReserveStoreType>((set) => ({
@@ -31,19 +31,16 @@ const useReserveClass = create<ReserveStoreType>((set) => ({
     set((state) => ({
       reserveInfo: { ...state.reserveInfo, classId: classId }
     }));
-    console.log(classId);
   },
   setDateAndTime: (date, time) => {
     set((state) => ({
-      reserveInfo: { ...state.reserveInfo, date: date, time: time }
+      reserveInfo: { ...state.reserveInfo, reserveDate: date, reserveTime: time }
     }));
-    console.log(date, time);
   },
-  setPrice: (totalPrice) => {
+  setPriceAndQuantity: (totalPrice, quantity) => {
     set((state) => ({
-      reserveInfo: { ...state.reserveInfo, reservePrice: totalPrice }
+      reserveInfo: { ...state.reserveInfo, reservePrice: totalPrice, reserveQuantity: quantity }
     }));
-    console.log(totalPrice);
   }
 }));
 

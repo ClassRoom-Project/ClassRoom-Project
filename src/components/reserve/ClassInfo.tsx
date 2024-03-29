@@ -5,9 +5,9 @@ import { Class } from '@/types/class';
 import Image from 'next/image';
 import React from 'react';
 
-const ClassInfo = ({ classInfo }: { classInfo: Class }) => {
+const ClassInfo = ({ classInfo, classId }: { classInfo: Class; classId: string }) => {
   const setClassId = useReserveClass((state) => state.setClassId);
-  setClassId(classInfo.class_id);
+  setClassId(classId);
 
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">

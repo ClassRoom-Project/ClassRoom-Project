@@ -15,7 +15,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
         <div className="flex w-full h-full bg-gray-200 p-6">
           <DateTimePicker />
           <div className="flex flex-col justify-between items-center w-full p-6">
-            <ClassInfo classInfo={classInfo} />
+            <ClassInfo classInfo={classInfo} classId={classId} />
             <PriceCalculator price={classInfo.price} />
             <ReserveButton />
           </div>

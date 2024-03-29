@@ -7,9 +7,9 @@ import React, { useState } from 'react';
 const PriceCalculator = ({ price }: { price: Class['price'] }) => {
   const [quantity, setQuantity] = useState(1);
 
-  const setPrice = useReserveClass((state) => state.setPrice);
+  const setPriceAndQuantity = useReserveClass((state) => state.setPriceAndQuantity);
   const totalPrice = price * quantity;
-  setPrice(totalPrice);
+  setPriceAndQuantity(totalPrice, quantity);
 
   // 클래스의 max 인원 고려 필요
   const handleQuantityDecrease = () => {
