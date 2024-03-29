@@ -5,7 +5,7 @@ const ClassName = () => {
     const [className, setClassName] = useState('');
     const handleClassNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setClassName(event.target.value);
-      };
+    };
     return (
         <div className="flex items-center space-x-2 my-2">
             <p>클래스명</p>

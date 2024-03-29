@@ -2,15 +2,15 @@
 import React, { useState } from 'react'
 
 const Personnel = () => {
-    const [personnel, setPersonnel] = useState('');
+  const [personnel, setPersonnel] = useState('');
   const [minNumber, setMinNumber] = useState('');
-    const handlePersonnelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPersonnel(event.target.value);
-      };
+  const handlePersonnelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPersonnel(event.target.value);
+  };
     
-      const handleMinNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setMinNumber(event.target.value);
-      };
+  const handleMinNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMinNumber(event.target.value);
+  };
   return (
     <div className="flex items-center space-x-2 my-2">
         <p>정원</p>

@@ -2,7 +2,9 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
-import Layout from '@/components/common/Layout';
+
+import Link from 'next/link';
+import Layout from '@/components/common/layout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -12,15 +14,23 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children
+  children,
+  admin
 }: Readonly<{
   children: React.ReactNode;
+  admin: React.ReactNode;
 }>) {
   return (
     <html lang="ko">
       <body className={inter.className}>
         <Layout>
-          <QueryProvider>{children}</QueryProvider>
+          {' '}
+          {/* Parallel Routes 여기에서 링크로 설정해주기 */}
+          <Link href="/login"></Link>
+          <QueryProvider>
+            {children}
+            {admin}
+          </QueryProvider>
         </Layout>
       </body>
     </html>
