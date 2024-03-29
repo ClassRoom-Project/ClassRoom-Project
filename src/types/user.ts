@@ -8,3 +8,8 @@ export interface UserType {
   field: string;
   profile_image: string;
 }
+
+interface AdminType {
+  isAdmin: boolean;
+  setIsAdmin: (isAdmin: boolean) => void;
+}

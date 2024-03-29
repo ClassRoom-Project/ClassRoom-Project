@@ -7,13 +7,13 @@ const CategoryDropdown = () => {
 
     const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedCategory(event.target.value);
-      };
+    };
     
-      const handleSubCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSubCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSubCategory(event.target.value);
-      };
-  return (
-    <div className='w-full max-w-md my-2'>
+    };
+    return (
+      <div className='w-full max-w-md my-2'>
           <div className="flex items-center space-x-2">
             <div>
               {/* 카테고리 드롭다운 */}
@@ -33,8 +33,8 @@ const CategoryDropdown = () => {
               <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={subCategory} onChange={handleSubCategoryChange} placeholder="해시태그를 입력해주세요"/>
             </div>
           </div>
-        </div>
-  )
+      </div>
+    )
 }
 
 export default CategoryDropdown
