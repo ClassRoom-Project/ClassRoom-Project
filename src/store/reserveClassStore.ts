@@ -1,13 +1,5 @@
+import { ReserveInfo } from '@/types';
 import { create } from 'zustand';
-
-export type ReserveInfo = {
-  classId: string;
-  userId: string;
-  reservePrice: number;
-  reserveQuantity: number;
-  reserveDate: string;
-  reserveTime: string;
-};
 
 export const defaultInitState: ReserveInfo = {
   classId: '',
@@ -20,27 +12,20 @@ export const defaultInitState: ReserveInfo = {
 
 export type ReserveStoreType = {
   reserveInfo: ReserveInfo;
-  setClassId: (classId: string) => void;
-  setDateAndTime: (date: string, time: string) => void;
-  setPriceAndQuantity: (totalPrice: number, totalQuantity: number) => void;
+  setReserveInfo: ({}) => void;
 };
 
 const useReserveClass = create<ReserveStoreType>((set) => ({
   reserveInfo: defaultInitState,
-  setClassId: (classId) => {
+
+  setReserveInfo: (updateInfo) => {
     set((state) => ({
-      reserveInfo: { ...state.reserveInfo, classId: classId }
+      reserveInfo: {
+        ...state.reserveInfo,
+        ...updateInfo
+      }
     }));
-  },
-  setDateAndTime: (date, time) => {
-    set((state) => ({
-      reserveInfo: { ...state.reserveInfo, reserveDate: date, reserveTime: time }
-    }));
-  },
-  setPriceAndQuantity: (totalPrice, quantity) => {
-    set((state) => ({
-      reserveInfo: { ...state.reserveInfo, reservePrice: totalPrice, reserveQuantity: quantity }
-    }));
+    console.log(updateInfo);
   }
 }));
 
