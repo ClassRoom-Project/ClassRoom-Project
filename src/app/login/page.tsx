@@ -16,7 +16,7 @@ export default function LoginPage() {
   return (
     <div className="flex h-screen items-center justify-center w-full ">
       <div className="flex flex-row border mx-auto rounded-md w-3/4 h-1/2 ">
-        <section className="h-full w-2/5 flex items-center justify-around bg-custom-radial">
+        <section className="h-full w-2/5 flex items-center justify-around bg-[#F0F6FF]">
           <p className="text-sm">
             클룸에 오신걸 환영합니다!
             <br /> 다양한 원데이 클래스를 체험해보세요!
