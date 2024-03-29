@@ -13,7 +13,8 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
         reserve_price: reservePrice,
         reserve_quantity: reserveQuantity,
         reserve_date: reserveDate,
-        reserve_time: reserveTime
+        reserve_time: reserveTime,
+        reserved_at: new Date()
       }
     ])
     .select();
