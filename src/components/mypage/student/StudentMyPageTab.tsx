@@ -2,13 +2,20 @@
 
 import React, { useState } from 'react';
 import EditProfile from '../EditProfile';
-import ReservedClass from './MyReservedClass';
 import MyComments from './MyComments';
 import MyReservedClass from './MyReservedClass';
 
+type StudentTabComponent = {
+  [key: string]: React.ReactNode;
+};
+
 const StudentMyPageTab = () => {
   const [activePage, setActivePage] = useState('editProfile');
-  const activeTab = { editProfile: <EditProfile />, reservedClass: <MyReservedClass />, myComments: <MyComments /> };
+  const activeStudentMyPageTab: StudentTabComponent = {
+    editProfile: <EditProfile />,
+    reservedClass: <MyReservedClass />,
+    myComments: <MyComments />
+  };
 
   return (
     <div className="m-4 p-4">
@@ -32,7 +39,7 @@ const StudentMyPageTab = () => {
           내가 쓴 댓글 보기
         </span>
       </div>
-      <div className="m-4 p-4">{activeTab[activePage]}</div>
+      <div className="m-4 p-4">{activeStudentMyPageTab[activePage]}</div>
     </div>
   );
 };
