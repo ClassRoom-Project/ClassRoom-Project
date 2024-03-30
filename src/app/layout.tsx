@@ -2,10 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
-
 import Link from 'next/link';
 import UserLayout from '@/components/common/UserLayout';
-import BorderLayout from '@/components/common/BorderLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -24,7 +22,6 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <BorderLayout>
           <UserLayout />
           {/* Parallel Routes 여기에서 링크로 설정해주기 */}
           <Link href="/login"></Link>
@@ -32,7 +29,6 @@ export default function RootLayout({
             {children}
             {teacher}
           </QueryProvider>
-        </BorderLayout>
       </body>
     </html>
   );
