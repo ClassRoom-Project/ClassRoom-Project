@@ -12,6 +12,10 @@ const ReserveButton = () => {
 
   const handleReserveButtonClick = () => {
     console.log(reserveInfo);
+
+    if (reserveInfo.reserveQuantity === 0) {
+      alert('예약 인원은 1명 이상이여야 합니다.');
+    }
     // router.push('reserve/rid=ba59530d-a840-443a-937c-53f10a9c8a93');
     submitReservation(reserveInfo);
   };
