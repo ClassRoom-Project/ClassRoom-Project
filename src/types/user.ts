@@ -3,7 +3,7 @@ export interface UserType {
   email: string;
   nickname: string;
   password: string;
-  admin: boolean;
+  teacher: boolean;
   job: string;
   field: string;
   profile_image: string;

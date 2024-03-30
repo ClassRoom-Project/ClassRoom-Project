@@ -1,13 +1,13 @@
 'use client';
 
-import StudentMyPage from '@/components/mypage/student/StudentMyPage';
-import TeacherMyPage from '@/components/mypage/teacher/TeacherMyPage';
+import StudentMyPage from '@/components/mypage/student/StudentMyPageTab';
+import TeacherMyPage from '@/components/mypage/teacher/TeacherMyPageTab';
 import { useGetUserInfo } from '@/hooks/mypage/useGetUserInfo';
 
 const MyPage = () => {
   // 일단 admin :  teacher = true / student = false 이라고 가정
 
-  const { admin } = useGetUserInfo();
+  const { teacher } = useGetUserInfo();
   // console.log('userInfo', userInfo);
 
   // console.log('isAdmin', isAdmin);
@@ -15,7 +15,7 @@ const MyPage = () => {
   return (
     <div>
       {/* admin의 boolean 값에 따라 마이페이지 구분*/}
-      {admin ? <TeacherMyPage /> : <StudentMyPage />}
+      {teacher ? <TeacherMyPage /> : <StudentMyPage />}
     </div>
   );
 };
