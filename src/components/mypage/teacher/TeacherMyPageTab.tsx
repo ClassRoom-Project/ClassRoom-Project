@@ -4,9 +4,9 @@ import EditProfile from '../EditProfile';
 import MyClass from './MyClass';
 import { UserType } from '@/types/user';
 
-const TeacherMyPage = () => {
+const TeacherMyPageTab = () => {
   const [activePage, setActivePage] = useState('editProfile');
-
+  const activeTab = { editProfile: <EditProfile />, editTeacherInfo: <EditTeacherInfo />, myClass: <MyClass /> };
   return (
     <div className="m-4 p-4">
       <div className="gap-4">
@@ -29,19 +29,9 @@ const TeacherMyPage = () => {
           내가 등록한 클래스
         </span>
       </div>
-      <div className="m-4 p-4">
-        {activePage === 'editProfile' ? (
-          <EditProfile />
-        ) : activePage === 'editTeacherInfo' ? (
-          <EditTeacherInfo />
-        ) : activePage === 'myClass' ? (
-          <MyClass />
-        ) : (
-          ''
-        )}
-      </div>
+      <div className="m-4 p-4">{activeTab[activePage]}</div>
     </div>
   );
 };
 
-export default TeacherMyPage;
+export default TeacherMyPageTab;
