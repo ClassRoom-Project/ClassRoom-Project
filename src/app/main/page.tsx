@@ -1,4 +1,4 @@
-import MainLayout from '@/components/main/MainLayout';
+import MainLayout from '@/components/common/UserLayout';
 const page = () => {
   return (
     <>
