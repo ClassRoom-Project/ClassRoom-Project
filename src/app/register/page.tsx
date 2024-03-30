@@ -35,8 +35,6 @@ const RegisterPage = () => {
   const [totalTime, setTotalTime] = useState('');
 
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
-  const [mainImage, setMainImge] = useState('');
-  const [selectedImages, setSelectedImages] = useState([]);
   
   // Daum Postcode Popup을 사용하기 위한 스크립트 URL
   const scriptUrl = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
@@ -62,12 +60,34 @@ const RegisterPage = () => {
     open({ onComplete: handleComplete });
   };
 
+  const uploadFile = async (file: File) => {
+    const filePath = `uploads/${uuidv4()}_${file.name}`; // 고유한 파일 경로 생성
+    const { data, error } = await supabase.storage
+        .from('images')
+        .upload(filePath, file);
+    if (error) {
+        console.error('파일 업로드 실패:', error);
+        return null;
+    } else {
+        const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${data.path}`;
+        return url;
+    }
+}
+
   // supabase에 데이터 저장
   const handleSubmit = async () => {
-    //const mainImage = images[0];
-
     const userId = "223e4567-e89b-12d3-a456-426614174002";
     const classId = uuidv4();
+    const imageUrls = [];
+
+    for (const image of images) {
+      const url = await uploadFile(image.file);
+      if(url) {
+        imageUrls.push(url);
+      }
+    }
+
+    console.log('업로드된 이미지 URL들:', imageUrls);
 
     const { data, error } = await supabase
       .from('class')
@@ -88,7 +108,7 @@ const RegisterPage = () => {
           date: null,
           time: selectedTime,
           totalTime: totalTime,
-          image: images,
+          image: imageUrls,
           //mainImage: mainImage,
         },
       ]);
@@ -108,7 +128,9 @@ const RegisterPage = () => {
 
       const file = event.target.files[0];
       const preview = URL.createObjectURL(file);
-      setImages([...images, { file, preview }]);
+      const newImages = [...images, { file, preview }];
+      setImages(newImages);
+      console.log(newImages);
     }
   };
 
