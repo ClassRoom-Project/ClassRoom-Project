@@ -4,7 +4,7 @@ import { supabase } from './supabase';// supabase 클라이언트를 불러옵�
 async function fetchMyClasses(userId:string) {
   const { data: reserves, error: reservesError } = await supabase
     .from('reserve')
-    .select('reserved_at, reserve_date, class_id')
+    .select('reserved_at, reserve_date, class_id, reserve_id')
     .eq('user_id', userId)
 
   if (reservesError) {
@@ -33,6 +33,21 @@ async function fetchMyClasses(userId:string) {
   }
 
   return classes;
+}
+
+// 예약 취소 함수
+export async function cancelReservation(reserve_id:string) {
+  const { data, error } = await supabase
+    .from('reserve')
+    .delete()
+    .match({ reserve_id: reserve_id });
+
+  if (error) {
+    console.error(error);
+    throw error;
+  }
+
+  return data;
 }
 
 export default fetchMyClasses;
