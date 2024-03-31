@@ -1,6 +1,5 @@
-import { fetchReserveInfo } from '@/api/supabase/fetchReserveInfo';
+import { fetchReserveInfo } from '@/app/api/supabase/fetchReserveInfo';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
-import useReserveStore from '@/store/reserveClassStore';
 import React from 'react';
 
 const reservationCompletePage = async ({ params }: { params: { reservationId: string } }) => {

@@ -1,8 +1,8 @@
-import { fetchClassInfo } from '@/api/supabase/fetchClassInfo';
 import ClassInfo from '@/components/reserve/ClassInfo';
 import DateTimePicker from '@/components/reserve/DateTimePicker';
 import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
+import { fetchClassInfo } from '../api/supabase/fetchClassInfo';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
