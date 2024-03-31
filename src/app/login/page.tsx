@@ -21,7 +21,7 @@ export default function LoginPage() {
             <p className="text-2xl font-bold ">클룸</p>
             <input placeholder="아이디" className="w-1/2 h-9  border rounded-lg " />
             <input placeholder="비밀번호" className="w-1/2 h-9 border rounded-lg " />
-            <button className="bg-black text-white w-1/3 h-9 rounded-lg  ">로그인</button>
+            <button className="bg-black text-white w-1/3 h-9 rounded-lg">로그인</button>
           </form>
 
           <div className="flex flex-row justify-around">

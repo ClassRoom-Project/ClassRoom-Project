@@ -14,21 +14,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  teacher
+  modal
 }: Readonly<{
   children: React.ReactNode;
-  teacher: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="ko">
       <body className={inter.className}>
-          <UserLayout />
-          {/* Parallel Routes 여기에서 링크로 설정해주기 */}
+        <UserLayout />
+        <QueryProvider>
           <Link href="/login"></Link>
-          <QueryProvider>
-            {children}
-            {teacher}
-          </QueryProvider>
+          {children}
+          {modal}
+        </QueryProvider>
       </body>
     </html>
   );
