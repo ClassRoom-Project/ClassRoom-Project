@@ -16,9 +16,9 @@ const ClassInfo = ({ classInfo, classId }: { classInfo: ReserveClassType; classI
       <Image
         width={100}
         height={100}
-        src={classInfo?.image[0] ? classInfo?.image[0] : 'default image'}
-        alt="클래스 이미지"
-        unoptimized={true}
+        src={classInfo?.image[0] ? classInfo?.image[0] : 'default image'} // dafault 이미지도 나중에 추가필요
+        alt="Class Thumbnail Image"
+        unoptimized={true} // 추후 수정 필요
       />
       <div className="flex flex-col">
         <span>{`[${classInfo?.category}] ${classInfo?.title}`}</span>

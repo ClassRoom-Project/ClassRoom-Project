@@ -26,6 +26,7 @@ export type MyRegistedClassType = Pick<
   'user_id' | 'class_id' | 'title' | 'location' | 'detailLocation' | 'date' | 'time' | 'image' | 'active'
 >;
 
+// 예약 페이지에서 클래스 정보를 보여주기 위한 타입
 export type ReserveClassType = Pick<
   ClassAllType,
   'class_id' | 'category' | 'title' | 'location' | 'price' | 'image' | 'max_ppl'
