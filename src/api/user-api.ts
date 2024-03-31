@@ -1,6 +1,6 @@
 import { PostgrestMaybeSingleResponse } from '@supabase/supabase-js';
 import { supabase } from './supabase/supabase';
-import { UserType } from '@/types/user';
+import { UpdateUserInfoType, UserType } from '@/types/user';
 import { userId } from '@/app/mypage/page';
 
 // User가 선생님인지 수강생인지 구분 : teacher 값 불러오기
@@ -32,3 +32,14 @@ export const getUserInfo = async () => {
 
   return userInfo;
 };
+
+// User 정보 수정하기 : supabase에 update
+export const updateUserInfo = async ({ email, nickname, password }: UpdateUserInfoType) => {
+  const { data, error } = await supabase.from('user').update({ email, nickname, password }).eq('user_id', userId);
+  if (error) {
+    console.error(error);
+  }
+  return data;
+};
+
+//.update({ comment: nextComment })

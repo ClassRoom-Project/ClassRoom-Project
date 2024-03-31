@@ -3,8 +3,8 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import BasicProfileImage from '../../../public/profile-image.png';
 import { CancleButton, EditButton } from '../common/mypage/buttons';
-import { getUserInfo } from '@/api/user-api';
-import { useQuery } from '@tanstack/react-query';
+import { getUserInfo, updateUserInfo } from '@/api/user-api';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { userId } from '@/app/mypage/page';
 
 const EditProfile = () => {
@@ -13,16 +13,16 @@ const EditProfile = () => {
     queryFn: () => getUserInfo()
   });
 
-  const [nickname, setNickname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [newNickname, setNewNickname] = useState('');
+  const [newEmail, setNewEmail] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
 
   useEffect(() => {
     if (userInfo) {
-      setNickname(userInfo.nickname || '');
-      setEmail(userInfo.email || '');
-      setPassword(userInfo.password || '');
+      setNewNickname(userInfo.nickname || '');
+      setNewEmail(userInfo.email || '');
+      setNewPassword(userInfo.password || '');
       setCheckPassword(userInfo.password || '');
     }
   }, [userInfo]);
@@ -36,19 +36,57 @@ const EditProfile = () => {
   }
 
   const handleOnChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNickname(e.target.value);
+    setNewNickname(e.target.value);
   };
   const handleOnChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
+    setNewEmail(e.target.value);
   };
   const handleOnChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+    setNewPassword(e.target.value);
   };
   const handleOnChangeCheckPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCheckPassword(e.target.value);
   };
 
-  const handleOnClickEditProfileBtn = () => {};
+  // 유저 정보 수정하기 mutation
+  // const { mutate: updateUserInfoMutation } = useMutation({
+  //   mutationFn: ({ newNickname, newEmail, newPassword }: UpdateUserInfoType) =>
+  //     updateUserInfo({ newNickname, newEmail, newPassword }),
+  //   onSuccess
+  // });
+
+  // 수정하기 버튼 -> supabase에 수정한 정보 update
+  const handleOnClickEditProfileBtn = () => {
+    alert('프로필 정보 수정하기 버튼입니다.');
+  };
+
+  //   // 댓글 수정 mutation
+  //   const { mutate: updateCommentMutation } = useMutation({
+  //     mutationFn: ({ email, id, nextComment }: UpdateCommentType) =>
+  //       updateComment({ nextComment, email, id }),
+  //     onSuccess: () => {
+  //       queryClient.invalidateQueries({
+  //         queryKey: ["comments"],
+  //       });
+  //     },
+  //   });
+
+  //     // 수정, 수정완료 버튼 핸들러
+  // const handleEditHandler = (id: number) => {
+  //   // 수정완료버튼
+  //   if (isEdit) {
+  //     if (nextComment !== comment.comment) {
+  //       const confirm = window.confirm("수정하시겠습니까?");
+  //       if (confirm) {
+  //         // insert하는 api mutation 호출
+  //         updateCommentMutation({ nextComment, email, id });
+  //         setIsEdit((prev) => !prev);
+  //       }
+  //       return;
+  //     } else if (nextComment === comment.comment) {
+  //       alert("수정사항이 없습니다.");
+  //     }
+  // };
 
   return (
     <div className="flex">
@@ -60,15 +98,15 @@ const EditProfile = () => {
         <div className="flex flex-col">
           <div className="m-4 p-4 gap-4">
             <p>닉네임</p>
-            <input type="text" className="border p-1" value={nickname} onChange={handleOnChangeNickname} />
+            <input type="text" className="border p-1" value={newNickname} onChange={handleOnChangeNickname} />
           </div>
           <div className="m-4 p-4">
             <p>이메일</p>
-            <input type="text" className="border p-1" value={email} onChange={handleOnChangeEmail} />
+            <input type="text" className="border p-1" value={newEmail} onChange={handleOnChangeEmail} />
           </div>
           <div className="m-4 p-4">
             <p>비밀번호</p>
-            <input type="text" className="border p-1" value={password} onChange={handleOnChangePassword} />
+            <input type="text" className="border p-1" value={newPassword} onChange={handleOnChangePassword} />
           </div>
           <div className="m-4 p-4">
             <p>비밀번호 확인</p>
