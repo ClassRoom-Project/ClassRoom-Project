@@ -25,3 +25,8 @@ export type MyRegistedClassType = Pick<
   ClassAllType,
   'user_id' | 'class_id' | 'title' | 'location' | 'detailLocation' | 'date' | 'time' | 'image' | 'active'
 >;
+
+export type ReserveClassType = Pick<
+  ClassAllType,
+  'class_id' | 'category' | 'title' | 'location' | 'price' | 'image' | 'max_ppl'
+>;

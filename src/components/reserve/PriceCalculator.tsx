@@ -1,10 +1,10 @@
 'use client';
 
 import useReserveStore from '@/store/reserveClassStore';
-import { ClassType } from '@/types';
+import { ReserveClassType } from '@/types/class';
 import React, { useState } from 'react';
 
-const PriceCalculator = ({ price }: { price: ClassType['price'] }) => {
+const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
   const [quantity, setQuantity] = useState(1);
 
   const totalPrice = price * quantity;

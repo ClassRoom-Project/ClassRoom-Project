@@ -1,7 +1,7 @@
 'use client';
 
 import useReserveStore from '@/store/reserveClassStore';
-import { DateType } from '@/types';
+import { DateType } from '@/types/date';
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
