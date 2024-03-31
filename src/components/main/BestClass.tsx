@@ -11,18 +11,57 @@ import { fetchClassInfos } from '@/api/supabase/fetchClassInfo';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { SlickArrowProps } from '@/types/reactSlick';
+
+function SampleNextArrow(props: SlickArrowProps) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        width: '20px',
+        height: '20px',
+        display: 'block',
+        borderRadius: '50%',
+        background: 'black'
+      }}
+      onClick={onClick}
+    />
+  );
+}
+
+function SamplePrevArrow(props: SlickArrowProps) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{
+        ...style,
+        width: '20px',
+        height: '20px',
+        display: 'block',
+        borderRadius: '50%',
+        background: 'black'
+      }}
+      onClick={onClick}
+    />
+  );
+}
 
 const BestClass = () => {
   const { classInfos, setClassInfos } = useClassInfoStore();
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     slidesToShow: 4,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 3000,
-    autoplaySpeed: 1000,
-    cssEase: 'linear'
+    speed: 500,
+    autoplaySpeed: 4000,
+    cssEase: 'linear',
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />
   };
 
   useEffect(() => {
@@ -34,7 +73,7 @@ const BestClass = () => {
   }, []);
 
   return (
-    <div>
+    <div className="mr-auto ml-auto">
       <p>BestClass</p>
       <div className="slider-container w-[85vw]">
         <Slider {...settings}>
