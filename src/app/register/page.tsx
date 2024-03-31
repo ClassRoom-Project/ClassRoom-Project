@@ -110,6 +110,8 @@ const RegisterPage = () => {
           class_id: classId,
           category: category,
           hashtag: subCategory, 
+          class_type: classType,
+          difficulty: difficulty,
           title: className, 
           description: classContent,
           quantity: personnel,

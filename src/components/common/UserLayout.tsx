@@ -15,4 +15,5 @@ const UserLayout = ({ children }: PropsWithChildren) => {
     </>
   );
 };
+
 export default UserLayout;

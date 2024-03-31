@@ -1,9 +1,11 @@
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import React from 'react';
 
-const reservationCompletePage = ({ params }: { params: { rid: string } }) => {
-  const reservationId = decodeURIComponent(params.rid);
+const reservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
+  const reservationId = decodeURIComponent(params.reservationId);
   console.log(reservationId);
+
+  // 객체 배열로 수정
 
   return (
     <div className="w-[1600px] h-[800px]">

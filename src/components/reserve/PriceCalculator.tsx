@@ -1,11 +1,18 @@
 'use client';
 
-import { Class } from '@/types/class';
+import useReserveStore from '@/store/reserveClassStore';
+import { ClassType } from '@/types';
 import React, { useState } from 'react';
 
-const PriceCalculator = ({ price }: { price: Class['price'] }) => {
+const PriceCalculator = ({ price }: { price: ClassType['price'] }) => {
   const [quantity, setQuantity] = useState(1);
 
+  const totalPrice = price * quantity;
+
+  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
+  setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
+
+  // 클래스의 max 인원 고려 필요
   const handleQuantityDecrease = () => {
     if (quantity !== 0) {
       setQuantity((prev) => prev - 1);
@@ -28,7 +35,7 @@ const PriceCalculator = ({ price }: { price: Class['price'] }) => {
       </div>
       <div className="flex w-full justify-between gap-4">
         <span className="w-16 text-right">총 금액</span>
-        <span> {(price * quantity).toLocaleString()} 원 </span>
+        <span> {totalPrice.toLocaleString()} 원 </span>
       </div>
     </div>
   );
