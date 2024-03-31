@@ -8,7 +8,6 @@ import React, { useEffect, useState } from 'react';
 
 const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
   const router = useRouter();
-  const [reserveId, setReserveid] = useState('');
 
   const reserveInfo = useReserveStore((state) => state.reserveInfo);
 
@@ -26,8 +25,11 @@ const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
     `)
     ) {
       const result = await submitReservation(reserveInfo);
-      console.log(result);
-      router.push(`reserve/${result?.reserve_id}`);
+      if (!result) {
+        alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
+        return;
+      }
+      router.push(`reserve/${result.reserve_id}`);
     }
     return;
   };

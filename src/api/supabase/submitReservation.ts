@@ -4,7 +4,7 @@ import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export const submitReservation = async (reserveInfo: ReserveInfo) => {
   const { classId, userId, reservePrice, reserveQuantity, reserveDate, reserveTime } = reserveInfo;
-  const { data, error }: PostgrestSingleResponse<DBReserveInfo> = await supabase
+  const { data: result, error }: PostgrestSingleResponse<DBReserveInfo> = await supabase
     .from('reserve')
     .insert([
       {
@@ -21,10 +21,9 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
     .single();
 
   if (error) {
-    console.log(error);
+    console.log('예약정보 제출 오류 발생 =>', error);
+    return;
   }
 
-  console.log(data);
-
-  return data;
+  return result;
 };

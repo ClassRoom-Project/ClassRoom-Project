@@ -10,12 +10,10 @@ export const fetchReserveInfo = async (reservationId: string) => {
     .eq('reserve_id', reservationId)
     .single();
 
-  if (error) {
+  if (error || !reserveInfo) {
     console.error('예약 정보 불러오기 오류 => ', error);
     return;
   }
-
-  console.log(reserveInfo);
 
   return reserveInfo;
 };
