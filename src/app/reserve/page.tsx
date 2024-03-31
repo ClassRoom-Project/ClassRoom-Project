@@ -1,15 +1,15 @@
-import { fetchClassInfo } from '@/api/supabase/fetchClassInfo';
 import ClassInfo from '@/components/reserve/ClassInfo';
 import DateTimePicker from '@/components/reserve/DateTimePicker';
 import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
+import { fetchClassInfo } from '../api/supabase/fetchClassInfo';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
   const classInfo = await fetchClassInfo({ classId });
 
   return (
-    <div className="w-[1600px] h-[800px]">
+    <div className="w-full h-full">
       <h1 className="text-xl">예약하기</h1>
       {classInfo ? (
         <div className="flex w-full h-full bg-gray-200 p-6">

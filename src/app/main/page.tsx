@@ -5,7 +5,7 @@ import D1Class from '@/components/main/D1Class';
 import LatestClass from '@/components/main/LatestClass';
 const MainPage = () => {
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className=" items-center justify-center grid">
       <D1Class />
       <LatestClass />
       <BestClass />
