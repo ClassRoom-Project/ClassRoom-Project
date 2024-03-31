@@ -3,9 +3,9 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
 
-import BorderLayout from '@/components/common/BorderLayout';
-import UserLayout from '@/components/common/UserLayout';
 import Link from 'next/link';
+import UserLayout from '@/components/common/UserLayout';
+import BorderLayout from '@/components/common/BorderLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
