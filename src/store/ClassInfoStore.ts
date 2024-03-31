@@ -1,38 +1,17 @@
 import { create } from 'zustand';
 import { ClassAllType } from '@/types/class';
-export const defaultClassInfo = {
-  class_id: '',
-  user_id: '',
-  category: '',
-  hashtag: '',
-  title: '',
-  description: '',
-  max_ppl: 0,
-  min_ppl: 0,
-  price: 0,
-  location: '',
-  date: [],
-  time: [],
-  quantity: 0,
-  image: [],
-  detailLocation: '',
-  total_time: 0,
-  class_type: '',
-  difficulty: '',
-  active: true
-};
 
+//class 정보들 각각 배열에 담는 로직임다
 export type ClassStoreType = {
-  classInfo: ClassAllType;
-  setClassInfo: (getInfo: ClassAllType) => void;
+  classInfos: ClassAllType[];
+  setClassInfos: (classInfos: ClassAllType[]) => void;
 };
-
 export const useClassInfoStore = create<ClassStoreType>((set) => ({
-  classInfo: defaultClassInfo,
+  classInfos: [],
 
-  setClassInfo: (getInfo: ClassAllType) => {
+  setClassInfos: (getclassInfos) => {
     set(() => ({
-      classInfo: getInfo
+      classInfos: getclassInfos
     }));
   }
 }));
