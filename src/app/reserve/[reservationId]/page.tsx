@@ -10,7 +10,7 @@ const reservationCompletePage = async ({ params }: { params: { reservationId: st
   const reserveInfoLabels = [
     {
       title: '클래스명',
-      description: `${completedReserveInfo?.class_id}`
+      description: `${completedReserveInfo?.class_id}` // api 수정 후 클래스명으로 변경
     },
     {
       title: '이용 일자',
