@@ -12,7 +12,7 @@ const UserLayout = ({ children }: PropsWithChildren) => {
           <Image src={defaultImage} alt="Profile image" className="mr-[15px] h-[50px] w-[50px]" />
         </div>
       </div>
-      {/* {children} */}
+      {children}
     </>
   );
 };

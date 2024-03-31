@@ -1,10 +1,9 @@
 'use client';
 
-import { fetchReserveInfo } from '@/api/supabase/fetchReserveInfo';
-import { submitReservation } from '@/api/supabase/submitReservation';
+import { submitReservation } from '@/app/api/supabase/submitReservation';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
   const router = useRouter();
