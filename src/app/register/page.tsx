@@ -22,12 +22,14 @@ interface ImageFileWithPreview {
 const RegisterPage = () => {
   const [category, setCategory] = useState('');
   const [subCategory, setSubCategory] = useState('');
+  const [classType, setClassType] = useState('');
   const [className, setClassName] = useState('');
   const [classContent, setClassContent] = useState('');
   const [personnel, setPersonnel] = useState('');
   const [minNumber, setMinNumber] = useState('');
   const [maxNumber, setMaxNumber] = useState('');
   const [price, setPrice] = useState('');
+  const [difficulty, setDifficulty] = useState('');
   const [address, setAddress] = useState('');
   const [detailAddress, setDetailAddress] = useState('');
   const [selectDay, setSelectDay] = useState(''); // 달력
@@ -35,7 +37,8 @@ const RegisterPage = () => {
   const [totalTime, setTotalTime] = useState('');
 
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
-  
+  const [representativeIndex, setRepresentativeIndex] = useState(-1);
+
   // Daum Postcode Popup을 사용하기 위한 스크립트 URL
   const scriptUrl = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
   const open = useDaumPostcodePopup(scriptUrl);
@@ -60,8 +63,15 @@ const RegisterPage = () => {
     open({ onComplete: handleComplete });
   };
 
+  // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
+  function cleanFileName(fileName:any) {
+    return fileName.replace(/[^a-zA-Z0-9.]/g, "_");
+  }
+
+  // supabase storage에 등록한 이미지 업로드
   const uploadFile = async (file: File) => {
-    const filePath = `uploads/${uuidv4()}_${file.name}`; // 고유한 파일 경로 생성
+    const cleanName = cleanFileName(file.name);
+    const filePath = `uploads/${uuidv4()}_${cleanName}`;
     const { data, error } = await supabase.storage
         .from('images')
         .upload(filePath, file);
@@ -72,18 +82,21 @@ const RegisterPage = () => {
         const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${data.path}`;
         return url;
     }
-}
+  }
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
     const userId = "223e4567-e89b-12d3-a456-426614174002";
     const classId = uuidv4();
     const imageUrls = [];
+    console.log(images);
 
     for (const image of images) {
       const url = await uploadFile(image.file);
       if(url) {
         imageUrls.push(url);
+      } else {
+        console.error('일부 이미지 업로드에 실패했습니다');
       }
     }
 
@@ -107,9 +120,8 @@ const RegisterPage = () => {
           detailLocation: detailAddress,
           date: null,
           time: selectedTime,
-          totalTime: totalTime,
+          total_time: totalTime,
           image: imageUrls,
-          //mainImage: mainImage,
         },
       ]);
     if (error) {
@@ -140,6 +152,7 @@ const RegisterPage = () => {
     const remainingImages = images.filter((_, i) => i !== index);
     const newImages = [selectedImage, ...remainingImages];
     setImages(newImages);
+    setRepresentativeIndex(0);
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -148,6 +161,14 @@ const RegisterPage = () => {
     
   const handleSubCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setSubCategory(event.target.value);
+  };
+
+  const handleClassTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setClassType(event.target.value);
+  };
+
+  const handleDifficultyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setDifficulty(event.target.value);
   };
 
   const handleClassNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -182,9 +203,17 @@ const RegisterPage = () => {
     setTotalTime(event.target.value);
   };
 
+  const handleSetRepresentative = (index:any) => {
+    setRepresentativeIndex(index);
+  };
+
   return (
-    <div className='p-4'>
-      <div className='border p-4 flex flex-col item-center mt-4'>
+    <div className='p-4 w-full sm:p-20 md:p-4 flex flex-col items-center justify-center'>
+      <div className="sm:p-20 md:p-4 pl-2 w-full">
+        <h1 className='font-extrabold text-xl'>클래스 등록하기</h1>
+      </div>
+      <div className='border py-6 px-20 flex flex-col item-center justify-center'>
+
         <div className='w-full max-w-md my-2'>
             <div className="flex items-center space-x-2">
               <div>
@@ -205,6 +234,29 @@ const RegisterPage = () => {
                 <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={subCategory} onChange={handleSubCategoryChange} placeholder="해시태그를 입력해주세요"/>
               </div>
             </div>
+        </div>
+
+        <div className='w-full max-w-md my-2'>
+          <div className="flex items-center space-x-2">
+            <div>
+              {/* 클래스 타입 드롭다운 */}
+              <select value={classType} onChange={handleClassTypeChange}>
+                <option value="">클래스타입 선택</option>
+                <option value="오프라인 클래스">오프라인 클래스</option>
+                <option value="온라인 클래스">온라인 클래스</option>
+              </select>
+            </div>
+          </div>
+          <div className="flex items-center">
+            {/* 난이도 드롭다운 */}
+            <select value={difficulty} onChange={handleDifficultyChange}>
+              <option value="">난이도 선택</option>
+              <option value="입문">입문</option>
+              <option value="초급">초급</option>
+              <option value="중급">중급</option>
+              <option value="고급">고급</option>
+            </select>
+          </div>
         </div>
 
         <div className="flex items-center space-x-2 my-2">
@@ -240,6 +292,13 @@ const RegisterPage = () => {
         </div>
 
         <div className="flex items-center space-x-2 my-2">
+          <p>소요시간</p>
+          <div>
+              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={totalTime} onChange={handleTotalTimeChange} placeholder="총 소요시간 입력"/>
+          </div>
+        </div>
+
+        <div className="flex items-center space-x-2 my-2">
           <p>가격</p>
           <div>
               <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={price} onChange={handlePriceChange} placeholder="가격"/>
@@ -258,7 +317,7 @@ const RegisterPage = () => {
                   onChange={(e) => setAddress(e.target.value)}
                   placeholder="주소"
                 />
-                <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={handleOpenPostCode}>주소 검색</button>
+                <button className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700" onClick={handleOpenPostCode}>주소 검색</button>
               </div>
             </div>
           </div>
@@ -271,11 +330,13 @@ const RegisterPage = () => {
           />
         </div>
 
-        <div>날짜</div>
-        {/* 날짜 달력 api 사용 */}
+        <div className='my-1'>
+          <p>날짜</p>
+          {/* 날짜 달력 api 사용 */}
+        </div>
 
         <div className="flex items-center space-x-2 my-2">
-            <div>시간선택</div>
+            <p>시간선택</p>
             <div>
                 <input
                 type="time"
@@ -284,37 +345,29 @@ const RegisterPage = () => {
                 />
             </div>
         </div>
-
-        <div className="flex items-center space-x-2 my-2">
-          <p>총 소요시간</p>
-          <div>
-              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={totalTime} onChange={handleTotalTimeChange} placeholder="총 소요시간 입력"/>
-          </div>
-        </div>
       </div>
 
-      <div className="flex items-center space-x-4">
-        {/* 이미지 선택 버튼 */}
+      <div className='mt-2'>
+        <div className="flex justify-between items-center pt-2">
         {images.length < 5 && (
           <label htmlFor="image-upload" className="cursor-pointer">
             <Image src={Plus} alt="plus" width={100} height={100} />
             <input id="image-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
           </label>
         )}
-        {/* 이미지 미리보기 */}
         {images.map((image, index) => (
-          <div key={index} className="h-[100px] w-[100px] relative">
-            <Image src={image.preview} alt={`preview ${index}`} layout="fill" objectFit="cover" />
-            {/* 이미지 오른쪽 위에 배치될 버튼 */}
+          <div key={index} className="h-[100px] w-[100px] relative ml-2">
+            <Image src={image.preview} alt={`preview ${index}`} layout="fill" objectFit="cover" className='rounded-[20px] border'/>
             <button 
-              className="absolute top-0 right-0 rounded-full bg-red-500 text-white w-6 h-6 flex items-center justify-center" 
+              className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${index === 0 ? 'bg-blue-500' : 'bg-white-500'}`} 
               onClick={() => handleMoveToFront(index)}
             >
-              &gt;
+              🌼
             </button>
           </div>
         ))}
-        <button onClick={handleSubmit} className="h-[100px]">등록하기</button>
+        <button  onClick={handleSubmit} className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">등록하기</button>
+        </div>
       </div>
 
     </div>
