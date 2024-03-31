@@ -9,7 +9,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   const classInfo = await fetchClassInfo({ classId });
 
   return (
-    <div className="w-[1600px] h-[800px]">
+    <div className="w-full h-full">
       <h1 className="text-xl">예약하기</h1>
       {classInfo ? (
         <div className="flex w-full h-full bg-gray-200 p-6">

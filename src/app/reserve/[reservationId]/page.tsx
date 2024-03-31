@@ -8,7 +8,7 @@ const reservationCompletePage = ({ params }: { params: { reservationId: string }
   // 객체 배열로 수정
 
   return (
-    <div className="w-[1600px] h-[800px]">
+    <div className="w-full h-full">
       <h1 className="text-xl">예약 완료</h1>
       <div className="w-full h-full bg-gray-200 p-6 flex flex-col justify-between items-center">
         <h1 className="text-xl text-center">예약이 정상적으로 처리되었습니다..</h1>

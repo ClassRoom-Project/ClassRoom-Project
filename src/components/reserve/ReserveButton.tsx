@@ -11,8 +11,6 @@ const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
   const reserveInfo = useReserveStore((state) => state.reserveInfo);
 
   const handleReserveButtonClick = () => {
-    console.log(reserveInfo);
-
     if (reserveInfo.reserveQuantity === 0) {
       alert('예약 인원은 1명 이상이여야 합니다.');
       return;

@@ -31,6 +31,7 @@ const DateTimePicker = () => {
         <h1 className="mb-1">날짜 선택</h1>
         <div>
           <Calendar
+            // tileDisabled={({ date }) => [0, 6].includes(date.getDay())} // 날짜 비활성화
             defaultView="month"
             onChange={handleDateChange}
             formatDay={(_locale, date) => date.getDate().toString()} // 달력에서 '일' 제거하고 숫자만 보이게
