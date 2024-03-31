@@ -1,10 +1,9 @@
-import { PostgrestResponse, PostgrestSingleResponse } from '@supabase/supabase-js';
+import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from './supabase';
-import { ClassType } from '@/types';
+import { ReserveClassType } from '@/types/class';
 
 export const fetchClassInfo = async ({ classId }: { classId: string }) => {
-  console.log(classId);
-  const { data: classInfo, error }: PostgrestSingleResponse<ClassType> = await supabase
+  const { data: classInfo, error }: PostgrestSingleResponse<ReserveClassType> = await supabase
     .from('class')
     .select('class_id, category, title, location, price, image, max_ppl')
     .eq('class_id', classId)

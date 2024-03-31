@@ -1,9 +1,9 @@
 'use client';
 
 import useReserveStore from '@/store/reserveClassStore';
-import { DateType } from '@/types';
+import { DateType } from '@/types/date';
 import { format } from 'date-fns';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -15,7 +15,9 @@ const DateTimePicker = () => {
   const [date, setDate] = useState<string>(today);
 
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  setReserveInfo({ reserveDate: date, reserveTime: selectedTime });
+  useEffect(() => {
+    setReserveInfo({ reserveDate: date, reserveTime: selectedTime });
+  }, [date, selectedTime, setReserveInfo]);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
@@ -31,6 +33,7 @@ const DateTimePicker = () => {
         <h1 className="mb-1">날짜 선택</h1>
         <div>
           <Calendar
+            // tileDisabled={({ date }) => [0, 6].includes(date.getDay())} // 날짜 비활성화
             defaultView="month"
             onChange={handleDateChange}
             formatDay={(_locale, date) => date.getDate().toString()} // 달력에서 '일' 제거하고 숫자만 보이게
