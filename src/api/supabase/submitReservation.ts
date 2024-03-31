@@ -1,4 +1,4 @@
-import { ReserveInfo } from '@/types';
+import { ReserveInfo } from '@/types/reserve';
 import { supabase } from './supabase';
 
 export const submitReservation = async (reserveInfo: ReserveInfo) => {

@@ -1,5 +1,4 @@
 export type ReserveInfo = {
-  reserveId: string;
   classId: string;
   userId: string;
   reservePrice: number;
@@ -19,6 +18,6 @@ export type DBReserveInfo = {
 };
 
 export type ReserveStoreType = {
-  reserveInfo: Omit<ReserveInfo, 'reserveId'>;
+  reserveInfo: ReserveInfo;
   setReserveInfo: ({}) => void;
 };

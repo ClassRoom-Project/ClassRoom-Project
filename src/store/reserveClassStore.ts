@@ -1,4 +1,4 @@
-import { ReserveStoreType } from '@/types/reserve';
+import { ReserveInfo, ReserveStoreType } from '@/types/reserve';
 import { create } from 'zustand';
 
 export const defaultInitState = {
