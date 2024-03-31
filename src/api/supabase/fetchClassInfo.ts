@@ -6,7 +6,7 @@ export const fetchClassInfo = async ({ classId }: { classId: string }) => {
   console.log(classId);
   const { data: classInfo, error }: PostgrestSingleResponse<ClassType> = await supabase
     .from('class')
-    .select('class_id, category, title, location, price, image')
+    .select('class_id, category, title, location, price, image, max_ppl')
     .eq('class_id', classId)
     .single();
 

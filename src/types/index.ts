@@ -8,6 +8,7 @@ export type ClassType = {
   location: string;
   price: number;
   image: string;
+  max_ppl: number;
 };
 
 export type ReserveInfo = {

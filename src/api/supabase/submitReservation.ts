@@ -3,7 +3,6 @@ import { supabase } from './supabase';
 
 export const submitReservation = async (reserveInfo: ReserveInfo) => {
   const { classId, userId, reservePrice, reserveQuantity, reserveDate, reserveTime } = reserveInfo;
-  console.log(classId, userId, reservePrice, reserveQuantity, reserveDate, reserveTime);
   const { data, error } = await supabase
     .from('reserve')
     .insert([

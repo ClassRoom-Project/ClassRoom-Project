@@ -17,7 +17,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
           <div className="flex flex-col justify-between items-center w-full p-6">
             <ClassInfo classInfo={classInfo} classId={classId} />
             <PriceCalculator price={classInfo.price} />
-            <ReserveButton />
+            <ReserveButton maxPeople={classInfo.max_ppl} />
           </div>
         </div>
       ) : (

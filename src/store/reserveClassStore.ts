@@ -25,7 +25,6 @@ const useReserveStore = create<ReserveStoreType>((set) => ({
         ...updateInfo
       }
     }));
-    console.log(updateInfo);
   }
 }));
 
