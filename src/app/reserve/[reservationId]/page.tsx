@@ -8,30 +8,29 @@ const reservationCompletePage = async ({ params }: { params: { reservationId: st
 
   const reserveInfos = await fetchReserveInfo();
   // console.log(reserveInfos);
-
-  const findCurrentReserveInfo = reserveInfos?.find((item) => item.reserveId === reservationId);
+  const findCurrentReserveInfo = reserveInfos?.find((item) => item.reserve_id === reservationId);
   console.log(findCurrentReserveInfo);
 
   const reserveInfoLabels = [
     {
       title: '클래스명',
-      description: '[요리] 쫀득쫀득 스모어쿠키'
+      description: `${findCurrentReserveInfo?.class_id}`
     },
     {
       title: '이용 일자',
-      description: '2024-03-26'
+      description: `${findCurrentReserveInfo?.reserve_date}`
     },
     {
       title: '이용 회차',
-      description: '16:00 (1회차)'
+      description: `${findCurrentReserveInfo?.reserve_time.slice(0, 5)}`
     },
     {
       title: '이용 인원',
-      description: '1 명'
+      description: `${findCurrentReserveInfo?.reserve_quantity}명`
     },
     {
       title: '이용 금액',
-      description: '50,000원'
+      description: `${findCurrentReserveInfo?.reserve_price.toLocaleString('ko-KR')}원`
     }
   ];
 
