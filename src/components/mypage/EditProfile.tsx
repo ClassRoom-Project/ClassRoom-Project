@@ -1,11 +1,11 @@
+import { getUserInfo } from '@/api/mypage/user-api';
+import { userId } from '@/app/mypage/page';
 import { UserType } from '@/types/user';
+import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import BasicProfileImage from '../../../public/profile-image.png';
-import { CancleButton, EditButton } from '../common/mypage/buttons';
-import { getUserInfo, updateUserInfo } from '@/api/user-api';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import { userId } from '@/app/mypage/page';
+import { CancleButton } from '../common/mypage/buttons';
 
 const EditProfile = () => {
   const { data: userInfo, isPending }: { data: UserType | undefined; isPending: boolean } = useQuery({
