@@ -2,7 +2,7 @@
 
 import useReserveStore from '@/store/reserveClassStore';
 import { ReserveClassType } from '@/types/class';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
   const [quantity, setQuantity] = useState(1);
@@ -10,7 +10,10 @@ const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
   const totalPrice = price * quantity;
 
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
+
+  useEffect(() => {
+    setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
+  }, [quantity, setReserveInfo]);
 
   // 클래스의 max 인원 고려 필요
   const handleQuantityDecrease = () => {

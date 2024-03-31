@@ -7,7 +7,7 @@ const NavigationButtons = () => {
       <Link href="/" className="bg-white w-48 p-4 text-center self-end">
         메인페이지 바로가기
       </Link>
-      <Link href="/mypage" className="bg-white w-48 p-4 text-center self-end">
+      <Link href="/mypage?studentMypage=reservedClass" className="bg-white w-48 p-4 text-center self-end">
         예약 상세 보기
       </Link>
     </div>

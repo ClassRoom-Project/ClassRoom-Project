@@ -3,7 +3,7 @@
 import useReserveStore from '@/store/reserveClassStore';
 import { DateType } from '@/types/date';
 import { format } from 'date-fns';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -15,7 +15,9 @@ const DateTimePicker = () => {
   const [date, setDate] = useState<string>(today);
 
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  setReserveInfo({ reserveDate: date, reserveTime: selectedTime });
+  useEffect(() => {
+    setReserveInfo({ reserveDate: date, reserveTime: selectedTime });
+  }, [date, selectedTime, setReserveInfo]);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);

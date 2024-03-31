@@ -3,11 +3,13 @@
 import useReserveStore from '@/store/reserveClassStore';
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const ClassInfo = ({ classInfo, classId }: { classInfo: ReserveClassType; classId: string }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  setReserveInfo({ classId: classId });
+  useEffect(() => {
+    setReserveInfo({ classId: classId });
+  }, [classId, setReserveInfo]);
 
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
