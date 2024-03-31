@@ -8,7 +8,7 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
     .from('reserve')
     .insert([
       {
-        user_id: '523e4567-e89b-12d3-a456-426614174005',
+        user_id: '523e4567-e89b-12d3-a456-426614174005', // 추후 현재 로그인한 유저 아이디로 수정 필요
         class_id: classId,
         reserve_price: reservePrice,
         reserve_quantity: reserveQuantity,

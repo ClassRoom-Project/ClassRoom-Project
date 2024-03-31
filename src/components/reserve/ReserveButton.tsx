@@ -24,6 +24,7 @@ const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
     금액 : ${reserveInfo.reservePrice.toLocaleString('ko-KR')}원
     `)
     ) {
+      // result: supabase의 응답으로 받아온 제출한 예약 정보
       const result = await submitReservation(reserveInfo);
       if (!result) {
         alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
