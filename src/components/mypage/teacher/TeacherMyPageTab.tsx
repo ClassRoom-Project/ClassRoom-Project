@@ -4,9 +4,19 @@ import React, { useState } from 'react';
 import EditTeacherInfo from './EditTeacherInfo';
 import EditProfile from '../EditProfile';
 import MyClass from './MyClass';
+import { UserType } from '@/types/user';
 
-const TeacherMyPage = () => {
+type TeacherTabComponent = {
+  [key: string]: React.ReactNode;
+};
+
+const TeacherMyPageTab = () => {
   const [activePage, setActivePage] = useState('editProfile');
+  const activeTeacherMyPageTab: TeacherTabComponent = {
+    editProfile: <EditProfile />,
+    editTeacherInfo: <EditTeacherInfo />,
+    myClass: <MyClass />
+  };
 
   return (
     <div className="m-4 p-4">
@@ -30,19 +40,9 @@ const TeacherMyPage = () => {
           내가 등록한 클래스
         </span>
       </div>
-      <div className="m-4 p-4">
-        {activePage === 'editProfile' ? (
-          <EditProfile />
-        ) : activePage === 'editTeacherInfo' ? (
-          <EditTeacherInfo />
-        ) : activePage === 'myClass' ? (
-          <MyClass />
-        ) : (
-          ''
-        )}
-      </div>
+      <div className="m-4 p-4">{activeTeacherMyPageTab[activePage]}</div>
     </div>
   );
 };
 
-export default TeacherMyPage;
+export default TeacherMyPageTab;

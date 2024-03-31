@@ -2,12 +2,20 @@
 
 import React, { useState } from 'react';
 import EditProfile from '../EditProfile';
-import ReservedClass from './MyReservedClass';
 import MyComments from './MyComments';
 import MyReservedClass from './MyReservedClass';
 
-const StudentMyPage = () => {
+type StudentTabComponent = {
+  [key: string]: React.ReactNode;
+};
+
+const StudentMyPageTab = () => {
   const [activePage, setActivePage] = useState('editProfile');
+  const activeStudentMyPageTab: StudentTabComponent = {
+    editProfile: <EditProfile />,
+    reservedClass: <MyReservedClass />,
+    myComments: <MyComments />
+  };
 
   return (
     <div className="m-4 p-4">
@@ -31,19 +39,9 @@ const StudentMyPage = () => {
           내가 쓴 댓글 보기
         </span>
       </div>
-      <div className="m-4 p-4">
-        {activePage === 'editProfile' ? (
-          <EditProfile />
-        ) : activePage === 'reservedClass' ? (
-          <MyReservedClass />
-        ) : activePage === 'myComments' ? (
-          <MyComments />
-        ) : (
-          ''
-        )}
-      </div>
+      <div className="m-4 p-4">{activeStudentMyPageTab[activePage]}</div>
     </div>
   );
 };
 
-export default StudentMyPage;
+export default StudentMyPageTab;

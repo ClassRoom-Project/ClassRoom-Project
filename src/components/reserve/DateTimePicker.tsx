@@ -1,29 +1,45 @@
 'use client';
 
+import useReserveStore from '@/store/reserveClassStore';
+import { DateType } from '@/types';
+import { format } from 'date-fns';
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
 const DateTimePicker = () => {
-  const timeList = ['14:30:00', '16:30:00'];
+  const timeList = ['14:30:00', '16:30:00']; // 추후 class 테이블에서 불러와야함
   const [selectedTime, setSelectedTime] = useState(timeList[0]);
+
+  const today = format(new Date(), 'yyyy-MM-dd');
+  const [date, setDate] = useState<string>(today);
+
+  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
+  setReserveInfo({ reserveDate: date, reserveTime: selectedTime });
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
   };
 
-  type ValuePiece = Date | null;
-
-  type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-  const [value, onChange] = useState<Value>(new Date());
+  const handleDateChange = (newDate: DateType) => {
+    setDate(format(newDate as Date, 'yyyy-MM-dd'));
+  };
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
       <div>
         <h1 className="mb-1">날짜 선택</h1>
         <div>
-          <Calendar onChange={onChange} value={value} />
+          <Calendar
+            defaultView="month"
+            onChange={handleDateChange}
+            formatDay={(_locale, date) => date.getDate().toString()} // 달력에서 '일' 제거하고 숫자만 보이게
+            value={date}
+            calendarType="gregory"
+            locale="ko-KR"
+            next2Label={null}
+            prev2Label={null}
+          />
         </div>
       </div>
       <div>
@@ -46,7 +62,9 @@ const DateTimePicker = () => {
       </div>
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
-        <span>2024-03-26 {selectedTime.slice(0, 5)}</span>
+        <span>
+          {`${date}`} {selectedTime.slice(0, 5)}
+        </span>
       </div>
     </div>
   );
