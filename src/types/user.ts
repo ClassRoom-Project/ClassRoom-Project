@@ -9,6 +9,8 @@ export interface UserType {
   profile_image: string;
 }
 
+export type UpdateUserInfoType = Pick<UserType, 'email' | 'nickname' | 'password'>;
+
 interface AdminType {
   isAdmin: boolean;
   setIsAdmin: (isAdmin: boolean) => void;
