@@ -73,9 +73,9 @@ export default function SigninModal() {
 
   const handleSocialSignin = async (provider: string) => {
     const result = await signIn(provider, { callbackUrl: '/login' });
-    // if (result?.error) {
-    //   setError(result.error);
-    // }
+    if (result?.error) {
+      setError(result.error);
+    }
   };
 
   return (
@@ -85,8 +85,8 @@ export default function SigninModal() {
           <p className="text-2xl font-bold ">회원가입</p>
           <ul className="steps">
             <li className="step step-primary">step 1</li>
-            <li className="step">step 2</li>
-            {teacher === true && <li className="step">step 3</li>}
+            <li className="step step-primary">step 2</li>
+            {teacher === true && <li className="step step-primary">step 3</li>}
           </ul>
           <div className="flex flex-col w-4/5 md:w-2/3 lg:w-1/2">
             <label htmlFor="nickname" className="block text-lg font-medium text-gray-700">

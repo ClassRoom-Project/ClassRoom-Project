@@ -16,19 +16,19 @@ export default function TeacherModal() {
 
   return (
     <div className="flex justify-center items-center w-full h-screen">
-      <div className="w-1/3 h-1/2 flex flex-col border bg-opacity-70 justify-center items-center">
+      <div className="flex flex-col items-center p-4 bg-white rounded-lg border w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
+        <p className="text-2xl font-bold ">회원가입</p>
         <ul className="steps">
           <li className="step step-primary">step 1</li>
           <li className="step">step 2</li>
           {selectTeacher === 'teacher' && <li className="step">step 3</li>}
         </ul>
-        <p>로고</p>
         <input
           type="button"
           name="teacher"
           value="선생님"
           onClick={() => onTeacherSubmit('teacher')}
-          className={`mt-5 block w-2/5 border btn btn-outlin py-2 text-center sm:text-sm rounded-md  ${
+          className={`${'input-field'}  ${
             selectTeacher === 'teacher' ? 'bg-slate-200' : 'bg-white hover:bg-slate-200'
           }`}
         />
@@ -37,17 +37,17 @@ export default function TeacherModal() {
           name="student"
           value="수강생"
           onClick={() => onTeacherSubmit('student')}
-          className={`mt-5 block w-2/5 border btn btn-outlin py-2 text-center sm:text-sm rounded-md ${
+          className={`${'input-field'}  ${
             selectTeacher === 'student' ? 'bg-[#F0F6FF]' : 'bg-white hover:bg-slate-200'
           }`}
         />
         {selectTeacher === 'teacher' && (
-          <Link href="/moreInfo" className="w-1/3 h-10 btn">
+          <Link href="/moreInfo" className="button-field">
             다음
           </Link>
         )}
         {selectTeacher === 'student' && (
-          <Link href="/signin" className="w-1/3 h-10 btn">
+          <Link href="/signin" className="button-field">
             다음
           </Link>
         )}
