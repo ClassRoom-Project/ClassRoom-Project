@@ -3,16 +3,18 @@ import React from 'react';
 
 const ClassCard = () => {
   return (
-    <div className="card w-96 bg-base-100 shadow-xl">
-      <figure className=" border-b-1 border-solid border-gray-400">
+    <div className="card w-[300px] h-[350px] bg-base-100 shadow-xl">
+      <figure>
         <Image src="" alt="Shoes" width={100} height={100} />
       </figure>
-      <div className="card-body">
-        <h2 className="card-title">Shoes!</h2>
-        <p>If a dog chews shoes whose shoes does he choose?</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+      <div className="card-body flex flex-col justify-center items-start">
+        <div className="bg-black rounded text-white">address</div>
+        <div className="flex">
+          <Image className=" rounded-full" src="" alt="" width={20} height={20} />
+          <p className="ml-[20px]">title</p>
         </div>
+        <div>description</div>
+        <div>price</div>
       </div>
     </div>
   );

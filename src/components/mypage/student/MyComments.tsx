@@ -1,13 +1,14 @@
-import { GoToClassPost } from '@/components/common/mypage/button';
+import { GoToClassPost } from '@/components/common/mypage/buttons';
 import Image from 'next/image';
 import React from 'react';
+import MyClassImage from '../../../../public/class-sample-img.jpeg';
 
 const MyComments = () => {
   return (
     <article className="flex  gap-4">
       <div className="w-[300px] h-[200px]">
         <Image
-          src="/class-sample-img.jpeg"
+          src={MyClassImage}
           alt="클래스 대표 사진"
           width={300}
           height={200}
@@ -16,6 +17,7 @@ const MyComments = () => {
         />
       </div>
 
+      {/* dummyData로 임시로 넣은 클래스 정보 부분입니다.*/}
       <div className="flex flex-col p-4">
         <section className="flex gap-8">
           <p className="font-bold">맛있는 쿠키 만들기 클래스</p>

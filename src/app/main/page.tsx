@@ -1,23 +1,14 @@
 import React from 'react';
 import ClassCard from '@/components/main/ClassCard';
+import BestClass from '@/components/main/BestClass';
+import D1Class from '@/components/main/D1Class';
+import LatestClass from '@/components/main/LatestClass';
 const MainPage = () => {
   return (
-    <div className="container mx-auto px-4">
-      <div className="flex justify-between">
-        <div className="w-full">
-          <h2 className="text-lg font-semibold mb-4">
-            신규 클래스
-            <ClassCard />
-          </h2>
-          <div className="flex space-x-4 overflow-x-auto"></div>
-        </div>
-      </div>
-
-      <div className="flex justify-between my-8">
-        <div className="w-full">
-          <div className="flex space-x-4 overflow-x-auto"></div>
-        </div>
-      </div>
+    <div className="flex flex-col justify-center items-center">
+      <D1Class />
+      <LatestClass />
+      <BestClass />
     </div>
   );
 };

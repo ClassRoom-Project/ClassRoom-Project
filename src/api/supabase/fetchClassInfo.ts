@@ -2,11 +2,12 @@ import { PostgrestResponse, PostgrestSingleResponse } from '@supabase/supabase-j
 import { supabase } from './supabase';
 import { ClassType } from '@/types';
 
+// 메인페이지, 리스트페이지, 디테일페이지, 예약페이지 유저 정보 불러오는 함수
 export const fetchClassInfo = async ({ classId }: { classId: string }) => {
   console.log(classId);
   const { data: classInfo, error }: PostgrestSingleResponse<ClassType> = await supabase
     .from('class')
-    .select('class_id, category, title, location, price, image, max_ppl')
+    .select('*')
     .eq('class_id', classId)
     .single();
 
