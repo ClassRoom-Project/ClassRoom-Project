@@ -1,16 +1,18 @@
 'use client';
 
+import { fetchReserveInfo } from '@/api/supabase/fetchReserveInfo';
 import { submitReservation } from '@/api/supabase/submitReservation';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
   const router = useRouter();
+  const [reserveId, setReserveid] = useState('');
 
   const reserveInfo = useReserveStore((state) => state.reserveInfo);
 
-  const handleReserveButtonClick = () => {
+  const handleReserveButtonClick = async () => {
     if (reserveInfo.reserveQuantity === 0) {
       alert('예약 인원은 1명 이상이여야 합니다.');
       return;
@@ -23,8 +25,9 @@ const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
     금액 : ${reserveInfo.reservePrice.toLocaleString('ko-KR')}원
     `)
     ) {
-      submitReservation(reserveInfo);
-      router.push('reserve/ba59530d-a840-443a-937c-53f10a9c8a93');
+      const result = await submitReservation(reserveInfo);
+      console.log(result);
+      router.push(`reserve/${result?.reserve_id}`);
     }
     return;
   };

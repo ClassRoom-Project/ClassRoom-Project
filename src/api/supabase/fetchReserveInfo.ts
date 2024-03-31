@@ -1,15 +1,21 @@
 import { ClassType } from '@/types';
-import { PostgrestResponse } from '@supabase/supabase-js';
+import { PostgrestResponse, PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from './supabase';
 import { DBReserveInfo, ReserveInfo } from '@/types/reserve';
 
-export const fetchReserveInfo = async () => {
-  const { data: reserveInfo, error }: PostgrestResponse<DBReserveInfo> = await supabase.from('reserve').select('*');
+export const fetchReserveInfo = async (reservationId: string) => {
+  const { data: reserveInfo, error }: PostgrestSingleResponse<DBReserveInfo> = await supabase
+    .from('reserve')
+    .select('*')
+    .eq('reserve_id', reservationId)
+    .single();
 
   if (error) {
     console.error('예약 정보 불러오기 오류 => ', error);
     return;
   }
+
+  console.log(reserveInfo);
 
   return reserveInfo;
 };

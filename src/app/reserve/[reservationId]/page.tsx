@@ -1,36 +1,33 @@
 import { fetchReserveInfo } from '@/api/supabase/fetchReserveInfo';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
+import useReserveStore from '@/store/reserveClassStore';
 import React from 'react';
 
 const reservationCompletePage = async ({ params }: { params: { reservationId: string } }) => {
   const reservationId = decodeURIComponent(params.reservationId);
-  console.log(reservationId);
 
-  const reserveInfos = await fetchReserveInfo();
-  // console.log(reserveInfos);
-  const findCurrentReserveInfo = reserveInfos?.find((item) => item.reserve_id === reservationId);
-  console.log(findCurrentReserveInfo);
+  const completedReserveInfo = await fetchReserveInfo(reservationId);
 
   const reserveInfoLabels = [
     {
       title: '클래스명',
-      description: `${findCurrentReserveInfo?.class_id}`
+      description: `${completedReserveInfo?.class_id}`
     },
     {
       title: '이용 일자',
-      description: `${findCurrentReserveInfo?.reserve_date}`
+      description: `${completedReserveInfo?.reserve_date}`
     },
     {
       title: '이용 회차',
-      description: `${findCurrentReserveInfo?.reserve_time.slice(0, 5)}`
+      description: `${completedReserveInfo?.reserve_time.slice(0, 5)}`
     },
     {
       title: '이용 인원',
-      description: `${findCurrentReserveInfo?.reserve_quantity}명`
+      description: `${completedReserveInfo?.reserve_quantity}명`
     },
     {
       title: '이용 금액',
-      description: `${findCurrentReserveInfo?.reserve_price.toLocaleString('ko-KR')}원`
+      description: `${completedReserveInfo?.reserve_price.toLocaleString('ko-KR')}원`
     }
   ];
 

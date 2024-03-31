@@ -1,9 +1,10 @@
-import { ReserveInfo } from '@/types/reserve';
+import { DBReserveInfo, ReserveInfo } from '@/types/reserve';
 import { supabase } from './supabase';
+import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export const submitReservation = async (reserveInfo: ReserveInfo) => {
   const { classId, userId, reservePrice, reserveQuantity, reserveDate, reserveTime } = reserveInfo;
-  const { data, error } = await supabase
+  const { data, error }: PostgrestSingleResponse<DBReserveInfo> = await supabase
     .from('reserve')
     .insert([
       {
@@ -16,9 +17,14 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
         reserved_at: new Date()
       }
     ])
-    .select();
+    .select()
+    .single();
 
   if (error) {
     console.log(error);
   }
+
+  console.log(data);
+
+  return data;
 };
