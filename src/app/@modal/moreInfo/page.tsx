@@ -69,12 +69,12 @@ export default function MoreInfoModal() {
             </select>
           </div>
         </div>
-        <Link
-          href={'/signin'}
-          className="mt-5 block w-2/5 border btn btn-outlin py-2 text-center sm:text-sm rounded-md"
-        >
-          다음
-        </Link>
+        <div className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full">
+          {' '}
+          <Link href={'/signin'} className="button-field ">
+            다음
+          </Link>
+        </div>
       </div>
     </div>
   );

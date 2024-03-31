@@ -83,7 +83,7 @@ export default function SigninModal() {
       <section className="flex flex-col items-center p-4 bg-white rounded-lg border w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
         <div className=" flex flex-col items-center w-full ">
           <p className="text-2xl font-bold ">회원가입</p>
-          <ul className="steps">
+          <ul className="steps w-full mb-4">
             <li className="step step-primary">step 1</li>
             <li className="step step-primary">step 2</li>
             {teacher === true && <li className="step step-primary">step 3</li>}
@@ -136,7 +136,7 @@ export default function SigninModal() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full">
-          <button className="button-field mb-4">회원가입</button>
+          <button className="button-field">회원가입</button>
           <div className="flex justify-between items-center w-full mb-3">
             <div
               onClick={() => handleSocialSignin('google')}
