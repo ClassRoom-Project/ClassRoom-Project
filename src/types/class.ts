@@ -17,10 +17,11 @@ export interface ClassAllType {
   image: string[];
   class_type: string;
   difficulty: string;
+  active: boolean;
 }
 
 /* 마이페이지(선생님) : 내가 등록한 클래스 보기에서 필요한 데이터 타입 */
 export type MyRegistedClassType = Pick<
   ClassAllType,
-  'user_id' | 'class_id' | 'title' | 'location' | 'detailLocation' | 'date' | 'time' | 'image'
+  'user_id' | 'class_id' | 'title' | 'location' | 'detailLocation' | 'date' | 'time' | 'image' | 'active'
 >;
