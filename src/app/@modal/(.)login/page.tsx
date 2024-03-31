@@ -6,7 +6,7 @@ export default function Page() {
   const closSigninModal = <SigninModal />;
 
   return (
-    <Modal admin={closSigninModal}>
+    <Modal modal={closSigninModal}>
       <LoginPage />
     </Modal>
   );

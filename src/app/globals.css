@@ -26,3 +26,15 @@ body {
     text-wrap: balance;
   }
 } */
+
+.label-field {
+  @apply mt-3 block text-lg font-medium text-gray-700;
+}
+
+.input-field {
+  @apply mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none  focus:border-black sm:text-sm rounded-md;
+}
+
+.button-field {
+  @apply mt-5 block w-full border mb-4 bg-black py-2 px-3 text-white text-center sm:text-sm rounded-md;
+}

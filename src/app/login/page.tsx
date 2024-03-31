@@ -1,18 +1,12 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-// import LoginModalPage from '../@auth/(.)login/page';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
 import { SiNaver } from 'react-icons/si';
+import Link from 'next/link';
 
 export default function LoginPage() {
-  const router = useRouter();
-
-  const openAdminModal = () => {
-    router.push('/admin');
-  };
-
   return (
     <div className="flex h-screen items-center justify-center w-full ">
       <div className="flex flex-row border mx-auto rounded-md w-3/4 h-1/2 ">
@@ -23,21 +17,20 @@ export default function LoginPage() {
           </p>
         </section>
         <section className="h-full flex flex-col justify-center items-center w-3/5">
-          <form className="flex flex-col  items-center w-full">
-            <p className="text-2xl font-bold mb-12">클룸</p>
-
-            <input placeholder="아이디" className="w-1/2 h-9 mt-4 border rounded-lg " />
-            <input placeholder="비밀번호" className="w-1/2 h-9 border rounded-lg mt-7" />
-
-            <button className="bg-black text-white w-1/3 h-9 rounded-lg  mt-10">로그인</button>
+          <form className=" flex flex-col items-center w-full h-1/2 justify-around">
+            <p className="text-2xl font-bold ">클룸</p>
+            <input placeholder="아이디" className="w-1/2 h-9  border rounded-lg " />
+            <input placeholder="비밀번호" className="w-1/2 h-9 border rounded-lg " />
+            <button className="bg-black text-white w-1/3 h-9 rounded-lg">로그인</button>
           </form>
-          <div className="flex flex-row gap-3 mt-4">
+
+          <div className="flex flex-row justify-around">
             <p className="text-xs">클룸이 처음이신가요?</p>
-            <button className="font-bold text-xs hover:color-grey" onClick={openAdminModal}>
+            <Link href="/teacher" className="font-bold text-xs hover:color-grey">
               회원가입
-            </button>
+            </Link>
           </div>
-          <div className="flex flex-row justify-between mt-6 w-2/5">
+          <div className="flex flex-row justify-between w-1/3 mt-4">
             <div>
               <FcGoogle className="text-5xl" />
             </div>
