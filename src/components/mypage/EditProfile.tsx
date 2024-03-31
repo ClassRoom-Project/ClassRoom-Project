@@ -3,7 +3,7 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import BasicProfileImage from '../../../public/profile-image.png';
 import { CancleButton, EditButton } from '../common/mypage/buttons';
-import { getUserInfo, updateUserInfo } from '@/api/user-api';
+import { getUserInfo, updateUserInfo } from '@/app/api/user-api';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { userId } from '@/app/mypage/page';
 

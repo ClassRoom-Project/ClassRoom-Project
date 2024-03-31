@@ -1,6 +1,6 @@
 'use client';
 
-import { submitReservation } from '@/api/supabase/submitReservation';
+import { submitReservation } from '@/app/api/supabase/submitReservation';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React from 'react';

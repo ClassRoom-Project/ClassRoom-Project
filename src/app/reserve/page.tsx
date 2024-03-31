@@ -1,4 +1,4 @@
-import { fetchClassInfo } from '@/api/supabase/fetchClassInfo';
+import { fetchClassInfo } from '@/app/api/supabase/fetchClassInfo';
 import ClassInfo from '@/components/reserve/ClassInfo';
 import DateTimePicker from '@/components/reserve/DateTimePicker';
 import PriceCalculator from '@/components/reserve/PriceCalculator';
