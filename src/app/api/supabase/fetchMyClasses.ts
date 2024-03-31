@@ -1,5 +1,5 @@
 // src/app/api/supabase/fetchMyClasses.ts
-import { supabase } from './supabase';// supabase 클라이언트를 불러옵니다.
+import { supabase } from './supabase';
 
 async function fetchMyClasses(userId:string) {
   const { data: reserves, error: reservesError } = await supabase
@@ -19,7 +19,7 @@ async function fetchMyClasses(userId:string) {
       .from('class')
       .select('image, title')
       .eq('class_id', reserve.class_id)
-      .limit(1); // 이미지는 0번째 값만 가져오도록 제한
+      .limit(1); // 이미지는 0번째 값만 가져오도록 제한인데 데이터베이스 문제로 추가 수정 예정
 
     if (classError) {
       console.error(classError)
