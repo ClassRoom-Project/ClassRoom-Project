@@ -19,11 +19,9 @@ const BestClass = () => {
     <div>
       <p>BestClass</p>
       <div className="w-[85vw] overflow-auto flex justify-between p-2 items-center bg-slate-500">
-        <button className="btn btn-circle "> </button>
         {classInfos.map((info, classId) => (
           <ClassCard key={classId} classInfos={info} />
         ))}
-        <button className="btn btn-circle "> </button>
       </div>
     </div>
   );
