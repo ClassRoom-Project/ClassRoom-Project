@@ -10,12 +10,3 @@ export type ClassType = {
   image: string;
   max_ppl: number;
 };
-
-export type ReserveInfo = {
-  classId: string;
-  userId: string;
-  reservePrice: number;
-  reserveQuantity: number;
-  reserveDate: string;
-  reserveTime: string;
-};

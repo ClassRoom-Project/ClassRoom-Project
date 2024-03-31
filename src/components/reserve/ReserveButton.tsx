@@ -23,8 +23,8 @@ const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
     금액 : ${reserveInfo.reservePrice.toLocaleString('ko-KR')}원
     `)
     ) {
-      // router.push('reserve/rid=ba59530d-a840-443a-937c-53f10a9c8a93');
       submitReservation(reserveInfo);
+      router.push('reserve/ba59530d-a840-443a-937c-53f10a9c8a93');
     }
     return;
   };
