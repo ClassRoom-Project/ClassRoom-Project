@@ -71,7 +71,14 @@ const MyClass = () => {
               <button onClick={handleOnClickGoToReservedStudentList} className="border rounded-xl p-4 w-[150px]">
                 수강생 보기
               </button>
-              <GoToClassPost />
+              <button
+                onClick={() => {
+                  router.push(`list/detail/${classInfo.class_id}`);
+                }}
+                className="border rounded-xl p-4 w-[150px]"
+              >
+                클래스 보러가기
+              </button>
             </div>
           </div>
         </li>
