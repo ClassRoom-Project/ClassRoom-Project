@@ -4,10 +4,14 @@ import { GoToClassPost } from '@/components/common/mypage/buttons';
 import { ClassAllType } from '@/types/class';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import { usePathname, useRouter } from 'next/navigation';
 
 type MyRegistedClassType = ClassAllType[];
 
 const MyClass = () => {
+  // const pathname = usePathname;
+  const router = useRouter();
+
   const { data: myClassInfo, isPending }: { data: MyRegistedClassType | undefined; isPending: boolean } = useQuery({
     queryKey: ['class', userId],
     queryFn: () => getMyRegistedClass()
@@ -27,7 +31,7 @@ const MyClass = () => {
 
   // 클래스 예약한 수강생 보러가기
   const handleOnClickGoToReservedStudentList = () => {
-    alert('예약한 수강생 보러가기 페이지로 이동합니다.');
+    router.push('/mypage/myClassStudentList');
   };
 
   return (
