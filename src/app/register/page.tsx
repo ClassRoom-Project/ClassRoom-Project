@@ -37,7 +37,6 @@ const RegisterPage = () => {
   const [totalTime, setTotalTime] = useState('');
 
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
-  const [representativeIndex, setRepresentativeIndex] = useState(-1);
 
   // Daum Postcode Popup을 사용하기 위한 스크립트 URL
   const scriptUrl = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
@@ -154,7 +153,6 @@ const RegisterPage = () => {
     const remainingImages = images.filter((_, i) => i !== index);
     const newImages = [selectedImage, ...remainingImages];
     setImages(newImages);
-    setRepresentativeIndex(0);
   };
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -205,13 +203,9 @@ const RegisterPage = () => {
     setTotalTime(event.target.value);
   };
 
-  const handleSetRepresentative = (index:any) => {
-    setRepresentativeIndex(index);
-  };
-
   return (
     <div className='p-4 w-full sm:p-20 md:p-4 flex flex-col items-center justify-center'>
-      <div className="sm:p-20 md:p-4 pl-2 w-full">
+      <div className="sm:p-20 md:p-4 pl-2">
         <h1 className='font-extrabold text-xl'>클래스 등록하기</h1>
       </div>
       <div className='border py-6 px-20 flex flex-col item-center justify-center'>

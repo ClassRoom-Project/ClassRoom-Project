@@ -10,14 +10,14 @@ const TimeSelect = () => {
 
     return (
         <div className="flex items-center space-x-2 my-2">
-            <div>시간선택</div>
+            <p>시간선택</p>
             <div>
                 <input
                 type="time"
                 value={selectedTime}
                 onChange={handleTimeChange}
                 />
-        </div>
+            </div>
         </div>
     )
 }
