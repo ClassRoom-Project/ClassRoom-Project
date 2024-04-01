@@ -63,6 +63,13 @@ export interface UserType {
   account: string;
 }
 
+export interface UserInfoType {
+  email: string;
+  nickname: string;
+  password: string;
+  profile_image: string;
+}
+
 // 수정된 닉네임 type
 export interface UpdateUserInfoType {
   newNickname: string;
