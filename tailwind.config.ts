@@ -12,6 +12,9 @@ const config: Config = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))', // 기존 정의된 그라데이션
         'custom-radial': 'radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(240,250,249,1) 0%, rgba(254,241,241,1) 100%)' // 새로운 그라데이션 추가
+      },
+      colors: {
+        vividBlue: '#264FFF'
       }
     }
   },

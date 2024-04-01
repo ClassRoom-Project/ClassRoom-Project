@@ -4,10 +4,36 @@ import useReserveStore from '@/store/reserveClassStore';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react';
-import { CaptionProps, DateFormatter, DayPicker, useNavigation } from 'react-day-picker';
+import { CaptionProps, DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { SlArrowLeft } from 'react-icons/sl';
-import { SlArrowRight } from 'react-icons/sl';
+import styles from 'react-day-picker/dist/style.module.css';
+// import { SlArrowLeft } from 'react-icons/sl';
+// import { SlArrowRight } from 'react-icons/sl';
+
+const css = `
+  .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
+  background-color: pink; // hover시 배경색
+}
+
+.rdp-day_selected,
+.rdp-day_selected:focus-visible,
+.rdp-day_selected:hover {
+  color: var(--rdp-selected-color);
+  opacity: 1;
+  background-color: black; // 선택시 배경색
+}
+
+
+  .rdp-months {
+    justify-content: center;
+    border: 1px solid black;
+    padding: 10px;
+  }
+
+  .rdp {
+    margin: 0;
+  }
+`;
 
 const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
@@ -17,8 +43,6 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
   };
-
-  console.log(classDateList);
 
   // 리액트 데이피커 ------------------------------------------------------------------
   const today = new Date();
@@ -45,6 +69,27 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
     return new Date(2024, today.getMonth(), day);
   });
 
+  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
+  function CustomCaption(props: CaptionProps) {
+    return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
+  }
+
+  useEffect(() => {
+    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
+  }, [selectedDate, selectedTime, setReserveInfo]);
+
+  // #region
+  // 1년의 배열 만들어서 isSameDay 메서드 사용..?
+  // const start = new Date(2024, 0, 1);
+  // const end = new Date(2024, 12, 1);
+  // let dates = [];
+
+  // for (let date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
+  //   dates.push(new Date(date));
+  // }
+
+  // console.log(dates);
+
   // 현재 달 외에 다른날도 보여주려면 날짜별로 date를 따로 생성..?
   // const monthList = classDates.map((item) => new Date(item).getMonth());
   // console.log(new Set(monthList));
@@ -55,32 +100,21 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   //   return list;
   // });
   // const nonAvailableDaysDate = nonAvailableDays.flatMap((day) => monthList.map((month) => new Date(2024, month, day)));
-
-  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
-  function CustomCaption(props: CaptionProps) {
-    return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
-  }
-
-  useEffect(() => {
-    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
-  }, [selectedDate, selectedTime, setReserveInfo]);
+  // #endregion
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
       <div>
         <h1 className="mb-1">날짜 선택</h1>
         <div>
+          <style>{css}</style>
           <DayPicker
             mode="single" // 여러 날짜 선택 시 multiple
             required
             disableNavigation
             selected={new Date(selectedDate)}
             onSelect={handleDateChange}
-            fromYear={2024}
-            toYear={2024}
             disabled={nonAvailableDates}
-            fromMonth={new Date(2024, today.getMonth())}
-            toMonth={new Date(2024, today.getMonth())}
             locale={ko}
             components={{
               Caption: CustomCaption
