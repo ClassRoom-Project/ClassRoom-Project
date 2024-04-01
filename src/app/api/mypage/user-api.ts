@@ -44,3 +44,18 @@ export const updateUserInfo = async ({ newEmail, newNickname, newPassword }: Upd
   }
   return data;
 };
+
+// User nickname 중복 확인하기
+export const checkUserNickname = async ({ newNickname }: Pick<UpdateUserInfoType, 'newNickname'>) => {
+  const { data, error } = await supabase
+    .from('user')
+    .select('nickname')
+    .not('user_id', 'eq', userId)
+    .eq('nickname', newNickname);
+  if (error) {
+    console.error(error.message);
+    return false;
+  }
+  // console.log('data', data);
+  return data.length > 0;
+};
