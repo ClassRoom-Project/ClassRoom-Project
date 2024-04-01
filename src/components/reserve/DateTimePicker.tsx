@@ -1,47 +1,63 @@
 'use client';
 
 import useReserveStore from '@/store/reserveClassStore';
-import { DateType } from '@/types/date';
 import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
+import { DateFormatter, DayPicker } from 'react-day-picker';
+import 'react-day-picker/dist/style.css';
 
 const DateTimePicker = () => {
+  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
+
   const timeList = ['14:30:00', '16:30:00']; // 추후 class 테이블에서 불러와야함
   const [selectedTime, setSelectedTime] = useState(timeList[0]);
-
-  const today = format(new Date(), 'yyyy-MM-dd');
-  const [date, setDate] = useState<string>(today);
-
-  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  useEffect(() => {
-    setReserveInfo({ reserveDate: date, reserveTime: selectedTime });
-  }, [date, selectedTime, setReserveInfo]);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
   };
 
-  const handleDateChange = (newDate: DateType) => {
-    setDate(format(newDate as Date, 'yyyy-MM-dd'));
+  // 리액트 데이피커 ------------------------------------------------------------------
+  const today = new Date();
+  const [selectedDate, setSelected] = useState<string>(format(today, 'yyyy-MM-dd'));
+
+  // 날짜 클릭시
+  const handleDateChange = (newDate: Date | undefined) => {
+    setSelected(format(newDate as Date, 'yyyy-MM-dd'));
   };
+
+  // 비활성화 할 날짜 배열
+  const disabledDays = [new Date(2024, 3, 10), new Date(2024, 3, 12), new Date(2024, 3, 20)];
+
+  // 상단의 날짜 레이블 포맷팅
+  const formatCaption: DateFormatter = (Date, options) => {
+    return (
+      <>
+        <span className="mr-1">{format(Date, 'uuuu', { locale: options?.locale })}년</span>
+        <span> {format(Date, 'LLLL', { locale: options?.locale })}</span>
+      </>
+    );
+  };
+
+  useEffect(() => {
+    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
+  }, [selectedDate, selectedTime, setReserveInfo]);
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
       <div>
         <h1 className="mb-1">날짜 선택</h1>
         <div>
-          <Calendar
-            // tileDisabled={({ date }) => [0, 6].includes(date.getDay())} // 날짜 비활성화
-            defaultView="month"
-            onChange={handleDateChange}
-            formatDay={(_locale, date) => date.getDate().toString()} // 달력에서 '일' 제거하고 숫자만 보이게
-            value={date}
-            calendarType="gregory"
-            locale="ko-KR"
-            next2Label={null}
-            prev2Label={null}
+          <DayPicker
+            mode="single" // 여러 날짜 선택 시 multiple
+            required
+            selected={new Date(selectedDate)}
+            onSelect={handleDateChange}
+            fromYear={2024}
+            toYear={2024}
+            disabled={disabledDays}
+            locale={ko}
+            formatters={{ formatCaption }}
           />
         </div>
       </div>
@@ -66,7 +82,7 @@ const DateTimePicker = () => {
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
         <span>
-          {`${date}`} {selectedTime.slice(0, 5)}
+          {`${selectedDate}`} {selectedTime.slice(0, 5)}
         </span>
       </div>
     </div>
