@@ -10,7 +10,7 @@ import MinMaxNumber from '@/components/register/MinMaxNumber';
 import Calendar from '@/components/register/Calendar';
 // import ImageUpload from '@/components/register/ImageUpload';
 
-const page = () => {
+const RegisterPage = () => {
   return (
     <div className='p-4'>
       <div className='border p-4 flex flex-col item-center mt-4'>
@@ -31,4 +31,4 @@ const page = () => {
   )
 }
 
-export default page
+export default RegisterPage

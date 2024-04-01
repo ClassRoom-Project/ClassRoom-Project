@@ -1,13 +1,15 @@
-// src/app/components/mypage/student/MyReservedClass.tsx
-import { GoToClassPost } from '@/components/common/mypage/buttons';
+"use client";
+
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import MyClassImage from '../../../../public/class-sample-img.jpeg';
 import fetchMyClasses from '@/app/api/supabase/fetchMyClasses';
 import { cancelReservation } from '@/app/api/supabase/fetchMyClasses'; // 예약 취소 함수 가져오기
+import { useRouter } from 'next/navigation';
 
 const MyReservedClass = () => {
   const [classes, setClasses] = useState<any[]>([]);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchData() {
@@ -57,7 +59,14 @@ const MyReservedClass = () => {
             <section className="flex gap-4 m-4">
               <button className="border rounded-xl p-4 w-[150px] bg-rose-500 text-white" onClick={() => handleCancelReservation(classItem.reserve_id)}>예약 취소하기</button>
               <button className="border rounded-xl p-4 w-[150px]">문의하기</button>
-              <GoToClassPost />
+              <button
+                onClick={() => {
+                  router.push(`list/detail/${classItem.class_id}`);
+                }}
+                className="border rounded-xl p-4 w-[150px]"
+                >
+                클래스 보러가기
+              </button>
             </section>
           </div>
         </article>

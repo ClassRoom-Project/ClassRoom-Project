@@ -1,4 +1,3 @@
-// src/app/api/supabase/fetchMyClasses.ts
 import { supabase } from './supabase';
 
 async function fetchMyClasses(userId:string) {
