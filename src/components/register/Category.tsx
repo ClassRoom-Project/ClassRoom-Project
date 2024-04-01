@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react'
 
-const CategoryDropdown = () => {
+const Category = () => {
     const [category, setCategory] = useState('');
     const [subCategory, setSubCategory] = useState('');
 
@@ -43,4 +43,4 @@ const CategoryDropdown = () => {
     )
 }
 
-export default CategoryDropdown
+export default Category
