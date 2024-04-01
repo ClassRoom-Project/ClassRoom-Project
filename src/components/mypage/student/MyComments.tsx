@@ -1,18 +1,62 @@
 'use client';
 
-import { getMyComments } from '@/app/api/mypage/my-comments-api';
+import { getMyComments, updateMyComments } from '@/app/api/mypage/my-comments-api';
 import { userId } from '@/app/mypage/page';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import MyClassImage from '../../../../public/class-sample-img.jpeg';
+import { ChangeEventHandler, useEffect, useState } from 'react';
+import { comment } from 'postcss';
 
 const MyComments = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [newContent, setNewContent] = useState('');
+
   const { data: myComments, isPending } = useQuery({
     queryKey: ['comments', userId],
     queryFn: () => getMyComments()
   });
+
   console.log('myComments', myComments);
+
+  // useEffect((commentId : string)=>{
+  //   const eachComment = myComments?.find((comment) => comment.comment_id === commentId);
+  // if(eachComment){
+  //   setNewContent(eachComment.content)
+  // }
+
+  // },[myComments])
+
+  const handleOnChangeComment = async (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setNewContent(e.target.value);
+  };
+
+  // 후기 수정하기
+  const handleOnClickEditComment = () => {
+    // const eachComment = myComments?.find((comment) => comment.comment_id === commentId);
+    // if (!eachComment) {
+    //   alert('해당 후기를 찾을 수 없습니다.');
+    //   return;
+    // }
+
+    // const isCommentChanged = newContent !== myComments[0].content;
+    // if (!isCommentChanged) {
+    //   alert('수정 사항이 없습니다.');
+    //   return;
+    // }
+
+    // 수정 사항이 있는 경우
+    updateMyComments({ newContent });
+    setIsEditing(false);
+    alert('후기 수정이 완료되었습니다.');
+  };
+
+  // 취소하기 버튼
+  const handleOnClickCancleBtn = () => {
+    setIsEditing(false);
+    alert('후기 수정이 취소 되었습니다. ');
+  };
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
@@ -48,16 +92,39 @@ const MyComments = () => {
             </section>
 
             <section className="p-4">
-              <textarea
-                name=""
-                placeholder="후기를 작성해봅시다"
-                id=""
-                className="w-[500px] h-[100px] border"
-                value={comment.content}
-              />
+              {isEditing ? (
+                <textarea
+                  name=""
+                  placeholder="후기를 작성해봅시다"
+                  id=""
+                  className="w-[500px] h-[100px] border"
+                  value={comment.content}
+                  onChange={handleOnChangeComment}
+                />
+              ) : (
+                <p className="w-[500px] h-[100px] m-4">{comment.content}</p>
+              )}
+
               <div className="flex justify-end gap-4 ">
-                <button className="border rounded-xl p-2 w-[50px]">수정</button>
-                <button className="border rounded-xl p-2 w-[50px]  bg-rose-500 text-white">삭제</button>
+                {isEditing ? (
+                  <button onClick={handleOnClickEditComment} className="p-4 border rounded-xl w-[150px]">
+                    수정 완료
+                  </button>
+                ) : (
+                  <button onClick={() => setIsEditing(true)} className="p-4 border rounded-xl w-[150px]">
+                    수정하기
+                  </button>
+                )}
+                {isEditing ? (
+                  <button
+                    className="border rounded-xl p-2 w-[150px]  bg-rose-500 text-white"
+                    onClick={handleOnClickCancleBtn}
+                  >
+                    취소
+                  </button>
+                ) : (
+                  <button className="border rounded-xl p-2 w-[150px]  bg-rose-500 text-white">삭제</button>
+                )}
               </div>
             </section>
             <div className=" flex justify-end">

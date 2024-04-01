@@ -5,3 +5,7 @@ export interface MyCommentType {
   content: string;
   create_at: string;
 }
+
+export interface newCommentType {
+  newContent: string;
+}
