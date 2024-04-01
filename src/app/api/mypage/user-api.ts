@@ -62,7 +62,7 @@ export const checkUserNickname = async ({ newNickname }: Pick<UpdateUserInfoType
 export const getTeacherInfo = async () => {
   const { data: teacherInfo, error }: PostgrestMaybeSingleResponse<UserType> = await supabase
     .from('user')
-    .select('job, field')
+    .select('job, field, bank, account')
     .eq('user_id', userId)
     .single();
 

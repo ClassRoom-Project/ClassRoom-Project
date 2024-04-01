@@ -50,6 +50,8 @@ const EditTeacherInfo = () => {
     if (teacherInfo) {
       setNewSelectedJob(teacherInfo.job);
       setNewSelectedField(teacherInfo.field);
+      setSelectedBank(teacherInfo ? teacherInfo?.bank : '');
+      setAccount(teacherInfo ? teacherInfo.account : '');
     }
   }, [teacherInfo]);
 
@@ -171,7 +173,7 @@ const EditTeacherInfo = () => {
                 onChange={handleOnChangeAddAccount}
               />
             ) : (
-              <p>******</p>
+              <p>{account}</p>
             )}
           </div>
           <div className="m-4 p-4 flex gap-4">

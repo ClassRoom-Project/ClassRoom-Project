@@ -59,6 +59,8 @@ export interface UserType {
   job: string;
   field: string;
   profile_image: string;
+  bank: string;
+  account: string;
 }
 
 export interface UpdateUserInfoType {
