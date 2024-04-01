@@ -20,6 +20,7 @@ interface ImageFileWithPreview {
 }
 
 const RegisterPage = () => {
+  // 코드가 매우 긴 것은.. 컴포넌트 다시 나누려고 다시 한곳 모아서 그렇읍니다..
   const [category, setCategory] = useState('');
   const [subCategory, setSubCategory] = useState('');
   const [classType, setClassType] = useState('');
