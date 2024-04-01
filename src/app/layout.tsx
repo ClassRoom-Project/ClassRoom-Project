@@ -4,7 +4,7 @@ import './globals.css';
 import { QueryProvider } from './provider';
 import Link from 'next/link';
 import UserLayout from '@/components/common/UserLayout';
-// import BorderLayout from '@/components/common/BorderLayout';
+import BorderLayout from '@/components/common/BorderLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,14 +23,14 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={inter.className}>
-        {/* <BorderLayout> */}
-        <UserLayout />
-        <QueryProvider>
-          <Link href="/login"></Link>
-          {children}
-          {modal}
-        </QueryProvider>
-        {/* </BorderLayout> */}
+        <BorderLayout>
+          <UserLayout />
+          <QueryProvider>
+            <Link href="/login"></Link>
+            {children}
+            {modal}
+          </QueryProvider>
+        </BorderLayout>
       </body>
     </html>
   );

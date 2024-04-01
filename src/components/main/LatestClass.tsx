@@ -77,7 +77,7 @@ const LatestClass = () => {
   return (
     <div className="mr-auto ml-auto p-5">
       <p>LatestClass</p>
-      <div className="slider-container w-[85vw]">
+      <div className="slider-container w-[75vw]">
         <Slider {...settings}>
           {classInfos.map((info, classId) => (
             <ClassCard key={classId} classInfos={info} />
