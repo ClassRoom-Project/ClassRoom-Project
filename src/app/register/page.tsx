@@ -10,9 +10,6 @@ import MinMaxNumber from '@/components/register/MinMaxNumber';
 import Calendar from '@/components/register/Calendar';
 // import ImageUpload from '@/components/register/ImageUpload';
 
-import Image from 'next/image';
-import plus from '../../../public/plus.png';
-
 const page = () => {
   return (
     <div className='p-4'>
