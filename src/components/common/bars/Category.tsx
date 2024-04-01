@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { SearchClass } from './categories/SearchClass';
 
 const Category = () => {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
@@ -18,8 +19,7 @@ const Category = () => {
           tabIndex={0}
           className="dropdown-content z-[1] menu p-2 shadow bg-white border-gray-300 border-solid border-[1px] w-52"
         >
-          <div className="h-[100px]">클래스검색</div>
-          <div>클래스 타입</div>
+          <SearchClass />
           <div>지역</div>
           <div>카테고리</div>
           <div>요일</div>
