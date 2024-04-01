@@ -69,7 +69,7 @@ export const getTeacherInfo = async () => {
   if (error) {
     console.error(error);
   }
-  console.log('teacherInfo', teacherInfo);
+  // console.log('teacherInfo', teacherInfo);
   return teacherInfo;
 };
 
