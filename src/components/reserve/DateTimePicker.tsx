@@ -4,8 +4,10 @@ import useReserveStore from '@/store/reserveClassStore';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react';
-import { DateFormatter, DayPicker } from 'react-day-picker';
+import { CaptionProps, DateFormatter, DayPicker, useNavigation } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
+import { SlArrowLeft } from 'react-icons/sl';
+import { SlArrowRight } from 'react-icons/sl';
 
 const DateTimePicker = () => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
@@ -43,6 +45,21 @@ const DateTimePicker = () => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
   }, [selectedDate, selectedTime, setReserveInfo]);
 
+  function CustomCaption(props: CaptionProps) {
+    const { goToMonth, nextMonth, previousMonth } = useNavigation();
+    return (
+      <div className="flex justify-between">
+        <button disabled={!previousMonth} onClick={() => previousMonth && goToMonth(previousMonth)}>
+          <SlArrowLeft size={14} />
+        </button>
+        {format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}
+        <button disabled={!nextMonth} onClick={() => nextMonth && goToMonth(nextMonth)}>
+          <SlArrowRight size={14} />
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div className="w-2/5 flex flex-col gap-4">
       <div>
@@ -58,6 +75,9 @@ const DateTimePicker = () => {
             disabled={disabledDays}
             locale={ko}
             formatters={{ formatCaption }}
+            components={{
+              Caption: CustomCaption
+            }}
           />
         </div>
       </div>
