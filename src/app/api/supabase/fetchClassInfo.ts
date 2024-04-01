@@ -5,7 +5,7 @@ import { ClassType } from 'react';
 
 // 메인페이지, 리스트페이지, 디테일페이지, 예약페이지 클래스 정보 불러오는 함수 모음
 
-export const fetchClassInfo = async ({ classId }: { classId: string }) => {
+export const fetchReserveClassInfo = async ({ classId }: { classId: string }) => {
   console.log(classId);
   const { data: classInfo, error }: PostgrestSingleResponse<ReserveClassType> = await supabase
     .from('class')
