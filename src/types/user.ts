@@ -61,8 +61,6 @@ export interface UserType {
   profile_image: string;
 }
 
-// export type UpdateUserInfoType = Pick<UserType, 'email' | 'nickname' | 'password'>;
-
 export interface UpdateUserInfoType {
   newNickname: string;
   newEmail: string;

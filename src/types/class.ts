@@ -21,10 +21,17 @@ export interface ClassAllType {
 }
 
 /* 마이페이지(선생님) : 내가 등록한 클래스 보기에서 필요한 데이터 타입 */
-export type MyRegistedClassType = Pick<
-  ClassAllType,
-  'user_id' | 'class_id' | 'title' | 'location' | 'detailLocation' | 'date' | 'time' | 'image' | 'active'
->;
+export interface MyRegisteredClassType {
+  class_id: string;
+  user_id: string;
+  title: string;
+  location: string;
+  detailLocation: string;
+  date: string[];
+  time: string[];
+  image: string[];
+  active: boolean;
+}
 
 // 예약 페이지에서 클래스 정보를 보여주기 위한 타입
 export type ReserveClassType = Pick<
