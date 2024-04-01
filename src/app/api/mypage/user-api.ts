@@ -1,5 +1,5 @@
 import { PostgrestMaybeSingleResponse } from '@supabase/supabase-js';
-import { supabase } from './supabase/supabase';
+import { supabase } from '../supabase/supabase';
 import { UpdateUserInfoType, UserType } from '@/types/user';
 import { userId } from '@/app/mypage/page';
 
@@ -34,12 +34,13 @@ export const getUserInfo = async () => {
 };
 
 // User 정보 수정하기 : supabase에 update
-export const updateUserInfo = async ({ email, nickname, password }: UpdateUserInfoType) => {
-  const { data, error } = await supabase.from('user').update({ email, nickname, password }).eq('user_id', userId);
+export const updateUserInfo = async ({ newEmail, newNickname, newPassword }: UpdateUserInfoType) => {
+  const { data, error } = await supabase
+    .from('user')
+    .update({ email: newEmail, nickname: newNickname, password: newPassword })
+    .eq('user_id', userId);
   if (error) {
     console.error(error);
   }
   return data;
 };
-
-//.update({ comment: nextComment })
