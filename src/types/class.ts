@@ -33,7 +33,7 @@ export interface MyRegisteredClassType {
   active: boolean;
 }
 
-// 예약 페이지에서 클래스 정보를 보여주기 위한 타입eRve
+// 예약 페이지에서 클래스 정보를 보여주기 위한 타입
 export type ReserveClassType = {
   class_id: string;
   category: string;
