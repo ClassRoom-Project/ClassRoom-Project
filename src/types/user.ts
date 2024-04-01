@@ -63,8 +63,13 @@ export interface UserType {
 
 export interface UpdateUserInfoType {
   newNickname: string;
-  newEmail: string;
-  newPassword: string;
+}
+
+export interface UpdateTeacherInfoType {
+  newSelectedJob: string;
+  newSelectedField: string;
+  selectedBank: string;
+  account: string;
 }
 
 interface AdminType {
