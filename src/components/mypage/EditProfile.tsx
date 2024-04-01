@@ -70,12 +70,15 @@ const EditProfile = () => {
   };
 
   // 취소하기 버튼
+
   const handleOnClickCancleBtn = () => {
-    setIsEditing(false);
-    setNewNickname(userInfo?.nickname || '');
-    setIsAvailableNickname(true);
-    setIsActiveBtn(false);
-    alert('프로필 수정이 취소 되었습니다. ');
+    if (isEditing) {
+      setIsEditing(false);
+      setNewNickname(userInfo?.nickname || '');
+      setIsAvailableNickname(true);
+      setIsActiveBtn(false);
+      alert('프로필 수정이 취소 되었습니다. ');
+    }
   };
 
   if (isPending) {
