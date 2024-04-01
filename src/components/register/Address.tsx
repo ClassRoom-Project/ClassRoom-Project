@@ -38,29 +38,29 @@ const Address = () => {
 
   return (
     <div className='my-1'>
-      <div className="flex items-center space-x-2 my-2">
-        <p>위치</p>
-        <div className="flex items-center space-x-2">
-          <div className="flex items-center">
-            <input
-              className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
-              type="text"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              placeholder="주소"
-            />
-            <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700" onClick={handleOpenPostCode}>주소 검색</button>
+          <div className="flex items-center space-x-2 my-2">
+            <p>위치</p>
+            <div className="flex items-center space-x-2">
+              <div className="flex items-center">
+                <input
+                  className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
+                  type="text"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder="주소"
+                />
+                <button className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700" onClick={handleOpenPostCode}>주소 검색</button>
+              </div>
+            </div>
           </div>
+          <input
+            className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
+            type="text"
+            value={detailAddress}
+            onChange={(e) => setDetailAddress(e.target.value)}
+            placeholder="상세 주소"
+          />
         </div>
-      </div>
-      <input
-        className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
-        type="text"
-        value={detailAddress}
-        onChange={(e) => setDetailAddress(e.target.value)}
-        placeholder="상세 주소"
-      />
-    </div>
   );
 }
 
