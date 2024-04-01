@@ -44,8 +44,8 @@ const reservationCompletePage = async ({ params }: { params: { reservationId: st
         <div className="flex flex-col w-1/3 gap-6 mb-20">
           {reserveInfoLabels.map((item, index) => (
             <div key={index} className="flex w-full justify-between gap-4">
-              <span className="w-20 text-right">{item.title}</span>
-              <span className="w-52 text-center">{item.description}</span>
+              <p className="w-20 text-right">{item.title}</p>
+              <p className="w-52 text-center">{item.description}</p>
             </div>
           ))}
         </div>
