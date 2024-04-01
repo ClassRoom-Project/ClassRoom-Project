@@ -1,16 +1,9 @@
-'use client';
-
 import useReserveStore from '@/store/reserveClassStore';
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
 
-const ClassInfo = ({ classInfo, classId }: { classInfo: ReserveClassType; classId: string }) => {
-  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  useEffect(() => {
-    setReserveInfo({ classId: classId });
-  }, [classId, setReserveInfo]);
-
+const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
       <Image
