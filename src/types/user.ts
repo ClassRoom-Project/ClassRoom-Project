@@ -63,15 +63,21 @@ export interface UserType {
   account: string;
 }
 
+// 수정된 닉네임 type
 export interface UpdateUserInfoType {
   newNickname: string;
 }
 
+// 수정된 선생님 정보 type
 export interface UpdateTeacherInfoType {
   newSelectedJob: string;
   newSelectedField: string;
   selectedBank: string;
   account: string;
+}
+
+export interface UpdateProfileImageType {
+  updateProfileImage: string;
 }
 
 interface AdminType {
