@@ -3,20 +3,12 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import MyClassImage from '../../../../public/class-sample-img.jpeg';
-import fetchMyClasses from '@/app/api/supabase/fetchMyClasses';
-import { cancelReservation } from '@/app/api/supabase/fetchMyClasses'; // 예약 취소 함수 가져오기
+import fetchMyClasses, { cancelReservation } from '@/app/api/supabase/fetchMyClasses';
 import { useRouter } from 'next/navigation';
+import { ClassItem } from '@/types/register';
 
-interface ClassItem {
-  reserve_id: string;
-  image?: string;
-  title: string;
-  reserve_date: string;
-  reserved_at: string;
-  class_id: string;
-}
 const MyReservedClass = () => {
-  const [classes, setClasses] = useState<ClassItem[]>([]);
+  const [classes, setClasses] = useState<ClassItem[]>([]); // 리액트 쿼리로 개선 가능
   const router = useRouter();
 
   useEffect(() => {
@@ -43,8 +35,8 @@ const MyReservedClass = () => {
 
   return (
     <div>
-      {classes.map((classItem, index) => (
-        <article key={index} className="flex gap-4">
+      {classes.map((classItem) => (
+        <article key={classItem.reserve_id} className="flex gap-4">
           <div className="w-[300px] h-[200px]">
             <Image
               src={classItem.image || MyClassImage}
