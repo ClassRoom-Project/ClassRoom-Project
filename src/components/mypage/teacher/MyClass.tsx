@@ -1,20 +1,19 @@
-import { getMyRegistedClass } from '@/app/api/mypage/my-class-api';
+import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
 import { userId } from '@/app/mypage/page';
-import { GoToClassPost } from '@/components/common/mypage/buttons';
 import { ClassAllType } from '@/types/class';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 
-type MyRegistedClassType = ClassAllType[];
+type MyRegisteredClassType = ClassAllType[];
 
 const MyClass = () => {
   // const pathname = usePathname;
   const router = useRouter();
 
-  const { data: myClassInfo, isPending }: { data: MyRegistedClassType | undefined; isPending: boolean } = useQuery({
+  const { data: myClassInfo, isPending }: { data: MyRegisteredClassType | undefined; isPending: boolean } = useQuery({
     queryKey: ['class', userId],
-    queryFn: () => getMyRegistedClass()
+    queryFn: () => getMyRegisteredClass()
   });
   if (isPending) {
     return <div> 로딩중 ... </div>;
