@@ -19,7 +19,7 @@ async function fetchMyClasses(userId:string) {
       .from('class')
       .select('image, title')
       .eq('class_id', reserve.class_id)
-      .limit(1); // 이미지는 0번째 값만 가져오도록 제한인데 데이터베이스 문제로 추가 수정 예정
+      .limit(1); // 이미지는 0번째 값만 가져오도록 제한
 
     if (classError) {
       console.error(classError)
