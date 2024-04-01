@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import ClassCard from './ClassCard';
 import { useClassInfoStore } from '@/store/ClassInfoStore';
-import { fetchClassInfos } from '@/api/supabase/fetchClassInfo';
+import { getClassAllInfo } from '@/app/api/supabase/fetchClassInfo';
 // yarn add --dev @types/react-slick
 // yarn add react-slick
 // yarn add slick-carousel
@@ -66,7 +66,9 @@ const LatestClass = () => {
 
   useEffect(() => {
     const getClassInfos = async () => {
-      const infos = await fetchClassInfos();
+      const infos = await getClassAllInfo();
+      //최신순
+      infos.sort((a, b) => b.date - a.date);
       setClassInfos(infos);
     };
     getClassInfos();

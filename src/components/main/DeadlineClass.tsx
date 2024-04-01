@@ -3,7 +3,7 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import ClassCard from './ClassCard';
 import { useClassInfoStore } from '@/store/ClassInfoStore';
-import { fetchClassInfos } from '@/api/supabase/fetchClassInfo';
+import { getClassAllInfo } from '@/app/api/supabase/fetchClassInfo';
 // yarn add --dev @types/react-slick
 // yarn add react-slick
 // yarn add slick-carousel
@@ -48,7 +48,7 @@ function SamplePrevArrow(props: SlickArrowProps) {
     />
   );
 }
-const D1Class = () => {
+const DeadlineClass = () => {
   const { classInfos, setClassInfos } = useClassInfoStore();
   const settings = {
     dots: false,
@@ -65,7 +65,9 @@ const D1Class = () => {
 
   useEffect(() => {
     const getClassInfos = async () => {
-      const infos = await fetchClassInfos();
+      const infos = await getClassAllInfo();
+      //남은수량순
+      [...infos].sort((a, b) => a.quantity - b.quantity);
       setClassInfos(infos);
     };
     getClassInfos();
@@ -73,7 +75,7 @@ const D1Class = () => {
 
   return (
     <div className="mr-auto ml-auto">
-      <p>D1Class</p>
+      <p>마감 임박</p>
       <div className="slider-container w-[85vw]">
         <Slider {...settings}>
           {classInfos.map((info, classId) => (
@@ -85,4 +87,4 @@ const D1Class = () => {
   );
 };
 
-export default D1Class;
+export default DeadlineClass;
