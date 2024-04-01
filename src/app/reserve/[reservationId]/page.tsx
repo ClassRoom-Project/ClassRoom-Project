@@ -42,8 +42,8 @@ const reservationCompletePage = async ({ params }: { params: { reservationId: st
       <div className="w-full h-full bg-gray-200 p-6 flex flex-col justify-between items-center">
         <h1 className="text-xl text-center mb-20">예약이 정상적으로 처리되었습니다..</h1>
         <div className="flex flex-col w-1/3 gap-6 mb-20">
-          {reserveInfoLabels.map((item, index) => (
-            <div key={index} className="flex w-full justify-between gap-4">
+          {reserveInfoLabels.map((item) => (
+            <div key={crypto.randomUUID()} className="flex w-full justify-between gap-4">
               <p className="w-20 text-right">{item.title}</p>
               <p className="w-52 text-center">{item.description}</p>
             </div>

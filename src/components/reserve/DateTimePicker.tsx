@@ -84,10 +84,10 @@ const DateTimePicker = () => {
       <div>
         <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
-          {timeList.map((time, index) => {
+          {timeList.map((time) => {
             return (
               <button
-                key={index}
+                key={crypto.randomUUID()}
                 onClick={() => handleTimeClick(time)}
                 className={`px-4 py-1 text-lg ${
                   time === selectedTime ? 'bg-rose-200' : 'bg-white'
