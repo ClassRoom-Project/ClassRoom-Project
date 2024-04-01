@@ -7,8 +7,16 @@ import fetchMyClasses from '@/app/api/supabase/fetchMyClasses';
 import { cancelReservation } from '@/app/api/supabase/fetchMyClasses'; // 예약 취소 함수 가져오기
 import { useRouter } from 'next/navigation';
 
+interface ClassItem {
+  reserve_id: string;
+  image?: string;
+  title: string;
+  reserve_date: string;
+  reserved_at: string;
+  class_id: string;
+}
 const MyReservedClass = () => {
-  const [classes, setClasses] = useState<any[]>([]);
+  const [classes, setClasses] = useState<ClassItem[]>([]);
   const router = useRouter();
 
   useEffect(() => {
