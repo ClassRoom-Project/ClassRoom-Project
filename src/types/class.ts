@@ -33,8 +33,13 @@ export interface MyRegisteredClassType {
   active: boolean;
 }
 
-// 예약 페이지에서 클래스 정보를 보여주기 위한 타입
-export type ReserveClassType = Pick<
-  ClassAllType,
-  'class_id' | 'category' | 'title' | 'location' | 'price' | 'image' | 'max_ppl'
->;
+// 예약 페이지에서 클래스 정보를 보여주기 위한 타입eRve
+export type ReserveClassType = {
+  class_id: string;
+  category: string;
+  title: string;
+  location: string;
+  price: number;
+  image: string;
+  max_ppl: number;
+};
