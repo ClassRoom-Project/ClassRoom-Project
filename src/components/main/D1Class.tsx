@@ -3,6 +3,7 @@
 import React, { PropsWithChildren, useEffect } from 'react';
 import ClassCard from './ClassCard';
 import { useClassInfoStore } from '@/store/ClassInfoStore';
+
 // yarn add --dev @types/react-slick
 // yarn add react-slick
 // yarn add slick-carousel
