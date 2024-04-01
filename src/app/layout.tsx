@@ -3,8 +3,8 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
 import Link from 'next/link';
-import UserLayout from '@/components/common/UserLayout';
-import BorderLayout from '@/components/common/BorderLayout';
+import UserLayout from '@/components/common/bars/UserLayout';
+import BorderLayout from '@/components/common/bars/BorderLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {

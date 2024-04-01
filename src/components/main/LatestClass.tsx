@@ -11,58 +11,10 @@ import { getClassAllInfo } from '@/app/api/supabase/fetchClassInfo';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { SlickArrowProps } from '@/types/reactSlick';
-
-function SampleNextArrow(props: SlickArrowProps) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        width: '20px',
-        height: '20px',
-        display: 'block',
-        borderRadius: '50%',
-        background: 'black'
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-function SamplePrevArrow(props: SlickArrowProps) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        width: '20px',
-        height: '20px',
-        display: 'block',
-        borderRadius: '50%',
-        background: 'black'
-      }}
-      onClick={onClick}
-    />
-  );
-}
+import { settings } from './ClassSlick';
 
 const LatestClass = () => {
   const { classInfos, setClassInfos } = useClassInfoStore();
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 500,
-    autoplaySpeed: 4000,
-    cssEase: 'linear',
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />
-  };
 
   useEffect(() => {
     const getClassInfos = async () => {
@@ -77,7 +29,7 @@ const LatestClass = () => {
   return (
     <div className="mr-auto ml-auto p-5">
       <p>LatestClass</p>
-      <div className="slider-container w-[75vw]">
+      <div className="slider-container w-[85vw]">
         <Slider {...settings}>
           {classInfos.map((info, classId) => (
             <ClassCard key={classId} classInfos={info} />
