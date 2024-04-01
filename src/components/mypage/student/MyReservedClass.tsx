@@ -10,7 +10,7 @@ const MyReservedClass = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await fetchMyClasses('523e4567-e89b-12d3-a456-426614174005');
+      const data = await fetchMyClasses('523e4567-e89b-12d3-a456-426614174005'); // 임시 user_id
       const formattedData = data.map((classItem:ClassItem) => ({
         ...classItem,
         image: classItem.image?.replace(/["{}]/g, '') || '' // 잘못된 따옴표 제거
