@@ -1,4 +1,4 @@
-import { getUserRole } from '@/api/mypage/user-api';
+import { getUserRole } from '@/app/api/mypage/user-api';
 import StudentMyPageTab from '@/components/mypage/student/StudentMyPageTab';
 import TeacherMyPageTab from '@/components/mypage/teacher/TeacherMyPageTab';
 

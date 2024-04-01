@@ -1,3 +1,4 @@
+import { fetchReserveClassInfo } from '@/app/api/supabase/fetchClassInfo';
 import { fetchReserveInfo } from '@/app/api/supabase/fetchReserveInfo';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import React from 'react';
@@ -7,10 +8,15 @@ const reservationCompletePage = async ({ params }: { params: { reservationId: st
 
   const completedReserveInfo = await fetchReserveInfo(reservationId);
 
+  if (!completedReserveInfo) {
+    return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;
+  }
+  const reservedClassInfo = await fetchReserveClassInfo({ classId: completedReserveInfo?.class_id });
+
   const reserveInfoLabels = [
     {
       title: '클래스명',
-      description: `${completedReserveInfo?.class_id}` // api 수정 후 클래스명으로 변경
+      description: `${reservedClassInfo?.title}` // api 수정 후 클래스명으로 변경
     },
     {
       title: '이용 일자',

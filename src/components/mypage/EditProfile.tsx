@@ -1,4 +1,4 @@
-import { getUserInfo } from '@/api/mypage/user-api';
+import { getUserInfo } from '@/app/api/mypage/user-api';
 import { userId } from '@/app/mypage/page';
 import { UserType } from '@/types/user';
 import { useQuery } from '@tanstack/react-query';
