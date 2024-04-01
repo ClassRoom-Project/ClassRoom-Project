@@ -10,9 +10,7 @@ const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
 
   const reserveInfo = useReserveStore((state) => state.reserveInfo);
 
-  const handleReserveButtonClick = () => {
-    console.log(reserveInfo);
-
+  const handleReserveButtonClick = async () => {
     if (reserveInfo.reserveQuantity === 0) {
       alert('예약 인원은 1명 이상이여야 합니다.');
       return;
@@ -25,8 +23,13 @@ const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
     금액 : ${reserveInfo.reservePrice.toLocaleString('ko-KR')}원
     `)
     ) {
-      // router.push('reserve/rid=ba59530d-a840-443a-937c-53f10a9c8a93');
-      submitReservation(reserveInfo);
+      // result: supabase의 응답으로 받아온 제출한 예약 정보
+      const result = await submitReservation(reserveInfo);
+      if (!result) {
+        alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
+        return;
+      }
+      router.push(`reserve/${result.reserve_id}`);
     }
     return;
   };
