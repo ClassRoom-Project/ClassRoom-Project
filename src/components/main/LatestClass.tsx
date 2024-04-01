@@ -3,7 +3,7 @@
 import React, { useEffect } from 'react';
 import ClassCard from './ClassCard';
 import { useClassInfoStore } from '@/store/ClassInfoStore';
-import { fetchClassInfos } from '@/api/supabase/fetchClassInfo';
+
 // yarn add --dev @types/react-slick
 // yarn add react-slick
 // yarn add slick-carousel
@@ -12,6 +12,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { SlickArrowProps } from '@/types/reactSlick';
+import { fetchClassInfos } from '@/app/api/supabase/fetchClassInfo';
 
 function SampleNextArrow(props: SlickArrowProps) {
   const { className, style, onClick } = props;
