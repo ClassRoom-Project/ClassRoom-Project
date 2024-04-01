@@ -1,13 +1,15 @@
-import { getUserInfo } from '@/api/mypage/user-api';
 import { userId } from '@/app/mypage/page';
-import { UserType } from '@/types/user';
-import { useQuery } from '@tanstack/react-query';
+import { UpdateUserInfoType, UserType } from '@/types/user';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import BasicProfileImage from '../../../public/profile-image.png';
 import { CancleButton } from '../common/mypage/buttons';
+import { getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
 
 const EditProfile = () => {
+  const queryClient = useQueryClient();
+
   const { data: userInfo, isPending }: { data: UserType | undefined; isPending: boolean } = useQuery({
     queryKey: ['user', userId],
     queryFn: () => getUserInfo()
@@ -17,6 +19,7 @@ const EditProfile = () => {
   const [newEmail, setNewEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (userInfo) {
@@ -26,14 +29,6 @@ const EditProfile = () => {
       setCheckPassword(userInfo.password || '');
     }
   }, [userInfo]);
-
-  if (isPending) {
-    return <div> 로딩중 ... </div>;
-  }
-
-  if (!userInfo) {
-    return <div> 유저 정보가 없습니다.</div>;
-  }
 
   const handleOnChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewNickname(e.target.value);
@@ -49,44 +44,46 @@ const EditProfile = () => {
   };
 
   // 유저 정보 수정하기 mutation
-  // const { mutate: updateUserInfoMutation } = useMutation({
-  //   mutationFn: ({ newNickname, newEmail, newPassword }: UpdateUserInfoType) =>
-  //     updateUserInfo({ newNickname, newEmail, newPassword }),
-  //   onSuccess
-  // });
+  const { mutate: updateUserInfoMutation } = useMutation({
+    mutationFn: ({ newNickname, newEmail, newPassword }: UpdateUserInfoType) =>
+      updateUserInfo({ newNickname, newEmail, newPassword }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['user']
+      });
+      setIsEditing(false);
+    }
+  });
 
   // 수정하기 버튼 -> supabase에 수정한 정보 update
   const handleOnClickEditProfileBtn = () => {
-    alert('프로필 정보 수정하기 버튼입니다.');
+    // 수정된 사항이 없는 경우
+    const isNicknameChanged = newNickname !== userInfo?.nickname;
+    const isEmailChanged = newEmail !== userInfo?.email;
+    const isNewPasswordChanged = newPassword !== userInfo?.password;
+
+    if (!isNicknameChanged && !isEmailChanged && !isNewPasswordChanged) {
+      alert('수정 사항이 없습니다.');
+      return;
+    }
+
+    // 수정된 사항이 있는 경우
+    updateUserInfoMutation({ newNickname, newEmail, newPassword });
+    alert('프로필 수정이 완료되었습니다.');
   };
 
-  //   // 댓글 수정 mutation
-  //   const { mutate: updateCommentMutation } = useMutation({
-  //     mutationFn: ({ email, id, nextComment }: UpdateCommentType) =>
-  //       updateComment({ nextComment, email, id }),
-  //     onSuccess: () => {
-  //       queryClient.invalidateQueries({
-  //         queryKey: ["comments"],
-  //       });
-  //     },
-  //   });
+  // 취소하기 버튼
+  const handleOnClickCancleBtn = () => {
+    setIsEditing(false);
+    alert('프로필 수정이 취소 되었습니다. ');
+  };
+  if (isPending) {
+    return <div> 로딩중 ... </div>;
+  }
 
-  //     // 수정, 수정완료 버튼 핸들러
-  // const handleEditHandler = (id: number) => {
-  //   // 수정완료버튼
-  //   if (isEdit) {
-  //     if (nextComment !== comment.comment) {
-  //       const confirm = window.confirm("수정하시겠습니까?");
-  //       if (confirm) {
-  //         // insert하는 api mutation 호출
-  //         updateCommentMutation({ nextComment, email, id });
-  //         setIsEdit((prev) => !prev);
-  //       }
-  //       return;
-  //     } else if (nextComment === comment.comment) {
-  //       alert("수정사항이 없습니다.");
-  //     }
-  // };
+  if (!userInfo) {
+    return <div> 유저 정보가 없습니다.</div>;
+  }
 
   return (
     <div className="flex">
@@ -98,26 +95,50 @@ const EditProfile = () => {
         <div className="flex flex-col">
           <div className="m-4 p-4 gap-4">
             <p>닉네임</p>
-            <input type="text" className="border p-1" value={newNickname} onChange={handleOnChangeNickname} />
+            {isEditing ? (
+              <input type="text" className="border p-1" value={newNickname} onChange={handleOnChangeNickname} />
+            ) : (
+              <p>{newNickname}</p>
+            )}
           </div>
           <div className="m-4 p-4">
             <p>이메일</p>
-            <input type="text" className="border p-1" value={newEmail} onChange={handleOnChangeEmail} />
+            {isEditing ? (
+              <input type="text" className="border p-1" value={newEmail} onChange={handleOnChangeEmail} />
+            ) : (
+              <p>{newEmail}</p>
+            )}
           </div>
           <div className="m-4 p-4">
             <p>비밀번호</p>
-            <input type="text" className="border p-1" value={newPassword} onChange={handleOnChangePassword} />
+            {isEditing ? (
+              <input type="text" className="border p-1" value={newPassword} onChange={handleOnChangePassword} />
+            ) : (
+              <p>******</p>
+            )}
           </div>
           <div className="m-4 p-4">
             <p>비밀번호 확인</p>
-            <input type="text" className="border p-1" value={checkPassword} onChange={handleOnChangeCheckPassword} />
+            {isEditing ? (
+              <input type="text" className="border p-1" value={checkPassword} onChange={handleOnChangeCheckPassword} />
+            ) : (
+              <p>******</p>
+            )}
           </div>
         </div>
         <div className="m-4 p-4 flex gap-4">
-          <button onClick={handleOnClickEditProfileBtn} className="p-4 border rounded-xl w-[150px]">
-            수정하기
+          {isEditing ? (
+            <button onClick={handleOnClickEditProfileBtn} className="p-4 border rounded-xl w-[150px]">
+              수정 완료
+            </button>
+          ) : (
+            <button onClick={() => setIsEditing(true)} className="p-4 border rounded-xl w-[150px]">
+              수정하기
+            </button>
+          )}
+          <button onClick={handleOnClickCancleBtn} className="p-4 border rounded-xl w-[150px]  bg-rose-500 text-white">
+            취소하기
           </button>
-          <CancleButton />
         </div>
       </div>
     </div>
