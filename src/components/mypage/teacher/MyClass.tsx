@@ -1,4 +1,4 @@
-import { getMyRegistedClass } from '@/api/mypage/my-class-api';
+import { getMyRegistedClass } from '@/app/api/mypage/my-class-api';
 import { userId } from '@/app/mypage/page';
 import { GoToClassPost } from '@/components/common/mypage/buttons';
 import { ClassAllType } from '@/types/class';
