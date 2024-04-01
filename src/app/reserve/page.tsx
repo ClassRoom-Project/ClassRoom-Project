@@ -13,7 +13,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
       <h1 className="text-xl">예약하기</h1>
       {classInfo ? (
         <div className="flex w-full h-full bg-gray-200 p-6">
-          <DateTimePicker classDates={classInfo.date} classTimes={classInfo.time} />
+          <DateTimePicker classDateList={classInfo.date} classTimeList={classInfo.time} />
           <div className="flex flex-col justify-between items-center w-full p-6">
             <ClassInfo classInfo={classInfo} />
             <PriceCalculator price={classInfo.price} />

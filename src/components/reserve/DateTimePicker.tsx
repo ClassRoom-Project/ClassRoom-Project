@@ -9,71 +9,61 @@ import 'react-day-picker/dist/style.css';
 import { SlArrowLeft } from 'react-icons/sl';
 import { SlArrowRight } from 'react-icons/sl';
 
-const DateTimePicker = ({ classDates, classTimes }: { classDates: string[]; classTimes: string[] }) => {
+const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
 
-  const [selectedTime, setSelectedTime] = useState(classTimes[0]);
+  const [selectedTime, setSelectedTime] = useState(classTimeList[0]);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
   };
 
+  console.log(classDateList);
+
   // 리액트 데이피커 ------------------------------------------------------------------
   const today = new Date();
-  const [selectedDate, setSelected] = useState<string>(format(today, 'yyyy-MM-dd'));
+  const [selectedDate, setSelected] = useState<string>(format(classDateList[0], 'yyyy-MM-dd'));
 
-  // 날짜 클릭시
+  // 날짜 클릭시 set
   const handleDateChange = (newDate: Date | undefined) => {
     setSelected(format(newDate as Date, 'yyyy-MM-dd'));
   };
 
-  // 비활성화 할 날짜 배열
+  // 1~31일 배열 생성
+  const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
 
-  const dayList: number[] = Array.from({ length: 31 }, (_, index) => index);
-
-  // DB에 있는 날짜에서 일자만 따로 생성한 배열
-  const dateList = classDates.map((item) => new Date(item).getDate());
+  // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
+  const availableDays = classDateList.map((item) => new Date(item).getDate());
 
   // 1~31 일중 DB에 있는 날짜를 삭제한 배열 생성
-  const newList = dayList.filter((item) => {
-    return !dateList.includes(item);
+  const nonAvailableDays = dayList.filter((item) => {
+    return !availableDays.includes(item);
   });
 
   // 속성으로 할당할 date 배열 생성
-  const nonAvailableDays = newList.map((day) => {
-    return new Date(2024, 3, day);
+  const nonAvailableDates = nonAvailableDays.map((day) => {
+    return new Date(2024, today.getMonth(), day);
   });
 
-  const disabledDays = nonAvailableDays;
+  // 현재 달 외에 다른날도 보여주려면 날짜별로 date를 따로 생성..?
+  // const monthList = classDates.map((item) => new Date(item).getMonth());
+  // console.log(new Set(monthList));
+  // const nonAvailabelDaysDate = nonAvailableDays.map((day) => {
+  //   const list = monthList.map((item) => {
+  //     return new Date(2024, item, day);
+  //   });
+  //   return list;
+  // });
+  // const nonAvailableDaysDate = nonAvailableDays.flatMap((day) => monthList.map((month) => new Date(2024, month, day)));
 
-  // 상단의 날짜 레이블 포맷팅
-  const formatCaption: DateFormatter = (Date, options) => {
-    return (
-      <>
-        <span className="mr-1">{format(Date, 'uuuu', { locale: options?.locale })}년</span>
-        <span> {format(Date, 'LLLL', { locale: options?.locale })}</span>
-      </>
-    );
-  };
+  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
+  function CustomCaption(props: CaptionProps) {
+    return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
+  }
 
   useEffect(() => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
   }, [selectedDate, selectedTime, setReserveInfo]);
-
-  function CustomCaption(props: CaptionProps) {
-    const { goToMonth, nextMonth, previousMonth } = useNavigation();
-    return (
-      <div className="flex justify-between">
-        <button disabled={!previousMonth} onClick={() => previousMonth && goToMonth(previousMonth)}>
-          <SlArrowLeft size={14} />
-        </button>
-        {format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}
-        <button disabled={!nextMonth} onClick={() => nextMonth && goToMonth(nextMonth)}>
-          <SlArrowRight size={14} />
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
@@ -83,13 +73,15 @@ const DateTimePicker = ({ classDates, classTimes }: { classDates: string[]; clas
           <DayPicker
             mode="single" // 여러 날짜 선택 시 multiple
             required
+            disableNavigation
             selected={new Date(selectedDate)}
             onSelect={handleDateChange}
             fromYear={2024}
             toYear={2024}
-            disabled={disabledDays}
+            disabled={nonAvailableDates}
+            fromMonth={new Date(2024, today.getMonth())}
+            toMonth={new Date(2024, today.getMonth())}
             locale={ko}
-            formatters={{ formatCaption }}
             components={{
               Caption: CustomCaption
             }}
@@ -99,7 +91,7 @@ const DateTimePicker = ({ classDates, classTimes }: { classDates: string[]; clas
       <div>
         <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
-          {classTimes.map((time) => {
+          {classTimeList.map((time) => {
             return (
               <button
                 key={crypto.randomUUID()}
