@@ -1,10 +1,12 @@
-// interface SignInType {
-//   email: string;
-//   password: string;
-//   checkPassword: string;
-// }
+export interface SessionUserType {
+  user: {
+    email: string;
+    name: string | null;
+    image: string | null;
+  };
+}
 
-//teacher
+//store
 export interface NewUserType {
   teacher: boolean;
   job?: string | null;
@@ -22,12 +24,19 @@ export interface NewUserType {
   setProfileImage: (profile_image: string) => void;
 }
 
-export interface SessionUserType {
-  user: {
-    email: string;
-    name: string | null;
-    image: string | null;
-  };
+//PickRole
+export type RoleType = 'teacher' | 'student';
+export type SocialType = 'google' | 'kakao' | 'naver';
+
+export interface UserType {
+  user_id: string;
+  email: string;
+  nickname: string;
+  password: string;
+  teacher: boolean;
+  job: string;
+  field: string;
+  profile_image: string;
 }
 
 //moreinfo
@@ -45,25 +54,10 @@ export const JOBS: JobType[] = ['교사', '요리사', '개발자', '운동선�
 export type FieldType = '교육' | '요리' | 'IT' | '스포츠' | '피아니스트' | '공방' | '애견미용';
 export const FIELDS: FieldType[] = ['교육', '요리', 'IT', '스포츠', '피아니스트', '공방', '애견미용'];
 
-//signin
+//signup
 export interface SignInType {
   name: string;
   value: string;
 }
-export interface UserType {
-  user_id: string;
-  email: string;
-  nickname: string;
-  password: string;
-  teacher: boolean;
-  job: string;
-  field: string;
-  profile_image: string;
-}
 
 export type UpdateUserInfoType = Pick<UserType, 'email' | 'nickname' | 'password'>;
-
-interface AdminType {
-  isAdmin: boolean;
-  setIsAdmin: (isAdmin: boolean) => void;
-}

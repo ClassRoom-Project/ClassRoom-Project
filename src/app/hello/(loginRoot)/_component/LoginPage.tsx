@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { RiKakaoTalkFill } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
 import { SiNaver } from 'react-icons/si';
@@ -23,10 +22,9 @@ export default function LoginPage() {
             <input placeholder="비밀번호" className="w-1/2 h-9 border rounded-lg " />
             <button className="bg-black text-white w-1/3 h-9 rounded-lg">로그인</button>
           </form>
-
           <div className="flex flex-row justify-around">
             <p className="text-xs">클룸이 처음이신가요?</p>
-            <Link href="/teacher" className="font-bold text-xs hover:color-grey">
+            <Link href="/hello/login/signup" className="font-bold text-xs hover:color-grey">
               회원가입
             </Link>
           </div>
