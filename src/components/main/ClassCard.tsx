@@ -3,7 +3,7 @@ import React from 'react';
 import { ClassAllType } from '@/types/class';
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   return classInfos ? (
-    <div className="card w-[300px] h-[300px] bg-base-100 shadow-xl m-1 rounded-lg overflow-hidden">
+    <div className="card w-[250px] h-[300px] bg-base-100 shadow-xl m-1 rounded-lg overflow-hidden">
       <figure className="w-full h-2/5 bg-gray-200">
         <Image
           width={300}

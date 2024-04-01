@@ -3,8 +3,7 @@
 import React, { useEffect } from 'react';
 import ClassCard from './ClassCard';
 import { useClassInfoStore } from '@/store/ClassInfoStore';
-import { fetchClassInfos } from '@/app/api/supabase/fetchClassInfo';
-
+import { getClassAllInfo } from '@/app/api/supabase/fetchClassInfo';
 // yarn add --dev @types/react-slick
 // yarn add react-slick
 // yarn add slick-carousel
@@ -12,62 +11,16 @@ import { fetchClassInfos } from '@/app/api/supabase/fetchClassInfo';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { SlickArrowProps } from '@/types/reactSlick';
-
-function SampleNextArrow(props: SlickArrowProps) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        width: '20px',
-        height: '20px',
-        display: 'block',
-        borderRadius: '50%',
-        background: 'black'
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-function SamplePrevArrow(props: SlickArrowProps) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{
-        ...style,
-        width: '20px',
-        height: '20px',
-        display: 'block',
-        borderRadius: '50%',
-        background: 'black'
-      }}
-      onClick={onClick}
-    />
-  );
-}
+import { settings } from './ClassSlick';
 
 const BestClass = () => {
   const { classInfos, setClassInfos } = useClassInfoStore();
-  const settings = {
-    dots: false,
-    infinite: true,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 500,
-    autoplaySpeed: 4000,
-    cssEase: 'linear',
-    nextArrow: <SampleNextArrow />,
-    prevArrow: <SamplePrevArrow />
-  };
 
   useEffect(() => {
     const getClassInfos = async () => {
-      const infos = await fetchClassInfos();
+      const infos = await getClassAllInfo();
+      //좋아요순
+      infos.sort((a, b) => b.likes - a.likes);
       setClassInfos(infos);
     };
     getClassInfos();
