@@ -3,12 +3,17 @@
 import { submitReservation } from '@/app/api/supabase/submitReservation';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-const ReserveButton = ({ maxPeople }: { maxPeople: number }) => {
+const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: string }) => {
   const router = useRouter();
 
+  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
   const reserveInfo = useReserveStore((state) => state.reserveInfo);
+
+  useEffect(() => {
+    setReserveInfo({ classId: classId });
+  }, [classId, setReserveInfo]);
 
   const handleReserveButtonClick = async () => {
     if (reserveInfo.reserveQuantity === 0) {

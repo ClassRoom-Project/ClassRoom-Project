@@ -59,9 +59,20 @@ export interface UserType {
   job: string;
   field: string;
   profile_image: string;
+  bank: string;
+  account: string;
 }
 
-export type UpdateUserInfoType = Pick<UserType, 'email' | 'nickname' | 'password'>;
+export interface UpdateUserInfoType {
+  newNickname: string;
+}
+
+export interface UpdateTeacherInfoType {
+  newSelectedJob: string;
+  newSelectedField: string;
+  selectedBank: string;
+  account: string;
+}
 
 interface AdminType {
   isAdmin: boolean;
