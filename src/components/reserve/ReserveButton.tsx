@@ -8,8 +8,10 @@ import React, { useEffect } from 'react';
 const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: string }) => {
   const router = useRouter();
 
-  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  const reserveInfo = useReserveStore((state) => state.reserveInfo);
+  const { setReserveInfo, reserveInfo } = useReserveStore((state) => ({
+    setReserveInfo: state.setReserveInfo,
+    reserveInfo: state.reserveInfo
+  }));
 
   useEffect(() => {
     setReserveInfo({ classId: classId });

@@ -9,11 +9,10 @@ import 'react-day-picker/dist/style.css';
 import { SlArrowLeft } from 'react-icons/sl';
 import { SlArrowRight } from 'react-icons/sl';
 
-const DateTimePicker = () => {
+const DateTimePicker = ({ classDates, classTimes }: { classDates: string[]; classTimes: string[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
 
-  const timeList = ['14:30:00', '16:30:00']; // 추후 class 테이블에서 불러와야함
-  const [selectedTime, setSelectedTime] = useState(timeList[0]);
+  const [selectedTime, setSelectedTime] = useState(classTimes[0]);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
@@ -29,7 +28,23 @@ const DateTimePicker = () => {
   };
 
   // 비활성화 할 날짜 배열
-  const disabledDays = [new Date(2024, 3, 10), new Date(2024, 3, 12), new Date(2024, 3, 20)];
+
+  const dayList: number[] = Array.from({ length: 31 }, (_, index) => index);
+
+  // DB에 있는 날짜에서 일자만 따로 생성한 배열
+  const dateList = classDates.map((item) => new Date(item).getDate());
+
+  // 1~31 일중 DB에 있는 날짜를 삭제한 배열 생성
+  const newList = dayList.filter((item) => {
+    return !dateList.includes(item);
+  });
+
+  // 속성으로 할당할 date 배열 생성
+  const nonAvailableDays = newList.map((day) => {
+    return new Date(2024, 3, day);
+  });
+
+  const disabledDays = nonAvailableDays;
 
   // 상단의 날짜 레이블 포맷팅
   const formatCaption: DateFormatter = (Date, options) => {
@@ -84,7 +99,7 @@ const DateTimePicker = () => {
       <div>
         <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
-          {timeList.map((time) => {
+          {classTimes.map((time) => {
             return (
               <button
                 key={crypto.randomUUID()}
