@@ -20,7 +20,8 @@ const MyClass = () => {
 
   // 클래스 삭제하기
   const handleOnClickDeleteMyClass = () => {
-    alert('클래스를 삭제합니다.');
+    // const confirm = window.confirm("")
+    alert('클래스를 삭제하는 버튼입니다.');
   };
 
   // 클래스 예약한 수강생 보러가기

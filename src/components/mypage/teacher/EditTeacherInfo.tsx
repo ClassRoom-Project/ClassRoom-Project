@@ -90,9 +90,11 @@ const EditTeacherInfo = () => {
   // 취소하기 버튼
   const handleOnClickCancleBtn = () => {
     if (isEditing) {
-      setIsEditing(false);
-      setIsActiveBtn(false);
-      alert('선생님 정보 수정이 취소 되었습니다. ');
+      const confirm = window.confirm('취소하시겠습니까?');
+      if (confirm) {
+        setIsEditing(false);
+        setIsActiveBtn(false);
+      }
     }
   };
 
