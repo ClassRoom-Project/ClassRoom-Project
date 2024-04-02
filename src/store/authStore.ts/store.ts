@@ -1,10 +1,10 @@
-import { NewUserType } from '@/types/user';
+import { NewUserType } from '@/types/authUser/authUser';
 import { create } from 'zustand';
 
 const useNewUserStore = create<NewUserType>((set) => ({
   teacher: true,
-  job: null,
-  field: null,
+  job: '',
+  field: '',
   nickname: null,
   email: null,
   password: null,

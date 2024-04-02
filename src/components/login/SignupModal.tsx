@@ -6,7 +6,7 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import { signIn } from 'next-auth/react';
 import { useId, useState } from 'react';
 import useNewUserStore from '@/store/authStore.ts/store';
-import { SocialType } from '@/types/user';
+import { SocialType } from '@/types/authUser/authUser';
 
 interface SigninModalProps {
   previousStep: () => void;
@@ -86,7 +86,10 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
   const id = useId();
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center">
+    <div
+      className="fixed inset-0 z-50 flex justify-center items-center"
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+    >
       <section className="flex flex-col items-center p-4 bg-white rounded-lg border w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
         <div className=" flex flex-col items-center w-full ">
           <p className="text-2xl font-bold ">회원가입</p>
@@ -150,8 +153,7 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
             )}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full">
-          <button className="button-field">회원가입</button>
+        <div className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full mt-3">
           <div className="flex justify-between items-center w-full mb-3">
             <div
               onClick={() => handleSocialSignin('google')}
@@ -172,15 +174,18 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
               <SiNaver className="w-2/4 h-2/4 text-white" />
             </div>
           </div>
+        </div>
+        <div className="flex flex-row items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full gap-5">
           {teacher === true ? (
-            <button onClick={previousStep} className="button-field">
+            <button onClick={previousStep} className="button__border-field">
               이전
             </button>
           ) : (
-            <button onClick={twoPreviousStep} className="button-field">
+            <button onClick={twoPreviousStep} className="button__border-field">
               이전
             </button>
           )}
+          <button className="button-field">회원가입</button>
         </div>
       </section>
     </div>

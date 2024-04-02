@@ -1,8 +1,7 @@
 'use client';
 
 import useNewUserStore from '@/store/authStore.ts/store';
-import { RoleType } from '@/types/user';
-import Link from 'next/link';
+import { RoleType } from '@/types/authUser/authUser';
 import { useState } from 'react';
 
 interface PickRoleModalProps {
@@ -21,7 +20,10 @@ export default function PickRoleModal({ nextStep, twoNextStep }: PickRoleModalPr
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-center items-center">
+    <div
+      className="fixed inset-0 z-50 flex justify-center items-center"
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
+    >
       <div className="flex flex-col items-center p-4 bg-white rounded-lg border w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
         <p className="text-2xl font-bold ">회원가입</p>
         <ul className="steps w-full mb-4">

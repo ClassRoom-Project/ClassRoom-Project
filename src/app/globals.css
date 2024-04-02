@@ -36,5 +36,9 @@ body {
 }
 
 .button-field {
-  @apply mt-5 block w-full border mb-4 bg-point-color py-2 px-3 text-white text-center sm:text-sm rounded-md;
+  @apply mt-5 block w-full border mb-4 bg-point-color py-2 px-3 text-white text-center sm:text-sm rounded-full;
+}
+
+.button__border-field {
+  @apply mt-5 block w-full border border-point-color mb-4 py-2 px-3 text-black text-center sm:text-sm rounded-full;
 }

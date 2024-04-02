@@ -1,12 +1,16 @@
-import MainLayout from '@/components/common/UserLayout';
-import Link from 'next/link';
-const page = () => {
+import React from 'react';
+import BestClass from '@/components/main/BestClass';
+import DeadlineClass from '@/components/main/DeadlineClass';
+import LatestClass from '@/components/main/LatestClass';
+
+const MainPage = () => {
   return (
-    <>
-      <div>Main</div>
-      <Link href="/hello">로그인</Link>
-    </>
+    <div className=" items-center p-[30px] justify-center grid min-h-screen]">
+      <DeadlineClass />
+      <LatestClass />
+      <BestClass />
+    </div>
   );
 };
 
-export default page;
+export default MainPage;

@@ -1,18 +1,13 @@
-import { ReserveInfo } from '@/types';
+import { ReserveStoreType } from '@/types/reserve';
 import { create } from 'zustand';
 
-export const defaultInitState: ReserveInfo = {
+export const defaultInitState = {
   classId: '',
   userId: '',
   reservePrice: 0,
   reserveQuantity: 0,
   reserveDate: '',
   reserveTime: ''
-};
-
-export type ReserveStoreType = {
-  reserveInfo: ReserveInfo;
-  setReserveInfo: ({}) => void;
 };
 
 const useReserveStore = create<ReserveStoreType>((set) => ({
