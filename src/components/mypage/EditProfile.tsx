@@ -121,19 +121,15 @@ const EditProfile = () => {
         </div>
         <div className="m-4 p-4 flex gap-4">
           {isEditing ? (
-            <button
-              onClick={handleOnClickEditProfileBtn}
-              className="p-4 border rounded-xl w-[150px]"
-              disabled={isActiveBtn}
-            >
+            <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
               수정 완료
             </button>
           ) : (
-            <button onClick={() => setIsEditing(true)} className="p-4 border rounded-xl w-[150px]">
+            <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
               수정하기
             </button>
           )}
-          <button onClick={handleOnClickCancleBtn} className="p-4 border rounded-xl w-[150px]  bg-rose-500 text-white">
+          <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-point-color text-white">
             취소하기
           </button>
         </div>

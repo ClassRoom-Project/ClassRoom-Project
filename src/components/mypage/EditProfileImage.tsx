@@ -15,19 +15,6 @@ const EditProfileImage = ({ userInfo }: { userInfo: UserType }) => {
     fileInput.current?.click();
   };
 
-  // 수정된 프로필 이미지 반영
-  const handleImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const file: File | undefined = e.target.files?.[0];
-    if (!file) {
-      return;
-    }
-
-    const imgUrl = URL.createObjectURL(file);
-    setUpdateProfileImage(imgUrl);
-
-    uploadProfileImage(file);
-  };
-
   // supabase storage에 프로필 이미지 업로드
   const uploadProfileImage = async (file: File) => {
     const randomUUID = crypto.randomUUID();
@@ -41,6 +28,20 @@ const EditProfileImage = ({ userInfo }: { userInfo: UserType }) => {
       console.log('url', url);
       return setUpdateProfileImage(url);
     }
+  };
+
+  // 수정된 프로필 이미지 반영
+  const handleOnChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const file: File | undefined = e.target.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    const imgUrl = URL.createObjectURL(file);
+    setUpdateProfileImage(imgUrl);
+    console.log('imgUrl', imgUrl);
+
+    // uploadProfileImage(file);
   };
 
   return (
@@ -63,10 +64,10 @@ const EditProfileImage = ({ userInfo }: { userInfo: UserType }) => {
             display: 'none'
           }}
           ref={fileInput}
-          onChange={handleImage}
+          onChange={handleOnChangeImage}
         />
       </div>
-      <button className="border p-2" onClick={handleOnClickEditImageBtn}>
+      <button className="btn p-4 bg-point-color text-white" onClick={handleOnClickEditImageBtn}>
         프로필 이미지 변경
       </button>
     </div>

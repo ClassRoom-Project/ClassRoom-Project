@@ -5,6 +5,8 @@ import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { GrLocation } from 'react-icons/gr';
+import { FaRegClock, FaRegCalendarCheck } from 'react-icons/fa';
 
 const MyClass = () => {
   // const pathname = usePathname;
@@ -49,29 +51,32 @@ const MyClass = () => {
           </div>
           {/* 클래스 정보 부분 */}
           <div className="flex flex-col p-4">
-            <div>
-              <p>클래스 : {classInfo.title}</p>
-              <div className="flex gap-4">
-                <span>날짜 : {classInfo.date}</span>
-                <span>시간 : {classInfo.time}</span>
+            <div className="">
+              <p className="font-bold text-xl text-text-color">{classInfo.title}</p>
+              <div className="flex gap-4 py-4">
+                <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl">
+                  <FaRegCalendarCheck />
+                  <span>날짜 : {classInfo.date}</span>
+                </div>
+                <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
+                  <FaRegClock />
+                  <span>시간 : {classInfo.time}</span>
+                </div>
               </div>
-              <p>
-                위치 : {classInfo.location} &nbsp;
-                {classInfo.detailLocation}
-              </p>
+              <div className="inline-flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
+                <GrLocation />
+                <span>위치 : {classInfo.location}</span>
+              </div>
             </div>
             <div className="flex gap-4 m-4">
-              <button
-                onClick={handleOnClickDeleteMyClass}
-                className="border rounded-xl p-4 w-[150px]  bg-rose-500 text-white"
-              >
-                클래스 삭제하기
-              </button>
-              <button onClick={handleOnClickGoToReservedStudentList} className="border rounded-xl p-4 w-[150px]">
+              <button onClick={handleOnClickGoToReservedStudentList} className="btn w-[150px]">
                 수강생 보기
               </button>
+              <button onClick={handleOnClickDeleteMyClass} className="btn w-[150px] bg-point-color text-white">
+                클래스 삭제하기
+              </button>
               <Link href={`list/detail/${classInfo.class_id}`}>
-                <button className="border rounded-xl p-4 w-[150px]">클래스 보러가기</button>
+                <button className="btn w-[150px] bg-pale-color text-white">클래스 보러가기</button>
               </Link>
             </div>
           </div>
