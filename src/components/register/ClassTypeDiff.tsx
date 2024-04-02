@@ -1,9 +1,10 @@
 "use client";
-import React, { useState } from 'react'
+import React from 'react'
+import useRegisterStore from '@/store/RegisterStore';
 
 const ClassTypeDiff = () => {
-    const [classType, setClassType] = useState('');
-    const [difficulty, setDifficulty] = useState('');
+    const { classType, difficulty, setClassType, setDifficulty } = useRegisterStore();
+
     const handleClassTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setClassType(event.target.value);
     };

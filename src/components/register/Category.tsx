@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from 'react'
+import React from 'react'
+import useRegisterStore from '@/store/RegisterStore';
 
-const CategoryDropdown = () => {
-    const [category, setCategory] = useState('');
-    const [subCategory, setSubCategory] = useState('');
+const Category = () => {
+    const { category, subCategory, setCategory, setSubCategory } = useRegisterStore();
 
     const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       setCategory(event.target.value);
@@ -43,4 +43,4 @@ const CategoryDropdown = () => {
     )
 }
 
-export default CategoryDropdown
+export default Category
