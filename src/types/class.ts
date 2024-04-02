@@ -12,12 +12,13 @@ export interface ClassAllType {
   date: string[];
   time: string[];
   quantity: number;
-  detailLocation: string;
+  detail_location: string;
   total_time: number;
   image: string[];
   class_type: string;
   difficulty: string;
   active: boolean;
+  reserved_count: number;
 }
 
 /* 마이페이지(선생님) : 내가 등록한 클래스 보기에서 필요한 데이터 타입 */

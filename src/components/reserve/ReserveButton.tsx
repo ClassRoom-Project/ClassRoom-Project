@@ -1,6 +1,7 @@
 'use client';
 
 import { fetchReservedUserIds } from '@/app/api/reserve/fetchReservedUserIds';
+import { increaseReservedCount } from '@/app/api/reserve/increaseReservedCount';
 import { submitReservation } from '@/app/api/reserve/submitReservation';
 import { updateReservedUserList } from '@/app/api/reserve/updateReservedUserList';
 import useReserveStore from '@/store/reserveClassStore';
@@ -26,8 +27,8 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
       return;
     }
 
-    const currentReserveQuantity = await fetchReservedUserIds({ classId });
-    console.log(currentReserveQuantity.length);
+    // const currentReserveQuantity = await fetchReservedUserIds({ classId });
+    // console.log(currentReserveQuantity.length);
 
     if (
       window.confirm(` 예약 정보가 맞는지 확인해주세요. 이대로 예약하시겠습니까?
@@ -40,7 +41,8 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
       const result = await submitReservation(reserveInfo);
 
       // class 테이블의 reserved_user_id 에 예약한 유저 아이디 리스트 업데이트
-      updateReservedUserList({ userId: '223e4567-e89b-12d3-a456-426614174002', classId });
+      await updateReservedUserList({ userId: '223e4567-e89b-12d3-a456-426614174002', classId });
+      await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
 
       if (!result) {
         alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
