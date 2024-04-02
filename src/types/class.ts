@@ -42,4 +42,6 @@ export type ReserveClassType = {
   price: number;
   image: string;
   max_ppl: number;
+  date: string[];
+  time: string[];
 };
