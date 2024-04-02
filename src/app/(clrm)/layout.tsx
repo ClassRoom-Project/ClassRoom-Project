@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import './globals.css';
-import { QueryProvider } from './provider';
+// import './globals.css';
+import UserLayout from '@/components/common/bars/UserLayout';
+import BorderLayout from '@/components/common/bars/BorderLayout';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -15,11 +16,12 @@ export default function RootLayout({ children, modal }: Props) {
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <QueryProvider>
+        <BorderLayout>
+          <UserLayout />
           {children}
           {modal}
-        </QueryProvider>
+        </BorderLayout>
       </body>
     </html>
   );
-} 
+}

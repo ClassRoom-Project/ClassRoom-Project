@@ -1,13 +1,14 @@
 'use client';
 
 import { getMyComments, updateMyComments } from '@/app/api/mypage/my-comments-api';
-import { userId } from '@/app/mypage/page';
+
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import MyClassImage from '../../../../public/class-sample-img.jpeg';
 import { ChangeEventHandler, useEffect, useState } from 'react';
 import { comment } from 'postcss';
+import { userId } from '@/app/(clrm)/mypage/page';
 
 const MyComments = () => {
   const [isEditing, setIsEditing] = useState(false);

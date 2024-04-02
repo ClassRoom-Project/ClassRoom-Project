@@ -3,23 +3,28 @@
 import { FcGoogle } from 'react-icons/fc';
 import { SiNaver } from 'react-icons/si';
 import { RiKakaoTalkFill } from 'react-icons/ri';
-import useTeacherStore from '@/hooks/authStore.ts/store';
-import { LiteralUnion, signIn } from 'next-auth/react';
-import { useState } from 'react';
-import useNewUserStore from '@/hooks/authStore.ts/store';
-import { fetchData } from 'next-auth/client/_utils';
-import { BuiltInProviderType } from 'next-auth/providers/index';
+import { signIn } from 'next-auth/react';
+import { useId, useState } from 'react';
+import useNewUserStore from '@/store/authStore.ts/store';
+import { SocialType } from '@/types/authUser/authUser';
 
-export default function SigninModal() {
-  const [error, setError] = useState<string>('');
-  const [emailCheck, setEmailCheck] = useState<string>('');
-  const [passwordCheck, setPasswordCheck] = useState<string>('');
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+interface SigninModalProps {
+  previousStep: () => void;
+  twoPreviousStep: () => void;
+}
 
-  const teacher = useNewUserStore((state) => state.teacher);
-  const setNickname = useNewUserStore((state) => state.setNickname);
-  const setEmail = useNewUserStore((state) => state.setEmail);
-  const setPassword = useNewUserStore((state) => state.setPassword);
+export default function SignupModal({ previousStep, twoPreviousStep }: SigninModalProps) {
+  const [error, setError] = useState('');
+  const [emailCheck, setEmailCheck] = useState('');
+  const [passwordCheck, setPasswordCheck] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const { teacher, setNickname, setEmail, setPassword } = useNewUserStore((state) => ({
+    teacher: state.teacher,
+    setNickname: state.setNickname,
+    setEmail: state.setEmail,
+    setPassword: state.setPassword
+  }));
 
   const onVaildateFilde = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -52,7 +57,7 @@ export default function SigninModal() {
       setPasswordCheck(value);
       if (value?.length < 6 || value?.length > 20) {
         setError('비밀번호는 6자리 이상 20자리 이하로 입력해주세요.');
-      } else if (confirmPassword?.length > 0 && value !== confirmPassword) {
+      } else if (confirmPassword?.length > 0 ?? value !== confirmPassword) {
         setError('비밀번호와 비밀번호 확인 값이 다릅니다. 다시 확인해주세요.');
       } else {
         setError('');
@@ -71,72 +76,84 @@ export default function SigninModal() {
     }
   };
 
-  const handleSocialSignin = async (provider: string) => {
+  const handleSocialSignin = async (provider: SocialType) => {
     const result = await signIn(provider, { callbackUrl: '/login' });
     if (result?.error) {
       setError(result.error);
     }
   };
 
+  const id = useId();
+
   return (
-    <div className="flex justify-center items-center w-full h-screen">
+    <div
+      className="fixed inset-0 z-50 flex justify-center items-center"
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+    >
       <section className="flex flex-col items-center p-4 bg-white rounded-lg border w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl">
         <div className=" flex flex-col items-center w-full ">
           <p className="text-2xl font-bold ">회원가입</p>
           <ul className="steps w-full mb-4">
             <li className="step step-primary">step 1</li>
             <li className="step step-primary">step 2</li>
-            {teacher === true && <li className="step step-primary">step 3</li>}
+            {teacher === true ? <li className="step step-primary">step 3</li> : ''}
           </ul>
           <div className="flex flex-col w-4/5 md:w-2/3 lg:w-1/2">
-            <label htmlFor="nickname" className="block text-lg font-medium text-gray-700">
+            <label htmlFor={`${id}-nickname`} className="block text-lg font-medium text-gray-700">
               닉네임
             </label>
-            <input id="text" name="nickname" placeholder="닉네임을 입력해주세요" required className="input-field" />
-            <label htmlFor="email" className="label-field">
+            <input
+              id={`${id}-nickname`}
+              name="nickname"
+              placeholder="닉네임을 입력해주세요"
+              required
+              className="input-field"
+            />
+            <label htmlFor={`${id}-email`} className="label-field">
               아이디
             </label>
             <input
-              id="email"
+              id={`${id}-email`}
               name="emailCheck"
               placeholder="이메일을 입력해주세요"
               required
               onChange={onVaildateFilde}
               className="input-field"
             />
-            <label htmlFor="password" className="label-field">
+            <label htmlFor={`${id}-password`} className="label-field">
               비밀번호
             </label>
             <input
+              id={`${id}-password`}
               type="password"
-              id="password"
               name="passwordCheck"
               placeholder="비밀번호를 입력해주세요"
               required
               onChange={onVaildateFilde}
               className="input-field"
             />
-            <label htmlFor="confirmPassword" className="label-field">
+            <label htmlFor={`${id}-confirmPassword`} className="label-field">
               비밀번호 재입력
             </label>
             <input
+              id={`${id}-confirmPassword`}
               type="password"
-              id="confirmPassword"
               name="confirmPassword"
               placeholder="비밀번호 확인"
               required
               onChange={onVaildateFilde}
               className="input-field"
             />
-            {error && error?.length > 0 && (
+            {error && error?.length > 0 ? (
               <div>
                 <div className="text-red-500 text-xs">{error}</div>
               </div>
+            ) : (
+              ''
             )}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full">
-          <button className="button-field">회원가입</button>
+        <div className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full mt-3">
           <div className="flex justify-between items-center w-full mb-3">
             <div
               onClick={() => handleSocialSignin('google')}
@@ -157,6 +174,18 @@ export default function SigninModal() {
               <SiNaver className="w-2/4 h-2/4 text-white" />
             </div>
           </div>
+        </div>
+        <div className="flex flex-row items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full gap-5">
+          {teacher === true ? (
+            <button onClick={previousStep} className="button__border-field">
+              이전
+            </button>
+          ) : (
+            <button onClick={twoPreviousStep} className="button__border-field">
+              이전
+            </button>
+          )}
+          <button className="button-field">회원가입</button>
         </div>
       </section>
     </div>

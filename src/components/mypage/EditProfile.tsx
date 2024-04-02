@@ -1,6 +1,6 @@
 'use client';
 
-import { userId } from '@/app/mypage/page';
+import { userId } from '@/app/(clrm)/mypage/page';
 import { UpdateUserInfoType, UserType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';

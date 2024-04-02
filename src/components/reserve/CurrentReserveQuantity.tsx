@@ -4,7 +4,7 @@ import React from 'react';
 const CurrentReserveQuantity = async ({ classId }: { classId: string }) => {
   const currentReserveQuantity = await fetchReservedUserIds({ classId });
 
-  // return <div>남은자리 : {currentReserveQuantity.length}</div>;
+  return <div>얍</div>;
 };
 
 export default CurrentReserveQuantity;

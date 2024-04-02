@@ -1,7 +1,7 @@
-import { userId } from '@/app/mypage/page';
 import { supabase } from '../supabase/supabase';
 import { PostgrestResponse } from '@supabase/supabase-js';
 import { MyCommentType, newCommentType } from '@/types/comments';
+import { userId } from '@/app/(clrm)/mypage/page';
 
 // 내가 쓴 후기 불러오기
 export const getMyComments = async () => {
