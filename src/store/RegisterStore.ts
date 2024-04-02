@@ -18,11 +18,11 @@ const useRegisterStore = create<ClassRegister>((set) => ({
     price: 0,
     selectedTime: [],
     totalTime: 0,
-    image: [],
+    // image: [],
 
     setCategory: (category:string) => set({ category }),
     setSubCategory: (subCategory:string) => set({ subCategory }),
-    setAddress: (address:string) => set(() => ({ address })),
+    setAddress: (address:string) => set({ address }),
     setDetailAddress: (detailAddress:string) => set({ detailAddress }),
     setSelectDay: (selectDay:string[]) => set({ selectDay }),
     setClassContent: (classContent:string) => set({ classContent }),
@@ -35,7 +35,7 @@ const useRegisterStore = create<ClassRegister>((set) => ({
     setPrice: (price:number) => set({ price }),
     setSelectedTime: (selectedTime:string[]) => set({ selectedTime }),
     setTotalTime: (totalTime:number) => set({ totalTime }),
-    setImage: (image:string[]) => set({ image }),
+    // setImage: (image:string[]) => set({ image }),
 }));
 
 export default useRegisterStore;

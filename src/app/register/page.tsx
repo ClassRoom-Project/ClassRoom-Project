@@ -7,7 +7,6 @@ import Price from '@/components/register/Price';
 import TimeSelect from '@/components/register/TimeSelect';
 import Category from '@/components/register/Category';
 import MinMaxNumber from '@/components/register/MinMaxNumber';
-import Calendar from '@/components/register/Calendar';
 import ClassTypeDiff from '@/components/register/ClassTypeDiff';
 import ImageUpload from '@/components/register/ImageUpload';
 import TotalTime from '@/components/register/TotalTime';
@@ -25,7 +24,6 @@ const RegisterPage = () => {
         <TotalTime />
         <Price />
         <Address />
-        <Calendar />
         <TimeSelect />
       </div>
       <div className="flex justify-between items-center pt-2">
