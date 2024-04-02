@@ -1,6 +1,6 @@
 import { supabase } from '../supabase/supabase';
 
-// class 테이블의 reserved_count 관련 api
+/* class 테이블의 reserved_count 관련 api */
 
 // 예약 인원수 증가
 export const increaseReservedCount = async ({ classId, quantity }: { classId: string; quantity: number }) => {

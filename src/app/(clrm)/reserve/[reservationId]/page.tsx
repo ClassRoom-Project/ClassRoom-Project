@@ -1,4 +1,4 @@
-import { fetchReserveClassInfo } from '@/app/api/reserve/fetchClassInfo';
+import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
 import { fetchReserveInfo } from '@/app/api/reserve/fetchReserveInfo';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import React from 'react';
@@ -11,7 +11,7 @@ const reservationCompletePage = async ({ params }: { params: { reservationId: st
   if (!completedReserveInfo) {
     return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;
   }
-  const reservedClassInfo = await fetchReserveClassInfo({ classId: completedReserveInfo?.class_id });
+  const reservedClassInfo = await fetchReserveClassInfo(completedReserveInfo?.class_id);
 
   const reserveInfoLabels = [
     {

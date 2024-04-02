@@ -1,7 +1,6 @@
-import useReserveStore from '@/store/reserveClassStore';
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
-import React, { useEffect } from 'react';
+import React from 'react';
 import defaultClassImage from '../../../public/favicon.ico.png';
 
 const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {

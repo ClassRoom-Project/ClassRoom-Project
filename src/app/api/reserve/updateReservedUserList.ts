@@ -2,10 +2,9 @@ import { supabase } from '../supabase/supabase';
 import { fetchReservedUserIds } from './fetchReservedUserIds';
 
 // class 테이블의 reserved_user_id 에 예약한 유저 아이디 리스트를 업데이트하는 api
-// TODO: query로 바로 배열에 추가하도록 수정 필요
 export const updateReservedUserList = async ({ userId, classId }: { userId: string; classId: string }) => {
   // 기존 reserved_user_id 리스트 조회
-  const reservedUserList = await fetchReservedUserIds({ classId });
+  const reservedUserList = await fetchReservedUserIds({ classId }); // TODO: sql query로 바로 배열에 추가하도록 수정 필요
 
   // 기존 reserved_user_id 리스트에 예약한 유저 아이디를 추가
   const { error: addError } = await supabase

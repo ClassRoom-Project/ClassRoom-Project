@@ -1,10 +1,9 @@
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
 import { ReserveClassType } from '@/types/class';
-import { ClassType } from 'react';
 
 // 예약페이지 클래스 정보 불러오는 api
-export const fetchReserveClassInfo = async ({ classId }: { classId: string }) => {
+export const fetchReserveClassInfo = async (classId: string) => {
   const { data: classInfo, error }: PostgrestSingleResponse<ReserveClassType> = await supabase
     .from('class')
     .select('class_id, category, title, location, price, image, max_people, date, time, reserved_count')
