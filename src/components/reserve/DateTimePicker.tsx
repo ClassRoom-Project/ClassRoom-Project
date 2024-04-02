@@ -6,34 +6,10 @@ import { ko } from 'date-fns/locale';
 import React, { useEffect, useState } from 'react';
 import { CaptionProps, DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import styles from 'react-day-picker/dist/style.module.css';
+import './day-picker.css';
+
 // import { SlArrowLeft } from 'react-icons/sl';
 // import { SlArrowRight } from 'react-icons/sl';
-
-const css = `
-  .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
-  background-color: pink; // hover시 배경색
-}
-
-.rdp-day_selected,
-.rdp-day_selected:focus-visible,
-.rdp-day_selected:hover {
-  color: var(--rdp-selected-color);
-  opacity: 1;
-  background-color: black; // 선택시 배경색
-}
-
-
-  .rdp-months {
-    justify-content: center;
-    border: 1px solid black;
-    padding: 10px;
-  }
-
-  .rdp {
-    margin: 0;
-  }
-`;
 
 const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
@@ -107,7 +83,6 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
       <div>
         <h1 className="mb-1">날짜 선택</h1>
         <div>
-          <style>{css}</style>
           <DayPicker
             mode="single" // 여러 날짜 선택 시 multiple
             required
