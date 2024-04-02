@@ -50,6 +50,7 @@ export interface SignInType {
   name: string;
   value: string;
 }
+
 export interface UserType {
   user_id: string;
   email: string;
@@ -63,6 +64,7 @@ export interface UserType {
   account: string;
 }
 
+// User 프로필 정보 type
 export interface UserInfoType {
   email: string;
   nickname: string;
@@ -83,6 +85,7 @@ export interface UpdateTeacherInfoType {
   account: string;
 }
 
+// 수정된 프로필 이미지 url type
 export interface UpdateProfileImageType {
   updateProfileImage: string;
 }

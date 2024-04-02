@@ -1,6 +1,7 @@
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
 import { userId } from '@/app/mypage/page';
 import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -28,20 +29,21 @@ const MyClass = () => {
   }
 
   if (!myClassInfo) {
-    return <div> 유저 정보가 없습니다.</div>;
+    return <div> 클래스 정보가 없습니다.</div>;
   }
   return (
     <ul className="flex flex-col">
       {myClassInfo.map((classInfo, index) => (
         <li key={index} className="flex gap-4">
           <div className="w-[300px] h-[200px]">
-            <img
+            <Image
               src={classInfo.image[0]}
               alt="클래스 대표 사진"
               width={300}
               height={200}
               className="w-full h-full p-4"
               style={{ objectFit: 'contain' }}
+              unoptimized={true}
             />
           </div>
           {/* 클래스 정보 부분 */}
