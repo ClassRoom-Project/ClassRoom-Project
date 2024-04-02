@@ -11,6 +11,7 @@ export const increaseReservedCount = async ({ classId, quantity }: { classId: st
   }
 
   console.log(increasedCount);
+  return increasedCount;
 };
 
 export const decreaseReservedCount = async ({ classId, quantity }: { classId: string; quantity: number }) => {
@@ -24,4 +25,5 @@ export const decreaseReservedCount = async ({ classId, quantity }: { classId: st
   }
 
   console.log(decreasedCount);
+  return decreasedCount;
 };
