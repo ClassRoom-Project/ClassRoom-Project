@@ -1,5 +1,5 @@
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
-import { supabase } from './supabase';
+import { supabase } from '../supabase/supabase';
 import { DBReserveInfo } from '@/types/reserve';
 
 export const fetchReserveInfo = async (reservationId: string) => {
@@ -10,7 +10,7 @@ export const fetchReserveInfo = async (reservationId: string) => {
     .single();
 
   if (error) {
-    console.error('예약 정보 불러오기 오류 => ', error);
+    console.error('예약 정보 불러오기 오류 발생 => ', error);
     return;
   }
 
