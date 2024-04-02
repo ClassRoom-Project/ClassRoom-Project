@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 export default function RedirectToSignUp() {
   const router = useRouter();
   useEffect(() => {
-    router.replace('hello/login/signup');
+    router.replace('hellologin/login/signup');
   }, []);
   return null;
 }

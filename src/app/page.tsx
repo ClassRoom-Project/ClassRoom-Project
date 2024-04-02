@@ -1,9 +1,14 @@
-import MainPage from './main/page';
+import BorderLayout from '@/components/common/bars/BorderLayout';
+import MainPage from './(clrm)/main/page';
+import UserLayout from '@/components/common/bars/UserLayout';
 
 export default function page() {
   return (
     <div>
-      <MainPage />
+      <BorderLayout>
+        <UserLayout />
+        <MainPage />
+      </BorderLayout>
     </div>
   );
 }

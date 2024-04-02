@@ -1,6 +1,6 @@
+import { getUserRole } from '@/app/api/mypage/user-api';
 import StudentMyPageTab from '@/components/mypage/student/StudentMyPageTab';
 import TeacherMyPageTab from '@/components/mypage/teacher/TeacherMyPageTab';
-import { getUserRole } from '../api/mypage/user-api';
 
 // 일단 임시로 생성 userId : 로그인한 사람의 user_id => zustand로 전역관리
 // 실제 로그인한 사람의 user_id가 들어가야함!

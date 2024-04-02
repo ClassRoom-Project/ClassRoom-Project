@@ -1,5 +1,5 @@
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
-import { userId } from '@/app/mypage/page';
+import { userId } from '@/app/(clrm)/mypage/page';
 import { ClassAllType } from '@/types/class';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
