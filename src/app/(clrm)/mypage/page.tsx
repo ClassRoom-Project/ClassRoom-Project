@@ -10,7 +10,7 @@ export const userId = '523e4567-e89b-12d3-a456-426614174005'; // admin : false�
 const MyPage = async () => {
   // 일단 teacher :  teacher = true / student = false 이라고 가정
   const userRole = await getUserRole({ userId });
-  const isTeacher = userRole?.teacher;
+  const isTeacher = userRole?.isTeacher;
 
   return (
     <div>
