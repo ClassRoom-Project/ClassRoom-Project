@@ -1,8 +1,7 @@
 import { supabase } from '../supabase/supabase';
 
-// class 테이블의 reserved_user_id 에 예약한 유저 아이디 리스트를 업데이트하는 api
-export const updateReservedUser = async ({ userId, classId }: { userId: string; classId: string }) => {
-  // class 테이블의 reserved_user_id 배열 조회
+// class 테이블의 reserved_user_id 배열 조회
+export const fetchReservedUserIds = async ({ classId }: { classId: string }) => {
   const { data: reservedUserList, error: fetchError } = await supabase
     .from('class')
     .select('reserved_user_id')
@@ -14,13 +13,20 @@ export const updateReservedUser = async ({ userId, classId }: { userId: string; 
     return;
   }
 
+  return reservedUserList.reserved_user_id;
+};
+
+// class 테이블의 reserved_user_id 에 예약한 유저 아이디 리스트를 업데이트하는 api
+export const updateReservedUser = async ({ userId, classId }: { userId: string; classId: string }) => {
+  // 기존 reserved_user_id 리스트 조회
+  const reservedUserList = await fetchReservedUserIds({ classId });
+
   // 기존 reserved_user_id 리스트에 예약한 유저 아이디를 추가
-  // reservedUserList : {reserved_user_id: Array(3)}
   const { error: addError } = await supabase
     .from('class')
     .update([
       {
-        reserved_user_id: reservedUserList.reserved_user_id ? [...reservedUserList.reserved_user_id, userId] : [userId]
+        reserved_user_id: reservedUserList ? [...reservedUserList, userId] : [userId]
       } // 리스트 값이 null일때 처리를 위해 삼항 연산자 사용
     ])
     .eq('class_id', classId)
