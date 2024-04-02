@@ -25,7 +25,7 @@ const ReserveButton = ({ classId, remainingQuantity }: { classId: string; remain
 
     // 예약 버튼을 눌렀을 때 한번 더 체크
     if (remainingQuantity < reserveInfo.reserveQuantity) {
-      alert('자리가 다찼어용');
+      alert('자리가 다찼어용'); // 확인을 위한 임시 alert
       return;
     }
 

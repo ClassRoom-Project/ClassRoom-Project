@@ -1,5 +1,6 @@
 'use client';
 
+import { fetchReservedUserIds } from '@/app/api/reserve/fetchReservedUserIds';
 import useReserveStore from '@/store/reserveClassStore';
 import React, { useEffect, useState } from 'react';
 
