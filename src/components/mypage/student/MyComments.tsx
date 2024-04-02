@@ -63,7 +63,7 @@ const MyComments = () => {
   }
 
   if (!myComments) {
-    return <div> 유저 정보가 없습니다.</div>;
+    return <div> 내가 작성한 후기가 없습니다.</div>;
   }
 
   return (
