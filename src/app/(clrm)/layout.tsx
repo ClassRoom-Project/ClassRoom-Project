@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 // import './globals.css';
-import UserLayout from '@/components/common/bars/Header';
+import Header from '@/components/common/bars/Header';
 import SideBar from '@/components/common/bars/SideBar';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -19,7 +19,7 @@ export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
     <html lang="ko">
       <body className={inter.className}>
         <SideBar>
-          <UserLayout />
+          <Header />
           {children}
         </SideBar>
       </body>
