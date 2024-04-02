@@ -5,5 +5,5 @@ export default async function Home() {
   // if (session?.user) {
   //   redirect('/home');
 
-  return <LoginPage />;
+  return null;
 }

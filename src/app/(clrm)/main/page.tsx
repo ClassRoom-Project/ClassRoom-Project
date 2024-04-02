@@ -5,7 +5,7 @@ import LatestClass from '@/components/main/LatestClass';
 
 const MainPage = () => {
   return (
-    <div className=" items-center p-[30px] justify-center grid min-h-screen]">
+    <div className=" items-center p-[30px] justify-center grid min-h-screen">
       <DeadlineClass />
       <LatestClass />
       <BestClass />

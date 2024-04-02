@@ -19,6 +19,7 @@ const BorderLayout = ({ children }: PropsWithChildren) => {
           <Link href={'http://localhost:3000/register'} className="p-5">
             create
           </Link>
+          <Link href="/hello">로그인</Link>
         </div>
         <div>
           <div className="p-5">convert</div>

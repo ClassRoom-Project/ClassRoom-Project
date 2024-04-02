@@ -90,6 +90,7 @@ const ImageUpload = () => {
     }
   };
 
+  // 최대 5개까지만 추가할 수 있도록!
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       if (images.length >= 5) {
@@ -98,7 +99,7 @@ const ImageUpload = () => {
       }
 
       const file = event.target.files[0];
-      const preview = URL.createObjectURL(file);
+      const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 URL을 생성
       const newImages = [...images, { file, preview }];
       setImages(newImages);
       console.log(newImages);
@@ -108,7 +109,7 @@ const ImageUpload = () => {
   // 이미지 맨 앞으로 이동하는 함수 (이 함수를 컴포넌트 안에 추가)
   const handleMoveToFront = (index:number) => {
     const selectedImage = images[index];
-    const remainingImages = images.filter((_, i) => i !== index);
+    const remainingImages = images.filter((_, i) => i !== index); // 선택된 이미지를 새 배열의 첫번째 요소로 두고 그 뒤에 나머지 애들 붙임
     const newImages = [selectedImage, ...remainingImages];
     setImages(newImages);
   };
