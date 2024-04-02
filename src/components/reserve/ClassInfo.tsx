@@ -18,9 +18,9 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
         <Image width={100} height={100} src={defaultClassImage} alt="Class Thumbnail Image" />
       )}
       <div className="flex flex-col">
-        <span>{`[${classInfo?.category}] ${classInfo?.title}`}</span>
-        <span>{classInfo?.location}</span>
-        <span>{classInfo?.price.toLocaleString('ko-KR')}원</span>
+        <p>{`[${classInfo?.category}] ${classInfo?.title}`}</p>
+        <p>{classInfo?.location}</p>
+        <p>{classInfo?.price.toLocaleString('ko-KR')}원</p>
       </div>
     </div>
   );
