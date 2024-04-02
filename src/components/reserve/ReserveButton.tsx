@@ -1,7 +1,7 @@
 'use client';
 
-import { updateReservedUser } from '@/app/api/reserve/updateReservedUser';
 import { submitReservation } from '@/app/api/reserve/submitReservation';
+import { updateReservedUserList } from '@/app/api/reserve/updateReservedUserList';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -36,7 +36,7 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
       const result = await submitReservation(reserveInfo);
 
       // class 테이블의 reserved_user_id 에 예약한 유저 아이디 리스트 업데이트
-      updateReservedUser({ userId: '223e4567-e89b-12d3-a456-426614174002', classId });
+      updateReservedUserList({ userId: '223e4567-e89b-12d3-a456-426614174002', classId });
 
       if (!result) {
         alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
