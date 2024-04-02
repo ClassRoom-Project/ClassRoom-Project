@@ -27,6 +27,12 @@ const ReserveButton = ({ classId, remainingQuantity }: { classId: string; remain
       return;
     }
 
+    // 예약 버튼을 눌렀을 때 한번 더 체크
+    if (remainingQuantity < reserveInfo.reserveQuantity) {
+      alert('자리가 다찼어용');
+      return;
+    }
+
     // if (
     //   window.confirm(` 예약 정보가 맞는지 확인해주세요. 이대로 예약하시겠습니까? // 예약 정보 확인은 다른 레이아웃에서 보여줄 예정
     // 예약 일자 : ${reserveInfo.reserveDate} ${reserveInfo.reserveTime.slice(0, 5)}

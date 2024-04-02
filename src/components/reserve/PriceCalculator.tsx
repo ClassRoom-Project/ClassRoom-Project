@@ -24,10 +24,11 @@ const PriceCalculator = ({ price, remainingQuantity }: { price: number; remainin
   const handleQuantityIncrease = async () => {
     console.log(remainingQuantity);
 
+    // 남은자리 수 까지만 인원 추가 가능하도록
     if (remainingQuantity <= quantity) {
-      alert('자리가 다찼어용');
       return;
     }
+
     setQuantity((prev) => prev + 1);
   };
 
