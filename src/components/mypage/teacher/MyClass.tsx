@@ -1,27 +1,18 @@
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
 import { userId } from '@/app/mypage/page';
-import { ClassAllType } from '@/types/class';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
-
-type MyRegisteredClassType = ClassAllType[];
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const MyClass = () => {
   // const pathname = usePathname;
   const router = useRouter();
 
-  const { data: myClassInfo, isPending }: { data: MyRegisteredClassType | undefined; isPending: boolean } = useQuery({
+  const { data: myClassInfo, isPending } = useQuery({
     queryKey: ['class', userId],
     queryFn: () => getMyRegisteredClass()
   });
-  if (isPending) {
-    return <div> 로딩중 ... </div>;
-  }
-
-  if (!myClassInfo) {
-    return <div> 유저 정보가 없습니다.</div>;
-  }
 
   // 클래스 삭제하기
   const handleOnClickDeleteMyClass = () => {
@@ -33,18 +24,26 @@ const MyClass = () => {
     router.push('/mypage/myClassStudentList');
   };
 
+  if (isPending) {
+    return <div> 로딩중 ... </div>;
+  }
+
+  if (!myClassInfo) {
+    return <div> 클래스 정보가 없습니다.</div>;
+  }
   return (
     <ul className="flex flex-col">
       {myClassInfo.map((classInfo, index) => (
         <li key={index} className="flex gap-4">
           <div className="w-[300px] h-[200px]">
-            <img
+            <Image
               src={classInfo.image[0]}
               alt="클래스 대표 사진"
               width={300}
               height={200}
               className="w-full h-full p-4"
               style={{ objectFit: 'contain' }}
+              unoptimized={true}
             />
           </div>
           {/* 클래스 정보 부분 */}
@@ -70,14 +69,9 @@ const MyClass = () => {
               <button onClick={handleOnClickGoToReservedStudentList} className="border rounded-xl p-4 w-[150px]">
                 수강생 보기
               </button>
-              <button
-                onClick={() => {
-                  router.push(`list/detail/${classInfo.class_id}`);
-                }}
-                className="border rounded-xl p-4 w-[150px]"
-              >
-                클래스 보러가기
-              </button>
+              <Link href={`list/detail/${classInfo.class_id}`}>
+                <button className="border rounded-xl p-4 w-[150px]">클래스 보러가기</button>
+              </Link>
             </div>
           </div>
         </li>

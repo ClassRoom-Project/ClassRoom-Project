@@ -5,8 +5,9 @@ import { UpdateUserInfoType, UserType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import BasicProfileImage from '../../../public/profile-image.png';
+
 import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
+import EditProfileImage from './EditProfileImage';
 
 const EditProfile = () => {
   const queryClient = useQueryClient();
@@ -91,10 +92,7 @@ const EditProfile = () => {
 
   return (
     <div className="flex">
-      <div className="flex flex-col items-center p-4 gap-4">
-        <Image src={BasicProfileImage} alt="기본 프로필 이미지" width={100} height={100} />
-        <button className="border p-2">프로필 이미지 변경</button>
-      </div>
+      <EditProfileImage userInfo={userInfo} />
       <div className="flex flex-col">
         <div className="flex flex-col">
           <div className="m-4 p-4 gap-4">

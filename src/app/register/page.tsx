@@ -30,7 +30,7 @@ const RegisterPage = () => {
         <ImageUpload />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;

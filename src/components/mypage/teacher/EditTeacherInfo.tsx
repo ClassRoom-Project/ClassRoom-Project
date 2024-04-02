@@ -82,13 +82,13 @@ const EditTeacherInfo = () => {
     // 수정된 사항이 있는 경우
     updateTeacherInfo({ newSelectedJob, newSelectedField, selectedBank, account });
     setIsEditing(false);
-    alert('프로필 수정이 완료되었습니다.');
+    alert('선생님 정보 수정이 완료되었습니다.');
   };
 
   // 취소하기 버튼
   const handleOnClickCancleBtn = () => {
     setIsEditing(false);
-    alert('프로필 수정이 취소 되었습니다. ');
+    alert('선생님 정보 수정이 취소 되었습니다. ');
   };
 
   if (isPending) {
@@ -96,7 +96,7 @@ const EditTeacherInfo = () => {
   }
 
   if (!teacherInfo) {
-    return <div> 유저 정보가 없습니다.</div>;
+    return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
     <div className="flex">

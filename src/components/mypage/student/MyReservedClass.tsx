@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import fetchMyClasses, { cancelReservation } from '@/app/api/mypage/fetchMyClasses';
@@ -11,7 +11,7 @@ const MyReservedClass = () => {
   useEffect(() => {
     async function fetchData() {
       const data = await fetchMyClasses('523e4567-e89b-12d3-a456-426614174005'); // 임시 user_id
-      const formattedData = data.map((classItem:ClassItem) => ({
+      const formattedData = data.map((classItem: ClassItem) => ({
         ...classItem,
         image: classItem.image?.replace(/["{}]/g, '') || '' // 잘못된 따옴표 제거
       }));
@@ -21,11 +21,11 @@ const MyReservedClass = () => {
   }, []);
 
   // 예약 취소
-  const handleCancelReservation = async (reserve_id:string) => {
+  const handleCancelReservation = async (reserve_id: string) => {
     if (window.confirm('정말 취소하시겠습니까?')) {
       try {
         await cancelReservation(reserve_id);
-        setClasses(classes.filter(classItem => classItem.reserve_id !== reserve_id));
+        setClasses(classes.filter((classItem) => classItem.reserve_id !== reserve_id));
         alert('예약이 취소되었습니다.');
       } catch (error) {
         console.error('예약 취소 중 오류 발생:', error);
@@ -58,7 +58,12 @@ const MyReservedClass = () => {
               </div>
             </section>
             <section className="flex gap-4 m-4">
-              <button className="border rounded-xl p-4 w-[150px] bg-rose-500 text-white" onClick={() => handleCancelReservation(classItem.reserve_id)}>예약 취소하기</button>
+              <button
+                className="border rounded-xl p-4 w-[150px] bg-rose-500 text-white"
+                onClick={() => handleCancelReservation(classItem.reserve_id)}
+              >
+                예약 취소하기
+              </button>
               <button className="border rounded-xl p-4 w-[150px]">문의하기</button>
               <Link href={`list/detail/${classItem.class_id}`}>
                 <div className="border rounded-xl p-4 w-[150px] cursor-pointer">클래스 보러가기</div>
