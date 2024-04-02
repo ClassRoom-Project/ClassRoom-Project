@@ -13,7 +13,7 @@ export const fetchClassInfoOnComment = async (userId: string) => {
     console.error(error);
     throw error;
   }
-  console.log('data', data);
+
   return data;
 };
 
