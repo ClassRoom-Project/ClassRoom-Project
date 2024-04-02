@@ -45,4 +45,5 @@ export type ReserveClassType = {
   max_people: number;
   date: string[];
   time: string[];
+  reserved_count: number;
 };

@@ -8,7 +8,7 @@ import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 
-const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: string }) => {
+const ReserveButton = ({ classId, remainingQuantity }: { classId: string; remainingQuantity: number }) => {
   const router = useRouter();
 
   const { setReserveInfo, reserveInfo } = useReserveStore((state) => ({
@@ -43,7 +43,6 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
 
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
-    // await decreaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
 
     if (!result) {
       alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
@@ -51,7 +50,6 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
     }
     router.push(`reserve/${result.reserve_id}`);
   };
-  return;
 
   return (
     <button onClick={handleReserveButtonClick} className="bg-white w-32 text-center self-end">

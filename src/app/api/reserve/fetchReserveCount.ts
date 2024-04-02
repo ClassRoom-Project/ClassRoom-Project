@@ -1,5 +1,7 @@
 import { supabase } from '../supabase/supabase';
 
+// class 테이블의 예약 인원수(reserved_count) 조회 api
+// class info에서 불러오니 필요없을듯
 export const fetchReserveCount = async (classId: string) => {
   const { data: reserveQuantity, error } = await supabase
     .from('class')

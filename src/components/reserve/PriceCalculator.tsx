@@ -1,10 +1,9 @@
 'use client';
 
 import useReserveStore from '@/store/reserveClassStore';
-import { ReserveClassType } from '@/types/class';
 import React, { useEffect, useState } from 'react';
 
-const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
+const PriceCalculator = ({ price, remainingQuantity }: { price: number; remainingQuantity: number }) => {
   const [quantity, setQuantity] = useState(1);
 
   const totalPrice = price * quantity;
@@ -15,11 +14,21 @@ const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
     setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
   }, [quantity, setReserveInfo]);
 
-  // 클래스의 max 인원 고려 필요
   const handleQuantityDecrease = () => {
     if (quantity !== 0) {
       setQuantity((prev) => prev - 1);
     }
+  };
+
+  // TODO: 클래스의 남은자리 고려 필요
+  const handleQuantityIncrease = async () => {
+    console.log(remainingQuantity);
+
+    if (remainingQuantity <= quantity) {
+      alert('자리가 다찼어용');
+      return;
+    }
+    setQuantity((prev) => prev + 1);
   };
 
   return (
@@ -33,7 +42,7 @@ const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
         <div className="flex w-16 justify-between gap-2">
           <button onClick={handleQuantityDecrease}> - </button>
           <span> {quantity} </span>
-          <button onClick={() => setQuantity((prev) => prev + 1)}> + </button>
+          <button onClick={handleQuantityIncrease}> + </button>
         </div>
       </div>
       <div className="flex w-full justify-between gap-4">
