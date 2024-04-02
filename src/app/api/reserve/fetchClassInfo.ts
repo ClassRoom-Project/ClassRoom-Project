@@ -11,6 +11,8 @@ export const fetchReserveClassInfo = async ({ classId }: { classId: string }) =>
     .eq('class_id', classId)
     .single();
 
+  // return된 data를 카멜케이스로 변환
+
   if (error) {
     console.error('클래스 정보 불러오기 오류 => ', error);
     return;
