@@ -22,7 +22,7 @@ const useRegisterStore = create<ClassRegister>((set) => ({
 
     setCategory: (category:string) => set({ category }),
     setSubCategory: (subCategory:string) => set({ subCategory }),
-    setAddress: (address:string) => set({ address }),
+    setAddress: (address:string) => set(() => ({ address })),
     setDetailAddress: (detailAddress:string) => set({ detailAddress }),
     setSelectDay: (selectDay:string[]) => set({ selectDay }),
     setClassContent: (classContent:string) => set({ classContent }),

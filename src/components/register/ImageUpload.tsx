@@ -12,27 +12,11 @@ interface ImageFileWithPreview {
 }
 
 const ImageUpload = () => {
-    const category = useRegisterStore((state) => state.category);
-    const subCategory = useRegisterStore((state) => state.subCategory);
-    const address = useRegisterStore((state) => state.address);
-    const detailAddress = useRegisterStore((state) => state.detailAddress);
-
-    const selectDay = useRegisterStore((state) => state.selectDay);
-    const classContent = useRegisterStore((state) => state.classContent);
-    const classTitle = useRegisterStore((state) => state.classTitle);
-    const classType = useRegisterStore((state) => state.classType);
-
-    const difficulty = useRegisterStore((state) => state.difficulty);
-    const minNumber = useRegisterStore((state) => state.minNumber);
-    const maxNumber = useRegisterStore((state) => state.maxNumber);
-    const personnel = useRegisterStore((state) => state.personnel);
-    
-    const price = useRegisterStore((state) => state.price);
-    const selectedTime = useRegisterStore((state) => state.selectedTime);
-    const totalTime = useRegisterStore((state) => state.totalTime);
-    const image = useRegisterStore((state) => state.image);
-
-    //const setImage = useRegisterStore((state) => state.setImage);
+    const { category, subCategory, address, detailAddress,
+      selectDay, classContent, classTitle, classType,
+      difficulty, minNumber, maxNumber, personnel,
+      price, selectedTime, totalTime
+    } = useRegisterStore();
 
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
 

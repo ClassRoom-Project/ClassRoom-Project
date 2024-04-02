@@ -1,8 +1,9 @@
 "use client";
-import React, { useState } from 'react'
+import React from 'react'
+import useRegisterStore from '../../store/RegisterStore';
 
 const Calendar = () => {
-    const [selectDay, setSelectDay] = useState(''); // 달력
+    const { selectDay, setSelectDay } = useRegisterStore();
   return (
     <div className='my-1'>
         <p>날짜</p>

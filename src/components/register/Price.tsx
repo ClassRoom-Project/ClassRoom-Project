@@ -1,10 +1,13 @@
 "use client";
-import React, { useState } from 'react'
+import React from 'react'
+import useRegisterStore from '@/store/RegisterStore';
 
 const Price = () => {
-  const [price, setPrice] = useState('');
+  const { price, setPrice } = useRegisterStore();
+
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPrice(event.target.value);
+    const value = parseInt(event.target.value);
+    setPrice(value);
   };
   return (
     <div className="flex items-center space-x-2 my-2">

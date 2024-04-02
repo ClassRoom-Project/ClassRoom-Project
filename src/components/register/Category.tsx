@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from 'react'
+import React from 'react'
+import useRegisterStore from '../../store/RegisterStore';
 
 const Category = () => {
-    const [category, setCategory] = useState('');
-    const [subCategory, setSubCategory] = useState('');
+    const { category, subCategory, setCategory, setSubCategory } = useRegisterStore();
 
     const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
       setCategory(event.target.value);

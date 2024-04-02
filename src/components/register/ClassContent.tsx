@@ -1,8 +1,10 @@
 "use client";
-import React, { useState } from 'react'
+import React from 'react'
+import useRegisterStore from '../../store/RegisterStore';
 
 const ClassContent = () => {
-    const [classContent, setClassContent] = useState('');
+    const { classContent, setClassContent } = useRegisterStore();
+
     const handleClassContentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setClassContent(event.target.value);
     };

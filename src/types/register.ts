@@ -24,6 +24,30 @@ export interface ClassRegister {
     selectDay: string[];
     selectedTime: string[];
     classType: string;
-    image: string[];
+    // image: string[];
     totalTime: number;
+
+    setCategory: (category: string) => void;
+    setSubCategory: (subCategory: string) => void;
+    setAddress: (address: string) => void;
+    setDetailAddress: (detailAddress: string) => void;
+    setSelectDay: (selectDay: string[]) => void;
+    setClassContent: (classContent: string) => void;
+    setClassTitle: (classTitle: string) => void;
+    setClassType: (classType: string) => void;
+    setDifficulty: (difficulty: string) => void;
+    setMinNumber: (minNumber: number) => void;
+    setMaxNumber: (maxNumber: number) => void;
+    setPersonnel: (personnel: number) => void;
+    setPrice: (price: number) => void;
+    setSelectedTime: (selectedTime: string[]) => void;
+    setTotalTime: (totalTime: number) => void;
+    // setImage: (image: string[]) => void;
+}
+
+export interface AddressData {
+    address: string;
+    addressType: string;
+    bname: string;
+    buildingName: string;
 }

@@ -1,17 +1,12 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-
-interface AddressData {
-    address: string;
-    addressType: string;
-    bname: string;
-    buildingName: string;
-}
+import useRegisterStore from '../../store/RegisterStore';
+import { AddressData } from '@/types/register';
 
 const Address = () => {
-  const [address, setAddress] = useState('');
-  const [detailAddress, setDetailAddress] = useState('');
+  const { address, detailAddress, setAddress, setDetailAddress } = useRegisterStore();
+
   // Daum Postcode Popup을 사용하기 위한 스크립트 URL
   const scriptUrl = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
   const open = useDaumPostcodePopup(scriptUrl);

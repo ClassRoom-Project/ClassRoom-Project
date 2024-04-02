@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from 'react'
+import React from 'react'
+import useRegisterStore from '@/store/RegisterStore';
 
 const TimeSelect = () => {
-    const [selectedTime, setSelectedTime] = useState('');
+    const { selectedTime, setSelectedTime } = useRegisterStore();
 
     const handleTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSelectedTime(event.target.value);
+        setSelectedTime([event.target.value]);
     };
 
     return (

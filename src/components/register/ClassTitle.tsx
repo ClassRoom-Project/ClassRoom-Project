@@ -1,13 +1,12 @@
 "use client";
-import React, { useState } from 'react'
+import React from 'react'
 import useRegisterStore from '@/store/RegisterStore';
 
 const ClassTitle = () => {
-    const classTitle = useRegisterStore((state) => state.classTitle);
-    // const setClassTitle = useRegisterStore((state) => state.setClassTitle);
-    
+    const { classTitle, setClassTitle } = useRegisterStore();
+
     const handleClassTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        // setClassTitle(event.target.value);
+        setClassTitle(event.target.value);
     };
     return (
         <div className="flex items-center space-x-2 my-2">
