@@ -11,7 +11,7 @@ const UserLayout = ({ children }: PropsWithChildren) => {
         <div className="flex justify-center items-center">
           <div className="mr-[10px]">alarm</div>
           <Link href={'http://localhost:3000/mypage'}>
-            {/* <Image src={defaultImage} alt="Profile image" className="mr-[5px] h-[50px] w-[50px]" /> */}
+            <Image src={defaultImage} alt="Profile image" className="mr-[5px] h-[50px] w-[50px]" />
           </Link>
         </div>
       </div>
