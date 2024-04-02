@@ -20,7 +20,7 @@ const EditProfile = () => {
   const [newNickname, setNewNickname] = useState('');
   const [isEditing, setIsEditing] = useState(false); // 수정된 사항 확인 여부
   const [isAvailableNickname, setIsAvailableNickname] = useState(true); // 닉네임 중복 여부 상태 업데이트
-  const [isActiveBtn, setIsActiveBtn] = useState(false); // 수정 완료 버튼 활성화 상태
+  const [isActiveBtn, setIsActiveBtn] = useState(false); // 수정 완료시 버튼 활성화 상태
 
   useEffect(() => {
     if (userInfo) {
@@ -74,11 +74,13 @@ const EditProfile = () => {
 
   const handleOnClickCancleBtn = () => {
     if (isEditing) {
-      setIsEditing(false);
-      setNewNickname(userInfo?.nickname || '');
-      setIsAvailableNickname(true);
-      setIsActiveBtn(false);
-      alert('프로필 수정이 취소 되었습니다. ');
+      const confirm = window.confirm('취소하시겠습니까?');
+      if (confirm) {
+        setIsEditing(false);
+        setNewNickname(userInfo?.nickname || '');
+        setIsAvailableNickname(true);
+        setIsActiveBtn(false);
+      }
     }
   };
 
@@ -121,21 +123,21 @@ const EditProfile = () => {
         </div>
         <div className="m-4 p-4 flex gap-4">
           {isEditing ? (
-            <button
-              onClick={handleOnClickEditProfileBtn}
-              className="p-4 border rounded-xl w-[150px]"
-              disabled={isActiveBtn}
-            >
+            <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
               수정 완료
             </button>
           ) : (
-            <button onClick={() => setIsEditing(true)} className="p-4 border rounded-xl w-[150px]">
+            <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
               수정하기
             </button>
           )}
-          <button onClick={handleOnClickCancleBtn} className="p-4 border rounded-xl w-[150px]  bg-rose-500 text-white">
-            취소하기
-          </button>
+          {isEditing ? (
+            <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-point-color text-white">
+              취소하기
+            </button>
+          ) : (
+            ''
+          )}
         </div>
       </div>
     </div>

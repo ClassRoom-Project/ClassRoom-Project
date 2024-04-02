@@ -12,7 +12,7 @@ export interface ClassAllType {
   date: string[];
   time: string[];
   quantity: number;
-  detailLocation: string;
+  detail_location: string;
   total_time: number;
   image: string[];
   class_type: string;
@@ -26,7 +26,7 @@ export interface MyRegisteredClassType {
   user_id: string;
   title: string;
   location: string;
-  detailLocation: string;
+  detail_location: string;
   date: string[];
   time: string[];
   image: string[];

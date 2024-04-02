@@ -26,7 +26,7 @@ export const GoToClassPost = () => {
     alert('클래스 디테일 페이지로 이동합니다.');
   };
   return (
-    <button onClick={handleMoveToClassPostBtn} className="border rounded-xl p-4 w-[150px]">
+    <button onClick={handleMoveToClassPostBtn} className="btn">
       클래스 보러가기
     </button>
   );
