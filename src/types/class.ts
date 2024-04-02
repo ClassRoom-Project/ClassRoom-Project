@@ -5,8 +5,8 @@ export interface ClassAllType {
   hashtag: string;
   title: string;
   description: string;
-  max_ppl: number;
-  min_ppl: number;
+  max_peple: number;
+  min_people: number;
   location: string;
   price: number;
   date: string[];
@@ -42,7 +42,7 @@ export type ReserveClassType = {
   location: string;
   price: number;
   image: string;
-  max_ppl: number;
+  max_people: number;
   date: string[];
   time: string[];
 };
