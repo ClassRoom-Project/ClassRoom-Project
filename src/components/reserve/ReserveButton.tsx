@@ -1,7 +1,7 @@
 'use client';
 
 import { fetchReservedUserIds } from '@/app/api/reserve/fetchReservedUserIds';
-import { increaseReservedCount } from '@/app/api/reserve/increaseReservedCount';
+import { decreaseReservedCount, increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
 import { submitReservation } from '@/app/api/reserve/submitReservation';
 import { updateReservedUserList } from '@/app/api/reserve/updateReservedUserList';
 import useReserveStore from '@/store/reserveClassStore';
@@ -42,7 +42,10 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
 
       // class 테이블의 reserved_user_id 에 예약한 유저 아이디 리스트 업데이트
       await updateReservedUserList({ userId: '223e4567-e89b-12d3-a456-426614174002', classId });
+
+      // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
       await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
+      // await decreaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
 
       if (!result) {
         alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
