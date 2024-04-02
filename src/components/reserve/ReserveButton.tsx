@@ -1,5 +1,6 @@
 'use client';
 
+import { fetchReservedUserIds } from '@/app/api/reserve/fetchReservedUserIds';
 import { submitReservation } from '@/app/api/reserve/submitReservation';
 import { updateReservedUserList } from '@/app/api/reserve/updateReservedUserList';
 import useReserveStore from '@/store/reserveClassStore';
@@ -24,6 +25,9 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
       alert('예약 인원은 1명 이상이여야 합니다.');
       return;
     }
+
+    const currentReserveQuantity = await fetchReservedUserIds({ classId });
+    console.log(currentReserveQuantity.length);
 
     if (
       window.confirm(` 예약 정보가 맞는지 확인해주세요. 이대로 예약하시겠습니까?
