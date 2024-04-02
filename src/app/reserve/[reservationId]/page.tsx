@@ -1,5 +1,5 @@
-import { fetchReserveClassInfo } from '@/app/api/supabase/fetchClassInfo';
-import { fetchReserveInfo } from '@/app/api/supabase/fetchReserveInfo';
+import { fetchReserveClassInfo } from '@/app/api/reserve/fetchClassInfo';
+import { fetchReserveInfo } from '@/app/api/reserve/fetchReserveInfo';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import React from 'react';
 
