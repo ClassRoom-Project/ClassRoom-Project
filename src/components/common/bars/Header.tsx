@@ -3,7 +3,7 @@ import React, { PropsWithChildren } from 'react';
 import defaultImage from '../../../../public/profile-image.png';
 import Link from 'next/link';
 
-const UserLayout = ({ children }: PropsWithChildren) => {
+const Header = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="flex p-[15px]  justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
@@ -20,4 +20,4 @@ const UserLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default UserLayout;
+export default Header;

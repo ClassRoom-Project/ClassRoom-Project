@@ -10,7 +10,7 @@ const Category = () => {
     setIsOpenCategory(!isOpenCategory);
   };
   return (
-    <div className="dropdown p-5 dropdown-right">
+    <div className="dropdown p-5 dropdown-bottom">
       <div tabIndex={0} onClick={handleDropdown} role="button" className="btn m-1">
         카테고리
       </div>
