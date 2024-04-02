@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { GrLocation } from 'react-icons/gr';
 import { FaRegClock, FaRegCalendarCheck } from 'react-icons/fa';
+import React from 'react';
 
 const MyClass = () => {
   // const pathname = usePathname;
@@ -55,16 +56,33 @@ const MyClass = () => {
               <p className="font-bold text-xl text-text-color">{classInfo.title}</p>
               <div className="flex gap-4 py-4">
                 <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl">
-                  <FaRegCalendarCheck />
-                  <span>날짜 : {classInfo.date}</span>
+                  <FaRegCalendarCheck color="#5373FF" size="20" />
+                  <span>
+                    날짜 :{' '}
+                    {classInfo.date.map((date, index) => (
+                      <React.Fragment key={index}>
+                        {/* 배열 내 값이 2개 이상일 경우, ' ' 둘 사이 공백주기*/}
+                        {index > 0 && ' '}
+                        {date}
+                      </React.Fragment>
+                    ))}
+                  </span>
                 </div>
                 <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
-                  <FaRegClock />
-                  <span>시간 : {classInfo.time}</span>
+                  <FaRegClock color="#5373FF" size="20" />
+                  <span>
+                    시간 :{' '}
+                    {classInfo.time.map((time, index) => (
+                      <React.Fragment key={index}>
+                        {index > 0 && ' '}
+                        {time}
+                      </React.Fragment>
+                    ))}
+                  </span>
                 </div>
               </div>
               <div className="inline-flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
-                <GrLocation />
+                <GrLocation color="#5373FF" size="20" />
                 <span>위치 : {classInfo.location}</span>
               </div>
             </div>
