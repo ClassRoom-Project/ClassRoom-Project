@@ -11,7 +11,7 @@
 
 /* 활성화 && 선택되지 않은 버튼의 hover시 */
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
-  border: 1px solid #264fff;
+  border: 1px solid #5373ff;
   transition: all 0.2s;
 }
 
@@ -21,5 +21,5 @@
 .rdp-day_selected:hover {
   color: var(--rdp-selected-color);
   opacity: 1;
-  background-color: #264fff;
+  background-color: #5373ff;
 }

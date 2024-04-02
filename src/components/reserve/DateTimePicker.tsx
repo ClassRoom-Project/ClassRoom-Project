@@ -33,11 +33,11 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
 
   // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
-  const availableDays = classDateList.map((item) => new Date(item).getDate());
+  const availableDays = classDateList.map((date) => new Date(date).getDate());
 
   // 1~31 일중 DB에 있는 날짜를 삭제한 배열 생성
-  const nonAvailableDays = dayList.filter((item) => {
-    return !availableDays.includes(item);
+  const nonAvailableDays = dayList.filter((day) => {
+    return !availableDays.includes(day);
   });
 
   // 속성으로 할당할 date 배열 생성

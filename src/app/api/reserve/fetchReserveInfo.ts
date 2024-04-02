@@ -1,5 +1,5 @@
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
-import { supabase } from './supabase';
+import { supabase } from '../supabase/supabase';
 import { DBReserveInfo } from '@/types/reserve';
 
 export const fetchReserveInfo = async (reservationId: string) => {

@@ -1,6 +1,7 @@
 'use client';
 
-import { submitReservation } from '@/app/api/supabase/submitReservation';
+import { updateReservedUser } from '@/app/api/reserve/updateReservedUser';
+import { submitReservation } from '@/app/api/reserve/submitReservation';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -17,6 +18,7 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
     setReserveInfo({ classId: classId });
   }, [classId, setReserveInfo]);
 
+  // 예약 버튼 클릭
   const handleReserveButtonClick = async () => {
     if (reserveInfo.reserveQuantity === 0) {
       alert('예약 인원은 1명 이상이여야 합니다.');
@@ -32,6 +34,10 @@ const ReserveButton = ({ maxPeople, classId }: { maxPeople: number; classId: str
     ) {
       // result: supabase의 응답으로 받아온 제출한 예약 정보
       const result = await submitReservation(reserveInfo);
+
+      // class 테이블의 reserved_user_id 에 예약한 유저 아이디 리스트 업데이트
+      updateReservedUser({ userId: '223e4567-e89b-12d3-a456-426614174002', classId: classId });
+
       if (!result) {
         alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
         return;
