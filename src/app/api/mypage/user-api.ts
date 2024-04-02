@@ -3,11 +3,11 @@ import { supabase } from '../supabase/supabase';
 import { UpdateTeacherInfoType, UpdateUserInfoType, UserType } from '@/types/user';
 import { userId } from '@/app/(clrm)/mypage/page';
 
-// User가 선생님인지 수강생인지 구분 : teacher 값 불러오기
+// User가 선생님인지 수강생인지 구분 : isTeacher 값 불러오기
 export const getUserRole = async ({ userId }: { userId: string }) => {
   const { data: userRole, error }: PostgrestMaybeSingleResponse<UserType> = await supabase
     .from('user')
-    .select('teacher')
+    .select('isTeacher')
     .eq('user_id', userId)
     .single();
 

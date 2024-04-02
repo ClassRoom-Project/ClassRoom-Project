@@ -28,7 +28,7 @@ export interface MyRegisteredClassType {
   user_id: string;
   title: string;
   location: string;
-  detailLocation: string;
+  detail_location: string;
   date: string[];
   time: string[];
   image: string[];

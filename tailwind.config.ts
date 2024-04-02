@@ -13,7 +13,9 @@ const config: Config = {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       },
       colors: {
-        'point-color': '#5373FF'
+        'point-color': '#5373FF',
+        'text-color': '#2443CA',
+        'pale-color': '#A4BEFF'
       }
     }
   },
@@ -30,4 +32,4 @@ const config: Config = {
   }
 };
 
-export default config; 
+export default config;
