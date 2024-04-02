@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from 'react';
-import fetchMyClasses, { cancelReservation } from '@/app/api/supabase/fetchMyClasses';
+import fetchMyClasses, { cancelReservation } from '@/app/api/mypage/fetchMyClasses';
 import Link from 'next/link';
 import { ClassItem } from '@/types/register';
 
