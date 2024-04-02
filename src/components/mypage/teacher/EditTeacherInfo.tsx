@@ -10,6 +10,7 @@ import { FieldType, JobType } from '@/types/authUser/authUser';
 
 const EditTeacherInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isActiveBtn, setIsActiveBtn] = useState(false);
   const [newSelectedJob, setNewSelectedJob] = useState('');
   const [newSelectedField, setNewSelectedField] = useState('');
   const [selectedBank, setSelectedBank] = useState('');
@@ -88,8 +89,11 @@ const EditTeacherInfo = () => {
 
   // 취소하기 버튼
   const handleOnClickCancleBtn = () => {
-    setIsEditing(false);
-    alert('선생님 정보 수정이 취소 되었습니다. ');
+    if (isEditing) {
+      setIsEditing(false);
+      setIsActiveBtn(false);
+      alert('선생님 정보 수정이 취소 되었습니다. ');
+    }
   };
 
   if (isPending) {
@@ -184,15 +188,15 @@ const EditTeacherInfo = () => {
         </div>
         <div className="p-4 flex gap-4">
           {isEditing ? (
-            <button onClick={handleOnClickEditTeacherInfoBtn} className="p-4 border rounded-xl w-[150px]">
+            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px]">
               수정 완료
             </button>
           ) : (
-            <button onClick={() => setIsEditing(true)} className="p-4 border rounded-xl w-[150px]">
+            <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
               수정하기
             </button>
           )}
-          <button onClick={handleOnClickCancleBtn} className="p-4 border rounded-xl w-[150px]  bg-rose-500 text-white">
+          <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-point-color text-white">
             취소하기
           </button>
         </div>
