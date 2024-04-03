@@ -1,3 +1,4 @@
+// 주석입니다
 import { cancelReservation } from '@/app/api/mypage/fetchMyClasses';
 import { ClassItem } from '@/types/register';
 import Image from 'next/image';

@@ -1,5 +1,5 @@
 'use client';
-
+// 주석입니다
 import { fetchClassInfoOnComment } from '@/app/api/mypage/my-comments-api';
 
 import { userId } from '@/app/(clrm)/mypage/page';

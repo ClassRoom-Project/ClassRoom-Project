@@ -1,3 +1,4 @@
+// 주석입니다
 import { UserInfoType } from '@/types/user';
 import { create } from 'zustand';
 

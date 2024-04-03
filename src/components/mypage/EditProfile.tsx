@@ -1,5 +1,5 @@
 'use client';
-
+// 주석입니다
 import { userId } from '@/app/(clrm)/mypage/page';
 import { UpdateUserInfoType, UserType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';

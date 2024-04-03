@@ -1,3 +1,4 @@
+// 주석입니다
 export interface UserType {
   user_id: string;
   email: string;

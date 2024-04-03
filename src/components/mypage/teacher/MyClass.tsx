@@ -1,13 +1,13 @@
-import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
+// 주석입니다
 import { userId } from '@/app/(clrm)/mypage/page';
-import { ClassAllType } from '@/types/class';
+import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { GrLocation } from 'react-icons/gr';
-import { FaRegClock, FaRegCalendarCheck } from 'react-icons/fa';
 import React from 'react';
+import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
+import { GrLocation } from 'react-icons/gr';
 
 const MyClass = () => {
   // const pathname = usePathname;

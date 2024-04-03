@@ -1,10 +1,10 @@
 'use client';
-
-import React, { useEffect, useState } from 'react';
-import EditTeacherInfo from './EditTeacherInfo';
+// 주석입니다
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
 import EditProfile from '../EditProfile';
+import EditTeacherInfo from './EditTeacherInfo';
 import MyClass from './MyClass';
-import { usePathname, useRouter } from 'next/navigation';
 
 type TeacherTabComponent = {
   [key: string]: React.ReactNode;
