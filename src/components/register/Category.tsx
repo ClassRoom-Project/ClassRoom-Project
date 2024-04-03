@@ -13,8 +13,8 @@ const Category = () => {
         setSubCategory(event.target.value);
     };
     return (
-      <div className='w-full max-w-md my-2'>
-            <div className="flex items-center space-x-2">
+      <div className="flex justify-center items-center">
+            <div className="flex items-center space-x-4">
               <div>
                 {/* 카테고리 드롭다운 */}
                 <select value={category} onChange={handleCategoryChange}>
@@ -28,8 +28,7 @@ const Category = () => {
                   <option value="기타">기타</option>
                 </select>
               </div>
-              <p>소분류</p>
-              <div>
+                <p>소분류</p>
                 <input 
                   className="form-input px-3 py-2 border rounded flex-grow" 
                   type="text" 
@@ -37,7 +36,6 @@ const Category = () => {
                   onChange={handleSubCategoryChange} 
                   placeholder="해시태그를 입력해주세요"
                 />
-              </div>
             </div>
         </div>
     )

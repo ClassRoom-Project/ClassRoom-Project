@@ -7,25 +7,29 @@ import useRegisterStore from '@/store/RegisterStore';
 import { ko } from 'date-fns/locale';
 
 const TimeSelect = () => {
-    const { selectDay, setSelectDay, selectedTime, setSelectedTime } = useRegisterStore(); // 여러 날짜 및 시간 선택을 위한 상태
-    const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-    const datePickerRef = useRef<HTMLDivElement | null>(null);
-    const dateInputRef = useRef<HTMLInputElement | null>(null);
+    const { selectDay, setSelectDay, selectedTime, setSelectedTime } = useRegisterStore();
+    const [isDatePickerOpen, setIsDatePickerOpen] = useState(false); // 날짜 선택 열림/닫힘 관리
+    const datePickerRef = useRef<HTMLDivElement | null>(null); // 날짜 선택기의 DOM 참조를 저장
+    const dateInputRef = useRef<HTMLInputElement | null>(null); // 날짜 입력 필드의 DOM 참조를 저장
 
+    // 선택된 시간 배열 업데이트
     const handleTimeChange = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
         const newTimes = [...selectedTime];
         newTimes[index] = event.target.value;
         setSelectedTime(newTimes);
     };
 
+    // 새로운 시간 입력 필드 추가
     const addTimeField = () => {
-        setSelectedTime([...selectedTime, '']); // 새 시간 입력 필드 추가
+        setSelectedTime([...selectedTime, '']);
     };
 
+    // 날짜 달력 열림/닫힘 토글
     const toggleDatePicker = () => {
         setIsDatePickerOpen(!isDatePickerOpen);
     };
 
+    // 선택된 날짜 저장, 입력란에 표시
     const handleDateSelect: SelectMultipleEventHandler = (selectedDate) => {
         if (!selectedDate || selectedDate.length === 0) {
             alert('클래스 일정 날짜를 선택해주세요');
@@ -33,14 +37,14 @@ const TimeSelect = () => {
         }
     
         const formattedDates = selectedDate.map(date => format(date, 'yyyy-MM-dd'));
-        setSelectDay(formattedDates); // 여러 날짜 저장
+        setSelectDay(formattedDates); 
         if (dateInputRef.current) {
-            dateInputRef.current.value = formattedDates.join(', '); // 입력란에 날짜 표시
+            dateInputRef.current.value = formattedDates.join(', '); 
         }
         setIsDatePickerOpen(false); 
     };
     
-
+    // 날짜 달력 바깥쪽 클릭 시 닫기
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
@@ -63,8 +67,14 @@ const TimeSelect = () => {
                     placeholder="날짜 선택"
                     onClick={toggleDatePicker}
                 />
+                <button
+                    className='px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700'
+                    onClick={toggleDatePicker}
+                >날짜 선택</button>
                 {isDatePickerOpen && (
-                    <div ref={datePickerRef} className="absolute top-full z-10">
+                    <div 
+                        ref={datePickerRef} 
+                        className="absolute top-full z-10 bg-white rounded border shadow-lg">
                         <DayPicker
                             mode="multiple"
                             selected={selectDay.map(day => new Date(day))}
@@ -75,7 +85,10 @@ const TimeSelect = () => {
                 )}
             </div>
             <div>
-                <p>시간 선택</p>
+                <div className='flex'>
+                    <p>시간 선택 </p>
+                    <button onClick={addTimeField}>+</button>
+                </div>
                 {selectedTime.map((time, index) => (
                     <div key={index} className="flex items-center space-x-2">
                         <input
@@ -85,7 +98,6 @@ const TimeSelect = () => {
                         />
                     </div>
                 ))}
-                <button onClick={addTimeField}>시간 추가</button>
             </div>
         </div>
     );
