@@ -13,7 +13,7 @@ export default function SocialLogin() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full mt-3">
+    <section className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full ">
       <nav className="flex flex-col justify-between items-center w-full mb-3 space-y-4">
         <button
           className="socialIcon-field hover:bg-[#EBF2FF] w-full flex items-center py-2 rounded"

@@ -1,12 +1,16 @@
+//todo : 폼 클릭 이벤트 추가
+
 export const SearchClass = () => {
   return (
-    <div className="h-[120px] border-b-[1px] border-solid border-gray-300 flex flex-col items-center justify-center">
+    <form className="h-[120px] border-b-[1px] flex items-center justify-center">
       <input
         type="text"
-        placeholder="클래스명을 입력하세요"
-        className="input input-bordered input-info w-full max-w-xs"
+        placeholder="클래스 검색"
+        className="input input-bordered border-[#F0F6FF] input-info w-full max-w-xs"
       />
-      <button className="btn my-3">Button</button>
-    </div>
+      <button type="submit" className="btn bg-[#F0F6FF] ml-2">
+        Button
+      </button>
+    </form>
   );
 };

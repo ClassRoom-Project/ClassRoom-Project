@@ -6,7 +6,7 @@ import { userId } from '@/app/(clrm)/mypage/page';
 export const getMyRegisteredClass = async () => {
   const { data: myClassInfo, error }: PostgrestResponse<MyRegisteredClassType> = await supabase
     .from('class')
-    .select('user_id, class_id, title, location,detailLocation, date, time, image, active')
+    .select('user_id, class_id, title, location,detail_location, date, time, image, active')
     .eq('user_id', userId);
 
   if (error) {

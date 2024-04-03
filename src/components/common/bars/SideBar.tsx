@@ -1,24 +1,25 @@
 import React, { PropsWithChildren } from 'react';
 import Category from './Category';
 import Link from 'next/link';
-const BorderLayout = ({ children }: PropsWithChildren) => {
+const SideBar = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="fixed p-3 top-0 border-gray-300 border-solid border-[1px] bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
         <div className="mt-[5vh] flex flex-col">
           <Category />
-          <Link href={'http://localhost:3000/'} className="p-5">
+          <Link href={'/'} className="p-5">
             Home
           </Link>
-          <Link href={'http://localhost:3000/chat'} className="p-5">
+          <Link href={'/chat'} className="p-5">
             chat
           </Link>
-          <Link href={'http://localhost:3000/mypage'} className="p-5">
+          <Link href={'/mypage'} className="p-5">
             mypage
           </Link>
-          <Link href={'http://localhost:3000/register'} className="p-5">
+          <Link href={'/register'} className="p-5">
             create
           </Link>
+          <Link href="/hello">로그인</Link>
         </div>
         <div>
           <div className="p-5">convert</div>
@@ -31,4 +32,4 @@ const BorderLayout = ({ children }: PropsWithChildren) => {
   );
 };
 
-export default BorderLayout;
+export default SideBar;
