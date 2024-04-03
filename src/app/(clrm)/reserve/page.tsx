@@ -5,6 +5,7 @@ import ReserveButton from '@/components/reserve/ReserveButton';
 import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
 import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
 
+export const revalidate = 10;
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
   const classInfo = await fetchReserveClassInfo(classId);
@@ -22,10 +23,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
               price={classInfo.price}
               remainingQuantity={classInfo?.max_people - classInfo.reserved_count}
             />
-            <ReserveButton
-              classId={classInfo.class_id}
-              remainingQuantity={classInfo?.max_people - classInfo.reserved_count}
-            />
+            <ReserveButton classId={classInfo.class_id} maxPeople={classInfo?.max_people} />
           </div>
         </div>
       ) : (

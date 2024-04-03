@@ -7,9 +7,8 @@ import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
-import { fetchReservedUserIds } from '@/app/api/reserve/fetchReservedUserIds';
 
-const ReserveButton = ({ classId, remainingQuantity }: { classId: string; remainingQuantity: number }) => {
+const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
 
   const { setReserveInfo, reserveInfo } = useReserveStore();
@@ -25,13 +24,19 @@ const ReserveButton = ({ classId, remainingQuantity }: { classId: string; remain
       return;
     }
 
-    const currentRemaininQuantity = await fetchReservedCount(classId);
-    fetchReservedUserIds({ classId });
+    // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
+    const currentReservedQuantity = await fetchReservedCount(classId);
 
-    // 예약 버튼을 눌렀을 때 한번 더 체크 => 서버에서 fetch하여 다시 체크?
-    if (remainingQuantity < reserveInfo.reserveQuantity) {
-      alert('자리가 다찼어용'); // 확인을 위한 임시 alert
-      return;
+    if (currentReservedQuantity) {
+      // 예약 버튼을 눌렀을 때의 남은 자리
+      const currentRemainingQuantity = maxPeople - currentReservedQuantity;
+
+      // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
+      if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
+        alert('정원 초과로 인해 예약할 수 없습니다. '); // 확인을 위한 임시 alert
+        router.refresh();
+        return;
+      }
     }
 
     // result: supabase의 응답으로 받아온 제출한 예약 정보
