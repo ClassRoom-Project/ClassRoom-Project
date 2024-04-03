@@ -18,6 +18,7 @@ const EditProfile = () => {
   });
 
   const [newNickname, setNewNickname] = useState('');
+  const [newProfileImage, setNewProfileImage] = useState('');
   const [isEditing, setIsEditing] = useState(false); // 수정된 사항 확인 여부
   const [isAvailableNickname, setIsAvailableNickname] = useState(true); // 닉네임 중복 여부 상태 업데이트
   const [isActiveBtn, setIsActiveBtn] = useState(false); // 수정 완료시 버튼 활성화 상태
@@ -25,6 +26,7 @@ const EditProfile = () => {
   useEffect(() => {
     if (userInfo) {
       setNewNickname(userInfo.nickname || '');
+      setNewProfileImage(userInfo.profile_image || '');
     }
   }, [userInfo]);
 
@@ -42,7 +44,8 @@ const EditProfile = () => {
 
   // 유저 정보 수정하기 : useMutation
   const { mutate: updateUserInfoMutation } = useMutation({
-    mutationFn: ({ newNickname }: UpdateUserInfoType) => updateUserInfo({ newNickname }),
+    mutationFn: ({ newNickname, newProfileImage }: UpdateUserInfoType) =>
+      updateUserInfo({ newNickname, newProfileImage }),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['user']
@@ -55,18 +58,20 @@ const EditProfile = () => {
   const handleOnClickEditProfileBtn = () => {
     // 수정된 사항이 없는 경우
     const isNicknameChanged = newNickname !== userInfo?.nickname;
+    // console.log('isNicknameChanged', isNicknameChanged);
+    const isProfileImageChanged = newProfileImage != userInfo?.profile_image;
 
-    if (!isNicknameChanged) {
+    if (!isNicknameChanged && !isProfileImageChanged) {
       alert('수정 사항이 없습니다.');
-
-      if (!isAvailableNickname) {
-        alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 다시 입력해주세요.');
-      }
+      return;
+    }
+    if (!isAvailableNickname) {
+      alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 다시 입력해주세요.');
       return;
     }
 
     // 수정된 사항이 있는 경우
-    updateUserInfoMutation({ newNickname });
+    updateUserInfoMutation({ newNickname, newProfileImage });
     alert('프로필 수정이 완료되었습니다.');
   };
 
@@ -78,6 +83,7 @@ const EditProfile = () => {
       if (confirm) {
         setIsEditing(false);
         setNewNickname(userInfo?.nickname || '');
+        setNewProfileImage(userInfo?.profile_image || '');
         setIsAvailableNickname(true);
         setIsActiveBtn(false);
       }
@@ -94,7 +100,11 @@ const EditProfile = () => {
 
   return (
     <div className="flex">
-      <EditProfileImage userInfo={userInfo} />
+      <EditProfileImage
+        newProfileImage={newProfileImage}
+        setNewProfileImage={setNewProfileImage}
+        isEditing={isEditing}
+      />
       <div className="flex flex-col">
         <div className="flex flex-col">
           <div className="m-4 p-4 gap-4">
@@ -131,13 +141,9 @@ const EditProfile = () => {
               수정하기
             </button>
           )}
-          {isEditing ? (
-            <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-point-color text-white">
-              취소하기
-            </button>
-          ) : (
-            ''
-          )}
+          <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-point-color text-white">
+            취소하기
+          </button>
         </div>
       </div>
     </div>
