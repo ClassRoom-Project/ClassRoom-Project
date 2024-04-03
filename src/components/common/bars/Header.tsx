@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { PropsWithChildren } from 'react';
 import defaultImage from '../../../../public/profile-image.png';
 import Link from 'next/link';
+import LoginState from '@/components/login/LoginState';
 import { SearchClass } from './categories/SearchClass';
 
 const Header = ({ children }: PropsWithChildren) => {
@@ -16,6 +17,7 @@ const Header = ({ children }: PropsWithChildren) => {
             <Image src={defaultImage} alt="Profile image" className="mr-[5px] h-[50px] w-[50px]" />
           </Link>
         </div>
+        <LoginState />
       </div>
       {children}
     </>
