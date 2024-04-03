@@ -17,6 +17,7 @@ const MyClass = () => {
     queryKey: ['class', userId],
     queryFn: () => getMyRegisteredClass()
   });
+  console.log('myClassInfo', myClassInfo);
 
   // 클래스 삭제하기
   const handleOnClickDeleteMyClass = () => {
@@ -88,14 +89,14 @@ const MyClass = () => {
               </div>
             </div>
             <div className="flex gap-4 m-4">
-              <button onClick={handleOnClickGoToReservedStudentList} className="btn w-[150px]">
+              <button onClick={handleOnClickGoToReservedStudentList} className="btn w-36">
                 수강생 보기
               </button>
-              <button onClick={handleOnClickDeleteMyClass} className="btn w-[150px] bg-point-color text-white">
+              <button onClick={handleOnClickDeleteMyClass} className="btn w-36 bg-point-color text-white">
                 클래스 삭제하기
               </button>
               <Link href={`list/detail/${classInfo.class_id}`}>
-                <button className="btn w-[150px] bg-pale-color text-white">클래스 보러가기</button>
+                <button className="btn w-36 bg-pale-color text-white">클래스 보러가기</button>
               </Link>
             </div>
           </div>
