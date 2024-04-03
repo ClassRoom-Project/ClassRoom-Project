@@ -1,5 +1,3 @@
-// 주석입니다
-
 import { supabase } from '@/app/api/supabase/supabase';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';

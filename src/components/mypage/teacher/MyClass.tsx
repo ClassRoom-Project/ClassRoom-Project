@@ -1,4 +1,3 @@
-// 주석입니다
 import { userId } from '@/app/(clrm)/mypage/page';
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
 import { useQuery } from '@tanstack/react-query';

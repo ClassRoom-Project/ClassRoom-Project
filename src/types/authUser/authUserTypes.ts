@@ -34,7 +34,7 @@ export interface MoreInfoType {
   isField: string;
   setIsField: (isField: string) => void;
 }
-// 주석입니다
+
 export type JobType =
   | '요리사'
   | '강사'

@@ -1,4 +1,3 @@
-// 주석입니다
 import { deleteMyComment, updateMyComment } from '@/app/api/mypage/my-comments-api';
 import { MyCommentType, NewCommentType } from '@/types/comments';
 import { useMutation, useQueryClient } from '@tanstack/react-query';

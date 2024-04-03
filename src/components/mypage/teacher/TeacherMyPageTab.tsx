@@ -1,5 +1,5 @@
 'use client';
-// 주석입니다
+
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import EditProfile from '../EditProfile';
