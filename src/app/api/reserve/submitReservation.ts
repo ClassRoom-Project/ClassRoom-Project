@@ -2,6 +2,7 @@ import { DBReserveInfo, ReserveInfo } from '@/types/reserve';
 import { supabase } from '../supabase/supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
+// 예약 정보 insert api
 export const submitReservation = async (reserveInfo: ReserveInfo) => {
   const { classId, userId, reservePrice, reserveQuantity, reserveDate, reserveTime } = reserveInfo;
   const { data: result, error }: PostgrestSingleResponse<DBReserveInfo> = await supabase
