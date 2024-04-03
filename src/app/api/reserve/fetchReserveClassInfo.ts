@@ -26,7 +26,6 @@ export const fetchReservedCount = async (classId: string) => {
     .from('class')
     .select('reserved_count')
     .eq('class_id', classId)
-    .neq('class_id', crypto.randomUUID()) // 카운트 fetch만 no-cache로 하기 위한.. 임시..
     .single();
 
   if (error) {

@@ -10,11 +10,10 @@ const CurrentReserveQuantity = ({ classId, maxPeople }: { classId: string; maxPe
     const fetchCurrentReservedQuantity = async () => {
       const currentReservedCount = await fetchReservedCount(classId);
 
-      if (currentReservedCount) {
+      if (currentReservedCount || currentReservedCount === 0) {
         setRemainingQuantity(maxPeople - currentReservedCount);
       }
     };
-
     fetchCurrentReservedQuantity();
   }, [classId, maxPeople]);
 

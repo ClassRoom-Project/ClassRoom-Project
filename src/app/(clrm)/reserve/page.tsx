@@ -17,11 +17,8 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
           <DateTimePicker classDateList={classInfo.date} classTimeList={classInfo.time} />
           <div className="flex flex-col justify-between items-center w-full p-6">
             <ClassInfo classInfo={classInfo} />
-            <CurrentReserveQuantity classId={classId} maxPeople={classInfo?.max_people} />
-            <PriceCalculator
-              price={classInfo.price}
-              remainingQuantity={classInfo?.max_people - classInfo.reserved_count}
-            />
+            <CurrentReserveQuantity classId={classInfo.class_id} maxPeople={classInfo?.max_people} />
+            <PriceCalculator price={classInfo.price} classId={classInfo.class_id} maxPeople={classInfo?.max_people} />
             <ReserveButton classId={classInfo.class_id} maxPeople={classInfo?.max_people} />
           </div>
         </div>

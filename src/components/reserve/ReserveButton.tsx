@@ -28,12 +28,12 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     const currentReservedQuantity = await fetchReservedCount(classId);
 
     if (currentReservedQuantity) {
-      // 예약 버튼을 눌렀을 때의 남은 자리
+      // 현재 남은 자리 = 최대 인원 - 예약 인원 수
       const currentRemainingQuantity = maxPeople - currentReservedQuantity;
 
       // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
       if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
-        alert('정원 초과로 인해 예약할 수 없습니다. '); // 확인을 위한 임시 alert
+        alert('정원 초과로 인해 예약할 수 없습니다. ');
         router.refresh();
         return;
       }
