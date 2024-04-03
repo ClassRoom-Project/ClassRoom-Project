@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 // import './globals.css';
-import UserLayout from '@/components/common/bars/UserLayout';
-import BorderLayout from '@/components/common/bars/BorderLayout';
+import Header from '@/components/common/bars/Header';
+import SideBar from '@/components/common/bars/SideBar';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -18,10 +18,10 @@ export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <BorderLayout>
-          <UserLayout />
+        <SideBar>
+          <Header />
           {children}
-        </BorderLayout>
+        </SideBar>
       </body>
     </html>
   );
