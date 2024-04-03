@@ -2,7 +2,7 @@
 
 export const SearchClass = () => {
   return (
-    <form className="h-[120px] border-b-[1px] flex items-center justify-center">
+    <form className="h-[120px] flex items-center justify-center">
       <input
         type="text"
         placeholder="클래스 검색"
