@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { userId } from '@/app/(clrm)/mypage/page';
 import { FieldType, JobType } from '@/types/authUser/authUser';
+import { useUserStore } from '@/store/UserInfoStore';
 
 const EditTeacherInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -15,6 +16,8 @@ const EditTeacherInfo = () => {
   const [newSelectedField, setNewSelectedField] = useState('');
   const [selectedBank, setSelectedBank] = useState('');
   const [account, setAccount] = useState('');
+
+  const { userInfo } = useUserStore();
 
   const { data: teacherInfo, isPending } = useQuery({
     queryKey: ['user', userId],
@@ -108,7 +111,7 @@ const EditTeacherInfo = () => {
   return (
     <div className="flex">
       <div className="flex flex-col items-center p-4 gap-4">
-        <Image src={BasicProfileImage} alt="기본 프로필 이미지" width={100} height={100} />
+        <img src={userInfo?.profile_image} alt="기본 프로필 이미지" width={100} height={100} className="rounded-full" />
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col">
