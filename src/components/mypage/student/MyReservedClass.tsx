@@ -1,11 +1,7 @@
 'use client';
-// 주석입니다
-import React, { useEffect, useState } from 'react';
-import fetchMyClasses, { cancelReservation } from '@/app/api/mypage/fetchMyClasses';
-import Link from 'next/link';
-import { ClassItem } from '@/types/register';
-import { useQuery } from '@tanstack/react-query';
 import { userId } from '@/app/(clrm)/mypage/page';
+import fetchMyClasses from '@/app/api/mypage/fetchMyClasses';
+import { useQuery } from '@tanstack/react-query';
 import MyReservedClassItem from './MyReservedClassItem';
 
 const MyReservedClass = () => {
