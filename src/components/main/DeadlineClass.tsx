@@ -31,8 +31,8 @@ const DeadlineClass = () => {
       <p>마감 임박</p>
       <div className="slider-container w-[85vw]">
         <Slider {...settings}>
-          {classInfos.map((info, classId) => (
-            <ClassCard key={classId} classInfos={info} />
+          {classInfos.map((info) => (
+            <ClassCard key={info.class_id} classInfos={info} />
           ))}
         </Slider>
       </div>
