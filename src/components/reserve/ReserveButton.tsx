@@ -7,8 +7,6 @@ import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
-import { changes } from '@/app/api/reserve/subscribeCount';
-import { supabase } from '@/app/api/supabase/supabase';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
@@ -17,23 +15,6 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
   useEffect(() => {
     setReserveInfo({ classId: classId });
-
-    // const channel = supabase
-    //   .channel('table-db-changes')
-    //   .on(
-    //     'postgres_changes',
-    //     {
-    //       event: '*',
-    //       schema: 'public',
-    //       table: 'class'
-    //     },
-    //     (payload) => console.log(payload.new.reserved_count)
-    //   )
-    //   .subscribe();
-
-    // return () => {
-    //   supabase.removeChannel(channel);
-    // };
   }, [classId, setReserveInfo]);
 
   // 예약 버튼 클릭

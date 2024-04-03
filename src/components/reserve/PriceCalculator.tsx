@@ -13,7 +13,7 @@ const PriceCalculator = ({ price, remainingQuantity }: { price: number; remainin
 
   useEffect(() => {
     setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
-  }, [quantity, setReserveInfo]);
+  }, [quantity, setReserveInfo, totalPrice]);
 
   const handleQuantityDecrease = () => {
     if (quantity !== 0) {
