@@ -5,13 +5,12 @@ import React from 'react';
 
 const reservationCompletePage = async ({ params }: { params: { reservationId: string } }) => {
   const reservationId = decodeURIComponent(params.reservationId);
-
   const completedReserveInfo = await fetchReserveInfo(reservationId);
 
   if (!completedReserveInfo) {
     return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;
   }
-  const reservedClassInfo = await fetchReserveClassInfo(completedReserveInfo?.class_id);
+  const reservedClassInfo = await fetchReserveClassInfo(completedReserveInfo?.classId);
 
   const reserveInfoLabels = [
     {
@@ -20,19 +19,19 @@ const reservationCompletePage = async ({ params }: { params: { reservationId: st
     },
     {
       title: '이용 일자',
-      description: `${completedReserveInfo?.reserve_date}`
+      description: `${completedReserveInfo?.reserveDate}`
     },
     {
       title: '이용 회차',
-      description: `${completedReserveInfo?.reserve_time.slice(0, 5)}`
+      description: `${completedReserveInfo?.reserveTime.slice(0, 5)}`
     },
     {
       title: '이용 인원',
-      description: `${completedReserveInfo?.reserve_quantity}명`
+      description: `${completedReserveInfo?.reserveQuantity}명`
     },
     {
       title: '이용 금액',
-      description: `${completedReserveInfo?.reserve_price.toLocaleString('ko-KR')}원`
+      description: `${completedReserveInfo?.reservePrice.toLocaleString('ko-KR')}원`
     }
   ];
 
