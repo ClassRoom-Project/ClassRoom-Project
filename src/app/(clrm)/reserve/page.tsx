@@ -5,8 +5,6 @@ import ReserveButton from '@/components/reserve/ReserveButton';
 import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
 import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
 
-export const revalidate = 0;
-
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
   const classInfo = await fetchReserveClassInfo(classId);
@@ -19,10 +17,8 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
           <DateTimePicker classDateList={classInfo.date} classTimeList={classInfo.time} />
           <div className="flex flex-col justify-between items-center w-full p-6">
             <ClassInfo classInfo={classInfo} />
-            <CurrentReserveQuantity
-              maxPeople={classInfo?.max_people}
-              remainingQuantity={classInfo?.max_people - classInfo.reserved_count}
-            />
+            {/* <CurrentReserveQuantity remainingQuantity={classInfo?.max_people - classInfo.reserved_count} /> */}
+            <CurrentReserveQuantity maxPeople={classInfo?.max_people} />
             <PriceCalculator
               price={classInfo.price}
               remainingQuantity={classInfo?.max_people - classInfo.reserved_count}
