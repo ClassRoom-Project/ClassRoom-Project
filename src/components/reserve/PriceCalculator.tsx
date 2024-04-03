@@ -1,11 +1,13 @@
 'use client';
 
+import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
+import { fetchReservedUserIds } from '@/app/api/reserve/fetchReservedUserIds';
 import useReserveStore from '@/store/reserveClassStore';
-import { ReserveClassType } from '@/types/class';
 import React, { useEffect, useState } from 'react';
 
-const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
+const PriceCalculator = ({ price, classId, maxPeople }: { classId: string; maxPeople: number; price: number }) => {
   const [quantity, setQuantity] = useState(1);
+  const [remainingQuantity, setRemainingQuantity] = useState(0);
 
   const totalPrice = price * quantity;
 
@@ -13,13 +15,31 @@ const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
 
   useEffect(() => {
     setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
-  }, [quantity, setReserveInfo]);
 
-  // 클래스의 max 인원 고려 필요
+    const fetchCurrentReservedQuantity = async () => {
+      const currentReservedCount = await fetchReservedCount(classId);
+
+      if (currentReservedCount) {
+        setRemainingQuantity(maxPeople - currentReservedCount);
+      }
+    };
+
+    fetchCurrentReservedQuantity();
+  }, [quantity, setReserveInfo, totalPrice, classId, maxPeople]);
+
   const handleQuantityDecrease = () => {
     if (quantity !== 0) {
       setQuantity((prev) => prev - 1);
     }
+  };
+
+  const handleQuantityIncrease = async () => {
+    // 남은자리 수 까지만 인원 추가 가능하도록
+    if (remainingQuantity <= quantity) {
+      return;
+    }
+
+    setQuantity((prev) => prev + 1);
   };
 
   return (
@@ -33,7 +53,7 @@ const PriceCalculator = ({ price }: { price: ReserveClassType['price'] }) => {
         <div className="flex w-16 justify-between gap-2">
           <button onClick={handleQuantityDecrease}> - </button>
           <span> {quantity} </span>
-          <button onClick={() => setQuantity((prev) => prev + 1)}> + </button>
+          <button onClick={handleQuantityIncrease}> + </button>
         </div>
       </div>
       <div className="flex w-full justify-between gap-4">
