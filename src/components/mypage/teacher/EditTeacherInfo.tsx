@@ -2,16 +2,12 @@ import { CancleButton, EditButton } from '@/components/common/mypage/buttons';
 import Image from 'next/image';
 import React, { useEffect, useId, useState } from 'react';
 import BasicProfileImage from '../../../../public/profile-image.png';
-
 import { useQuery } from '@tanstack/react-query';
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { userId } from '@/app/(clrm)/mypage/page';
-<<<<<<< HEAD
-import { FieldType, JobType } from '@/types/authUser/authUserTypes';
-=======
-import { FieldType, JobType } from '@/types/authUser/authUser';
+
 import { useUserStore } from '@/store/UserInfoStore';
->>>>>>> d4138237a5145c8ed0299d93ea173a776600f091
+import { FieldType, JobType } from '@/types/authUser/authUserTypes';
 
 const EditTeacherInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
