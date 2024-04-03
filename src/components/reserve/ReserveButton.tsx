@@ -48,7 +48,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     }
 
     // class 테이블의 reserved_user_id 에 예약한 유저 아이디 리스트 업데이트
-    await updateReservedUserList({ userId: '223e4567-e89b-12d3-a456-426614174002', classId });
+    await updateReservedUserList({ userId: '323e4567-e89b-12d3-a456-426614174003', classId });
 
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
