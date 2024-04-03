@@ -1,7 +1,7 @@
 'use client';
 
 import useNewUserStore from '@/store/authStore.ts/store';
-import { RoleType } from '@/types/authUser/authUser';
+import { RoleType } from '@/types/authUser/authUserTypes';
 import { useState } from 'react';
 
 interface PickRoleModalProps {

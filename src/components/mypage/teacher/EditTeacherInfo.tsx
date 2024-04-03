@@ -6,7 +6,7 @@ import BasicProfileImage from '../../../../public/profile-image.png';
 import { useQuery } from '@tanstack/react-query';
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { userId } from '@/app/(clrm)/mypage/page';
-import { FieldType, JobType } from '@/types/authUser/authUser';
+import { FieldType, JobType } from '@/types/authUser/authUserTypes';
 
 const EditTeacherInfo = () => {
   const [isEditing, setIsEditing] = useState(false);

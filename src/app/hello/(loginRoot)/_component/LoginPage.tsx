@@ -4,6 +4,7 @@ import { RiKakaoTalkFill } from 'react-icons/ri';
 import { FcGoogle } from 'react-icons/fc';
 import { SiNaver } from 'react-icons/si';
 import Link from 'next/link';
+import SocialLogin from '@/components/login/SocialLogin';
 
 export default function LoginPage() {
   return (
@@ -27,17 +28,7 @@ export default function LoginPage() {
             <Link href="/hello/login/signup" className="font-bold text-xs hover:color-grey">
               회원가입
             </Link>
-          </div>
-          <div className="flex flex-row justify-between w-1/3 mt-4">
-            <div>
-              <FcGoogle className="text-5xl" />
-            </div>
-            <div className="rounded-full bg-yellow-300 w-12 h-12 relative">
-              <RiKakaoTalkFill className="text-yellow-950 absolute text-4xl right-1.5 top-1.5" />
-            </div>
-            <div className="rounded-full bg-green-500 w-12 h-12 relative">
-              <SiNaver className="text-white text-2xl absolute right-3 top-3" />
-            </div>
+            <SocialLogin />
           </div>
         </section>
       </div>

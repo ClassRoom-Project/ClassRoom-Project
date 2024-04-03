@@ -1,7 +1,7 @@
 'use client';
 
 import useNewUserStore from '@/store/authStore.ts/store';
-import { FIELDS, JOBS } from '@/types/authUser/authUser';
+import { FIELDS, JOBS } from '@/types/authUser/authUserTypes';
 
 import { La_Belle_Aurore } from 'next/font/google';
 import Link from 'next/link';

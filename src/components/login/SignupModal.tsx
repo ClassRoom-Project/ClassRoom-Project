@@ -1,12 +1,9 @@
 'use client';
 
-import { FcGoogle } from 'react-icons/fc';
-import { SiNaver } from 'react-icons/si';
-import { RiKakaoTalkFill } from 'react-icons/ri';
 import { signIn } from 'next-auth/react';
 import { useId, useState } from 'react';
-import useNewUserStore from '@/store/authStore.ts/store';
-import { SocialType } from '@/types/authUser/authUser';
+import { SocialType } from '@/types/authUser/authUserTypes';
+import SocialLogin from './SocialLogin';
 
 interface SigninModalProps {
   previousStep: () => void;
@@ -18,30 +15,14 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
   const [emailCheck, setEmailCheck] = useState('');
   const [passwordCheck, setPasswordCheck] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirmEmail, setConfirmEmail] = useState('');
 
-  const { teacher, setNickname, setEmail, setPassword } = useNewUserStore((state) => ({
-    teacher: state.teacher,
-    setNickname: state.setNickname,
-    setEmail: state.setEmail,
-    setPassword: state.setPassword
-  }));
+  const [sendEmail, setSendEmail] = useState('');
 
-  const onVaildateFilde = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onValidateField = (e: React.ChangeEvent<HTMLInputElement>) => {
     const {
       target: { name, value }
     } = e;
-
-    switch (name) {
-      case 'nickname':
-        setNickname(value);
-        break;
-      case 'emailCheck':
-        setEmail(value);
-        break;
-      case 'passwordCheck':
-        setPassword(value);
-        break;
-    }
 
     if (name === 'emailCheck') {
       setEmailCheck(value);
@@ -76,10 +57,12 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
     }
   };
 
-  const handleSocialSignin = async (provider: SocialType) => {
-    const result = await signIn(provider, { callbackUrl: '/login' });
+  const handleConfirmEmail = async () => {
+    const result = await signIn('email', { email: emailCheck, redirect: false });
     if (result?.error) {
-      setError(result.error);
+      console.log(result.error);
+    } else {
+      setConfirmEmail('입력하신 이메일 주소로 인증 링크가 포함된 이메일을 발송했습니다.');
     }
   };
 
@@ -96,7 +79,6 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
           <ul className="steps w-full mb-4">
             <li className="step step-primary">step 1</li>
             <li className="step step-primary">step 2</li>
-            {teacher === true ? <li className="step step-primary">step 3</li> : ''}
           </ul>
           <div className="flex flex-col w-4/5 md:w-2/3 lg:w-1/2">
             <label htmlFor={`${id}-nickname`} className="block text-lg font-medium text-gray-700">
@@ -112,14 +94,25 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
             <label htmlFor={`${id}-email`} className="label-field">
               아이디
             </label>
-            <input
-              id={`${id}-email`}
-              name="emailCheck"
-              placeholder="이메일을 입력해주세요"
-              required
-              onChange={onVaildateFilde}
-              className="input-field"
-            />
+            <div className="flex flex-row relative">
+              <input
+                id={`${id}-email`}
+                name="emailCheck"
+                placeholder="이메일을 입력해주세요"
+                required
+                onChange={onValidateField}
+                className="input-field"
+              />
+              <button
+                className="absolute inset-y-0 right-0 flex items-center justify-center px-4 bg-[#5373FF] text-white text-sm rounded-full mt-2 mb-1 mr-1"
+                id={`${id}-email`}
+                onClick={handleConfirmEmail}
+              >
+                인증하기
+              </button>
+            </div>
+            {confirmEmail && confirmEmail?.length > 0 ? <div className="text-red-500 text-xs">{confirmEmail}</div> : ''}
+            {sendEmail && sendEmail?.length > 0 ? <div className="text-red-500 text-xs">{sendEmail}</div> : ''}
             <label htmlFor={`${id}-password`} className="label-field">
               비밀번호
             </label>
@@ -129,7 +122,7 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
               name="passwordCheck"
               placeholder="비밀번호를 입력해주세요"
               required
-              onChange={onVaildateFilde}
+              onChange={onValidateField}
               className="input-field"
             />
             <label htmlFor={`${id}-confirmPassword`} className="label-field">
@@ -141,7 +134,7 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
               name="confirmPassword"
               placeholder="비밀번호 확인"
               required
-              onChange={onVaildateFilde}
+              onChange={onValidateField}
               className="input-field"
             />
             {error && error?.length > 0 ? (
@@ -153,30 +146,9 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
             )}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full mt-3">
-          <div className="flex justify-between items-center w-full mb-3">
-            <div
-              onClick={() => handleSocialSignin('google')}
-              className="rounded-full bg-transparent w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-gray-200"
-            >
-              <FcGoogle className="w-full h-full" />
-            </div>
-            <div
-              onClick={() => handleSocialSignin('kakao')}
-              className="rounded-full bg-yellow-300 w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-yellow-400"
-            >
-              <RiKakaoTalkFill className="w-3/4 h-3/4 text-yellow-900" />
-            </div>
-            <div
-              onClick={() => handleSocialSignin('naver')}
-              className="rounded-full bg-green-500 w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-green-600"
-            >
-              <SiNaver className="w-2/4 h-2/4 text-white" />
-            </div>
-          </div>
-        </div>
+        <SocialLogin />
         <div className="flex flex-row items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full gap-5">
-          {teacher === true ? (
+          {/* {teacher === true ? (
             <button onClick={previousStep} className="button__border-field">
               이전
             </button>
@@ -184,7 +156,7 @@ export default function SignupModal({ previousStep, twoPreviousStep }: SigninMod
             <button onClick={twoPreviousStep} className="button__border-field">
               이전
             </button>
-          )}
+          )} */}
           <button className="button-field">회원가입</button>
         </div>
       </section>

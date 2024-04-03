@@ -16,9 +16,9 @@ export default function ThreeModals() {
 
   return (
     <div>
+      {currentStep === 1 ? <SignupModal previousStep={previousStep} twoPreviousStep={twoPreviousStep} /> : ''}
       {currentStep === 1 ? <PickRoleModal nextStep={nextStep} twoNextStep={twoNextStep} /> : ''}
       {currentStep === 2 ? <MoreInfoModal nextStep={nextStep} previousStep={previousStep} /> : ''}
-      {currentStep === 3 ? <SignupModal previousStep={previousStep} twoPreviousStep={twoPreviousStep} /> : ''}
     </div>
   );
 }
