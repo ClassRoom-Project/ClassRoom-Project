@@ -2,7 +2,6 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import NaverProvider from 'next-auth/providers/naver';
 import KakaoProvider from 'next-auth/providers/kakao';
-import EmailProvider from 'next-auth/providers/email';
 import { supabase } from '../../supabase/supabase';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -12,18 +11,6 @@ const handler = NextAuth({
     newUser: '/auth/new-user'
   },
   providers: [
-    // EmailProvider({
-    //   server: {
-    //     host: process.env.EMAIL_SERVER_HOST,
-    //     port: parseInt(process.env.EMAIL_SERVER_PORT || '465', 10), // 문자열을 숫자로 변환
-    //     secure: process.env.EMAIL_SECURE === 'true',
-    //     auth: {
-    //       user: process.env.EMAIL_SERVER_USER,
-    //       pass: process.env.EMAIL_SERVER_PASSWORD
-    //     }
-    //   },
-    //   from: process.env.EMAIL_FROM
-    // }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID! as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRENT! as string

@@ -13,27 +13,36 @@ export default function SocialLogin() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full mt-3">
-      <div className="flex justify-between items-center w-full mb-3">
-        <div
+    <section className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full mt-3">
+      <nav className="flex flex-col justify-between items-center w-full mb-3 space-y-4">
+        <button
+          className="socialIcon-field hover:bg-[#EBF2FF] w-full flex items-center py-2 rounded"
           onClick={() => handleSocialSignin('google')}
-          className="rounded-full bg-transparent w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-gray-200"
         >
-          <FcGoogle className="w-full h-full" />
-        </div>
-        <div
+          <span className="rounded-full bg-transparent w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-gray-200">
+            <FcGoogle className="w-full h-full" />
+          </span>
+          <strong className="text-black flex-grow text-center">구글 로그인하기</strong>
+        </button>
+        <button
+          className="socialIcon-field hover:bg-yellow-300 w-full flex items-center py-2 rounded"
           onClick={() => handleSocialSignin('kakao')}
-          className="rounded-full bg-yellow-300 w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-yellow-400"
         >
-          <RiKakaoTalkFill className="w-3/4 h-3/4 text-yellow-900" />
-        </div>
-        <div
+          <span className="rounded-full bg-yellow-300 w-12 h-12 flex justify-center items-center cursor-pointer">
+            <RiKakaoTalkFill className="w-3/4 h-3/4 text-yellow-900" />
+          </span>
+          <strong className="text-black flex-grow text-center">카카오 로그인하기</strong>
+        </button>
+        <button
+          className="socialIcon-field hover:bg-green-500 w-full flex items-center py-2 rounded"
           onClick={() => handleSocialSignin('naver')}
-          className="rounded-full bg-green-500 w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-green-600"
         >
-          <SiNaver className="w-2/4 h-2/4 text-white" />
-        </div>
-      </div>
-    </div>
+          <span className="rounded-full bg-green-500 w-12 h-12 flex justify-center items-center cursor-pointer">
+            <SiNaver className="w-2/4 h-2/4 text-white" />
+          </span>
+          <strong className="text-black flex-grow text-center">네이버 로그인하기</strong>
+        </button>
+      </nav>
+    </section>
   );
 }
