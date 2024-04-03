@@ -9,7 +9,7 @@
   font-weight: 400;
 }
 
-/* 활성화 && 선택되지 않은 버튼의 hover시 */
+/* 활성화 && 선택되지 않은 버튼의 hover */
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
   border: 1px solid #5373ff;
   transition: all 0.2s;

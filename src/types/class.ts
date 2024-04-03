@@ -5,8 +5,8 @@ export interface ClassAllType {
   hashtag: string;
   title: string;
   description: string;
-  max_ppl: number;
-  min_ppl: number;
+  max_peple: number;
+  min_people: number;
   location: string;
   price: number;
   date: string[];
@@ -18,6 +18,8 @@ export interface ClassAllType {
   class_type: string;
   difficulty: string;
   active: boolean;
+  reserved_count: number;
+  reserved_user_id: string[];
 }
 
 /* 마이페이지(선생님) : 내가 등록한 클래스 보기에서 필요한 데이터 타입 */
@@ -41,7 +43,8 @@ export type ReserveClassType = {
   location: string;
   price: number;
   image: string;
-  max_ppl: number;
+  max_people: number;
   date: string[];
   time: string[];
+  reserved_count: number;
 };
