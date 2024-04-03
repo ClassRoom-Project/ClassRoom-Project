@@ -6,6 +6,8 @@ import { updateReservedUserList } from '@/app/api/reserve/updateReservedUserList
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
+import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
+import { fetchReservedUserIds } from '@/app/api/reserve/fetchReservedUserIds';
 
 const ReserveButton = ({ classId, remainingQuantity }: { classId: string; remainingQuantity: number }) => {
   const router = useRouter();
@@ -23,19 +25,14 @@ const ReserveButton = ({ classId, remainingQuantity }: { classId: string; remain
       return;
     }
 
-    // 예약 버튼을 눌렀을 때 한번 더 체크
+    const currentRemaininQuantity = await fetchReservedCount(classId);
+    fetchReservedUserIds({ classId });
+
+    // 예약 버튼을 눌렀을 때 한번 더 체크 => 서버에서 fetch하여 다시 체크?
     if (remainingQuantity < reserveInfo.reserveQuantity) {
       alert('자리가 다찼어용'); // 확인을 위한 임시 alert
       return;
     }
-
-    // if (
-    //   window.confirm(` 예약 정보가 맞는지 확인해주세요. 이대로 예약하시겠습니까? //TODO: 예약 정보 확인은 다른 레이아웃에서 보여줄 예정
-    // 예약 일자 : ${reserveInfo.reserveDate} ${reserveInfo.reserveTime.slice(0, 5)}
-    // 인원 : ${reserveInfo.reserveQuantity}명
-    // 금액 : ${reserveInfo.reservePrice.toLocaleString('ko-KR')}원
-    // `)
-    // ) {
 
     // result: supabase의 응답으로 받아온 제출한 예약 정보
     const result = await submitReservation(reserveInfo);

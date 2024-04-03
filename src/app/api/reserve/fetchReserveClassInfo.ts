@@ -19,3 +19,18 @@ export const fetchReserveClassInfo = async (classId: string) => {
 
   return classInfo;
 };
+
+export const fetchReservedCount = async (classId: string) => {
+  const { data: reservedCount, error }: PostgrestSingleResponse<{ reserved_count: number }> = await supabase
+    .from('class')
+    .select('reserved_count')
+    .eq('class_id', classId)
+    .single();
+
+  if (error) {
+    console.error('fetchReservedCount error => ', error);
+    return;
+  }
+
+  return reservedCount.reserved_count;
+};

@@ -1,10 +1,9 @@
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
-import { ClassAllType } from '@/types/class';
 
 // class 테이블의 reserved_user_id 배열 조회
 export const fetchReservedUserIds = async ({ classId }: { classId: string }) => {
-  const { data: reservedUserList, error }: PostgrestSingleResponse<ClassAllType['reserved_user_id']> = await supabase
+  const { data: reservedUserList, error }: PostgrestSingleResponse<{ reserved_user_id: [] }> = await supabase
     .from('class')
     .select('reserved_user_id')
     .eq('class_id', classId)
@@ -15,6 +14,5 @@ export const fetchReservedUserIds = async ({ classId }: { classId: string }) => 
     return;
   }
 
-  const { reserved_user_id: reservedUserIds } = reservedUserList;
-  return reservedUserIds;
+  return reservedUserList.reserved_user_id;
 };

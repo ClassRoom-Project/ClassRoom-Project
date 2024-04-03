@@ -22,11 +22,11 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
 
   // 리액트 데이피커 ------------------------------------------------------------------
   const today = new Date();
-  const [selectedDate, setSelected] = useState<string>(format(classDateList[0], 'yyyy-MM-dd'));
+  const [selectedDate, setSelectedDate] = useState<string>(classDateList[0]);
 
   // 날짜 클릭시 set
   const handleDateChange = (newDate: Date | undefined) => {
-    setSelected(format(newDate as Date, 'yyyy-MM-dd'));
+    setSelectedDate(format(newDate as Date, 'yyyy-MM-dd'));
   };
 
   // 1~31일 배열 생성
@@ -53,30 +53,6 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   useEffect(() => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
   }, [selectedDate, selectedTime, setReserveInfo]);
-
-  // #region
-  // 1년의 배열 만들어서 isSameDay 메서드 사용..?
-  // const start = new Date(2024, 0, 1);
-  // const end = new Date(2024, 12, 1);
-  // let dates = [];
-
-  // for (let date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
-  //   dates.push(new Date(date));
-  // }
-
-  // console.log(dates);
-
-  // 현재 달 외에 다른날도 보여주려면 날짜별로 date를 따로 생성..?
-  // const monthList = classDates.map((item) => new Date(item).getMonth());
-  // console.log(new Set(monthList));
-  // const nonAvailabelDaysDate = nonAvailableDays.map((day) => {
-  //   const list = monthList.map((item) => {
-  //     return new Date(2024, item, day);
-  //   });
-  //   return list;
-  // });
-  // const nonAvailableDaysDate = nonAvailableDays.flatMap((day) => monthList.map((month) => new Date(2024, month, day)));
-  // #endregion
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
@@ -109,7 +85,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
                   time === selectedTime ? 'bg-rose-200' : 'bg-white'
                 } tracking-wide rounded-lg`}
               >
-                {time.slice(0, 5)}
+                {time}
               </button>
             );
           })}
@@ -118,7 +94,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
         <span>
-          {`${selectedDate}`} {selectedTime.slice(0, 5)}
+          {`${selectedDate}`} {selectedTime}
         </span>
       </div>
     </div>

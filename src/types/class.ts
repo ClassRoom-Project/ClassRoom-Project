@@ -19,7 +19,7 @@ export interface ClassAllType {
   difficulty: string;
   active: boolean;
   reserved_count: number;
-  reserved_user_id: { reserved_user_id: string[] };
+  reserved_user_id: string[];
 }
 
 /* 마이페이지(선생님) : 내가 등록한 클래스 보기에서 필요한 데이터 타입 */
