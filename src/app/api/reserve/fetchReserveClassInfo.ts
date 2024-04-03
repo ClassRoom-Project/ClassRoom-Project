@@ -1,6 +1,7 @@
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
 import { ReserveClassType } from '@/types/class';
+import next from 'next';
 
 // 예약페이지 클래스 정보 불러오는 api
 export const fetchReserveClassInfo = async (classId: string) => {
@@ -25,6 +26,7 @@ export const fetchReservedCount = async (classId: string) => {
     .from('class')
     .select('reserved_count')
     .eq('class_id', classId)
+    .neq('class_id', crypto.randomUUID())
     .single();
 
   if (error) {
@@ -34,3 +36,20 @@ export const fetchReservedCount = async (classId: string) => {
 
   return reservedCount.reserved_count;
 };
+
+// export const fetchReservedCount2 = async (classId: string) => {
+//   const response = await fetch(
+//     `https://hdurwturhsczrdeugmon.supabase.co/rest/v1/class?select=reserved_count&class_id=eq.${classId}`,
+//     {
+//       cache: 'no-cache',
+//       headers: {
+//         'Content-Type': 'application/json'
+//         // 'Content-Type': 'application/x-www-form-urlencoded',
+//       }
+//     }
+//   );
+
+//   console.log('--------------------', response, '--------------------');
+
+//   return response;
+// };
