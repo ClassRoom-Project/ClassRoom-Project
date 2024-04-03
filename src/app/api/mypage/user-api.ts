@@ -31,7 +31,10 @@ export const getUserInfo = async () => {
     console.error(error);
   }
 
-  useUserStore.getState().setUserInfo(userInfo);
+  // zustand에 상태 업데이트
+  if (userInfo) {
+    useUserStore.getState().setUserInfo(userInfo);
+  }
 
   return userInfo;
 };
