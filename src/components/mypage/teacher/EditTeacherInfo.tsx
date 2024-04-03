@@ -29,8 +29,31 @@ const EditTeacherInfo = () => {
   const fieldId = useId();
   const bankId = useId();
 
-  const jobOptions: JobType[] = ['요리사', '교사', '개발자', '운동선수', '음악가', '예술가', '뷰티'];
-  const businessFieldOptions: FieldType[] = ['요리', '교육', 'IT', '스포츠', '피아니스트', '공방', '애견미용'];
+  const jobOptions: JobType[] = [
+    '요리사',
+    '강사',
+    '개발자',
+    '의사',
+    '디자이너',
+    '변호사',
+    '음악가',
+    '운동선수',
+    '예술가',
+    '비즈니스 전문가'
+  ];
+  const businessFieldOptions: FieldType[] = [
+    '요리/음식',
+    '교육',
+    'IT/테크',
+    '의료/건강',
+    '디자인/예술',
+    '법률/변호',
+    '음악/연주',
+    '운동/스포츠',
+    '예술/창작',
+    '경영/컨설팅'
+  ];
+
   const koreanBanks = [
     '국민은행',
     '우리은행',
