@@ -1,4 +1,4 @@
-import { NewUserType } from '@/types/authUser/authUser';
+import { NewUserType } from '@/types/authUser/authUserTypes';
 import { create } from 'zustand';
 
 const useNewUserStore = create<NewUserType>((set) => ({

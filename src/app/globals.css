@@ -42,3 +42,7 @@ body {
 .button__border-field {
   @apply mt-5 block w-full border border-point-color mb-4 py-2 px-3 text-black text-center sm:text-sm rounded-full;
 }
+
+.socialIcon-field {
+  @apply mt-2 w-full border border-point-color mb-2 py-2 px-3 text-white text-center sm:text-sm rounded-lg;
+}
