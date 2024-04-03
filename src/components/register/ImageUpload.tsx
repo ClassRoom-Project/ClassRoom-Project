@@ -35,7 +35,7 @@ const ImageUpload = () => {
         console.error('파일 업로드 실패:', error);
         return null;
     } else {
-        const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/classImage/${data.path}`;
+        const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/classImages/${data.path}`;
         return url;
     }
   }

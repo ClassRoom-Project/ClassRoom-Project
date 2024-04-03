@@ -9,8 +9,8 @@ import { ko } from 'date-fns/locale';
 const TimeSelect = () => {
     const { selectDay, setSelectDay, selectedTime, setSelectedTime } = useRegisterStore();
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false); // 날짜 선택 열림/닫힘 관리
-    const datePickerRef = useRef<HTMLDivElement | null>(null); // 날짜 선택기의 DOM 참조를 저장
-    const dateInputRef = useRef<HTMLInputElement | null>(null); // 날짜 입력 필드의 DOM 참조를 저장
+    const datePickerRef = useRef<HTMLDivElement>(null); // 날짜 선택기의 DOM 참조를 저장
+    const dateInputRef = useRef<HTMLInputElement>(null); // 날짜 입력 필드의 DOM 참조를 저장
 
     // 선택된 시간 배열 업데이트
     const handleTimeChange = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,24 +29,29 @@ const TimeSelect = () => {
         setIsDatePickerOpen(!isDatePickerOpen);
     };
 
-    // 선택된 날짜 저장, 입력란에 표시
+    // 선택된 날짜 저장, 입력란(input)에 표시
     const handleDateSelect: SelectMultipleEventHandler = (selectedDate) => {
-        if (!selectedDate || selectedDate.length === 0) {
-            alert('클래스 일정 날짜를 선택해주세요');
+        // 선택된 날짜가 없는 경우!
+        if (!selectedDate) {
+            alert('클래스 일정을 선택해주세요');
             return;
         }
     
+        // 선택된 날짜 'yyyy-MM-dd' 형식으로 포맷
         const formattedDates = selectedDate.map(date => format(date, 'yyyy-MM-dd'));
         setSelectDay(formattedDates); 
+
+        // dateInputRef 존재할 시, input 필드 값 포맷된 문자열로
         if (dateInputRef.current) {
             dateInputRef.current.value = formattedDates.join(', '); 
         }
-        setIsDatePickerOpen(false); 
+        setIsDatePickerOpen(false); // 닫기
     };
     
     // 날짜 달력 바깥쪽 클릭 시 닫기
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
+            // 해당 이벤트가 영역 밖이면!
             if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
                 setIsDatePickerOpen(false);
             }
