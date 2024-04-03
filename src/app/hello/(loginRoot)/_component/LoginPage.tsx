@@ -1,42 +1,24 @@
 'use client';
 
-import { RiKakaoTalkFill } from 'react-icons/ri';
-import { FcGoogle } from 'react-icons/fc';
-import { SiNaver } from 'react-icons/si';
-import Link from 'next/link';
+import SocialLogin from '@/components/login/SocialLogin';
 
 export default function LoginPage() {
   return (
-    <div className="flex h-screen items-center justify-center w-full ">
-      <div className="flex flex-row border mx-auto rounded-md w-3/4 h-1/2 ">
-        <section className="h-full w-2/5 flex items-center justify-around bg-[#F0F6FF]">
-          <p className="text-sm">
+    <div className="flex h-screen items-center justify-center w-full">
+      <div className="flex flex-col md:flex-row border mx-auto rounded-md w-11/12 md:w-3/4 h-auto md:h-1/2">
+        <section className="hidden md:flex h-full w-full md:w-2/5 items-center justify-around bg-[#F0F6FF]">
+          <p className="text-xl px-4 text-center">
             클룸에 오신걸 환영합니다!
             <br /> 다양한 원데이 클래스를 체험해보세요!
           </p>
         </section>
-        <section className="h-full flex flex-col justify-center items-center w-3/5">
-          <form className=" flex flex-col items-center w-full h-1/2 justify-around">
-            <p className="text-2xl font-bold ">클룸</p>
-            <input placeholder="아이디" className="w-1/2 h-9  border rounded-lg " />
-            <input placeholder="비밀번호" className="w-1/2 h-9 border rounded-lg " />
-            <button className="bg-black text-white w-1/3 h-9 rounded-lg">로그인</button>
-          </form>
-          <div className="flex flex-row justify-around">
-            <p className="text-xs">클룸이 처음이신가요?</p>
-            <Link href="/hello/login/signup" className="font-bold text-xs hover:color-grey">
-              회원가입
-            </Link>
-          </div>
-          <div className="flex flex-row justify-between w-1/3 mt-4">
-            <div>
-              <FcGoogle className="text-5xl" />
-            </div>
-            <div className="rounded-full bg-yellow-300 w-12 h-12 relative">
-              <RiKakaoTalkFill className="text-yellow-950 absolute text-4xl right-1.5 top-1.5" />
-            </div>
-            <div className="rounded-full bg-green-500 w-12 h-12 relative">
-              <SiNaver className="text-white text-2xl absolute right-3 top-3" />
+        <section className="h-full flex flex-col justify-center items-center w-full md:w-3/5">
+          <div className="flex flex-col items-center w-full h-1/2 justify-around">
+            <div className="flex flex-col items-center w-full">
+              <p className="text-4xl font-bold mb-1 text-point-color">클룸</p>
+              <div className="border-t border-gray-300 w-5/6 md:max-w-2xl mx-auto mb-4" />
+              <p className="mb-10">로그인 또는 회원가입</p>
+              <SocialLogin />
             </div>
           </div>
         </section>
