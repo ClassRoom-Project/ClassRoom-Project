@@ -21,10 +21,7 @@ const PriceCalculator = ({ price, remainingQuantity }: { price: number; remainin
     }
   };
 
-  // TODO: 클래스의 남은자리 고려 필요
   const handleQuantityIncrease = async () => {
-    console.log(remainingQuantity);
-
     // 남은자리 수 까지만 인원 추가 가능하도록
     if (remainingQuantity <= quantity) {
       return;
