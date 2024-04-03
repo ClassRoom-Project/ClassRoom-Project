@@ -19,8 +19,7 @@ const BestClass = () => {
   useEffect(() => {
     const getClassInfos = async () => {
       const infos = await getClassAllInfo();
-      //좋아요순
-      infos.sort((a, b) => b.likes - a.likes);
+      //todo : 좋아요순
       setClassInfos(infos);
     };
     getClassInfos();
@@ -31,8 +30,8 @@ const BestClass = () => {
       <p>BestClass</p>
       <div className="slider-container w-[85vw]">
         <Slider {...settings}>
-          {classInfos.map((info, classId) => (
-            <ClassCard key={classId} classInfos={info} />
+          {classInfos.map((info) => (
+            <ClassCard key={info.class_id} classInfos={info} />
           ))}
         </Slider>
       </div>
