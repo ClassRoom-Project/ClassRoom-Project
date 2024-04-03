@@ -3,8 +3,9 @@ import React, { useEffect, useId, useState } from 'react';
 import { userId } from '@/app/(clrm)/mypage/page';
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { useUserStore } from '@/store/UserInfoStore';
-import { FieldType, JobType } from '@/types/authUser/authUser';
+
 import { useQuery } from '@tanstack/react-query';
+import { FieldType, JobType } from '@/types/authUser/authUserTypes';
 
 const EditTeacherInfo = () => {
   const [isEditing, setIsEditing] = useState(false);

@@ -6,22 +6,20 @@ export interface SessionUserType {
   };
 }
 
+export interface CreateNewUserType {
+  email: string;
+  nickname: string | null;
+  image: string | null;
+}
+
 //store
 export interface NewUserType {
-  teacher: boolean;
+  isTeacher: boolean;
   job?: string | null;
   field?: string | null;
-  nickname?: string | null;
-  email?: string | null;
-  password?: string | null;
-  profile_image?: string | null;
   setTeacher: (teacher: boolean) => void;
   setJob: (job: string) => void;
   setField: (field: string) => void;
-  setNickname: (nickname: string) => void;
-  setEmail: (job: string) => void;
-  setPassword: (password: string) => void;
-  setProfileImage: (profile_image: string) => void;
 }
 
 //PickRole
