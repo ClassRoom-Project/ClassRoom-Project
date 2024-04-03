@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState(comment.content);
-  console.log('comment', comment);
+
   const queryClient = useQueryClient();
 
   const commentId = comment.comment_id;
@@ -139,7 +139,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
               </button>
             )}
             <Link href={`list/detail/${comment.class_id}`}>
-              <button className="btn bg-[#A4BEFF] text-white w-36">클래스 보러가기</button>
+              <button className="btn bg-[#A4BEFF] text-white w-[150px]">클래스 보러가기</button>
             </Link>
           </div>
         </section>
