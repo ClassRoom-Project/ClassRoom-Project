@@ -7,13 +7,17 @@ import { useQuery } from '@tanstack/react-query';
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { userId } from '@/app/(clrm)/mypage/page';
 import { FieldType, JobType } from '@/types/authUser/authUser';
+import { useUserStore } from '@/store/UserInfoStore';
 
 const EditTeacherInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const [isActiveBtn, setIsActiveBtn] = useState(false);
   const [newSelectedJob, setNewSelectedJob] = useState('');
   const [newSelectedField, setNewSelectedField] = useState('');
   const [selectedBank, setSelectedBank] = useState('');
   const [account, setAccount] = useState('');
+
+  const { userInfo } = useUserStore();
 
   const { data: teacherInfo, isPending } = useQuery({
     queryKey: ['user', userId],
@@ -88,8 +92,13 @@ const EditTeacherInfo = () => {
 
   // 취소하기 버튼
   const handleOnClickCancleBtn = () => {
-    setIsEditing(false);
-    alert('선생님 정보 수정이 취소 되었습니다. ');
+    if (isEditing) {
+      const confirm = window.confirm('취소하시겠습니까?');
+      if (confirm) {
+        setIsEditing(false);
+        setIsActiveBtn(false);
+      }
+    }
   };
 
   if (isPending) {
@@ -102,7 +111,7 @@ const EditTeacherInfo = () => {
   return (
     <div className="flex">
       <div className="flex flex-col items-center p-4 gap-4">
-        <Image src={BasicProfileImage} alt="기본 프로필 이미지" width={100} height={100} />
+        <img src={userInfo?.profile_image} alt="기본 프로필 이미지" width={100} height={100} className="rounded-full" />
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col">
@@ -184,15 +193,15 @@ const EditTeacherInfo = () => {
         </div>
         <div className="p-4 flex gap-4">
           {isEditing ? (
-            <button onClick={handleOnClickEditTeacherInfoBtn} className="p-4 border rounded-xl w-[150px]">
+            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px]">
               수정 완료
             </button>
           ) : (
-            <button onClick={() => setIsEditing(true)} className="p-4 border rounded-xl w-[150px]">
+            <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
               수정하기
             </button>
           )}
-          <button onClick={handleOnClickCancleBtn} className="p-4 border rounded-xl w-[150px]  bg-rose-500 text-white">
+          <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-point-color text-white">
             취소하기
           </button>
         </div>

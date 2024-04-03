@@ -5,19 +5,21 @@ export interface ClassAllType {
   hashtag: string;
   title: string;
   description: string;
-  max_ppl: number;
-  min_ppl: number;
+  max_peple: number;
+  min_people: number;
   location: string;
   price: number;
   date: string[];
   time: string[];
   quantity: number;
-  detailLocation: string;
+  detail_location: string;
   total_time: number;
   image: string[];
   class_type: string;
   difficulty: string;
   active: boolean;
+  reserved_count: number;
+  reserved_user_id: string[];
 }
 
 /* 마이페이지(선생님) : 내가 등록한 클래스 보기에서 필요한 데이터 타입 */
@@ -26,7 +28,7 @@ export interface MyRegisteredClassType {
   user_id: string;
   title: string;
   location: string;
-  detailLocation: string;
+  detail_location: string;
   date: string[];
   time: string[];
   image: string[];
@@ -41,7 +43,8 @@ export type ReserveClassType = {
   location: string;
   price: number;
   image: string;
-  max_ppl: number;
+  max_people: number;
   date: string[];
   time: string[];
+  reserved_count: number;
 };

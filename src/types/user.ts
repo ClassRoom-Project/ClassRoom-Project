@@ -3,7 +3,7 @@ export interface UserType {
   email: string;
   nickname: string;
   password: string;
-  teacher: boolean;
+  isTeacher: boolean;
   job: string;
   field: string;
   profile_image: string;
@@ -22,6 +22,7 @@ export interface UserInfoType {
 // 수정된 닉네임 type
 export interface UpdateUserInfoType {
   newNickname: string;
+  newProfileImage: string;
 }
 
 // 수정된 선생님 정보 type

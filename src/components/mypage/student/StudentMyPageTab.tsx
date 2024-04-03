@@ -30,19 +30,19 @@ const StudentMyPageTab = () => {
       <div className="gap-4">
         <span
           onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4 m-4 ${activePage === 'editProfile' ? 'font-bold cursor-pointer' : ''}`}
+          className={`p-4 m-4 ${activePage === 'editProfile' ? 'font-bold cursor-pointer text-point-color ' : ''}`}
         >
           프로필 수정하기
         </span>
         <span
           onClick={() => handleOnClickTabBtn('reservedClass')}
-          className={`p-4 m-4 ${activePage === 'reservedClass' ? 'font-bold cursor-pointer' : ''}`}
+          className={`p-4 m-4  ${activePage === 'reservedClass' ? 'font-bold cursor-pointer text-point-color' : ''}`}
         >
           내가 예약한 클래스 보기
         </span>
         <span
           onClick={() => handleOnClickTabBtn('myComments')}
-          className={`p-4 m-4 ${activePage === 'myComments' ? 'font-bold cursor-pointer' : ''}`}
+          className={`p-4 m-4 ${activePage === 'myComments' ? 'font-bold cursor-pointer  text-point-color' : ''}`}
         >
           내가 쓴 댓글 보기
         </span>
