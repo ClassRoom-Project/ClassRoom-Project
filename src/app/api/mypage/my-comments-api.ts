@@ -35,7 +35,6 @@ export const deleteMyComment = async (commentId: string) => {
 
 // 후기 수정하기 : update
 export const updateMyComment = async ({ newContent, commentId }: NewCommentType) => {
-  // supabase type 지정 postgrest 이런거!!
   const { data, error }: PostgrestSingleResponse<null> = await supabase
     .from('comments')
     .update({ content: newContent })
@@ -49,5 +48,3 @@ export const updateMyComment = async ({ newContent, commentId }: NewCommentType)
 
   return data;
 };
-
-// 후기 삭제하기 : delete

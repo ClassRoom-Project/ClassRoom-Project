@@ -58,33 +58,30 @@ const MyClass = () => {
               <div className="flex gap-4 py-4">
                 <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl">
                   <FaRegCalendarCheck color="#5373FF" size="20" />
-                  <span>
-                    날짜 :{' '}
+                  <div className="flex flex-row gap-2">
+                    날짜 :
                     {classInfo.date.map((date, index) => (
                       <React.Fragment key={index}>
-                        {/* 배열 내 값이 2개 이상일 경우, ' ' 둘 사이 공백주기*/}
-                        {index > 0 && ' '}
-                        {date}
+                        <p className="flex gap-2">{date}</p>
                       </React.Fragment>
                     ))}
-                  </span>
+                  </div>
                 </div>
                 <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
                   <FaRegClock color="#5373FF" size="20" />
-                  <span>
-                    시간 :{' '}
+                  <div className="flex flex-row gap-2">
+                    시간 :
                     {classInfo.time.map((time, index) => (
                       <React.Fragment key={index}>
-                        {index > 0 && ' '}
-                        {time}
+                        <p className="flex gap-2">{time}</p>
                       </React.Fragment>
                     ))}
-                  </span>
+                  </div>
                 </div>
               </div>
               <div className="inline-flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
                 <GrLocation color="#5373FF" size="20" />
-                <span>위치 : {classInfo.location}</span>
+                <p>위치 : {classInfo.location}</p>
               </div>
             </div>
             <div className="flex gap-4 m-4">

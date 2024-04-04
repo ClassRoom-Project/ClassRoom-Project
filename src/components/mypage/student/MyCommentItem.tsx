@@ -47,7 +47,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         }
         return;
       } else {
-        alert('수정사항이 없습니다.');
+        alert('수정 사항이 없습니다.');
       }
     } else {
       setIsEditing((prev) => !prev);
@@ -94,9 +94,9 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         <section className="flex gap-8">
           <p className="font-bold text-xl text-text-color">{comment.title}</p>
           <div className="flex gap-4">
-            <span>
+            <p>
               작성일 : {formattedDate} {formattedTime}
-            </span>
+            </p>
           </div>
         </section>
         <section className="pt-4">
