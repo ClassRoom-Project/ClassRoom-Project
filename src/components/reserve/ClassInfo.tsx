@@ -2,7 +2,6 @@ import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
 import React from 'react';
 import defaultClassImage from '../../../public/favicon.ico.png';
-import { useRouter } from 'next/navigation';
 
 const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   return (

@@ -1,4 +1,4 @@
-// 24시간제를 12시간제로 변환하는 함수
+/*  24시간제를 12시간제로 변환하는 함수 */
 export const convertTimeTo12HourClock = (classTime: string) => {
   // ex) classTime = ['14:30']
   const hour = Number(classTime.slice(0, 2));

@@ -1,8 +1,7 @@
-import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReserveInfo';
-import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import React from 'react';
+import { fetchReservationDetails } from '@/app/api/reserve/fetchReserveInfo';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
+import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 
 const reservationCompletePage = async ({ params }: { params: { reservationId: string } }) => {
   const reservationId = decodeURIComponent(params.reservationId);

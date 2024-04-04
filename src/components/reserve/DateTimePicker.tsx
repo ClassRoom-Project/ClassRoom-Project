@@ -1,20 +1,19 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
 import useReserveStore from '@/store/reserveClassStore';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import React, { useEffect, useState } from 'react';
 import { CaptionProps, DayPicker } from 'react-day-picker';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 
 const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-
-  const today = new Date();
   const [selectedTime, setSelectedTime] = useState(classTimeList[0]);
   const [selectedDate, setSelectedDate] = useState<string>(classDateList[0]);
+  const today = new Date();
 
   useEffect(() => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
@@ -24,9 +23,12 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
     setSelectedTime(time);
   };
 
-  // 리액트 데이피커 ------------------------------------------------------------------
+  /* 데이피커 */
+  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
+  function CustomCaption(props: CaptionProps) {
+    return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
+  }
 
-  // 날짜 클릭시 set
   const handleDateChange = (newDate: Date | undefined) => {
     setSelectedDate(format(newDate as Date, 'yyyy-MM-dd'));
   };
@@ -46,11 +48,6 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   const nonAvailableDates = nonAvailableDays.map((day) => {
     return new Date(2024, today.getMonth(), day);
   });
-
-  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
-  function CustomCaption(props: CaptionProps) {
-    return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
-  }
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
