@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReserveInfo';
+import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 
