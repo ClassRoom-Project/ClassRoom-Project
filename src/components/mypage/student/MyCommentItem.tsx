@@ -82,7 +82,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
       <div className="w-[300px] h-[200px]">
         {/* img 파일 불러오는 부분은 아직 수정 중입니다. */}
         <img
-          src="https://d1x9f5mf11b8gz.cloudfront.net/class/20220308/ec9fa67b-0040-413d-ae8b-258d46df07c4.jpg"
+          src={comment.image[0]}
           alt="클래스 대표 사진"
           width={300}
           height={200}
