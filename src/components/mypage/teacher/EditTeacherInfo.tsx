@@ -1,11 +1,10 @@
 import React, { useEffect, useId, useState } from 'react';
-
 import { userId } from '@/app/(clrm)/mypage/page';
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { useUserStore } from '@/store/UserInfoStore';
-
 import { useQuery } from '@tanstack/react-query';
-import { FieldType, JobType } from '@/types/authUser/authUserTypes';
+import { FIELDS, FieldType, JOBS, JobType } from '@/types/authUser/authUserTypes';
+import SelectOption from '../SelectOption';
 
 const EditTeacherInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -26,31 +25,6 @@ const EditTeacherInfo = () => {
   const jobId = useId();
   const fieldId = useId();
   const bankId = useId();
-
-  const jobOptions: JobType[] = [
-    '요리사',
-    '강사',
-    '개발자',
-    '의사',
-    '디자이너',
-    '변호사',
-    '음악가',
-    '운동선수',
-    '예술가',
-    '비즈니스 전문가'
-  ];
-  const businessFieldOptions: FieldType[] = [
-    '요리/음식',
-    '교육',
-    'IT/테크',
-    '의료/건강',
-    '디자인/예술',
-    '법률/변호',
-    '음악/연주',
-    '운동/스포츠',
-    '예술/창작',
-    '경영/컨설팅'
-  ];
 
   const koreanBanks = [
     '국민은행',
@@ -136,63 +110,30 @@ const EditTeacherInfo = () => {
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col">
-          <form className="m-4 p-4 flex gap-4 items-center">
-            <label htmlFor={jobId}>직업</label>
-            <select
-              name="job"
-              id={jobId}
-              value={newSelectedJob}
-              onChange={handleOnChangeJob}
-              disabled={!isEditing}
-              className="select select-bordered w-[200px] "
-            >
-              {jobOptions.map((option) => {
-                return (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                );
-              })}
-            </select>
-          </form>
-          <form className="m-4 p-4 flex gap-4">
-            <label htmlFor={fieldId}>비지니스 분야</label>
-            <select
-              name="businessField"
-              id={fieldId}
-              value={newSelectedField}
-              onChange={handleOnChangeField}
-              disabled={!isEditing}
-              className="select select-bordered w-[200px]"
-            >
-              {businessFieldOptions.map((option) => {
-                return (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                );
-              })}
-            </select>
-          </form>
-          <form className="m-4 p-4 flex gap-4">
-            <label htmlFor={bankId}>은행</label>
-            <select
-              name="job"
-              id={bankId}
-              className="select select-bordered w-[200px]"
-              value={selectedBank}
-              onChange={handleOnChangeSelectedBank}
-              disabled={!isEditing}
-            >
-              {koreanBanks.map((bank) => {
-                return (
-                  <option value={bank} key={bank}>
-                    {bank}
-                  </option>
-                );
-              })}
-            </select>
-          </form>
+          <SelectOption
+            id={jobId}
+            label="직업"
+            value={newSelectedJob}
+            onChange={handleOnChangeJob}
+            disabled={!isEditing}
+            options={JOBS}
+          />
+          <SelectOption
+            id={fieldId}
+            label="비지니스 분야"
+            value={newSelectedField}
+            onChange={handleOnChangeField}
+            disabled={!isEditing}
+            options={FIELDS}
+          />
+          <SelectOption
+            id={bankId}
+            label="은행"
+            value={selectedBank}
+            onChange={handleOnChangeSelectedBank}
+            disabled={!isEditing}
+            options={koreanBanks}
+          />
           <div className="m-4 p-4 flex gap-4">
             <span>계좌 정보</span>
             {isEditing ? (
