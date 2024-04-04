@@ -45,7 +45,8 @@ export type JobType =
   | '음악가'
   | '운동선수'
   | '예술가'
-  | '비즈니스 전문가';
+  | '비즈니스 전문가'
+  | '기타';
 export const JOBS: JobType[] = [
   '요리사',
   '강사',
@@ -56,7 +57,8 @@ export const JOBS: JobType[] = [
   '음악가',
   '운동선수',
   '예술가',
-  '비즈니스 전문가'
+  '비즈니스 전문가',
+  '기타'
 ];
 
 export type FieldType =
@@ -69,7 +71,9 @@ export type FieldType =
   | '음악/연주'
   | '운동/스포츠'
   | '예술/창작'
-  | '경영/컨설팅';
+  | '경영/컨설팅'
+  | '기타';
+
 export const FIELDS: FieldType[] = [
   '요리/음식',
   '교육',
@@ -80,7 +84,8 @@ export const FIELDS: FieldType[] = [
   '음악/연주',
   '운동/스포츠',
   '예술/창작',
-  '경영/컨설팅'
+  '경영/컨설팅',
+  '기타'
 ];
 
 //signup
