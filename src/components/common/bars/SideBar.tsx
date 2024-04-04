@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import Category from './Category';
 import Link from 'next/link';
+import ConvertBtn from './ConvertBtn';
 const SideBar = ({ children }: PropsWithChildren) => {
   return (
     <>
@@ -22,7 +23,8 @@ const SideBar = ({ children }: PropsWithChildren) => {
           <Link href="/hello">로그인</Link>
         </div>
         <div>
-          <div className="p-5">convert</div>
+          {/* 수강생/강사 전환 버튼입니다. */}
+          <ConvertBtn />
           <div className="p-5">logout</div>
         </div>
       </div>
