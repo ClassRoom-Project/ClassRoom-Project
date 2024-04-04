@@ -11,7 +11,7 @@ import { BiMoneyWithdraw } from 'react-icons/bi';
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const [classes, setClasses] = useState<ClassItem[]>([]);
 
-  console.log('classItem', classItem);
+  // console.log('classItem', classItem);
 
   // 예약 취소 -> useMutation으로 수정?
   const handleCancelReservation = async (reserve_id: string) => {

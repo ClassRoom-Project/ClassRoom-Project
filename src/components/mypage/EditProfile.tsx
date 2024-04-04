@@ -1,9 +1,8 @@
 'use client';
-// 주석입니다
+
 import { userId } from '@/app/(clrm)/mypage/page';
-import { UpdateUserInfoType, UserType } from '@/types/user';
+import { UpdateUserInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
