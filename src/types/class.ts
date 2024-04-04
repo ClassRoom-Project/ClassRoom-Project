@@ -22,6 +22,10 @@ export interface ClassAllType {
   reserved_user_id: string[];
 }
 
+export interface ClassItem {
+  class_id: string;
+}
+
 /* 마이페이지(선생님) : 내가 등록한 클래스 보기에서 필요한 데이터 타입 */
 export interface MyRegisteredClassType {
   class_id: string;
@@ -37,6 +41,20 @@ export interface MyRegisteredClassType {
 
 // 예약 페이지에서 클래스 정보를 보여주기 위한 타입
 export type ReserveClassType = {
+  classId: string;
+  category: string;
+  title: string;
+  location: string;
+  price: number;
+  image: string;
+  maxPeople: number;
+  date: string[];
+  time: string[];
+  reservedCount: number;
+};
+
+// DB에 저장된 클래스 정보 타입
+export type DBReserveClassType = {
   class_id: string;
   category: string;
   title: string;

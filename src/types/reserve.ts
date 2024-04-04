@@ -8,18 +8,20 @@ export type ReserveInfo = {
   reserveTime: string;
 };
 
-// DB에서 받아온 값 타입
-export type DBReserveInfo = {
-  reserve_id: string;
-  class_id: string;
-  user_id: string;
-  reserve_price: number;
-  reserve_quantity: number;
-  reserve_date: string;
-  reserve_time: string;
-};
-
 export type ReserveStoreType = {
   reserveInfo: ReserveInfo;
   setReserveInfo: ({}) => void;
 };
+
+// DB에서 받아온 예약 정보 타입
+export interface reservationDetailsType {
+  class_id: string;
+  reserve_date: string;
+  reserve_time: string;
+  reserve_quantity: number;
+  reserve_price: number;
+  class: {
+    class_id: string;
+    title: string;
+  };
+}

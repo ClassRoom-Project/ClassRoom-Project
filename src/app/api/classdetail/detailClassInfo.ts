@@ -1,16 +1,28 @@
 import { supabase } from '../supabase/supabase';
-import { ClassAllType } from '@/types/class';
-// 여러 클래스 정보를 불러오는 함수
-//따로 만든 이유 -> single이 단일 정보만 불러오기 때문
+import { ClassAllType, ClassItem } from '@/types/class';
+
+//디테일 페이지 클래스 정보 api 함수
 export const detailClassInfo = async (
   classId: string
 ): Promise<Omit<ClassAllType, 'reserved_count,reserved_user_id,active'> | null> => {
   const { data: classInfos, error } = await supabase.from('class').select('*').eq('class_id', classId).single();
 
   if (error) {
-    console.error('클래스 정보들 불러오기 오류 => ', error);
+    console.error('클래스 정보들 불러오기 오류 --> ', error);
     return null;
   }
 
   return classInfos;
+};
+
+//generateStaticParams 위한 class_id를 가져오는 함수
+
+export const detailClassIDForParams = async (): Promise<ClassItem[]> => {
+  const { data, error } = await supabase.from('class').select('class_id');
+
+  if (error) {
+    console.log('클래스 아이디 가져오기 오류 -->', error);
+    return [];
+  }
+  return data;
 };

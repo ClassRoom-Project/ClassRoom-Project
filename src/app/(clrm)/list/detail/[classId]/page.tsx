@@ -1,16 +1,17 @@
 import React from 'react';
-import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
-const page = async ({ params }: { params: { classId: string } }) => {
-  const classId = decodeURIComponent(params.classId);
+import { detailClassIDForParams, detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
 
-  const ClassAllInfo = await detailClassInfo(classId);
+export const generateStaticParams = async () => {
+  const classId = await detailClassIDForParams();
 
-  if (!ClassAllInfo) {
-    <div>클래스 정보를 불러오기에 실패했습니다</div>;
-    console.log('클래스정보 ->', ClassAllInfo);
-  }
+  const paths = classId.map((classItem) => ({
+    params: { id: classItem.class_id }
+  }));
+  return paths;
+};
 
-  return <div>DetailPage</div>;
+const page = () => {
+  return <div>page</div>;
 };
 
 export default page;
