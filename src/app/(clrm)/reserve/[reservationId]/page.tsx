@@ -1,39 +1,39 @@
-import { fetchReservationDetails, fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
-import { fetchReserveInfo } from '@/app/api/reserve/fetchReserveInfo';
+import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
+import { fetchReservationDetails } from '@/app/api/reserve/fetchReserveInfo';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import React from 'react';
 
 const reservationCompletePage = async ({ params }: { params: { reservationId: string } }) => {
   const reservationId = decodeURIComponent(params.reservationId);
-  const completedReserveInfo = await fetchReserveInfo(reservationId);
-  const result = await fetchReservationDetails(reservationId);
-  console.log(result);
+  // const completedReserveInfo = await fetchReserveInfo(reservationId);
+  const reservationDetails = await fetchReservationDetails(reservationId);
+  console.log(reservationDetails);
 
-  if (!completedReserveInfo) {
+  if (!reservationDetails) {
     return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;
   }
-  const reservedClassInfo = await fetchReserveClassInfo(completedReserveInfo?.classId);
+  // const reservedClassInfo = await fetchReserveClassInfo(completedReserveInfo?.classId);
 
   const reserveInfoLabels = [
     {
       title: '클래스명',
-      description: `${reservedClassInfo?.title}`
+      description: `${reservationDetails?.class.title}`
     },
     {
       title: '이용 일자',
-      description: `${completedReserveInfo?.reserveDate}`
+      description: `${reservationDetails?.reserveDate}`
     },
     {
       title: '이용 회차',
-      description: `${completedReserveInfo?.reserveTime.slice(0, 5)}`
+      description: `${reservationDetails?.reserveTime.slice(0, 5)}`
     },
     {
       title: '이용 인원',
-      description: `${completedReserveInfo?.reserveQuantity}명`
+      description: `${reservationDetails?.reserveQuantity}명`
     },
     {
       title: '이용 금액',
-      description: `${completedReserveInfo?.reservePrice.toLocaleString('ko-KR')}원`
+      description: `${reservationDetails?.reservePrice.toLocaleString('ko-KR')}원`
     }
   ];
 

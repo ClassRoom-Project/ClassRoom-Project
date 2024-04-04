@@ -1,6 +1,7 @@
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
 import { DBReserveClassType } from '@/types/class';
+import { reservationDetailsType } from '@/types/reserve';
 
 // 예약페이지 클래스 정보 불러오는 api
 export const fetchReserveClassInfo = async (classId: string) => {
@@ -45,24 +46,4 @@ export const fetchReservedCount = async (classId: string) => {
   }
 
   return reservedCount.reserved_count;
-};
-
-// 예약 정보 불러오는 api
-// reserve 테이블에서 class_id를 기준으로 class 테이블을 join하여 클래스 title을 가져옴
-export const fetchReservationDetails = async (reserveId: string) => {
-  const { data, error } = await supabase
-    .from('reserve')
-    .select(
-      `
-  class_id,  reserve_date, reserve_time, reserve_quantity, reserve_price,  
-  class ( class_id, title )
-`
-    )
-    .eq('reserve_id', reserveId);
-
-  if (error) {
-    console.log('join error =>', error);
-  }
-
-  return data;
 };

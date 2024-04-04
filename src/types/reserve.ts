@@ -23,3 +23,15 @@ export type ReserveStoreType = {
   reserveInfo: ReserveInfo;
   setReserveInfo: ({}) => void;
 };
+
+export interface reservationDetailsType {
+  class_id: string;
+  reserve_date: Date;
+  reserve_time: Date;
+  reserve_quantity: number;
+  reserve_price: number;
+  class: {
+    class_id: string;
+    title: string;
+  };
+}
