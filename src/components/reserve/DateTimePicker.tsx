@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { CaptionProps, DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 
 const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
@@ -51,29 +52,6 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
     return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
   }
 
-  // 24시간제를 12시간제로 변환하는 함수
-  const ConvertTimeTo12HourClock = (classTime: string) => {
-    const hour = Number(classTime.slice(0, 2));
-    const minute = classTime.slice(2, 5);
-
-    // 시간이 12 초과 (오후)
-    if (hour > 12) {
-      const pmHour = hour - 12;
-      const formatHour = pmHour < 10 ? '0' + pmHour : pmHour; // 시간이 10보다 작으면 0 붙임
-      return formatHour + minute + ' PM';
-
-      // 시간이 12 미만 (오전) && 00시가 아닐 때
-    } else if (hour < 12 && hour !== 0) {
-      const amHour = hour;
-      const formatHour = amHour < 10 ? '0' + amHour : amHour;
-      return formatHour + minute + ' AM';
-
-      // 00시, 12시일 경우
-    } else {
-      return hour === 0 ? 12 + minute + ' AM' : 12 + minute + ' PM';
-    }
-  };
-
   return (
     <div className="w-2/5 flex flex-col gap-4">
       <div>
@@ -105,7 +83,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
                   time === selectedTime ? 'bg-rose-200' : 'bg-white'
                 } tracking-wide rounded-lg`}
               >
-                {ConvertTimeTo12HourClock(time)}
+                {convertTimeTo12HourClock(time)}
               </button>
             );
           })}
@@ -114,7 +92,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
         <span>
-          {`${selectedDate}`} {ConvertTimeTo12HourClock(selectedTime)}
+          {`${selectedDate}`} {convertTimeTo12HourClock(selectedTime)}
         </span>
       </div>
     </div>

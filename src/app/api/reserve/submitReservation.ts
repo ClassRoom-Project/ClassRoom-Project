@@ -18,13 +18,15 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
         reserved_at: new Date()
       }
     ])
-    .select()
+    .select('reserve_id')
     .single();
 
   if (error) {
     console.log('예약정보 제출 오류 발생 =>', error);
     return;
   }
+
+  console.log(result);
 
   return result;
 };
