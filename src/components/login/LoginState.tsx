@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export default function LoginState() {
   const { data: session } = useSession();
-
+  console.log('--------', session);
   const handleLogoutClick = async () => {
     await signOut({ redirect: true, callbackUrl: '/' });
   };
