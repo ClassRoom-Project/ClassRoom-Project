@@ -1,30 +1,34 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
 import useReserveStore from '@/store/reserveClassStore';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import React, { useEffect, useState } from 'react';
 import { CaptionProps, DayPicker } from 'react-day-picker';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css';
 
-// import { SlArrowLeft } from 'react-icons/sl';
-// import { SlArrowRight } from 'react-icons/sl';
-
 const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-
   const [selectedTime, setSelectedTime] = useState(classTimeList[0]);
+  const [selectedDate, setSelectedDate] = useState<string>(classDateList[0]);
+  const today = new Date();
+
+  useEffect(() => {
+    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
+  }, [selectedDate, selectedTime, setReserveInfo]);
 
   const handleTimeClick = (time: string) => {
     setSelectedTime(time);
   };
 
-  // 리액트 데이피커 ------------------------------------------------------------------
-  const today = new Date();
-  const [selectedDate, setSelectedDate] = useState<string>(classDateList[0]);
+  /* 데이피커 */
+  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
+  function CustomCaption(props: CaptionProps) {
+    return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
+  }
 
-  // 날짜 클릭시 set
   const handleDateChange = (newDate: Date | undefined) => {
     setSelectedDate(format(newDate as Date, 'yyyy-MM-dd'));
   };
@@ -44,15 +48,6 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   const nonAvailableDates = nonAvailableDays.map((day) => {
     return new Date(2024, today.getMonth(), day);
   });
-
-  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
-  function CustomCaption(props: CaptionProps) {
-    return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
-  }
-
-  useEffect(() => {
-    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
-  }, [selectedDate, selectedTime, setReserveInfo]);
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
@@ -85,7 +80,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
                   time === selectedTime ? 'bg-rose-200' : 'bg-white'
                 } tracking-wide rounded-lg`}
               >
-                {time}
+                {convertTimeTo12HourClock(time)}
               </button>
             );
           })}
@@ -94,7 +89,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
         <span>
-          {`${selectedDate}`} {selectedTime}
+          {`${selectedDate}`} {convertTimeTo12HourClock(selectedTime)}
         </span>
       </div>
     </div>

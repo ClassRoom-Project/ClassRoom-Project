@@ -5,7 +5,8 @@ import { userId } from '@/app/(clrm)/mypage/page';
 import { useUserStore } from '@/store/UserInfoStore';
 
 // User가 선생님인지 수강생인지 구분 : isTeacher 값 불러오기
-export const getUserRole = async ({ userId }: { userId: string }) => {
+export const getUserRole = async () => {
+  // console.log('getUserRole 함수 호출 시작');
   const { data: userRole, error }: PostgrestMaybeSingleResponse<UserType> = await supabase
     .from('users')
     .select('isTeacher')
@@ -15,7 +16,8 @@ export const getUserRole = async ({ userId }: { userId: string }) => {
   if (error) {
     console.error(error);
   }
-
+  // console.log('getUserRole 함수 호출 종료');
+  // console.log('userRole', userRole);
   return userRole;
 };
 

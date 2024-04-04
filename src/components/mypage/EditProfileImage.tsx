@@ -1,7 +1,6 @@
 import { supabase } from '@/app/api/supabase/supabase';
-import { UpdateUserInfoType, UserType } from '@/types/user';
 import Image from 'next/image';
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 
 interface EditProfileImageProps {
   newProfileImage: string;

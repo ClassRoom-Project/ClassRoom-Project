@@ -1,6 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import Category from './Category';
 import Link from 'next/link';
+import ConvertBtn from './ConvertBtn';
 const SideBar = ({ children }: PropsWithChildren) => {
   return (
     <>
@@ -20,9 +21,12 @@ const SideBar = ({ children }: PropsWithChildren) => {
             create
           </Link>
           <Link href="/hello">로그인</Link>
+          {/* 예약 페이지 확인을 위한 임시 링크 */}
+          <Link href="/reserve?classId=c3d4e5f6-0000-4aeb-bcf5-6fa40fc0b0e3">예약하기(임시)</Link>
         </div>
         <div>
-          <div className="p-5">convert</div>
+          {/* 수강생/강사 전환 버튼입니다. */}
+          <ConvertBtn />
           <div className="p-5">logout</div>
         </div>
       </div>

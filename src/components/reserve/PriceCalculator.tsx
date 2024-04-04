@@ -1,24 +1,20 @@
 'use client';
 
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
-import { fetchReservedUserIds } from '@/app/api/reserve/fetchReservedUserIds';
 import useReserveStore from '@/store/reserveClassStore';
 import React, { useEffect, useState } from 'react';
 
 const PriceCalculator = ({ price, classId, maxPeople }: { classId: string; maxPeople: number; price: number }) => {
+  const { setReserveInfo } = useReserveStore();
   const [quantity, setQuantity] = useState(1);
   const [remainingQuantity, setRemainingQuantity] = useState(0);
-
   const totalPrice = price * quantity;
-
-  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
 
   useEffect(() => {
     setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
 
     const fetchCurrentReservedQuantity = async () => {
       const currentReservedCount = await fetchReservedCount(classId);
-
       if (currentReservedCount) {
         setRemainingQuantity(maxPeople - currentReservedCount);
       }
@@ -38,7 +34,6 @@ const PriceCalculator = ({ price, classId, maxPeople }: { classId: string; maxPe
     if (remainingQuantity <= quantity) {
       return;
     }
-
     setQuantity((prev) => prev + 1);
   };
 
