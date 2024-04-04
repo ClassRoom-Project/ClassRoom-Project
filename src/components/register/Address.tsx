@@ -59,7 +59,7 @@ const Address = () => {
             onChange={(e) => setDetailAddress(e.target.value)}
             placeholder="상세 주소"
           />
-        </div>
+    </div>
   );
 }
 

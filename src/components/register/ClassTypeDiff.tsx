@@ -13,8 +13,8 @@ const ClassTypeDiff = () => {
         setDifficulty(event.target.value);
     };
     return (
-        <div className='w-full max-w-md my-2'>
-            <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-4">
+            <div>
                 <div>
                 {/* 클래스 타입 드롭다운 */}
                 <select value={classType} onChange={handleClassTypeChange}>
@@ -24,7 +24,7 @@ const ClassTypeDiff = () => {
                 </select>
                 </div>
             </div>
-            <div className="flex items-center">
+            <div>
                 {/* 난이도 드롭다운 */}
                 <select value={difficulty} onChange={handleDifficultyChange}>
                 <option value="">난이도 선택</option>
@@ -34,7 +34,7 @@ const ClassTypeDiff = () => {
                 <option value="고급">고급</option>
                 </select>
             </div>
-            </div>
+        </div>
     )
 }
 

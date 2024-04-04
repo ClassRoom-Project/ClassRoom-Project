@@ -1,5 +1,5 @@
 // store.js
-import create from 'zustand';
+import { create } from 'zustand';
 import { ClassRegister } from '@/types/register';
 
 const useRegisterStore = create<ClassRegister>((set) => ({

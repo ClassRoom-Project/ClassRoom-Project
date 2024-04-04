@@ -13,9 +13,7 @@ const Personnel = () => {
   return (
     <div className="flex items-center space-x-2 my-2">
         <p>정원</p>
-    <div>
         <input className="form-input px-3 py-2 border rounded flex-grow" type="number" value={personnel} onChange={handlePersonnelChange} placeholder="정원 입력"/>
-    </div>
     </div>
   )
 }
