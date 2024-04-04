@@ -1,13 +1,20 @@
 import { PostgrestMaybeSingleResponse, PostgrestResponse, PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
-import { UpdateTeacherInfoType, UpdateUserInfoType, UserInfoType, UserType } from '@/types/user';
+import {
+  InsertTeacherInfo,
+  TeacherInfoType,
+  UpdateTeacherInfoType,
+  UpdateUserInfoType,
+  UserInfoType,
+  UserRoleType
+} from '@/types/user';
 import { userId } from '@/app/(clrm)/mypage/page';
 import { useUserStore } from '@/store/UserInfoStore';
 
 // User가 선생님인지 수강생인지 구분 : isTeacher 값 불러오기
 export const getUserRole = async () => {
   // console.log('getUserRole 함수 호출 시작');
-  const { data: userRole, error }: PostgrestMaybeSingleResponse<UserType> = await supabase
+  const { data: userRole, error }: PostgrestMaybeSingleResponse<UserRoleType> = await supabase
     .from('users')
     .select('isTeacher')
     .eq('user_id', userId)
@@ -71,7 +78,7 @@ export const checkUserNickname = async ({ newNickname }: Pick<UpdateUserInfoType
 // 선생님 정보 불러오기
 // User(선생님/수강생) 정보 불러오기
 export const getTeacherInfo = async () => {
-  const { data: teacherInfo, error }: PostgrestMaybeSingleResponse<UserType> = await supabase
+  const { data: teacherInfo, error }: PostgrestMaybeSingleResponse<TeacherInfoType> = await supabase
     .from('users')
     .select('job, field, bank, account')
     .eq('user_id', userId)
@@ -84,16 +91,33 @@ export const getTeacherInfo = async () => {
   return teacherInfo;
 };
 
-// 선생님 정보(직업, 분야, 은행, 계좌) update : supabase에 update
+// 선생님 정보 등록하기(수강생 마이페이지) : insert
+export const insertTeacherInfo = async ({
+  selectedJob,
+  selectedField,
+  selectedBank,
+  userAccount
+}: InsertTeacherInfo) => {
+  const { data, error }: PostgrestMaybeSingleResponse<InsertTeacherInfo> = await supabase
+    .from('users')
+    .insert([{ job: selectedJob, field: selectedField, bank: selectedBank, account: userAccount }])
+    .eq('user_id', userId);
+  if (error) {
+    console.error(error);
+  }
+  return data;
+};
+
+// 선생님 정보 수정하기 (강사 마이페이지) :update
 export const updateTeacherInfo = async ({
   newSelectedJob,
   newSelectedField,
-  selectedBank,
-  account
+  newSelectedBank,
+  newAccount
 }: UpdateTeacherInfoType) => {
-  const { data, error } = await supabase
+  const { data, error }: PostgrestMaybeSingleResponse<UpdateTeacherInfoType> = await supabase
     .from('users')
-    .update({ job: newSelectedJob, field: newSelectedField, bank: selectedBank, account: account })
+    .update({ job: newSelectedJob, field: newSelectedField, bank: newSelectedBank, account: newAccount })
     .eq('user_id', userId);
   if (error) {
     console.error(error);
