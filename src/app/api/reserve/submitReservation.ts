@@ -5,7 +5,7 @@ import { PostgrestSingleResponse } from '@supabase/supabase-js';
 // 예약 정보 insert api
 export const submitReservation = async (reserveInfo: ReserveInfo) => {
   const { classId, userId, reservePrice, reserveQuantity, reserveDate, reserveTime } = reserveInfo;
-  const { data: reservationId, error }: PostgrestSingleResponse<string> = await supabase
+  const { data: reservationId, error }: PostgrestSingleResponse<{ reserve_id: string }> = await supabase
     .from('reserve')
     .insert([
       {
@@ -26,5 +26,5 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
     return;
   }
 
-  return reservationId;
+  return reservationId.reserve_id;
 };
