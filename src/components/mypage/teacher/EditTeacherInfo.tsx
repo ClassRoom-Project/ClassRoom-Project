@@ -65,7 +65,9 @@ const EditTeacherInfo = () => {
     setSelectedBank(e.target.value);
   };
   const handleOnChangeAddAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAccount(e.target.value);
+    const value = e.target.value;
+    // 계좌번호 숫자만 입력 가능하게 하기 (유효성 검사)
+    setAccount(value);
   };
 
   // 수정하기 버튼 -> supabase에 수정한 정보 update
@@ -73,8 +75,10 @@ const EditTeacherInfo = () => {
     // 수정된 사항이 없는 경우
     const isJobChanged = newSelectedJob !== teacherInfo?.job;
     const isFieldChanged = newSelectedField !== teacherInfo?.field;
+    const isSelectedBankChanged = selectedBank !== teacherInfo?.bank;
+    const isAccountChanged = account !== teacherInfo?.account;
 
-    if (!isJobChanged && !isFieldChanged && !selectedBank && !account) {
+    if (!isJobChanged && !isFieldChanged && !isSelectedBankChanged && !isAccountChanged) {
       alert('수정 사항이 없습니다.');
       return;
     }
@@ -95,6 +99,9 @@ const EditTeacherInfo = () => {
       }
     }
   };
+
+  // 계좌번호 앞 6자리 남기고 가리기
+  const secretAccount = account && account.length > 6 ? account.slice(0, 6) + '*'.repeat(account.length - 6) : account;
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
@@ -145,7 +152,7 @@ const EditTeacherInfo = () => {
                 onChange={handleOnChangeAddAccount}
               />
             ) : (
-              <p>{account}</p>
+              <p>{secretAccount}</p>
             )}
           </div>
           <div className="m-4 p-4 flex gap-4">
