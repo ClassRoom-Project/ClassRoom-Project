@@ -1,11 +1,11 @@
-import { DBReserveInfo, ReserveInfo } from '@/types/reserve';
+import { ReserveInfo } from '@/types/reserve';
 import { supabase } from '../supabase/supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 // 예약 정보 insert api
 export const submitReservation = async (reserveInfo: ReserveInfo) => {
   const { classId, userId, reservePrice, reserveQuantity, reserveDate, reserveTime } = reserveInfo;
-  const { data: result, error }: PostgrestSingleResponse<DBReserveInfo> = await supabase
+  const { data: reservationId, error }: PostgrestSingleResponse<string> = await supabase
     .from('reserve')
     .insert([
       {
@@ -18,7 +18,7 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
         reserved_at: new Date()
       }
     ])
-    .select('reserve_id')
+    .select('reserve_id') // return값으로 reserve_id만선택
     .single();
 
   if (error) {
@@ -26,7 +26,5 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
     return;
   }
 
-  console.log(result);
-
-  return result;
+  return reservationId;
 };
