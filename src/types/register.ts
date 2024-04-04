@@ -24,7 +24,7 @@ export interface ClassRegister {
     selectDay: string[];
     selectedTime: string[];
     classType: string;
-    // image: string[];
+    image?: string[];
     totalTime: number;
 
     setCategory: (category: string) => void;

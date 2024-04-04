@@ -12,11 +12,11 @@ export async function fetchMyClasses(userId:string) {
 }
 
 // 예약 취소 함수
-export async function cancelReservation(reserve_id:string) {
+export async function cancelReservation(reserveId:string) {
   const { data, error } = await supabase
     .from('reserve')
     .delete()
-    .match({ reserve_id: reserve_id });
+    .match({ reserve_id: reserveId });
 
   if (error) {
     console.error(error);

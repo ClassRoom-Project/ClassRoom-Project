@@ -15,7 +15,7 @@ const TotalTime = () => {
             <div>
                 <input className="form-input px-3 py-2 border rounded flex-grow" type="number" value={totalTime} onChange={handleTotalTimeChange} placeholder="총 소요시간 입력"/>
             </div>
-            </div>
+        </div>
     )
 }
 

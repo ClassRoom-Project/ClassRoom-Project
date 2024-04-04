@@ -11,6 +11,10 @@ const Address = () => {
   const scriptUrl = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
   const open = useDaumPostcodePopup(scriptUrl);
 
+  // address === 기본 주소 (ex. 경기 성남시 분당구 판교역로 166)
+  // addressType === R : 검색된 기본 주소 타입 (도로명)
+  // bname === 법정동/법정리 이름 (ex.백현동)
+  // buildingName === 건물명 (ex.카카오 판교 아지트)
   const handleComplete = (data:AddressData) => {
     let fullAddress = data.address;
     let extraAddress = '';
