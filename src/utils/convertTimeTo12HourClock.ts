@@ -1,5 +1,6 @@
 // 24시간제를 12시간제로 변환하는 함수
 export const convertTimeTo12HourClock = (classTime: string) => {
+  // ex) classTime = ['14:30']
   const hour = Number(classTime.slice(0, 2));
   const minute = classTime.slice(2, 5);
 
@@ -15,8 +16,8 @@ export const convertTimeTo12HourClock = (classTime: string) => {
     const formatHour = amHour < 10 ? '0' + amHour : amHour;
     return formatHour + minute + ' AM';
 
-    // 00시, 12시일 경우
+    // 00시 = 12 AM, 12시 = 12 PM
   } else {
-    return hour === 0 ? 12 + minute + ' AM' : 12 + minute + ' PM';
+    return hour === 0 ? 12 + minute + ' AM' : hour + minute + ' PM';
   }
 };

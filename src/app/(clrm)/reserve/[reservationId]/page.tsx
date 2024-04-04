@@ -7,7 +7,6 @@ import React from 'react';
 const reservationCompletePage = async ({ params }: { params: { reservationId: string } }) => {
   const reservationId = decodeURIComponent(params.reservationId);
   const reservationDetails = await fetchReservationDetails(reservationId);
-  console.log(reservationDetails);
 
   if (!reservationDetails) {
     return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;

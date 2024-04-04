@@ -17,7 +17,7 @@ export const fetchReservationDetails = async (reserveId: string) => {
     .single();
 
   if (error) {
-    console.log('join error =>', error);
+    console.log('fetchReservationDetails error =>', error);
     return;
   }
 
