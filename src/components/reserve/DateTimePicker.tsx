@@ -59,7 +59,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
     // 시간이 12 초과 (오후)
     if (hour > 12) {
       const pmHour = hour - 12;
-      const formatHour = pmHour < 10 ? '0' + pmHour : pmHour;
+      const formatHour = pmHour < 10 ? '0' + pmHour : pmHour; // 시간이 10보다 작으면 0 붙임
       return formatHour + minute + ' PM';
 
       // 시간이 12 미만 (오전) && 00시가 아닐 때
@@ -114,7 +114,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
         <span>
-          {`${selectedDate}`} {selectedTime}
+          {`${selectedDate}`} {ConvertTimeTo12HourClock(selectedTime)}
         </span>
       </div>
     </div>
