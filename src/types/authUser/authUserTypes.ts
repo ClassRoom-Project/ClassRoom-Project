@@ -1,3 +1,5 @@
+import exp from 'constants';
+
 export interface SessionUserType {
   user: {
     email: string;
@@ -45,4 +47,15 @@ export const FIELDS: FieldType[] = ['교육', '요리', 'IT', '스포츠', '피�
 export interface SignInType {
   name: string;
   value: string;
+}
+
+//login
+
+export interface getLoginUserType {
+  user_id: string;
+}
+
+export interface SetUserLoginIdType {
+  loginUserId: string | null;
+  setLoginUserId: (id: string) => void;
 }
