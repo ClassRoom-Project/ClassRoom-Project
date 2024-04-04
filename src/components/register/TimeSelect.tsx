@@ -9,8 +9,8 @@ import { ko } from 'date-fns/locale';
 const TimeSelect = () => {
     const { selectDay, setSelectDay, selectedTime, setSelectedTime } = useRegisterStore();
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false); // 날짜 선택 열림/닫힘 관리
-    const datePickerRef = useRef<HTMLDivElement>(null); // 날짜 선택기의 DOM 참조를 저장
-    const dateInputRef = useRef<HTMLInputElement>(null); // 날짜 입력 필드의 DOM 참조를 저장
+    const dayPickerRef = useRef<HTMLDivElement>(null); // 날짜 선택기의 DOM 참조를 저장
+    const dayInputRef = useRef<HTMLInputElement>(null); // 날짜 입력 필드의 DOM 참조를 저장
 
     // 선택된 시간 배열 업데이트
     const handleTimeChange = (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
@@ -41,9 +41,9 @@ const TimeSelect = () => {
         const formattedDates = selectedDate.map(date => format(date, 'yyyy-MM-dd'));
         setSelectDay(formattedDates); 
 
-        // dateInputRef 존재할 시, input 필드 값 포맷된 문자열로
-        if (dateInputRef.current) {
-            dateInputRef.current.value = formattedDates.join(', '); 
+        // dayInputRef 존재할 시, input 필드 값 포맷된 문자열로
+        if (dayInputRef.current) {
+            dayInputRef.current.value = formattedDates.join(', '); 
         }
         setIsDatePickerOpen(false); // 닫기
     };
@@ -52,7 +52,7 @@ const TimeSelect = () => {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             // 해당 이벤트가 영역 밖이면!
-            if (datePickerRef.current && !datePickerRef.current.contains(event.target as Node)) {
+            if (dayPickerRef.current && !dayPickerRef.current.contains(event.target as Node)) {
                 setIsDatePickerOpen(false);
             }
         };
@@ -65,7 +65,7 @@ const TimeSelect = () => {
             <div className="relative flex items-center space-x-2">
                 <p>날짜</p>
                 <input
-                    ref={dateInputRef}
+                    ref={dayInputRef}
                     className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
                     type="text"
                     readOnly
@@ -78,7 +78,7 @@ const TimeSelect = () => {
                 >날짜 선택</button>
                 {isDatePickerOpen && (
                     <div 
-                        ref={datePickerRef} 
+                        ref={dayPickerRef} 
                         className="absolute top-full z-10 bg-white rounded border shadow-lg">
                         <DayPicker
                             mode="multiple"
