@@ -1,13 +1,10 @@
-import { CancleButton, EditButton } from '@/components/common/mypage/buttons';
-import Image from 'next/image';
 import React, { useEffect, useId, useState } from 'react';
-import BasicProfileImage from '../../../../public/profile-image.png';
-import { useQuery } from '@tanstack/react-query';
-import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { userId } from '@/app/(clrm)/mypage/page';
-
+import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { useUserStore } from '@/store/UserInfoStore';
-import { FieldType, JobType } from '@/types/authUser/authUserTypes';
+import { useQuery } from '@tanstack/react-query';
+import { FIELDS, FieldType, JOBS, JobType } from '@/types/authUser/authUserTypes';
+import SelectOption from '../SelectOption';
 
 const EditTeacherInfo = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -29,8 +26,6 @@ const EditTeacherInfo = () => {
   const fieldId = useId();
   const bankId = useId();
 
-  const jobOptions: JobType[] = ['요리사', '교사', '개발자', '운동선수', '음악가', '예술가', '뷰티'];
-  const businessFieldOptions: FieldType[] = ['요리', '교육', 'IT', '스포츠', '피아니스트', '공방', '애견미용'];
   const koreanBanks = [
     '국민은행',
     '우리은행',
@@ -70,7 +65,9 @@ const EditTeacherInfo = () => {
     setSelectedBank(e.target.value);
   };
   const handleOnChangeAddAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setAccount(e.target.value);
+    const value = e.target.value;
+    // 계좌번호 숫자만 입력 가능하게 하기 (유효성 검사)
+    setAccount(value);
   };
 
   // 수정하기 버튼 -> supabase에 수정한 정보 update
@@ -78,8 +75,10 @@ const EditTeacherInfo = () => {
     // 수정된 사항이 없는 경우
     const isJobChanged = newSelectedJob !== teacherInfo?.job;
     const isFieldChanged = newSelectedField !== teacherInfo?.field;
+    const isSelectedBankChanged = selectedBank !== teacherInfo?.bank;
+    const isAccountChanged = account !== teacherInfo?.account;
 
-    if (!isJobChanged && !isFieldChanged && !selectedBank && !account) {
+    if (!isJobChanged && !isFieldChanged && !isSelectedBankChanged && !isAccountChanged) {
       alert('수정 사항이 없습니다.');
       return;
     }
@@ -101,6 +100,9 @@ const EditTeacherInfo = () => {
     }
   };
 
+  // 계좌번호 앞 6자리 남기고 가리기
+  const secretAccount = account && account.length > 6 ? account.slice(0, 6) + '*'.repeat(account.length - 6) : account;
+
   if (isPending) {
     return <div> 로딩중 ... </div>;
   }
@@ -115,63 +117,30 @@ const EditTeacherInfo = () => {
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col">
-          <form className="m-4 p-4 flex gap-4 items-center">
-            <label htmlFor={jobId}>직업</label>
-            <select
-              name="job"
-              id={jobId}
-              value={newSelectedJob}
-              onChange={handleOnChangeJob}
-              disabled={!isEditing}
-              className="select select-bordered w-[200px] "
-            >
-              {jobOptions.map((option) => {
-                return (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                );
-              })}
-            </select>
-          </form>
-          <form className="m-4 p-4 flex gap-4">
-            <label htmlFor={fieldId}>비지니스 분야</label>
-            <select
-              name="businessField"
-              id={fieldId}
-              value={newSelectedField}
-              onChange={handleOnChangeField}
-              disabled={!isEditing}
-              className="select select-bordered w-[200px]"
-            >
-              {businessFieldOptions.map((option) => {
-                return (
-                  <option value={option} key={option}>
-                    {option}
-                  </option>
-                );
-              })}
-            </select>
-          </form>
-          <form className="m-4 p-4 flex gap-4">
-            <label htmlFor={bankId}>은행</label>
-            <select
-              name="job"
-              id={bankId}
-              className="select select-bordered w-[200px]"
-              value={selectedBank}
-              onChange={handleOnChangeSelectedBank}
-              disabled={!isEditing}
-            >
-              {koreanBanks.map((bank) => {
-                return (
-                  <option value={bank} key={bank}>
-                    {bank}
-                  </option>
-                );
-              })}
-            </select>
-          </form>
+          <SelectOption
+            id={jobId}
+            label="직업"
+            value={newSelectedJob}
+            onChange={handleOnChangeJob}
+            disabled={!isEditing}
+            options={JOBS}
+          />
+          <SelectOption
+            id={fieldId}
+            label="비지니스 분야"
+            value={newSelectedField}
+            onChange={handleOnChangeField}
+            disabled={!isEditing}
+            options={FIELDS}
+          />
+          <SelectOption
+            id={bankId}
+            label="은행"
+            value={selectedBank}
+            onChange={handleOnChangeSelectedBank}
+            disabled={!isEditing}
+            options={koreanBanks}
+          />
           <div className="m-4 p-4 flex gap-4">
             <span>계좌 정보</span>
             {isEditing ? (
@@ -183,7 +152,7 @@ const EditTeacherInfo = () => {
                 onChange={handleOnChangeAddAccount}
               />
             ) : (
-              <p>{account}</p>
+              <p>{secretAccount}</p>
             )}
           </div>
           <div className="m-4 p-4 flex gap-4">

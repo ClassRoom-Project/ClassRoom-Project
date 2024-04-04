@@ -1,9 +1,8 @@
 'use client';
 
 import { userId } from '@/app/(clrm)/mypage/page';
-import { UpdateUserInfoType, UserType } from '@/types/user';
+import { UpdateUserInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 
 import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
@@ -58,7 +57,6 @@ const EditProfile = () => {
   const handleOnClickEditProfileBtn = () => {
     // 수정된 사항이 없는 경우
     const isNicknameChanged = newNickname !== userInfo?.nickname;
-    // console.log('isNicknameChanged', isNicknameChanged);
     const isProfileImageChanged = newProfileImage != userInfo?.profile_image;
 
     if (!isNicknameChanged && !isProfileImageChanged) {
