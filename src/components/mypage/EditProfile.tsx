@@ -4,9 +4,10 @@ import { userId } from '@/app/(clrm)/mypage/page';
 import { UpdateUserInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
-
 import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
 import EditProfileImage from './EditProfileImage';
+import { notify } from '../common/Toastify';
+import { ToastContainer } from 'react-toastify';
 
 const EditProfile = () => {
   const queryClient = useQueryClient();
@@ -60,9 +61,10 @@ const EditProfile = () => {
     const isProfileImageChanged = newProfileImage != userInfo?.profile_image;
 
     if (!isNicknameChanged && !isProfileImageChanged) {
-      alert('수정 사항이 없습니다.');
+      notify();
       return;
     }
+
     if (!isAvailableNickname) {
       alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 다시 입력해주세요.');
       return;
@@ -131,9 +133,12 @@ const EditProfile = () => {
         </div>
         <div className="m-4 p-4 flex gap-4">
           {isEditing ? (
-            <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
-              수정 완료
-            </button>
+            <div>
+              <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
+                수정 완료
+              </button>
+              <ToastContainer />
+            </div>
           ) : (
             <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
               수정하기
