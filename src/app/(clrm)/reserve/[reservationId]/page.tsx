@@ -1,38 +1,38 @@
-import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
-import { fetchReserveInfo } from '@/app/api/reserve/fetchReserveInfo';
-import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import React from 'react';
+import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
+import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 
 const reservationCompletePage = async ({ params }: { params: { reservationId: string } }) => {
   const reservationId = decodeURIComponent(params.reservationId);
+  const reservationDetails = await fetchReservationDetails(reservationId);
 
-  const completedReserveInfo = await fetchReserveInfo(reservationId);
-
-  if (!completedReserveInfo) {
+  if (!reservationDetails) {
     return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;
   }
-  const reservedClassInfo = await fetchReserveClassInfo(completedReserveInfo?.class_id);
+
+  const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
 
   const reserveInfoLabels = [
     {
       title: '클래스명',
-      description: `${reservedClassInfo?.title}`
+      description: `${classDetails.title}`
     },
     {
       title: '이용 일자',
-      description: `${completedReserveInfo?.reserve_date}`
+      description: `${reserveDate}`
     },
     {
       title: '이용 회차',
-      description: `${completedReserveInfo?.reserve_time.slice(0, 5)}`
+      description: `${convertTimeTo12HourClock(reserveTime.slice(0, 5))}`
     },
     {
       title: '이용 인원',
-      description: `${completedReserveInfo?.reserve_quantity}명`
+      description: `${reserveQuantity}명`
     },
     {
       title: '이용 금액',
-      description: `${completedReserveInfo?.reserve_price.toLocaleString('ko-KR')}원`
+      description: `${reservePrice.toLocaleString('ko-KR')}원`
     }
   ];
 
