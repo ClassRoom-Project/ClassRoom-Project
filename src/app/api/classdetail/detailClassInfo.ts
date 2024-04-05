@@ -17,7 +17,7 @@ export const detailClassInfo = async (
 
 //generateStaticParams 위한 class_id를 가져오는 함수
 
-export const detailClassIDForParams = async (): Promise<ClassItem[]> => {
+export const detailClassIdOnly = async (): Promise<ClassItem[]> => {
   const { data, error } = await supabase.from('class').select('class_id');
 
   if (error) {
@@ -26,8 +26,8 @@ export const detailClassIDForParams = async (): Promise<ClassItem[]> => {
   }
   return data;
 };
-
-export const detailClassIDForProps = async (): Promise<ClassAllType[]> => {
+//데이터를 준비하는데 필요
+export const detailClassIdAllData = async (): Promise<ClassAllType[]> => {
   const { data: classInfos, error } = await supabase.from('class').select('*').single();
 
   if (error) {

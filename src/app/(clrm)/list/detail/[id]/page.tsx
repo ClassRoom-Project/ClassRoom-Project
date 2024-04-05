@@ -1,18 +1,21 @@
 import React from 'react';
-import { detailClassIDForProps } from '@/app/api/classdetail/detailClassInfo';
+import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
+import MapImage from '@/components/classDetail/MapImage';
+//ssr 구현
+export async function loader({ params }: { params: { id: string } }) {
+  const classData = await detailClassInfo(params.id);
 
-export async function generateStaticParams() {
-  const classId = await detailClassIDForProps();
-
-  const paths = classId.map((classItem) => ({
-    params: { id: classItem.class_id }
-  }));
-  return paths;
+  return {
+    data: classData
+  };
 }
-
-const page = ({ params }: { params: { id: string } }) => {
-  const { id } = params;
-  return <div></div>;
+const page = async ({ params }: { params: { id: string } }) => {
+  const classData = await detailClassInfo(params.id);
+  return (
+    <div>
+      <MapImage classData={classData} />
+    </div>
+  );
 };
 
 export default page;
