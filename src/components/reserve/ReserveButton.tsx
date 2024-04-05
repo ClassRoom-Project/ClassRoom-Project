@@ -6,10 +6,14 @@ import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
   const { setReserveInfo, reserveInfo } = useReserveStore();
+
+  const { loginUserId } = useLoginStore();
+  console.log('🚀 ~ ReserveButton ~ loginUserId:', loginUserId);
 
   useEffect(() => {
     setReserveInfo({ classId: classId });
