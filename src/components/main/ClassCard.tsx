@@ -4,7 +4,7 @@ import { ClassAllType } from '@/types/class';
 import Link from 'next/link';
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   return classInfos ? (
-    <Link href={`/list/${classInfos.class_id}`}>
+    <Link href={`/list/detail/${classInfos.class_id}`}>
       <div className="card w-[250px] h-[300px] bg-base-100 shadow-xl m-1 rounded-lg overflow-hidden">
         <figure className="w-full h-2/5 bg-gray-200">
           <Image
