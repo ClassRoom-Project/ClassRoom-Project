@@ -1,16 +1,15 @@
 'use client';
 
 import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 
 export default async function PaymentPageasync({ params }: { params: { reservationId: string } }) {
-  const clientKey = process.env.TOSS_CLIENT_KEY as string;
-  const customerKey = crypto.randomUUID();
   const reservationId = decodeURIComponent(params.reservationId);
+  const clientKey = process.env.TOSS_CLIENT_KEY as string;
+  const customerKey = reservationId;
   const reservationDetails = await fetchReservationDetails(reservationId);
   const { data: paymentWidget } = usePaymentWidget(clientKey, customerKey);
 
@@ -28,7 +27,6 @@ export default async function PaymentPageasync({ params }: { params: { reservati
   const classTitle = `${classDetails.title}`;
   const goToClassDate = `${reserveDate}`;
   const useClassTime = `${convertTimeTo12HourClock(reserveTime.slice(0, 5))}`;
-  const reservedId = reservationId;
 
   useEffect(() => {
     if (paymentWidget == null) {

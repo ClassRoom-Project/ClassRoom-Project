@@ -18,7 +18,7 @@ export default function LoginState() {
   // 훅 호출
   useSetSessionStorage();
   useReadLoginUserId(userEmail);
-  useLoginUserId();
+  useLoginUserId({ userEmail });
 
   return <div>{userEmail ? <button onClick={handleLogout}>Logout</button> : <Link href="/hello">Login</Link>}</div>;
 }
