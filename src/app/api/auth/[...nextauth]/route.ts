@@ -7,8 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const handler = NextAuth({
   pages: {
-    signIn: '/',
-    newUser: '/auth/new-user'
+    signIn: '/'
   },
   providers: [
     GoogleProvider({
@@ -35,7 +34,8 @@ const handler = NextAuth({
           user_id: uuid,
           email: user.email,
           nickname: profile?.name || user.name,
-          profile_image: profile?.image || user.image
+          profile_image: profile?.image || user.image,
+          isTeacher: false
         });
         return !error;
       }
