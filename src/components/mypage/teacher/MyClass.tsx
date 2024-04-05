@@ -1,5 +1,5 @@
-import { userId } from '@/app/(clrm)/mypage/page';
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,14 +9,15 @@ import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GrLocation } from 'react-icons/gr';
 
 const MyClass = () => {
+  const { loginUserId } = useLoginStore();
   // const pathname = usePathname;
   const router = useRouter();
 
   const { data: myClassInfo, isPending } = useQuery({
-    queryKey: ['class', userId],
-    queryFn: () => getMyRegisteredClass()
+    queryKey: ['class', loginUserId],
+    queryFn: () => getMyRegisteredClass(loginUserId)
   });
-  console.log('myClassInfo', myClassInfo);
+  // console.log('myClassInfo', myClassInfo);
 
   // 클래스 삭제하기
   const handleOnClickDeleteMyClass = () => {

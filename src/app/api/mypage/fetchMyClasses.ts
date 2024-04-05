@@ -2,9 +2,9 @@ import { PostgrestResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
 import { ClassItem } from '@/types/register';
 
-export async function fetchMyClasses(userId: string) {
+export async function fetchMyClasses(loginUserId: string | null) {
   const { data, error }: PostgrestResponse<ClassItem> = await supabase.rpc('fetch_my_reserved_classes', {
-    p_user_id: userId
+    p_user_id: loginUserId
   });
 
   if (error) {

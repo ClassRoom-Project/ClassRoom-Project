@@ -12,8 +12,6 @@ type TeacherTabComponent = {
 
 const TeacherMyPageTab = () => {
   const router = useRouter();
-  // const path = usePathname();
-  // console.log('path', path);
 
   const [activePage, setActivePage] = useState('editProfile');
 

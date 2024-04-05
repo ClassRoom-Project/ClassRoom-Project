@@ -1,3 +1,7 @@
+export interface LoginUserIdType {
+  loginUserId: string | null;
+}
+
 export interface UserRoleType {
   isTeacher: boolean;
 }

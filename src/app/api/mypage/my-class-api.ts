@@ -1,13 +1,12 @@
-import { PostgrestResponse } from '@supabase/supabase-js';
-import { MyRegisteredClassType } from '@/types/class';
 import { supabase } from '@/app/api/supabase/supabase';
-import { userId } from '@/app/(clrm)/mypage/page';
+import { MyRegisteredClassType } from '@/types/class';
+import { PostgrestResponse } from '@supabase/supabase-js';
 
-export const getMyRegisteredClass = async () => {
+export const getMyRegisteredClass = async (loginUserId: string | null) => {
   const { data: myClassInfo, error }: PostgrestResponse<MyRegisteredClassType> = await supabase
     .from('class')
     .select('user_id, class_id, title, location,detail_location, date, time, image, active')
-    .eq('user_id', userId);
+    .eq('user_id', loginUserId);
 
   if (error) {
     console.error(error);

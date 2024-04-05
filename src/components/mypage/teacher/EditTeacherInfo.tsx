@@ -1,15 +1,17 @@
-import { userId } from '@/app/(clrm)/mypage/page';
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
+import { fields, jobs, koreanBanks } from '@/constants/options';
 import { useUserStore } from '@/store/UserInfoStore';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import SelectOption from '../SelectOption';
-import { fields, jobs, koreanBanks } from '@/constants/options';
 
-import { ToastContainer } from 'react-toastify';
 import { notify } from '@/components/common/Toastify';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { ToastContainer } from 'react-toastify';
 
 const EditTeacherInfo = () => {
+  const { loginUserId } = useLoginStore();
+
   const [isEditing, setIsEditing] = useState(false);
   const [isActiveBtn, setIsActiveBtn] = useState(false);
   const [newSelectedJob, setNewSelectedJob] = useState('');
@@ -20,8 +22,8 @@ const EditTeacherInfo = () => {
   const { userInfo } = useUserStore();
 
   const { data: teacherInfo, isPending } = useQuery({
-    queryKey: ['user', userId],
-    queryFn: () => getTeacherInfo()
+    queryKey: ['user', loginUserId],
+    queryFn: () => getTeacherInfo(loginUserId)
   });
 
   // id와 htmlFor 연결 => useId 내장 훅 사용
@@ -68,7 +70,7 @@ const EditTeacherInfo = () => {
     }
 
     // 수정된 사항이 있는 경우
-    updateTeacherInfo({ newSelectedJob, newSelectedField, newSelectedBank, newAccount });
+    updateTeacherInfo({ newSelectedJob, newSelectedField, newSelectedBank, newAccount }, loginUserId);
     setIsEditing(false);
     alert('선생님 정보 수정이 완료되었습니다.');
   };

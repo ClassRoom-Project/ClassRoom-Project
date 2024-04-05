@@ -1,21 +1,24 @@
 'use client';
 
-import { userId } from '@/app/(clrm)/mypage/page';
+import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { UpdateUserInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
-import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
-import EditProfileImage from './EditProfileImage';
-import { notify } from '../common/Toastify';
 import { ToastContainer } from 'react-toastify';
+import { notify } from '../common/Toastify';
+import EditProfileImage from './EditProfileImage';
 
 const EditProfile = () => {
+  const { loginUserId } = useLoginStore();
   const queryClient = useQueryClient();
 
   const { data: userInfo, isPending } = useQuery({
-    queryKey: ['user', userId],
-    queryFn: () => getUserInfo()
+    queryKey: ['user', loginUserId],
+    queryFn: () => getUserInfo(loginUserId)
   });
+
+  // console.log('userInfo', userInfo);
 
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
@@ -35,7 +38,7 @@ const EditProfile = () => {
     const newNickname = e.target.value;
     setNewNickname(newNickname); // 새로 작성한 닉네임
 
-    const isAvailable = !(await checkUserNickname({ newNickname }));
+    const isAvailable = !(await checkUserNickname({ newNickname }, loginUserId));
     setIsAvailableNickname(isAvailable); // 중복 여부 상태 업데이트
 
     // 이미 존재하는 닉네임을 입력한 경우 수정 완료 버튼 비활성화
@@ -45,7 +48,7 @@ const EditProfile = () => {
   // 유저 정보 수정하기 : useMutation
   const { mutate: updateUserInfoMutation } = useMutation({
     mutationFn: ({ newNickname, newProfileImage }: UpdateUserInfoType) =>
-      updateUserInfo({ newNickname, newProfileImage }),
+      updateUserInfo({ newNickname, newProfileImage }, loginUserId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['user']

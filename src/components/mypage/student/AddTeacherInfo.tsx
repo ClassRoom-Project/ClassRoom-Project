@@ -2,11 +2,13 @@ import React, { useEffect, useId, useState } from 'react';
 import SelectOption from '../SelectOption';
 import { useUserStore } from '@/store/UserInfoStore';
 import { fields, jobs, koreanBanks } from '@/constants/options';
-import { userId } from '@/app/(clrm)/mypage/page';
 import { getTeacherInfo, insertTeacherInfo } from '@/app/api/mypage/user-api';
 import { useQuery } from '@tanstack/react-query';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 
 const AddTeacherInfo = () => {
+  const { loginUserId } = useLoginStore();
+
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
   // 선생님 정보가 없으면(null) : false => 정보 입력하기
   const [isHaveTeacherInfo, setIsHaveTeacherInfo] = useState(false);
@@ -21,10 +23,11 @@ const AddTeacherInfo = () => {
   const bankId = useId();
 
   const { data, isPending } = useQuery({
-    queryKey: ['user', userId],
-    queryFn: () => getTeacherInfo()
+    queryKey: ['user', loginUserId],
+    queryFn: () => getTeacherInfo(loginUserId),
+    enabled: !!loginUserId
   });
-  console.log('data', data);
+  // console.log('data', data);
 
   useEffect(() => {
     if (data && data.job) {
@@ -55,12 +58,15 @@ const AddTeacherInfo = () => {
   const handleOnClickAddTeacherInfoBtn = () => {
     const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
     if (confirm) {
-      insertTeacherInfo({
-        selectedJob,
-        selectedField,
-        selectedBank,
-        userAccount
-      });
+      insertTeacherInfo(
+        {
+          selectedJob,
+          selectedField,
+          selectedBank,
+          userAccount
+        },
+        loginUserId
+      );
 
       // 수강생에서 선생님으로 전환 로직 추가
       setIsHaveTeacherInfo(true);

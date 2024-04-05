@@ -1,21 +1,24 @@
 'use client';
-import { userId } from '@/app/(clrm)/mypage/page';
 import fetchMyClasses from '@/app/api/mypage/fetchMyClasses';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import MyReservedClassItem from './MyReservedClassItem';
 
 const MyReservedClass = () => {
+  const { loginUserId } = useLoginStore();
+
   const { data: reservedClasses, isPending } = useQuery({
     queryKey: ['reserve'],
-    queryFn: () => fetchMyClasses(userId)
+    queryFn: () => fetchMyClasses(loginUserId),
+    enabled: !!loginUserId
   });
-  // console.log('reservedClasses', reservedClasses);
+  console.log('reservedClasses', reservedClasses);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
   }
 
-  if (!reservedClasses) {
+  if (!reservedClasses || reservedClasses.length === 0) {
     return <div> 내가 예약한 클래스가 없습니다.</div>;
   }
 
