@@ -12,7 +12,7 @@ import './day-picker.css';
 const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
   const [selectedTime, setSelectedTime] = useState(classTimeList[0]);
-  const [selectedDate, setSelectedDate] = useState<string>(classDateList[0]);
+  const [selectedDate, setSelectedDate] = useState(classDateList[0]);
   const today = new Date();
 
   useEffect(() => {
