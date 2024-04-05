@@ -2,12 +2,15 @@ import React, { useEffect, useId, useState } from 'react';
 import SelectOption from '../SelectOption';
 import { useUserStore } from '@/store/UserInfoStore';
 import { fields, jobs, koreanBanks } from '@/constants/options';
-import { getTeacherInfo, insertTeacherInfo } from '@/app/api/mypage/user-api';
+import { getTeacherInfo } from '@/app/api/mypage/user-api';
 import { useQuery } from '@tanstack/react-query';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { supabase } from '@/app/api/supabase/supabase';
+import { useRouter } from 'next/navigation';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
+  // const router = useRouter();
 
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
   // 선생님 정보가 없으면(null) : false => 정보 입력하기
@@ -27,7 +30,6 @@ const AddTeacherInfo = () => {
     queryFn: () => getTeacherInfo(loginUserId),
     enabled: !!loginUserId
   });
-  // console.log('data', data);
 
   useEffect(() => {
     if (data && data.job) {
@@ -54,23 +56,31 @@ const AddTeacherInfo = () => {
     setUserAccount(value);
   };
 
-  // 등록하기 버튼
-  const handleOnClickAddTeacherInfoBtn = () => {
+  // 선생님 정보 등록하기 버튼
+  const handleOnClickAddTeacherInfoBtn = async () => {
     const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
     if (confirm) {
-      insertTeacherInfo(
-        {
-          selectedJob,
-          selectedField,
-          selectedBank,
-          userAccount
-        },
-        loginUserId
-      );
+      const { data, error } = await supabase
+        .from('users')
+        .update([{ job: selectedJob, field: selectedField, bank: selectedBank, account: userAccount, isTeacher: true }])
+        .eq('user_id', loginUserId);
+      if (error) {
+        console.error(error);
+      }
 
       // 수강생에서 선생님으로 전환 로직 추가
       setIsHaveTeacherInfo(true);
       alert('선생님 마이페이지로 이동합니다.');
+      console.log('data', data);
+      return data;
+    }
+  };
+
+  // 선생님 정보 수정하기 버튼 : 선생님으로 전환 && 선생님 마이페이지로 이동
+  const handleOnClickMoveToEditTeacherInfoBtn = () => {
+    const confirm = window.confirm('선생님으로 전환됩니다. 선생님 마이페이지로 이동하시겠습니까?');
+    if (confirm) {
+      // 선생님 마이페이지로 이동하는 로직
     }
   };
 
@@ -128,12 +138,14 @@ const AddTeacherInfo = () => {
         </div>
       </div>
       <div className="p-4 flex gap-4">
-        {!isHaveTeacherInfo ? (
+        {isHaveTeacherInfo ? (
+          <button onClick={handleOnClickMoveToEditTeacherInfoBtn} className="btn bg-point-color text-white">
+            선생님 정보 수정하기
+          </button>
+        ) : (
           <button onClick={handleOnClickAddTeacherInfoBtn} className="btn bg-point-color text-white">
             선생님 정보 등록하기
           </button>
-        ) : (
-          ''
         )}
       </div>
     </div>

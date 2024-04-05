@@ -93,21 +93,6 @@ export const getTeacherInfo = async (loginUserId: string | null) => {
   return teacherInfo;
 };
 
-// 선생님 정보 등록하기(수강생 마이페이지) : insert
-export const insertTeacherInfo = async (
-  { selectedJob, selectedField, selectedBank, userAccount }: InsertTeacherInfo,
-  loginUserId: string | null
-) => {
-  const { data, error }: PostgrestMaybeSingleResponse<InsertTeacherInfo> = await supabase
-    .from('users')
-    .insert([{ job: selectedJob, field: selectedField, bank: selectedBank, account: userAccount }])
-    .eq('user_id', loginUserId);
-  if (error) {
-    console.error(error);
-  }
-  return data;
-};
-
 // 선생님 정보 수정하기 (강사 마이페이지) :update
 export const updateTeacherInfo = async (
   { newSelectedJob, newSelectedField, newSelectedBank, newAccount }: UpdateTeacherInfoType,

@@ -34,8 +34,8 @@ const MyClass = () => {
     return <div> 로딩중 ... </div>;
   }
 
-  if (!myClassInfo) {
-    return <div> 클래스 정보가 없습니다.</div>;
+  if (!myClassInfo || myClassInfo.length === 0) {
+    return <div>현재 등록한 클래스가 없습니다.</div>;
   }
   return (
     <ul className="flex flex-col">
