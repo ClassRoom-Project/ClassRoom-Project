@@ -1,13 +1,10 @@
 import { ReactNode } from 'react';
 import LoginPage from './_component/LoginPage';
 
-type Props = { children: ReactNode; modal: ReactNode };
+interface LoginType {
+  children: ReactNode;
+}
 
-export default function Layout({ children, modal }: Props) {
-  return (
-    <div>
-      {children}
-      {modal}
-    </div>
-  );
+export default function Layout({ children }: LoginType) {
+  return <div>{children}</div>;
 }
