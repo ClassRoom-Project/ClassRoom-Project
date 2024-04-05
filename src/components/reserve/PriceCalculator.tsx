@@ -5,8 +5,13 @@ import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
-// TODO: interface로 빼기
-const PriceCalculator = ({ price, classId, maxPeople }: { classId: string; maxPeople: number; price: number }) => {
+interface PriceCalculatorProps {
+  classId: string;
+  price: number;
+  maxPeople: number;
+}
+
+const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) => {
   const { setReserveInfo } = useReserveStore();
   const [quantity, setQuantity] = useState(1);
   const [remainingQuantity, setRemainingQuantity] = useState(0);
