@@ -4,7 +4,7 @@ import { ClassAllType, ClassItem } from '@/types/class';
 //디테일 페이지 클래스 정보 api 함수
 export const detailClassInfo = async (
   classId: string
-): Promise<Omit<ClassAllType, 'reserved_count,reserved_user_id,active'> | null> => {
+): Promise<Omit<ClassAllType, 'reserved_count' | 'reserved_user_id' | 'active'> | null> => {
   const { data: classInfos, error } = await supabase.from('class').select('*').eq('class_id', classId).single();
 
   if (error) {
@@ -25,4 +25,15 @@ export const detailClassIDForParams = async (): Promise<ClassItem[]> => {
     return [];
   }
   return data;
+};
+
+export const detailClassIDForProps = async (): Promise<ClassAllType[]> => {
+  const { data: classInfos, error } = await supabase.from('class').select('*').single();
+
+  if (error) {
+    console.error('클래스 정보들 불러오기 오류 --> ', error);
+    return [];
+  }
+
+  return classInfos;
 };
