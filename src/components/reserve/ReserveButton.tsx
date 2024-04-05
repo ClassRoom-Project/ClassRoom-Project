@@ -16,8 +16,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
   console.log('🚀 ~ ReserveButton ~ loginUserId:', loginUserId);
 
   useEffect(() => {
-    setReserveInfo({ classId: classId });
-  }, [classId, setReserveInfo]);
+    setReserveInfo({ classId: classId, userId: loginUserId });
+  }, [classId, setReserveInfo, loginUserId]);
 
   const handleReserveButtonClick = async () => {
     if (reserveInfo.reserveQuantity === 0) {
