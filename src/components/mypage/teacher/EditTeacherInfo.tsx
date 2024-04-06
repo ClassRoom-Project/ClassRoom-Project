@@ -1,15 +1,14 @@
 'use client';
 
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
+import { noChangedNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
-import { useUserStore } from '@/store/UserInfoStore';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
-import SelectOption from '../SelectOption';
-
-import { notify } from '@/components/common/Toastify';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { ToastContainer } from 'react-toastify';
+import SelectOption from '../SelectOption';
+import { useUserStore } from '@/store/userInfoStore';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
@@ -67,7 +66,7 @@ const EditTeacherInfo = () => {
     const isAccountChanged = newAccount !== teacherInfo?.account;
 
     if (!isJobChanged && !isFieldChanged && !isSelectedBankChanged && !isAccountChanged) {
-      notify();
+      noChangedNotify(); // react-toastify 사용
       return;
     }
 

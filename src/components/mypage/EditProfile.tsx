@@ -6,7 +6,7 @@ import { UpdateUserInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { notify } from '../common/Toastify';
+import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
 
 const EditProfile = () => {
@@ -64,7 +64,7 @@ const EditProfile = () => {
     const isProfileImageChanged = newProfileImage != userInfo?.profile_image;
 
     if (!isNicknameChanged && !isProfileImageChanged) {
-      notify();
+      noChangedNotify();
       return;
     }
 

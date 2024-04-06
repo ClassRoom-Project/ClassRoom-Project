@@ -1,5 +1,5 @@
 import { deleteMyComment, updateMyComment } from '@/app/api/mypage/my-comments-api';
-import { useUserStore } from '@/store/UserInfoStore';
+import { useUserStore } from '@/store/userInfoStore';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { MyCommentType, NewCommentType } from '@/types/comments';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
