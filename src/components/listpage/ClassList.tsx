@@ -1,6 +1,6 @@
 'use client';
 
-import { getClassForList } from '@/app/api/listpage/ClassInfoForList';
+import { getClassForList } from '@/app/api/listpage/classInfoForList';
 import { ClassAllType } from '@/types/class';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
