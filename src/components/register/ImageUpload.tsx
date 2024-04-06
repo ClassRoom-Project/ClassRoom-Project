@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import useRegisterStore from '../../store/RegisterStore';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 
 interface ImageFileWithPreview {
   file: File;
@@ -27,6 +28,7 @@ const ImageUpload = () => {
     totalTime
   } = useRegisterStore();
 
+  const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
   let classId = crypto.randomUUID();
 
@@ -55,7 +57,7 @@ const ImageUpload = () => {
     if (!window.confirm('등록하시겠습니까?')) {
       return; // 사용자가 취소를 누르면 여기서 함수 종료
     }
-    const userId = '223e4567-e89b-12d3-a456-426614174002';
+    const userId = loginUserId;
     const imageUrls = [];
     console.log(images);
 
