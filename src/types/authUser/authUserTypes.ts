@@ -53,3 +53,7 @@ export interface SetUserLoginIdType {
   loginUserId: string | null;
   setLoginUserId: (id: string) => void;
 }
+
+export interface UserIdType {
+  email: string;
+}
