@@ -1,7 +1,14 @@
-import { useUserStore } from '@/store/UserInfoStore';
-import { TeacherInfoType, UpdateTeacherInfoType, UpdateUserInfoType, UserInfoType, UserRoleType } from '@/types/user';
+import {
+  InsertTeacherInfo,
+  TeacherInfoType,
+  UpdateTeacherInfoType,
+  UpdateUserInfoType,
+  UserInfoType,
+  UserRoleType
+} from '@/types/user';
 import { PostgrestMaybeSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
+import { useUserStore } from '@/store/UserInfoStore';
 
 // User가 선생님인지 수강생인지 구분 : isTeacher 값 불러오기
 export const getUserRole = async (loginUserId: string | null): Promise<{ isTeacher: boolean } | null> => {
@@ -99,4 +106,18 @@ export const updateTeacherInfo = async (
     console.error(error);
   }
   return data;
+};
+
+// 선생님 정보 초기 등록하기 (수강생 마이페이지에서) : update
+export const addTeacherInfo = async (
+  { selectedJob, selectedField, selectedBank, userAccount }: InsertTeacherInfo,
+  loginUserId: string | null
+) => {
+  const { data, error } = await supabase
+    .from('users')
+    .update([{ job: selectedJob, field: selectedField, bank: selectedBank, account: userAccount, isTeacher: true }])
+    .eq('user_id', loginUserId);
+  if (error) {
+    console.error(error);
+  }
 };

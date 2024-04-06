@@ -1,10 +1,12 @@
-import { getTeacherInfo } from '@/app/api/mypage/user-api';
+import { addTeacherInfo, getTeacherInfo } from '@/app/api/mypage/user-api';
 import { supabase } from '@/app/api/supabase/supabase';
+import { noInfoNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import SelectOption from '../SelectOption';
+import { ToastContainer } from 'react-toastify';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
@@ -56,21 +58,25 @@ const AddTeacherInfo = () => {
 
   // 선생님 정보 등록하기 버튼
   const handleOnClickAddTeacherInfoBtn = async () => {
-    const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
-    if (confirm) {
-      const { data, error } = await supabase
-        .from('users')
-        .update([{ job: selectedJob, field: selectedField, bank: selectedBank, account: userAccount, isTeacher: true }])
-        .eq('user_id', loginUserId);
-      if (error) {
-        console.error(error);
-      }
+    const isJobChanged = selectedJob !== data?.job;
+    const isFieldChanged = selectedField !== data?.field;
+    const isBankChanged = selectedBank !== data?.bank;
+    const isAccountChanged = userAccount !== data?.account;
 
-      // 수강생에서 선생님으로 전환 로직 추가
-      setIsHaveTeacherInfo(true);
-      alert('선생님 마이페이지로 이동합니다.');
-      console.log('data', data);
-      return data;
+    if (!isJobChanged || !isFieldChanged || !isBankChanged || !isAccountChanged) {
+      noInfoNotify();
+      return;
+    } else {
+      const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
+      if (confirm) {
+        addTeacherInfo({ selectedJob, selectedField, selectedBank, userAccount }, loginUserId);
+
+        // 수강생에서 선생님으로 전환 로직 추가
+        setIsHaveTeacherInfo(true);
+        alert('선생님 마이페이지로 이동합니다.');
+        // console.log('data', data);
+        return data;
+      }
     }
   };
 
@@ -141,9 +147,12 @@ const AddTeacherInfo = () => {
             선생님 정보 수정하기
           </button>
         ) : (
-          <button onClick={handleOnClickAddTeacherInfoBtn} className="btn bg-point-color text-white">
-            선생님 정보 등록하기
-          </button>
+          <div>
+            <button onClick={handleOnClickAddTeacherInfoBtn} className="btn bg-point-color text-white">
+              선생님 정보 등록하기
+            </button>
+            <ToastContainer />
+          </div>
         )}
       </div>
     </div>
