@@ -47,3 +47,10 @@ export interface UpdateTeacherInfoType {
 export interface UpdateProfileImageType {
   updateProfileImage: string;
 }
+
+export interface DetailUserInfoType {
+  user_id: string;
+  email: string;
+  nickname: string;
+  profile_image: string;
+}
