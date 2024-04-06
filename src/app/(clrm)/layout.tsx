@@ -16,12 +16,11 @@ interface ClrmRootLayoutProps {
 
 export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
   return (
-    <div className={inter.className}>
+    <div>
       <SideBar>
         <Header />
         {children}
       </SideBar>
-      asd
     </div>
   );
 }
