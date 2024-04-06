@@ -32,12 +32,12 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     if (currentReservedQuantity) {
       const currentRemainingQuantity = maxPeople - currentReservedQuantity;
 
-      // // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
-      // if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
-      //   alert('정원 초과로 인해 예약할 수 없습니다. ');
-      //   router.refresh();
-      //   return;
-      // }
+      // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
+      if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
+        alert('정원 초과로 인해 예약할 수 없습니다. ');
+        router.refresh();
+        return;
+      }
     }
 
     // reservationId: supabase의 응답으로 받아온 제출한 예약 정보의 아이디
@@ -50,7 +50,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
     // router.push(`reserve/${reservationId}`);
-    router.push(`reserve/${reservationId}/payment?customerKey=${userId}`);
+    // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
+    // router.replace(`/payment?customerKey=${userId}&title=${title}&price=${price}&userEmail=${userEmail}&price=${price}&userEmail=${userEmail}&goToClassDate=${goToClassDate}&useClassTime=${useClassTime}&totalPerson=${totalPerson}`);
   };
 
   return (
