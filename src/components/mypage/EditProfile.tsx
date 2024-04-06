@@ -18,8 +18,6 @@ const EditProfile = () => {
     queryFn: () => getUserInfo(loginUserId)
   });
 
-  // console.log('userInfo', userInfo);
-
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
   const [isEditing, setIsEditing] = useState(false); // 수정된 사항 확인 여부
@@ -79,7 +77,6 @@ const EditProfile = () => {
   };
 
   // 취소하기 버튼
-
   const handleOnClickCancleBtn = () => {
     if (isEditing) {
       const confirm = window.confirm('취소하시겠습니까?');

@@ -14,6 +14,7 @@ const Header = ({ children }: PropsWithChildren) => {
   const { userInfo } = useUserStore();
   const { isTeacher } = useUserRoleStore();
 
+  // 수강생인지 강사인지 명시적으로 보여주기
   const roleName = isTeacher ? '강사' : '수강생';
 
   // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기

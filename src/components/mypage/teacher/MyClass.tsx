@@ -10,18 +10,16 @@ import { GrLocation } from 'react-icons/gr';
 
 const MyClass = () => {
   const { loginUserId } = useLoginStore();
-  // const pathname = usePathname;
   const router = useRouter();
 
   const { data: myClassInfo, isPending } = useQuery({
     queryKey: ['class', loginUserId],
     queryFn: () => getMyRegisteredClass(loginUserId)
   });
-  // console.log('myClassInfo', myClassInfo);
 
   // 클래스 삭제하기
   const handleOnClickDeleteMyClass = () => {
-    // const confirm = window.confirm("")
+    // const confirm = window.confirm("클래스를 정말 삭제하시겠습니까?")
     alert('클래스를 삭제하는 버튼입니다.');
   };
 
@@ -37,6 +35,7 @@ const MyClass = () => {
   if (!myClassInfo || myClassInfo.length === 0) {
     return <div>현재 등록한 클래스가 없습니다.</div>;
   }
+
   return (
     <ul className="flex flex-col">
       {myClassInfo.map((classInfo, index) => (
