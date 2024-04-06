@@ -21,6 +21,7 @@ export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
         <Header />
         {children}
       </SideBar>
+      asd
     </div>
   );
 }

@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { userId } from '@/app/(clrm)/mypage/page';
+import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
@@ -46,12 +47,26 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
       return;
     }
+    const reservationDetails = await fetchReservationDetails(reservationId);
+
+    if (!reservationDetails || !('class' in reservationDetails)) {
+      // 예외 처리 로직
+      console.error('faild to fetch reservationDtails in ReserveButton', Error);
+      return;
+    }
+
+    const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
+    const userEmail = sessionStorage.getItem('userEmail');
+
+    console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
 
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
     // router.push(`reserve/${reservationId}`);
     // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
-    // router.replace(`/payment?customerKey=${userId}&title=${title}&price=${price}&userEmail=${userEmail}&price=${price}&userEmail=${userEmail}&goToClassDate=${goToClassDate}&useClassTime=${useClassTime}&totalPerson=${totalPerson}`);
+    router.replace(
+      `/payment?customerKey=${loginUserId}&title=${classDetails.title}&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${reserveDate}&useClassTime=${reserveTime}&totalPerson=${reserveQuantity}`
+    );
   };
 
   return (
