@@ -1,7 +1,7 @@
 'use client';
 
 import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
-import { submitReservation } from '@/app/api/reserve/submitReservation';
+import { newSubmit, submitReservation } from '@/app/api/reserve/submitReservation';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -42,7 +42,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     }
 
     // reservationId: supabase의 응답으로 받아온 제출한 예약 정보의 아이디
-    const reservationId = await submitReservation(reserveInfo);
+    // const reservationId = await submitReservation(reserveInfo);
+    const reservationId = await newSubmit(reserveInfo);
     if (!reservationId) {
       alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
       return;
@@ -64,9 +65,9 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
     // router.push(`reserve/${reservationId}`);
     // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
-    router.replace(
-      `/payment?customerKey=${loginUserId}&title=${classDetails.title}&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${reserveDate}&useClassTime=${reserveTime}&totalPerson=${reserveQuantity}`
-    );
+    // router.replace(
+    //   `/payment?customerKey=${loginUserId}&title=${classDetails.title}&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${reserveDate}&useClassTime=${reserveTime}&totalPerson=${reserveQuantity}`
+    // );
   };
 
   return (
