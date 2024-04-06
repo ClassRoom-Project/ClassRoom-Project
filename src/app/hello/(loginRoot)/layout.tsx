@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface LoginType {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export default function Layout({ children }: LoginType) {
