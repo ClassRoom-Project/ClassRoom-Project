@@ -2,8 +2,7 @@ import { useReadLoginUserId } from './useSetEmailToApi';
 import { useEffect } from 'react';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 
-export default function useLoginUserId() {
-  const userEmail = sessionStorage.getItem('userEmail');
+export default function useLoginUserId({ userEmail }: { userEmail: string | null }) {
   const { data: userData, isError } = useReadLoginUserId(userEmail);
   const setUserId = useLoginStore((state) => state.setLoginUserId);
 
