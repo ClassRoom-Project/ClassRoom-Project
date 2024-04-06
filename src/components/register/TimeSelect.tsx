@@ -26,10 +26,15 @@ const TimeSelect: React.FC = () => {
         }
     };
 
-    const handleAddTime = (date: string) => { // date 매개변수만 남김
-        addTimeToSchedule(date, tempTime); // 임시 저장된 시간 사용
+    const handleAddTime = (date: string) => {
+        if (tempTime === '') {
+            alert('시간을 선택해주세요.'); // 시간이 입력되지 않았을 때 경고 메시지 표시
+        } else {
+            addTimeToSchedule(date, tempTime); // 임시 저장된 시간 사용
+            setTempTime(''); // 시간 입력 후 입력 필드 초기화
+        }
     };
-
+    
     const handleRemoveTime = (date: string, time: string) => { // 시간 삭제 핸들러
         removeTimeFromSchedule(date, time);
     };
