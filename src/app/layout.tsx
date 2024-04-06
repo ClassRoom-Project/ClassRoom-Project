@@ -15,9 +15,7 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <QueryProvider>
-          {children}
-        </QueryProvider>
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );

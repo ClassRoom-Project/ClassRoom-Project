@@ -1,4 +1,4 @@
-import ClassList from '@/components/common/listpage/ClassList';
+import ClassList from '@/components/listpage/ClassList';
 
 export default function ListPage() {
   return (

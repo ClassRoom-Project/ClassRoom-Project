@@ -16,13 +16,11 @@ interface ClrmRootLayoutProps {
 
 export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
   return (
-    <html lang="ko">
-      <body className={inter.className}>
-        <SideBar>
-          <Header />
-          {children}
-        </SideBar>
-      </body>
-    </html>
+    <div>
+      <SideBar>
+        <Header />
+        {children}
+      </SideBar>
+    </div>
   );
 }
