@@ -1,4 +1,4 @@
-import { addTeacherInfo, getTeacherInfo } from '@/app/api/mypage/user-api';
+import { addTeacherInfo, getTeacherInfo, updateUserRole } from '@/app/api/mypage/user-api';
 import { supabase } from '@/app/api/supabase/supabase';
 import { noInfoNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
@@ -7,9 +7,12 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import SelectOption from '../SelectOption';
 import { ToastContainer } from 'react-toastify';
+import { useRouter } from 'next/navigation';
+import { useUserRoleStore } from '@/store/userRoleStore';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
+  const { isTeacher, setIsTeacher } = useUserRoleStore();
   // const router = useRouter();
 
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
@@ -85,6 +88,8 @@ const AddTeacherInfo = () => {
     const confirm = window.confirm('선생님으로 전환됩니다. 선생님 마이페이지로 이동하시겠습니까?');
     if (confirm) {
       // 선생님 마이페이지로 이동하는 로직
+      updateUserRole(isTeacher, loginUserId);
+      setIsTeacher(!isTeacher);
     }
   };
 
