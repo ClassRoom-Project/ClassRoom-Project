@@ -3,8 +3,9 @@ import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetai
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 
-const reservationCompletePage = async ({ params }: { params: { reservationId: string } }) => {
-  const reservationId = decodeURIComponent(params.reservationId);
+const reservationCompletePage = async ({ params }: { params: { reservationCompleted: string } }) => {
+  const reservationId = decodeURIComponent(params.reservationCompleted);
+  console.log(reservationId);
   const reservationDetails = await fetchReservationDetails(reservationId);
 
   if (!reservationDetails) {

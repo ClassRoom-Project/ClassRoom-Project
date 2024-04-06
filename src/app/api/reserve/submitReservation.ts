@@ -30,6 +30,7 @@ export const submitReservation = async (reserveInfo: ReserveInfo) => {
   return reservationId.reserve_id;
 };
 
+// ----------------------------------------------------
 export const newSubmit = async (reserveInfo: ReserveInfo) => {
   console.log(reserveInfo);
   //date 테이블에서 클래스 아이디가일치하고 사용자가 입력한 날짜와 day가 일치하는 date_id 가져와
@@ -71,7 +72,7 @@ export const newSubmit = async (reserveInfo: ReserveInfo) => {
     .from('reserve')
     .insert([
       {
-        user_id: 'a2260a8a-a1d6-4e37-896c-c6e3c922caec',
+        user_id: userId,
         class_id: classId,
         reserve_price: reservePrice,
         reserve_quantity: reserveQuantity,
