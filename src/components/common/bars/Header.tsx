@@ -8,10 +8,13 @@ import { SearchClass } from './categories/SearchClass';
 import { LuBell } from 'react-icons/lu';
 import basicProfileImage from '../../../../public/profile-image.png';
 import { useUserStore } from '@/store/userInfoStore';
+import { useUserRoleStore } from '@/store/userRoleStore';
 
 const Header = ({ children }: PropsWithChildren) => {
   const { userInfo } = useUserStore();
-  // console.log('userInfo', userInfo);
+  const { isTeacher } = useUserRoleStore();
+
+  const roleName = isTeacher ? '강사' : '수강생';
 
   // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기
   const profileImage = userInfo?.profile_image ? userInfo?.profile_image : basicProfileImage;
@@ -24,7 +27,9 @@ const Header = ({ children }: PropsWithChildren) => {
           <div className="mr-[10px]">
             <LuBell size={30} />
           </div>
-          <p className="p-4">{userInfo?.nickname} 님</p>
+          <p className="p-4">
+            {userInfo?.nickname} <span className="text-point-color font-bold">{roleName}님</span>
+          </p>
           <Link href={'/mypage'}>
             <Image
               src={profileImage}
