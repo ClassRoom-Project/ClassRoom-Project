@@ -89,18 +89,57 @@ const ImageUpload = () => {
         price: price,
         location: address,
         detail_location: detailAddress,
-        date: selectDay,
-        time: selectedTime,
         total_time: totalTime,
         image: imageUrls
       }
     ]);
+
     if (error) {
       console.error('Supabase에 데이터 저장 중 오류 발생:', error);
     } else {
       alert('등록이 완료되었습니다.');
       console.log('데이터 저장 성공:', data);
     }
+
+    const datesData = [];
+    const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
+    for (const date of selectDay) {
+      const { data: dateData, error: dateError } = await supabase.from('date').insert([
+        {
+          date_id: dateId,
+          class_id: classId,
+          date: date
+        }
+      ]);
+      if (dateError) {
+        console.error('Error while saving data to the "date" table:', dateError);
+      } else {
+        datesData.push(dateData);
+      }
+    }
+
+    console.log('Saved data to the "date" table:', datesData);
+
+    // Insert data into the 'time' table
+    const timesData = [];
+    const timeId = crypto.randomUUID();
+    for (const time of selectedTime) {
+      const { data: timeData, error: timeError } = await supabase.from('time').insert([
+        {
+          time_id: timeId,
+          date_id: dateId,
+          time: time
+        }
+      ]);
+      if (timeError) {
+        console.error('Error while saving data to the "time" table:', timeError);
+      } else {
+        timesData.push(timeData);
+      }
+    }
+
+    console.log('Saved data to the "time" table:', timesData);
+
   };
 
   // 이미지 최대 5개까지만 추가할 수 있도록!
