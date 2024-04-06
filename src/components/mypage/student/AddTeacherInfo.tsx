@@ -1,12 +1,10 @@
+import { getTeacherInfo } from '@/app/api/mypage/user-api';
+import { supabase } from '@/app/api/supabase/supabase';
+import { fields, jobs, koreanBanks } from '@/constants/options';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import SelectOption from '../SelectOption';
-import { useUserStore } from '@/store/UserInfoStore';
-import { fields, jobs, koreanBanks } from '@/constants/options';
-import { getTeacherInfo } from '@/app/api/mypage/user-api';
-import { useQuery } from '@tanstack/react-query';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
-import { supabase } from '@/app/api/supabase/supabase';
-import { useRouter } from 'next/navigation';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();

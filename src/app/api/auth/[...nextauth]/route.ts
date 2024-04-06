@@ -3,7 +3,6 @@ import GoogleProvider from 'next-auth/providers/google';
 import NaverProvider from 'next-auth/providers/naver';
 import KakaoProvider from 'next-auth/providers/kakao';
 import { supabase } from '../../supabase/supabase';
-import { v4 as uuidv4 } from 'uuid';
 
 const handler = NextAuth({
   pages: {
@@ -29,7 +28,7 @@ const handler = NextAuth({
       const { data: existingUser } = await supabase.from('users').select('email').eq('email', user.email).single();
 
       if (!existingUser) {
-        const uuid = uuidv4();
+        const uuid = crypto.randomUUID();
         const { data, error } = await supabase.from('users').upsert({
           user_id: uuid,
           email: user.email,

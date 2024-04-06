@@ -1,3 +1,5 @@
+'use client';
+
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { fields, jobs, koreanBanks } from '@/constants/options';
 import { useUserStore } from '@/store/UserInfoStore';
