@@ -62,6 +62,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
+    // router.push(`reserve/${reservationId}`);
+    // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
     router.replace(
       `/payment?customerKey=${loginUserId}&title=${classDetails.title}&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${reserveDate}&useClassTime=${reserveTime}&totalPerson=${reserveQuantity}`
     );
