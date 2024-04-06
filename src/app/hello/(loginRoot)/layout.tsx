@@ -1,16 +1,9 @@
 import { ReactNode } from 'react';
-import LoginPage from './_component/LoginPage';
 
 interface LoginType {
-  children: ReactNode;
-  modal: ReactNode;
+  children: React.ReactNode;
 }
 
-export default function Layout({ children, modal }: LoginType) {
-  return (
-    <div>
-      {children}
-      {modal}
-    </div>
-  );
+export default function Layout({ children }: LoginType) {
+  return <div>{children}</div>;
 }

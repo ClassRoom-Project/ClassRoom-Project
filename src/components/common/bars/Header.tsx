@@ -9,11 +9,11 @@ const Header = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="flex p-[15px]  justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
-        <Link href={'http://localhost:3000/'}>Logo</Link>
+        <Link href={'/'}>Logo</Link>
         <SearchClass />
         <div className="flex justify-center items-center">
           <div className="mr-[10px]">alarm</div>
-          <Link href={'http://localhost:3000/mypage'}>
+          <Link href={'/mypage'}>
             <Image src={defaultImage} alt="Profile image" className="mr-[5px] h-[50px] w-[50px]" />
           </Link>
         </div>
