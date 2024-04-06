@@ -11,7 +11,7 @@ const ClassDetailLeft = ({
   userData: DetailUserInfoType | null;
 }) => {
   return (
-    <div className="flex flex-col p-5 justify-center items-center w-[500px] min-h-full border-[#5373FF] border-solid border-[1px]">
+    <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg min-h-full border-[#5373FF] border-solid border-[1px]">
       <div className="flex items-start justify-start w-[350px]">
         <div className="w-8 mr-2 h-8">
           <Image
