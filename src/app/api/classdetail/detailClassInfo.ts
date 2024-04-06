@@ -2,9 +2,7 @@ import { supabase } from '../supabase/supabase';
 import { ClassAllType, ClassItem } from '@/types/class';
 
 //디테일 페이지 클래스 정보 api 함수
-export const detailClassInfo = async (
-  classId: string
-): Promise<Omit<ClassAllType, 'reserved_count' | 'reserved_user_id' | 'active'> | null> => {
+export const detailClassInfo = async (classId: string): Promise<ClassAllType | null> => {
   const { data: classInfos, error } = await supabase.from('class').select('*').eq('class_id', classId).single();
 
   if (error) {

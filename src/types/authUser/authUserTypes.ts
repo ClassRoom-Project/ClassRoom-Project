@@ -1,3 +1,5 @@
+import exp from 'constants';
+
 export interface SessionUserType {
   user: {
     email: string;
@@ -92,4 +94,15 @@ export const FIELDS: FieldType[] = [
 export interface SignInType {
   name: string;
   value: string;
+}
+
+//login
+
+export interface getLoginUserType {
+  user_id: string;
+}
+
+export interface SetUserLoginIdType {
+  loginUserId: string | null;
+  setLoginUserId: (id: string) => void;
 }

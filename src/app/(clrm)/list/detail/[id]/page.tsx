@@ -1,7 +1,9 @@
 import React from 'react';
 import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
-import MapImage from '@/components/classDetail/MapImage';
-//ssr 구현
+import ClassDetailLeft from '@/components/classDetail/ClassDetailLeft';
+import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
+
+//ssr
 export async function loader({ params }: { params: { id: string } }) {
   const classData = await detailClassInfo(params.id);
 
@@ -11,9 +13,10 @@ export async function loader({ params }: { params: { id: string } }) {
 }
 const page = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
+  const userData = await getDetailUserInfo();
   return (
     <div>
-      <MapImage classData={classData} />
+      <ClassDetailLeft classData={classData} userData={userData} />
     </div>
   );
 };

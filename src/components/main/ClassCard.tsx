@@ -9,7 +9,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
         <figure className="w-full h-2/5 bg-gray-200">
           <Image
             width={300}
-            height={140}
+            height={200}
             src={classInfos.image && classInfos.image.length > 0 ? classInfos.image[0] : 'no image'}
             alt="클래스 이미지"
             layout="responsive"

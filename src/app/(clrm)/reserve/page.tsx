@@ -4,6 +4,7 @@ import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
 import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
 import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
+import CheckAlreadyReserved from '@/components/reserve/CheckAlreadyReserved';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
@@ -16,6 +17,8 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
         <div className="flex w-full h-full bg-gray-200 p-6">
           <DateTimePicker classDateList={classInfo.date} classTimeList={classInfo.time} />
           <div className="flex flex-col justify-between items-center w-full p-6">
+            {/* CheckAlreadyReserved : 예약한 클래스인지 확인을 위한 임시 컴포넌트 */}
+            <CheckAlreadyReserved classId={classInfo.classId} />
             <ClassInfo classInfo={classInfo} />
             <CurrentReserveQuantity classId={classInfo.classId} maxPeople={classInfo?.maxPeople} />
             <PriceCalculator price={classInfo.price} classId={classInfo.classId} maxPeople={classInfo.maxPeople} />
