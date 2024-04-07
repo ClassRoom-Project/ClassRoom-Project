@@ -12,9 +12,15 @@ const Price = () => {
   return (
     <div className='mt-2'>
         <div className="flex items-center space-x-4">
-          <p>가격</p>
+          <p className='text-base flex-shrink-0'>가격</p>
           <div>
-              <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={price} onChange={handlePriceChange} placeholder="가격"/>
+              <input 
+                className="form-input px-3 py-2 border rounded flex-grow" 
+                type="text" 
+                value={price} 
+                onChange={handlePriceChange} 
+                placeholder="가격"
+              />
           </div>
         </div>
     </div>

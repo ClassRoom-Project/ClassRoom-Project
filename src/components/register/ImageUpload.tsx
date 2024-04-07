@@ -59,7 +59,7 @@ const ImageUpload = () => {
   // supabase에 데이터 저장
   const handleSubmit = async () => {
     if (!window.confirm('등록하시겠습니까?')) {
-      return; // 사용자가 취소를 누르면 여기서 함수 종료
+      return;
     }
     const userId = loginUserId;
     const imageUrls = [];
@@ -143,8 +143,6 @@ const ImageUpload = () => {
   };
 
   // 이미지 최대 5개까지만 추가할 수 있도록!
-  // 선택된 파일이 있고 이미 선택된 이미지의 수가 5개 이상이면
-  // 미리보기 URL(preview)
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       if (images.length >= 5) {
@@ -168,6 +166,7 @@ const ImageUpload = () => {
     const newImages = [selectedImage, ...remainingImages];
     setImages(newImages);
   };
+
   return (
     <div className="flex justify-between items-center pt-2">
       {images.length < 5 && (
@@ -184,7 +183,11 @@ const ImageUpload = () => {
       )}
       {images.map((image, index) => (
         <div key={index} className="h-[100px] w-[100px] relative ml-2">
-          <img src={image.preview} alt="uploaded" className="h-full w-full object-cover rounded-[20px] border" />
+          <img 
+            src={image.preview} 
+            alt="uploaded" 
+            className="h-full w-full object-cover rounded-[20px] border" 
+          />
           <button
             className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${
               index === 0 ? 'bg-blue-500' : 'bg-white-500'
@@ -195,7 +198,10 @@ const ImageUpload = () => {
           </button>
         </div>
       ))}
-      <button onClick={handleSubmit} className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">
+      <button
+        onClick={handleSubmit} 
+        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+      >
         등록하기
       </button>
     </div>

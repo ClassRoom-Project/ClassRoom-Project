@@ -16,12 +16,12 @@ const ClassTypeDiff = () => {
         <div className="flex items-center space-x-4">
             <div>
                 <div>
-                {/* 클래스 타입 드롭다운 */}
-                <select value={classType} onChange={handleClassTypeChange}>
-                    <option value="">클래스타입 선택</option>
-                    <option value="오프라인 클래스">오프라인 클래스</option>
-                    <option value="온라인 클래스">온라인 클래스</option>
-                </select>
+                    {/* 클래스 타입 드롭다운 */}
+                    <select value={classType} onChange={handleClassTypeChange}>
+                        <option value="">클래스타입 선택</option>
+                        <option value="오프라인 클래스">오프라인 클래스</option>
+                        <option value="온라인 클래스">온라인 클래스</option>
+                    </select>
                 </div>
             </div>
             <div>

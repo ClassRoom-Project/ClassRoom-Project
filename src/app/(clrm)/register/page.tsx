@@ -14,19 +14,22 @@ import TotalTime from '@/components/register/TotalTime';
 const RegisterPage = () => {
   return (
     <div className='p-4'>
-      <div className='border p-4 flex flex-col item-center mt-4'>
-        <Category />
-        <ClassTitle />
-        <ClassContent />
-        <Personnel />
-        <MinMaxNumber />
-        <ClassTypeDiff />
-        <TotalTime />
-        <Price />
-        <Address />
-        <TimeSelect />
+      {/* max-w-md로 최대 너비를 중간 크기로 설정하고, mx-auto로 가운데 정렬, sm:max-w-lg와 lg:max-w-xl로 반응형 설정 */}
+      <div className='border p-4'>
+        <div className='max-w-md mx-auto sm:max-w-lg lg:max-w-xl'>
+          <ClassTypeDiff />
+          <Category />
+          <ClassTitle />
+          <ClassContent />
+          <Personnel />
+          <MinMaxNumber />
+          <TotalTime />
+          <Price />
+          <Address />
+          <TimeSelect />
+        </div>
       </div>
-      <div className="flex justify-between items-center pt-2">
+      <div className="flex justify-between items-center pt-2 max-w-md mx-auto sm:max-w-lg lg:max-w-xl">
         <ImageUpload />
       </div>
     </div>

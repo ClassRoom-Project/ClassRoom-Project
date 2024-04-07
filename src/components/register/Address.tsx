@@ -36,29 +36,26 @@ const Address = () => {
   };
 
   return (
-    <div className='my-1'>
-          <div className="flex items-center space-x-2 my-2">
-            <p>위치</p>
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center">
-                <input
-                  className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
-                  type="text"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  placeholder="주소"
-                />
-                <button className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700" onClick={handleOpenPostCode}>주소 검색</button>
-              </div>
-            </div>
-          </div>
-          <input
-            className="form-input px-3 py-2 border rounded mr-2 max-w-xs"
-            type="text"
-            value={detailAddress}
-            onChange={(e) => setDetailAddress(e.target.value)}
-            placeholder="상세 주소"
-          />
+    <div className='my-2'>
+      <div className="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2 my-2">
+        <p className='text-base flex-shrink-0 '>위치</p>
+        <input
+          className="form-input px-3 py-2 border rounded flex-grow sm:flex-grow-0 sm:w-auto"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          placeholder="주소를 입력해주세요"
+        />
+        {/* mt-2 sm:mt-0 유틸리티를 이용해 반응형으로 마진을 조절합니다. */}
+        <button onClick={handleOpenPostCode} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700 w-full sm:w-auto mt-2 sm:mt-0">주소 검색</button>
+      </div>
+      <input
+        className="form-input px-3 py-2 border rounded w-full"
+        type="text"
+        value={detailAddress}
+        onChange={(e) => setDetailAddress(e.target.value)}
+        placeholder="상세 주소를 입력해주세요"
+      />
     </div>
   );
 }
