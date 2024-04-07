@@ -1,6 +1,7 @@
 import { supabase } from '@/app/api/supabase/supabase';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
+import basicProfileImage from '../../../public/profile-image.png';
 
 interface EditProfileImageProps {
   newProfileImage: string;
@@ -41,11 +42,14 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing }: Ed
     uploadProfileImage(file);
   };
 
+  // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기
+  const profileImage = newProfileImage ? newProfileImage : basicProfileImage;
+
   return (
     <div>
       <div className="flex flex-col items-center p-4 gap-4">
         <Image
-          src={newProfileImage}
+          src={profileImage}
           width={100}
           height={100}
           className="rounded-full"

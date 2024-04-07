@@ -1,12 +1,11 @@
-import { supabase } from '../supabase/supabase';
-import { PostgrestResponse, PostgrestSingleResponse } from '@supabase/supabase-js';
 import { MyCommentType, NewCommentType } from '@/types/comments';
-import { userId } from '@/app/(clrm)/mypage/page';
+import { PostgrestResponse, PostgrestSingleResponse } from '@supabase/supabase-js';
+import { supabase } from '../supabase/supabase';
 
 // 후기를 작성한 클래스 정보 불러오기 : db join
-export const fetchClassInfoOnComment = async (userId: string) => {
+export const fetchClassInfoOnComment = async (loginUserId: string | null) => {
   const { data, error }: PostgrestResponse<MyCommentType> = await supabase.rpc('fetch_class_info_on_comment_new', {
-    p_user_id: userId
+    p_user_id: loginUserId as string
   });
 
   if (error) {
@@ -18,11 +17,11 @@ export const fetchClassInfoOnComment = async (userId: string) => {
 };
 
 // 후기 삭제하기 : delete
-export const deleteMyComment = async (commentId: string) => {
+export const deleteMyComment = async (commentId: string, loginUserId: string | null) => {
   const { data, error } = await supabase
     .from('comments')
     .delete()
-    .eq('user_id', userId)
+    .eq('user_id', loginUserId as string)
     .eq('comment_id', commentId)
     .select();
 
@@ -34,12 +33,11 @@ export const deleteMyComment = async (commentId: string) => {
 };
 
 // 후기 수정하기 : update
-export const updateMyComment = async ({ newContent, commentId }: NewCommentType) => {
-  // supabase type 지정 postgrest 이런거!!
+export const updateMyComment = async ({ newContent, commentId }: NewCommentType, loginUserId: string | null) => {
   const { data, error }: PostgrestSingleResponse<null> = await supabase
     .from('comments')
     .update({ content: newContent })
-    .eq('user_id', userId)
+    .eq('user_id', loginUserId as string)
     .eq('comment_id', commentId);
 
   if (error) {
@@ -49,5 +47,3 @@ export const updateMyComment = async ({ newContent, commentId }: NewCommentType)
 
   return data;
 };
-
-// 후기 삭제하기 : delete

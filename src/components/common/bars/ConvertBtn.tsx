@@ -1,15 +1,43 @@
 'use client';
 
-import React from 'react';
+import { updateUserRole } from '@/app/api/mypage/user-api';
+import { supabase } from '@/app/api/supabase/supabase';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useUserRoleStore } from '@/store/userRoleStore';
+import { useRouter } from 'next/navigation';
+import { TbArrowsExchange } from 'react-icons/tb';
 
 const ConvertBtn = () => {
-  const handleOnClickChangedRoleBtn = () => {
-    alert('수강생/선생님으로 전환됩니다.');
+  const { loginUserId } = useLoginStore();
+  // const isTeacherBoolean = useUserRole();
+
+  const { isTeacher, setIsTeacher } = useUserRoleStore();
+  const router = useRouter();
+
+  // 전환 버튼
+  const handleOnClickChangedRoleBtn = async () => {
+    const confirmMessage = isTeacher ? '수강생으로 전환 하시겠습니까?' : '선생님으로 전환 하시겠습니까?';
+    const confirm = window.confirm(confirmMessage);
+
+    if (confirm) {
+      updateUserRole(isTeacher, loginUserId);
+      // zustand 스토어 상태 업데이트
+      setIsTeacher(!isTeacher);
+
+      // 페이지 새로고침
+      router.refresh();
+    }
   };
+
   return (
-    <button className="p-5" onClick={handleOnClickChangedRoleBtn}>
-      convert
-    </button>
+    <div className="p-4">
+      <button onClick={handleOnClickChangedRoleBtn}>
+        <div className="flex flex-col items-center">
+          <TbArrowsExchange size={30} />
+          <p className="text-xs">{isTeacher ? '수강생으로 전환하기' : '선생님으로 전환하기'}</p>
+        </div>
+      </button>
+    </div>
   );
 };
 

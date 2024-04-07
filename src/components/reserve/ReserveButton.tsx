@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
-import { userId } from '@/app/(clrm)/mypage/page';
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
