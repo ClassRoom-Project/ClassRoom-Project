@@ -1,6 +1,6 @@
-export interface LoginUserIdType {
-  loginUserId: string | null;
-}
+// export interface LoginUserIdType {
+//   loginUserId: string | null;
+// }
 
 export interface UserRoleType {
   isTeacher: boolean;
@@ -11,6 +11,7 @@ export interface UserInfoType {
   email: string;
   nickname: string;
   profile_image: string;
+  userId: string;
 }
 
 // 선생님 정보 type
