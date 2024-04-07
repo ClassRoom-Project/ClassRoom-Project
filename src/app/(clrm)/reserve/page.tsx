@@ -4,13 +4,11 @@ import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
 import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
 import CheckAlreadyReserved from '@/components/reserve/CheckAlreadyReserved';
-import { fetchReserveClassInfo, newFetch } from '@/app/api/reserve/fetchReserveClassInfo';
+import { fetchReserveClassInfo, newFetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
-  const classInfo = await newFetch(classId);
-
-  // console.log(classInfo);
+  const classInfo = await newFetchReserveClassInfo(classId);
 
   return (
     <div className="w-full h-full">

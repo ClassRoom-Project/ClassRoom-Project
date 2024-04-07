@@ -6,7 +6,6 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { CaptionProps, DayPicker } from 'react-day-picker';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { ReserveClassType } from '@/types/class';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css';
 import { DateList } from '@/types/date';
@@ -17,10 +16,10 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const [selectedDate, setSelectedDate] = useState(classDates[0].day);
   const today = new Date();
 
-  console.log(classDates);
+  // console.log(classDates);
 
   useEffect(() => {
-    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime + ':00' });
+    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
   }, [selectedDate, selectedTime, setReserveInfo]);
 
   const handleTimeClick = (timeId: string) => {

@@ -1,8 +1,25 @@
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
-import { DBReserveClassType } from '@/types/class';
+import { DBReserveClassType, ReserveClassType } from '@/types/class';
 
 // 예약페이지에서 클래스 정보 불러오는 api
+export const newFetchReserveClassInfo = async (classId: string) => {
+  const { data: classInfo, error }: PostgrestSingleResponse<ReserveClassType[]> = await supabase.rpc(
+    'fetch_reserve_class_info',
+    {
+      _class_id: classId
+    }
+  );
+
+  if (error) {
+    console.error('newFetchReserveClassInfo 오류 =>', error);
+    return;
+  }
+
+  return classInfo[0];
+};
+
+/* TODO: 예약 카운트 로직 구현 후 삭제 예정 */
 export const fetchReserveClassInfo = async (classId: string) => {
   const { data, error }: PostgrestSingleResponse<DBReserveClassType> = await supabase
     .from('class')
@@ -47,43 +64,7 @@ export const fetchReserveClassInfo = async (classId: string) => {
   return classInfo;
 };
 
-// export const newFetch = async (classId: string) => {
-//   const { data, error } = await supabase.rpc('get_reserve_class_info', { p_class_id: classId });
-
-//   if (error) {
-//     console.error('Error fetching class info', error);
-//     return;
-//   }
-
-//   return data;
-// };
-export const newFetch = async (classId: string) => {
-  const { data, error }: PostgrestSingleResponse<DBReserveClassType[]> = await supabase.rpc('get_class_info', {
-    class_id: classId
-  });
-
-  if (error) {
-    console.error('Error fetching class info', error);
-    return;
-  }
-
-  const classInfo = {
-    classId: data[0].class_id,
-    category: data[0].category,
-    title: data[0].title,
-    location: data[0].location,
-    price: data[0].price,
-    image: data[0].image,
-    maxPeople: data[0].max_people,
-    reservedCount: data[0].reserved_count,
-    dates: data[0].dates
-  };
-
-  console.log(classInfo);
-
-  return classInfo;
-};
-
+/* TODO: 예약 카운트 로직 구현 후 삭제 예정 */
 // 예약 인원 수 불러오는 api
 export const fetchReservedCount = async (classId: string) => {
   const { data: reservedCount, error }: PostgrestSingleResponse<{ reserved_count: number }> = await supabase

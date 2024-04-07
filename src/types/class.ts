@@ -43,7 +43,7 @@ export interface MyRegisteredClassType {
 
 // 예약 페이지에서 클래스 정보를 보여주기 위한 타입
 export type ReserveClassType = {
-  class_id: string;
+  classId: string;
   category: string;
   title: string;
   location: string;
@@ -51,9 +51,10 @@ export type ReserveClassType = {
   image: string;
   maxPeople: number;
   dates: DateList[];
-  reserved_count: number;
+  reservedCount: number;
 };
 
+/* TODO: 예약 카운트 로직 구현 후 삭제 예정 */
 // DB에 저장된 클래스 정보 타입
 export type DBReserveClassType = {
   class_id: string;
