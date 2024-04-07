@@ -1,5 +1,6 @@
 'use client';
 
+import { LuBell } from 'react-icons/lu';
 import useLoginUserId from '@/hooks/useLogin/useLoginUserId';
 import useSessionStorageUserEmail from '@/hooks/useLogin/useSessionStorageUserEmail';
 import { useReadLoginUserId } from '@/hooks/useLogin/useSetEmailToApi';
@@ -42,10 +43,13 @@ export default function LoginState() {
     <div>
       {userEmail ? (
         <div className="flex items-center">
-          {' '}
+          <div className="mr-[10px]">
+            <LuBell size={30} />
+          </div>{' '}
           <p className="p-4">
             {userInfo?.nickname} <span className="text-point-color font-bold">{roleName}님</span>
           </p>
+          {/*todo : 드랍다운으로 변경*/}
           <Link href={'/mypage'}>
             <Image
               src={profileImage}
