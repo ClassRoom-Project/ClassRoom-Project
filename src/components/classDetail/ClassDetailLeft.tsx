@@ -10,6 +10,8 @@ const ClassDetailLeft = ({
   classData: ClassAllType | null;
   userData: DetailUserInfoType | null;
 }) => {
+  const defaultImageSrc = '/noimage.png';
+  const defaultProfileImageSrc = '기본프로필사진.png';
   return (
     <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg min-h-full border-[#5373FF] border-solid border-[1px]">
       <div className="flex items-start justify-start w-[350px]">
@@ -17,10 +19,8 @@ const ClassDetailLeft = ({
           <Image
             width={30}
             height={30}
-            src={userData?.profile_image && userData?.profile_image.length > 0 ? userData.profile_image[0] : 'no image'}
+            src={userData?.profile_image[0] ? userData.profile_image[0] : defaultProfileImageSrc}
             alt="profileImage"
-            layout="responsive"
-            objectFit="cover"
             unoptimized={true}
           ></Image>
         </div>
@@ -30,10 +30,8 @@ const ClassDetailLeft = ({
         <Image
           width={350}
           height={350}
-          src={classData?.image && classData?.image.length > 0 ? classData.image[0] : 'no image'}
+          src={classData?.image[0] ? classData.image[0] : defaultImageSrc}
           alt="classImage 0"
-          layout="responsive"
-          objectFit="cover"
           unoptimized={true}
         ></Image>
       </div>
@@ -42,10 +40,8 @@ const ClassDetailLeft = ({
           <Image
             width={50}
             height={50}
-            src={classData?.image && classData?.image.length > 0 ? classData.image[1] : 'no image'}
+            src={classData?.image[1] ? classData.image[1] : defaultImageSrc}
             alt="classImage 1"
-            layout="responsive"
-            objectFit="cover"
             unoptimized={true}
           ></Image>
         </div>
@@ -53,10 +49,8 @@ const ClassDetailLeft = ({
           <Image
             width={50}
             height={50}
-            src={classData?.image && classData?.image.length > 0 ? classData.image[2] : 'no image'}
-            alt="classImage 1"
-            layout="responsive"
-            objectFit="cover"
+            src={classData?.image[2] ? classData.image[2] : defaultImageSrc}
+            alt="classImage 2"
             unoptimized={true}
           ></Image>
         </div>
@@ -64,10 +58,8 @@ const ClassDetailLeft = ({
           <Image
             width={50}
             height={50}
-            src={classData?.image && classData?.image.length > 0 ? classData.image[3] : 'no image'}
-            alt="classImage 1"
-            layout="responsive"
-            objectFit="cover"
+            src={classData?.image[3] ? classData.image[3] : defaultImageSrc}
+            alt="classImage 3"
             unoptimized={true}
           ></Image>
         </div>
@@ -75,10 +67,8 @@ const ClassDetailLeft = ({
           <Image
             width={50}
             height={50}
-            src={classData?.image && classData?.image.length > 0 ? classData.image[4] : 'no image'}
-            alt="classImage 1"
-            layout="responsive"
-            objectFit="cover"
+            src={classData?.image[4] ? classData.image[4] : defaultImageSrc}
+            alt="classImage 4"
             unoptimized={true}
           ></Image>
         </div>
