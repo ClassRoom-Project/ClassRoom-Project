@@ -16,7 +16,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   const today = new Date();
 
   useEffect(() => {
-    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
+    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime + ':00' });
   }, [selectedDate, selectedTime, setReserveInfo]);
 
   const handleTimeClick = (time: string) => {

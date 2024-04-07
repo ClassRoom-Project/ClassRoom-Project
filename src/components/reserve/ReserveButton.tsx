@@ -1,7 +1,7 @@
 'use client';
 
 import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
-import { newSubmit, submitReservation } from '@/app/api/reserve/submitReservation';
+import { newRpc, newSubmit, submitReservation } from '@/app/api/reserve/submitReservation';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -43,7 +43,9 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
     // reservationId: supabase의 응답으로 받아온 제출한 예약 정보의 아이디
     // const reservationId = await submitReservation(reserveInfo);
-    const reservationId = await newSubmit(reserveInfo);
+    const result = await newRpc(reserveInfo);
+    // const reservationId = await newSubmit(reserveInfo);
+    return;
     if (!reservationId) {
       alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
       return;
@@ -59,7 +61,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
     const userEmail = sessionStorage.getItem('userEmail');
 
-    console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
+    // console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
 
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });

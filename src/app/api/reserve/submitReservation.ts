@@ -87,11 +87,25 @@ export const newSubmit = async (reserveInfo: ReserveInfo) => {
 
   if (error) {
     console.log('insert error', error);
+    return;
   }
 
   console.log(data);
 
-  return data?.reserve_id;
+  return data.reserve_id;
 
   // 그럼 time_id를 알면 date_id를 알수있다
+};
+
+export const newRpc = async (reserveInfo: ReserveInfo) => {
+  const { data, error } = await supabase.rpc('insert_new_reservation', {
+    reserve_info: reserveInfo
+  });
+
+  if (error) {
+    console.error('Error calling new_submit function:', error);
+    return;
+  }
+
+  return data;
 };
