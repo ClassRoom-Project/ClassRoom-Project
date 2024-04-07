@@ -1,5 +1,7 @@
-import { userId } from '@/app/(clrm)/mypage/page';
+'use client';
+
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,18 +11,17 @@ import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GrLocation } from 'react-icons/gr';
 
 const MyClass = () => {
-  // const pathname = usePathname;
+  const { loginUserId } = useLoginStore();
   const router = useRouter();
 
   const { data: myClassInfo, isPending } = useQuery({
-    queryKey: ['class', userId],
-    queryFn: () => getMyRegisteredClass()
+    queryKey: ['class', loginUserId],
+    queryFn: () => getMyRegisteredClass(loginUserId)
   });
-  console.log('myClassInfo', myClassInfo);
 
   // 클래스 삭제하기
   const handleOnClickDeleteMyClass = () => {
-    // const confirm = window.confirm("")
+    // const confirm = window.confirm("클래스를 정말 삭제하시겠습니까?")
     alert('클래스를 삭제하는 버튼입니다.');
   };
 
@@ -33,9 +34,10 @@ const MyClass = () => {
     return <div> 로딩중 ... </div>;
   }
 
-  if (!myClassInfo) {
-    return <div> 클래스 정보가 없습니다.</div>;
+  if (!myClassInfo || myClassInfo.length === 0) {
+    return <div>현재 등록한 클래스가 없습니다.</div>;
   }
+
   return (
     <ul className="flex flex-col">
       {myClassInfo.map((classInfo, index) => (
@@ -58,33 +60,30 @@ const MyClass = () => {
               <div className="flex gap-4 py-4">
                 <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl">
                   <FaRegCalendarCheck color="#5373FF" size="20" />
-                  <span>
-                    날짜 :{' '}
+                  <div className="flex flex-row gap-2">
+                    날짜 :
                     {classInfo.date.map((date, index) => (
                       <React.Fragment key={index}>
-                        {/* 배열 내 값이 2개 이상일 경우, ' ' 둘 사이 공백주기*/}
-                        {index > 0 && ' '}
-                        {date}
+                        <p className="flex gap-2">{date}</p>
                       </React.Fragment>
                     ))}
-                  </span>
+                  </div>
                 </div>
                 <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
                   <FaRegClock color="#5373FF" size="20" />
-                  <span>
-                    시간 :{' '}
+                  <div className="flex flex-row gap-2">
+                    시간 :
                     {classInfo.time.map((time, index) => (
                       <React.Fragment key={index}>
-                        {index > 0 && ' '}
-                        {time}
+                        <p className="flex gap-2">{time}</p>
                       </React.Fragment>
                     ))}
-                  </span>
+                  </div>
                 </div>
               </div>
               <div className="inline-flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
                 <GrLocation color="#5373FF" size="20" />
-                <span>위치 : {classInfo.location}</span>
+                <p>위치 : {classInfo.location}</p>
               </div>
             </div>
             <div className="flex gap-4 m-4">

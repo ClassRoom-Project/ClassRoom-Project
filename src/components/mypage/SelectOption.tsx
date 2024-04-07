@@ -1,4 +1,3 @@
-import { FieldType, JobType } from '@/types/authUser/authUserTypes';
 import React, { ChangeEvent } from 'react';
 
 interface SelectOptionProps {
@@ -7,7 +6,7 @@ interface SelectOptionProps {
   value: string;
   onChange: React.ChangeEventHandler<HTMLSelectElement> | (() => Promise<void>);
   disabled: boolean;
-  options: JobType[] | FieldType[] | string[];
+  options: string[];
 }
 
 const SelectOption = ({ id, label, value, onChange, disabled, options }: SelectOptionProps) => {
@@ -20,7 +19,7 @@ const SelectOption = ({ id, label, value, onChange, disabled, options }: SelectO
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className="select select-bordered w-[200px] "
+        className="select select-bordered w-[200px]"
       >
         {options.map((option) => {
           return (
