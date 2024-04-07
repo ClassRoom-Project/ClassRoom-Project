@@ -5,6 +5,7 @@ import ClassInfos from './ClassInfos';
 import ClassDetailBtn from './ClassDetailBtn';
 import ClassDetailDayPicker from './ClassDetailDayPicker';
 
+//오른쪽 컴포넌트
 const ClassDetailRight = ({ classData }: { classData: ClassAllType | null }) => {
   return (
     <div className="flex flex-col p-5 ml-4 justify-center items-center w-[500px] rounded-lg h-[900px] border-[#5373FF] border-solid border-[1px]">

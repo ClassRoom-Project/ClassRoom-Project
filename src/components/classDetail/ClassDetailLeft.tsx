@@ -5,6 +5,7 @@ import { ClassAllType } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
 
+//왼쪽 컴포넌트
 const ClassDetailLeft = ({
   classData,
   userData
@@ -15,9 +16,10 @@ const ClassDetailLeft = ({
   const defaultImageSrc = '/noimage.png';
   const defaultProfileImageSrc = '/기본프로필사진.png';
 
+  // 메인 이미지를 스테이트로 변경 -> 메인이미지 바꾸기
   const [mainImageSrc, setMainImageSrc] = useState(classData?.image[0] || defaultImageSrc);
 
-  // 이미지 선택시 해당이미지가 메인이미지로 바뀌는 로직
+  // 이미지 선택시 해당이미지가 메인이미지로 바뀌는 로직, Todo : 컴포넌트로 리팩토링 예정
   const handleThumbnailClick = (imageSrc: string) => {
     setMainImageSrc(imageSrc);
   };
@@ -102,7 +104,7 @@ const ClassDetailLeft = ({
           ></Image>
         </div>
       </div>
-      <div className="w-[350px] mt-6 h-[350px] bg-black">지도 들어갈 자리</div>
+      <div className="w-[350px] mt-6 h-[350px] text-white bg-black">지도 들어갈 자리</div>
     </div>
   );
 };

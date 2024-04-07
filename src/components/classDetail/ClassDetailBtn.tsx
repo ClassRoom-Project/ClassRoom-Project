@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
 
-//Todo :  href reserveId, 받아서 입력할것
+//Todo :  href chat ID, 받아서 입력할것
 const ClassDetailBtn = ({ classId }: { classId: string }) => {
   return (
     <div className="w-[350px] flex justify-center items-center mt-20">

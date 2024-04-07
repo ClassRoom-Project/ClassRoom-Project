@@ -18,7 +18,7 @@ const page = async ({ params }: { params: { id: string } }) => {
   const userData = await getDetailUserInfo(classData?.user_id);
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center p-5">
         <ClassDetailLeft classData={classData} userData={userData} />
         <ClassDetailRight classData={classData} />
       </div>

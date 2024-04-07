@@ -5,8 +5,10 @@ import { useDetailClassInfoStore } from '@/store/ClassInfoStore';
 import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
 import { ClassInfoBox } from './ClassInfoBox';
 
+//태그들 모아놓은 컴포넌트
 const ClassInfos = ({ classId }: { classId: string }) => {
   const { classInfo, setClassInfo } = useDetailClassInfoStore();
+  //해당 classId에 해당하는 데이터를 불러오기
   useEffect(() => {
     const getClassInfos = async () => {
       const infos = await detailClassInfo(classId);
