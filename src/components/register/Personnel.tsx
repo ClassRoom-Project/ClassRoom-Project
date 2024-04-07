@@ -12,7 +12,7 @@ const Personnel = () => {
     
   return (
     <div className="flex items-center space-x-2 my-2">
-        <p className='text-base flex-shrink-0'>정원</p>
+        <p className='text-base flex-shrink-0 font-bold'>정원</p>
         <input 
           className="form-input px-3 py-2 border rounded flex-grow" 
           type="number" 

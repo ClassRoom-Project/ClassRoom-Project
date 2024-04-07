@@ -28,9 +28,9 @@ const Category = () => {
               <option value="기타">기타</option>
             </select>
           </div>
-          <p className='text-base'>소분류</p>
+          <p className='text-base flex-shrink-0 font-bold'>소분류</p>
           <input 
-            className="form-input px-3 py-2 border rounded flex-grow min-w-0" // min-w-0 추가
+            className="form-input px-3 py-2 border rounded flex-grow min-w-0"
             type="text" 
             value={subCategory} 
             onChange={handleSubCategoryChange} 

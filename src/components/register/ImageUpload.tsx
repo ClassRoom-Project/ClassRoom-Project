@@ -136,7 +136,6 @@ const ImageUpload = () => {
             }
         }
     }
-
       alert('등록이 완료되었습니다.');
       console.log('데이터 저장 성공:', data);
     }

@@ -8,12 +8,12 @@ import { ko } from 'date-fns/locale';
 
 const TimeSelect: React.FC = () => {
     const { schedules, selectedDates, setSelectedDates, addSchedule, addTimeToSchedule, removeTimeFromSchedule } = RegisterScheduleStore(state => state);
-    const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
+    const [isDayPickerOpen, setIsDayPickerOpen] = useState(false);
     const [tempTime, setTempTime] = useState<string>(''); // 임시 시간 상태 추가
     const dayPickerRef = useRef<HTMLDivElement>(null);
 
     const toggleDatePicker = () => {
-        setIsDatePickerOpen(!isDatePickerOpen);
+        setIsDayPickerOpen(!isDayPickerOpen);
     };
 
     const handleDateSelect = (selectedDate: Date | undefined) => {
@@ -21,7 +21,7 @@ const TimeSelect: React.FC = () => {
             const formattedDate = format(selectedDate, 'yyyy-MM-dd');
             setSelectedDates([...selectedDates, formattedDate]);
             addSchedule(formattedDate);
-            setIsDatePickerOpen(false);
+            setIsDayPickerOpen(false);
 
             console.log("선택된 날짜:", formattedDate);
             console.log("선택된 시간:", tempTime);
@@ -44,7 +44,7 @@ const TimeSelect: React.FC = () => {
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dayPickerRef.current && !dayPickerRef.current.contains(event.target as Node)) {
-                setIsDatePickerOpen(false);
+                setIsDayPickerOpen(false);
             }
         };
         document.addEventListener('mousedown', handleClickOutside);
@@ -55,8 +55,8 @@ const TimeSelect: React.FC = () => {
         <div>
             <div className="relative">
                 <button onClick={toggleDatePicker} className="bg-blue-500 text-white p-2 rounded-md">일정 추가</button>
-                {isDatePickerOpen && (
-                    <div ref={dayPickerRef} className="absolute z-10">
+                {isDayPickerOpen && (
+                    <div ref={dayPickerRef} className="absolute z-10 bg-white border-2 rounded-lg p-4">
                         <DayPicker
                             mode="single"
                             onSelect={handleDateSelect}
