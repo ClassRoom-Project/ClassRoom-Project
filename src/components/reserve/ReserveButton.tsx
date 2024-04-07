@@ -47,6 +47,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
       return;
     }
+
+    window.localStorage.setItem('reservationId', reservationId);
     const reservationDetails = await fetchReservationDetails(reservationId);
 
     if (!reservationDetails || !('class' in reservationDetails)) {
@@ -62,11 +64,11 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
-    router.push(`reserve/${reservationId}`);
+    // router.push(`reserve/${reservationId}`);
     // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
-    // router.replace(
-    //   `/payment?customerKey=${loginUserId}&title=${classDetails.title}&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${reserveDate}&useClassTime=${reserveTime}&totalPerson=${reserveQuantity}`
-    // );
+    router.replace(
+      `/payment?customerKey=${loginUserId}&title=${classDetails.title}&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${reserveDate}&useClassTime=${reserveTime}&totalPerson=${reserveQuantity}`
+    );
   };
 
   return (
