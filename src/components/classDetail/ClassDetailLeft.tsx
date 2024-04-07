@@ -23,7 +23,7 @@ const ClassDetailLeft = ({
   };
 
   return (
-    <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg h-[800px] border-[#5373FF] border-solid border-[1px]">
+    <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg h-[900px] border-[#5373FF] border-solid border-[1px]">
       <div className="flex items-start justify-start w-[350px]">
         <div className="w-8 mr-2 h-8">
           <Image
@@ -102,7 +102,7 @@ const ClassDetailLeft = ({
           ></Image>
         </div>
       </div>
-      <div className="w-[350px] mt-6 h-[220px] bg-black">지도 들어갈 자리</div>
+      <div className="w-[350px] mt-6 h-[350px] bg-black">지도 들어갈 자리</div>
     </div>
   );
 };
