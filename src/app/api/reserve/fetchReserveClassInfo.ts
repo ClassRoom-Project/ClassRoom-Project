@@ -6,7 +6,23 @@ import { DBReserveClassType } from '@/types/class';
 export const fetchReserveClassInfo = async (classId: string) => {
   const { data, error }: PostgrestSingleResponse<DBReserveClassType> = await supabase
     .from('class')
-    .select('class_id, category, title, location, price, image, max_people, date, time, reserved_count')
+    .select(
+      `
+      class_id, 
+      category, 
+      title, 
+      location, 
+      price, 
+      image, 
+      max_people, 
+      dates: date ( 
+        class_id, 
+        date_id, 
+        day, 
+        times: time (time_id, times)
+      )
+    `
+    )
     .eq('class_id', classId)
     .single();
 
@@ -24,13 +40,27 @@ export const fetchReserveClassInfo = async (classId: string) => {
     price: data.price,
     image: data.image,
     maxPeople: data.max_people,
-    date: data.date,
-    time: data.time,
-    reservedCount: data.reserved_count
+    reservedCount: data.reserved_count,
+    dates: data.dates
   };
+
+  console.log(data);
 
   return classInfo;
 };
+
+// export const newFetch = async (classId: string) => {
+//   const { data, error } = await supabase.rpc('get_class_info', { class_id: classId });
+
+//   if (error) {
+//     console.error('Error fetching class info', error);
+//     return null;
+//   }
+
+//   console.log(data[0].dates);
+
+//   return data;
+// };
 
 // 예약 인원 수 불러오는 api
 export const fetchReservedCount = async (classId: string) => {
