@@ -26,7 +26,10 @@ export const getUserRole = async (loginUserId: string | null): Promise<{ isTeach
 
 // User Role(선생님인지 수강생인지) 상태 supabase에 업데이트하기
 export const updateUserRole = async (isTeacher: boolean, loginUserId: string | null) => {
-  const { data, error } = await supabase.from('users').update({ isTeacher: !isTeacher }).eq('user_id', loginUserId);
+  const { data, error } = await supabase
+    .from('users')
+    .update({ isTeacher: !isTeacher })
+    .eq('user_id', loginUserId as string);
 
   if (error) {
     console.error(error);
@@ -35,15 +38,15 @@ export const updateUserRole = async (isTeacher: boolean, loginUserId: string | n
 };
 
 // User(선생님/수강생) 정보 불러오기
-export const getUserInfo = async (loginUserId: string | null) => {
+export const getUserInfo = async ({ userId }: { userId: string }) => {
   const { data: userInfo, error }: PostgrestMaybeSingleResponse<UserInfoType> = await supabase
     .from('users')
     .select('nickname, email, profile_image')
-    .eq('user_id', loginUserId)
+    .eq('user_id', userId)
     .single();
 
   if (error) {
-    console.error(error);
+    console.error('getUserInfo api error =>', error);
   }
 
   // zustand에 상태 업데이트
@@ -62,7 +65,7 @@ export const updateUserInfo = async (
   const { data, error } = await supabase
     .from('users')
     .update({ nickname: newNickname, profile_image: newProfileImage })
-    .eq('user_id', loginUserId);
+    .eq('user_id', loginUserId as string);
   if (error) {
     console.error(error);
   }
@@ -77,7 +80,7 @@ export const checkUserNickname = async (
   const { data, error } = await supabase
     .from('users')
     .select('nickname')
-    .not('user_id', 'eq', loginUserId)
+    .not('user_id', 'eq', loginUserId as string)
     .eq('nickname', newNickname);
   if (error) {
     console.error(error.message);
@@ -93,7 +96,7 @@ export const getTeacherInfo = async (loginUserId: string | null) => {
   const { data: teacherInfo, error }: PostgrestMaybeSingleResponse<TeacherInfoType> = await supabase
     .from('users')
     .select('job, field, bank, account')
-    .eq('user_id', loginUserId)
+    .eq('user_id', loginUserId as string)
     .single();
 
   if (error) {
@@ -111,7 +114,7 @@ export const updateTeacherInfo = async (
   const { data, error }: PostgrestMaybeSingleResponse<UpdateTeacherInfoType> = await supabase
     .from('users')
     .update({ job: newSelectedJob, field: newSelectedField, bank: newSelectedBank, account: newAccount })
-    .eq('user_id', loginUserId);
+    .eq('user_id', loginUserId as string);
   if (error) {
     console.error(error);
   }
@@ -126,7 +129,7 @@ export const addTeacherInfo = async (
   const { data, error } = await supabase
     .from('users')
     .update([{ job: selectedJob, field: selectedField, bank: selectedBank, account: userAccount, isTeacher: true }])
-    .eq('user_id', loginUserId);
+    .eq('user_id', loginUserId as string);
   if (error) {
     console.error(error);
   }

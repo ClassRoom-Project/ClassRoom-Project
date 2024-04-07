@@ -4,7 +4,7 @@ import { ClassItem } from '@/types/register';
 
 export async function fetchMyClasses(loginUserId: string | null) {
   const { data, error }: PostgrestResponse<ClassItem> = await supabase.rpc('fetch_my_reserved_classes', {
-    p_user_id: loginUserId
+    p_user_id: loginUserId as string
   });
 
   if (error) {

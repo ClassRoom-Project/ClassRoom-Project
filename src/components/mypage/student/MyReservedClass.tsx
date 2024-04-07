@@ -1,4 +1,5 @@
 'use client';
+
 import fetchMyClasses from '@/app/api/mypage/fetchMyClasses';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
@@ -12,7 +13,7 @@ const MyReservedClass = () => {
     queryFn: () => fetchMyClasses(loginUserId),
     enabled: !!loginUserId
   });
-  console.log('reservedClasses', reservedClasses);
+  // console.log('reservedClasses', reservedClasses);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
