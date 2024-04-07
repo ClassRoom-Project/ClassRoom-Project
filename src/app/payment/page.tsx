@@ -1,16 +1,10 @@
 'use client';
 
-import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useRef, useState } from 'react';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
-import { usePaymentWidget } from '@/hooks/usePayment/usePayment';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { useSearchParams } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 import { useAsync } from 'react-use';
-import { constructNow } from 'date-fns';
-import { userId } from '../(clrm)/mypage/page';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
