@@ -1,4 +1,6 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import { ClassAllType } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
@@ -12,6 +14,14 @@ const ClassDetailLeft = ({
 }) => {
   const defaultImageSrc = '/noimage.png';
   const defaultProfileImageSrc = '/기본프로필사진.png';
+
+  const [mainImageSrc, setMainImageSrc] = useState(classData?.image[0] || defaultImageSrc);
+
+  // 이미지 선택시 해당이미지가 메인이미지로 바뀌는 로직
+  const handleThumbnailClick = (imageSrc: string) => {
+    setMainImageSrc(imageSrc);
+  };
+
   return (
     <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg h-[800px] border-[#5373FF] border-solid border-[1px]">
       <div className="flex items-start justify-start w-[350px]">
@@ -27,16 +37,26 @@ const ClassDetailLeft = ({
         <p>{userData?.nickname}</p>
       </div>
       <div className="w-[350px] h-[350px] mt-2 flex bg-black">
-        <Image
-          width={350}
-          height={350}
-          src={classData?.image[0] ? classData.image[0] : defaultImageSrc}
-          alt="classImage 0"
-          unoptimized={true}
-        ></Image>
+        <Image width={350} height={350} src={mainImageSrc} alt="classImage 0" unoptimized={true}></Image>
       </div>
-      <div className="w-[350px] h-[50px] flex mt-2 ">
-        <div className="w-[50px] h-[50px] flex">
+      <div className="w-[350px] h-[50px] flex mt-2">
+        <div
+          onClick={() => handleThumbnailClick(classData?.image[0] || defaultImageSrc)}
+          className="w-[50px] h-[50px] cursor-pointer flex mr-[15px]"
+        >
+          <Image
+            width={50}
+            height={50}
+            src={classData?.image[0] ? classData.image[0] : defaultImageSrc}
+            alt="classImage 0"
+            unoptimized={true}
+          ></Image>
+        </div>
+
+        <div
+          onClick={() => handleThumbnailClick(classData?.image[1] || defaultImageSrc)}
+          className="w-[50px] h-[50px] cursor-pointer flex mx-[15px]"
+        >
           <Image
             width={50}
             height={50}
@@ -45,7 +65,10 @@ const ClassDetailLeft = ({
             unoptimized={true}
           ></Image>
         </div>
-        <div className="w-[50px] h-[50px] flex ml-[50px]">
+        <div
+          onClick={() => handleThumbnailClick(classData?.image[2] || defaultImageSrc)}
+          className="w-[50px] h-[50px] cursor-pointer flex mx-[15px]"
+        >
           <Image
             width={50}
             height={50}
@@ -54,7 +77,10 @@ const ClassDetailLeft = ({
             unoptimized={true}
           ></Image>
         </div>
-        <div className="w-[50px] h-[50px] flex ml-[50px]">
+        <div
+          onClick={() => handleThumbnailClick(classData?.image[3] || defaultImageSrc)}
+          className="w-[50px] h-[50px] cursor-pointer flex mx-[15px]"
+        >
           <Image
             width={50}
             height={50}
@@ -63,7 +89,10 @@ const ClassDetailLeft = ({
             unoptimized={true}
           ></Image>
         </div>
-        <div className="w-[50px] h-[50px] flex ml-[50px]">
+        <div
+          onClick={() => handleThumbnailClick(classData?.image[4] || defaultImageSrc)}
+          className="w-[50px] h-[50px] cursor-pointer flex ml-[15px]"
+        >
           <Image
             width={50}
             height={50}
@@ -73,7 +102,7 @@ const ClassDetailLeft = ({
           ></Image>
         </div>
       </div>
-      <div className="w-[350px] h-[220px] bg-black">지도 들어갈 자리</div>
+      <div className="w-[350px] mt-6 h-[220px] bg-black">지도 들어갈 자리</div>
     </div>
   );
 };
