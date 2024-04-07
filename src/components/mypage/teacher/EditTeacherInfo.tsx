@@ -24,7 +24,8 @@ const EditTeacherInfo = () => {
 
   const { data: teacherInfo, isPending } = useQuery({
     queryKey: ['user', loginUserId],
-    queryFn: () => getTeacherInfo(loginUserId)
+    queryFn: () => getTeacherInfo(loginUserId),
+    enabled: !!loginUserId
   });
 
   // id와 htmlFor 연결 => useId 내장 훅 사용

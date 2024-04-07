@@ -1,3 +1,5 @@
+'use client';
+
 import React, { PropsWithChildren } from 'react';
 import Category from './Category';
 import Link from 'next/link';
@@ -6,8 +8,10 @@ import { FiHome } from 'react-icons/fi';
 import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
 import { SlNote } from 'react-icons/sl';
 import { GoPerson } from 'react-icons/go';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 
 const SideBar = ({ children }: PropsWithChildren) => {
+  const { loginUserId } = useLoginStore();
   return (
     <>
       <div className="fixed p-3 top-0  border-gray-300 border-solid border-[1px] bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
@@ -33,8 +37,8 @@ const SideBar = ({ children }: PropsWithChildren) => {
           <Link href="/reserve?classId=9335e676-0c77-4f7a-9b29-63cb4df446f1">예약하기(임시)</Link>
         </div>
         <div>
-          {/* 수강생/강사 전환 버튼입니다. */}
-          <ConvertBtn />
+          {/* 수강생/강사 전환 버튼입니다. (로그인 상태일 때만 보임) */}
+          {loginUserId && <ConvertBtn />}
         </div>
       </div>
 
