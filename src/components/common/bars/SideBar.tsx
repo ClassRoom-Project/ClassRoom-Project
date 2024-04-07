@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import Category from './Category';
+import Category from './categories/Category';
 import Link from 'next/link';
 import ConvertBtn from './ConvertBtn';
 import { FiHome } from 'react-icons/fi';
@@ -10,10 +10,9 @@ import { GoPerson } from 'react-icons/go';
 const SideBar = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <div className="fixed p-3 top-0  border-gray-300 border-solid border-[1px] bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
-        <div className="mt-[5vh] flex flex-col items-center">
-          <Category />
-          <Link href={'/'} className="p-4 flex flex-col items-center">
+      <div className="fixed p-3 top-0 bg-[#5373FF]  border-gray-300 border-solid border-[1px] bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
+        <div className="mt-[5vh] flex flex-col text-white items-center">
+          <Link href={'/'} className="p-4  flex flex-col items-center">
             <FiHome size={30} />
             <span>HOME</span>
           </Link>
@@ -29,8 +28,6 @@ const SideBar = ({ children }: PropsWithChildren) => {
             <GoPerson size={30} />
             <span>MYPAGE</span>
           </Link>
-          {/* 예약 페이지 확인을 위한 임시 링크 */}
-          <Link href="/reserve?classId=9335e676-0c77-4f7a-9b29-63cb4df446f1">예약하기(임시)</Link>
         </div>
         <div>
           {/* 수강생/강사 전환 버튼입니다. */}

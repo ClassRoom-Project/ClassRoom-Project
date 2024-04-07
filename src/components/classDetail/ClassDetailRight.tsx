@@ -1,16 +1,30 @@
-import { ClassAllType } from '@/types/class';
+'use client';
 
+import { ClassAllType } from '@/types/class';
+import ClassInfos from './ClassInfos';
+import ClassDetailBtn from './ClassDetailBtn';
+import ClassDetailDayPicker from './ClassDetailDayPicker';
+
+//오른쪽 컴포넌트
 const ClassDetailRight = ({ classData }: { classData: ClassAllType | null }) => {
   return (
-    <div className="flex flex-col div-5 ml-4 justify-center items-center w-[500px] rounded-lg min-h-full border-[#5373FF] border-solid border-[1px]">
-      <div className="flex items-center mt-2 justify-center w-[350px]">
+    <div className="flex flex-col p-5 ml-4 justify-center items-center w-[500px] rounded-lg h-[900px] border-[#5373FF] border-solid border-[1px]">
+      <div className="flex items-center mt-2 justify-center h-9 w-[350px]">
         <p className=" text-[#5373FF]">{classData?.title}</p>
       </div>
-      <div className="w-[350px] h-[350px] border-gray-400 border-solid border-b mt-2">
+      <div className="w-[350px] h-[250px] overflow-hidden border-gray-400 border-solid border-b mt-2">
         <p>{classData?.description}</p>
       </div>
-      <div className="w-[350px] mt-2">class infos</div>
-      <div className="w-[350px] mt-2">button</div>
+      <div className="w-[350px] h-36 mt-2">
+        {classData?.class_id ? <ClassInfos classId={classData.class_id} /> : null}
+      </div>
+      <div className="w-[300px] h-[300px] mt-12 flex justify-center items-center ">
+        {classData?.class_id ? <ClassDetailDayPicker classDate={classData.date} /> : null}
+      </div>
+
+      <div className="w-[350px] h-36 mt-10">
+        {classData?.class_id ? <ClassDetailBtn classId={classData.class_id} /> : null}
+      </div>
     </div>
   );
 };
