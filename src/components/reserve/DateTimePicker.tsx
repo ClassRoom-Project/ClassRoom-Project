@@ -8,28 +8,20 @@ import { CaptionProps, DayPicker } from 'react-day-picker';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css';
+import { ReserveClassType } from '@/types/class';
 
-interface DateInfo {
-  day: string;
-  times: [{ times: string; time_id: string }];
-  date_id: string;
-  class_id: string;
-}
-
-const DateTimePicker = ({ classInfo }) => {
-  console.log(classInfo);
-
+const DateTimePicker = ({ classDates }: { classDates: ReserveClassType['dates'] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  const [selectedTime, setSelectedTime] = useState(classInfo[0].times);
-  const [selectedDate, setSelectedDate] = useState(classInfo[0].day);
+  const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
+  const [selectedDate, setSelectedDate] = useState(classDates[0].day);
   const today = new Date();
 
   useEffect(() => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime + ':00' });
   }, [selectedDate, selectedTime, setReserveInfo]);
 
-  const handleTimeClick = (time: string) => {
-    setSelectedTime(time);
+  const handleTimeClick = (time_id: string) => {
+    setSelectedTime(time_id);
   };
 
   /* 데이피커 */
@@ -80,28 +72,26 @@ const DateTimePicker = ({ classInfo }) => {
       <div>
         <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
-          {classInfo.map(({ times, day }) => {
-            if (selectedDate === day) {
-              return (
+          {classDates
+            .filter((item) => item.day === selectedDate)
+            .flatMap(({ times }) =>
+              times.map((time) => (
                 <button
-                  key={times}
-                  onClick={() => handleTimeClick(times)}
+                  key={time.time_id}
+                  onClick={() => handleTimeClick(time.times)}
                   className={`px-4 py-1 text-lg ${
-                    times === selectedTime ? 'bg-rose-200' : 'bg-white'
+                    time.times === selectedTime ? 'bg-rose-200' : 'bg-white'
                   } tracking-wide rounded-lg`}
                 >
-                  {convertTimeTo12HourClock(times)}
+                  {convertTimeTo12HourClock(time.times)}
                 </button>
-              );
-            }
-          })}
+              ))
+            )}
         </div>
       </div>
       <div>
         <h1 className="mb-1">선택하신 수강일</h1>
-        <span>
-          {`${selectedDate}`} {convertTimeTo12HourClock(selectedTime)}
-        </span>
+        <span>{/* {`${selectedDate}`} {convertTimeTo12HourClock(selectedTime)} */}</span>
       </div>
     </div>
   );
