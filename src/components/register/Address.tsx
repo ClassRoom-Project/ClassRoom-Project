@@ -43,7 +43,7 @@ const Address = () => {
             placeholder="주소를 입력해주세요"
           />
           {/* mt-2 sm:mt-0 유틸리티를 이용해 반응형으로 마진을 조절합니다. */}
-          <button onClick={handleOpenPostCode} className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-700 w-full sm:w-auto mt-2 sm:mt-0">주소 검색</button>
+          <button onClick={handleOpenPostCode} className="px-4 py-2 bg-[#4D80FF] text-white rounded hover:bg-blue-700 w-full sm:w-auto mt-2 sm:mt-0">주소 검색</button>
         </div>
         <input
           className="form-input px-3 py-2 border rounded w-full"

@@ -199,7 +199,7 @@ const ImageUpload = () => {
       ))}
       <button
         onClick={handleSubmit} 
-        className="ml-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+        className="ml-4 px-4 py-2 bg-[#264FFF] text-white rounded hover:bg-blue-700"
       >
         등록하기
       </button>
