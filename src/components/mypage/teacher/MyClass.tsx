@@ -19,6 +19,13 @@ const MyClass = () => {
     queryFn: () => getMyRegisteredClass(loginUserId)
   });
 
+  // 중복되는 값 제외하기
+  const days: string[] | undefined = myClassInfo?.map((item) => item.day);
+  const times: string[] | undefined = myClassInfo?.map((item) => item.times);
+
+  const uniqueDays = Array.from(new Set(days));
+  const uniqueTimes = Array.from(new Set(times));
+
   // 클래스 삭제하기
   const handleOnClickDeleteMyClass = () => {
     // const confirm = window.confirm("클래스를 정말 삭제하시겠습니까?")
@@ -62,7 +69,7 @@ const MyClass = () => {
                   <FaRegCalendarCheck color="#5373FF" size="20" />
                   <div className="flex flex-row gap-2">
                     날짜 :
-                    {classInfo.date.map((date, index) => (
+                    {uniqueDays.map((date, index) => (
                       <React.Fragment key={index}>
                         <p className="flex gap-2">{date}</p>
                       </React.Fragment>
@@ -73,9 +80,9 @@ const MyClass = () => {
                   <FaRegClock color="#5373FF" size="20" />
                   <div className="flex flex-row gap-2">
                     시간 :
-                    {classInfo.time.map((time, index) => (
+                    {uniqueTimes.map((date, index) => (
                       <React.Fragment key={index}>
-                        <p className="flex gap-2">{time}</p>
+                        <p className="flex gap-2">{date}</p>
                       </React.Fragment>
                     ))}
                   </div>
