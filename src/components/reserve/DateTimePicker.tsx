@@ -16,6 +16,8 @@ const DateTimePicker = ({ classDates }: { classDates: ReserveClassType['dates'] 
   const [selectedDate, setSelectedDate] = useState(classDates[0].day);
   const today = new Date();
 
+  console.log(classDates);
+
   useEffect(() => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime + ':00' });
   }, [selectedDate, selectedTime, setReserveInfo]);
@@ -38,17 +40,21 @@ const DateTimePicker = ({ classDates }: { classDates: ReserveClassType['dates'] 
   const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
 
   // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
-  // const availableDays = classDateList.dates.map(() => new Date(day).getDate());
+  const availableDays = classDates.map(({ day }) => {
+    return new Date(day).getDate();
+  });
+
+  console.log(availableDays);
 
   // 1~31 일중 DB에 있는 날짜를 삭제한 배열 생성
-  // const nonAvailableDays = dayList.filter((day) => {
-  //   return !availableDays.includes(day);
-  // });
+  const nonAvailableDays = dayList.filter((day) => {
+    return !availableDays.includes(day);
+  });
 
   // // 속성으로 할당할 date 배열 생성
-  // const nonAvailableDates = nonAvailableDays.map((day) => {
-  //   return new Date(2024, today.getMonth(), day);
-  // });
+  const nonAvailableDates = nonAvailableDays.map((day) => {
+    return new Date(2024, today.getMonth(), day);
+  });
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
@@ -61,7 +67,7 @@ const DateTimePicker = ({ classDates }: { classDates: ReserveClassType['dates'] 
             disableNavigation
             selected={new Date(selectedDate)}
             onSelect={handleDateChange}
-            // disabled={nonAvailableDates}
+            disabled={nonAvailableDates}
             locale={ko}
             components={{
               Caption: CustomCaption
