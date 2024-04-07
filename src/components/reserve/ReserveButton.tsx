@@ -12,10 +12,8 @@ import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetai
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
-  const { setReserveInfo, reserveInfo } = useReserveStore();
-
   const { loginUserId } = useLoginStore();
-  console.log('🚀 ~ ReserveButton ~ loginUserId:', loginUserId);
+  const { setReserveInfo, reserveInfo } = useReserveStore();
 
   useEffect(() => {
     setReserveInfo({ classId: classId, userId: loginUserId });
@@ -27,6 +25,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       return;
     }
 
+    // TODO: 세션별 체크하도록 수정 필요
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
     const currentReservedQuantity = await fetchReservedCount(classId);
 
@@ -41,8 +40,9 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       }
     }
 
-    // reservationId: supabase의 응답으로 받아온 제출한 예약 정보의 아이디
+    // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
     const reservationId = await insertNewReservation(reserveInfo);
+
     if (!reservationId) {
       alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
       return;
