@@ -12,7 +12,7 @@ import EditProfileImage from './EditProfileImage';
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
   const userId = loginUserId as string;
-  console.log('userId', userId);
+  // console.log('userId', userId);
 
   const queryClient = useQueryClient();
 
@@ -27,7 +27,7 @@ const EditProfile = () => {
       fetchUserInfo();
     }
   }, [userId, getUserInfo]);
-  console.log('userInfo', userInfo);
+  // console.log('userInfo', userInfo);
 
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
