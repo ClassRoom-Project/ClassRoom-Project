@@ -3,8 +3,8 @@ import DateTimePicker from '@/components/reserve/DateTimePicker';
 import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
 import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
-import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
 import CheckAlreadyReserved from '@/components/reserve/CheckAlreadyReserved';
+import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
