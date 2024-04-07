@@ -1,4 +1,4 @@
-// store/RegisterStore.js
+// store/RegisterScheduleStoreState.js
 import create from 'zustand'
 
 interface Schedule {
@@ -8,6 +8,8 @@ interface Schedule {
 
 interface RegisterScheduleStoreState {
     schedules: Schedule[];
+    selectedDates: string[];
+    setSelectedDates: (dates: string[]) => void;
     addSchedule: (date: string) => void;
     addTimeToSchedule: (date: string, time: string) => void;
     removeSchedule: (date: string) => void; // 날짜 삭제 기능 추가
@@ -17,6 +19,8 @@ interface RegisterScheduleStoreState {
 
 const RegisterScheduleStore = create<RegisterScheduleStoreState>(set => ({
     schedules: [], 
+    selectedDates: [],
+    setSelectedDates: (dates) => set({ selectedDates: dates }),
     addSchedule: (date) => set(state => ({ schedules: [...state.schedules, { date, times: [] }] })),
     addTimeToSchedule: (date, time) => set(state => ({
         schedules: state.schedules.map(schedule => 

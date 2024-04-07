@@ -26,7 +26,7 @@ export interface ClassRegister {
   price: number;
   personnel: number;
   difficulty: string;
-  selectDay: string[];
+  selectDay: Date[];
   selectedTime: string[];
   classType: string;
   image?: string[];
@@ -36,7 +36,7 @@ export interface ClassRegister {
   setSubCategory: (subCategory: string) => void;
   setAddress: (address: string) => void;
   setDetailAddress: (detailAddress: string) => void;
-  setSelectDay: (selectDay: string[]) => void;
+  setSelectDay: (selectDay: Date[]) => void;
   setClassContent: (classContent: string) => void;
   setClassTitle: (classTitle: string) => void;
   setClassType: (classType: string) => void;

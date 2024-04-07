@@ -7,8 +7,7 @@ import RegisterScheduleStore from '@/store/RegisterScheduleStore';
 import { ko } from 'date-fns/locale';
 
 const TimeSelect: React.FC = () => {
-    const { schedules, addSchedule, addTimeToSchedule, removeTimeFromSchedule } = RegisterScheduleStore(state => state); // removeTimeFromSchedule 함수 추가
-    const [selectedDates, setSelectedDates] = useState<Array<string>>([]);
+    const { schedules, selectedDates, setSelectedDates, addSchedule, addTimeToSchedule, removeTimeFromSchedule } = RegisterScheduleStore(state => state);
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
     const [tempTime, setTempTime] = useState<string>(''); // 임시 시간 상태 추가
     const dayPickerRef = useRef<HTMLDivElement>(null);
@@ -23,6 +22,9 @@ const TimeSelect: React.FC = () => {
             setSelectedDates([...selectedDates, formattedDate]);
             addSchedule(formattedDate);
             setIsDatePickerOpen(false);
+
+            console.log("선택된 날짜:", formattedDate);
+            console.log("선택된 시간:", tempTime);
         }
     };
 

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import useRegisterStore from '../../store/RegisterStore';
+import RegisterScheduleStore from '@/store/RegisterScheduleStore';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 
 interface ImageFileWithPreview {
@@ -15,7 +16,6 @@ const ImageUpload = () => {
     subCategory,
     address,
     detailAddress,
-    selectDay,
     classContent,
     classTitle,
     classType,
@@ -24,13 +24,17 @@ const ImageUpload = () => {
     maxNumber,
     personnel,
     price,
-    selectedTime,
     totalTime
   } = useRegisterStore();
 
+  const {
+    selectedDates,
+    schedules
+  } = RegisterScheduleStore();
+
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
-  let classId = crypto.randomUUID();
+  const classId = crypto.randomUUID();
 
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
@@ -97,49 +101,45 @@ const ImageUpload = () => {
     if (error) {
       console.error('Supabase에 데이터 저장 중 오류 발생:', error);
     } else {
+      // 각 날짜에 대한 데이터 저장
+      for (const date of selectedDates) {
+        const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
+        const { data: dateData, error: dateError } = await supabase.from('date').insert([
+          {
+            date_id: dateId,
+            class_id: classId,
+            day: date
+          }
+        ]);
+        if (dateError) {
+          console.error('date 테이블에 데이터 저장 중 오류 발생:', dateError);
+        } else {
+          console.log('date 테이블에 데이터 저장 성공:', dateData);
+          const selectedTimes = schedules.find(schedule => schedule.date === date)?.times;
+
+          if (selectedTimes && selectedTimes.length > 0) {
+                for (const time of selectedTimes) {
+                    const timeId = crypto.randomUUID(); // 시간마다 새로운 ID 생성
+                    const { data: timeData, error: timeError } = await supabase.from('time').insert([
+                        {
+                            time_id: timeId,
+                            date_id: dateId,
+                            times: time
+                        }
+                    ]);
+                    if (timeError) {
+                        console.error('time 테이블에 데이터 저장 중 오류 발생:', timeError);
+                    } else {
+                        console.log('time 테이블에 데이터 저장 성공:', timeData);
+                    }
+                }
+            }
+        }
+    }
+
       alert('등록이 완료되었습니다.');
       console.log('데이터 저장 성공:', data);
     }
-
-    const datesData = [];
-    const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
-    for (const date of selectDay) {
-      const { data: dateData, error: dateError } = await supabase.from('date').insert([
-        {
-          date_id: dateId,
-          class_id: classId,
-          date: date
-        }
-      ]);
-      if (dateError) {
-        console.error('Error while saving data to the "date" table:', dateError);
-      } else {
-        datesData.push(dateData);
-      }
-    }
-
-    console.log('Saved data to the "date" table:', datesData);
-
-    // Insert data into the 'time' table
-    const timesData = [];
-    const timeId = crypto.randomUUID();
-    for (const time of selectedTime) {
-      const { data: timeData, error: timeError } = await supabase.from('time').insert([
-        {
-          time_id: timeId,
-          date_id: dateId,
-          time: time
-        }
-      ]);
-      if (timeError) {
-        console.error('Error while saving data to the "time" table:', timeError);
-      } else {
-        timesData.push(timeData);
-      }
-    }
-
-    console.log('Saved data to the "time" table:', timesData);
-
   };
 
   // 이미지 최대 5개까지만 추가할 수 있도록!
