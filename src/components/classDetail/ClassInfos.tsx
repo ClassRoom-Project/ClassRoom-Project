@@ -20,7 +20,7 @@ const ClassInfos = ({ classId }: { classId: string }) => {
   }, []);
 
   return (
-    <div className="w-[350px] flex flex-col justify-center items-center">
+    <div className="w-[350px] p-4 flex flex-col border-gray-400 border-solid border-b-[1px] justify-center items-center">
       <div className="w-[350px] flex justify-between">
         <div className="rounded-2xl border-[#5373FF] border-solid border-[1px] p-1 flex justify-center items-center">
           총 {classInfo?.total_time}시간
@@ -35,9 +35,9 @@ const ClassInfos = ({ classId }: { classId: string }) => {
         <ClassInfoBox classInfos={classInfo?.price} />
         <ClassInfoBox classInfos={classInfo?.class_type} />
       </div>
-      <div className="w-[200px] justify-start">
+      <div className="w-[250px] justify-start">
         <div className="rounded-2xl border-[#5373FF] border-solid border-[1px] p-1 flex justify-center items-center">
-          수용가능인원 : {classInfo?.min_people} - {classInfo?.max_people} 명
+          수용가능인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.max_people} 명
         </div>
       </div>
     </div>

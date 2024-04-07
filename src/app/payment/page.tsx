@@ -1,16 +1,10 @@
 'use client';
 
-import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { useQuery } from '@tanstack/react-query';
-import { useEffect, useRef, useState } from 'react';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
-import { usePaymentWidget } from '@/hooks/usePayment/usePayment';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { useSearchParams } from 'next/navigation';
+import { useEffect, useRef } from 'react';
 import { useAsync } from 'react-use';
-import { constructNow } from 'date-fns';
-import { userId } from '../(clrm)/mypage/page';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
@@ -26,6 +20,8 @@ export default function PaymentPageasync() {
   const totalPerson = searchParams.get('totalPerson');
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
+
+  const reservationId = window.localStorage.getItem('reservationId');
 
   //내아이디 : d162d609-b1dc-41c4-b8c5-7998cb0b58ca
 
@@ -95,7 +91,7 @@ export default function PaymentPageasync() {
                 orderName: `${title}__${goToClassDate}${useClassTime}_${totalPerson}명`,
                 customerEmail: userEmail as string,
                 //여기에 예약확인 페이지로 넘기기
-                successUrl: `${window.location.origin}/success`,
+                successUrl: `${window.location.origin}/reserve/${reservationId}`,
                 //fail 시 보여줄 페이지 만들기
                 failUrl: `${window.location.origin}/fail?orderId=${customerKey}`
               });

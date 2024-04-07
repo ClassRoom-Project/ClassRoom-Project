@@ -14,7 +14,7 @@ export async function loader({ params }: { params: { id: string } }) {
 }
 const page = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
-  const userData = await getDetailUserInfo();
+  const userData = await getDetailUserInfo(classData?.user_id);
   return (
     <div className="flex justify-center items-center">
       <ClassDetailLeft classData={classData} userData={userData} />

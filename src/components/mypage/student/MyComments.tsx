@@ -1,23 +1,24 @@
 'use client';
 
 import { fetchClassInfoOnComment } from '@/app/api/mypage/my-comments-api';
-
-import { userId } from '@/app/(clrm)/mypage/page';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import MyCommentItem from './MyCommentItem';
 
 const MyComments = () => {
+  const { loginUserId } = useLoginStore();
   // 후기 리스트 불러오기
   const { data: myComments, isPending } = useQuery({
     queryKey: ['comments'],
-    queryFn: () => fetchClassInfoOnComment(userId)
+    queryFn: () => fetchClassInfoOnComment(loginUserId),
+    enabled: !!loginUserId
   });
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
   }
 
-  if (!myComments) {
+  if (!myComments || myComments.length === 0) {
     return <div> 내가 작성한 후기가 없습니다.</div>;
   }
 

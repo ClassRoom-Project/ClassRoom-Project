@@ -1,24 +1,30 @@
-import React, { useEffect, useId, useState } from 'react';
-import { userId } from '@/app/(clrm)/mypage/page';
+'use client';
+
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
-import { useUserStore } from '@/store/UserInfoStore';
+import { noChangedNotify } from '@/components/common/Toastify';
+import { fields, jobs, koreanBanks } from '@/constants/options';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
-import { FIELDS, FieldType, JOBS, JobType } from '@/types/authUser/authUserTypes';
+import React, { useEffect, useId, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
+import { useUserStore } from '@/store/userInfoStore';
 
 const EditTeacherInfo = () => {
+  const { loginUserId } = useLoginStore();
+
   const [isEditing, setIsEditing] = useState(false);
   const [isActiveBtn, setIsActiveBtn] = useState(false);
   const [newSelectedJob, setNewSelectedJob] = useState('');
   const [newSelectedField, setNewSelectedField] = useState('');
-  const [selectedBank, setSelectedBank] = useState('');
-  const [account, setAccount] = useState('');
+  const [newSelectedBank, setNewSelectedBank] = useState('');
+  const [newAccount, setNewAccount] = useState('');
 
   const { userInfo } = useUserStore();
 
   const { data: teacherInfo, isPending } = useQuery({
-    queryKey: ['user', userId],
-    queryFn: () => getTeacherInfo()
+    queryKey: ['user', loginUserId],
+    queryFn: () => getTeacherInfo(loginUserId)
   });
 
   // id와 htmlFor 연결 => useId 내장 훅 사용
@@ -26,32 +32,13 @@ const EditTeacherInfo = () => {
   const fieldId = useId();
   const bankId = useId();
 
-  const koreanBanks = [
-    '국민은행',
-    '우리은행',
-    '신한은행',
-    '하나은행',
-    '기업은행',
-    '농협은행',
-    'KEB하나은행',
-    'SC제일은행',
-    '씨티은행',
-    'BNK경남은행',
-    '광주은행',
-    '대구은행',
-    '부산은행',
-    '전북은행',
-    '제주은행',
-    '카카오뱅크'
-  ];
-
   // 초기 직업/ 비지니스 분야
   useEffect(() => {
     if (teacherInfo) {
       setNewSelectedJob(teacherInfo.job);
       setNewSelectedField(teacherInfo.field);
-      setSelectedBank(teacherInfo ? teacherInfo?.bank : '');
-      setAccount(teacherInfo ? teacherInfo.account : '');
+      setNewSelectedBank(teacherInfo ? teacherInfo?.bank : '');
+      setNewAccount(teacherInfo ? teacherInfo.account : '');
     }
   }, [teacherInfo]);
 
@@ -62,12 +49,12 @@ const EditTeacherInfo = () => {
     setNewSelectedField(e.target.value);
   };
   const handleOnChangeSelectedBank = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedBank(e.target.value);
+    setNewSelectedBank(e.target.value);
   };
   const handleOnChangeAddAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     // 계좌번호 숫자만 입력 가능하게 하기 (유효성 검사)
-    setAccount(value);
+    setNewAccount(value);
   };
 
   // 수정하기 버튼 -> supabase에 수정한 정보 update
@@ -75,16 +62,16 @@ const EditTeacherInfo = () => {
     // 수정된 사항이 없는 경우
     const isJobChanged = newSelectedJob !== teacherInfo?.job;
     const isFieldChanged = newSelectedField !== teacherInfo?.field;
-    const isSelectedBankChanged = selectedBank !== teacherInfo?.bank;
-    const isAccountChanged = account !== teacherInfo?.account;
+    const isSelectedBankChanged = newSelectedBank !== teacherInfo?.bank;
+    const isAccountChanged = newAccount !== teacherInfo?.account;
 
     if (!isJobChanged && !isFieldChanged && !isSelectedBankChanged && !isAccountChanged) {
-      alert('수정 사항이 없습니다.');
+      noChangedNotify(); // react-toastify 사용
       return;
     }
 
     // 수정된 사항이 있는 경우
-    updateTeacherInfo({ newSelectedJob, newSelectedField, selectedBank, account });
+    updateTeacherInfo({ newSelectedJob, newSelectedField, newSelectedBank, newAccount }, loginUserId);
     setIsEditing(false);
     alert('선생님 정보 수정이 완료되었습니다.');
   };
@@ -101,7 +88,8 @@ const EditTeacherInfo = () => {
   };
 
   // 계좌번호 앞 6자리 남기고 가리기
-  const secretAccount = account && account.length > 6 ? account.slice(0, 6) + '*'.repeat(account.length - 6) : account;
+  const secretAccount =
+    newAccount && newAccount.length > 6 ? newAccount.slice(0, 6) + '*'.repeat(newAccount.length - 6) : newAccount;
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
@@ -110,6 +98,7 @@ const EditTeacherInfo = () => {
   if (!teacherInfo) {
     return <div> 선생님 정보가 없습니다.</div>;
   }
+
   return (
     <div className="flex">
       <div className="flex flex-col items-center p-4 gap-4">
@@ -123,7 +112,7 @@ const EditTeacherInfo = () => {
             value={newSelectedJob}
             onChange={handleOnChangeJob}
             disabled={!isEditing}
-            options={JOBS}
+            options={jobs}
           />
           <SelectOption
             id={fieldId}
@@ -131,12 +120,12 @@ const EditTeacherInfo = () => {
             value={newSelectedField}
             onChange={handleOnChangeField}
             disabled={!isEditing}
-            options={FIELDS}
+            options={fields}
           />
           <SelectOption
             id={bankId}
             label="은행"
-            value={selectedBank}
+            value={newSelectedBank}
             onChange={handleOnChangeSelectedBank}
             disabled={!isEditing}
             options={koreanBanks}
@@ -148,7 +137,7 @@ const EditTeacherInfo = () => {
                 type="text"
                 placeholder="계좌 번호를 입력해주세요."
                 className="input input-bordered w-[300px]"
-                value={account}
+                value={newAccount}
                 onChange={handleOnChangeAddAccount}
               />
             ) : (
@@ -162,9 +151,12 @@ const EditTeacherInfo = () => {
         </div>
         <div className="p-4 flex gap-4">
           {isEditing ? (
-            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px]">
-              수정 완료
-            </button>
+            <div>
+              <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px]">
+                수정 완료
+              </button>
+              <ToastContainer />
+            </div>
           ) : (
             <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
               수정하기
