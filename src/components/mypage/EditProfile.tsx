@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
+import { useUserStore } from '@/store/userInfoStore';
 
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
@@ -16,17 +17,20 @@ const EditProfile = () => {
 
   const queryClient = useQueryClient();
 
-  const [userInfo, setUserInfo] = useState<UserInfoType | null>(null);
+  // zustand로 userInfo 상태 관리
+  const { userInfo, setUserInfo } = useUserStore();
 
   useEffect(() => {
     if (userId) {
       const fetchUserInfo = async () => {
         const userInfoData = await getUserInfo({ userId });
-        setUserInfo(userInfoData);
+        if (userInfoData !== null) {
+          setUserInfo(userInfoData);
+        }
       };
       fetchUserInfo();
     }
-  }, [userId, getUserInfo]);
+  }, [userId, setUserInfo]);
   // console.log('userInfo', userInfo);
 
   const [newNickname, setNewNickname] = useState('');
