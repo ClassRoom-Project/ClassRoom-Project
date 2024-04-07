@@ -1,3 +1,5 @@
+import { DateList } from './date';
+
 export interface ClassAllType {
   class_id: string;
   user_id: string;
@@ -47,8 +49,8 @@ export type ReserveClassType = {
   location: string;
   price: number;
   image: string;
-  max_people: number;
-  dates: [{ date_id: string; day: string; times: [{ time_id: string; times: string }] }];
+  maxPeople: number;
+  dates: DateList[];
   reserved_count: number;
 };
 
