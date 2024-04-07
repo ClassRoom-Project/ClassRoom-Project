@@ -44,23 +44,21 @@ export const fetchReserveClassInfo = async (classId: string) => {
     dates: data.dates
   };
 
-  console.log(data);
-
   return classInfo;
 };
 
-// export const newFetch = async (classId: string) => {
-//   const { data, error } = await supabase.rpc('get_class_info', { class_id: classId });
+export const newFetch = async (classId: string) => {
+  const { data, error } = await supabase.rpc('get_class_info_on_reserve_page', { p_class_id: classId });
 
-//   if (error) {
-//     console.error('Error fetching class info', error);
-//     return null;
-//   }
+  if (error) {
+    console.error('Error fetching class info', error);
+    return;
+  }
 
-//   console.log(data[0].dates);
+  // console.log(data);
 
-//   return data;
-// };
+  return data;
+};
 
 // 예약 인원 수 불러오는 api
 export const fetchReservedCount = async (classId: string) => {

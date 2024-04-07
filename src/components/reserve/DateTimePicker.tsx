@@ -9,10 +9,23 @@ import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css';
 
-const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
+interface DateInfo {
+  day: string;
+  times: [{ times: string; time_id: string }];
+  date_id: string;
+  class_id: string;
+}
+
+const DateTimePicker = ({ classDates }: { classDates: DateInfo[] }) => {
+  console.log(classDates);
+  classDates.forEach(({ day, times }) => {
+    const timeList = times.map(({ times }) => times); // Create an array of 'times' strings from the 'times' array
+    console.log(timeList); // Access the list of times for each date
+  });
+
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  const [selectedTime, setSelectedTime] = useState(classTimeList[0]);
-  const [selectedDate, setSelectedDate] = useState(classDateList[0]);
+  const [selectedTime, setSelectedTime] = useState(classDates[2].times[0].times);
+  const [selectedDate, setSelectedDate] = useState(classDates[2].day);
   const today = new Date();
 
   useEffect(() => {
@@ -20,7 +33,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   }, [selectedDate, selectedTime, setReserveInfo]);
 
   const handleTimeClick = (time: string) => {
-    setSelectedTime(time);
+    // setSelectedTime(time);
   };
 
   /* 데이피커 */
@@ -37,17 +50,17 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
 
   // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
-  const availableDays = classDateList.map((date) => new Date(date).getDate());
+  // const availableDays = classDateList.dates.map(() => new Date(day).getDate());
 
   // 1~31 일중 DB에 있는 날짜를 삭제한 배열 생성
-  const nonAvailableDays = dayList.filter((day) => {
-    return !availableDays.includes(day);
-  });
+  // const nonAvailableDays = dayList.filter((day) => {
+  //   return !availableDays.includes(day);
+  // });
 
-  // 속성으로 할당할 date 배열 생성
-  const nonAvailableDates = nonAvailableDays.map((day) => {
-    return new Date(2024, today.getMonth(), day);
-  });
+  // // 속성으로 할당할 date 배열 생성
+  // const nonAvailableDates = nonAvailableDays.map((day) => {
+  //   return new Date(2024, today.getMonth(), day);
+  // });
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
@@ -60,7 +73,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
             disableNavigation
             selected={new Date(selectedDate)}
             onSelect={handleDateChange}
-            disabled={nonAvailableDates}
+            // disabled={nonAvailableDates}
             locale={ko}
             components={{
               Caption: CustomCaption
@@ -71,7 +84,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
       <div>
         <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
-          {classTimeList.map((time, index) => {
+          {classTimeList.map((time) => {
             return (
               <button
                 key={classTimeList[index]}

@@ -1,9 +1,12 @@
+'use client';
+
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
 import React from 'react';
 import defaultClassImage from '../../../public/favicon.ico.png';
 
 const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
+  console.log(classInfo);
   return (
     <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
       {classInfo.image[0] ? (
