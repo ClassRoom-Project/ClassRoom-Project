@@ -1,15 +1,10 @@
 'use client';
 
 import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { useQuery } from '@tanstack/react-query';
 import { useEffect, useRef, useState } from 'react';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
-import { usePaymentWidget } from '@/hooks/usePayment/usePayment';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useSearchParams } from 'next/navigation';
 import { useAsync } from 'react-use';
-import { constructNow } from 'date-fns';
 import { userId } from '../(clrm)/mypage/page';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
@@ -35,7 +30,7 @@ export default function PaymentPageasync() {
   console.log('파람스', customerKey, price, userEmail, totalPerson);
   console.log('유저아이디', customerKey);
   console.log('금액', price);
-  console.log('내아이디', loginUserId);
+  console.log('금액', loginUserId);
 
   useAsync(async () => {
     //초기화
@@ -95,7 +90,7 @@ export default function PaymentPageasync() {
                 orderName: `${title}__${goToClassDate}${useClassTime}_${totalPerson}명`,
                 customerEmail: userEmail as string,
                 //여기에 예약확인 페이지로 넘기기
-                successUrl: `${window.location.origin}/success`,
+                successUrl: `${window.location.origin}/reserve/reservationComplete/reservationId`,
                 //fail 시 보여줄 페이지 만들기
                 failUrl: `${window.location.origin}/fail?orderId=${customerKey}`
               });
