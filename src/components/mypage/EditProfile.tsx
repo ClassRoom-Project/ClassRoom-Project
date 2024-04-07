@@ -1,20 +1,37 @@
 'use client';
 
-import { userId } from '@/app/(clrm)/mypage/page';
-import { UpdateUserInfoType } from '@/types/user';
+import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { UpdateUserInfoType, UserInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
-
-import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
+import { ToastContainer } from 'react-toastify';
+import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
+import { useUserStore } from '@/store/userInfoStore';
 
 const EditProfile = () => {
+  const { loginUserId } = useLoginStore();
+  const userId = loginUserId as string;
+  // console.log('userId', userId);
+
   const queryClient = useQueryClient();
 
-  const { data: userInfo, isPending } = useQuery({
-    queryKey: ['user', userId],
-    queryFn: () => getUserInfo()
-  });
+  // zustand로 userInfo 상태 관리
+  const { userInfo, setUserInfo } = useUserStore();
+
+  useEffect(() => {
+    if (userId) {
+      const fetchUserInfo = async () => {
+        const userInfoData = await getUserInfo({ userId });
+        if (userInfoData !== null) {
+          setUserInfo(userInfoData);
+        }
+      };
+      fetchUserInfo();
+    }
+  }, [userId, setUserInfo]);
+  // console.log('userInfo', userInfo);
 
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
@@ -34,7 +51,7 @@ const EditProfile = () => {
     const newNickname = e.target.value;
     setNewNickname(newNickname); // 새로 작성한 닉네임
 
-    const isAvailable = !(await checkUserNickname({ newNickname }));
+    const isAvailable = !(await checkUserNickname({ newNickname }, userId));
     setIsAvailableNickname(isAvailable); // 중복 여부 상태 업데이트
 
     // 이미 존재하는 닉네임을 입력한 경우 수정 완료 버튼 비활성화
@@ -44,7 +61,7 @@ const EditProfile = () => {
   // 유저 정보 수정하기 : useMutation
   const { mutate: updateUserInfoMutation } = useMutation({
     mutationFn: ({ newNickname, newProfileImage }: UpdateUserInfoType) =>
-      updateUserInfo({ newNickname, newProfileImage }),
+      updateUserInfo({ newNickname, newProfileImage }, userId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['user']
@@ -60,9 +77,10 @@ const EditProfile = () => {
     const isProfileImageChanged = newProfileImage != userInfo?.profile_image;
 
     if (!isNicknameChanged && !isProfileImageChanged) {
-      alert('수정 사항이 없습니다.');
+      noChangedNotify();
       return;
     }
+
     if (!isAvailableNickname) {
       alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 다시 입력해주세요.');
       return;
@@ -74,7 +92,6 @@ const EditProfile = () => {
   };
 
   // 취소하기 버튼
-
   const handleOnClickCancleBtn = () => {
     if (isEditing) {
       const confirm = window.confirm('취소하시겠습니까?');
@@ -88,9 +105,9 @@ const EditProfile = () => {
     }
   };
 
-  if (isPending) {
-    return <div> 로딩중 ... </div>;
-  }
+  // if (isPending) {
+  //   return <div> 로딩중 ... </div>;
+  // }
 
   if (!userInfo) {
     return <div> 유저 정보가 없습니다.</div>;
@@ -131,9 +148,12 @@ const EditProfile = () => {
         </div>
         <div className="m-4 p-4 flex gap-4">
           {isEditing ? (
-            <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
-              수정 완료
-            </button>
+            <div>
+              <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
+                수정 완료
+              </button>
+              <ToastContainer />
+            </div>
           ) : (
             <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
               수정하기

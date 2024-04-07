@@ -1,8 +1,9 @@
-import Image from 'next/image';
-import React, { PropsWithChildren } from 'react';
-import defaultImage from '../../../../public/profile-image.png';
-import Link from 'next/link';
+'use client';
+
 import LoginState from '@/components/login/LoginState';
+import Link from 'next/link';
+import { PropsWithChildren } from 'react';
+import { LuBell } from 'react-icons/lu';
 import { SearchClass } from './categories/SearchClass';
 
 const Header = ({ children }: PropsWithChildren) => {
@@ -12,10 +13,9 @@ const Header = ({ children }: PropsWithChildren) => {
         <Link href={'/'}>Logo</Link>
         <SearchClass />
         <div className="flex justify-center items-center">
-          <div className="mr-[10px]">alarm</div>
-          <Link href={'/mypage'}>
-            <Image src={defaultImage} alt="Profile image" className="mr-[5px] h-[50px] w-[50px]" />
-          </Link>
+          <div className="mr-[10px]">
+            <LuBell size={30} />
+          </div>
         </div>
         <LoginState />
       </div>
