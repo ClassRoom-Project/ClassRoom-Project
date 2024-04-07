@@ -21,6 +21,7 @@ export interface reservationDetailsType {
   reserve_quantity: number;
   reserve_price: number;
   time_id: string;
+  user_id: string;
   class: {
     class_id: string;
     title: string;
