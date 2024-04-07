@@ -10,14 +10,14 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   const classId = searchParams.classId;
   const classInfo = await newFetch(classId);
 
-  console.log(classInfo);
+  // console.log(classInfo);
 
   return (
     <div className="w-full h-full">
       <h1 className="text-xl">예약하기</h1>
       {classInfo ? (
         <div className="flex w-full h-full bg-gray-200 p-6">
-          <DateTimePicker classDateList={classInfo.dates} />
+          <DateTimePicker classDates={classInfo.dates} />
           <div className="flex flex-col justify-between items-center w-full p-6">
             {/* CheckAlreadyReserved : 예약한 클래스인지 확인을 위한 임시 컴포넌트  */}
             <CheckAlreadyReserved classId={classInfo.classId} />

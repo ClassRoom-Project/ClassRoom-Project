@@ -16,16 +16,12 @@ interface DateInfo {
   class_id: string;
 }
 
-const DateTimePicker = ({ classDates }: { classDates: DateInfo[] }) => {
-  console.log(classDates);
-  classDates.forEach(({ day, times }) => {
-    const timeList = times.map(({ times }) => times); // Create an array of 'times' strings from the 'times' array
-    console.log(timeList); // Access the list of times for each date
-  });
+const DateTimePicker = ({ classInfo }) => {
+  console.log(classInfo);
 
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  const [selectedTime, setSelectedTime] = useState(classDates[2].times[0].times);
-  const [selectedDate, setSelectedDate] = useState(classDates[2].day);
+  const [selectedTime, setSelectedTime] = useState(classInfo[0].times);
+  const [selectedDate, setSelectedDate] = useState(classInfo[0].day);
   const today = new Date();
 
   useEffect(() => {
@@ -33,7 +29,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateInfo[] }) => {
   }, [selectedDate, selectedTime, setReserveInfo]);
 
   const handleTimeClick = (time: string) => {
-    // setSelectedTime(time);
+    setSelectedTime(time);
   };
 
   /* 데이피커 */
@@ -84,18 +80,20 @@ const DateTimePicker = ({ classDates }: { classDates: DateInfo[] }) => {
       <div>
         <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
-          {classTimeList.map((time) => {
-            return (
-              <button
-                key={classTimeList[index]}
-                onClick={() => handleTimeClick(time)}
-                className={`px-4 py-1 text-lg ${
-                  time === selectedTime ? 'bg-rose-200' : 'bg-white'
-                } tracking-wide rounded-lg`}
-              >
-                {convertTimeTo12HourClock(time)}
-              </button>
-            );
+          {classInfo.map(({ times, day }) => {
+            if (selectedDate === day) {
+              return (
+                <button
+                  key={times}
+                  onClick={() => handleTimeClick(times)}
+                  className={`px-4 py-1 text-lg ${
+                    times === selectedTime ? 'bg-rose-200' : 'bg-white'
+                  } tracking-wide rounded-lg`}
+                >
+                  {convertTimeTo12HourClock(times)}
+                </button>
+              );
+            }
           })}
         </div>
       </div>

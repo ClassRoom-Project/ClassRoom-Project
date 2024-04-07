@@ -62,7 +62,6 @@ export type DBReserveClassType = {
   price: number;
   image: string;
   max_people: number;
-  dates: [{ day: string; times: []; date_id: string; class_id: string }];
-  time: string[];
+  dates: [{ date_id: string; day: string; times: string[] }];
   reserved_count: number;
 };
