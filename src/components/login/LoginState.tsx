@@ -5,13 +5,13 @@ import useLoginUserId from '@/hooks/useLogin/useLoginUserId';
 // import useSessionStorageUserEmail from '@/hooks/useLogin/useSessionStorageUserEmail';
 import { useReadLoginUserId } from '@/hooks/useLogin/useSetEmailToApi';
 import useSetSessionStorage from '@/hooks/useLogin/useSetStorage';
-import { useUserStore } from '@/store/userInfoStore';
 import { useUserRoleStore } from '@/store/userRoleStore';
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import basicProfileImage from '../../../public/profile-image.png';
 import { useEffect } from 'react';
+import { useUserStore } from '@/store/UserInfoStore';
 
 export default function LoginState() {
   const userEmail = typeof window !== undefined ? sessionStorage.getItem('userEmail') : null;
@@ -48,7 +48,7 @@ export default function LoginState() {
             {userInfo?.nickname} <span className="text-point-color font-bold">{roleName}님</span>
           </p>
           {/*todo : 드랍다운으로 변경*/}
-          <Link href={'/mypage'}>
+          <Link href="/mypage">
             <Image
               src={profileImage}
               alt="Profile image"

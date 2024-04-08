@@ -12,21 +12,21 @@ const SideBar = ({ children }: PropsWithChildren) => {
     <>
       <div className="fixed p-3 top-0 bg-[#5373FF]  border-solid  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
         <div className="mt-[5vh] flex flex-col text-white items-center">
-          <Link href={'/'} className="p-4  flex flex-col items-center">
+          <Link href="/" className="p-4  flex flex-col items-center">
             <FiHome size={30} />
-            <span>HOME</span>
+            HOME
           </Link>
-          <Link href={'/chat'} className="p-4 flex flex-col items-center">
+          <Link href="/chat" className="p-4 flex flex-col items-center">
             <IoChatbubbleEllipsesOutline size={30} />
-            <span>CHAT</span>
+            CHAT
           </Link>
-          <Link href={'/register'} className="p-4 flex flex-col items-center">
+          <Link href="/register" className="p-4 flex flex-col items-center">
             <SlNote size={30} />
-            <span>CREATE</span>
+            CREATE
           </Link>
-          <Link href={'/mypage'} className="p-4 flex flex-col items-center">
+          <Link href="/mypage" className="p-4 flex flex-col items-center">
             <GoPerson size={30} />
-            <span>MYPAGE</span>
+            MYPAGE
           </Link>
 
           <Link href="/hello">로그인</Link>

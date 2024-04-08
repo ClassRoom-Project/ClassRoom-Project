@@ -23,6 +23,10 @@ const StudentMyPageTab = () => {
   };
 
   const handleOnClickTabBtn = (tab: string) => {
+    if (!tab) {
+      console.log('error');
+      return;
+    }
     setActivePage(tab);
     router.push(`/mypage?studentMypage=${tab}`);
   };
