@@ -2,9 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
+import { useCurrentReservedStore } from '@/store/reserveClassStore';
 
 const CurrentReserveQuantity = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const [remainingQuantity, setRemainingQuantity] = useState(0);
+  const { currentReservedCount, setCurrentReservedCount } = useCurrentReservedStore();
 
   useEffect(() => {
     const fetchCurrentReservedQuantity = async () => {

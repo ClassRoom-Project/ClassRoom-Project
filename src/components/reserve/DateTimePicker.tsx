@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import useReserveStore from '@/store/reserveClassStore';
+import { useCurrentReservedStore, useReserveStore } from '@/store/reserveClassStore';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { CaptionProps, DayPicker } from 'react-day-picker';
@@ -9,9 +9,11 @@ import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css';
 import { DateList } from '@/types/date';
+import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
+  const { currentReservedCount, setCurrentReservedCount } = useCurrentReservedStore();
   const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
   const [selectedDate, setSelectedDate] = useState(classDates[0].day);
   const today = new Date();
@@ -22,8 +24,11 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
   }, [selectedDate, selectedTime, setReserveInfo]);
 
-  const handleTimeClick = (timeId: string) => {
-    setSelectedTime(timeId);
+  const handleTimeClick = async (times: string, timeId: string) => {
+    setSelectedTime(times);
+    const currentReservedAmount = await countReservationsByTimeId(timeId);
+    console.log('🚀 ~ handleTimeClick ~ currentReservedAmount:', currentReservedAmount);
+    setCurrentReservedCount(currentReservedAmount);
   };
 
   /* 데이피커 */
@@ -89,7 +94,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
               times.map((timeInfo) => (
                 <button
                   key={timeInfo.timeId}
-                  onClick={() => handleTimeClick(timeInfo.times)}
+                  onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
                   className={`px-4 py-1 text-lg ${
                     timeInfo.times === selectedTime ? 'bg-rose-200' : 'bg-white'
                   } tracking-wide rounded-lg`}

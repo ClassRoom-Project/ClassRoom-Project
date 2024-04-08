@@ -27,3 +27,8 @@ export interface reservationDetailsType {
     title: string;
   };
 }
+
+export type useCurrentReservedStoreType = {
+  currentReservedCount: number;
+  setCurrentReservedCount: (currentReservedCount: number | null | undefined) => void;
+};
