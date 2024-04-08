@@ -50,8 +50,6 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     window.localStorage.setItem('reservationId', reservationId);
     const reservationDetails = await fetchReservationDetails(reservationId);
 
-    console.log(reservationDetails);
-
     if (!reservationDetails || !('class' in reservationDetails)) {
       // 예외 처리 로직
       console.error('faild to fetch reservationDtails in ReserveButton', Error);
