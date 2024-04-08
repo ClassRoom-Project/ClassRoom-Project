@@ -11,7 +11,7 @@ interface SelectOptionProps {
 
 const SelectOption = ({ id, label, value, onChange, disabled, options }: SelectOptionProps) => {
   return (
-    <form className="m-4 p-4 flex gap-4 items-center">
+    <form className="m-4 p-4 flex gap-4 justify-center flex-col">
       <label htmlFor={id}>{label}</label>
       <select
         name="job"

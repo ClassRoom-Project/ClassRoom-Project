@@ -3,9 +3,12 @@ import { supabase } from '../supabase/supabase';
 import { ClassItem } from '@/types/register';
 
 export async function fetchMyClasses(loginUserId: string | null) {
-  const { data, error }: PostgrestResponse<ClassItem> = await supabase.rpc('fetch_my_reserved_classes', {
-    p_user_id: loginUserId as string
-  });
+  const { data, error }: PostgrestResponse<ClassItem> = await supabase.rpc(
+    'fetch_my_reserved_classes_with_date_and_time',
+    {
+      p_user_id: loginUserId as string
+    }
+  );
 
   if (error) {
     console.error(error);

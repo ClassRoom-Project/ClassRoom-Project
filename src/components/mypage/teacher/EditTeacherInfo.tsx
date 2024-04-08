@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
-import { useUserStore } from '@/store/UserInfoStore';
+import { useUserStore } from '../../../store/UserInfoStore';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
@@ -24,7 +24,8 @@ const EditTeacherInfo = () => {
 
   const { data: teacherInfo, isPending } = useQuery({
     queryKey: ['user', loginUserId],
-    queryFn: () => getTeacherInfo(loginUserId)
+    queryFn: () => getTeacherInfo(loginUserId),
+    enabled: !!loginUserId
   });
 
   // id와 htmlFor 연결 => useId 내장 훅 사용

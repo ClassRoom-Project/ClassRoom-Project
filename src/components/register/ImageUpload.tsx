@@ -4,6 +4,8 @@ import { supabase } from '@/app/api/supabase/supabase';
 import useRegisterStore from '../../store/RegisterStore';
 import RegisterScheduleStore from '@/store/RegisterScheduleStore';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import Image from 'next/image';
+import PlusImage from '../../../public/plusImage.jpg';
 
 interface ImageFileWithPreview {
   file: File;
@@ -170,7 +172,13 @@ const ImageUpload = () => {
     <div className="flex justify-between items-center pt-2">
       {images.length < 5 && (
         <label htmlFor="image-upload" className="cursor-pointer">
-          <img src="/plus.png" alt="plus" width={100} height={100} />
+          <Image
+              src={PlusImage}
+              alt="PlusImage"
+              width={100}
+              height={100}
+              unoptimized={true}
+            />
           <input
             id="image-upload"
             type="file"

@@ -1,7 +1,6 @@
 'use client';
 
 import { updateUserRole } from '@/app/api/mypage/user-api';
-import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useUserRoleStore } from '@/store/userRoleStore';
 import { useRouter } from 'next/navigation';
@@ -12,6 +11,8 @@ const ConvertBtn = () => {
   // const isTeacherBoolean = useUserRole();
 
   const { isTeacher, setIsTeacher } = useUserRoleStore();
+  // 선생님 정보가 등록되었으면, 선생님 전환 가능/ 선생님 정보가 등록되지 않았으면, 전환 X
+  // 선생님 정보를 zustand로 전역 상태 관리하기 -> 쓰이는 곳이 꽤 많음...
   const router = useRouter();
 
   // 전환 버튼

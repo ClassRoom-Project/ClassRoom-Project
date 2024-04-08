@@ -1,7 +1,6 @@
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const cssStyle = {};
 export const noChangedNotify = () =>
   toast.error('수정 사항이 없습니다.', {
     position: 'top-right',

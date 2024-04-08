@@ -1,10 +1,11 @@
 'use client';
 
+import { getClassForList } from '@/app/api/listpage/ClassInfoForList';
+import ClassCard from '@/components/main/ClassCard';
 import { ClassAllType } from '@/types/class';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import ClassCard from '@/components/main/ClassCard';
-import { getClassForList } from '@/app/api/listpage/ClassInfoForList';
+import React, { useEffect, useRef } from 'react';
+
 //무한 스크롤
 function ClassList() {
   const targetRef = useRef<HTMLDivElement>(null);

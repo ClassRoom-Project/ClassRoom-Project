@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
-import { useUserStore } from '@/store/UserInfoStore';
+import { useUserStore } from '../../store/UserInfoStore';
 
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
@@ -78,11 +78,6 @@ const EditProfile = () => {
 
     if (!isNicknameChanged && !isProfileImageChanged) {
       noChangedNotify();
-      return;
-    }
-
-    if (!isAvailableNickname) {
-      alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 다시 입력해주세요.');
       return;
     }
 
