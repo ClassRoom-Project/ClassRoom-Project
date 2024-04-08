@@ -4,17 +4,15 @@ import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetai
 import { insertNewReservation } from '@/app/api/reserve/submitReservation';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useReserveStore } from '@/store/reserveClassStore';
-import { DBReserveInfo, ReserveInfo } from '@/types/reserve';
+import { DBReserveInfo, ReserveInfo, reservationDetailsType, reservationDetailsType2 } from '@/types/reserve';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const ReservationCompletePage = ({ params }: { params: { reservationCompleted: string } }) => {
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
-  const [reservationResponse, setReservationResponse] = useState<ReserveInfo>();
+  const [reservationResponse, setReservationResponse] = useState<reservationDetailsType2>();
   const searchParams = useSearchParams();
-  const paymentKey = searchParams.get('paymentKey');
-  const orderId = searchParams.get('orderId');
-  const amount = searchParams.get('amount');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -38,36 +36,42 @@ const ReservationCompletePage = ({ params }: { params: { reservationCompleted: s
     }
   }, [reservationRequest]);
 
-  // if (!reservationDetails) {
-  //   return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;
-  // }
+  console.log(reservationResponse);
 
-  /* 테이블 reserve_date, reserve_time이 null이 되었기 때문에 오류 방지를 위해 임시 주석처리 */
+  if (reservationResponse) {
+    const { class: classDetails, reserveQuantity, reservePrice } = reservationResponse;
+  }
 
-  // const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationResponse;
-
-  // const reserveInfoLabels = [
-  //   {
-  //     title: '클래스명',
-  //     description: `${classDetails.title}`
-  //   },
-  //   {
-  //     title: '이용 일자',
-  //     description: `${reserveDate}`
-  //   },
-  //   {
-  //     title: '이용 회차',
-  //     description: `${convertTimeTo12HourClock(reserveTime.slice(0, 5))}`
-  //   },
-  //   {
-  //     title: '이용 인원',
-  //     description: `${reserveQuantity}명`
-  //   },
-  //   {
-  //     title: '이용 금액',
-  //     description: `${reservePrice.toLocaleString('ko-KR')}원`
-  //   }
-  // ];
+  const reserveInfoLabels = [
+    {
+      title: '클래스명',
+      description: `${reservationResponse?.class.title}`
+    },
+    {
+      title: '이용 일자',
+      description: `${reservationResponse?.timeId}`
+    },
+    {
+      title: '이용 시간',
+      description: `...`
+    },
+    // {
+    //   title: '이용 일자',
+    //   description: `${reservationResponse?.timeId}`
+    // },
+    // {
+    //   title: '이용 회차',
+    //   description: `${convertTimeTo12HourClock(reservationResponse.)}`
+    // },
+    {
+      title: '이용 인원',
+      description: `${reservationResponse?.reserveQuantity}명`
+    },
+    {
+      title: '이용 금액',
+      description: `${reservationResponse?.reservePrice.toLocaleString('ko-KR')}원`
+    }
+  ];
 
   return (
     <div className="w-full h-full">
@@ -77,13 +81,15 @@ const ReservationCompletePage = ({ params }: { params: { reservationCompleted: s
         <div className="flex flex-col w-1/3 gap-6 mb-20">
           {/* <div>{`${reservationDetails.class.title} `}</div>
           <div>{`time_id = ${reservationDetails.timeId}`}</div>
-          <div>{`reserve_price = ${reservationDetails.reservePrice} `}</div> */}
-          {/* {reserveInfoLabels.map(({ title, description }) => (
-            <div key={title} className="flex w-full justify-between gap-4">
-              <p className="w-20 text-right">{title}</p>
-              <p className="w-52 text-center">{description}</p>
-            </div>
-          ))} */}
+          <div>{`reserve_price = ${reservationDetails.reservePrice} `}</div>  */}
+          {reservationResponse
+            ? reserveInfoLabels.map(({ title, description }) => (
+                <div key={title} className="flex w-full justify-between gap-4">
+                  <p className="w-20 text-right">{title}</p>
+                  <p className="w-52 text-center">{description}</p>
+                </div>
+              ))
+            : ' 로딩중.. 스피너 추가 예정..'}
         </div>
         <NavigationButtons />
       </div>

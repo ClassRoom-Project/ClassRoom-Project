@@ -36,6 +36,17 @@ export interface reservationDetailsType {
     title: string;
   };
 }
+export interface reservationDetailsType2 {
+  classId: string;
+  userId: string;
+  reserveQuantity: number;
+  reservePrice: number;
+  timeId: string;
+  class: {
+    classId: string;
+    title: string;
+  };
+}
 
 export interface CurrentReservedStoreType {
   currentReservedCount: number | null | undefined;

@@ -25,8 +25,6 @@ export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
     return;
   }
 
-  console.log(data.reserve_id, '카멜~~~~~~~~케이스 ~!!');
-
   return data.reserve_id;
 };
 // export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
