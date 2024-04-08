@@ -16,6 +16,7 @@ const RegisterPage = () => {
     <div className='p-4'>
       <div className='border p-4'>
         <div className='max-w-md mx-auto sm:max-w-lg lg:max-w-xl'>
+          <p>클래스 기본정보 입력란</p>
           <ClassTypeDiff />
           <Category />
           <ClassTitle />
