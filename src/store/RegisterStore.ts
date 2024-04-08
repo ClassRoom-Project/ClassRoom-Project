@@ -1,7 +1,7 @@
 // store.js
 
-import { ClassRegister } from '@/types/register';
 import { create } from 'zustand';
+import { ClassRegister } from '../types/register';
 
 const useRegisterStore = create<ClassRegister>((set) => ({
   category: '',

@@ -18,7 +18,7 @@ const MyClass = () => {
     queryKey: ['class', loginUserId],
     queryFn: () => getMyRegisteredClass(loginUserId)
   });
-  // console.log('myClassInfo', myClassInfo);
+  console.log('myClassInfo', myClassInfo);
 
   // 중복되는 값 제외하기
   const days: string[] | undefined = myClassInfo?.map((item) => item.day);

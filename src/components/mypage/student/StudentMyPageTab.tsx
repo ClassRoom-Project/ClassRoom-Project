@@ -16,10 +16,10 @@ const StudentMyPageTab = () => {
 
   const [activePage, setActivePage] = useState('editProfile');
   const activeStudentMyPageTab: StudentTabComponent = {
-    editProfile: <EditProfile />,
-    reservedClass: <MyReservedClass />,
-    myComments: <MyComments />,
-    addTeacherInfo: <AddTeacherInfo />
+    editProfile: <EditProfile key="editProfile" />,
+    reservedClass: <MyReservedClass key="reservedClass" />,
+    myComments: <MyComments key="myComments" />,
+    addTeacherInfo: <AddTeacherInfo key="addTeacherInfo" />
   };
 
   const handleOnClickTabBtn = (tab: string) => {

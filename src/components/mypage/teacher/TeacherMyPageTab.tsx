@@ -22,7 +22,6 @@ const TeacherMyPageTab = () => {
   };
 
   // useEffect(() => {
-  //   // 페이지 로드 시 쿼리 매개변수에서 teacherMypage 값을 읽어 활성 페이지를 설정합니다.
   //   const { teacherMypage } = router.query;
   //   if (teacherMypage && Object.keys(activeTeacherMyPageTab).includes(teacherMypage as string)) {
   //     setActivePage(teacherMypage as string);

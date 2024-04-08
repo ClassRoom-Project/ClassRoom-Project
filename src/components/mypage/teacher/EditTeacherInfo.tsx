@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
-import { useUserStore } from '@/store/UserInfoStore';
+import { useUserStore } from '@/store/userInfoStore';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();

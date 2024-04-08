@@ -6,11 +6,13 @@ interface UserRoleState {
 }
 
 export const useUserRoleStore = create<UserRoleState>((set) => ({
-  // 새로고침 했을 때, 상태유지하기 : sessionStorage에 값을 넣어서 변하지않게 저장
   isTeacher: typeof window !== 'undefined' ? sessionStorage.getItem('isTeacher') === 'true' : null,
 
   setIsTeacher: (value: boolean) => {
     set({ isTeacher: value });
-    typeof window !== 'undefined' ? sessionStorage.setItem('isTeacher', value.toString()) : null;
+    // null 값이 아닐 때만 sessionStorage에 저장하도록 변경
+    if (typeof window !== 'undefined' && value !== null) {
+      sessionStorage.setItem('isTeacher', value.toString());
+    }
   }
 }));
