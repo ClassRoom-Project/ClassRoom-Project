@@ -22,6 +22,8 @@ const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) =>
 
   useEffect(() => {
     setRemainingQuantity(currentReservedCount || currentReservedCount === 0 ? maxPeople - currentReservedCount : 0);
+
+    setQuantity(1);
   }, [currentReservedCount, maxPeople]);
 
   const handleQuantityIncrease = async () => {
