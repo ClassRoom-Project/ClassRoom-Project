@@ -5,7 +5,7 @@ export interface ClassAllType {
   hashtag: string;
   title: string;
   description: string;
-  max_peple: number;
+  max_people: number;
   min_people: number;
   location: string;
   price: number;

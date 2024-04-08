@@ -31,7 +31,7 @@ const ConvertBtn = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 text-white">
       <button onClick={handleOnClickChangedRoleBtn}>
         <div className="flex flex-col items-center">
           <TbArrowsExchange size={30} />

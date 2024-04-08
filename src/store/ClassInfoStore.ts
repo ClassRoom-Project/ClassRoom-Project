@@ -6,6 +6,10 @@ export type ClassStoreType = {
   classInfos: ClassAllType[];
   setClassInfos: (classInfos: ClassAllType[]) => void;
 };
+export type DetailClassStoreType = {
+  classInfo: ClassAllType | null;
+  setClassInfo: (classInfo: ClassAllType | null) => void;
+};
 export const useClassInfoStore = create<ClassStoreType>((set) => ({
   classInfos: [],
 
@@ -13,5 +17,12 @@ export const useClassInfoStore = create<ClassStoreType>((set) => ({
     set(() => ({
       classInfos: getclassInfos
     }));
+  }
+}));
+
+export const useDetailClassInfoStore = create<DetailClassStoreType>((set) => ({
+  classInfo: null,
+  setClassInfo: (classInfo) => {
+    set(() => ({ classInfo }));
   }
 }));
