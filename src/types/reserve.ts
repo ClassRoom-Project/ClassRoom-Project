@@ -8,6 +8,7 @@ export type ReserveInfo = {
 };
 
 export type DBReserveInfo = {
+  reserve_id: string;
   class_id: string;
   user_id: string;
   reserve_price: number;
