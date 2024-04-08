@@ -55,10 +55,8 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
       const { timeId, times } = firstAvailableTime;
       setSelectedTime(times);
       setTimeId(timeId);
-    }
 
-    // 일자를 선택했을 때 첫 번째 시간의 예약 인원수로 setCurrentReservedCount
-    if (timeId) {
+      // 일자를 선택했을 때 첫 번째 시간의 예약 인원수로 setCurrentReservedCount
       const reservedCountOfSelectedDate = await countReservationsByTimeId(timeId);
       setCurrentReservedCount(reservedCountOfSelectedDate);
     }

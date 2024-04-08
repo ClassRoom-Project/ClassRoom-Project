@@ -7,7 +7,8 @@ export const defaultInitState = {
   reservePrice: 0,
   reserveQuantity: 0,
   reserveDate: '',
-  reserveTime: ''
+  reserveTime: '',
+  timeId: ''
 };
 
 export const useReserveStore = create<ReserveStoreType>((set) => ({
