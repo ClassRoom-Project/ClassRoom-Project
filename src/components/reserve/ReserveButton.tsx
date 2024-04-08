@@ -59,7 +59,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     }
 
     const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
-    const userEmail = sessionStorage.getItem('userEmail');
+    const userEmail = typeof window !== undefined ? sessionStorage.getItem('userEmail') : null;
 
     // console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
 

@@ -20,7 +20,7 @@ const ConvertBtn = () => {
     const confirm = window.confirm(confirmMessage);
 
     if (confirm) {
-      updateUserRole(isTeacher, loginUserId);
+      updateUserRole(!!isTeacher, loginUserId);
       // zustand 스토어 상태 업데이트
       setIsTeacher(!isTeacher);
 

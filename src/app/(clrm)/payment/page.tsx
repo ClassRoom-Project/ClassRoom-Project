@@ -22,7 +22,7 @@ export default function PaymentPageasync() {
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
 
-  const reservationId = window.localStorage.getItem('reservationId');
+  const reservationId = typeof window !== 'undefined' ? window.localStorage.getItem('reservationId') : null;
 
   //내아이디 : d162d609-b1dc-41c4-b8c5-7998cb0b58ca
 

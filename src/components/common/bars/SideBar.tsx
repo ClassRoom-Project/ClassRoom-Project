@@ -16,7 +16,7 @@ const SideBar = ({ children }: PropsWithChildren) => {
             <FiHome size={30} />
             HOME
           </Link>
-          <Link href="/chat" className="p-4 flex flex-col items-center">
+          <Link href="/messages" className="p-4 flex flex-col items-center">
             <IoChatbubbleEllipsesOutline size={30} />
             CHAT
           </Link>
