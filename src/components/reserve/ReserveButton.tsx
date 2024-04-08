@@ -25,9 +25,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       return;
     }
 
-    // TODO: 세션별 체크하도록 수정 필요
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
-    const currentReservedQuantity = await countReservationsByTimeId(classId);
+    const currentReservedQuantity = await countReservationsByTimeId(reserveInfo.timeId);
 
     if (currentReservedQuantity) {
       const currentRemainingQuantity = maxPeople - currentReservedQuantity;
