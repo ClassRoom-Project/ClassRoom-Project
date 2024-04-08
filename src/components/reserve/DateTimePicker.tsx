@@ -8,19 +8,22 @@ import { CaptionProps, DayPicker } from 'react-day-picker';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css';
+import { DateList } from '@/types/date';
 
-const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: string[]; classTimeList: string[] }) => {
+const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  const [selectedTime, setSelectedTime] = useState(classTimeList[0]);
-  const [selectedDate, setSelectedDate] = useState(classDateList[0]);
+  const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
+  const [selectedDate, setSelectedDate] = useState(classDates[0].day);
   const today = new Date();
 
+  // console.log(classDates);
+
   useEffect(() => {
-    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime + ':00' });
+    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
   }, [selectedDate, selectedTime, setReserveInfo]);
 
-  const handleTimeClick = (time: string) => {
-    setSelectedTime(time);
+  const handleTimeClick = (timeId: string) => {
+    setSelectedTime(timeId);
   };
 
   /* 데이피커 */
@@ -30,14 +33,22 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   }
 
   const handleDateChange = (newDate: Date | undefined) => {
-    setSelectedDate(format(newDate as Date, 'yyyy-MM-dd'));
+    const formattedDate = format(newDate as Date, 'yyyy-MM-dd');
+    setSelectedDate(formattedDate);
+
+    // 일자를 선택했을 때 첫 번째 시간으로 state를 set
+    const firstAvailableTime = classDates.find(({ day }) => day === formattedDate)?.times[0].times;
+
+    if (firstAvailableTime) {
+      setSelectedTime(firstAvailableTime);
+    }
   };
 
   // 1~31일 배열 생성
   const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
 
   // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
-  const availableDays = classDateList.map((date) => new Date(date).getDate());
+  const availableDays = classDates.map(({ day }) => new Date(day).getDate());
 
   // 1~31 일중 DB에 있는 날짜를 삭제한 date 배열 생성
   const nonAvailableDays = dayList
@@ -70,19 +81,23 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
       <div>
         <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
-          {classTimeList.map((time, index) => {
-            return (
-              <button
-                key={classTimeList[index]}
-                onClick={() => handleTimeClick(time)}
-                className={`px-4 py-1 text-lg ${
-                  time === selectedTime ? 'bg-rose-200' : 'bg-white'
-                } tracking-wide rounded-lg`}
-              >
-                {convertTimeTo12HourClock(time)}
-              </button>
-            );
-          })}
+          {classDates
+            .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 예약가능한 시간만 filter
+            /* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */
+            .map(({ times }) =>
+              /* 각 시간의 정보 렌더링 */
+              times.map((timeInfo) => (
+                <button
+                  key={timeInfo.timeId}
+                  onClick={() => handleTimeClick(timeInfo.times)}
+                  className={`px-4 py-1 text-lg ${
+                    timeInfo.times === selectedTime ? 'bg-rose-200' : 'bg-white'
+                  } tracking-wide rounded-lg`}
+                >
+                  {convertTimeTo12HourClock(timeInfo.times)}
+                </button>
+              ))
+            )}
         </div>
       </div>
       <div>
