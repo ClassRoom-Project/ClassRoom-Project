@@ -28,7 +28,7 @@ export interface reservationDetailsType {
   };
 }
 
-export type useCurrentReservedStoreType = {
+export interface CurrentReservedStoreType {
   currentReservedCount: number;
   setCurrentReservedCount: (currentReservedCount: number | null | undefined) => void;
-};
+}
