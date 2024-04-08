@@ -21,10 +21,11 @@ const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) =>
   }, [quantity, setReserveInfo, totalPrice, classId, maxPeople]);
 
   useEffect(() => {
-    setRemainingQuantity(currentReservedCount ? maxPeople - currentReservedCount : 0);
+    setRemainingQuantity(currentReservedCount || currentReservedCount === 0 ? maxPeople - currentReservedCount : 0);
   }, [currentReservedCount, maxPeople]);
 
   const handleQuantityIncrease = async () => {
+    console.log(remainingQuantity);
     // 남은자리 수 까지만 인원 추가 가능하도록
     if (remainingQuantity) {
       if (remainingQuantity <= quantity) {

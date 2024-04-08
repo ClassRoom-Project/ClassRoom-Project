@@ -6,13 +6,11 @@ import NavigationButtons from '@/components/reserve/reservationComplete/Navigati
 import { useReserveStore } from '@/store/reserveClassStore';
 import { DBReserveInfo, ReserveInfo, reservationDetailsType, reservationDetailsType2 } from '@/types/reserve';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const ReservationCompletePage = ({ params }: { params: { reservationCompleted: string } }) => {
+const ReservationCompletePage = () => {
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
   const [reservationResponse, setReservationResponse] = useState<reservationDetailsType2>();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -38,9 +36,9 @@ const ReservationCompletePage = ({ params }: { params: { reservationCompleted: s
 
   console.log(reservationResponse);
 
-  if (reservationResponse) {
-    const { class: classDetails, reserveQuantity, reservePrice } = reservationResponse;
-  }
+  // if (reservationResponse) {
+  //   const { class: classDetails, reserveQuantity, reservePrice } = reservationResponse;
+  // }
 
   const reserveInfoLabels = [
     {

@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
+import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
@@ -26,18 +27,18 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
     // TODO: 세션별 체크하도록 수정 필요
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
-    const currentReservedQuantity = await fetchReservedCount(classId);
+    const currentReservedQuantity = await countReservationsByTimeId(classId);
 
-    // if (currentReservedQuantity) {
-    //   const currentRemainingQuantity = maxPeople - currentReservedQuantity;
+    if (currentReservedQuantity) {
+      const currentRemainingQuantity = maxPeople - currentReservedQuantity;
 
-    //   // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
-    //   if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
-    //     alert('정원 초과로 인해 예약할 수 없습니다. ');
-    //     router.refresh();
-    //     return;
-    //   }
-    // }
+      // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
+      if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
+        alert('정원 초과로 인해 예약할 수 없습니다. ');
+        router.refresh();
+        return;
+      }
+    }
 
     // TODO: 미주님과 의논 필요
     // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
