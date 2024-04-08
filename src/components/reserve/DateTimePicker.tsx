@@ -16,11 +16,12 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const { setCurrentReservedCount } = useCurrentReservedStore();
   const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
   const [selectedDate, setSelectedDate] = useState(classDates[0].day);
+  const [timeId, setTimeId] = useState(classDates[0].times[0].timeId);
   const today = new Date();
 
   useEffect(() => {
-    setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
-  }, [selectedDate, selectedTime]);
+    setReserveInfo({ timeId: timeId });
+  }, [selectedDate, selectedTime, timeId]);
 
   useEffect(() => {
     const setInitialReservedCount = async () => {
@@ -32,6 +33,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   const handleTimeClick = async (times: string, timeId: string) => {
     setSelectedTime(times);
+    setTimeId(timeId);
 
     const currentReservedAmount = await countReservationsByTimeId(timeId);
     setCurrentReservedCount(currentReservedAmount);
@@ -45,18 +47,19 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   const handleDateChange = async (newDate: Date | undefined) => {
     const formattedDate = format(newDate as Date, 'yyyy-MM-dd');
+    const firstAvailableTime = classDates.find(({ day }) => day === formattedDate)?.times[0];
     setSelectedDate(formattedDate);
 
     // 일자를 선택했을 때 첫 번째 시간으로 state를 set
-    const firstAvailableTime = classDates.find(({ day }) => day === formattedDate)?.times[0].times;
     if (firstAvailableTime) {
-      setSelectedTime(firstAvailableTime);
+      const { timeId, times } = firstAvailableTime;
+      setSelectedTime(times);
+      setTimeId(timeId);
     }
 
-    // 선택한 날짜에 해당하는 첫 번째 시간의 예약 인원수로 setCurrentReservedCount
-    const FirstTimeIdOfSelectedDate = classDates.find(({ day }) => day === formattedDate)?.times[0].timeId;
-    if (FirstTimeIdOfSelectedDate) {
-      const reservedCountOfSelectedDate = await countReservationsByTimeId(FirstTimeIdOfSelectedDate);
+    // 일자를 선택했을 때 첫 번째 시간의 예약 인원수로 setCurrentReservedCount
+    if (timeId) {
+      const reservedCountOfSelectedDate = await countReservationsByTimeId(timeId);
       setCurrentReservedCount(reservedCountOfSelectedDate);
     }
   };

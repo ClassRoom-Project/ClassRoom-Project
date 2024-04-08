@@ -4,8 +4,7 @@ export type ReserveInfo = {
   userId: string;
   reservePrice: number;
   reserveQuantity: number;
-  reserveDate: string;
-  reserveTime: string;
+  timeId: string;
 };
 
 export type ReserveStoreType = {

@@ -3,17 +3,39 @@ import { supabase } from '../supabase/supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
-  const { data: reservationId, error }: PostgrestSingleResponse<string> = await supabase.rpc('insert_new_reservation', {
-    reserve_info: reserveInfo
-  });
+  const { userId, classId, reservePrice, reserveQuantity, timeId } = reserveInfo;
+
+  const { data, error } = await supabase.from('reserve').insert([
+    {
+      user_id: userId,
+      class_id: classId,
+      reserve_price: reservePrice,
+      reserve_quantity: reserveQuantity,
+      time_id: timeId
+    }
+  ]);
 
   if (error) {
     console.error('insertNewReservation 오류 =>', error);
     return;
   }
 
-  return reservationId;
+  console.log(data);
+
+  return data;
 };
+// export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
+//   const { data: reservationId, error }: PostgrestSingleResponse<string> = await supabase.rpc('insert_new_reservation', {
+//     reserve_info: reserveInfo
+//   });
+
+//   if (error) {
+//     console.error('insertNewReservation 오류 =>', error);
+//     return;
+//   }
+
+//   return reservationId;
+// };
 
 // 예약 정보 insert api
 // export const submitReservation = async (reserveInfo: ReserveInfo) => {
