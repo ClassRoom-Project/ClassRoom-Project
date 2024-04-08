@@ -18,6 +18,14 @@ const MyClass = () => {
     queryKey: ['class', loginUserId],
     queryFn: () => getMyRegisteredClass(loginUserId)
   });
+  console.log('myClassInfo', myClassInfo);
+
+  // 중복되는 값 제외하기
+  const days: string[] | undefined = myClassInfo?.map((item) => item.day);
+  const times: string[] | undefined = myClassInfo?.map((item) => item.times);
+
+  const uniqueDays = Array.from(new Set(days));
+  const uniqueTimes = Array.from(new Set(times));
 
   // 클래스 삭제하기
   const handleOnClickDeleteMyClass = () => {
@@ -60,25 +68,11 @@ const MyClass = () => {
               <div className="flex gap-4 py-4">
                 <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl">
                   <FaRegCalendarCheck color="#5373FF" size="20" />
-                  <div className="flex flex-row gap-2">
-                    날짜 :
-                    {classInfo.date.map((date, index) => (
-                      <React.Fragment key={index}>
-                        <p className="flex gap-2">{date}</p>
-                      </React.Fragment>
-                    ))}
-                  </div>
+                  <div className="flex flex-row gap-2">날짜 :{classInfo.day}</div>
                 </div>
                 <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
                   <FaRegClock color="#5373FF" size="20" />
-                  <div className="flex flex-row gap-2">
-                    시간 :
-                    {classInfo.time.map((time, index) => (
-                      <React.Fragment key={index}>
-                        <p className="flex gap-2">{time}</p>
-                      </React.Fragment>
-                    ))}
-                  </div>
+                  <div className="flex flex-row gap-2">시간 :{classInfo.times}</div>
                 </div>
               </div>
               <div className="inline-flex items-center p-2 gap-2 border border-point-color rounded-3xl ">

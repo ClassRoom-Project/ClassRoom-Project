@@ -28,11 +28,14 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   // 가격 콤마(,) 넣기
   const formattedPrice = classItem.reserve_price.toLocaleString();
 
+  // 이미지 대표사진
+  const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음';
+
   return (
-    <li key={classItem.reserve_id} className="flex gap-4 border-y border-y-pale-color w-xl">
+    <li className="flex gap-4 border-y border-y-pale-color w-xl">
       <div className="w-[300px] h-[200px]">
         <Image
-          src={classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음'}
+          src={mainImage}
           alt="클래스 대표 사진"
           width={300}
           height={200}
@@ -47,11 +50,11 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
           <div className="flex gap-4 py-4">
             <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl">
               <FaRegCalendarCheck color="#5373FF" size="20" />
-              <span>날짜 : {classItem.reserve_date}</span>
+              <span>날짜 : {classItem.day}</span>
             </div>
             <div className="flex items-center p-2 gap-2 border border-point-color rounded-3xl ">
               <FaRegClock color="#5373FF" size="20" />
-              <span>시간 : {classItem.reserve_time}</span>
+              <span>시간 : {classItem.times}</span>
             </div>
           </div>
           <div className="flex gap-4">

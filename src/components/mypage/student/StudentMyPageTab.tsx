@@ -16,10 +16,10 @@ const StudentMyPageTab = () => {
 
   const [activePage, setActivePage] = useState('editProfile');
   const activeStudentMyPageTab: StudentTabComponent = {
-    editProfile: <EditProfile />,
-    reservedClass: <MyReservedClass />,
-    myComments: <MyComments />,
-    addTeacherInfo: <AddTeacherInfo />
+    editProfile: <EditProfile key="editProfile" />,
+    reservedClass: <MyReservedClass key="reservedClass" />,
+    myComments: <MyComments key="myComments" />,
+    addTeacherInfo: <AddTeacherInfo key="addTeacherInfo" />
   };
 
   const handleOnClickTabBtn = (tab: string) => {
@@ -50,7 +50,7 @@ const StudentMyPageTab = () => {
           onClick={() => handleOnClickTabBtn('myComments')}
           className={`p-4 m-4 ${activePage === 'myComments' ? 'font-bold cursor-pointer  text-point-color' : ''}`}
         >
-          내가 쓴 댓글 보기
+          내가 쓴 후기 보기
         </p>
         <p
           onClick={() => handleOnClickTabBtn('addTeacherInfo')}
