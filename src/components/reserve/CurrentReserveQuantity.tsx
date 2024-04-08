@@ -8,7 +8,7 @@ const CurrentReserveQuantity = ({ classId, maxPeople }: { classId: string; maxPe
   const [remainingQuantity, setRemainingQuantity] = useState(currentReservedCount);
 
   useEffect(() => {
-    if (currentReservedCount) {
+    if (currentReservedCount || currentReservedCount === 0) {
       setRemainingQuantity(maxPeople - currentReservedCount);
     }
   }, [classId, currentReservedCount, maxPeople]);
