@@ -18,6 +18,7 @@ export interface reservationDetailsType {
   class_id: string;
   reserve_date: string;
   reserve_time: string;
+  userId: string;
   reserve_quantity: number;
   reserve_price: number;
   time_id: string;

@@ -1,10 +1,8 @@
-import React from 'react';
-import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
+import { detailClassIdOnly, detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
+import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
 import ClassDetailLeft from '@/components/classDetail/ClassDetailLeft';
 import ClassDetailRight from '@/components/classDetail/ClassDetailRight';
-import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
 import DetailComments from '@/components/classDetail/DetailComments';
-import { detailClassIdOnly } from '@/app/api/classdetail/detailClassInfo';
 
 export const revalidate = 3600;
 export async function generateStaticParams() {

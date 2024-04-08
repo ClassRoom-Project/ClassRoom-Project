@@ -1,9 +1,10 @@
 'use client';
 
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useSearchParams } from 'next/navigation';
+
 import { useAsync } from 'react-use';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
@@ -31,7 +32,7 @@ export default function PaymentPageasync() {
   console.log('파람스', customerKey, price, userEmail, totalPerson);
   console.log('유저아이디', customerKey);
   console.log('금액', price);
-  console.log('내아이디', loginUserId);
+  console.log('금액', loginUserId);
 
   useAsync(async () => {
     //초기화

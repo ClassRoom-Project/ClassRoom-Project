@@ -13,10 +13,10 @@ export default function SocialLogin() {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-full ">
+    <section className="flex flex-col items-center justify-center w-4/5 md:w-2/3 lg:w-1/2 h-1/2 ">
       <nav className="flex flex-col justify-between items-center w-full mb-3 space-y-4">
         <button
-          className="socialIcon-field hover:bg-[#EBF2FF] w-full flex items-center py-2 rounded"
+          className="socialIcon-field hover:bg-[#EBF2FF] w-full h-1/4 flex items-center py-2 rounded"
           onClick={() => handleSocialSignin('google')}
         >
           <span className="rounded-full bg-transparent w-12 h-12 flex justify-center items-center cursor-pointer hover:bg-gray-200">
@@ -25,7 +25,7 @@ export default function SocialLogin() {
           <strong className="text-black flex-grow text-center">구글 로그인하기</strong>
         </button>
         <button
-          className="socialIcon-field hover:bg-yellow-300 w-full flex items-center py-2 rounded"
+          className="socialIcon-field hover:bg-yellow-300 w-full h-1/4 flex items-center py-2 rounded"
           onClick={() => handleSocialSignin('kakao')}
         >
           <span className="rounded-full bg-yellow-300 w-12 h-12 flex justify-center items-center cursor-pointer">
@@ -34,10 +34,10 @@ export default function SocialLogin() {
           <strong className="text-black flex-grow text-center">카카오 로그인하기</strong>
         </button>
         <button
-          className="socialIcon-field hover:bg-green-500 w-full flex items-center py-2 rounded"
+          className="socialIcon-field hover:bg-green-500 w-full h-1/4 flex items-center py-2 rounded"
           onClick={() => handleSocialSignin('naver')}
         >
-          <span className="rounded-full bg-green-500 w-12 h-12 flex justify-center items-center cursor-pointer">
+          <span className="rounded-full bg-green-500 w-12 h-10 flex justify-center items-center cursor-pointer">
             <SiNaver className="w-2/4 h-2/4 text-white" />
           </span>
           <strong className="text-black flex-grow text-center">네이버 로그인하기</strong>

@@ -24,7 +24,7 @@ const Header = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="flex p-[15px] justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
-        <Link href={'/'}>Logo</Link>
+        <Link href="/">Logo</Link>
         <div className="flex items-center justify-center ml-60">
           <SearchClass />
         </div>
