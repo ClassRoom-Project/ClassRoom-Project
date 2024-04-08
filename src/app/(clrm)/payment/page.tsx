@@ -1,11 +1,10 @@
 'use client';
 
 import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useSearchParams } from 'next/navigation';
-
-import { useAsync } from 'react-use';
+import { useAsync, useStartTyping } from 'react-use';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
@@ -22,16 +21,22 @@ export default function PaymentPageasync() {
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
 
-  const reservationId = typeof window !== 'undefined' ? window.localStorage.getItem('reservationId') : null;
+  const [reserveId, setReserveId] = useState<string | null>(null);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const reservationId = window.localStorage.getItem('reservationId');
+      setReserveId(reservationId);
+    }
+  }, []);
   //내아이디 : d162d609-b1dc-41c4-b8c5-7998cb0b58ca
 
   // d162d609-b1dc-41c4-b8c5-7998cb0b58ca
   // 15ec9598-722e-429b-b295-c433a04b94fb
 
-  console.log('파람스', customerKey, price, userEmail, totalPerson);
+  // console.log('파람스', customerKey, price, userEmail, totalPerson);
   console.log('유저아이디', customerKey);
-  console.log('금액', price);
+  // console.log('금액', price);
   console.log('금액', loginUserId);
 
   useAsync(async () => {
@@ -92,7 +97,7 @@ export default function PaymentPageasync() {
                 orderName: `${title}__${goToClassDate}${useClassTime}_${totalPerson}명`,
                 customerEmail: userEmail as string,
                 //여기에 예약확인 페이지로 넘기기
-                successUrl: `${window.location.origin}/reserve/${reservationId}`,
+                successUrl: `${window.location.origin}/reserve/${reserveId}`,
                 //fail 시 보여줄 페이지 만들기
                 failUrl: `${window.location.origin}/fail?orderId=${customerKey}`
               });

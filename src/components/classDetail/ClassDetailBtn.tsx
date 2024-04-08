@@ -12,7 +12,7 @@ const ClassDetailBtn = ({ classId }: { classId: string }) => {
         신청하기
       </Link>
       <Link
-        href="/chat"
+        href={'/message'}
         className="flex justify-center items-center rounded-2xl w-20 border-[#5373FF] border-solid border-[1px] h-9 ml-3"
       >
         문의하기

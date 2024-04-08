@@ -1,3 +1,5 @@
+import { DateList } from './date';
+
 export interface ClassAllType {
   class_id: string;
   user_id: string;
@@ -33,10 +35,11 @@ export interface MyRegisteredClassType {
   title: string;
   location: string;
   detail_location: string;
-  date: string[];
-  time: string[];
   image: string[];
   active: boolean;
+  day: string;
+  date_id: string;
+  times: string;
 }
 
 // 예약 페이지에서 클래스 정보를 보여주기 위한 타입
@@ -48,11 +51,11 @@ export type ReserveClassType = {
   price: number;
   image: string;
   maxPeople: number;
-  date: string[];
-  time: string[];
+  dates: DateList[];
   reservedCount: number;
 };
 
+/* TODO: 예약 카운트 로직 구현 후 삭제 예정 */
 // DB에 저장된 클래스 정보 타입
 export type DBReserveClassType = {
   class_id: string;
@@ -62,7 +65,6 @@ export type DBReserveClassType = {
   price: number;
   image: string;
   max_people: number;
-  date: string[];
-  time: string[];
+  dates: [{ date_id: string; day: string; times: [{ time_id: string; times: string }] }];
   reserved_count: number;
 };

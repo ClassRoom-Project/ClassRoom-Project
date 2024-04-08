@@ -6,7 +6,7 @@ import Image from 'next/image';
 export default function LoginPage() {
   return (
     <div className="flex h-screen items-center justify-center w-full">
-      <div className="flex flex-col md:flex-row border mx-auto rounded-md w-11/12 md:w-3/4 h-auto ">
+      <div className="flex flex-col md:flex-row border mx-auto rounded-md w-11/12 md:w-4/5 h-auto ">
         <section className=" flex-col hidden md:flex w-full md:w-2/5 items-center justify-evenly bg-[#F0F6FF]">
           <Image src="/loginLogo.svg" alt="LoginLogoImage" width={200} height={100} priority />
           <p className="px-4  text-center text-[#7D95FF] mb:text-sm lg:text-lg">
@@ -22,7 +22,7 @@ export default function LoginPage() {
             </p>
           </div>
           <div className="flex flex-col items-center w-full h-4/5 justify-around mt-5">
-            <div className="w-full flex flex-col items-center h-1/5">
+            <div className="w-full flex flex-col items-center h-auto">
               <SocialLogin />
             </div>
           </div>

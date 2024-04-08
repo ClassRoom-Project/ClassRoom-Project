@@ -28,21 +28,21 @@ const AddTeacherInfo = () => {
   const fieldId = useId();
   const bankId = useId();
 
-  const { data, isPending } = useQuery({
+  const { data: teacherInfo, isPending } = useQuery({
     queryKey: ['user', loginUserId],
     queryFn: () => getTeacherInfo(loginUserId),
     enabled: !!loginUserId
   });
 
   useEffect(() => {
-    if (data && data.job) {
+    if (teacherInfo && teacherInfo.job) {
       setIsHaveTeacherInfo(true);
-      setNewSelectedJob(data.job);
-      setSelectedField(data.field);
-      setSelectedBank(data.bank);
-      setUserAccount(data.account);
+      setNewSelectedJob(teacherInfo.job);
+      setSelectedField(teacherInfo.field);
+      setSelectedBank(teacherInfo.bank);
+      setUserAccount(teacherInfo.account);
     }
-  }, [data]);
+  }, [teacherInfo]);
 
   const handleOnChangeJob = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     setNewSelectedJob(e.target.value);
@@ -55,16 +55,20 @@ const AddTeacherInfo = () => {
   };
   const handleOnChangeAddAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // 계좌번호 숫자만 입력 가능하게 하기 (유효성 검사)
-    setUserAccount(value);
+
+    const sanitizedValue = value.replace(/\D/g, '');
+    setUserAccount(sanitizedValue);
   };
+
+  // 계좌번호 숫자만 입력하기
+  const handleOnKeyDownInputOnlyNumber = () => {};
 
   // 선생님 정보 등록하기 버튼
   const handleOnClickAddTeacherInfoBtn = async () => {
-    const isJobChanged = selectedJob !== data?.job;
-    const isFieldChanged = selectedField !== data?.field;
-    const isBankChanged = selectedBank !== data?.bank;
-    const isAccountChanged = userAccount !== data?.account;
+    const isJobChanged = selectedJob !== teacherInfo?.job;
+    const isFieldChanged = selectedField !== teacherInfo?.field;
+    const isBankChanged = selectedBank !== teacherInfo?.bank;
+    const isAccountChanged = userAccount !== teacherInfo?.account;
 
     if (!isJobChanged || !isFieldChanged || !isBankChanged || !isAccountChanged) {
       noInfoNotify();
@@ -76,9 +80,8 @@ const AddTeacherInfo = () => {
 
         // 수강생에서 선생님으로 전환 로직 추가
         setIsHaveTeacherInfo(true);
-        alert('선생님 마이페이지로 이동합니다.');
         // console.log('data', data);
-        return data;
+        return teacherInfo;
       }
     }
   };
@@ -101,7 +104,7 @@ const AddTeacherInfo = () => {
     return <div> 로딩중 ... </div>;
   }
 
-  if (!data) {
+  if (!teacherInfo) {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
@@ -140,6 +143,7 @@ const AddTeacherInfo = () => {
               className="input input-bordered w-[300px]"
               value={userAccount}
               onChange={handleOnChangeAddAccount}
+              onKeyDown={handleOnKeyDownInputOnlyNumber}
             />
           ) : (
             <p>{secretAccount}</p>

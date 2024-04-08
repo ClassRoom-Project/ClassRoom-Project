@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EditProfile from '../EditProfile';
 import EditTeacherInfo from './EditTeacherInfo';
 import MyClass from './MyClass';
@@ -20,6 +20,13 @@ const TeacherMyPageTab = () => {
     editTeacherInfo: <EditTeacherInfo />,
     myClass: <MyClass />
   };
+
+  // useEffect(() => {
+  //   const { teacherMypage } = router.query;
+  //   if (teacherMypage && Object.keys(activeTeacherMyPageTab).includes(teacherMypage as string)) {
+  //     setActivePage(teacherMypage as string);
+  //   }
+  // }, [router.query]);
 
   const handleOnClickTabBtn = (tab: string) => {
     if (!tab) {
