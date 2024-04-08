@@ -22,13 +22,6 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   useEffect(() => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
-
-    const setInitialReservedCount = async () => {
-      const initialReservedCount = await countReservationsByTimeId(classDates[0].times[0].timeId);
-      setCurrentReservedCount(initialReservedCount);
-    };
-
-    setInitialReservedCount();
   }, [selectedDate, selectedTime]);
 
   useEffect(() => {
@@ -43,7 +36,6 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const handleTimeClick = async (times: string, timeId: string) => {
     setSelectedTime(times);
     const currentReservedAmount = await countReservationsByTimeId(timeId);
-    console.log('🚀 ~ handleTimeClick ~ currentReservedAmount:', currentReservedAmount);
     setCurrentReservedCount(currentReservedAmount);
   };
 

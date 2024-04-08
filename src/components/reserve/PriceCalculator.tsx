@@ -1,7 +1,7 @@
 'use client';
 
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
-import { useReserveStore } from '@/store/reserveClassStore';
+import { useCurrentReservedStore, useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
