@@ -7,6 +7,14 @@ export type ReserveInfo = {
   timeId: string;
 };
 
+export type DBReserveInfo = {
+  class_id: string;
+  user_id: string;
+  reserve_price: number;
+  reserve_quantity: number;
+  time_id: string;
+};
+
 export type ReserveStoreType = {
   reserveInfo: ReserveInfo;
   setReserveInfo: ({}) => void;

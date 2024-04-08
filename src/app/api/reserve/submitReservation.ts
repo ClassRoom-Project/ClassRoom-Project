@@ -1,19 +1,23 @@
-import { ReserveInfo } from '@/types/reserve';
+import { DBReserveInfo, ReserveInfo } from '@/types/reserve';
 import { supabase } from '../supabase/supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
   const { userId, classId, reservePrice, reserveQuantity, timeId } = reserveInfo;
 
-  const { data, error } = await supabase.from('reserve').insert([
-    {
-      user_id: userId,
-      class_id: classId,
-      reserve_price: reservePrice,
-      reserve_quantity: reserveQuantity,
-      time_id: timeId
-    }
-  ]);
+  const { data, error }: PostgrestSingleResponse<DBReserveInfo> = await supabase
+    .from('reserve')
+    .insert([
+      {
+        user_id: userId,
+        class_id: classId,
+        reserve_price: reservePrice,
+        reserve_quantity: reserveQuantity,
+        time_id: timeId
+      }
+    ])
+    .select()
+    .single();
 
   if (error) {
     console.error('insertNewReservation 오류 =>', error);
