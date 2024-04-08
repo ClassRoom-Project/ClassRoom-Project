@@ -7,7 +7,7 @@ import RegisterScheduleStore from '@/store/RegisterScheduleStore';
 import { ko } from 'date-fns/locale';
 
 const TimeSelect: React.FC = () => {
-    const { schedules, selectedDates, setSelectedDates, addSchedule, addTimeToSchedule, removeTimeFromSchedule } = RegisterScheduleStore(state => state);
+    const { schedules, selectedDates, setSelectedDates, addSchedule, addTimeToSchedule, removeSchedule, removeTimeFromSchedule } = RegisterScheduleStore(state => state);
     const [isDayPickerOpen, setIsDayPickerOpen] = useState(false);
     const [tempTime, setTempTime] = useState<string>(''); // 임시 시간 상태 추가
     const dayPickerRef = useRef<HTMLDivElement>(null);
@@ -33,8 +33,14 @@ const TimeSelect: React.FC = () => {
             setTempTime(''); // 시간 입력 후 초기화
         }
     };
+
+    // 선택한 날짜 삭제
+    const handleRemoveDate = (date:string) => {
+        removeSchedule(date);
+        setSelectedDates(selectedDates.filter(d => d !== date));
+    }
     
-    // 시간 삭제
+    // 선택한 시간 삭제
     const handleRemoveTime = (date: string, time: string) => {
         removeTimeFromSchedule(date, time);
     };
@@ -64,23 +70,24 @@ const TimeSelect: React.FC = () => {
                 )}
             </div>
             <div className="flex flex-col my-4">
-                {selectedDates.map((date, index) => (
-                    <div key={index} className="flex items-center gap-2 my-2">
-                        <p className="flex-none">{date}</p>
-                        <input type="time" onChange={(e) => setTempTime(e.target.value)} className="flex-none" />
-                        <button onClick={() => handleAddTime(date)} className="bg-green-500 text-white p-1 rounded-md">+</button>
-                        <div className="flex gap-2">
-                            {schedules.find(schedule => schedule.date === date)?.times.map((time, timeIndex) => (
-                                <div key={timeIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded-md">
-                                  <p>{time}</p>
-                                  <button onClick={() => handleRemoveTime(date, time)} className="bg-red-500 text-white p-1 rounded-md">-</button>
-                                </div>
-                            ))}
-                        </div>
+            {selectedDates.map((date, index) => (
+                <div key={index} className="flex items-center gap-2 my-2">
+                    <button onClick={() => handleRemoveDate(date)} className="bg-red-500 text-white p-1 rounded-md">-</button>
+                    <p className="flex-none">{date}</p>
+                    <input type="time" onChange={(e) => setTempTime(e.target.value)} className="flex-none" />
+                    <button onClick={() => handleAddTime(date)} className="bg-green-500 text-white p-1 rounded-md">+</button>
+                    <div className="flex gap-2">
+                        {schedules.find(schedule => schedule.date === date)?.times.map((time, timeIndex) => (
+                            <div key={timeIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded-md">
+                              <p>{time}</p>
+                              <button onClick={() => handleRemoveTime(date, time)} className="bg-red-500 text-white p-1 rounded-md">-</button>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
+                </div>
+            ))}
         </div>
+    </div>
     );
 }
 
