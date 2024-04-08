@@ -2,14 +2,14 @@ export interface ClassItem {
   reserve_id: string;
   image: string[];
   title: string;
-  reserve_date: string;
+  day: string;
   reserved_at: string;
   class_id: string;
   detail_location: string;
   location: string;
   reserve_price: number;
   reserve_quantity: number;
-  reserve_time: string;
+  times: string;
 }
 
 export interface ClassRegister {

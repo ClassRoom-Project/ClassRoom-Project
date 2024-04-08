@@ -35,10 +35,11 @@ export interface MyRegisteredClassType {
   title: string;
   location: string;
   detail_location: string;
-  date: string[];
-  time: string[];
   image: string[];
   active: boolean;
+  day: string;
+  date_id: string;
+  times: string;
 }
 
 // 예약 페이지에서 클래스 정보를 보여주기 위한 타입
