@@ -6,6 +6,7 @@ import RegisterScheduleStore from '@/store/RegisterScheduleStore';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import Image from 'next/image';
 import PlusImage from '../../../public/plusImage.jpg';
+import { useRouter } from 'next/navigation';
 
 interface ImageFileWithPreview {
   file: File;
@@ -37,6 +38,7 @@ const ImageUpload = () => {
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
   const classId = crypto.randomUUID();
+  const router = useRouter();
 
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
@@ -140,6 +142,8 @@ const ImageUpload = () => {
     }
       alert('등록이 완료되었습니다.');
       console.log('데이터 저장 성공:', data);
+      // router.push(`/list/detail/${classId}`);
+      router.push(`/`); // 디테일 페이지로 이동하도록 할건데, 중간에 페이지 필요할것같음
     }
   };
 
