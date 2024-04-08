@@ -4,14 +4,17 @@ import ClassDetailLeft from '@/components/classDetail/ClassDetailLeft';
 import ClassDetailRight from '@/components/classDetail/ClassDetailRight';
 import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
 import DetailComments from '@/components/classDetail/DetailComments';
+import { detailClassIdOnly } from '@/app/api/classdetail/detailClassInfo';
 
-//ssr
-export async function loader({ params }: { params: { id: string } }) {
-  const classData = await detailClassInfo(params.id);
-
-  return {
-    data: classData
-  };
+export const revalidate = 3600;
+export async function generateStaticParams() {
+  //데이터 불러오는 로직
+  const classId = await detailClassIdOnly();
+  //params 내려주기
+  const paths = classId.map((classItem) => ({
+    params: { id: classItem.class_id }
+  }));
+  return paths;
 }
 const page = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
@@ -26,5 +29,4 @@ const page = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
-
 export default page;

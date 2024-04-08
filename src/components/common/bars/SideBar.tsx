@@ -14,7 +14,7 @@ const SideBar = ({ children }: PropsWithChildren) => {
   const { loginUserId } = useLoginStore();
   return (
     <>
-      <div className="fixed p-3 top-0 bg-[#5373FF]  border-gray-300 border-solid border-[1px] bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
+      <div className="fixed p-3 top-0 bg-[#5373FF]  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
         <div className="mt-[5vh] flex flex-col text-white items-center">
           <Link href={'/'} className="p-4  flex flex-col items-center">
             <FiHome size={30} />

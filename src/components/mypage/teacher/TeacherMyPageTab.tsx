@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import EditProfile from '../EditProfile';
 import EditTeacherInfo from './EditTeacherInfo';
 import MyClass from './MyClass';
@@ -20,6 +20,14 @@ const TeacherMyPageTab = () => {
     editTeacherInfo: <EditTeacherInfo />,
     myClass: <MyClass />
   };
+
+  // useEffect(() => {
+  //   // 페이지 로드 시 쿼리 매개변수에서 teacherMypage 값을 읽어 활성 페이지를 설정합니다.
+  //   const { teacherMypage } = router.query;
+  //   if (teacherMypage && Object.keys(activeTeacherMyPageTab).includes(teacherMypage as string)) {
+  //     setActivePage(teacherMypage as string);
+  //   }
+  // }, [router.query]);
 
   const handleOnClickTabBtn = (tab: string) => {
     setActivePage(tab);

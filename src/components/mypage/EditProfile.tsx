@@ -81,11 +81,6 @@ const EditProfile = () => {
       return;
     }
 
-    if (!isAvailableNickname) {
-      alert('이미 사용 중인 닉네임입니다. 다른 닉네임을 다시 입력해주세요.');
-      return;
-    }
-
     // 수정된 사항이 있는 경우
     updateUserInfoMutation({ newNickname, newProfileImage });
     alert('프로필 수정이 완료되었습니다.');

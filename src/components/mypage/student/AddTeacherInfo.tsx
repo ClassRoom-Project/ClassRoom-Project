@@ -55,9 +55,13 @@ const AddTeacherInfo = () => {
   };
   const handleOnChangeAddAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // 계좌번호 숫자만 입력 가능하게 하기 (유효성 검사)
-    setUserAccount(value);
+
+    const sanitizedValue = value.replace(/\D/g, '');
+    setUserAccount(sanitizedValue);
   };
+
+  // 계좌번호 숫자만 입력하기
+  const handleOnKeyDownInputOnlyNumber = () => {};
 
   // 선생님 정보 등록하기 버튼
   const handleOnClickAddTeacherInfoBtn = async () => {
@@ -139,6 +143,7 @@ const AddTeacherInfo = () => {
               className="input input-bordered w-[300px]"
               value={userAccount}
               onChange={handleOnChangeAddAccount}
+              onKeyDown={handleOnKeyDownInputOnlyNumber}
             />
           ) : (
             <p>{secretAccount}</p>

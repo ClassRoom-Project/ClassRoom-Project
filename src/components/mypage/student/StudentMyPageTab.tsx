@@ -46,7 +46,7 @@ const StudentMyPageTab = () => {
           onClick={() => handleOnClickTabBtn('myComments')}
           className={`p-4 m-4 ${activePage === 'myComments' ? 'font-bold cursor-pointer  text-point-color' : ''}`}
         >
-          내가 쓴 댓글 보기
+          내가 쓴 후기 보기
         </p>
         <p
           onClick={() => handleOnClickTabBtn('addTeacherInfo')}
