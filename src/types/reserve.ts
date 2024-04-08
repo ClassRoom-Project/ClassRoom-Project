@@ -30,6 +30,6 @@ export interface reservationDetailsType {
 }
 
 export interface CurrentReservedStoreType {
-  currentReservedCount: number;
+  currentReservedCount: number | null | undefined;
   setCurrentReservedCount: (currentReservedCount: number | null | undefined) => void;
 }
