@@ -1,23 +1,16 @@
 'use client';
 
+import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 import { insertNewReservation } from '@/app/api/reserve/submitReservation';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useReserveStore } from '@/store/reserveClassStore';
-import { ReserveInfo } from '@/types/reserve';
+import { DBReserveInfo, ReserveInfo } from '@/types/reserve';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const ReservationCompletePage = ({ params }: { params: { reservationCompleted: string } }) => {
-  const reservationId = decodeURIComponent(params.reservationCompleted);
-
-  const { setReserveInfo, reserveInfo } = useReserveStore();
-
-  // const reservationDetails = await fetchReservationDetails(reservationId);
-  // 일단 페이먼트키 들어왔을때 if한번 걸고
-  // 예약정보 넘겨서 완료되면 데이터 들어오고 그동안 스피너 보여주고
-
-  const [isConfirmed, setIsConfirmed] = useState(false);
-  const [info, setInfo] = useState<ReserveInfo>();
+  const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
+  const [reservationResponse, setReservationResponse] = useState<ReserveInfo>();
   const searchParams = useSearchParams();
   const paymentKey = searchParams.get('paymentKey');
   const orderId = searchParams.get('orderId');
@@ -25,20 +18,25 @@ const ReservationCompletePage = ({ params }: { params: { reservationCompleted: s
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const reserveInfo = JSON.parse(window.localStorage.getItem('reservationInfo'));
-
-      setInfo(reserveInfo);
+      const storageData = window.localStorage.getItem('reservationInfo');
+      const reserveInfo: ReserveInfo = storageData ? JSON.parse(storageData) : {}; // null 처리
+      setReservationRequest(reserveInfo);
     }
   }, []);
 
   useEffect(() => {
-    const submitReservation = async () => {
-      console.log(info);
-      const reservationInfo = await insertNewReservation(info);
-    };
+    if (reservationRequest) {
+      const submitReservation = async () => {
+        const reservationId = await insertNewReservation(reservationRequest);
 
-    submitReservation();
-  }, [info]);
+        if (reservationId) {
+          const reservationResponse = await fetchReservationDetails(reservationId);
+          setReservationResponse(reservationResponse);
+        }
+      };
+      submitReservation();
+    }
+  }, [reservationRequest]);
 
   // if (!reservationDetails) {
   //   return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;
@@ -46,7 +44,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationCompleted: s
 
   /* 테이블 reserve_date, reserve_time이 null이 되었기 때문에 오류 방지를 위해 임시 주석처리 */
 
-  // const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
+  // const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationResponse;
 
   // const reserveInfoLabels = [
   //   {

@@ -28,16 +28,16 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
     const currentReservedQuantity = await fetchReservedCount(classId);
 
-    if (currentReservedQuantity) {
-      const currentRemainingQuantity = maxPeople - currentReservedQuantity;
+    // if (currentReservedQuantity) {
+    //   const currentRemainingQuantity = maxPeople - currentReservedQuantity;
 
-      // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
-      if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
-        alert('정원 초과로 인해 예약할 수 없습니다. ');
-        router.refresh();
-        return;
-      }
-    }
+    //   // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
+    //   if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
+    //     alert('정원 초과로 인해 예약할 수 없습니다. ');
+    //     router.refresh();
+    //     return;
+    //   }
+    // }
 
     // TODO: 미주님과 의논 필요
     // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
@@ -48,8 +48,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       return;
     }
 
-    window.localStorage.setItem('reservationId', reservationId.reserve_id);
-    const reservationDetails = await fetchReservationDetails(reservationId.reserve_id);
+    window.localStorage.setItem('reservationId', reservationId);
+    const reservationDetails = await fetchReservationDetails(reservationId);
 
     if (!reservationDetails || !('class' in reservationDetails)) {
       // 예외 처리 로직

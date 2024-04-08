@@ -1,11 +1,12 @@
 import { DBReserveInfo, ReserveInfo } from '@/types/reserve';
 import { supabase } from '../supabase/supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
+import camelcaseKeys from 'camelcase-keys';
 
 export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
   const { userId, classId, reservePrice, reserveQuantity, timeId } = reserveInfo;
 
-  const { data, error }: PostgrestSingleResponse<DBReserveInfo> = await supabase
+  const { data, error }: PostgrestSingleResponse<{ reserve_id: string }> = await supabase
     .from('reserve')
     .insert([
       {
@@ -16,7 +17,7 @@ export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
         time_id: timeId
       }
     ])
-    .select()
+    .select('reserve_id')
     .single();
 
   if (error) {
@@ -24,9 +25,9 @@ export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
     return;
   }
 
-  console.log(data);
+  console.log(data.reserve_id, '카멜~~~~~~~~케이스 ~!!');
 
-  return data;
+  return data.reserve_id;
 };
 // export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
 //   const { data: reservationId, error }: PostgrestSingleResponse<string> = await supabase.rpc('insert_new_reservation', {
