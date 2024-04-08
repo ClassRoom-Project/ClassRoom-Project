@@ -1,21 +1,18 @@
 'use client';
 
 import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
-import { submitReservation } from '@/app/api/reserve/submitReservation';
+import { insertNewReservation } from '@/app/api/reserve/submitReservation';
 import useReserveStore from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
-import { userId } from '@/app/(clrm)/mypage/page';
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
-  const { setReserveInfo, reserveInfo } = useReserveStore();
-
   const { loginUserId } = useLoginStore();
-  console.log('🚀 ~ ReserveButton ~ loginUserId:', loginUserId);
+  const { setReserveInfo, reserveInfo } = useReserveStore();
 
   useEffect(() => {
     setReserveInfo({ classId: classId, userId: loginUserId });
@@ -27,6 +24,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       return;
     }
 
+    // TODO: 세션별 체크하도록 수정 필요
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
     const currentReservedQuantity = await fetchReservedCount(classId);
 
@@ -41,13 +39,18 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       }
     }
 
-    // reservationId: supabase의 응답으로 받아온 제출한 예약 정보의 아이디
-    const reservationId = await submitReservation(reserveInfo);
+    // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
+    const reservationId = await insertNewReservation(reserveInfo);
+
     if (!reservationId) {
       alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
       return;
     }
+
+    window.localStorage.setItem('reservationId', reservationId);
     const reservationDetails = await fetchReservationDetails(reservationId);
+
+    console.log(reservationDetails);
 
     if (!reservationDetails || !('class' in reservationDetails)) {
       // 예외 처리 로직
@@ -58,7 +61,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
     const userEmail = sessionStorage.getItem('userEmail');
 
-    console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
+    // console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
 
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });

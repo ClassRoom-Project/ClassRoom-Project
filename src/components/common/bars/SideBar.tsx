@@ -1,25 +1,34 @@
 import React, { PropsWithChildren } from 'react';
-import Category from './Category';
+import Category from './categories/Category';
 import Link from 'next/link';
 import ConvertBtn from './ConvertBtn';
+import { FiHome } from 'react-icons/fi';
+import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
+import { SlNote } from 'react-icons/sl';
+import { GoPerson } from 'react-icons/go';
+
 const SideBar = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <div className="fixed p-3 top-0 border-gray-300 border-solid border-[1px] bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
-        <div className="mt-[5vh] flex flex-col">
-          <Category />
-          <Link href={'/'} className="p-5">
-            Home
+      <div className="fixed p-3 top-0 bg-[#5373FF]  border-solid  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
+        <div className="mt-[5vh] flex flex-col text-white items-center">
+          <Link href={'/'} className="p-4  flex flex-col items-center">
+            <FiHome size={30} />
+            <span>HOME</span>
           </Link>
-          <Link href={'/chat'} className="p-5">
-            chat
+          <Link href={'/chat'} className="p-4 flex flex-col items-center">
+            <IoChatbubbleEllipsesOutline size={30} />
+            <span>CHAT</span>
           </Link>
-          <Link href={'/mypage'} className="p-5">
-            mypage
+          <Link href={'/register'} className="p-4 flex flex-col items-center">
+            <SlNote size={30} />
+            <span>CREATE</span>
           </Link>
-          <Link href={'/register'} className="p-5">
-            create
+          <Link href={'/mypage'} className="p-4 flex flex-col items-center">
+            <GoPerson size={30} />
+            <span>MYPAGE</span>
           </Link>
+
           <Link href="/hello">로그인</Link>
           {/* 예약 페이지 확인을 위한 임시 링크 */}
           <Link href="/reserve?classId=c3d4e5f6-0000-4aeb-bcf5-6fa40fc0b0e3">예약하기(임시)</Link>
@@ -30,7 +39,6 @@ const SideBar = ({ children }: PropsWithChildren) => {
         <div>
           {/* 수강생/강사 전환 버튼입니다. */}
           <ConvertBtn />
-          <div className="p-5">logout</div>
         </div>
       </div>
 

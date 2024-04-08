@@ -1,20 +1,24 @@
 import { deleteMyComment, updateMyComment } from '@/app/api/mypage/my-comments-api';
+import { useUserStore } from '@/store/userInfoStore';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { MyCommentType, NewCommentType } from '@/types/comments';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
 const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
+  const { loginUserId } = useLoginStore();
+
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState(comment.content);
-  console.log('comment', comment);
+
   const queryClient = useQueryClient();
 
   const commentId = comment.comment_id;
 
   // 후기 삭제 mutaion
   const { mutate: deleteCommentMutation } = useMutation({
-    mutationFn: (commentId: string) => deleteMyComment(commentId),
+    mutationFn: (commentId: string) => deleteMyComment(commentId, loginUserId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['comments']
@@ -24,7 +28,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
 
   // 후기 수정 mutation
   const { mutate: updateCommentMutation } = useMutation({
-    mutationFn: ({ newContent, commentId }: NewCommentType) => updateMyComment({ newContent, commentId }),
+    mutationFn: ({ newContent, commentId }: NewCommentType) => updateMyComment({ newContent, commentId }, loginUserId),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['comments']
@@ -47,7 +51,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         }
         return;
       } else {
-        alert('수정사항이 없습니다.');
+        alert('수정 사항이 없습니다.');
       }
     } else {
       setIsEditing((prev) => !prev);
@@ -94,9 +98,9 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         <section className="flex gap-8">
           <p className="font-bold text-xl text-text-color">{comment.title}</p>
           <div className="flex gap-4">
-            <span>
+            <p>
               작성일 : {formattedDate} {formattedTime}
-            </span>
+            </p>
           </div>
         </section>
         <section className="pt-4">
