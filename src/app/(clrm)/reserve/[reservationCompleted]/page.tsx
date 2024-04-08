@@ -3,12 +3,12 @@
 import { insertNewReservation } from '@/app/api/reserve/submitReservation';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useReserveStore } from '@/store/reserveClassStore';
+import { ReserveInfo } from '@/types/reserve';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const ReservationCompletePage = ({ params }: { params: { reservationCompleted: string } }) => {
   const reservationId = decodeURIComponent(params.reservationCompleted);
-  console.log(reservationId);
 
   const { setReserveInfo, reserveInfo } = useReserveStore();
 
@@ -17,16 +17,28 @@ const ReservationCompletePage = ({ params }: { params: { reservationCompleted: s
   // 예약정보 넘겨서 완료되면 데이터 들어오고 그동안 스피너 보여주고
 
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [info, setInfo] = useState<ReserveInfo>();
   const searchParams = useSearchParams();
   const paymentKey = searchParams.get('paymentKey');
   const orderId = searchParams.get('orderId');
   const amount = searchParams.get('amount');
 
   useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const reserveInfo = JSON.parse(window.localStorage.getItem('reservationInfo'));
+
+      setInfo(reserveInfo);
+    }
+  }, []);
+
+  useEffect(() => {
     const submitReservation = async () => {
-      const reservationId = await insertNewReservation(reserveInfo);
+      console.log(info);
+      const reservationInfo = await insertNewReservation(info);
     };
-  });
+
+    submitReservation();
+  }, [info]);
 
   // if (!reservationDetails) {
   //   return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;

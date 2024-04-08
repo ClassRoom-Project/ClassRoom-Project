@@ -39,6 +39,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       }
     }
 
+    // TODO: 미주님과 의논 필요
     // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
     const reservationId = await insertNewReservation(reserveInfo);
 
@@ -47,8 +48,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       return;
     }
 
-    window.localStorage.setItem('reservationId', reservationId);
-    const reservationDetails = await fetchReservationDetails(reservationId);
+    window.localStorage.setItem('reservationId', reservationId.reserve_id);
+    const reservationDetails = await fetchReservationDetails(reservationId.reserve_id);
 
     if (!reservationDetails || !('class' in reservationDetails)) {
       // 예외 처리 로직

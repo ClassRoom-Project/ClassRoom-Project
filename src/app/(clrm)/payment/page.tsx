@@ -5,6 +5,7 @@ import { Suspense, useEffect, useRef, useState } from 'react';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useSearchParams } from 'next/navigation';
 import { useAsync, useStartTyping } from 'react-use';
+import { useReserveStore } from '@/store/reserveClassStore';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
@@ -24,11 +25,15 @@ export default function PaymentPageasync() {
   // const reservationId = typeof window !== 'undefined' ? window.localStorage.getItem('reservationId') : null;
 
   const [reserveId, setReserveId] = useState<string | null>(null);
+  const { setReserveInfo, reserveInfo } = useReserveStore();
+  const { userId, classId, reservePrice, reserveQuantity, timeId } = reserveInfo;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const reservationId = window.localStorage.getItem('reservationId');
       setReserveId(reservationId);
+
+      window.localStorage.setItem('reservationInfo', JSON.stringify(reserveInfo));
     }
   }, []);
   //내아이디 : d162d609-b1dc-41c4-b8c5-7998cb0b58ca
