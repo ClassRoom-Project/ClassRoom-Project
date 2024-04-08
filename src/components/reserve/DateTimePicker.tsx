@@ -13,12 +13,10 @@ import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsBy
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  const { currentReservedCount, setCurrentReservedCount } = useCurrentReservedStore();
+  const { setCurrentReservedCount } = useCurrentReservedStore();
   const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
   const [selectedDate, setSelectedDate] = useState(classDates[0].day);
   const today = new Date();
-
-  // console.log(classDates);
 
   useEffect(() => {
     setReserveInfo({ reserveDate: selectedDate, reserveTime: selectedTime });
@@ -29,12 +27,12 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
       const initialReservedCount = await countReservationsByTimeId(classDates[0].times[0].timeId);
       setCurrentReservedCount(initialReservedCount);
     };
-
     setInitialReservedCount();
   }, []);
 
   const handleTimeClick = async (times: string, timeId: string) => {
     setSelectedTime(times);
+
     const currentReservedAmount = await countReservationsByTimeId(timeId);
     setCurrentReservedCount(currentReservedAmount);
   };
@@ -45,18 +43,25 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
   }
 
-  const handleDateChange = (newDate: Date | undefined) => {
+  const handleDateChange = async (newDate: Date | undefined) => {
     const formattedDate = format(newDate as Date, 'yyyy-MM-dd');
     setSelectedDate(formattedDate);
 
     // 일자를 선택했을 때 첫 번째 시간으로 state를 set
     const firstAvailableTime = classDates.find(({ day }) => day === formattedDate)?.times[0].times;
-
     if (firstAvailableTime) {
       setSelectedTime(firstAvailableTime);
     }
+
+    // 선택한 날짜에 해당하는 첫 번째 시간의 예약 인원수로 setCurrentReservedCount
+    const FirstTimeIdOfSelectedDate = classDates.find(({ day }) => day === formattedDate)?.times[0].timeId;
+    if (FirstTimeIdOfSelectedDate) {
+      const reservedCountOfSelectedDate = await countReservationsByTimeId(FirstTimeIdOfSelectedDate);
+      setCurrentReservedCount(reservedCountOfSelectedDate);
+    }
   };
 
+  /* 비활성화할 날짜 배열 생성 */
   // 1~31일 배열 생성
   const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
 
@@ -78,7 +83,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
         <h1 className="mb-1">날짜 선택</h1>
         <div>
           <DayPicker
-            mode="single" // 여러 날짜 선택 시 multiple
+            mode="single"
             required
             disableNavigation
             selected={new Date(selectedDate)}
@@ -95,7 +100,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
         <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
           {classDates
-            .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 예약가능한 시간만 filter
+            .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 시간만 filter
             /* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */
             .map(({ times }) =>
               /* 각 시간의 정보 렌더링 */
