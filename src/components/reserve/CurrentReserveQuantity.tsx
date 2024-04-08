@@ -5,19 +5,14 @@ import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
 import { useCurrentReservedStore } from '@/store/reserveClassStore';
 
 const CurrentReserveQuantity = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
-  const [remainingQuantity, setRemainingQuantity] = useState(0);
-  const { currentReservedCount, setCurrentReservedCount } = useCurrentReservedStore();
+  const { currentReservedCount } = useCurrentReservedStore();
+  const [remainingQuantity, setRemainingQuantity] = useState(currentReservedCount);
 
   useEffect(() => {
-    const fetchCurrentReservedQuantity = async () => {
-      const currentReservedCount = await fetchReservedCount(classId);
-
-      if (currentReservedCount || currentReservedCount === 0) {
-        setRemainingQuantity(maxPeople - currentReservedCount);
-      }
-    };
-    fetchCurrentReservedQuantity();
-  }, [classId, maxPeople]);
+    if (currentReservedCount) {
+      setRemainingQuantity(maxPeople - currentReservedCount);
+    }
+  }, [classId, currentReservedCount, maxPeople]);
 
   return <p>{`남은 자리 : ${remainingQuantity ? remainingQuantity : ''}`}</p>;
 };
