@@ -15,7 +15,8 @@ const config: Config = {
       colors: {
         'point-color': '#5373FF',
         'text-color': '#2443CA',
-        'pale-color': '#A4BEFF'
+        'pale-color': '#A4BEFF',
+        'border-color': '#EFEFEF'
       }
     }
   },
