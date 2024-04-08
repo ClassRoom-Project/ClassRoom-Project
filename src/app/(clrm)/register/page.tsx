@@ -14,19 +14,22 @@ import TotalTime from '@/components/register/TotalTime';
 const RegisterPage = () => {
   return (
     <div className='p-4'>
-      <div className='border p-4 flex flex-col item-center mt-4'>
-        <Category />
-        <ClassTitle />
-        <ClassContent />
-        <Personnel />
-        <MinMaxNumber />
-        <ClassTypeDiff />
-        <TotalTime />
-        <Price />
-        <Address />
-        <TimeSelect />
+      <div className='border p-4'>
+        <div className='max-w-md mx-auto sm:max-w-lg lg:max-w-xl'>
+          <p>클래스 기본정보 입력란</p>
+          <ClassTypeDiff />
+          <Category />
+          <ClassTitle />
+          <ClassContent />
+          <Personnel />
+          <MinMaxNumber />
+          <TotalTime />
+          <Price />
+          <Address />
+          <TimeSelect />
+        </div>
       </div>
-      <div className="flex justify-between items-center pt-2">
+      <div className="flex justify-between items-center pt-2 max-w-md mx-auto sm:max-w-lg lg:max-w-xl">
         <ImageUpload />
       </div>
     </div>
