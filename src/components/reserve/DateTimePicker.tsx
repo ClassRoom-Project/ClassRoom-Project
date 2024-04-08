@@ -39,15 +39,14 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
   // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
   const availableDays = classDateList.map((date) => new Date(date).getDate());
 
-  // 1~31 일중 DB에 있는 날짜를 삭제한 배열 생성
-  const nonAvailableDays = dayList.filter((day) => {
-    return !availableDays.includes(day);
-  });
-
-  // 속성으로 할당할 date 배열 생성
-  const nonAvailableDates = nonAvailableDays.map((day) => {
-    return new Date(2024, today.getMonth(), day);
-  });
+  // 1~31 일중 DB에 있는 날짜를 삭제한 date 배열 생성
+  const nonAvailableDays = dayList
+    .filter((day) => {
+      return !availableDays.includes(day);
+    })
+    .map((day) => {
+      return new Date(2024, today.getMonth(), day);
+    });
 
   return (
     <div className="w-2/5 flex flex-col gap-4">
@@ -60,7 +59,7 @@ const DateTimePicker = ({ classDateList, classTimeList }: { classDateList: strin
             disableNavigation
             selected={new Date(selectedDate)}
             onSelect={handleDateChange}
-            disabled={nonAvailableDates}
+            disabled={nonAvailableDays}
             locale={ko}
             components={{
               Caption: CustomCaption
