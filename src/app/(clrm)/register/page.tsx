@@ -6,6 +6,7 @@ import Personnel from '@/components/register/Personnel';
 import Price from '@/components/register/Price';
 import TimeSelect from '@/components/register/TimeSelect';
 import Category from '@/components/register/Category';
+import HashTag from '@/components/register/HashTag';
 import MinMaxNumber from '@/components/register/MinMaxNumber';
 import ClassTypeDiff from '@/components/register/ClassTypeDiff';
 import ImageUpload from '@/components/register/ImageUpload';
@@ -16,9 +17,11 @@ const RegisterPage = () => {
     <div className='p-4'>
       <div className='border p-4'>
         <div className='max-w-md mx-auto sm:max-w-lg lg:max-w-xl'>
-          <p>클래스 기본정보 입력란</p>
-          <ClassTypeDiff />
+          <h1 className='font-bold'>클래스 기본정보 입력란</h1>
+          <hr className='my-4' />
           <Category />
+          <HashTag />
+          <ClassTypeDiff />
           <ClassTitle />
           <ClassContent />
           <Personnel />
