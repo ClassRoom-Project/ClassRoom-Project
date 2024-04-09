@@ -1,4 +1,14 @@
-// export default function useSessionStorageUserEmail() {
-//   const userEmail = sessionStorage.getItem('userEmail');
-//   return userEmail;
-// }
+import { useEffect, useState } from 'react';
+
+export default function useSessionStorageUserEmail() {
+  const [userEmail, setUserEmail] = useState('');
+
+  useEffect(() => {
+    const userEmailFromStorage = sessionStorage.getItem('userEmail');
+    if (userEmailFromStorage) {
+      setUserEmail(userEmailFromStorage);
+    }
+  }, []);
+
+  return userEmail;
+}

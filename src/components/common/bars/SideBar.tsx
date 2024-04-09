@@ -1,6 +1,5 @@
 'use client';
 
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 import { FiHome } from 'react-icons/fi';
@@ -10,7 +9,6 @@ import { SlNote } from 'react-icons/sl';
 import ConvertBtn from './ConvertBtn';
 
 const SideBar = ({ children }: PropsWithChildren) => {
-  const { loginUserId } = useLoginStore();
   return (
     <>
       <div className="fixed p-3 top-0 bg-[#5373FF]  border-solid  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
