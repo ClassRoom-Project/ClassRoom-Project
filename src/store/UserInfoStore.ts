@@ -13,7 +13,7 @@ export const defaultInitState: UserInfoType = {
   profile_image: ''
 };
 
-export const useUserStore = create<UserStateType>()((set) => ({
+export const userInfoStore = create<UserStateType>()((set) => ({
   userInfo: defaultInitState,
   setUserInfo: (userInfo) => {
     set(() => ({ userInfo }));

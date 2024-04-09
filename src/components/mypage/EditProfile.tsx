@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
-import { useUserStore } from '@/store/UserInfoStore';
+import { userInfoStore } from '@/store/UserInfoStore';
 
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
@@ -18,7 +18,7 @@ const EditProfile = () => {
   const queryClient = useQueryClient();
 
   // zustand로 userInfo 상태 관리
-  const { userInfo, setUserInfo } = useUserStore();
+  const { userInfo, setUserInfo } = userInfoStore();
 
   useEffect(() => {
     if (userId) {
