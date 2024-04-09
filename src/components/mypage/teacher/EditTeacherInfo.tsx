@@ -19,6 +19,7 @@ const EditTeacherInfo = () => {
   const [newSelectedField, setNewSelectedField] = useState('');
   const [newSelectedBank, setNewSelectedBank] = useState('');
   const [newAccount, setNewAccount] = useState('');
+  const [isAvailableAccount, setIsAvailableAccount] = useState(true); // 계좌번호 숫자만 입력 여부 상태 업데이트
 
   const { userInfo } = userInfoStore();
 
@@ -54,8 +55,15 @@ const EditTeacherInfo = () => {
   };
   const handleOnChangeAddAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    // 계좌번호 숫자만 입력 가능하게 하기 (유효성 검사)
     setNewAccount(value);
+
+    // 계좌번호 숫자만 입력 가능하게 하기 : 정규 표현식 사용 (유효성 검사)
+    const accountNo_reg_exp = /^[0-9]+$/;
+    if (accountNo_reg_exp.test(value)) {
+      setIsAvailableAccount(true);
+    } else {
+      setIsAvailableAccount(false);
+    }
   };
 
   // 수정하기 버튼 -> supabase에 수정한 정보 update
@@ -131,19 +139,22 @@ const EditTeacherInfo = () => {
             disabled={!isEditing}
             options={koreanBanks}
           />
-          <div className="m-4 p-4 flex gap-4">
+          <div className="m-4 p-4 flex gap-4 flex-col">
             <span>계좌 정보</span>
-            {isEditing ? (
-              <input
-                type="text"
-                placeholder="계좌 번호를 입력해주세요."
-                className="input input-bordered w-[300px]"
-                value={newAccount}
-                onChange={handleOnChangeAddAccount}
-              />
-            ) : (
-              <p>{secretAccount}</p>
-            )}
+            <div className="flex flex-col">
+              {isEditing ? (
+                <input
+                  type="text"
+                  placeholder="계좌 번호를 입력해주세요."
+                  className="input input-bordered w-[300px]"
+                  value={newAccount}
+                  onChange={handleOnChangeAddAccount}
+                />
+              ) : (
+                <p>{secretAccount}</p>
+              )}
+              {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
+            </div>
           </div>
           <div className="m-4 p-4 flex gap-4">
             <span>총 수익</span>

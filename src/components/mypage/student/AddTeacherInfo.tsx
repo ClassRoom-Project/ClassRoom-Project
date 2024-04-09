@@ -22,6 +22,7 @@ const AddTeacherInfo = () => {
   const [selectedField, setSelectedField] = useState('요리/음식');
   const [selectedBank, setSelectedBank] = useState('국민은행');
   const [userAccount, setUserAccount] = useState('');
+  const [isAvailableAccount, setIsAvailableAccount] = useState(true); // 계좌번호 숫자만 입력 여부 상태 업데이트
 
   // id와 htmlFor 연결 => useId 내장 훅 사용
   const jobId = useId();
@@ -49,13 +50,16 @@ const AddTeacherInfo = () => {
   };
   const handleOnChangeAddAccount = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
+    setUserAccount(value);
 
-    const sanitizedValue = value.replace(/\D/g, '');
-    setUserAccount(sanitizedValue);
+    // 계좌번호 숫자만 입력 가능하게 하기 : 정규 표현식 사용 (유효성 검사)
+    const accountNo_reg_exp = /^[0-9]+$/;
+    if (accountNo_reg_exp.test(value)) {
+      setIsAvailableAccount(true);
+    } else {
+      setIsAvailableAccount(false);
+    }
   };
-
-  // 계좌번호 숫자만 입력하기
-  const handleOnKeyDownInputOnlyNumber = () => {};
 
   // 선생님 정보 등록하기 버튼
   const handleOnClickAddTeacherInfoBtn = async () => {
@@ -123,20 +127,22 @@ const AddTeacherInfo = () => {
           disabled={isHaveTeacherInfo}
           options={koreanBanks}
         />
-        <div className="m-4 p-4 flex gap-4">
+        <div className="m-4 p-4 flex flex-col gap-4">
           <span>계좌 정보</span>
-          {!isHaveTeacherInfo ? (
-            <input
-              type="text"
-              placeholder="계좌 번호를 입력해주세요."
-              className="input input-bordered w-[300px]"
-              value={userAccount}
-              onChange={handleOnChangeAddAccount}
-              onKeyDown={handleOnKeyDownInputOnlyNumber}
-            />
-          ) : (
-            <p>{secretAccount}</p>
-          )}
+          <div className="flex flex-col">
+            {!isHaveTeacherInfo ? (
+              <input
+                type="text"
+                placeholder="계좌 번호를 입력해주세요."
+                className="input input-bordered w-[300px]"
+                value={userAccount}
+                onChange={handleOnChangeAddAccount}
+              />
+            ) : (
+              <p>{secretAccount}</p>
+            )}{' '}
+            {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
+          </div>
         </div>
       </div>
       <div className="p-4 flex gap-4">
