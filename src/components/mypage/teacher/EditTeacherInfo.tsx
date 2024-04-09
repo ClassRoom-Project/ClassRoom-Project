@@ -3,12 +3,12 @@
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { noChangedNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
-import { useUserStore } from '@/store/userInfoStore';
+import { userInfoStore } from '@/store/userInfoStore';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
@@ -20,7 +20,7 @@ const EditTeacherInfo = () => {
   const [newSelectedBank, setNewSelectedBank] = useState('');
   const [newAccount, setNewAccount] = useState('');
 
-  const { userInfo } = useUserStore();
+  const { userInfo } = userInfoStore();
 
   const { data: teacherInfo, isPending } = useQuery({
     queryKey: ['user', loginUserId],

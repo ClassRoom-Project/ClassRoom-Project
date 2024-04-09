@@ -1,64 +1,113 @@
-import React from 'react';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
+'use client';
+
+import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { alreadyReserved, invalidReserve } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
+import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservationDetail';
+import { ReserveInfo } from '@/types/reserve';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
+import { useEffect, useState } from 'react';
 
-const reservationCompletePage = async ({ params }: { params: { reservationCompleted: string } }) => {
-  const reservationId = decodeURIComponent(params.reservationCompleted);
-  console.log(reservationId);
-  const reservationDetails = await fetchReservationDetails(reservationId);
+const ReservationCompletePage = () => {
+  const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
+  const [reserveId, setReserveId] = useState('');
+  const [isInvalidRequest, setIsInvalidRequest] = useState(false);
 
-  if (!reservationDetails) {
-    return <div>예약 완료 정보를 불러오는 도중 문제가 발생했습니다.</div>;
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // 로컬 스토리지에서 예약 정보 가져와서 set
+      const storageData = window.localStorage.getItem('reservationInfo');
+      const reserveInfo: ReserveInfo = storageData ? JSON.parse(storageData) : null; // null 처리
+      setReservationRequest(reserveInfo);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (reservationRequest) {
+      const submitReservation = async () => {
+        // db에 예약 정보  insert
+        const responseReserveId = await insertNewReservation(reservationRequest);
+        if (responseReserveId) {
+          setReserveId(responseReserveId);
+        }
+      };
+      submitReservation();
+    } else {
+      // 요청 인자가 없으면 에러 메세지 출력을 위한 state set
+      setIsInvalidRequest(true);
+    }
+  }, [reservationRequest]);
+
+  // 응답 받은 예약 id로 예약 정보 불러오기
+  const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reserveId);
+
+  if (isError) {
+    console.log(isError);
+    invalidReserve();
+    return;
   }
 
-  /* 테이블 reserve_date, reserve_time이 null이 되었기 때문에 오류 방지를 위해 임시 주석처리 */
-
-  // const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
-
-  // const reserveInfoLabels = [
-  //   {
-  //     title: '클래스명',
-  //     description: `${classDetails.title}`
-  //   },
-  //   {
-  //     title: '이용 일자',
-  //     description: `${reserveDate}`
-  //   },
-  //   {
-  //     title: '이용 회차',
-  //     description: `${convertTimeTo12HourClock(reserveTime.slice(0, 5))}`
-  //   },
-  //   {
-  //     title: '이용 인원',
-  //     description: `${reserveQuantity}명`
-  //   },
-  //   {
-  //     title: '이용 금액',
-  //     description: `${reservePrice.toLocaleString('ko-KR')}원`
-  //   }
-  // ];
+  let reserveInfoLabels = [{ title: '', description: '' }];
+  if (reservationDetails) {
+    const { class: classInfo, time: dateInfo, reserveQuantity, reservePrice } = reservationDetails;
+    reserveInfoLabels = [
+      {
+        title: '클래스명',
+        description: `${classInfo.title}`
+      },
+      {
+        title: '이용 일자',
+        description: `${dateInfo.date.day}`
+      },
+      {
+        title: '이용 시간',
+        description: `${reservationDetails && convertTimeTo12HourClock(dateInfo.times)}`
+      },
+      {
+        title: '소요 시간',
+        description: `${classInfo.totalTime}시간`
+      },
+      {
+        title: '위치',
+        description: `${classInfo.location}`
+      },
+      {
+        title: '이용 인원',
+        description: `${reserveQuantity}명`
+      },
+      {
+        title: '이용 금액',
+        description: `${reservePrice.toLocaleString()}원`
+      }
+    ];
+  }
 
   return (
     <div className="w-full h-full">
       <h1 className="text-xl">예약 완료</h1>
       <div className="w-full h-full bg-gray-200 p-6 flex flex-col justify-between items-center">
-        <h1 className="text-xl text-center mb-20">예약이 정상적으로 처리되었습니다..</h1>
-        <div className="flex flex-col w-1/3 gap-6 mb-20">
-          <div>{`${reservationDetails.class.title} `}</div>
-          <div>{`time_id = ${reservationDetails.timeId}`}</div>
-          <div>{`reserve_price = ${reservationDetails.reservePrice} `}</div>
-          {/* {reserveInfoLabels.map(({ title, description }) => (
-            <div key={title} className="flex w-full justify-between gap-4">
-              <p className="w-20 text-right">{title}</p>
-              <p className="w-52 text-center">{description}</p>
+        {!isLoading && reservationDetails ? (
+          <>
+            <h1 className="text-xl text-center mb-20">예약이 정상적으로 처리되었습니다.</h1>
+            <div className="flex flex-col w-1/3 gap-6 mb-20">
+              {reserveInfoLabels.map(({ title, description }) => (
+                <div key={title} className="flex w-full justify-between gap-4">
+                  <p className="w-20 text-right">{title}</p>
+                  <p className="w-52 text-center">{description}</p>
+                </div>
+              ))}
             </div>
-          ))} */}
-        </div>
-        <NavigationButtons />
+            <NavigationButtons />
+          </>
+        ) : isInvalidRequest && !reservationRequest ? (
+          <div>예약 도중 오류 발생!!!</div>
+        ) : (
+          <LoadingSpinner />
+        )}
       </div>
     </div>
   );
 };
 
-export default reservationCompletePage;
+export default ReservationCompletePage;

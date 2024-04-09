@@ -8,7 +8,7 @@ import {
 } from '@/types/user';
 import { PostgrestMaybeSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
-import { useUserStore } from '@/store/userInfoStore';
+import { userInfoStore } from '@/store/userInfoStore';
 
 // User가 선생님인지 수강생인지 구분 : isTeacher 값 불러오기
 export const getUserRole = async (loginUserId: string | null): Promise<{ isTeacher: boolean } | null> => {
@@ -51,7 +51,7 @@ export const getUserInfo = async ({ userId }: { userId: string }) => {
 
   // zustand에 상태 업데이트
   if (userInfo) {
-    useUserStore.getState().setUserInfo(userInfo);
+    userInfoStore.getState().setUserInfo(userInfo);
   }
 
   return userInfo;

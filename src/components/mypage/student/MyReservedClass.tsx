@@ -1,7 +1,7 @@
 'use client';
 
 import fetchMyClasses from '@/app/api/mypage/fetchMyClasses';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import MyReservedClassItem from './MyReservedClassItem';
 
