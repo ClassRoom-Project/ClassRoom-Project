@@ -41,7 +41,6 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
           height={200}
           className="w-full h-full p-4"
           style={{ objectFit: 'contain' }}
-          unoptimized={true}
         />
       </div>
       <div className="flex flex-col p-4 relative">

@@ -9,6 +9,7 @@ import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
 import { userInfoStore } from '@/store/userInfoStore';
+import Image from 'next/image';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
@@ -155,7 +156,13 @@ const EditTeacherInfo = () => {
   return (
     <div className="flex">
       <div className="flex flex-col items-center p-4 gap-4">
-        <img src={userInfo?.profile_image} alt="기본 프로필 이미지" width={100} height={100} className="rounded-full" />
+        <Image
+          src={userInfo?.profile_image}
+          alt="기본 프로필 이미지"
+          width={100}
+          height={100}
+          className="rounded-full"
+        />
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col">

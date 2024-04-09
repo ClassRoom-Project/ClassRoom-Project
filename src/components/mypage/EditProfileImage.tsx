@@ -48,14 +48,7 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing }: Ed
   return (
     <div>
       <div className="flex flex-col items-center p-4 gap-4">
-        <Image
-          src={profileImage}
-          width={100}
-          height={100}
-          className="rounded-full"
-          alt="프로필 이미지"
-          unoptimized={true} // 추후 수정 해야함
-        />
+        <Image src={profileImage} width={100} height={100} className="rounded-full" alt="프로필 이미지" />
         <input
           type="file"
           name="image_URL"

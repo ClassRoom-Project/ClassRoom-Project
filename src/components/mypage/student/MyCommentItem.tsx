@@ -4,6 +4,7 @@ import { useDeleteComment } from '@/hooks/useEditComment';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { MyCommentType, NewCommentType } from '@/types/comments';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 
@@ -78,8 +79,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   return (
     <li className="p-4 flex gap-4 border-y border-y-pale-color" key={comment.comment_id}>
       <div className="w-[300px] h-[200px]">
-        {/* img 파일 불러오는 부분은 아직 수정 중입니다. */}
-        <img
+        <Image
           src={comment.image[0]}
           alt="클래스 대표 사진"
           width={300}

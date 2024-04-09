@@ -58,7 +58,6 @@ const MyClass = () => {
               height={200}
               className="w-full h-full p-4"
               style={{ objectFit: 'contain' }}
-              unoptimized={true}
             />
           </div>
           {/* 클래스 정보 부분 */}
