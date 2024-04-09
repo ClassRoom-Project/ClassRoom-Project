@@ -36,3 +36,15 @@ export const alreadyReserved = () =>
     progress: undefined,
     theme: 'light'
   });
+
+export const quantityWarning = () =>
+  toast.info('예약은 최소 1명 이상부터 가능합니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });

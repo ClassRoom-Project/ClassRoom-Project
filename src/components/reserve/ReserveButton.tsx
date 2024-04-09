@@ -9,6 +9,8 @@ import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
+import { quantityWarning } from '../common/Toastify';
+import { ToastContainer } from 'react-toastify';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
@@ -21,7 +23,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
   const handleReserveButtonClick = async () => {
     if (reserveInfo.reserveQuantity === 0) {
-      alert('예약 인원은 1명 이상이여야 합니다.');
+      quantityWarning();
       return;
     }
 
@@ -72,9 +74,12 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
   };
 
   return (
-    <button onClick={handleReserveButtonClick} className="bg-white w-32 text-center self-end">
-      예약하기
-    </button>
+    <>
+      <ToastContainer />
+      <button onClick={handleReserveButtonClick} className="bg-white w-32 text-center self-end">
+        예약하기
+      </button>
+    </>
   );
 };
 

@@ -24,10 +24,8 @@ const ClassDetailBtn = ({ classId }: { classId: string }) => {
     }
 
     const isReserved = await checkIsReserved({ userId: loginUserId, classId });
-
     if (isReserved) {
       alreadyReserved();
-      // alert('이미 예약한 클래스 입니다.');
       return;
     } else router.push(`/reserve?classId=${classId}`);
   };
