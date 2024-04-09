@@ -99,6 +99,8 @@ const ReservationCompletePage = () => {
             <NavigationButtons />
           </>
         ) : (
+          // ) : !isLoading && !reservationDetails && !reserveId ? (
+          //   <div>예약 도중 오류 발생!!!</div>
           <LoadingSpinner />
         )}
       </div>
