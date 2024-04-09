@@ -1,13 +1,15 @@
 'use client';
 
 import useLoginUserId from '@/hooks/useLogin/useLoginUserId';
-import useSessionStorageUserEmail from '@/hooks/useLogin/useSessionStorageUserEmail';
 import { useReadLoginUserId } from '@/hooks/useLogin/useSetEmailToApi';
 import useSetSessionStorage from '@/hooks/useLogin/useSetStorage';
+import useSessionStorageUserEmail from '@/hooks/useLogin/useSessionStorageUserEmail';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 export default function LoginState() {
+  // const userEmail = useUserEmail();
+  // const userEmail = typeof window !== 'undefined' ? sessionStorage.getItem('userEmail') : null;
   const userEmail = useSessionStorageUserEmail();
 
   const handleLogout = async () => {
