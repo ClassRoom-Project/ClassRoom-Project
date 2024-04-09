@@ -22,10 +22,8 @@ export type ReserveStoreType = {
 };
 
 // DB에서 받아온 예약 정보 타입
-export interface reservationDetailsType {
+export interface DBReservationDetailsType {
   class_id: string;
-  reserve_date: string;
-  reserve_time: string;
   userId: string;
   reserve_quantity: number;
   reserve_price: number;
@@ -35,8 +33,14 @@ export interface reservationDetailsType {
     class_id: string;
     title: string;
   };
+  time: {
+    date: { day: string };
+    times: string;
+    date_id: string;
+    time_id: string;
+  };
 }
-export interface reservationDetailsType2 {
+export interface ReservationDetailsType {
   classId: string;
   userId: string;
   reserveQuantity: number;
@@ -45,6 +49,12 @@ export interface reservationDetailsType2 {
   class: {
     classId: string;
     title: string;
+  };
+  time: {
+    date: { day: string };
+    times: string;
+    dateId: string;
+    timeId: string;
   };
 }
 
