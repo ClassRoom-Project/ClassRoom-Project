@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google';
 // import './globals.css';
 import Header from '@/components/common/bars/Header';
 import SideBar from '@/components/common/bars/SideBar';
-import { ReactNode, Suspense } from 'react';
+import { ReactNode } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -20,7 +20,7 @@ export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
     <div>
       <SideBar>
         <Header />
-        <Suspense>{children}</Suspense>
+        {children}
       </SideBar>
     </div>
   );
