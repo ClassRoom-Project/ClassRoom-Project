@@ -81,8 +81,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
   return (
     <>
       <ToastContainer />
-      <button onClick={handleReserveButtonClick} className="bg-white w-32 text-center self-end">
-        예약하기
+      <button className="btn btn-primary w-full" onClick={handleReserveButtonClick}>
+        결제하자
       </button>
     </>
   );

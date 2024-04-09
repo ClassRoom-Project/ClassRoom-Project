@@ -43,7 +43,7 @@ const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) =>
   };
 
   return (
-    <div className="flex flex-col gap-2 text-lg items-center w-80 p-4 border border-solid border-black">
+    <div className="w-full mb-10 border-black border-solid border">
       <div className="flex w-full justify-between gap-4">
         <span className="w-16 text-right">금액</span>
         <span> {price.toLocaleString()} 원</span>

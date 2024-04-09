@@ -79,9 +79,8 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     });
 
   return (
-    <div className="w-2/5 flex flex-col gap-4">
+    <div className="w-full mb-10 border-black border-solid border p-6">
       <div>
-        <h1 className="mb-1">날짜 선택</h1>
         <div>
           <DayPicker
             mode="single"
@@ -98,7 +97,6 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
         </div>
       </div>
       <div>
-        <h1 className="mb-1">시간 선택</h1>
         <div className="flex gap-2">
           {classDates
             .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 시간만 filter
