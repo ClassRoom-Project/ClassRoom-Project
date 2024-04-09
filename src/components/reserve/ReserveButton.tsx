@@ -6,16 +6,19 @@ import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 import { quantityWarning } from '../common/Toastify';
 import { ToastContainer } from 'react-toastify';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
   const { loginUserId } = useLoginStore();
   const { setReserveInfo, reserveInfo } = useReserveStore();
+
+  console.log(loginUserId);
 
   useEffect(() => {
     setReserveInfo({ classId: classId, userId: loginUserId });
@@ -71,7 +74,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     router.replace(
       `/payment?customerKey=${loginUserId}&title=${
         classDetails.title
-      }&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${'2024-04-011'}&useClassTime=${'14:00:00'}&totalPerson=${reserveQuantity}`
+      }&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${'2024-04-11'}&useClassTime=${'14:00:00'}&totalPerson=${reserveQuantity}`
     );
   };
 

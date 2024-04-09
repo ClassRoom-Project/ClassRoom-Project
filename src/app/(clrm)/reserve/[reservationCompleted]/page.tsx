@@ -2,7 +2,7 @@
 
 import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { alreadyReserved } from '@/components/common/Toastify';
+import { alreadyReserved, invalidReserve } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservationDetail';
 import { ReserveInfo } from '@/types/reserve';
@@ -12,6 +12,7 @@ import { useEffect, useState } from 'react';
 const ReservationCompletePage = () => {
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
   const [reserveId, setReserveId] = useState('');
+  const [isValidRequest, setIsValidRequest] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -32,6 +33,9 @@ const ReservationCompletePage = () => {
         }
       };
       submitReservation();
+    } else {
+      // 요청 인자가 없으면 에러 메세지 출력을 위한 state set
+      setIsValidRequest(true);
     }
   }, [reservationRequest]);
 
@@ -40,7 +44,7 @@ const ReservationCompletePage = () => {
 
   if (isError) {
     console.log(isError);
-    alreadyReserved();
+    invalidReserve();
     return;
   }
 
@@ -97,9 +101,9 @@ const ReservationCompletePage = () => {
             </div>
             <NavigationButtons />
           </>
+        ) : isValidRequest ? (
+          <div>예약 도중 오류 발생!!!</div>
         ) : (
-          // ) : !isLoading && !reservationDetails && !reserveId ? (
-          //   <div>예약 도중 오류 발생!!!</div>
           <LoadingSpinner />
         )}
       </div>

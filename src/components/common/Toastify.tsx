@@ -48,3 +48,15 @@ export const quantityWarning = () =>
     progress: undefined,
     theme: 'light'
   });
+
+export const invalidReserve = () =>
+  toast.error('클래스를 예약하는 도중 오류가 발생했습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
