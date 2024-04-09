@@ -16,12 +16,14 @@ const ConvertBtn = () => {
   const field = teacherInfo?.field;
   const bank = teacherInfo?.bank;
   const account = teacherInfo?.account;
+  const name = teacherInfo?.teacher_name;
+  const number = teacherInfo?.teacher_number;
 
   const router = useRouter();
 
   // 전환 버튼
   const handleOnClickChangedRoleBtn = async () => {
-    if (job === null && field === null && bank === null && account === null) {
+    if (job === null && field === null && bank === null && account === null && name === null && number === null) {
       const confirm = window.confirm(
         '입력된 선생님 정보가 없습니다. 마이페이지에서 선생님 정보를 입력해주세요. 마이페이지로 이동 하시겠습니까?'
       );
