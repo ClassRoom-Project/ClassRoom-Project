@@ -1,4 +1,5 @@
 import { deleteMyComment, updateMyComment } from '@/app/api/mypage/my-comments-api';
+import { useDeleteComment } from '@/hooks/useEditComment';
 
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { MyCommentType, NewCommentType } from '@/types/comments';
@@ -17,14 +18,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const commentId = comment.comment_id;
 
   // 후기 삭제 mutaion
-  const { mutate: deleteCommentMutation } = useMutation({
-    mutationFn: (commentId: string) => deleteMyComment(commentId, loginUserId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['comments']
-      });
-    }
-  });
+  const { mutate: deleteCommentMutation } = useDeleteComment();
 
   // 후기 수정 mutation
   const { mutate: updateCommentMutation } = useMutation({
