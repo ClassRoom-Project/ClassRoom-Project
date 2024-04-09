@@ -12,12 +12,14 @@ export const fetchReservationDetails = async (reserveId: string) => {
     .select(
       `
         class_id, reserve_quantity, reserve_price, time_id, user_id,
-        class!inner(title, total_time, location),
-        time (time_id, times, date_id, date!inner(day))
+        class(title, total_time, location),
+        time (times, date!inner(day))
   `
     )
     .eq('reserve_id', reserveId)
     .single();
+
+  console.log(data);
 
   if (error) {
     console.log('fetchReservationDetails error =>', error);
