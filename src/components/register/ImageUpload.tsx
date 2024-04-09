@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
-import useRegisterStore from '../../store/RegisterStore';
-import RegisterScheduleStore from '@/store/RegisterScheduleStore';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import useRegisterStore from '../../store/registerStore';
+import RegisterScheduleStore from '@/store/registerScheduleStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import Image from 'next/image';
 import PlusImage from '../../../public/plusImage.jpg';
 
@@ -29,10 +29,7 @@ const ImageUpload = () => {
     totalTime
   } = useRegisterStore();
 
-  const {
-    selectedDates,
-    schedules
-  } = RegisterScheduleStore();
+  const { selectedDates, schedules } = RegisterScheduleStore();
 
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
@@ -117,27 +114,27 @@ const ImageUpload = () => {
           console.error('date 테이블에 데이터 저장 중 오류 발생:', dateError);
         } else {
           console.log('date 테이블에 데이터 저장 성공:', dateData);
-          const selectedTimes = schedules.find(schedule => schedule.date === date)?.times;
+          const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
 
           if (selectedTimes && selectedTimes.length > 0) {
-                for (const time of selectedTimes) {
-                    const timeId = crypto.randomUUID(); // 시간마다 새로운 ID 생성
-                    const { data: timeData, error: timeError } = await supabase.from('time').insert([
-                        {
-                            time_id: timeId,
-                            date_id: dateId,
-                            times: time
-                        }
-                    ]);
-                    if (timeError) {
-                        console.error('time 테이블에 데이터 저장 중 오류 발생:', timeError);
-                    } else {
-                        console.log('time 테이블에 데이터 저장 성공:', timeData);
-                    }
+            for (const time of selectedTimes) {
+              const timeId = crypto.randomUUID(); // 시간마다 새로운 ID 생성
+              const { data: timeData, error: timeError } = await supabase.from('time').insert([
+                {
+                  time_id: timeId,
+                  date_id: dateId,
+                  times: time
                 }
+              ]);
+              if (timeError) {
+                console.error('time 테이블에 데이터 저장 중 오류 발생:', timeError);
+              } else {
+                console.log('time 테이블에 데이터 저장 성공:', timeData);
+              }
             }
+          }
         }
-    }
+      }
       alert('등록이 완료되었습니다.');
       console.log('데이터 저장 성공:', data);
     }
@@ -172,13 +169,7 @@ const ImageUpload = () => {
     <div className="flex justify-between items-center pt-2">
       {images.length < 5 && (
         <label htmlFor="image-upload" className="cursor-pointer">
-          <Image
-              src={PlusImage}
-              alt="PlusImage"
-              width={100}
-              height={100}
-              unoptimized={true}
-            />
+          <Image src={PlusImage} alt="PlusImage" width={100} height={100} unoptimized={true} />
           <input
             id="image-upload"
             type="file"
@@ -190,11 +181,7 @@ const ImageUpload = () => {
       )}
       {images.map((image, index) => (
         <div key={index} className="h-[100px] w-[100px] relative ml-2">
-          <img 
-            src={image.preview} 
-            alt="uploaded" 
-            className="h-full w-full object-cover rounded-[20px] border" 
-          />
+          <img src={image.preview} alt="uploaded" className="h-full w-full object-cover rounded-[20px] border" />
           <button
             className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${
               index === 0 ? 'bg-blue-500' : 'bg-white-500'
@@ -205,10 +192,7 @@ const ImageUpload = () => {
           </button>
         </div>
       ))}
-      <button
-        onClick={handleSubmit} 
-        className="ml-4 px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-blue-700"
-      >
+      <button onClick={handleSubmit} className="ml-4 px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-blue-700">
         등록하기
       </button>
     </div>
