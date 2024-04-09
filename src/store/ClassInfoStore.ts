@@ -1,5 +1,5 @@
-import { create } from 'zustand';
 import { ClassAllType } from '@/types/class';
+import { create } from 'zustand';
 
 //class 정보들 각각 배열에 담는 로직임다
 export type ClassStoreType = {

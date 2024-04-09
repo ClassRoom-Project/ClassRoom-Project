@@ -1,7 +1,11 @@
 'use client';
 
 import { updateUserRole } from '@/app/api/mypage/user-api';
+
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+
+import { useTeacherInfo } from '@/hooks/useLogin/useTeacherInfo';
+
 import { useUserRoleStore } from '@/store/userRoleStore';
 import { useRouter } from 'next/navigation';
 import { TbArrowsExchange } from 'react-icons/tb';
@@ -12,24 +16,49 @@ const ConvertBtn = () => {
 
   const { isTeacher, setIsTeacher } = useUserRoleStore();
   // 선생님 정보가 등록되었으면, 선생님 전환 가능/ 선생님 정보가 등록되지 않았으면, 전환 X
-  // 선생님 정보를 zustand로 전역 상태 관리하기 -> 쓰이는 곳이 꽤 많음...
+  // console.log('isTeacher', isTeacher);
+
+  const { teacherInfo, isPending } = useTeacherInfo();
+
+  const job = teacherInfo?.job;
+  const field = teacherInfo?.field;
+  const bank = teacherInfo?.bank;
+  const account = teacherInfo?.account;
+
   const router = useRouter();
 
   // 전환 버튼
   const handleOnClickChangedRoleBtn = async () => {
-    const confirmMessage = isTeacher ? '수강생으로 전환 하시겠습니까?' : '선생님으로 전환 하시겠습니까?';
-    const confirm = window.confirm(confirmMessage);
+    if (job === null && field === null && bank === null && account === null) {
+      const confirm = window.confirm(
+        '입력된 선생님 정보가 없습니다. 마이페이지에서 선생님 정보를 입력해주세요. 마이페이지로 이동 하시겠습니까?'
+      );
+      if (confirm) {
+        router.push('/mypage');
+      }
+      return;
+    } else {
+      const confirmMessage = isTeacher ? '수강생으로 전환 하시겠습니까?' : '선생님으로 전환 하시겠습니까?';
+      const confirm = window.confirm(confirmMessage);
 
-    if (confirm) {
-      updateUserRole(!!isTeacher, loginUserId);
-      // zustand 스토어 상태 업데이트
-      setIsTeacher(!isTeacher);
+      if (confirm) {
+        updateUserRole(isTeacher, loginUserId);
+        // zustand 스토어 상태 업데이트
+        setIsTeacher(!isTeacher);
 
-      // 페이지 새로고침
-      router.refresh();
+        // 페이지 새로고침
+        router.refresh();
+      }
     }
   };
 
+  if (isPending) {
+    return <div> 로딩중 ... </div>;
+  }
+
+  if (!teacherInfo) {
+    return <div> 선생님 정보가 없습니다.</div>;
+  }
   return (
     <div className="p-4 text-white">
       <button onClick={handleOnClickChangedRoleBtn}>
