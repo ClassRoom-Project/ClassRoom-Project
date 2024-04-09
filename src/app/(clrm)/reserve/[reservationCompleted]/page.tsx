@@ -2,7 +2,9 @@
 
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 import { insertNewReservation } from '@/app/api/reserve/submitReservation';
+import { alreadyReserved } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
+import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservationDetail';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { DBReserveInfo, ReservationDetailsType, ReserveInfo } from '@/types/reserve';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
@@ -11,6 +13,7 @@ import { useEffect, useState } from 'react';
 const ReservationCompletePage = () => {
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
   const [reservationResponse, setReservationResponse] = useState<ReservationDetailsType>();
+  const [reserveId, setReserveId] = useState('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -21,14 +24,15 @@ const ReservationCompletePage = () => {
     }
   }, []);
 
+  const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reserveId);
+  console.log(reservationDetails);
+
   useEffect(() => {
     if (reservationRequest) {
       const submitReservation = async () => {
-        const reservationId = await insertNewReservation(reservationRequest);
-
-        if (reservationId) {
-          const reservationResponse = await fetchReservationDetails(reservationId);
-          setReservationResponse(reservationResponse);
+        const responseReserveId = await insertNewReservation(reservationRequest);
+        if (responseReserveId) {
+          setReserveId(responseReserveId);
         }
       };
       submitReservation();
@@ -37,42 +41,39 @@ const ReservationCompletePage = () => {
 
   console.log(reservationResponse);
 
-  if (!reservationResponse) {
-    //TODO: 화면 중앙으로 배치
-    return <div className="border-gray-300 h-16 w-16 animate-spin rounded-full border-[8px] border-t-violet-400"></div>;
+  if (isError) {
+    alreadyReserved();
+    return;
   }
-
-  //TODO: 구조분해할당
-  const { class: classDetails, time: timeInfo, reserveQuantity, reservePrice } = reservationResponse;
 
   const reserveInfoLabels = [
     {
       title: '클래스명',
-      description: `${classDetails.title}`
+      description: `${reservationDetails?.class.title}`
     },
     {
       title: '이용 일자',
-      description: `${timeInfo.date.day}`
+      description: `${reservationDetails?.time.date.day}`
     },
-    {
-      title: '이용 시간',
-      description: `${convertTimeTo12HourClock(timeInfo.times)}`
-    },
+    // {
+    //   title: '이용 시간',
+    //   description: `${convertTimeTo12HourClock(reservationDetails?.time.times ?  )}`
+    // },
     {
       title: '소요 시간',
-      description: `${classDetails.totalTime}시간`
+      description: `${reservationDetails?.class.totalTime}시간`
     },
     {
       title: '위치',
-      description: `${classDetails.location}`
+      description: `${reservationDetails?.class.location}`
     },
     {
       title: '이용 인원',
-      description: `${reserveQuantity}명`
+      description: `${reservationDetails?.reserveQuantity}명`
     },
     {
       title: '이용 금액',
-      description: `${reservePrice.toLocaleString('ko-KR')}원`
+      description: `${reservationDetails?.reservePrice.toLocaleString('ko-KR')}원`
     }
   ];
 
@@ -84,7 +85,9 @@ const ReservationCompletePage = () => {
     <div className="w-full h-full">
       <h1 className="text-xl">예약 완료</h1>
       <div className="w-full h-full bg-gray-200 p-6 flex flex-col justify-between items-center">
-        {reservationResponse ? (
+        {isLoading ? (
+          <div className="border-gray-300 h-16 w-16 animate-spin rounded-full border-[8px] border-t-violet-400"></div>
+        ) : reservationDetails ? (
           <>
             <h1 className="text-xl text-center mb-20">예약이 정상적으로 처리되었습니다.</h1>
             <div className="flex flex-col w-1/3 gap-6 mb-20">
@@ -98,7 +101,7 @@ const ReservationCompletePage = () => {
             <NavigationButtons />
           </>
         ) : (
-          <div>예약 실패</div>
+          <div></div>
         )}
       </div>
     </div>
