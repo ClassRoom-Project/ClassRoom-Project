@@ -80,6 +80,7 @@ const ReservationCompletePage = () => {
     ];
   }
 
+  // TODO: localStorage에 예약 정보 없을 시 실패메세지 출력
   return (
     <div className="w-full h-full">
       <h1 className="text-xl">예약 완료</h1>
