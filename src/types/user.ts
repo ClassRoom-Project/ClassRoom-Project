@@ -20,6 +20,8 @@ export interface TeacherInfoType {
   field: string;
   bank: string;
   account: string;
+  teacher_name: string;
+  teacher_number: string;
 }
 
 // 입력한 선생님 정보 type
@@ -28,6 +30,8 @@ export interface InsertTeacherInfo {
   selectedField: string;
   selectedBank: string;
   userAccount: string;
+  teacherName: string;
+  teacherNumber: string;
 }
 
 // 수정된 닉네임 type
@@ -42,6 +46,8 @@ export interface UpdateTeacherInfoType {
   newSelectedField: string;
   newSelectedBank: string;
   newAccount: string;
+  newTeacherName: string;
+  newTeacherNumber: string;
 }
 
 // 수정된 프로필 이미지 url type

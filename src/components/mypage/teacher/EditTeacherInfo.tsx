@@ -19,7 +19,11 @@ const EditTeacherInfo = () => {
   const [newSelectedField, setNewSelectedField] = useState('');
   const [newSelectedBank, setNewSelectedBank] = useState('');
   const [newAccount, setNewAccount] = useState('');
-  const [isAvailableAccount, setIsAvailableAccount] = useState(true); // 계좌번호 숫자만 입력 여부 상태 업데이트
+  const [isAvailableAccount, setIsAvailableAccount] = useState(true); // 계좌번호 숫자만 유효성 검사
+  const [newTeacherName, setNewTeacherName] = useState('');
+  const [isAvailableName, setIsAvailableName] = useState(true); // 이름 유효성 검사
+  const [newTeacherNumber, setNewTeacherNumber] = useState('');
+  const [isAvailableNumber, setIsAvailableNumber] = useState(true); // 폰 번호 숫자만 유효성 검사
 
   const { userInfo } = userInfoStore();
 
@@ -41,6 +45,8 @@ const EditTeacherInfo = () => {
       setNewSelectedField(teacherInfo.field);
       setNewSelectedBank(teacherInfo ? teacherInfo?.bank : '');
       setNewAccount(teacherInfo ? teacherInfo.account : '');
+      setNewTeacherName(teacherInfo ? teacherInfo.teacher_name : '');
+      setNewTeacherNumber(teacherInfo ? teacherInfo.teacher_number : '');
     }
   }, [teacherInfo]);
 
@@ -65,6 +71,32 @@ const EditTeacherInfo = () => {
       setIsAvailableAccount(false);
     }
   };
+  const handleOnChangeAddTeacherName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setNewTeacherName(value);
+
+    // 이름 영어 대소문자 & 한글만 허용 : 정규 표현식 사용 (유효성 검사)
+    const nameNumRegExp = /^[a-zA-Z가-힣]+$/;
+
+    if (nameNumRegExp.test(value)) {
+      setIsAvailableName(true);
+    } else {
+      setIsAvailableName(false);
+    }
+  };
+  const handleOnChangeAddTeacherNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setNewTeacherNumber(value);
+
+    // 휴대폰 번호 숫자만 입력 가능하게 하기 : 정규 표현식 사용 (유효성 검사)
+    const phoneNumRegExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{5}$/;
+
+    if (phoneNumRegExp.test(value)) {
+      setIsAvailableNumber(true);
+    } else {
+      setIsAvailableNumber(false);
+    }
+  };
 
   // 수정하기 버튼 -> supabase에 수정한 정보 update
   const handleOnClickEditTeacherInfoBtn = () => {
@@ -73,14 +105,26 @@ const EditTeacherInfo = () => {
     const isFieldChanged = newSelectedField !== teacherInfo?.field;
     const isSelectedBankChanged = newSelectedBank !== teacherInfo?.bank;
     const isAccountChanged = newAccount !== teacherInfo?.account;
+    const isNameChanged = newTeacherName !== teacherInfo?.teacher_name;
+    const isNumberChanged = newTeacherNumber !== teacherInfo?.teacher_number;
 
-    if (!isJobChanged && !isFieldChanged && !isSelectedBankChanged && !isAccountChanged) {
+    if (
+      !isJobChanged &&
+      !isFieldChanged &&
+      !isSelectedBankChanged &&
+      !isAccountChanged &&
+      !isNameChanged &&
+      !isNumberChanged
+    ) {
       noChangedNotify(); // react-toastify 사용
       return;
     }
 
     // 수정된 사항이 있는 경우
-    updateTeacherInfo({ newSelectedJob, newSelectedField, newSelectedBank, newAccount }, loginUserId);
+    updateTeacherInfo(
+      { newSelectedJob, newSelectedField, newSelectedBank, newAccount, newTeacherName, newTeacherNumber },
+      loginUserId
+    );
     setIsEditing(false);
     alert('선생님 정보 수정이 완료되었습니다.');
   };
@@ -115,6 +159,40 @@ const EditTeacherInfo = () => {
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col">
+          <div className="m-4 p-4 flex flex-col gap-4">
+            <p>강사 이름</p>
+            <div className="flex flex-col">
+              {isEditing ? (
+                <input
+                  type="text"
+                  placeholder="본명을 입력해주세요."
+                  className="input input-bordered w-[300px]"
+                  value={newTeacherName}
+                  onChange={handleOnChangeAddTeacherName}
+                />
+              ) : (
+                <p>{newTeacherName}</p>
+              )}
+              {isAvailableName ? '' : <p className="font-thin p-2">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>}
+            </div>
+          </div>
+          <div className="m-4 p-4 flex flex-col gap-4">
+            <p>휴대폰 번호</p>
+            <div className="flex flex-col">
+              {isEditing ? (
+                <input
+                  type="text"
+                  placeholder="휴대폰 번호를 입력해주세요."
+                  className="input input-bordered w-[300px]"
+                  value={newTeacherNumber}
+                  onChange={handleOnChangeAddTeacherNumber}
+                />
+              ) : (
+                <p>{newTeacherNumber}</p>
+              )}
+              {isAvailableNumber ? '' : <p className="font-thin p-2">휴대폰 번호의 양식에 맞게 입력해주세요.</p>}
+            </div>
+          </div>
           <SelectOption
             id={jobId}
             label="직업"

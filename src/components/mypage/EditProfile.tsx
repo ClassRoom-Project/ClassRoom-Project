@@ -19,7 +19,7 @@ const EditProfile = () => {
 
   // zustand로 userInfo 상태 관리
   const { userInfo, setUserInfo } = userInfoStore();
-  console.log('userInfo', userInfo);
+  // console.log('userInfo', userInfo);
 
   useEffect(() => {
     if (userId) {

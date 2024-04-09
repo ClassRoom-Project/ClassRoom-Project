@@ -89,7 +89,7 @@ export const checkUserNickname = async (
 export const getTeacherInfo = async (loginUserId: string | null) => {
   const { data: teacherInfo, error }: PostgrestMaybeSingleResponse<TeacherInfoType> = await supabase
     .from('users')
-    .select('job, field, bank, account')
+    .select('job, field, bank, account, teacher_name, teacher_number')
     .eq('user_id', loginUserId as string)
     .single();
 
@@ -102,12 +102,26 @@ export const getTeacherInfo = async (loginUserId: string | null) => {
 
 // 선생님 정보 수정하기 (강사 마이페이지) :update
 export const updateTeacherInfo = async (
-  { newSelectedJob, newSelectedField, newSelectedBank, newAccount }: UpdateTeacherInfoType,
+  {
+    newSelectedJob,
+    newSelectedField,
+    newSelectedBank,
+    newAccount,
+    newTeacherName,
+    newTeacherNumber
+  }: UpdateTeacherInfoType,
   loginUserId: string | null
 ) => {
   const { data, error }: PostgrestMaybeSingleResponse<UpdateTeacherInfoType> = await supabase
     .from('users')
-    .update({ job: newSelectedJob, field: newSelectedField, bank: newSelectedBank, account: newAccount })
+    .update({
+      job: newSelectedJob,
+      field: newSelectedField,
+      bank: newSelectedBank,
+      account: newAccount,
+      teacher_name: newTeacherName,
+      teacher_number: newTeacherNumber
+    })
     .eq('user_id', loginUserId as string);
   if (error) {
     console.error(error);
@@ -117,12 +131,22 @@ export const updateTeacherInfo = async (
 
 // 선생님 정보 초기 등록하기 (수강생 마이페이지에서) : update
 export const addTeacherInfo = async (
-  { selectedJob, selectedField, selectedBank, userAccount }: InsertTeacherInfo,
+  { selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber }: InsertTeacherInfo,
   loginUserId: string | null
 ) => {
   const { data, error } = await supabase
     .from('users')
-    .update([{ job: selectedJob, field: selectedField, bank: selectedBank, account: userAccount, isTeacher: true }])
+    .update([
+      {
+        job: selectedJob,
+        field: selectedField,
+        bank: selectedBank,
+        account: userAccount,
+        teacher_name: teacherName,
+        teacher_number: teacherNumber,
+        isTeacher: true
+      }
+    ])
     .eq('user_id', loginUserId as string);
   if (error) {
     console.error(error);

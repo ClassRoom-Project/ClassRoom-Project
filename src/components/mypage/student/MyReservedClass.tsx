@@ -13,7 +13,6 @@ const MyReservedClass = () => {
     queryFn: () => fetchMyClasses(loginUserId),
     enabled: !!loginUserId
   });
-  console.log('reservedClasses', reservedClasses);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;

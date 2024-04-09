@@ -12,17 +12,20 @@ const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
   const { isTeacher, setIsTeacher } = useUserRoleStore();
   const { teacherInfo, isPending } = useTeacherInfo();
-  console.log('teacherInfo', teacherInfo);
-  // const router = useRouter();
+  // console.log('teacherInfo', teacherInfo);
 
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
   // 선생님 정보가 없으면(null) : false => 정보 입력하기
   const [isHaveTeacherInfo, setIsHaveTeacherInfo] = useState(false);
-  const [selectedJob, setNewSelectedJob] = useState('요리사');
-  const [selectedField, setSelectedField] = useState('요리/음식');
-  const [selectedBank, setSelectedBank] = useState('국민은행');
-  const [userAccount, setUserAccount] = useState('');
-  const [isAvailableAccount, setIsAvailableAccount] = useState(true); // 계좌번호 숫자만 입력 여부 상태 업데이트
+  const [selectedJob, setNewSelectedJob] = useState('요리사'); // 직업 선택
+  const [selectedField, setSelectedField] = useState('요리/음식'); // 분야 선택
+  const [selectedBank, setSelectedBank] = useState('국민은행'); // 은행 선택
+  const [userAccount, setUserAccount] = useState(''); // 계좌 입력
+  const [isAvailableAccount, setIsAvailableAccount] = useState(true); // 계좌 숫자만 유효성 검사
+  const [teacherName, setTeacherName] = useState(''); // 강사 이름
+  const [isAvailableName, setIsAvailableName] = useState(true); // 이름 유효성 검사
+  const [teacherNumber, setTeacherNumber] = useState(''); // 강사 휴대폰 번호
+  const [isAvailableNumber, setIsAvailableNumber] = useState(true); // 폰 번호 숫자만 유효성 검사
 
   // id와 htmlFor 연결 => useId 내장 훅 사용
   const jobId = useId();
@@ -36,6 +39,8 @@ const AddTeacherInfo = () => {
       setSelectedField(teacherInfo.field);
       setSelectedBank(teacherInfo.bank);
       setUserAccount(teacherInfo.account);
+      setTeacherName(teacherInfo.teacher_name);
+      setTeacherNumber(teacherInfo.teacher_number);
     }
   }, [teacherInfo]);
 
@@ -53,23 +58,52 @@ const AddTeacherInfo = () => {
     setUserAccount(value);
 
     // 계좌번호 숫자만 입력 가능하게 하기 : 정규 표현식 사용 (유효성 검사)
-    const accountNo_reg_exp = /^[0-9]+$/;
-    if (accountNo_reg_exp.test(value)) {
+    const accountNoRegExp = /^[0-9]+$/;
+    if (accountNoRegExp.test(value)) {
       setIsAvailableAccount(true);
     } else {
       setIsAvailableAccount(false);
     }
   };
+  const handleOnChangeAddTeacherName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setTeacherName(value);
+
+    // 이름 영어 대소문자 & 한글만 허용 : 정규 표현식 사용 (유효성 검사)
+    const nameNumRegExp = /^[a-zA-Z가-힣]+$/;
+
+    if (nameNumRegExp.test(value)) {
+      setIsAvailableName(true);
+    } else {
+      setIsAvailableName(false);
+    }
+  };
+  const handleOnChangeAddTeacherNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setTeacherNumber(value);
+
+    // 휴대폰 번호 숫자만 입력 가능하게 하기 : 정규 표현식 사용 (유효성 검사)
+    const phoneNumRegExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{5}$/;
+
+    if (phoneNumRegExp.test(value)) {
+      setIsAvailableNumber(true);
+    } else {
+      setIsAvailableNumber(false);
+    }
+  };
 
   // 선생님 정보 등록하기 버튼
   const handleOnClickAddTeacherInfoBtn = async () => {
-    if (!selectedJob || !selectedField || !selectedBank || !userAccount) {
+    if (!selectedJob || !selectedField || !selectedBank || !userAccount || !teacherName || !teacherNumber) {
       noInfoNotify(); // 아무것도 입력되지 않은 경우
       return;
     } else {
       const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
       if (confirm) {
-        addTeacherInfo({ selectedJob, selectedField, selectedBank, userAccount }, loginUserId);
+        addTeacherInfo(
+          { selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber },
+          loginUserId
+        );
 
         // 수강생에서 선생님으로 전환 로직 추가
         setIsHaveTeacherInfo(true);
@@ -103,6 +137,40 @@ const AddTeacherInfo = () => {
   return (
     <div>
       <div className="flex flex-col">
+        <div className="m-4 p-4 flex flex-col gap-4">
+          <p>강사 이름</p>
+          <div className="flex flex-col">
+            {!isHaveTeacherInfo ? (
+              <input
+                type="text"
+                placeholder="본명을 입력해주세요."
+                className="input input-bordered w-[300px]"
+                value={teacherName}
+                onChange={handleOnChangeAddTeacherName}
+              />
+            ) : (
+              <p>{teacherName}</p>
+            )}
+            {isAvailableName ? '' : <p className="font-thin p-2">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>}
+          </div>
+        </div>
+        <div className="m-4 p-4 flex flex-col gap-4">
+          <p>휴대폰 번호</p>
+          <div className="flex flex-col">
+            {!isHaveTeacherInfo ? (
+              <input
+                type="text"
+                placeholder="휴대폰 번호를 입력해주세요."
+                className="input input-bordered w-[300px]"
+                value={teacherNumber}
+                onChange={handleOnChangeAddTeacherNumber}
+              />
+            ) : (
+              <p>{teacherNumber}</p>
+            )}
+            {isAvailableNumber ? '' : <p className="font-thin p-2">휴대폰 번호의 양식에 맞게 입력해주세요.</p>}
+          </div>
+        </div>
         <SelectOption
           id={jobId}
           label="직업"
@@ -128,7 +196,7 @@ const AddTeacherInfo = () => {
           options={koreanBanks}
         />
         <div className="m-4 p-4 flex flex-col gap-4">
-          <span>계좌 정보</span>
+          <p>계좌 정보</p>
           <div className="flex flex-col">
             {!isHaveTeacherInfo ? (
               <input
