@@ -11,20 +11,20 @@ import { useRouter } from 'next/navigation';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 const SideBar = ({ children }: PropsWithChildren) => {
-  const { loginUserId } = useLoginStore();
-  const router = useRouter();
+  // const { loginUserId } = useLoginStore();
+  // const router = useRouter();
 
-  // 임시로 넣어놓고 => mypage에서 접근제한 걸기
-  const handleMyPageIconOnClick = () => {
-    if (loginUserId) {
-      router.push(`/mypage`);
-    } else {
-      const confirm = window.confirm('로그인 후 이용이 가능합니다. 로그인 페이지로 이동 하시겠습니까?');
-      if (confirm) {
-        router.push('/hello');
-      }
-    }
-  };
+  // // 임시로 넣어놓고 => mypage에서 접근제한 걸기
+  // const handleMyPageIconOnClick = () => {
+  //   if (loginUserId) {
+  //     router.push('/mypage');
+  //   } else {
+  //     const confirm = window.confirm('로그인 후 이용이 가능합니다. 로그인 페이지로 이동 하시겠습니까?');
+  //     if (confirm) {
+  //       router.push('/hello');
+  //     }
+  //   }
+  // };
   return (
     <>
       <div className="fixed p-3 top-0 bg-[#5373FF]  border-solid  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
@@ -41,10 +41,10 @@ const SideBar = ({ children }: PropsWithChildren) => {
             <SlNote size={30} />
             CREATE
           </Link>
-          <div onClick={handleMyPageIconOnClick} className="p-4 flex flex-col items-center cursor-pointer">
+          <Link href="/mypage" className="p-4 flex flex-col items-center cursor-pointer">
             <GoPerson size={30} />
             MYPAGE
-          </div>
+          </Link>
           {/* 예약 페이지 확인을 위한 임시 링크 */}
           <Link href="/reserve?classId=9335e676-0c77-4f7a-9b29-63cb4df446f1">예약하기(임시)</Link>
           <Link href="/messages" prefetch={false}>
