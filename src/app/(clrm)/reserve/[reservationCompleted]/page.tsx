@@ -51,26 +51,27 @@ const ReservationCompletePage = () => {
   let reserveInfoLabels = [{ title: '', description: '' }];
 
   if (reservationDetails) {
+    const { class: classInfo, time: dateInfo, reserveQuantity, reservePrice } = reservationDetails;
     reserveInfoLabels = [
       {
         title: '클래스명',
-        description: `${reservationDetails.class.title}`
+        description: `${classInfo.title}`
       },
       {
         title: '이용 일자',
-        description: `${reservationDetails.time.date.day}`
+        description: `${dateInfo.date.day}`
       },
       {
         title: '이용 시간',
-        description: `${reservationDetails && convertTimeTo12HourClock(reservationDetails.time.times)}`
+        description: `${reservationDetails && convertTimeTo12HourClock(dateInfo.times)}`
       },
       {
         title: '소요 시간',
-        description: `${reservationDetails.class.totalTime}시간`
+        description: `${classInfo.totalTime}시간`
       },
       {
         title: '위치',
-        description: `${reservationDetails.class.location}`
+        description: `${classInfo.location}`
       },
       {
         title: '이용 인원',
