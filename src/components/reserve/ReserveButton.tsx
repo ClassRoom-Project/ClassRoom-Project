@@ -72,9 +72,9 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     // router.push(`reserve/${reservationId}`);
     // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
     router.replace(
-      `/payment?customerKey=${loginUserId}&title=${
-        classDetails.title
-      }&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${'2024-04-11'}&useClassTime=${'14:00:00'}&totalPerson=${reserveQuantity}`
+      `/payment?customerKey=${reserveInfo.userId}&title=${classDetails.title}&price=${
+        reserveInfo.reservePrice
+      }&userEmail=${userEmail}&goToClassDate=${'2024-04-11'}&useClassTime=${'14:00:00'}&totalPerson=${reserveQuantity}`
     );
   };
 

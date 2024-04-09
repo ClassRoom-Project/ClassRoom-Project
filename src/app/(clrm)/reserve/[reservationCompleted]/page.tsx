@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 const ReservationCompletePage = () => {
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
   const [reserveId, setReserveId] = useState('');
-  const [isValidRequest, setIsValidRequest] = useState(false);
+  const [isInvalidRequest, setIsInvalidRequest] = useState(false);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -35,7 +35,7 @@ const ReservationCompletePage = () => {
       submitReservation();
     } else {
       // 요청 인자가 없으면 에러 메세지 출력을 위한 state set
-      setIsValidRequest(true);
+      setIsInvalidRequest(true);
     }
   }, [reservationRequest]);
 
@@ -83,7 +83,6 @@ const ReservationCompletePage = () => {
     ];
   }
 
-  // TODO: localStorage에 예약 정보 없을 시 실패메세지 출력
   return (
     <div className="w-full h-full">
       <h1 className="text-xl">예약 완료</h1>
@@ -101,7 +100,7 @@ const ReservationCompletePage = () => {
             </div>
             <NavigationButtons />
           </>
-        ) : isValidRequest ? (
+        ) : isInvalidRequest && !reservationRequest ? (
           <div>예약 도중 오류 발생!!!</div>
         ) : (
           <LoadingSpinner />

@@ -13,6 +13,7 @@ export default function PaymentPageasync() {
   const { loginUserId } = useLoginStore();
   const searchParams = useSearchParams();
   const customerKey = loginUserId ? loginUserId : crypto.randomUUID();
+  const customerKey2 = searchParams.get('customerKey');
   const price = parseInt(searchParams.get('price') || '', 10) || 0;
   const title = searchParams.get('title');
   const userEmail = searchParams.get('userEmail');
@@ -21,6 +22,9 @@ export default function PaymentPageasync() {
   const totalPerson = searchParams.get('totalPerson');
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
+
+  console.log(price, 'sdffdssdffsd');
+  console.log(customerKey2, '유저키 !!');
 
   // const reservationId = typeof window !== 'undefined' ? window.localStorage.getItem('reservationId') : null;
 
