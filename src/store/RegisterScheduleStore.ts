@@ -1,5 +1,5 @@
 // store/RegisterScheduleStoreState.js
-import create from 'zustand'
+import { create } from 'zustand'
 
 interface Schedule {
     date: string;
