@@ -19,6 +19,7 @@ const EditProfile = () => {
 
   // zustand로 userInfo 상태 관리
   const { userInfo, setUserInfo } = userInfoStore();
+  console.log('userInfo', userInfo);
 
   useEffect(() => {
     if (userId) {
@@ -31,7 +32,6 @@ const EditProfile = () => {
       fetchUserInfo();
     }
   }, [userId, setUserInfo]);
-  // console.log('userInfo', userInfo);
 
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
