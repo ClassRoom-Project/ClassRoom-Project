@@ -13,7 +13,12 @@ const CurrentReserveQuantity = ({ classId, maxPeople }: { classId: string; maxPe
     }
   }, [classId, currentReservedCount, maxPeople]);
 
-  return <p>{`남은 자리 : ${remainingQuantity ? remainingQuantity : ''}`}</p>;
+  return (
+    <button className="btn gap-1">
+      <div className="badge badge-primary">{remainingQuantity ? remainingQuantity : ''}</div>
+      자리 남았어요!
+    </button>
+  );
 };
 
 export default CurrentReserveQuantity;

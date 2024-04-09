@@ -1,32 +1,59 @@
-'use client';
-
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
 import React from 'react';
 import defaultClassImage from '../../../public/favicon.ico.png';
 
 const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
+  const classInfoLabels = [
+    {
+      title: '클래스 유형',
+      description: `${classInfo.category}`
+    },
+    {
+      title: '카테고리',
+      description: `${classInfo.category}`
+    },
+    {
+      title: '소요 시간',
+      description: `${classInfo.maxPeople}`
+    },
+    {
+      title: '클래스 난이도',
+      description: `${classInfo.category}`
+    },
+    {
+      title: '위치',
+      description: `${classInfo.location}`
+    },
+    {
+      title: '1인당 수강 금액',
+      description: `${classInfo.price}`
+    }
+  ];
+
   return (
-    <div className="p-6 pb-12 bg-white mb-6 rounded-md  border border-black border-solid ">
-      <p>선택하신 클래스</p>
-      <div className="w-full p-4 h-[250px] border border-solid border-black mb-4">사진자리</div>
-      <div className="px-2 flex-col flex gap-1">
-        <h1 className="font-bold text-xl mb-4">클래스 타이틀</h1>
-        <p className="font-bold">
-          클래스 유형 : <span className="font-normal">원데이 ㅋㅋ</span>
-        </p>
-        <p className="font-bold">
-          클래스 소요시간 : <span className="font-normal">원데이 ㅋㅋ</span>
-        </p>
-        <p className="font-bold">
-          클래스 난이도 : <span className="font-normal">원데이 ㅋㅋ</span>
-        </p>
-        <p className="font-bold">
-          위치: <span className="font-normal">원데이 ㅋㅋ</span>
-        </p>
-        <p className="font-bold">
-          1인당 수강 금액 : <span className="font-normal">원데이 ㅋㅋ</span>
-        </p>
+    <div className="p-6 pb-8 bg-white mb-4 rounded-md   ">
+      <h1 className="font-bold text-lg mb-2">선택하신 클래스</h1>
+      <div className="w-full relative h-[250px] mb-4 ">
+        <Image
+          className="rounded-lg"
+          fill={true}
+          src={classInfo.image}
+          alt={classInfo.title}
+          unoptimized={true} // 추후 수정 필요
+        />
+      </div>
+      <div className="px-2 flex-col flex">
+        <h1 className="font-bold text-xl mb-4">{classInfo.title}</h1>
+        {classInfoLabels.map(({ title, description }) => {
+          return (
+            <div key={title} className="font-bold">
+              <p>
+                {title} <span className="font-normal">{description}</span>
+              </p>
+            </div>
+          );
+        })}
       </div>
     </div>
     // <div className="p-2 gap-2 w-full flex h-28 border border-solid border-black">
