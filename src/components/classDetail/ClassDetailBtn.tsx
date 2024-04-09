@@ -1,7 +1,7 @@
 'use client';
 
 import { checkIsReserved } from '@/app/api/reserve/checkIsReserved';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
