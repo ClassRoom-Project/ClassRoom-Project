@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useCurrentReservedStore, useReserveStore } from '@/store/reserveClassStore';
+import { useCurrentReservedCountStore, useReserveStore } from '@/store/reserveClassStore';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { CaptionProps, DayPicker } from 'react-day-picker';
@@ -13,7 +13,7 @@ import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsBy
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
-  const { setCurrentReservedCount } = useCurrentReservedStore();
+  const { setCurrentReservedCount } = useCurrentReservedCountStore();
   const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
   const [selectedDate, setSelectedDate] = useState(classDates[0].day);
   const [timeId, setTimeId] = useState(classDates[0].times[0].timeId);

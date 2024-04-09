@@ -1,6 +1,6 @@
 'use client';
 
-import { useCurrentReservedStore, useReserveStore } from '@/store/reserveClassStore';
+import { useCurrentReservedCountStore, useReserveStore } from '@/store/reserveClassStore';
 import React, { useEffect, useState } from 'react';
 
 interface PriceCalculatorProps {
@@ -11,7 +11,7 @@ interface PriceCalculatorProps {
 
 const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) => {
   const { setReserveInfo } = useReserveStore();
-  const { currentReservedCount } = useCurrentReservedStore();
+  const { currentReservedCount } = useCurrentReservedCountStore();
   const [quantity, setQuantity] = useState(1);
   const [remainingQuantity, setRemainingQuantity] = useState(0);
   const totalPrice = price * quantity;

@@ -1,7 +1,7 @@
 'use client';
 
 import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
-import { insertNewReservation } from '@/app/api/reserve/submitReservation';
+import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';

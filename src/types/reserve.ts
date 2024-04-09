@@ -7,19 +7,24 @@ export type ReserveInfo = {
   timeId: string;
 };
 
-export type DBReserveInfo = {
-  reserve_id: string;
-  class_id: string;
-  user_id: string;
-  reserve_price: number;
-  reserve_quantity: number;
-  time_id: string;
-};
+// export type DBReserveInfo = {
+//   reserve_id: string;
+//   class_id: string;
+//   user_id: string;
+//   reserve_price: number;
+//   reserve_quantity: number;
+//   time_id: string;
+// };
 
 export type ReserveStoreType = {
   reserveInfo: ReserveInfo;
   setReserveInfo: ({}) => void;
 };
+
+export interface CurrentReservedCountStoreType {
+  currentReservedCount: number | null | undefined;
+  setCurrentReservedCount: (currentReservedCount: number | null | undefined) => void;
+}
 
 // DB에서 받아온 예약 정보 타입
 export interface DBReservationDetailsType {
@@ -60,9 +65,4 @@ export interface ReservationDetailsType {
     dateId: string;
     timeId: string;
   };
-}
-
-export interface CurrentReservedStoreType {
-  currentReservedCount: number | null | undefined;
-  setCurrentReservedCount: (currentReservedCount: number | null | undefined) => void;
 }

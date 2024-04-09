@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useCurrentReservedStore } from '@/store/reserveClassStore';
+import { useCurrentReservedCountStore } from '@/store/reserveClassStore';
 
 const CurrentReserveQuantity = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
-  const { currentReservedCount } = useCurrentReservedStore();
+  const { currentReservedCount } = useCurrentReservedCountStore();
   const [remainingQuantity, setRemainingQuantity] = useState(currentReservedCount);
 
   useEffect(() => {

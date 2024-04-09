@@ -1,6 +1,6 @@
 'use client';
 
-import { insertNewReservation } from '@/app/api/reserve/submitReservation';
+import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { alreadyReserved } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
@@ -12,9 +12,6 @@ import { useEffect, useState } from 'react';
 const ReservationCompletePage = () => {
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
   const [reserveId, setReserveId] = useState('');
-
-  const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reserveId);
-  console.log(reservationDetails);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -28,28 +25,27 @@ const ReservationCompletePage = () => {
   useEffect(() => {
     if (reservationRequest) {
       const submitReservation = async () => {
-        try {
-          // db에 예약 정보  insert
-          const responseReserveId = await insertNewReservation(reservationRequest);
-          if (responseReserveId) {
-            setReserveId(responseReserveId);
-          }
-        } catch (error) {
-          console.log(error, 'ㅇdkdkdkddkkdkdk');
-          return;
+        // db에 예약 정보  insert
+        const responseReserveId = await insertNewReservation(reservationRequest);
+        if (responseReserveId) {
+          setReserveId(responseReserveId);
         }
       };
       submitReservation();
     }
   }, [reservationRequest]);
 
+  // 응답 받은 예약 id로 예약 정보 불러오기
+  const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reserveId);
+  console.log(reservationDetails);
+
   if (isError) {
     console.log(isError);
     alreadyReserved();
     return;
   }
-  let reserveInfoLabels = [{ title: '', description: '' }];
 
+  let reserveInfoLabels = [{ title: '', description: '' }];
   if (reservationDetails) {
     const { class: classInfo, time: dateInfo, reserveQuantity, reservePrice } = reservationDetails;
     reserveInfoLabels = [
@@ -75,11 +71,11 @@ const ReservationCompletePage = () => {
       },
       {
         title: '이용 인원',
-        description: `${reservationDetails.reserveQuantity}명`
+        description: `${reserveQuantity}명`
       },
       {
         title: '이용 금액',
-        description: `${reservationDetails.reservePrice.toLocaleString('ko-KR')}원`
+        description: `${reservePrice.toLocaleString()}원`
       }
     ];
   }
