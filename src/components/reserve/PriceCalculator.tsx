@@ -1,8 +1,6 @@
 'use client';
 
-import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
-import useReserveStore from '@/store/reserveClassStore';
-import { useRouter } from 'next/navigation';
+import { useCurrentReservedCountStore, useReserveStore } from '@/store/reserveClassStore';
 import React, { useEffect, useState } from 'react';
 
 interface PriceCalculatorProps {
@@ -13,35 +11,35 @@ interface PriceCalculatorProps {
 
 const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) => {
   const { setReserveInfo } = useReserveStore();
+  const { currentReservedCount } = useCurrentReservedCountStore();
   const [quantity, setQuantity] = useState(1);
   const [remainingQuantity, setRemainingQuantity] = useState(0);
   const totalPrice = price * quantity;
 
   useEffect(() => {
     setReserveInfo({ reservePrice: totalPrice, reserveQuantity: quantity });
-
-    const fetchCurrentReservedQuantity = async () => {
-      const currentReservedCount = await fetchReservedCount(classId);
-      if (currentReservedCount) {
-        setRemainingQuantity(maxPeople - currentReservedCount);
-      }
-    };
-
-    fetchCurrentReservedQuantity();
   }, [quantity, setReserveInfo, totalPrice, classId, maxPeople]);
+
+  useEffect(() => {
+    setRemainingQuantity(currentReservedCount || currentReservedCount === 0 ? maxPeople - currentReservedCount : 0);
+
+    setQuantity(1);
+  }, [currentReservedCount, maxPeople]);
+
+  const handleQuantityIncrease = async () => {
+    // 남은자리 수 까지만 인원 추가 가능하도록
+    if (remainingQuantity) {
+      if (remainingQuantity <= quantity) {
+        return;
+      }
+      setQuantity((prev) => prev + 1);
+    }
+  };
 
   const handleQuantityDecrease = () => {
     if (quantity !== 0) {
       setQuantity((prev) => prev - 1);
     }
-  };
-
-  const handleQuantityIncrease = async () => {
-    // 남은자리 수 까지만 인원 추가 가능하도록
-    if (remainingQuantity <= quantity) {
-      return;
-    }
-    setQuantity((prev) => prev + 1);
   };
 
   return (

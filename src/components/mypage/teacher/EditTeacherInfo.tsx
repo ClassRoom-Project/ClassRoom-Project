@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
-import { useUserStore } from '@/store/userInfoStore';
+import { userInfoStore } from '@/store/userInfoStore';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
@@ -20,7 +20,7 @@ const EditTeacherInfo = () => {
   const [newSelectedBank, setNewSelectedBank] = useState('');
   const [newAccount, setNewAccount] = useState('');
 
-  const { userInfo } = useUserStore();
+  const { userInfo } = userInfoStore();
 
   const { data: teacherInfo, isPending } = useQuery({
     queryKey: ['user', loginUserId],

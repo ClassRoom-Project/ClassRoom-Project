@@ -6,9 +6,7 @@ import { DBReserveClassType, ReserveClassType } from '@/types/class';
 export const newFetchReserveClassInfo = async (classId: string) => {
   const { data: classInfo, error }: PostgrestSingleResponse<ReserveClassType[]> = await supabase.rpc(
     'fetch_reserve_class_info',
-    {
-      _class_id: classId
-    }
+    { _class_id: classId }
   );
 
   if (error) {
