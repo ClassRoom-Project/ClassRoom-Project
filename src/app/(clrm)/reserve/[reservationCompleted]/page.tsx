@@ -43,27 +43,36 @@ const ReservationCompletePage = () => {
   }
 
   //TODO: 구조분해할당
+  const { class: classDetails, time: timeInfo, reserveQuantity, reservePrice } = reservationResponse;
 
   const reserveInfoLabels = [
     {
       title: '클래스명',
-      description: `${reservationResponse.class.title}`
+      description: `${classDetails.title}`
     },
     {
       title: '이용 일자',
-      description: `${reservationResponse.time.date.day}`
+      description: `${timeInfo.date.day}`
     },
     {
       title: '이용 시간',
-      description: `${convertTimeTo12HourClock(reservationResponse.time.times)}`
+      description: `${convertTimeTo12HourClock(timeInfo.times)}`
+    },
+    {
+      title: '소요 시간',
+      description: `${classDetails.totalTime}시간`
+    },
+    {
+      title: '위치',
+      description: `${classDetails.location}`
     },
     {
       title: '이용 인원',
-      description: `${reservationResponse.reserveQuantity}명`
+      description: `${reserveQuantity}명`
     },
     {
       title: '이용 금액',
-      description: `${reservationResponse.reservePrice.toLocaleString('ko-KR')}원`
+      description: `${reservePrice.toLocaleString('ko-KR')}원`
     }
   ];
 
@@ -75,9 +84,7 @@ const ReservationCompletePage = () => {
     <div className="w-full h-full">
       <h1 className="text-xl">예약 완료</h1>
       <div className="w-full h-full bg-gray-200 p-6 flex flex-col justify-between items-center">
-        {!reservationResponse ? (
-          <LoadingSpinner />
-        ) : (
+        {reservationResponse ? (
           <>
             <h1 className="text-xl text-center mb-20">예약이 정상적으로 처리되었습니다.</h1>
             <div className="flex flex-col w-1/3 gap-6 mb-20">
@@ -90,6 +97,8 @@ const ReservationCompletePage = () => {
             </div>
             <NavigationButtons />
           </>
+        ) : (
+          <div>예약 실패</div>
         )}
       </div>
     </div>
