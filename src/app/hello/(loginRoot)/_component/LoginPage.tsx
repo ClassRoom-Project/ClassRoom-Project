@@ -7,9 +7,9 @@ export default function LoginPage() {
   return (
     <div className="flex h-screen items-center justify-center w-full">
       <div className="flex flex-col  md:flex-row border mx-auto rounded-md w-full  h-full ">
-        <section className="  flex-col hidden md:flex w-full md:w-2/5 items-center justify-center bg-[#F0F6FF]">
-          <Image src="/loginLogo.svg" alt="LoginLogoImage" width={300} height={100} priority />
-          <p className="px-4  pt-10 text-center text-[#7D95FF] mb:text-sm lg:text-4xl">
+        <section className="  flex-col hidden md:flex w-full md:w-2/5 items-center justify-center bg-login-background">
+          <Image src="/loginLogo.svg" alt="LoginLogoImage" width={250} height={100} priority />
+          <p className="px-4  pt-10 text-center text-[#4D43B8] font-semibold mb:text-sm lg:text-3xl">
             클룸에 오신걸 환영합니다!
             <br /> 다양한 원데이 클래스를 체험해보세요!
           </p>

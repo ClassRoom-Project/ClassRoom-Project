@@ -5,3 +5,8 @@ export interface ChatRoomType {
   fromUserId: string;
   toClassUserId: string;
 }
+
+export interface CreateNewChatRoom {
+  toClassId: string;
+  fromUserId: string;
+}
