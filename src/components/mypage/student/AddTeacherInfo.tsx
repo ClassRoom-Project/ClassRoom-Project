@@ -2,7 +2,7 @@ import { addTeacherInfo, getTeacherInfo, updateUserRole } from '@/app/api/mypage
 import { supabase } from '@/app/api/supabase/supabase';
 import { noInfoNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import SelectOption from '../SelectOption';

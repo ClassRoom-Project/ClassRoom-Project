@@ -1,11 +1,12 @@
 'use client';
 
 import { useCreateNewRoom } from '@/hooks/useChatRoom/useNewChatRoom';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
+
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
-export default function AskButton({ classId }: { classId: string }) {
+export default function AskButton({ classId, makeClassUserId }: { classId: string; makeClassUserId: string }) {
   const router = useRouter();
   const { loginUserId } = useLoginStore();
   const { createNewRoomMutate } = useCreateNewRoom();
@@ -16,20 +17,22 @@ export default function AskButton({ classId }: { classId: string }) {
       alert('로그인이 필요한 기능입니다.');
       return;
     }
-    createNewRoomMutate(
-      {
-        toClassId: classId,
-        fromUserId: loginUserId
-      },
-      {
-        onSuccess: () => {
-          router.replace('/messages');
+    console.log(' 전달', classId, loginUserId),
+      createNewRoomMutate(
+        {
+          toClassId: classId,
+          fromUserId: loginUserId,
+          teacherUserId: makeClassUserId
         },
-        onError: (error: any) => {
-          console.error(error);
+        {
+          onSuccess: () => {
+            router.replace('/messages');
+          },
+          onError: (error: any) => {
+            console.error(error);
+          }
         }
-      }
-    );
+      );
   };
 
   return (

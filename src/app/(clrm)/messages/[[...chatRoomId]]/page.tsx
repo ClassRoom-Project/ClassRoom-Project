@@ -1,6 +1,6 @@
 'use client';
 
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import ChatPreview from './_components/ChatPreview';
 
 export default function MessagesPage() {

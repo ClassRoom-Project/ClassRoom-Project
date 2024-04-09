@@ -2,7 +2,7 @@
 
 import LoginState from '@/components/login/LoginState';
 import Link from 'next/link';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, Suspense } from 'react';
 import { SearchClass } from './categories/SearchClass';
 
 import { useUserRoleStore } from '@/store/userRoleStore';
@@ -33,7 +33,7 @@ const Header = ({ children }: PropsWithChildren) => {
         <div className="flex items-center">
           <div className="mr-[10px]">
             <LuBell size={30} />
-          </div>{' '}
+          </div>
           <p className="p-4">
             {userInfo?.nickname} <span className="text-point-color font-bold">{roleName}님</span>
           </p>
@@ -49,7 +49,9 @@ const Header = ({ children }: PropsWithChildren) => {
             />
           </Link>
         </div>
-        <LoginState />
+        <Suspense fallback={<div>Logout</div>}>
+          <LoginState />
+        </Suspense>
       </div>
       {children}
     </>

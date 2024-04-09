@@ -3,7 +3,7 @@ import React from 'react';
 import AskButton from '../chatRooms/AskButton';
 
 //Todo :  href chat ID, 받아서 입력할것
-const ClassDetailBtn = ({ classId }: { classId: string }) => {
+const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeClassUserId: string }) => {
   return (
     <div className="w-[350px] flex justify-center items-center mt-20">
       <Link
@@ -12,7 +12,7 @@ const ClassDetailBtn = ({ classId }: { classId: string }) => {
       >
         신청하기
       </Link>
-      <AskButton classId={classId} />
+      <AskButton classId={classId} makeClassUserId={makeClassUserId} />
     </div>
   );
 };

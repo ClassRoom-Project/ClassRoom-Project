@@ -1,6 +1,6 @@
 'use client';
 
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 import { FiHome } from 'react-icons/fi';

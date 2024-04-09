@@ -19,7 +19,9 @@ export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
   return (
     <div>
       <SideBar>
-        <Header />
+        <Suspense>
+          <Header />
+        </Suspense>
         {children}
       </SideBar>
     </div>

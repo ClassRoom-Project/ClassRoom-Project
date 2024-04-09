@@ -1,6 +1,6 @@
 import { useReadLoginUserId } from './useSetEmailToApi';
 import { useEffect } from 'react';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 export default function useLoginUserId({ userEmail }: { userEmail: string | null }) {
   const { data: userData, isError } = useReadLoginUserId(userEmail);
