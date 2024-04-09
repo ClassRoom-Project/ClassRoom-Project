@@ -4,7 +4,7 @@ import LoginState from '@/components/login/LoginState';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 import { SearchClass } from './categories/SearchClass';
-import { useUserStore } from '@/store/userInfoStore';
+import { useUserStore } from '../../../store/UserInfoStore';
 import { useUserRoleStore } from '@/store/userRoleStore';
 import basicProfileImage from '../../../../public/profile-image.png';
 import { LuBell } from 'react-icons/lu';
