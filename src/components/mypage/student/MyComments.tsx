@@ -1,7 +1,7 @@
 'use client';
 
 import { fetchClassInfoOnComment } from '@/app/api/mypage/my-comments-api';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import MyCommentItem from './MyCommentItem';
 

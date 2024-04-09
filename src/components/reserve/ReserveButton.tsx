@@ -1,18 +1,23 @@
 'use client';
 
 import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
-import { insertNewReservation } from '@/app/api/reserve/submitReservation';
-import useReserveStore from '@/store/reserveClassStore';
+import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
+import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
+import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
+import { quantityWarning } from '../common/Toastify';
+import { ToastContainer } from 'react-toastify';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
   const { loginUserId } = useLoginStore();
   const { setReserveInfo, reserveInfo } = useReserveStore();
+
+  console.log(loginUserId);
 
   useEffect(() => {
     setReserveInfo({ classId: classId, userId: loginUserId });
@@ -20,13 +25,12 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
   const handleReserveButtonClick = async () => {
     if (reserveInfo.reserveQuantity === 0) {
-      alert('예약 인원은 1명 이상이여야 합니다.');
+      quantityWarning();
       return;
     }
 
-    // TODO: 세션별 체크하도록 수정 필요
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
-    const currentReservedQuantity = await fetchReservedCount(classId);
+    const currentReservedQuantity = await countReservationsByTimeId(reserveInfo.timeId);
 
     if (currentReservedQuantity) {
       const currentRemainingQuantity = maxPeople - currentReservedQuantity;
@@ -39,6 +43,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       }
     }
 
+    // TODO: 미주님과 의논 필요
     // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
     const reservationId = await insertNewReservation(reserveInfo);
 
@@ -50,32 +55,30 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     window.localStorage.setItem('reservationId', reservationId);
     const reservationDetails = await fetchReservationDetails(reservationId);
 
-    console.log(reservationDetails);
-
     if (!reservationDetails || !('class' in reservationDetails)) {
       // 예외 처리 로직
       console.error('faild to fetch reservationDtails in ReserveButton', Error);
       return;
     }
 
-    const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
-    const userEmail = typeof window !== undefined ? sessionStorage.getItem('userEmail') : null;
-
-    // console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
+    const { class: classDetails, reserveQuantity, reservePrice } = reservationDetails;
+    const userEmail = sessionStorage.getItem('userEmail');
 
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
-    // router.push(`reserve/${reservationId}`);
-    // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
+
     router.replace(
-      `/payment?customerKey=${loginUserId}&title=${classDetails.title}&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${reserveDate}&useClassTime=${reserveTime}&totalPerson=${reserveQuantity}`
+      `/payment?customerKey=${reserveInfo.userId}&price=${reserveInfo.reservePrice}&classId=${reserveInfo.classId}`
     );
   };
 
   return (
-    <button onClick={handleReserveButtonClick} className="bg-white w-32 text-center self-end">
-      예약하기
-    </button>
+    <>
+      <ToastContainer />
+      <button onClick={handleReserveButtonClick} className="bg-white w-32 text-center self-end">
+        예약하기
+      </button>
+    </>
   );
 };
 

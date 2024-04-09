@@ -1,12 +1,9 @@
 'use client';
 
 import LoginState from '@/components/login/LoginState';
-
-import { useUserStore } from '@/store/UserInfoStore';
-
+import { userInfoStore } from '@/store/UserInfoStore';
 import { useUserRoleStore } from '@/store/userRoleStore';
 import Image from 'next/image';
-
 import Link from 'next/link';
 import { PropsWithChildren, Suspense } from 'react';
 import { LuBell } from 'react-icons/lu';
@@ -14,7 +11,7 @@ import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
 
 const Header = ({ children }: PropsWithChildren) => {
-  const { userInfo } = useUserStore();
+  const { userInfo } = userInfoStore();
 
   const { isTeacher } = useUserRoleStore();
 

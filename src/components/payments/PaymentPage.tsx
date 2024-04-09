@@ -2,22 +2,17 @@
 
 import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { Suspense, useEffect, useRef, useState } from 'react';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useSearchParams } from 'next/navigation';
 import { useAsync, useStartTyping } from 'react-use';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
 export default function PaymentPageasync() {
-  const { loginUserId } = useLoginStore();
   const searchParams = useSearchParams();
-  const customerKey = loginUserId ? loginUserId : crypto.randomUUID();
+  const customerKey = searchParams.get('customerKey') || crypto.randomUUID();
   const price = parseInt(searchParams.get('price') || '', 10) || 0;
-  const title = searchParams.get('title');
-  const userEmail = searchParams.get('userEmail');
-  const goToClassDate = searchParams.get('goToClassDate');
-  const useClassTime = searchParams.get('useClassTime');
-  const totalPerson = searchParams.get('totalPerson');
+  const classId = searchParams.get('classId') || crypto.randomUUID();
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
 
@@ -80,8 +75,7 @@ export default function PaymentPageasync() {
             try {
               await paymentWidget?.requestPayment({
                 orderId: customerKey as string,
-                orderName: `${title}__${goToClassDate}${useClassTime}_${totalPerson}명`,
-                customerEmail: userEmail as string,
+                orderName: classId as string,
                 //여기에 예약확인 페이지로 넘기기
                 successUrl: `${window.location.origin}/reserve/${reserveId}`,
                 //fail 시 보여줄 페이지 만들기

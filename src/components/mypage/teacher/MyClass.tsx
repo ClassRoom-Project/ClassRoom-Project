@@ -1,7 +1,7 @@
 'use client';
 
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';

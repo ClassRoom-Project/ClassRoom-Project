@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import useRegisterStore from '@/store/RegisterStore';
@@ -15,8 +15,10 @@ const Address = () => {
     let fullAddress = data.address; // address : 기본 주소 (ex. 경기 성남시 분당구 판교역로 166)
     let extraAddress = '';
 
-    if (data.addressType === 'R') { // R : 검색된 기본 주소 타입 (도로명)
-      if (data.bname !== '') { // bname : 법정동/법정리 이름 (ex.백현동)
+    if (data.addressType === 'R') {
+      // R : 검색된 기본 주소 타입 (도로명)
+      if (data.bname !== '') {
+        // bname : 법정동/법정리 이름 (ex.백현동)
         extraAddress += data.bname;
       }
       if (data.buildingName !== '') {
@@ -32,9 +34,9 @@ const Address = () => {
   };
 
   return (
-    <div className='my-2'>
+    <div className="my-2">
       <div className="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2 my-2">
-        <p className='text-base flex-shrink-0 font-bold'>위치</p>
+        <p className="text-base flex-shrink-0 font-bold">위치</p>
         <input
           className="form-input px-3 py-2 border rounded flex-grow sm:flex-grow-0 sm:w-auto"
           type="text"
@@ -42,7 +44,12 @@ const Address = () => {
           onChange={(e) => setAddress(e.target.value)}
           placeholder="주소를 입력해주세요"
         />
-        <button onClick={handleOpenPostCode} className="px-4 py-2 bg-[#4D80FF] text-white rounded hover:bg-blue-700 w-full sm:w-auto mt-2 sm:mt-0">주소 검색</button>
+        <button
+          onClick={handleOpenPostCode}
+          className="px-4 py-2 bg-[#4D80FF] text-white rounded hover:bg-blue-700 w-full sm:w-auto mt-2 sm:mt-0"
+        >
+          주소 검색
+        </button>
       </div>
       <input
         className="form-input px-3 py-2 border rounded w-full"
@@ -53,6 +60,6 @@ const Address = () => {
       />
     </div>
   );
-}
+};
 
 export default Address;

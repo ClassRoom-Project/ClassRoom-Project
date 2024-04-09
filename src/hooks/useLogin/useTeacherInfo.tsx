@@ -1,8 +1,6 @@
 import { getTeacherInfo } from '@/app/api/mypage/user-api';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
-
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useQuery } from '@tanstack/react-query';
-
 export const useTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
 

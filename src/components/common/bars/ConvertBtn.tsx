@@ -1,11 +1,8 @@
 'use client';
 
 import { updateUserRole } from '@/app/api/mypage/user-api';
-
-import { useLoginStore } from '@/store/login/loginUserIdStore';
-
 import { useTeacherInfo } from '@/hooks/useLogin/useTeacherInfo';
-
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useUserRoleStore } from '@/store/userRoleStore';
 import { useRouter } from 'next/navigation';
 import { TbArrowsExchange } from 'react-icons/tb';

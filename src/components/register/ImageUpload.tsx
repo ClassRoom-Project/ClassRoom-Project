@@ -1,11 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
-import useRegisterStore from '../../store/RegisterStore';
-import RegisterScheduleStore from '@/store/RegisterScheduleStore';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import Image from 'next/image';
 import PlusImage from '../../../public/plusImage.jpg';
+import RegisterScheduleStore from '@/store/RegisterScheduleStore';
+import useRegisterStore from '@/store/RegisterStore';
 
 interface ImageFileWithPreview {
   file: File;

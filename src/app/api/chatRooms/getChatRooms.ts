@@ -45,12 +45,32 @@ const testFetch = async (classId: string) => {
   const { data, error } = await supabase.from('class').select('').eq('class_id', classId);
 };
 
-export const getChatRooms = async () => {};
+export const getChatRooms = async (loginUserId: string) => {
+  const { data, error } = await supabase
+    .from('chat_rooms')
+    .select(
+      `
+    chat_id, created_at, to_class_id, from_user_id, teacher_user_id,
+    class!inner(title),
+    users!inner(nickname, profile_image)
+    `
+    )
+    .eq('from_user_id', loginUserId)
+    .eq('teacher_user_id', loginUserId)
+    .single();
+
+  if (error) {
+    console.log('데이터 없지롱', error);
+    return;
+  }
+  return data;
+};
 
 // 예약 정보 조회 api
 // reserve 테이블과 class 테이블을 class_id로 inner조인하고, class 테이블에서 title, total_time, location만 선택하여 결과에 포함
 // time 테이블을 time_id로 조인
 // time테이블에서 time_id가 일치하는 레코드의 date_id로 date 테이블 inner조인하고, date 테이블에서 day만 선택하여 결과에 포함
+
 // export const fetchReservationDetails = async (reserveId: string) => {
 //   const { data, error }: PostgrestSingleResponse<DBReservationDetailsType> = await supabase
 //     .from('reserve')

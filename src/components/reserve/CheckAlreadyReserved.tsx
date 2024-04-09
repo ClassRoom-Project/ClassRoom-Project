@@ -1,7 +1,7 @@
 'use client';
 
 import { checkIsReserved } from '@/app/api/reserve/checkIsReserved';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import React from 'react';
 
 // 이미 예약한 클래스 인지 확인을 위한 임시 컴포넌트 => 디테일 페이지에서 예약하기 버튼을 누르면 실행될 로직
