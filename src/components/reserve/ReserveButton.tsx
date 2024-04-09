@@ -59,7 +59,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       return;
     }
 
-    const { class: classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice } = reservationDetails;
+    const { class: classDetails, reserveQuantity, reservePrice } = reservationDetails;
     const userEmail = sessionStorage.getItem('userEmail');
 
     // console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
@@ -69,7 +69,9 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     // router.push(`reserve/${reservationId}`);
     // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
     router.replace(
-      `/payment?customerKey=${loginUserId}&title=${classDetails.title}&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${reserveDate}&useClassTime=${reserveTime}&totalPerson=${reserveQuantity}`
+      `/payment?customerKey=${loginUserId}&title=${
+        classDetails.title
+      }&price=${reservePrice}&userEmail=${userEmail}&goToClassDate=${'2024-04-011'}&useClassTime=${'14:00:00'}&totalPerson=${reserveQuantity}`
     );
   };
 
