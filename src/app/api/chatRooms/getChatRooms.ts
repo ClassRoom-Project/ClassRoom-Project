@@ -45,6 +45,8 @@ const testFetch = async (classId: string) => {
   const { data, error } = await supabase.from('class').select('').eq('class_id', classId);
 };
 
+export const getChatRooms = async () => {};
+
 // 예약 정보 조회 api
 // reserve 테이블과 class 테이블을 class_id로 inner조인하고, class 테이블에서 title, total_time, location만 선택하여 결과에 포함
 // time 테이블을 time_id로 조인
