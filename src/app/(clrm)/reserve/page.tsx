@@ -12,10 +12,10 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   return (
     <>
       <h1 className="text-xl">클래스 상세보기</h1>
-      <div className="w-full min-h-screen bg-violet-100 flex justify-center items-center flex-col">
+      <div className="w-full min-h-screen  bg-violet-100 flex justify-center items-center flex-col text-gray-600">
         {classInfo ? (
-          <div className="flex w-2/3 h-full bg-violet-200">
-            <div className="flex flex-col w-2/5 bg-gray-2006">
+          <div className="flex h-full gap-10 justify-between bg-violet-200">
+            <div className="flex flex-col w-[500px] bg-gray-200">
               <div className="p-6 pb-12 bg-white mb-6 rounded-md  border border-black border-solid ">
                 <p>선택하신 클래스</p>
                 <div className="w-full p-4 h-[250px] border border-solid border-black mb-4">사진자리</div>
@@ -53,7 +53,14 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
                 </button>
               </div>
             </div>
-            <div>시간인원 선택</div>
+
+            <div className=" p-6 w-[460px] pb-12 bg-white rounded-md  border border-black border-solid flex flex-col items-center">
+              <p className="font-bold text-lg text-left w-full mb-6">수강요일 & 시간 선택하기</p>
+              <div className="w-4/5 mb-10 border-black border-solid border">데이피커 자리</div>
+              <div className="w-4/5 mb-10 border-black border-solid border">계산기 자리</div>
+              <button className="btn btn-primary w-4/5">결제하기</button>
+            </div>
+
             {/* <DateTimePicker classDates={classInfo.dates} />
             <ClassInfo classInfo={classInfo} />
             <CurrentReserveQuantity classId={classInfo.classId} maxPeople={classInfo?.maxPeople} />
