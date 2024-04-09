@@ -6,7 +6,6 @@ import RegisterScheduleStore from '@/store/RegisterScheduleStore';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import Image from 'next/image';
 import PlusImage from '../../../public/plusImage.jpg';
-import { useRouter } from 'next/navigation';
 
 interface ImageFileWithPreview {
   file: File;
@@ -27,7 +26,7 @@ const ImageUpload = () => {
     maxNumber,
     personnel,
     price,
-    totalTime
+    totalTime,
   } = useRegisterStore();
 
   const {
@@ -38,7 +37,6 @@ const ImageUpload = () => {
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
   const classId = crypto.randomUUID();
-  const router = useRouter();
 
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
@@ -143,7 +141,7 @@ const ImageUpload = () => {
       alert('등록이 완료되었습니다.');
       console.log('데이터 저장 성공:', data);
       // router.push(`/list/detail/${classId}`);
-      router.push(`/`); // 디테일 페이지로 이동하도록 할건데, 중간에 페이지 필요할것같음
+      //router.push(`/`); // 디테일 페이지로 이동하도록 할건데, 중간에 페이지 필요할것같음
     }
   };
 
@@ -172,50 +170,62 @@ const ImageUpload = () => {
     setImages(newImages);
   };
 
+  // 이미지 삭제 함수수
+  const handleImageDelete = (index: number) => {
+    const newImage = images.filter((_, i) => i !== index);
+    setImages(newImage);
+  }
+
   return (
     <div className="flex justify-between items-center pt-2">
-      {images.length < 5 && (
-        <label htmlFor="image-upload" className="cursor-pointer">
-          <Image
-              src={PlusImage}
-              alt="PlusImage"
-              width={100}
-              height={100}
-              unoptimized={true}
-            />
-          <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            style={{ display: 'none' }}
-          />
-        </label>
-      )}
-      {images.map((image, index) => (
-        <div key={index} className="h-[100px] w-[100px] relative ml-2">
-          <img 
-            src={image.preview} 
-            alt="uploaded" 
-            className="h-full w-full object-cover rounded-[20px] border" 
-          />
-          <button
-            className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${
-              index === 0 ? 'bg-blue-500' : 'bg-white-500'
-            }`}
-            onClick={() => handleMoveToFront(index)}
-          >
-            🌼
-          </button>
-        </div>
-      ))}
-      <button
-        onClick={handleSubmit} 
-        className="ml-4 px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-blue-700"
-      >
-        등록하기
-      </button>
-    </div>
+              {images.length < 5 && (
+                <label htmlFor="image-upload" className="cursor-pointer">
+                  <Image
+                      src={PlusImage}
+                      alt="PlusImage"
+                      width={100}
+                      height={100}
+                      unoptimized={true}
+                    />
+                  <input
+                    id="image-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    style={{ display: 'none' }}
+                  />
+                </label>
+              )}
+              {images.map((image, index) => (
+                <div key={index} className="h-[100px] w-[100px] relative ml-2">
+                  <img 
+                    src={image.preview} 
+                    alt="uploaded" 
+                    className="h-full w-full object-cover rounded-[20px] border" 
+                  />
+                  <button
+                    className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${
+                      index === 0 ? 'bg-blue-500' : 'bg-white-500'
+                    }`}
+                    onClick={() => handleMoveToFront(index)}
+                  >
+                    🌼
+                  </button>
+                  <button
+                    className="btn btn-circle btn-xs mt-1 mr-1 absolute top-0 left-0 bg-red-500"
+                    onClick={() => handleImageDelete(index)}
+                  >
+                    🗑️
+                  </button>
+                </div>
+              ))}
+              <button
+                onClick={handleSubmit} 
+                className="ml-4 px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-blue-700"
+              >
+                등록하기
+              </button>
+            </div>
   );
 };
 

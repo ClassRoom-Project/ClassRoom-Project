@@ -14,7 +14,7 @@ interface RegisterScheduleStoreState {
     addTimeToSchedule: (date: string, time: string) => void;
     removeSchedule: (date: string) => void; // 날짜 삭제 기능 추가
     removeTimeFromSchedule: (date: string, time: string) => void; // 시간 삭제 기능 추가
-    setTimesForDate: (date: string, times: string[]) => void;
+    // setTimesForDate: (date: string, times: string[]) => void;
 }
 
 const RegisterScheduleStore = create<RegisterScheduleStoreState>(set => ({
@@ -35,11 +35,11 @@ const RegisterScheduleStore = create<RegisterScheduleStoreState>(set => ({
         schedule.date === date ? { ...schedule, times: schedule.times.filter(t => t !== time) } : schedule
         )
     })),
-    setTimesForDate: (date, times) => set(state => ({
-        schedules: state.schedules.map(schedule => 
-        schedule.date === date ? { ...schedule, times } : schedule
-        )
-    })),
+    // setTimesForDate: (date, times) => set(state => ({
+    //     schedules: state.schedules.map(schedule => 
+    //     schedule.date === date ? { ...schedule, times } : schedule
+    //     )
+    // })),
 }));
 
 export default RegisterScheduleStore;
