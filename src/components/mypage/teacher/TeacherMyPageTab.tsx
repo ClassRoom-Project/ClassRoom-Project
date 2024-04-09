@@ -1,10 +1,11 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import EditProfile from '../EditProfile';
 import EditTeacherInfo from './EditTeacherInfo';
 import MyClass from './MyClass';
+import { useSearchParam } from 'react-use';
 
 type TeacherTabComponent = {
   [key: string]: React.ReactNode;
@@ -12,6 +13,7 @@ type TeacherTabComponent = {
 
 const TeacherMyPageTab = () => {
   const router = useRouter();
+  // const params = useSearchParams();
 
   const [activePage, setActivePage] = useState('editProfile');
 
@@ -26,7 +28,7 @@ const TeacherMyPageTab = () => {
   //   if (teacherMypage && Object.keys(activeTeacherMyPageTab).includes(teacherMypage as string)) {
   //     setActivePage(teacherMypage as string);
   //   }
-  // }, [router.query]);
+  // }, [router]);
 
   const handleOnClickTabBtn = (tab: string) => {
     if (!tab) {

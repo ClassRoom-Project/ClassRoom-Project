@@ -10,10 +10,18 @@ const Price = () => {
     setPrice(value);
   };
   return (
-    <div className="flex items-center space-x-2 my-2">
-        <p>가격</p>
-        <div>
-            <input className="form-input px-3 py-2 border rounded flex-grow" type="text" value={price} onChange={handlePriceChange} placeholder="가격"/>
+    <div className='mt-2'>
+        <div className="flex items-center space-x-4">
+          <p className='text-base flex-shrink-0 font-bold'>가격</p>
+          <div>
+              <input 
+                className="form-input px-3 py-2 border rounded flex-grow" 
+                type="text" 
+                value={price} 
+                onChange={handlePriceChange} 
+                placeholder="가격"
+              />
+          </div>
         </div>
     </div>
   )

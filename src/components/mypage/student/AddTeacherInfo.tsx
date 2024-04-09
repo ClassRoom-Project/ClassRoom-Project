@@ -1,18 +1,18 @@
-import { addTeacherInfo, getTeacherInfo, updateUserRole } from '@/app/api/mypage/user-api';
-import { supabase } from '@/app/api/supabase/supabase';
-import { noInfoNotify } from '@/components/common/Toastify';
+import { addTeacherInfo, updateUserRole } from '@/app/api/mypage/user-api';
+import { noChangedNotify, noInfoNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
+import { useTeacherInfo } from '@/hooks/useLogin/useTeacherInfo';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useId, useState } from 'react';
-import SelectOption from '../SelectOption';
-import { ToastContainer } from 'react-toastify';
-import { useRouter } from 'next/navigation';
 import { useUserRoleStore } from '@/store/userRoleStore';
+import React, { useEffect, useId, useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+import SelectOption from '../SelectOption';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
   const { isTeacher, setIsTeacher } = useUserRoleStore();
+  const { teacherInfo, isPending } = useTeacherInfo();
+  console.log('teacherInfo', teacherInfo);
   // const router = useRouter();
 
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
@@ -27,12 +27,6 @@ const AddTeacherInfo = () => {
   const jobId = useId();
   const fieldId = useId();
   const bankId = useId();
-
-  const { data: teacherInfo, isPending } = useQuery({
-    queryKey: ['user', loginUserId],
-    queryFn: () => getTeacherInfo(loginUserId),
-    enabled: !!loginUserId
-  });
 
   useEffect(() => {
     if (teacherInfo && teacherInfo.job) {
@@ -65,13 +59,8 @@ const AddTeacherInfo = () => {
 
   // 선생님 정보 등록하기 버튼
   const handleOnClickAddTeacherInfoBtn = async () => {
-    const isJobChanged = selectedJob !== teacherInfo?.job;
-    const isFieldChanged = selectedField !== teacherInfo?.field;
-    const isBankChanged = selectedBank !== teacherInfo?.bank;
-    const isAccountChanged = userAccount !== teacherInfo?.account;
-
-    if (!isJobChanged || !isFieldChanged || !isBankChanged || !isAccountChanged) {
-      noInfoNotify();
+    if (!selectedJob || !selectedField || !selectedBank || !userAccount) {
+      noInfoNotify(); // 아무것도 입력되지 않은 경우
       return;
     } else {
       const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
