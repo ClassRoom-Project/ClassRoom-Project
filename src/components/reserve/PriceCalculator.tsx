@@ -27,7 +27,6 @@ const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) =>
   }, [currentReservedCount, maxPeople]);
 
   const handleQuantityIncrease = async () => {
-    console.log(remainingQuantity);
     // 남은자리 수 까지만 인원 추가 가능하도록
     if (remainingQuantity) {
       if (remainingQuantity <= quantity) {

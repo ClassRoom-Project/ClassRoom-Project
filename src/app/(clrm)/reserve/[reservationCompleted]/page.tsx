@@ -37,7 +37,6 @@ const ReservationCompletePage = () => {
 
   // 응답 받은 예약 id로 예약 정보 불러오기
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reserveId);
-  console.log(reservationDetails);
 
   if (isError) {
     console.log(isError);
