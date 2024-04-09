@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useDetailClassInfoStore } from '@/store/ClassInfoStore';
+import { useDetailClassInfoStore } from '@/store/classInfoStore';
 import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
 import { ClassInfoBox } from './ClassInfoBox';
 

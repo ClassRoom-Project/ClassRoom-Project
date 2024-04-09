@@ -1,6 +1,6 @@
 "use client";
 import React from 'react'
-import useRegisterStore from '@/store/RegisterStore';
+import useRegisterStore from '@/store/registerStore';
 
 const MinNumber = () => {
   const { minNumber, maxNumber, setMinNumber, setMaxNumber } = useRegisterStore();

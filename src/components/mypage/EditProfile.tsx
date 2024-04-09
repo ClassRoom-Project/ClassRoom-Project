@@ -1,14 +1,14 @@
 'use client';
 
 import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { UpdateUserInfoType, UserInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
-import { useUserStore } from '../../store/UserInfoStore';
+import { useUserStore } from '@/store/userInfoStore';
 
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();

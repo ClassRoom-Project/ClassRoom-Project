@@ -1,9 +1,9 @@
-"use client";
+'use client';
 import React, { useState, useRef, useEffect } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
-import RegisterScheduleStore from '@/store/RegisterScheduleStore';
+import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { ko } from 'date-fns/locale';
 
 const TimeSelect: React.FC = () => {
@@ -19,11 +19,16 @@ const TimeSelect: React.FC = () => {
     const handleDateSelect = (selectedDate: Date | undefined) => {
         if (selectedDate) {
             const formattedDate = format(selectedDate, 'yyyy-MM-dd');
-            setSelectedDates([...selectedDates, formattedDate]);
-            addSchedule(formattedDate);
-            setIsDayPickerOpen(false);
+            // 이미 선택된 날짜인지 확인
+            if (selectedDates.includes(formattedDate)) {
+                alert('이미 선택한 날짜입니다.'); // 이미 선택된 날짜라면 경고 메시지 표시
+            } else {
+                setSelectedDates([...selectedDates, formattedDate]); // 새로운 날짜를 selectedDates에 추가
+                addSchedule(formattedDate); // 새로운 날짜의 스케줄 추가
+                setIsDayPickerOpen(false); // DayPicker 닫기
+            }
         }
-    };
+    };    
 
     const handleAddTime = (date: string) => {
         if (tempTime === '') {

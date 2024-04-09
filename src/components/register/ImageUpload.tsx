@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
-import useRegisterStore from '../../store/RegisterStore';
-import RegisterScheduleStore from '@/store/RegisterScheduleStore';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import useRegisterStore from '../../store/registerStore';
+import RegisterScheduleStore from '@/store/registerScheduleStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import Image from 'next/image';
 import PlusImage from '../../../public/plusImage.jpg';
 

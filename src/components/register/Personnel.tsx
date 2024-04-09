@@ -1,6 +1,6 @@
 "use client";
 import React from 'react'
-import useRegisterStore from '@/store/RegisterStore';
+import useRegisterStore from '@/store/registerStore';
 
 const Personnel = () => {
   const { personnel, setPersonnel } = useRegisterStore();
