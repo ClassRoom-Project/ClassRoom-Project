@@ -42,7 +42,9 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   /* 데이피커 */
   // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
   function CustomCaption(props: CaptionProps) {
-    return <div className="flex justify-center">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>;
+    return (
+      <div className="flex justify-center font-bold">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>
+    );
   }
 
   const handleDateChange = async (newDate: Date | undefined) => {
@@ -77,42 +79,45 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     .map((day) => {
       return new Date(2024, today.getMonth(), day);
     });
+  /* 캘린더 */
 
+  // 0px 4px 4px rgba(0, 0, 0, 0.25);
   return (
-    <div className="w-full mb-10 border-black border-solid border p-6">
-      <div>
-        <div>
-          <DayPicker
-            mode="single"
-            required
-            disableNavigation
-            selected={new Date(selectedDate)}
-            onSelect={handleDateChange}
-            disabled={nonAvailableDays}
-            locale={ko}
-            components={{
-              Caption: CustomCaption
-            }}
-          />
-        </div>
+    <div className="w-full ">
+      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md ">
+        <DayPicker
+          mode="single"
+          required
+          disableNavigation
+          selected={new Date(selectedDate)}
+          onSelect={handleDateChange}
+          disabled={nonAvailableDays}
+          locale={ko}
+          components={{
+            Caption: CustomCaption
+          }}
+        />
       </div>
+
       <div>
-        <div className="flex gap-2">
+        <div className="grid-rows-2 flex justify-between w-full">
           {classDates
             .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 시간만 filter
             /* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */
             .map(({ times }) =>
               /* 각 시간의 정보 렌더링 */
               times.map((timeInfo) => (
-                <button
-                  key={timeInfo.timeId}
-                  onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
-                  className={`px-4 py-1 text-lg ${
-                    timeInfo.times === selectedTime ? 'bg-rose-200' : 'bg-white'
-                  } tracking-wide rounded-lg`}
-                >
-                  {convertTimeTo12HourClock(timeInfo.times)}
-                </button>
+                <>
+                  <button
+                    key={timeInfo.timeId}
+                    onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
+                    className={`btn btn-sm font-normal ${
+                      timeInfo.times === selectedTime ? 'bg-point-purple text-white' : 'bg-white'
+                    } tracking-wide rounded-md h-[48px] w-[150px]`}
+                  >
+                    {convertTimeTo12HourClock(timeInfo.times)}
+                  </button>
+                </>
               ))
             )}
         </div>

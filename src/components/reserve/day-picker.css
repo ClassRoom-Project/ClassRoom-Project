@@ -1,6 +1,7 @@
 /* 오늘 날짜 스타일 */
 .rdp-day_today:not(.rdp-day_outside) {
   font-weight: bold;
+  font-color: #6c5ff7;
 }
 
 .rdp-months {
@@ -11,8 +12,9 @@
 
 /* 활성화 && 선택되지 않은 버튼의 hover */
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
-  border: 1px solid #5373ff;
+  border: 1px solid #6c5ff7;
   transition: all 0.2s;
+  background-color: #6c5ff7;
 }
 
 /* 선택된 날짜 */
@@ -21,5 +23,5 @@
 .rdp-day_selected:hover {
   color: var(--rdp-selected-color);
   opacity: 1;
-  background-color: #5373ff;
+  background-color: #6c5ff7;
 }
