@@ -1,36 +1,42 @@
+import { useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 //데이터 불러오기,
 
 export default function ChatPreview({
-  // chatId,
+  chatId,
   // createdAt,
   // toClassId,
   // fromUserId,
   // teacherUserId,
   // title,
-  // makeClassUserId,
-  nickName,
-  profileImg
+  makeClassUserId
 }: any) {
-  //   const [class, setClass] = useState()
+  const { MakeClassUserInfo } = useReadMakeClassUserInfo(makeClassUserId);
 
-  // useEffect(() => {
-  //   async () => {
-
-  //   }
-  // },[])
+  console.log('보자', MakeClassUserInfo);
 
   return (
-    <div className="flex py-4 hover:bg-[#E3E1FC] border-b-2">
-      <div className="mx-3">
-        <img src={profileImg} alt="profileImg" width={50} height={50} className="border border-black rounded-full" />
+    <Link href={`/messages/${chatId}`} prefetch={false}>
+      <div className="flex py-4 hover:bg-[#E3E1FC] border-b-2">
+        <div className="mx-3">
+          <img
+            src={MakeClassUserInfo?.profile_image}
+            alt="profileImg"
+            width={50}
+            height={50}
+            className="border border-black rounded-full"
+          />
+        </div>
+        <div className="flex flex-col mx-3 flex-1 w-0">
+          <p className=" md:text-lg sm:text-sm font-bold text-nowrap">{MakeClassUserInfo?.nickname}</p>
+          <div className="truncate">
+            <p className="sm:text-sm text-gray-500">메시지</p>
+          </div>
+        </div>
       </div>
-      <div className="flex flex-col mx-3 flex-1">
-        <p className=" md:text-lg sm:text-sm font-bold">{nickName}</p>
-        <p className="sm:text-sm text-gray-500">메시지</p>
-      </div>
-    </div>
+    </Link>
   );
 }

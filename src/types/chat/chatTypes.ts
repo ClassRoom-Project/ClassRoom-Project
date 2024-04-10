@@ -57,3 +57,8 @@ export interface ChatRoomFromDB {
     };
   };
 }
+
+export interface MakeClassUserInfoType {
+  nickname: string;
+  profile_image: string;
+}

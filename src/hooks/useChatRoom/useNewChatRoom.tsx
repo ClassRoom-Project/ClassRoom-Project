@@ -1,4 +1,4 @@
-import { createChatRoom, getChatRooms } from '@/app/api/chatRooms/getChatRooms';
+import { createChatRoom, getChatRooms, getMakeClassUser } from '@/app/api/chatRooms/getChatRooms';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -35,4 +35,13 @@ export function useCreateNewRoom() {
   });
 
   return { createNewRoomMutate };
+}
+
+export function useReadMakeClassUserInfo(classUserId: string) {
+  const { data: MakeClassUserInfo } = useQuery({
+    queryKey: ['MakeClassUser', classUserId],
+    queryFn: () => getMakeClassUser(classUserId as string),
+    enabled: !!classUserId
+  });
+  return { MakeClassUserInfo };
 }

@@ -1,4 +1,4 @@
-import { ChatRoom, ChatRoomFromDB, CreateNewChatRoomType } from '@/types/chat/chatTypes';
+import { ChatRoom, ChatRoomFromDB, CreateNewChatRoomType, MakeClassUserInfoType } from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
 //채팅방 생성
@@ -80,4 +80,19 @@ export const getChatRooms = async (loginUserId: string): Promise<any> => {
   // console.log('Transformed data:', transformedData);
 
   return transformedData;
+};
+
+//채팅방 들어갈 정보
+export const getMakeClassUser = async (classUserId: string): Promise<MakeClassUserInfoType | null> => {
+  const { data: makeClassUserInfo, error } = await supabase
+    .rpc('get_make_class_user_info', { class_user_id: classUserId }) // 함수명과 매개변수 명시
+    .single(); // 단일 결과를 반환하도록 요청
+
+  if (error) {
+    console.error('Failed to get makeClassUserInfo', error);
+    throw error;
+  }
+
+  // RPC 호출은 기본적으로 단일 객체를 반환
+  return makeClassUserInfo as MakeClassUserInfoType;
 };
