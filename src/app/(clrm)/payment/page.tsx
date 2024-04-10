@@ -2,7 +2,7 @@
 
 import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
 import { useEffect, useRef } from 'react';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useSearchParams } from 'next/navigation';
 
 import { useAsync } from 'react-use';

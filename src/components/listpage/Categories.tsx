@@ -1,5 +1,5 @@
 'use client';
-
+import { FiAlignJustify } from 'react-icons/fi';
 import React, { useState } from 'react';
 
 const Categories = () => {
@@ -9,27 +9,31 @@ const Categories = () => {
     setIsOpenCategory(!isOpenCategory);
   };
   return (
-    <div className="dropdown p-5 dropdown-bottom">
-      <div tabIndex={0} onClick={handleDropdown} role="button" className="btn m-1">
-        카테고리
+    <div className="flex p-5">
+      <div className="dropdown p-5 dropdown-bottom w-12 h-12">
+        <div tabIndex={0} onClick={handleDropdown} role="button" className="btn ">
+          <FiAlignJustify size={30} color="#5373FF">
+            카테고리
+          </FiAlignJustify>
+        </div>
+
+        {isOpenCategory ? (
+          <ul
+            tabIndex={0}
+            className="dropdown-content z-[1] menu p-2 shadow bg-white border-gray-300 border-solid border-[1px] w-52"
+          >
+            <div>class_type</div>
+            <div>location</div>
+            <div>time</div>
+            <div>difficulty</div>
+            <div>price</div>
+            <div>검색하기,초기화 버튼</div>
+          </ul>
+        ) : (
+          <></>
+        )}
       </div>
-      {isOpenCategory ? (
-        <ul
-          tabIndex={0}
-          className="dropdown-content z-[1] menu p-2 shadow bg-white border-gray-300 border-solid border-[1px] w-52"
-        >
-          <div>클래스 타입</div>
-          <div>지역</div>
-          <div>카테고리</div>
-          <div>요일</div>
-          <div>시간</div>
-          <div>난이도</div>
-          <div>금액</div>
-          <div>검색하기,초기화 버튼</div>
-        </ul>
-      ) : (
-        <></>
-      )}
+      <button className="btn ml-12 m-5 w-17 h-12">초기화</button>
     </div>
   );
 };

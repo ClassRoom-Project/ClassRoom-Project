@@ -1,26 +1,27 @@
 'use client';
 
 import LoginState from '@/components/login/LoginState';
+import { useUserStore } from '@/store/userInfoStore';
+import { useUserRoleStore } from '@/store/userRoleStore';
+import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
-import { SearchClass } from './categories/SearchClass';
-import { useUserStore } from '../../../store/UserInfoStore';
-import { useUserRoleStore } from '@/store/userRoleStore';
-import basicProfileImage from '../../../../public/profile-image.png';
 import { LuBell } from 'react-icons/lu';
-import Image from 'next/image';
+import basicProfileImage from '../../../../public/profile-image.png';
+import { SearchClass } from './categories/SearchClass';
 
 const Header = ({ children }: PropsWithChildren) => {
   const { userInfo } = useUserStore();
 
-  // console.log('userInfo', userInfo);
   const { isTeacher } = useUserRoleStore();
 
   // 수강생인지 강사인지 명시적으로 보여주기
-  const roleName = isTeacher ? '강사' : '수강생';
+  const roleName = isTeacher === true ? '강사' : '회원';
+  // console.log('roleName', roleName);
 
   // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기
   const profileImage = userInfo?.profile_image ? userInfo?.profile_image : basicProfileImage;
+
   return (
     <>
       <div className="flex p-[15px] justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">

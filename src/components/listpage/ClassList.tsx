@@ -2,12 +2,15 @@
 
 import { getClassForList } from '@/app/api/listpage/classInfoForList';
 import ClassCard from '@/components/main/ClassCard';
+import { useClassFilterStore } from '@/store/classFilterStore';
 import { ClassAllType } from '@/types/class';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 //무한 스크롤
 function ClassList() {
+  const { selectedCategory } = useClassFilterStore();
+  const [filteredClasses, setFilteredClasses] = useState<ClassAllType[]>([]);
   const targetRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -36,7 +39,7 @@ function ClassList() {
         }
       },
       {
-        threshold: 0.1 // targetRef의 10%가 보일 때 콜백이 실행됩니다.
+        threshold: 0.5 // targetRef의 해당수치만큼이 보일 때 콜백이 실행됩니다.
       }
     );
     observer.observe(targetRef.current);
@@ -44,22 +47,31 @@ function ClassList() {
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
+  //flatMap은 모든 페이지에 있는 데이터를 가져와서 하나의 배열로 리턴하는 메서드
+  useEffect(() => {
+    if (classInfos) {
+      const allClasses = classInfos.pages.flatMap((page) => page.classInfos);
+      const filtered = selectedCategory
+        ? allClasses.filter((classInfo) => classInfo.category === selectedCategory)
+        : allClasses;
+      setFilteredClasses(filtered);
+    }
+  }, [classInfos, selectedCategory]);
+
   return status === 'pending' ? (
-    <p>Loading...</p>
+    <div className="w-full h-screen text-[#5373FF] flex justify-center items-center">
+      <p>로딩중입니다!</p>
+    </div>
   ) : status === 'error' ? (
-    <p>Error: {error.message}</p>
+    <div className="w-full h-screen text-[#5373FF] flex justify-center items-center">
+      <p>Error: {error.message}</p>
+    </div>
   ) : (
     <div className="flex justify-center min-w-full">
       <div className="grid grid-cols-4 min-w-[90px]">
-        {classInfos?.pages.map((page, i) => (
-          <React.Fragment key={i}>
-            {page.classInfos.map((classInfos: ClassAllType) => (
-              <div key={classInfos.class_id} className="p-3">
-                <ClassCard key={classInfos.class_id} classInfos={classInfos} />
-              </div>
-            ))}
-          </React.Fragment>
-        ))}
+        {filteredClasses.map((classInfos) => (
+          <ClassCard key={classInfos.class_id} classInfos={classInfos} />
+        ))}{' '}
         {/*여기서 ref값 적용*/}
         <div ref={targetRef} className="h-5"></div>
         {isFetching && !isFetchingNextPage && <p>Loading more...</p>}
