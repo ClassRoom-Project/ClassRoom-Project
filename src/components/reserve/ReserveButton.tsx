@@ -5,7 +5,6 @@ import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
-import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
 
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
@@ -81,8 +80,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
   return (
     <>
       <ToastContainer />
-      <button onClick={handleReserveButtonClick} className="bg-white w-32 text-center self-end">
-        예약하기
+      <button className="btn bg-point-purple text-white tracking-wide w-full" onClick={handleReserveButtonClick}>
+        결제하자
       </button>
     </>
   );

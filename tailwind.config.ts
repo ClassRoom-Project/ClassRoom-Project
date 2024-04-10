@@ -16,7 +16,9 @@ const config: Config = {
         'point-color': '#5373FF',
         'text-color': '#2443CA',
         'pale-color': '#A4BEFF',
-        'border-color': '#EFEFEF'
+        'border-color': '#EFEFEF',
+        'point-purple': '#6C5FF7',
+        'light-purple': '#F6F6FF'
       }
     }
   },
