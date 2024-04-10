@@ -12,5 +12,5 @@ export const checkIsReserved = async ({ userId, classId }: { userId: string; cla
     return;
   }
 
-  return Boolean(data.length);
+  return data.length > 0;
 };
