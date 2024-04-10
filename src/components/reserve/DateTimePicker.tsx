@@ -6,13 +6,13 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { CaptionProps, DayPicker } from 'react-day-picker';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import './day-picker.css';
 import 'react-day-picker/dist/style.css';
+import './day-picker.css'; // dist css 밑에 둬야 적용됨
 import { DateList } from '@/types/date';
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
-  const { setReserveInfo, reserveInfo } = useReserveStore();
+  const { setReserveInfo } = useReserveStore();
   const { setCurrentReservedCount } = useCurrentReservedCountStore();
   const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
   const [selectedDate, setSelectedDate] = useState(classDates[0].day);
@@ -79,12 +79,10 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     .map((day) => {
       return new Date(2024, today.getMonth(), day);
     });
-  /* 캘린더 */
 
-  // 0px 4px 4px rgba(0, 0, 0, 0.25);
   return (
     <div className="w-full mb-2">
-      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md ">
+      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md py-1 mb-4 ">
         <DayPicker
           mode="single"
           required
