@@ -13,6 +13,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   const classId = searchParams.classId;
   const classInfo = await newFetchReserveClassInfo(classId);
 
+  //TODO: 컴포넌트로 정리
   return (
     <>
       <Link href={`/list/detail/${classId}`} className="flex  items-center text-lg gap-1">
