@@ -4,7 +4,7 @@ import React from 'react';
 const ReserveUserInfo = () => {
   return (
     <div className="rounded-md flex flex-col bg-white p-6">
-      <p className="mb-6 text-lg font-bold ">연락처 입력</p>
+      <p className="mb-4 text-lg font-bold ">연락처 입력</p>
       <div className="flex flex-col  mb-4">
         <p className="font-bold mb-1">계정 ID (알림 메일이 발송됩니다.)</p>
         <p>seifei@fsmfkl</p>

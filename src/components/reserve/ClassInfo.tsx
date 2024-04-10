@@ -34,7 +34,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   return (
     <div className="p-6 pb-8 bg-white mb-4 rounded-md   ">
       <h1 className="font-bold text-lg mb-2">선택하신 클래스</h1>
-      <div className="w-full relative h-[250px] mb-4 ">
+      <div className="w-full relative h-[210px] mb-4 ">
         <Image
           className="rounded-lg"
           fill={true}
