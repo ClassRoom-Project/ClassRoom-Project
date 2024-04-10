@@ -1,7 +1,19 @@
-import { createChatRoom } from '@/app/api/chatRooms/getChatRooms';
-import { CreateNewChatRoom } from '@/types/chat/chatTypes';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createChatRoom, getChatRooms } from '@/app/api/chatRooms/getChatRooms';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
+//채팅방 목록 읽어오기
+export function useReadChatRooms() {
+  const { loginUserId } = useLoginStore();
+  const { data: chatroomsInfo } = useQuery({
+    queryKey: ['chatRooms', loginUserId],
+    queryFn: () => getChatRooms(loginUserId as string),
+    enabled: !!loginUserId
+  });
+  return { chatroomsInfo };
+}
+
+//채팅방 생성하기
 export function useCreateNewRoom() {
   const queryClient = useQueryClient();
 

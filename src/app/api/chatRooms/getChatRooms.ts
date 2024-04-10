@@ -1,11 +1,12 @@
-import { CreateNewChatRoom } from '@/types/chat/chatTypes';
+import { ChatRoom, ChatRoomFromDB, CreateNewChatRoomType } from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
+//채팅방 생성
 export const createChatRoom = async ({
   toClassId,
   fromUserId,
   teacherUserId
-}: CreateNewChatRoom): Promise<CreateNewChatRoom | undefined> => {
+}: CreateNewChatRoomType): Promise<CreateNewChatRoomType | undefined> => {
   const { data: existingRooms, error: searchError } = await supabase
 
     .from('chat_rooms')
@@ -40,75 +41,43 @@ export const createChatRoom = async ({
   } else console.log('이미 방이있어요');
 };
 
-// 클래스에서 타이틀가져오고 클래스id로 클래스테이블에서 user_id, user_id로 유저테이블 조인해서 닉네임이랑 프로필이미지
-const testFetch = async (classId: string) => {
-  const { data, error } = await supabase.from('class').select('').eq('class_id', classId);
-};
-
-export const getChatRooms = async (loginUserId: string) => {
+//방 정보 가져오기
+export const getChatRooms = async (loginUserId: string): Promise<any> => {
   const { data, error } = await supabase
     .from('chat_rooms')
     .select(
       `
-    chat_id, created_at, to_class_id, from_user_id, teacher_user_id,
-    class!inner(title),
-    users!inner(nickname, profile_image)
+      chat_id, created_at, to_class_id, from_user_id, teacher_user_id,
+      class!inner(title, user_id, users!inner(nickname, profile_image))
     `
     )
-    .eq('from_user_id', loginUserId)
-    .eq('teacher_user_id', loginUserId)
-    .single();
+    .or(`from_user_id.eq.${loginUserId},teacher_user_id.eq.${loginUserId}`);
 
   if (error) {
-    console.log('데이터 없지롱', error);
-    return;
+    console.error('못가져와', error);
+    throw error;
   }
-  return data;
+
+  // console.log(data);
+  const transformedData = data!.map((chatRoom: any) => {
+    const chatRoomTyped = {
+      chatId: chatRoom.chat_id,
+      createdAt: chatRoom.created_at,
+      toClassId: chatRoom.to_class_id,
+      fromUserId: chatRoom.from_user_id,
+      teacherUserId: chatRoom.teacher_user_id,
+      title: chatRoom.class.title,
+      makeClassUserId: chatRoom.class.user_id,
+      nickName: chatRoom.class.users.nickname,
+      profileImg: chatRoom.class.users.profile_image
+    };
+
+    // console.log('chatRoom', chatRoom);
+    // console.log(chatRoom);
+    return chatRoomTyped;
+  });
+
+  // console.log('Transformed data:', transformedData);
+
+  return transformedData;
 };
-
-// 예약 정보 조회 api
-// reserve 테이블과 class 테이블을 class_id로 inner조인하고, class 테이블에서 title, total_time, location만 선택하여 결과에 포함
-// time 테이블을 time_id로 조인
-// time테이블에서 time_id가 일치하는 레코드의 date_id로 date 테이블 inner조인하고, date 테이블에서 day만 선택하여 결과에 포함
-
-// export const fetchReservationDetails = async (reserveId: string) => {
-//   const { data, error }: PostgrestSingleResponse<DBReservationDetailsType> = await supabase
-//     .from('reserve')
-//     .select(
-//       `
-//         class_id, reserve_quantity, reserve_price, time_id, user_id,
-//         class!inner(title, total_time, location),
-//         time (time_id, times, date_id, date!inner(day))
-//   `
-//       //이너조인 같은 클래스 아이디 찾아들어가서 값가져오기
-//     )
-//     .eq('reserve_id', reserveId)
-//     .single();
-
-//   if (error) {
-//     console.log('fetchReservationDetails error =>', error);
-//     return;
-//   }
-
-//   const reservationDetails = {
-//     classId: data.class_id,
-//     reserveQuantity: data.reserve_quantity,
-//     reservePrice: data.reserve_price,
-//     timeId: data.time_id,
-//     userId: data.user_id,
-//     class: {
-//       title: data.class.title,
-//       totalTime: data.class.total_time,
-//       location: data.class.location,
-//       classId: data.class.class_id
-//     },
-//     time: {
-//       date: { day: data.time.date.day },
-//       times: data.time.times,
-//       dateId: data.time.date_id,
-//       timeId: data.time.time_id
-//     }
-//   };
-
-//   return reservationDetails;
-// };
