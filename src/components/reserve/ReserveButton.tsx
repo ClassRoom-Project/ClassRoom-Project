@@ -5,7 +5,6 @@ import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
-import { fetchReservedCount } from '@/app/api/reserve/fetchReserveClassInfo';
 
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';

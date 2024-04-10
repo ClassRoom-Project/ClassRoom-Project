@@ -38,12 +38,14 @@ const ReserveUserInfo = () => {
         <p className="font-bold mb-1">이름 (닉네임)</p>
         <p>{userInfo?.nickname}</p>
       </div>
-      <button
-        onClick={() => router.push('/mypage')}
-        className="btn mt-auto btn-ghost border border-solid border-gray-300 text-gray-500 h-[20px]"
-      >
-        프로필 수정하기
-      </button>
+      <div className="tooltip mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
+        <button
+          onClick={() => router.push('/mypage')}
+          className="btn w-full btn-ghost border border-solid border-gray-300"
+        >
+          프로필 수정하기
+        </button>
+      </div>
     </div>
   );
 };
