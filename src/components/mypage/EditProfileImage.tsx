@@ -3,15 +3,23 @@ import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
 import basicProfileImage from '../../../public/profile-image.png';
 import { useStartTyping } from 'react-use';
+import { UserInfoType } from '@/types/user';
 
 interface EditProfileImageProps {
   newProfileImage: string;
   isEditing: boolean;
   selectedImage: File | null;
-  setSelectedImage: React.Dispatch<React.SetStateAction<File>>;
+  setSelectedImage: React.Dispatch<React.SetStateAction<File | null>>;
+  userInfo: UserInfoType;
 }
 
-const EditProfileImage = ({ newProfileImage, isEditing, selectedImage, setSelectedImage }: EditProfileImageProps) => {
+const EditProfileImage = ({
+  newProfileImage,
+  isEditing,
+  selectedImage,
+  setSelectedImage,
+  userInfo
+}: EditProfileImageProps) => {
   const fileInput = useRef<HTMLInputElement | null>(null);
 
   // 프로필 이미지 수정 버튼 클릭
@@ -26,17 +34,26 @@ const EditProfileImage = ({ newProfileImage, isEditing, selectedImage, setSelect
     if (file) {
       setSelectedImage(file);
     } else {
-      return;
+      setSelectedImage(null);
     }
   };
 
   // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기
-  const profileImage = selectedImage ? URL.createObjectURL(selectedImage) : newProfileImage || basicProfileImage;
+  const profileImage = selectedImage
+    ? URL.createObjectURL(selectedImage)
+    : newProfileImage || userInfo.profile_image || basicProfileImage;
 
   return (
     <div>
       <div className="flex flex-col items-center p-4 gap-4">
-        <Image src={profileImage} width={100} height={100} className="rounded-full" alt="프로필 이미지" />
+        <Image
+          src={profileImage}
+          width={100}
+          height={100}
+          className="rounded-full"
+          alt="프로필 이미지"
+          unoptimized={true}
+        />
         <input
           type="file"
           name="image_URL"
