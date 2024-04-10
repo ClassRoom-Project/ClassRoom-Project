@@ -17,22 +17,21 @@ export default function AskButton({ classId, makeClassUserId }: { classId: strin
       alert('로그인이 필요한 기능입니다.');
       return;
     }
-    console.log(' 전달', classId, loginUserId),
-      createNewRoomMutate(
-        {
-          toClassId: classId,
-          fromUserId: loginUserId,
-          teacherUserId: makeClassUserId
+    createNewRoomMutate(
+      {
+        toClassId: classId,
+        fromUserId: loginUserId,
+        teacherUserId: makeClassUserId
+      },
+      {
+        onSuccess: () => {
+          router.replace('/messages');
         },
-        {
-          onSuccess: () => {
-            router.replace('/messages');
-          },
-          onError: (error: any) => {
-            console.error(error);
-          }
+        onError: (error: any) => {
+          console.error(error);
         }
-      );
+      }
+    );
   };
 
   return (

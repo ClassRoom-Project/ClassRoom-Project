@@ -16,11 +16,9 @@ export default function ChatPreview({
 }: any) {
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(makeClassUserId);
 
-  console.log('보자', MakeClassUserInfo);
-
   return (
-    <Link href={`/messages/${chatId}`} prefetch={false}>
-      <div className="flex py-4 hover:bg-[#E3E1FC] border-b-2">
+    <Link href={`/messages?chatId=${chatId}`} prefetch={false} shallow>
+      <div className="flex py-4 hover:bg-[#E3E1FC] border-b-2 px-2">
         <div className="mx-3">
           <img
             src={MakeClassUserInfo?.profile_image}
@@ -31,7 +29,7 @@ export default function ChatPreview({
           />
         </div>
         <div className="flex flex-col mx-3 flex-1 w-0">
-          <p className=" md:text-lg sm:text-sm font-bold text-nowrap">{MakeClassUserInfo?.nickname}</p>
+          <p className="sm:text-sm md:text-lg font-bold text-nowrap">{MakeClassUserInfo?.nickname}</p>
           <div className="truncate">
             <p className="sm:text-sm text-gray-500">메시지</p>
           </div>

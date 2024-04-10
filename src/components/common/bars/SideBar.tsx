@@ -7,6 +7,7 @@ import { GoPerson } from 'react-icons/go';
 import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
 import { SlNote } from 'react-icons/sl';
 import ConvertBtn from './ConvertBtn';
+import ChatButton from '@/components/chatRooms/ChatButton';
 
 const SideBar = ({ children }: PropsWithChildren) => {
   return (
@@ -17,10 +18,7 @@ const SideBar = ({ children }: PropsWithChildren) => {
             <FiHome size={30} />
             HOME
           </Link>
-          <Link href="/messages" prefetch={false} className="p-4 flex flex-col items-center">
-            <IoChatbubbleEllipsesOutline size={30} />
-            CHAT
-          </Link>
+          <ChatButton />
           <Link href="/register" className="p-4 flex flex-col items-center">
             <SlNote size={30} />
             CREATE
