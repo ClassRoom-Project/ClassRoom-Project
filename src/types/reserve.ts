@@ -5,6 +5,8 @@ export type ReserveInfo = {
   reservePrice: number;
   reserveQuantity: number;
   timeId: string;
+  reserveDate: string;
+  reserveTime: string;
 };
 
 // export type DBReserveInfo = {

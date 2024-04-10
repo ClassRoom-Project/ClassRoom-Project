@@ -15,7 +15,7 @@ export const useReserveStore = create<ReserveStoreType>((set) => ({
   reserveInfo: defaultInitState,
 
   setReserveInfo: (updateInfo) => {
-    console.log(updateInfo);
+    console.log(defaultInitState);
     set((state) => ({
       reserveInfo: {
         ...state.reserveInfo,

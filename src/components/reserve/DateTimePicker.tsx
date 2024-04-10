@@ -10,6 +10,7 @@ import './day-picker.css';
 import 'react-day-picker/dist/style.css';
 import { DateList } from '@/types/date';
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
+import SelectedDate from './SelectedDate';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const { setReserveInfo, reserveInfo } = useReserveStore();
@@ -20,7 +21,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const today = new Date();
 
   useEffect(() => {
-    setReserveInfo({ timeId: timeId });
+    setReserveInfo({ timeId: timeId, reserveDate: selectedDate, reserveTime: selectedTime });
   }, [selectedDate, selectedTime, timeId]);
 
   useEffect(() => {
@@ -99,34 +100,26 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
         />
       </div>
 
-      <div className="mb-2">
-        <div className="grid grid-cols-2 flex justify-around w-full">
-          {classDates
-            .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 시간만 filter
-            /* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */
-            .map(({ times }) =>
-              /* 각 시간의 정보 렌더링 */
-              times.map((timeInfo) => (
-                <>
-                  <button
-                    key={timeInfo.timeId}
-                    onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
-                    className={`btn btn-sm font-normal ${
-                      timeInfo.times === selectedTime ? 'bg-point-purple text-white' : 'bg-white'
-                    } tracking-wide rounded-md h-[48px] w-[150px] mb-2`}
-                  >
-                    {convertTimeTo12HourClock(timeInfo.times)}
-                  </button>
-                </>
-              ))
-            )}
-        </div>
-      </div>
-      <div className="flex flex-row justify-between w-full bg-base-200 rounded-md  text-sm py-2 px-3">
-        <div className="mb-1 font-bold">선택하신 수강일</div>
-        <p>
-          {`${selectedDate}`} {convertTimeTo12HourClock(selectedTime)}
-        </p>
+      <div className="grid grid-cols-2 gap-2 w-full">
+        {classDates
+          .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 시간만 filter
+          /* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */
+          .map(({ times }) =>
+            /* 각 시간의 정보 렌더링 */
+            times.map((timeInfo) => (
+              <>
+                <button
+                  key={timeInfo.timeId}
+                  onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
+                  className={`btn btn-sm font-normal ${
+                    timeInfo.times === selectedTime ? 'bg-point-purple text-white' : 'bg-white'
+                  } tracking-wide rounded-md h-[48px] border border-solid border-gray-300`}
+                >
+                  {convertTimeTo12HourClock(timeInfo.times)}
+                </button>
+              </>
+            ))
+          )}
       </div>
     </div>
   );

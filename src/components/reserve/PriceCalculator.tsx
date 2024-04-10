@@ -43,7 +43,7 @@ const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) =>
   };
 
   return (
-    <div className="w-full flex flex-col mt-auto mb-6">
+    <div className="w-full flex flex-col mb-6">
       <h1 className="font-bold">수강인원 선택하기</h1>
       <div className="flex w-full mt-4 mb-2 justify-end">
         <span className="font-bold text-right mr-4">총 인원</span>
