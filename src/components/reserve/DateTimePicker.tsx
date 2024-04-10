@@ -6,8 +6,8 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { CaptionProps, DayPicker } from 'react-day-picker';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import 'react-day-picker/dist/style.css';
 import './day-picker.css';
+import 'react-day-picker/dist/style.css';
 import { DateList } from '@/types/date';
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 
