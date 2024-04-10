@@ -22,13 +22,13 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
         {classInfo ? (
           <div>
             <div className="flex flex-col w-full lg:flex-row ">
-              <div className="flex box-border flex-col w-[400px] bg-gray-200 my-4">
+              <div className="flex box-border flex-col w-[400px] my-4">
                 <ClassInfo classInfo={classInfo} />
                 <ReserveUserInfo />
               </div>
               <div className="lg:divider-horizontal"></div>
-              <div className=" py-6  px-12 w-[400px] pb-12 bg-white rounded-md  justify-between flex flex-col items-center my-4">
-                <p className="font-bold text-lg text-left w-full">수강요일 & 시간 선택하기</p>
+              <div className=" py-6  px-12 w-[400px] bg-white rounded-md  justify-between flex flex-col items-center my-4">
+                <p className="font-bold text-lg text-left w-full">수강일 선택하기</p>
                 <DateTimePicker classDates={classInfo.dates} />
                 <CurrentReserveQuantity classId={classInfo.classId} maxPeople={classInfo?.maxPeople} />
                 <PriceCalculator price={classInfo.price} classId={classInfo.classId} maxPeople={classInfo.maxPeople} />

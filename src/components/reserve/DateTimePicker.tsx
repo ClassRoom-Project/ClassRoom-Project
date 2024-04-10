@@ -12,7 +12,7 @@ import { DateList } from '@/types/date';
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
-  const setReserveInfo = useReserveStore((state) => state.setReserveInfo);
+  const { setReserveInfo, reserveInfo } = useReserveStore();
   const { setCurrentReservedCount } = useCurrentReservedCountStore();
   const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
   const [selectedDate, setSelectedDate] = useState(classDates[0].day);
@@ -83,7 +83,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   // 0px 4px 4px rgba(0, 0, 0, 0.25);
   return (
-    <div className="w-full ">
+    <div className="w-full mb-4">
       <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md ">
         <DayPicker
           mode="single"
@@ -99,8 +99,8 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
         />
       </div>
 
-      <div>
-        <div className="grid-rows-2 flex justify-between w-full">
+      <div className="mb-2">
+        <div className="grid grid-cols-2 flex justify-around w-full">
           {classDates
             .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 시간만 filter
             /* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */
@@ -113,7 +113,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
                     onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
                     className={`btn btn-sm font-normal ${
                       timeInfo.times === selectedTime ? 'bg-point-purple text-white' : 'bg-white'
-                    } tracking-wide rounded-md h-[48px] w-[150px]`}
+                    } tracking-wide rounded-md h-[48px] w-[150px] mb-2`}
                   >
                     {convertTimeTo12HourClock(timeInfo.times)}
                   </button>
@@ -122,11 +122,11 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
             )}
         </div>
       </div>
-      <div>
-        <h1 className="mb-1">선택하신 수강일</h1>
-        <span>
+      <div className="flex flex-row justify-between w-full bg-base-200 rounded-md  text-sm py-2 px-3">
+        <div className="mb-1 font-bold">선택하신 수강일</div>
+        <p>
           {`${selectedDate}`} {convertTimeTo12HourClock(selectedTime)}
-        </span>
+        </p>
       </div>
     </div>
   );

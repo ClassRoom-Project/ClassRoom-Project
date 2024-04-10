@@ -43,22 +43,24 @@ const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) =>
   };
 
   return (
-    <div className="w-full mb-10 border-black border-solid border">
-      <div className="flex w-full justify-between gap-4">
-        <span className="w-16 text-right">금액</span>
-        <span> {price.toLocaleString()} 원</span>
-      </div>
-      <div className="flex w-full justify-between gap-4">
-        <span className="w-16 text-right">인원</span>
-        <div className="flex w-16 justify-between gap-2">
-          <button onClick={handleQuantityDecrease}> - </button>
-          <span> {quantity} </span>
-          <button onClick={handleQuantityIncrease}> + </button>
+    <div className="w-full flex flex-col mt-auto mb-6">
+      <h1 className="font-bold">수강인원 선택하기</h1>
+      <div className="flex w-full mt-4 mb-2 justify-end">
+        <span className="font-bold text-right mr-4">총 인원</span>
+        <div className="flex gap-2">
+          <button onClick={handleQuantityDecrease} className="btn btn-circle btn-xs bg-point-purple text-white">
+            -
+          </button>
+          <span className="font-bold"> {quantity} </span>
+          <button onClick={handleQuantityIncrease} className="btn btn-circle btn-xs bg-point-purple text-white">
+            +
+          </button>
         </div>
       </div>
+      <div className="divider m-0"></div>
       <div className="flex w-full justify-between gap-4">
-        <span className="w-16 text-right">총 금액</span>
-        <span> {totalPrice.toLocaleString()} 원 </span>
+        <span className="text-right font-bold">최종 결제 금액</span>
+        <span className="font-bold font-gray-800"> {totalPrice.toLocaleString()} 원</span>
       </div>
     </div>
   );
