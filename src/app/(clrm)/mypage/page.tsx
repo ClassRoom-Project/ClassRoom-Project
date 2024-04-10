@@ -3,7 +3,7 @@
 import StudentMyPageTab from '@/components/mypage/student/StudentMyPageTab';
 import TeacherMyPageTab from '@/components/mypage/teacher/TeacherMyPageTab';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
-import { useUserRoleStore } from '@/store/userRoleStore';
+import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import { redirect, useRouter } from 'next/navigation';
 
 const MyPage = () => {

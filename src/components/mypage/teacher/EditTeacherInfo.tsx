@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
-import { userInfoStore } from '@/store/userInfoStore';
+import { userInfoStore } from '@/store/mypage/userInfoStore';
 import Image from 'next/image';
 
 const EditTeacherInfo = () => {

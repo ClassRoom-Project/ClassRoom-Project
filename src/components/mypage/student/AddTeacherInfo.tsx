@@ -3,7 +3,7 @@ import { noChangedNotify, noInfoNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
 import { useTeacherInfo } from '@/hooks/useLogin/useTeacherInfo';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
-import { useUserRoleStore } from '@/store/userRoleStore';
+import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';

@@ -2,23 +2,23 @@
 
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useMyClassInfoStore } from '@/store/mypage/classInfoStore';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import React from 'react';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GrLocation } from 'react-icons/gr';
 
 const MyClass = () => {
   const { loginUserId } = useLoginStore();
+  const { setMyClassInfo } = useMyClassInfoStore();
   const router = useRouter();
 
   const { data: myClassInfo, isPending } = useQuery({
     queryKey: ['class', loginUserId],
     queryFn: () => getMyRegisteredClass(loginUserId)
   });
-  console.log('myClassInfo', myClassInfo);
 
   // 중복되는 값 제외하기
   const days: string[] | undefined = myClassInfo?.map((item) => item.day);
@@ -34,8 +34,11 @@ const MyClass = () => {
   };
 
   // 클래스 예약한 수강생 보러가기
-  const handleOnClickGoToReservedStudentList = () => {
-    router.push('/mypage/myClassStudentList');
+  const handleOnClickGoToReservedStudentList = (timeId: string) => {
+    if (myClassInfo) {
+      setMyClassInfo(myClassInfo);
+      router.push(`/mypage/myClassStudentList?timeId=${timeId}`);
+    }
   };
 
   if (isPending) {
@@ -80,7 +83,10 @@ const MyClass = () => {
               </div>
             </div>
             <div className="flex gap-4 m-4">
-              <button onClick={handleOnClickGoToReservedStudentList} className="btn w-36">
+              <button
+                onClick={() => handleOnClickGoToReservedStudentList(classInfo.time_id, myClassInfo)}
+                className="btn w-36"
+              >
                 수강생 보기
               </button>
               <button onClick={handleOnClickDeleteMyClass} className="btn w-36 bg-point-color text-white">

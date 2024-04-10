@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
-import { userInfoStore } from '@/store/userInfoStore';
+import { userInfoStore } from '@/store/mypage/userInfoStore';
 
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
