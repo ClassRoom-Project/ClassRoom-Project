@@ -46,12 +46,12 @@ const PriceCalculator = ({ price, classId, maxPeople }: PriceCalculatorProps) =>
     <div className="w-full flex flex-col mb-6 mt-auto">
       <h1 className="font-bold">수강인원 선택하기</h1>
       <div className="flex w-full mt-4 mb-2 justify-end">
-        <span className="font-bold text-right mr-4">총 인원</span>
-        <div className="flex gap-2">
+        <span className="font-bold text-right mr-3">총 인원</span>
+        <div className="flex gap-2 w-[85px] justify-between">
           <button onClick={handleQuantityDecrease} className="btn btn-circle btn-xs bg-point-purple text-white">
             -
           </button>
-          <span className="font-bold"> {quantity} </span>
+          <span className="font-bold w-[20px] text-center"> {quantity} </span>
           <button onClick={handleQuantityIncrease} className="btn btn-circle btn-xs bg-point-purple text-white">
             +
           </button>

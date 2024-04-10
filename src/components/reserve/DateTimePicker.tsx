@@ -120,7 +120,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
             ))
           )}
       </div>
-      <div className="flex flex-row justify-between w-full bg-base-200 rounded-md  text-sm py-2 px-3">
+      <div className="flex flex-row justify-between items-center w-full bg-base-200 rounded-md  text-sm py-2 px-3">
         <div className="mb-1 font-bold">선택하신 수강일</div>
         <p>
           {`${selectedDate}`} {convertTimeTo12HourClock(selectedTime)}

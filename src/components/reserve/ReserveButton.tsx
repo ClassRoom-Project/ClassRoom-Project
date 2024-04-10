@@ -80,7 +80,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
   return (
     <>
       <ToastContainer />
-      <button className="btn btn-primary w-full" onClick={handleReserveButtonClick}>
+      <button className="btn bg-point-purple text-white tracking-wide w-full" onClick={handleReserveButtonClick}>
         결제하자
       </button>
     </>

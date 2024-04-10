@@ -31,7 +31,6 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
               <div className=" py-6  px-12 w-[400px] bg-white rounded-md  justify-between flex flex-col items-center my-4">
                 <p className="font-bold text-lg text-left w-full">수강일 선택하기</p>
                 <DateTimePicker classDates={classInfo.dates} />
-                {/* <SelectedDate /> */}
                 <CurrentReserveQuantity classId={classInfo.classId} maxPeople={classInfo?.maxPeople} />
                 <PriceCalculator price={classInfo.price} classId={classInfo.classId} maxPeople={classInfo.maxPeople} />
                 <ReserveButton classId={classInfo.classId} maxPeople={classInfo.maxPeople} />

@@ -28,7 +28,7 @@ const ReserveUserInfo = () => {
   }, [loginUserId]);
 
   return (
-    <div className="rounded-md h-[280px] flex flex-col bg-white p-6">
+    <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md">
       <p className="mb-4 text-lg font-bold ">연락처 입력</p>
       <div className="flex flex-col  mb-4 h-[52px]">
         <p className="font-bold mb-1 ">계정 ID (알림 메일이 발송됩니다.)</p>
