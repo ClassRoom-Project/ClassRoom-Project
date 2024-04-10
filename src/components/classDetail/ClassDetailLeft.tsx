@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { ClassAllType } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
+import WishButton from './WishButton';
 
 //왼쪽 컴포넌트
 const ClassDetailLeft = ({
@@ -26,6 +27,7 @@ const ClassDetailLeft = ({
 
   return (
     <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg h-[900px] border-[#5373FF] border-solid border-[1px]">
+      <WishButton classId={classData?.class_id} />
       <div className="flex items-start justify-start w-[350px]">
         <div className="w-8 mr-2 h-8">
           <Image
