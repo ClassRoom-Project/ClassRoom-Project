@@ -7,6 +7,7 @@ import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservatio
 import { ReserveInfo } from '@/types/reserve';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { useEffect, useState } from 'react';
+import { FiCheckCircle } from 'react-icons/fi';
 
 const ReservationCompletePage = () => {
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
@@ -84,29 +85,33 @@ const ReservationCompletePage = () => {
 
   return (
     <div className="w-full h-100vh-header  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-600">
-      <h1 className="text-xl">예약 완료</h1>
-      <div className="w-full p-6 flex flex-col justify-between items-center">
-        {!isLoading && reservationDetails ? (
-          <>
-            <h1 className="text-xl text-center mb-20">예약이 정상적으로 처리되었습니다.</h1>
-            <div className="flex flex-col w-1/3 gap-6 mb-20">
-              {reserveInfoLabels.map(({ title, description }) => (
-                <div key={title} className="flex w-full justify-between gap-4">
-                  <p className="w-20 text-right">{title}</p>
-                  <p className="w-52 text-center">{description}</p>
-                </div>
-              ))}
+      <div className="w-1/2 min-w-[500px] bg-white">
+        <div className="w-full flex flex-col justify-between items-center p-12">
+          {!isLoading && reservationDetails ? (
+            <>
+              <h1 className="text-2xl font-bold  text-center mb-4">클래스 예약이 정상적으로 처리되었습니다.</h1>
+              <FiCheckCircle color="mediumseagreen" size={70} />
+              <div className="divider m-2"></div>
+              <div className="flex flex-col gap-4 mb-10">
+                {reserveInfoLabels.map(({ title, description }) => (
+                  <div key={title} className="flex w-full justify-between gap-4">
+                    <p className="w-20 text-right">{title}</p>
+                    <p className="w-52 text-center">{description}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="divider m-2"></div>
+              <NavigationButtons />
+            </>
+          ) : isInvalidRequest && !reservationRequest ? (
+            <div>예약 도중 오류 발생!!!</div>
+          ) : (
+            <div className="flex justify-center flex-col items-center gap-4">
+              <span className="loading loading-spinner loading-lg text-primary"></span>
+              <p>잠시만 기다려주세요..</p>
             </div>
-            <NavigationButtons />
-          </>
-        ) : isInvalidRequest && !reservationRequest ? (
-          <div>예약 도중 오류 발생!!!</div>
-        ) : (
-          <div className="flex justify-center flex-col items-center gap-4">
-            <span className="loading loading-spinner loading-lg text-primary"></span>
-            <p>잠시만 기다려주세요..</p>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );
