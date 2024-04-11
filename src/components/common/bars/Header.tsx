@@ -1,7 +1,7 @@
 'use client';
 
 import LoginState from '@/components/login/LoginState';
-import { useUserStore } from '@/store/userInfoStore';
+import { userInfoStore } from '@/store/userInfoStore';
 import { useUserRoleStore } from '@/store/userRoleStore';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,7 +11,7 @@ import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
 
 const Header = ({ children }: PropsWithChildren) => {
-  const { userInfo } = useUserStore();
+  const { userInfo } = userInfoStore();
 
   const { isTeacher } = useUserRoleStore();
 

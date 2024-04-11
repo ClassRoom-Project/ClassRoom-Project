@@ -49,11 +49,13 @@ export type ReserveClassType = {
   category: string;
   title: string;
   location: string;
-  price: number;
   image: string;
+  difficulty: string;
+  classType: string;
+  price: number;
   maxPeople: number;
+  totalTime: number;
   dates: DateList[];
-  reservedCount: number;
 };
 
 /* TODO: 예약 카운트 로직 구현 후 삭제 예정 */
@@ -63,9 +65,8 @@ export type DBReserveClassType = {
   category: string;
   title: string;
   location: string;
-  price: number;
   image: string;
+  price: number;
   max_people: number;
   dates: [{ date_id: string; day: string; times: [{ time_id: string; times: string }] }];
-  reserved_count: number;
 };
