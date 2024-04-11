@@ -7,7 +7,20 @@ import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservatio
 import { ReserveInfo } from '@/types/reserve';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { useEffect, useState } from 'react';
-import { FiCheckCircle } from 'react-icons/fi';
+import { FiCheckCircle, FiWatch } from 'react-icons/fi';
+import { LuClock } from 'react-icons/lu';
+import { LuClipboardEdit } from 'react-icons/lu';
+import { LuPresentation } from 'react-icons/lu';
+import { LuWatch } from 'react-icons/lu';
+
+import { PiCurrencyKrw } from 'react-icons/pi';
+import { GrLocation } from 'react-icons/gr';
+import { MdOutlineCategory } from 'react-icons/md';
+import { RiUserLocationLine } from 'react-icons/ri';
+import { HiOutlineCube } from 'react-icons/hi2';
+import { FiUserPlus } from 'react-icons/fi';
+import { FiCalendar } from 'react-icons/fi';
+import { LuCalendar } from 'react-icons/lu';
 
 const ReservationCompletePage = () => {
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
@@ -48,59 +61,74 @@ const ReservationCompletePage = () => {
     return;
   }
 
-  let reserveInfoLabels = [{ title: '', description: '' }];
+  type ReserveInfoLabels = {
+    icon: React.ReactNode;
+    title: string;
+    description: string;
+  }[];
+  let reserveInfoLabels: ReserveInfoLabels = [];
   if (reservationDetails) {
     const { class: classInfo, time: dateInfo, reserveQuantity, reservePrice } = reservationDetails;
     reserveInfoLabels = [
       {
+        icon: <LuClipboardEdit size={20} color="#8074FF" />,
         title: '클래스명',
         description: `${classInfo.title}`
       },
       {
+        icon: <FiCalendar size={20} color="#8074FF" />,
         title: '이용 일자',
         description: `${dateInfo.date.day}`
       },
       {
+        icon: <FiWatch size={20} color="#8074FF" />,
         title: '이용 시간',
         description: `${reservationDetails && convertTimeTo12HourClock(dateInfo.times)}`
       },
       {
+        icon: <LuClock size={20} color="#8074FF" />,
         title: '소요 시간',
         description: `${classInfo.totalTime}시간`
       },
       {
+        icon: <GrLocation size={20} color="#8074FF" />,
         title: '위치',
         description: `${classInfo.location}`
       },
       {
+        icon: <FiUserPlus size={20} color="#8074FF" />,
         title: '이용 인원',
         description: `${reserveQuantity}명`
       },
       {
-        title: '이용 금액',
+        icon: <PiCurrencyKrw size={20} color="#8074FF" />,
+        title: '결제하신 금액',
         description: `${reservePrice.toLocaleString()}원`
       }
     ];
   }
 
   return (
-    <div className="w-full h-100vh-header  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-600">
-      <div className="w-1/2 min-w-[500px] bg-white">
+    <div className="w-full h-100vh-header  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-700">
+      <div className="w-1/2 min-w-[600px] bg-white">
         <div className="w-full flex flex-col justify-between items-center p-12">
           {!isLoading && reservationDetails ? (
             <>
-              <h1 className="text-2xl font-bold  text-center mb-4">클래스 예약이 정상적으로 처리되었습니다.</h1>
-              <FiCheckCircle color="mediumseagreen" size={70} />
-              <div className="divider m-2"></div>
-              <div className="flex flex-col gap-4 mb-10">
-                {reserveInfoLabels.map(({ title, description }) => (
-                  <div key={title} className="flex w-full justify-between gap-4">
-                    <p className="w-20 text-right">{title}</p>
-                    <p className="w-52 text-center">{description}</p>
+              <FiCheckCircle color="mediumseagreen" className="mb-6" size={70} />
+              <h1 className="text-2xl font-bold  text-center">클래스 예약이 정상적으로 처리되었습니다.</h1>
+              <div className="divider my-6"></div>
+              <div className="flex flex-col gap-4 w-[350px] font-bold mx-auto">
+                {reserveInfoLabels.map(({ icon, title, description }) => (
+                  <div key={title} className="flex gap-4 ">
+                    <div className="flex flex-row gap-2 justify-center items-center">
+                      <p className=" text-right">{icon}</p>
+                      <p className="w-[100px] mr-8 ">{title}</p>
+                    </div>
+                    <p className="text-left w-full text-gray-600 font-normal">{description}</p>
                   </div>
                 ))}
               </div>
-              <div className="divider m-2"></div>
+              <div className="divider mt-8"></div>
               <NavigationButtons />
             </>
           ) : isInvalidRequest && !reservationRequest ? (
