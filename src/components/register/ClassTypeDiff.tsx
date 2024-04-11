@@ -3,31 +3,22 @@ import React from 'react'
 import useRegisterStore from '@/store/registerStore';
 
 const ClassTypeDiff = () => {
-    const { classType, difficulty, setClassType, setDifficulty } = useRegisterStore();
+    const { difficulty, setDifficulty } = useRegisterStore();
 
-    const handleClassTypeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        setClassType(event.target.value);
-    };
-    
     const handleDifficultyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         setDifficulty(event.target.value);
     };
     return (
         <div className="flex items-center space-x-4">
-            <div>
-                <div>
-                    {/* 클래스 타입 드롭다운 */}
-                    <select value={classType} onChange={handleClassTypeChange}>
-                        <option value="">클래스타입 선택</option>
-                        <option value="오프라인 클래스">오프라인 클래스</option>
-                        <option value="온라인 클래스">온라인 클래스</option>
-                    </select>
-                </div>
-            </div>
-            <div>
+            <div className="flex items-center space-x-4">
+                <p className='text-base flex-shrink-0 font-bold'>클래스 난이도</p>
                 {/* 난이도 드롭다운 */}
-                <select value={difficulty} onChange={handleDifficultyChange}>
-                <option value="">난이도 선택</option>
+                <select 
+                    value={difficulty} 
+                    onChange={handleDifficultyChange}
+                    className='border border-[#D5D5D5] rounded-md p-2 text-gray-700'
+                >
+                <option value="">난이도</option>
                 <option value="입문">입문</option>
                 <option value="초급">초급</option>
                 <option value="중급">중급</option>

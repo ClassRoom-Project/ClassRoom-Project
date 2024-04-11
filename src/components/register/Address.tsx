@@ -36,16 +36,16 @@ const Address = () => {
       <div className="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2 my-2">
         <p className='text-base flex-shrink-0 font-bold'>위치</p>
         <input
-          className="form-input px-3 py-2 border rounded flex-grow sm:flex-grow-0 sm:w-auto"
+          className="form-input px-3 py-2 border border-[#D5D5D5] rounded flex-grow sm:flex-grow-0 sm:w-auto"
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
           placeholder="주소를 입력해주세요"
         />
-        <button onClick={handleOpenPostCode} className="px-4 py-2 bg-[#4D80FF] text-white rounded hover:bg-blue-700 w-full sm:w-auto mt-2 sm:mt-0">주소 검색</button>
+        <button onClick={handleOpenPostCode} className="px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-blue-700 w-full sm:w-auto mt-2 sm:mt-0">주소 검색</button>
       </div>
       <input
-        className="form-input px-3 py-2 border rounded w-full"
+        className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-full"
         type="text"
         value={detailAddress}
         onChange={(e) => setDetailAddress(e.target.value)}

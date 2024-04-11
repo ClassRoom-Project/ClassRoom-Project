@@ -17,9 +17,9 @@ const Category = () => {
             <select 
               value={category} 
               onChange={handleCategoryChange}
-              className="border border-gray-300 rounded-md p-2 w-full text-gray-700"
+              className="border border-[#D5D5D5] rounded-md p-2 w-full text-gray-700"
               >
-              <option value="">카테고리 선택</option>
+              <option value="">카테고리</option>
               <option value="요리">요리</option>
               <option value="공예&공방">공예&공방</option>
               <option value="운동">운동</option>

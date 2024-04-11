@@ -14,7 +14,7 @@ const TotalTime = () => {
             <p className='text-base flex-shrink-0 font-bold'>소요시간</p>
             <div className="w-full">
                 <input
-                    className="form-input px-3 py-2 border rounded w-full md:w-auto"
+                    className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-full md:w-auto"
                     type="number"
                     value={totalTime}
                     onChange={handleTotalTimeChange}
