@@ -2,7 +2,7 @@
 
 import { getUserInfo } from '@/app/api/mypage/user-api';
 import useLoginUserId from '@/hooks/useLogin/useLoginUserId';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { UserInfoType } from '@/types/user';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -28,7 +28,7 @@ const ReserveUserInfo = () => {
   }, [loginUserId]);
 
   return (
-    <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md">
+    <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md shadow">
       <p className="mb-4 text-lg font-bold ">연락처 입력</p>
       <div className="flex flex-col  mb-4 h-[52px]">
         <p className="font-bold mb-1 ">계정 ID (알림 메일이 발송됩니다.)</p>

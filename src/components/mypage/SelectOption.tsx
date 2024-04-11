@@ -11,15 +11,17 @@ interface SelectOptionProps {
 
 const SelectOption = ({ id, label, value, onChange, disabled, options }: SelectOptionProps) => {
   return (
-    <form className="m-4 p-4 flex gap-4 justify-center flex-col">
-      <label htmlFor={id}>{label}</label>
+    <form className="p-4 flex gap-4 justify-center flex-col">
+      <label htmlFor={id} className="text-text-dark-gray font-bold">
+        {label}
+      </label>
       <select
         name="job"
         id={id}
         value={value}
         onChange={onChange}
         disabled={disabled}
-        className="select select-bordered w-[200px]"
+        className="select select-bordered w-[250px]  border-point-purple shadow-md"
       >
         {options.map((option) => {
           return (

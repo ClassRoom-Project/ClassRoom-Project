@@ -1,14 +1,14 @@
 'use client';
 
 import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { UpdateUserInfoType, UserInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
-import { userInfoStore } from '@/store/UserInfoStore';
+import { userInfoStore } from '@/store/mypage/userInfoStore';
 
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
@@ -109,55 +109,60 @@ const EditProfile = () => {
   }
 
   return (
-    <div className="flex">
-      <EditProfileImage
-        newProfileImage={newProfileImage}
-        setNewProfileImage={setNewProfileImage}
-        isEditing={isEditing}
-      />
-      <div className="flex flex-col">
-        <div className="flex flex-col">
-          <div className="m-4 p-4 gap-4">
-            <p>닉네임</p>
-            {isEditing ? (
-              <input
-                type="text"
-                placeholder="닉네임을 입력하세요."
-                className="input input-bordered w-full max-w-xs"
-                value={newNickname}
-                onChange={handleOnChangeNickname}
-              />
-            ) : (
-              <p>{newNickname}</p>
-            )}
-            {isAvailableNickname ? (
-              ''
-            ) : (
-              <p className="font-thin p-2">이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.</p>
-            )}
-          </div>
-          <div className="m-4 p-4">
-            <p>이메일</p>
-            <p>{userInfo?.email}</p>
-          </div>
+    <div className="flex flex-col justify-center items-center bg-light-purple w-[960px] p-4">
+      <p className="flex items-start text-xl text-dark-purple-color font-bold">프로필 수정하기</p>
+      <div className="flex gap-10">
+        <div className="flex flex-col justify-center items-center">
+          <EditProfileImage
+            newProfileImage={newProfileImage}
+            setNewProfileImage={setNewProfileImage}
+            isEditing={isEditing}
+          />
         </div>
-        <div className="m-4 p-4 flex gap-4">
-          {isEditing ? (
-            <div>
-              <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
-                수정 완료
-              </button>
-              <ToastContainer />
+        <div>
+          <div className="flex flex-col">
+            <div className="m-4 p-4 gap-4">
+              <p className="text-text-dark-gray font-bold">닉네임</p>
+              {isEditing ? (
+                <input
+                  type="text"
+                  placeholder="닉네임을 입력하세요."
+                  className="input input-bordered w-[250px] max-w-xs border-point-purple shadow-md"
+                  value={newNickname}
+                  onChange={handleOnChangeNickname}
+                />
+              ) : (
+                <p>{newNickname}</p>
+              )}
+              {isAvailableNickname ? (
+                ''
+              ) : (
+                <p className="font-thin p-2">이미 사용중인 닉네임입니다. 다른 닉네임을 입력해주세요.</p>
+              )}
             </div>
-          ) : (
-            <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
-              수정하기
-            </button>
-          )}
-          <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-point-color text-white">
-            취소하기
-          </button>
+            <div className="m-4 p-4">
+              <p className="text-text-dark-gray font-bold">이메일</p>
+              <p>{userInfo?.email}</p>
+            </div>
+          </div>
         </div>
+      </div>{' '}
+      <div className="m-4 p-4 flex gap-4">
+        {isEditing ? (
+          <div>
+            <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
+              수정 완료
+            </button>
+            <ToastContainer />
+          </div>
+        ) : (
+          <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
+            수정하기
+          </button>
+        )}
+        <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-dark-purple-color text-white">
+          취소하기
+        </button>
       </div>
     </div>
   );

@@ -1,10 +1,9 @@
 'use client';
 
 import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-import { Suspense, useEffect, useRef, useState } from 'react';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useAsync, useStartTyping } from 'react-use';
+import { useAsync } from 'react-use';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 

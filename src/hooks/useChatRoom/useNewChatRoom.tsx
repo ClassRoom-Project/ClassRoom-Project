@@ -5,7 +5,7 @@ import {
   getChatRooms,
   getMakeClassUser
 } from '@/app/api/chatRooms/getChatRooms';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { SendNewMessageType, SendNewPhotoMessageType } from '@/types/chat/chatTypes';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 

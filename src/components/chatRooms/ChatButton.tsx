@@ -1,4 +1,4 @@
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
 

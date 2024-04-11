@@ -2,7 +2,7 @@ import { DragEvent, useState } from 'react';
 import { MdPhotoCamera } from 'react-icons/md';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useCreateNewPhotoMessage } from '@/hooks/useChatRoom/useNewChatRoom';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 export default function ChatImageModal({ chatId }: { chatId: string }) {
   console.log('chatId', chatId);
@@ -15,7 +15,7 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      if (photos.length > 5) {
+      if (photos.length > 4) {
         setCountError('사진은 최대 5개까지 업로드 가능합니다.');
         return;
       }
@@ -26,6 +26,7 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
     }
   };
 
+  //드래그앤 드롭 참고 블로그 https://medium.com/@iamkjw/react-drag-drop%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%88%9C%EC%84%9C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0-415e348e2855
   //드래그 시작 이벤트
   //드래그 시작 시 드래그한 이미지의 인덱스를 dataTransfer객체에 저장
   const handleDragStart = (e: DragEvent<HTMLDivElement>, index: number) => {
@@ -61,6 +62,7 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
       return;
     }
     createNewPhotoMessageMutate({ photos, chatId, loginUserId });
+    setPhotos([]);
   };
 
   return (

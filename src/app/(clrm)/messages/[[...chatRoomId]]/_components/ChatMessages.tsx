@@ -3,7 +3,7 @@ import { BsSend } from 'react-icons/bs';
 import { MdPhotoCamera } from 'react-icons/md';
 import MessageBoxs from './MessageBoxs';
 import { useCreateNewMessage } from '@/hooks/useChatRoom/useNewChatRoom';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ChatMessagesType } from '@/types/chat/chatTypes';
 import { useStartTyping } from 'react-use';
 import { DragEvent, useState } from 'react';

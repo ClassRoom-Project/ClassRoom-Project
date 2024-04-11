@@ -2,31 +2,28 @@
 
 import { updateUserRole } from '@/app/api/mypage/user-api';
 import { useTeacherInfo } from '@/hooks/useLogin/useTeacherInfo';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
-import { useUserRoleStore } from '@/store/userRoleStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import { useRouter } from 'next/navigation';
 import { TbArrowsExchange } from 'react-icons/tb';
 
 const ConvertBtn = () => {
   const { loginUserId } = useLoginStore();
-  // const isTeacherBoolean = useUserRole();
-
   const { isTeacher, setIsTeacher } = useUserRoleStore();
-  // 선생님 정보가 등록되었으면, 선생님 전환 가능/ 선생님 정보가 등록되지 않았으면, 전환 X
-  // console.log('isTeacher', isTeacher);
-
   const { teacherInfo, isPending } = useTeacherInfo();
 
   const job = teacherInfo?.job;
   const field = teacherInfo?.field;
   const bank = teacherInfo?.bank;
   const account = teacherInfo?.account;
+  const name = teacherInfo?.teacher_name;
+  const number = teacherInfo?.teacher_number;
 
   const router = useRouter();
 
   // 전환 버튼
   const handleOnClickChangedRoleBtn = async () => {
-    if (job === null && field === null && bank === null && account === null) {
+    if (job === null && field === null && bank === null && account === null && name === null && number === null) {
       const confirm = window.confirm(
         '입력된 선생님 정보가 없습니다. 마이페이지에서 선생님 정보를 입력해주세요. 마이페이지로 이동 하시겠습니까?'
       );
@@ -49,8 +46,24 @@ const ConvertBtn = () => {
     }
   };
 
+  // 로그인 전, 값을 받아오기 전에도 버튼은 그대로 보이게 하되, 로그인 페이지로 이동 유도
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    const handler = () => {
+      const confirm = window.confirm('로그인 상태에서 이용 가능합니다. 로그인 페이지로 이동 하시겠습니까?');
+      if (confirm) {
+        router.push('/hello');
+      }
+    };
+    return (
+      <div className="p-4 text-white">
+        <button onClick={handler}>
+          <div className="flex flex-col items-center">
+            <TbArrowsExchange size={30} />
+            <p className="text-xs">선생님으로 전환하기</p>
+          </div>
+        </button>
+      </div>
+    );
   }
 
   if (!teacherInfo) {

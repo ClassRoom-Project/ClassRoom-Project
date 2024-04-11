@@ -1,7 +1,7 @@
 'use client';
 
 import { useCreateNewRoom } from '@/hooks/useChatRoom/useNewChatRoom';
-import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
