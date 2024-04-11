@@ -1,7 +1,8 @@
 'use client';
 
-import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
 import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
+import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -9,7 +10,6 @@ import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetai
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 import { quantityWarning } from '../common/Toastify';
 import { ToastContainer } from 'react-toastify';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();

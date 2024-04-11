@@ -1,8 +1,8 @@
 'use client';
 
 import LoginState from '@/components/login/LoginState';
-import { userInfoStore } from '@/store/userInfoStore';
-import { useUserRoleStore } from '@/store/userRoleStore';
+import { userInfoStore } from '@/store/mypage/userInfoStore';
+import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';

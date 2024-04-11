@@ -8,7 +8,7 @@ export default function useSessionStorageUserEmail() {
     if (userEmailFromStorage) {
       setUserEmail(userEmailFromStorage);
     }
-  }, []);
+  }, [userEmail]);
 
   return userEmail;
 }
