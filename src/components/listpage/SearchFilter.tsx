@@ -2,7 +2,7 @@
 import { FiAlignJustify } from 'react-icons/fi';
 import React, { useState } from 'react';
 
-const Categories = () => {
+const SearchFilter = () => {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
 
   const handleDropdown = () => {
@@ -13,7 +13,7 @@ const Categories = () => {
       <div className="dropdown p-5 dropdown-bottom w-12 h-12">
         <div tabIndex={0} onClick={handleDropdown} role="button" className="btn ">
           <FiAlignJustify size={30} color="#5373FF">
-            카테고리
+            검색필터
           </FiAlignJustify>
         </div>
 
@@ -22,7 +22,23 @@ const Categories = () => {
             tabIndex={0}
             className="dropdown-content z-[1] menu p-2 shadow bg-white border-gray-300 border-solid border-[1px] w-52"
           >
-            <div>class_type</div>
+            <div>
+              <button
+                className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                  selectedCategory === category ? 'bg-purple-600' : 'bg-white'
+                }`}
+              >
+                온라인
+              </button>
+              <button
+                className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                  selectedCategory === category ? 'bg-purple-600' : 'bg-white'
+                }`}
+              >
+                {' '}
+                오프라인
+              </button>
+            </div>
             <div>location</div>
             <div>time</div>
             <div>difficulty</div>
@@ -38,4 +54,4 @@ const Categories = () => {
   );
 };
 
-export default Categories;
+export default SearchFilter;
