@@ -17,8 +17,8 @@ const MyClassStudentItem = ({ student }: { student: MyClassStudentInfoType }) =>
       />
       <p>닉네임 : {student.nickname}</p>
       <p>이메일 : {student.email}</p>
-      <p>예약 인원 : {student.reserve_quantity}</p>
-      <p>예약 금액 : {formattedPrice}</p>
+      <p>예약 인원 : {student.reserve_quantity}명</p>
+      <p>예약 금액 : {formattedPrice}원</p>
       <button className="btn">1:1 채팅</button>
     </li>
   );

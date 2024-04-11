@@ -33,6 +33,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
 
   // 시간 초 빼기
   const formattedTime = classItem.times.substring(0, 5);
+
   return (
     <li className="flex gap-4 border-y border-y-border-color w-[1080px]">
       <div className="w-[300px] h-[200px]">
@@ -62,11 +63,11 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
             </div>
             <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
               <GoPeople color="#6C5FF7" size="20" />
-              <span>신청한 인원 : {classItem.reserve_quantity}</span>
+              <span>신청한 인원 : {classItem.reserve_quantity}명</span>
             </div>
             <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
               <BiMoneyWithdraw color="#6C5FF7" size="20" />
-              <span>신청한 가격 : {formattedPrice}</span>
+              <span>신청한 가격 : {formattedPrice}원</span>
             </div>
           </div>
           <div className="flex gap-4 py-4">

@@ -14,6 +14,7 @@ import { GrLocation } from 'react-icons/gr';
 const MyClass = () => {
   const { loginUserId } = useLoginStore();
   const { myClassSingleInfo, setMyClassSingleInfo } = useMyClassInfoStore();
+
   const router = useRouter();
 
   const { data: myClassInfo, isPending } = useQuery({
@@ -36,6 +37,7 @@ const MyClass = () => {
 
   // 클래스 예약한 수강생 보러가기
   const handleOnClickGoToReservedStudentList = (timeId: string, classInfo: MyRegisteredClassType | null) => {
+    // console.log('classInfo 여기선 값을 받아오고 있음', classInfo);
     if (classInfo !== null) {
       setMyClassSingleInfo(classInfo);
     }
@@ -85,7 +87,7 @@ const MyClass = () => {
             </div>
             <div className="flex gap-4 m-4">
               <button
-                onClick={() => handleOnClickGoToReservedStudentList(classInfo.time_id, myClassSingleInfo)}
+                onClick={() => handleOnClickGoToReservedStudentList(classInfo.time_id, classInfo)}
                 className="btn w-36"
               >
                 수강생 보기
