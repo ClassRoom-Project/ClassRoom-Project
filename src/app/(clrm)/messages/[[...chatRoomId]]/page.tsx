@@ -11,14 +11,13 @@ import ChatMessages from './_components/ChatMessages';
 export default function MessagesPage() {
   const { loginUserId } = useLoginStore();
   const { chatroomsInfo } = useReadChatRooms(loginUserId!);
-
-  // const router = useRouter();
-
-  // const chatRoomId = router.query.chatId ?? '';
   const searchParams = useSearchParams();
   const currentChatRoomId = searchParams.get('chatId');
   const otherId = searchParams.get('otherId');
   const title = searchParams.get('title');
+  const toClassId = searchParams.get('toClassId');
+  const fromUserId = searchParams.get('fromUserId');
+
   return (
     <div className="w-full">
       <div>
@@ -38,10 +37,7 @@ export default function MessagesPage() {
               <div className="flex flex-col flex-1 w-full">
                 <Virtuoso
                   data={chatroomsInfo}
-                  itemContent={(
-                    _,
-                    { chatId, toClassId, fromUserId, teacherUserId, title, makeClassUserId, loginUserId }
-                  ) => (
+                  itemContent={(_, { chatId, toClassId, fromUserId, teacherUserId, title, makeClassUserId }) => (
                     <ChatPreview
                       key={chatId}
                       chatId={chatId}
@@ -59,7 +55,7 @@ export default function MessagesPage() {
             )}
           </section>
           <section
-            className="w-3/5 border-l border-gray-500 pl-2"
+            className="w-3/5 border-l border-gray-500"
             style={{
               minHeight: 'calc(100vh - 60px)',
               maxHeight: 'calc(100vh - 60px)'
@@ -70,7 +66,13 @@ export default function MessagesPage() {
                 <p>대화를선택해주세요</p>
               </div>
             ) : (
-              <ChatMessages chatId={currentChatRoomId} loginUserId={loginUserId!} otherId={otherId!} title={title!} />
+              <ChatMessages
+                chatId={currentChatRoomId}
+                otherId={otherId!}
+                title={title!}
+                toClassId={toClassId!}
+                fromUserId={fromUserId!}
+              />
             )}
           </section>
         </div>

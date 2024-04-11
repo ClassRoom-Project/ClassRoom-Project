@@ -1,5 +1,6 @@
-import { createChatRoom, getChatRooms, getMakeClassUser } from '@/app/api/chatRooms/getChatRooms';
+import { createChatRoom, createNewMessages, getChatRooms, getMakeClassUser } from '@/app/api/chatRooms/getChatRooms';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
+import { SendNewMessageType } from '@/types/chat/chatTypes';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 //채팅방 목록 읽어오기
@@ -36,11 +37,54 @@ export function useCreateNewRoom() {
   return { createNewRoomMutate };
 }
 
-export function useReadMakeClassUserInfo(classUserId: string) {
+// 상대방 프로필, 닉네임 가져오기
+export function useReadMakeClassUserInfo(otherUserId: string) {
   const { data: MakeClassUserInfo } = useQuery({
-    queryKey: ['MakeClassUser', classUserId],
-    queryFn: () => getMakeClassUser(classUserId as string),
-    enabled: !!classUserId
+    queryKey: ['MakeClassUser', otherUserId],
+    queryFn: () => getMakeClassUser(otherUserId as string),
+    enabled: !!otherUserId
   });
   return { MakeClassUserInfo };
+}
+
+//채팅방 메시지 보내기
+export function useCreateNewMessage() {
+  const queryClient = useQueryClient();
+
+  const { mutate: createNewMessageMutate } = useMutation({
+    mutationFn: async ({ chatId, message, loginUserId }: SendNewMessageType) => {
+      console.log('chatId', chatId);
+
+      console.log('message', message);
+      console.log('create_by', loginUserId);
+
+      await createNewMessages({ chatId, loginUserId, message });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['chatMessage'] });
+    }
+  });
+
+  return { createNewMessageMutate };
+}
+
+//채팅방 이미지 보내기
+export function useCreateNewPhotoMessage() {
+  const queryClient = useQueryClient();
+
+  const { mutate: createNewPhotoMessageMutate } = useMutation({
+    mutationFn: async ({ chatId, message, loginUserId }: SendNewMessageType) => {
+      console.log('chatId', chatId);
+
+      console.log('message', message);
+      console.log('create_by', loginUserId);
+
+      await createNewMessages({ chatId, loginUserId, message });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['chatMessage'] });
+    }
+  });
+
+  return { createNewPhotoMessageMutate };
 }

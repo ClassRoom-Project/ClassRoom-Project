@@ -1,4 +1,11 @@
-import { ChatRoom, ChatRoomFromDB, CreateNewChatRoomType, MakeClassUserInfoType } from '@/types/chat/chatTypes';
+import {
+  ChatRoom,
+  ChatRoomFromDB,
+  CreateNewChatRoomType,
+  MakeClassUserInfoType,
+  SendNewMessageType,
+  SendNewPhotoMessageType
+} from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
 //채팅방 생성
@@ -15,7 +22,7 @@ export const createChatRoom = async ({
     .eq('from_user_id', fromUserId);
 
   if (searchError) {
-    console.error('검색 중 에러 발생:', searchError);
+    console.error(searchError);
     return;
   }
 
@@ -42,7 +49,7 @@ export const createChatRoom = async ({
 };
 
 //방 정보 가져오기
-export const getChatRooms = async (loginUserId: string): Promise<any> => {
+export const getChatRooms = async (loginUserId: string): Promise<ChatRoom[]> => {
   const { data, error } = await supabase
     .from('chat_rooms')
     .select(
@@ -54,12 +61,13 @@ export const getChatRooms = async (loginUserId: string): Promise<any> => {
     .or(`from_user_id.eq.${loginUserId},teacher_user_id.eq.${loginUserId}`);
 
   if (error) {
-    console.error('못가져와', error);
     throw error;
   }
 
   // console.log(data);
-  const transformedData = data!.map((chatRoom: any) => {
+  const transformedData = data!.map((test) => {
+    //타입추론 우회하기
+    const chatRoom = test as any as ChatRoomFromDB;
     const chatRoomTyped = {
       chatId: chatRoom.chat_id,
       createdAt: chatRoom.created_at,
@@ -91,4 +99,54 @@ export const getMakeClassUser = async (classUserId: string): Promise<MakeClassUs
 
   // RPC 호출은 기본적으로 단일 객체를 반환
   return makeClassUserInfo as MakeClassUserInfoType;
+};
+
+//채팅 텍스트 넣기
+export const createNewMessages = async ({
+  chatId,
+  message,
+  loginUserId
+}: SendNewMessageType): Promise<SendNewMessageType | undefined> => {
+  const { data: newChat, error } = await supabase
+
+    .from('chat_messages')
+    .insert([
+      {
+        chat_id: chatId,
+        messages: message,
+        create_by: loginUserId
+      }
+    ])
+    .single();
+  if (error) {
+    console.error('삽입 중 에러 발생:', error);
+    throw error;
+  }
+  console.log('삽입 성공:', newChat);
+  return newChat;
+};
+
+//채팅 이미지 넣기
+export const createNewMessagesPhoto = async ({
+  chatId,
+  photo,
+  loginUserId
+}: SendNewPhotoMessageType): Promise<SendNewPhotoMessageType | undefined> => {
+  const { data: newChat, error } = await supabase
+
+    .from('chat_messages')
+    .insert([
+      {
+        chat_id: chatId,
+        messages: photo,
+        create_by: loginUserId
+      }
+    ])
+    .single();
+  if (error) {
+    console.error('삽입 중 에러 발생:', error);
+    throw error;
+  }
+  console.log('삽입 성공:', newChat);
+  return newChat;
 };

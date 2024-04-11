@@ -15,6 +15,7 @@ const config: Config = {
           'radial-gradient(circle, rgba(186,180,253,1) 11%, rgba(239,239,255,1) 52%, rgba(246,246,255,1) 71%)'
       },
       colors: {
+        'main-color': '#6C5FF7',
         'point-color': '#5373FF',
         'text-color': '#2443CA',
         'pale-color': '#A4BEFF',

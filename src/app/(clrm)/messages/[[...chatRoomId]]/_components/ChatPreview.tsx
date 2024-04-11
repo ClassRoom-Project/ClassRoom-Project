@@ -7,18 +7,20 @@ import { useEffect, useState } from 'react';
 
 export default function ChatPreview({
   chatId,
-  // createdAt,
-  // toClassId,
+  toClassId,
   title,
+  fromUserId,
   // makeClassUserId,
   otherId
 }: any) {
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
-  console.log(MakeClassUserInfo?.profile_image);
-  console.log('아덜', otherId);
 
   return (
-    <Link href={`/messages?chatId=${chatId}&otherId=${otherId}&title=${title}`} prefetch={false} shallow>
+    <Link
+      href={`/messages?fromUserId=${fromUserId}&chatId=${chatId}&otherId=${otherId}&title=${title}&toClassId=${toClassId}`}
+      prefetch={false}
+      shallow
+    >
       <div className="flex py-4 hover:bg-[#E3E1FC] mt-2 mb-2 px-2">
         <div className="mx-3">
           <img

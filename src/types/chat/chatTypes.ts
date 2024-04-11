@@ -58,7 +58,27 @@ export interface ChatRoomFromDB {
   };
 }
 
+export interface ChatMessagesType {
+  chatId: string;
+  otherId: string;
+  title: string;
+  toClassId: string;
+  fromUserId: string;
+}
+
 export interface MakeClassUserInfoType {
   nickname: string;
   profile_image: string;
+}
+
+export interface SendNewMessageType {
+  chatId: string;
+  message: string;
+  loginUserId: string;
+}
+
+export interface SendNewPhotoMessageType {
+  chatId: string;
+  photo: string;
+  loginUserId: string;
 }
