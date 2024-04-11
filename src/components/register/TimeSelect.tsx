@@ -64,7 +64,7 @@ const TimeSelect: React.FC = () => {
         <div className='mt-4'>
             <h1 className='font-bold text-[#3F3F3F] my-4'>클래스 날짜&시간</h1>
             <div className="relative">
-                <button onClick={toggleDatePicker} className="border border-[#6C5FF7] text-black text-sm p-1 rounded-full hover:bg-blue-700">일정추가</button>
+                <button onClick={toggleDatePicker} className="border border-[#6C5FF7] text-black text-sm p-1 rounded-full hover:bg-[#E3E1FC]">일정추가</button>
                 {isDayPickerOpen && (
                     <div ref={dayPickerRef} className="absolute z-10 bg-white border-2 rounded-lg p-4">
                         <DayPicker
