@@ -5,6 +5,7 @@ export interface MyCommentType {
   create_at: string;
   title: string;
   image: string[];
+  star: number;
 }
 
 export interface NewCommentType {

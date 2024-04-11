@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import useRegisterStore from '@/store/registerStore';
 import { AddressData } from '@/types/register';
+import useRegisterStore from '@/store/RegisterStore';
 
 const Address = () => {
   const { address, detailAddress, setAddress, setDetailAddress } = useRegisterStore();
@@ -46,7 +46,7 @@ const Address = () => {
           onChange={(e) => setAddress(e.target.value)}
           placeholder="주소를 입력해주세요"
         />
-        <button 
+        <button
           onClick={handleOpenPostCode}
           className="px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-[#4D43B8] w-full sm:w-auto mt-2 sm:mt-0"
         >
