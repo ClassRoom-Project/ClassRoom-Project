@@ -20,7 +20,14 @@ const config: Config = {
         'pale-color': '#A4BEFF',
         'border-color': '#EFEFEF',
         'point-purple': '#6C5FF7',
-        'light-purple': '#F6F6FF'
+        'light-purple': '#F6F6FF',
+        'disable-color': '#E3E1FC',
+        //button
+        'button-default-color': '#6C5FF7',
+        'button-hover-color': '#4D43B8',
+        'button-press-color': '#988FFE',
+        'button-focus-color': '#BAB4FD',
+        'button-disable-color': '#E3E1FC'
       }
     }
   },

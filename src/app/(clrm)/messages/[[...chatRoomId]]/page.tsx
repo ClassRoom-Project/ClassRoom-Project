@@ -9,14 +9,16 @@ import { Virtuoso } from 'react-virtuoso';
 import ChatMessages from './_components/ChatMessages';
 
 export default function MessagesPage() {
-  const { chatroomsInfo } = useReadChatRooms();
   const { loginUserId } = useLoginStore();
+  const { chatroomsInfo } = useReadChatRooms(loginUserId!);
+
   // const router = useRouter();
 
   // const chatRoomId = router.query.chatId ?? '';
   const searchParams = useSearchParams();
   const currentChatRoomId = searchParams.get('chatId');
-
+  const otherId = searchParams.get('otherId');
+  const title = searchParams.get('title');
   return (
     <div className="w-full">
       <div>
@@ -56,22 +58,20 @@ export default function MessagesPage() {
               </div>
             )}
           </section>
-          <section className="w-3/5 border-l border-gray-500">
-            <div className="flex justify-center items-center flex-1 ">
-              {!currentChatRoomId ? (
-                <a
-                  className=" text-gray-500"
-                  style={{
-                    minHeight: 'calc(100vh - 60px)',
-                    maxHeight: 'calc(100vh - 60px)'
-                  }}
-                >
-                  대화를선택해주세요
-                </a>
-              ) : (
-                <ChatMessages />
-              )}
-            </div>
+          <section
+            className="w-3/5 border-l border-gray-500 pl-2"
+            style={{
+              minHeight: 'calc(100vh - 60px)',
+              maxHeight: 'calc(100vh - 60px)'
+            }}
+          >
+            {!currentChatRoomId ? (
+              <div className=" text-disable-color h-full flex justify-center items-center">
+                <p>대화를선택해주세요</p>
+              </div>
+            ) : (
+              <ChatMessages chatId={currentChatRoomId} loginUserId={loginUserId!} otherId={otherId!} title={title!} />
+            )}
           </section>
         </div>
       </div>

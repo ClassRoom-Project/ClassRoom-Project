@@ -72,17 +72,13 @@ export const getChatRooms = async (loginUserId: string): Promise<any> => {
       profileImg: chatRoom.class.users.profile_image
     };
 
-    // console.log('chatRoom', chatRoom);
-    // console.log(chatRoom);
     return chatRoomTyped;
   });
-
-  // console.log('Transformed data:', transformedData);
 
   return transformedData;
 };
 
-//채팅방 들어갈 정보
+//채팅방 들어갈 정보 (nickname, profileImage)
 export const getMakeClassUser = async (classUserId: string): Promise<MakeClassUserInfoType | null> => {
   const { data: makeClassUserInfo, error } = await supabase
     .rpc('get_make_class_user_info', { class_user_id: classUserId }) // 함수명과 매개변수 명시

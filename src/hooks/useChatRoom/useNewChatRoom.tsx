@@ -3,8 +3,7 @@ import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 //채팅방 목록 읽어오기
-export function useReadChatRooms() {
-  const { loginUserId } = useLoginStore();
+export function useReadChatRooms(loginUserId: string) {
   const { data: chatroomsInfo } = useQuery({
     queryKey: ['chatRooms', loginUserId],
     queryFn: () => getChatRooms(loginUserId as string),
