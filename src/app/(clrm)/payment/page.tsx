@@ -22,9 +22,8 @@ export default function PaymentPageasync() {
   const totalPerson = searchParams.get('totalPerson');
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
-
-  console.log(price, 'sdffdssdffsd');
-  console.log(customerKey2, '유저키 !!');
+  const orderId = searchParams.get('orderId');
+  console.log(orderId, 'orderId');
 
   // const reservationId = typeof window !== 'undefined' ? window.localStorage.getItem('reservationId') : null;
 
@@ -36,8 +35,6 @@ export default function PaymentPageasync() {
     if (typeof window !== 'undefined') {
       const reservationId = window.localStorage.getItem('reservationId');
       setReserveId(reservationId);
-
-      window.localStorage.setItem('reservationInfo', JSON.stringify(reserveInfo));
     }
   }, []);
   //내아이디 : d162d609-b1dc-41c4-b8c5-7998cb0b58ca
@@ -46,9 +43,9 @@ export default function PaymentPageasync() {
   // 15ec9598-722e-429b-b295-c433a04b94fb
 
   // console.log('파람스', customerKey, price, userEmail, totalPerson);
-  console.log('유저아이디', customerKey);
+  // console.log('유저아이디', customerKey);
   // console.log('금액', price);
-  console.log('금액', loginUserId);
+  // console.log('금액', loginUserId);
 
   useAsync(async () => {
     //초기화
@@ -66,8 +63,8 @@ export default function PaymentPageasync() {
       { value: price },
       { variantKey: 'DEFAULT' }
     );
-    console.log('안돌아', paymentMethodsWidget);
-    console.log('커스터머키', customerKey);
+    // console.log('안돌아', paymentMethodsWidget);
+    // console.log('커스터머키', customerKey);
 
     //이용약관 렌더링
     paymentWidget.renderAgreement('#agreement');
@@ -104,11 +101,11 @@ export default function PaymentPageasync() {
             const paymentWidget = paymentWidgetRef.current;
             try {
               await paymentWidget?.requestPayment({
-                orderId: customerKey as string,
+                orderId: orderId as string,
                 orderName: `${title}__${goToClassDate}${useClassTime}_${totalPerson}명`,
                 customerEmail: userEmail as string,
                 //여기에 예약확인 페이지로 넘기기
-                successUrl: `${window.location.origin}/reserve/success`,
+                successUrl: `${window.location.origin}/reserve/checkPay`,
                 //fail 시 보여줄 페이지 만들기
                 failUrl: `${window.location.origin}/fail?orderId=${customerKey}`
               });

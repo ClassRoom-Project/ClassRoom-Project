@@ -21,11 +21,18 @@ import { HiOutlineCube } from 'react-icons/hi2';
 import { FiUserPlus } from 'react-icons/fi';
 import { FiCalendar } from 'react-icons/fi';
 import { LuCalendar } from 'react-icons/lu';
+import { useSearchParams } from 'next/navigation';
 
-const ReservationCompletePage = () => {
+const ReservationCompletePage = ({ params }: { params: { id: string } }) => {
+  console.log(params);
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
   const [reserveId, setReserveId] = useState('');
   const [isInvalidRequest, setIsInvalidRequest] = useState(false);
+  const searchParams = useSearchParams();
+  const orderId = searchParams.get('orderId');
+  const paymentKey = searchParams.get('paymentKey');
+  console.log('🚀 ~ ReservationCompletePage ~ paymentKey:', paymentKey);
+  console.log(orderId);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -54,8 +61,6 @@ const ReservationCompletePage = () => {
 
   // 응답 받은 예약 id로 예약 정보 불러오기
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reserveId);
-
-  console.log(isInvalidRequest, reservationRequest);
 
   if (isError) {
     console.log(isError);

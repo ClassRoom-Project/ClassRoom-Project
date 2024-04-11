@@ -44,30 +44,33 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
     // TODO: 미주님과 의논 필요
     // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
-    const reservationId = await insertNewReservation(reserveInfo);
+    // const reservationId = await insertNewReservation(reserveInfo);
 
-    if (!reservationId) {
-      alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
-      return;
-    }
+    // if (!reservationId) {
+    //   alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
+    //   return;
+    // }
 
-    window.localStorage.setItem('reservationId', reservationId);
-    const reservationDetails = await fetchReservationDetails(reservationId);
+    const randomOrderId = crypto.randomUUID();
 
-    if (!reservationDetails || !('class' in reservationDetails)) {
-      // 예외 처리 로직
-      console.error('faild to fetch reservationDtails in ReserveButton', Error);
-      return;
-    }
+    window.localStorage.setItem('orderId', randomOrderId);
+    window.localStorage.setItem('reservationInfo', JSON.stringify(reserveInfo));
+    // const reservationDetails = await fetchReservationDetails(reservationId);
 
-    const { class: classDetails, reserveQuantity, reservePrice } = reservationDetails;
-    const userEmail = sessionStorage.getItem('userEmail');
+    // if (!reservationDetails || !('class' in reservationDetails)) {
+    //   // 예외 처리 로직
+    //   console.error('faild to fetch reservationDtails in ReserveButton', Error);
+    //   return;
+    // }
 
-    // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
-    await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
+    // const { class: classDetails, reserveQuantity, reservePrice } = reservationDetails;
+    // const userEmail = sessionStorage.getItem('userEmail');
+
+    // // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
+    // await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
 
     router.replace(
-      `/payment?customerKey=${reserveInfo.userId}&price=${reserveInfo.reservePrice}&classId=${reserveInfo.classId}`
+      `/payment?orderId=${randomOrderId}&price=${reserveInfo.reservePrice}&classId=${reserveInfo.classId}`
     );
   };
 
