@@ -62,7 +62,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   ];
 
   return (
-    <div className="p-6 bg-white h-[500px] mb-4 rounded-md   ">
+    <div className="p-6 bg-white h-[500px] mb-4 rounded-md shadow">
       <h1 className="font-bold text-lg mb-1">선택하신 클래스</h1>
       <div className="w-full relative h-[210px] mb-2 ">
         <Image
@@ -70,12 +70,12 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
           fill={true}
           src={classInfo.image}
           alt={classInfo.title}
-          unoptimized={true} // 추후 수정 필요
+          style={{ objectFit: 'cover' }}
         />
       </div>
       <div className="px-2 flex-col flex gap-1">
         <h1 className="font-bold text-xl mb-2">{classInfo.title}</h1>
-        <div className="flex flex-col gap-1 text-sm">
+        <div className="flex flex-col gap-1.5 text-sm">
           {classInfoLabels.map(({ title, description }) => {
             return (
               <div key={description} className="flex items-center gap-2 text-gray-500">

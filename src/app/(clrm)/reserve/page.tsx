@@ -15,12 +15,12 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
 
   //TODO: 컴포넌트로 정리
   return (
-    <>
+    <div className="h-100vh-header bg-light-purple">
       <Link href={`/list/detail/${classId}`} className="flex  items-center text-lg gap-1">
         <SlArrowLeft />
         클래스 상세보기
       </Link>
-      <div className="w-full box-border  bg-light-purple flex justify-center items-center flex-col text-gray-600">
+      <div className="w-full  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-600">
         {classInfo ? (
           <div>
             <div className="flex flex-col w-full lg:flex-row ">
@@ -29,7 +29,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
                 <ReserveUserInfo />
               </div>
               <div className="lg:divider-horizontal"></div>
-              <div className=" py-6  px-12 w-[420px] bg-white rounded-md  justify-between flex flex-col items-center my-4">
+              <div className=" py-6  px-12 w-[420px] bg-white rounded-md  justify-between flex flex-col items-center my-4 shadow">
                 <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
                 <DateTimePicker classDates={classInfo.dates} />
                 <CurrentReserveQuantity classId={classInfo.classId} maxPeople={classInfo?.maxPeople} />
@@ -42,6 +42,6 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
           <div>클래스 정보를 불러오지 못했어요. 🥲</div>
         )}
       </div>
-    </>
+    </div>
   );
 }
