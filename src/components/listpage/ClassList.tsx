@@ -20,6 +20,7 @@ function ClassList() {
     isFetchingNextPage,
     status
   } = useInfiniteQuery({
+    //키값을 변수로해두면 유즈이펙트 사용할 필요없이 키값이 변경될 때 마다 리액트 쿼리에서 리페칭해옵니다!
     queryKey: ['infiniteClass', selectedCategory],
     queryFn: ({ pageParam = 1 }) => getClassForList(pageParam, 8, selectedCategory), //한페이지당 불러오는 데이터 수 지정
     initialPageParam: 1,
