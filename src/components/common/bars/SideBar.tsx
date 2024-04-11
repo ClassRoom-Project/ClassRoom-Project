@@ -30,7 +30,7 @@ const SideBar = ({ children }: PropsWithChildren) => {
             MYPAGE
           </Link>
           {/* 예약 페이지 확인을 위한 임시 링크 */}
-          <Link href="/reserve?classId=9335e676-0c77-4f7a-9b29-63cb4df446f1">예약하기(임시)</Link>
+          <Link href="/reserve?classId=d162d609-b1dc-41c4-b8c5-7998cb0b58ca">예약하기(임시)</Link>
           <Link href="/messages" prefetch={false}>
             채팅
           </Link>

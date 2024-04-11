@@ -1,8 +1,7 @@
 'use client';
 
 import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
-import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { alreadyReserved, invalidReserve } from '@/components/common/Toastify';
+import { invalidReserve } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservationDetail';
 import { ReserveInfo } from '@/types/reserve';
@@ -84,9 +83,9 @@ const ReservationCompletePage = () => {
   }
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full h-100vh-header  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-600">
       <h1 className="text-xl">예약 완료</h1>
-      <div className="w-full h-full bg-gray-200 p-6 flex flex-col justify-between items-center">
+      <div className="w-full p-6 flex flex-col justify-between items-center">
         {!isLoading && reservationDetails ? (
           <>
             <h1 className="text-xl text-center mb-20">예약이 정상적으로 처리되었습니다.</h1>
