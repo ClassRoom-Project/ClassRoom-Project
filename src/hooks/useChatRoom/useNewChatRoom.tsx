@@ -1,6 +1,12 @@
-import { createChatRoom, createNewMessages, getChatRooms, getMakeClassUser } from '@/app/api/chatRooms/getChatRooms';
+import {
+  createChatRoom,
+  createNewMessages,
+  createNewMessagesPhoto,
+  getChatRooms,
+  getMakeClassUser
+} from '@/app/api/chatRooms/getChatRooms';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
-import { SendNewMessageType } from '@/types/chat/chatTypes';
+import { SendNewMessageType, SendNewPhotoMessageType } from '@/types/chat/chatTypes';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 //채팅방 목록 읽어오기
@@ -73,13 +79,13 @@ export function useCreateNewPhotoMessage() {
   const queryClient = useQueryClient();
 
   const { mutate: createNewPhotoMessageMutate } = useMutation({
-    mutationFn: async ({ chatId, message, loginUserId }: SendNewMessageType) => {
+    mutationFn: async ({ chatId, photos, loginUserId }: SendNewPhotoMessageType) => {
       console.log('chatId', chatId);
 
-      console.log('message', message);
+      console.log('message', photos);
       console.log('create_by', loginUserId);
 
-      await createNewMessages({ chatId, loginUserId, message });
+      await createNewMessagesPhoto({ chatId, loginUserId, photos });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['chatMessage'] });

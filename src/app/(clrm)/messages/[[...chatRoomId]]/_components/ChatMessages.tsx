@@ -54,7 +54,7 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
           <BsSend className="text-xl text-gray-400 " />
         </form>
       </div>
-      <ChatImageModal />
+      <ChatImageModal chatId={chatId} />
     </div>
   );
 }

@@ -79,6 +79,6 @@ export interface SendNewMessageType {
 
 export interface SendNewPhotoMessageType {
   chatId: string;
-  photo: string;
+  photos: string[];
   loginUserId: string;
 }

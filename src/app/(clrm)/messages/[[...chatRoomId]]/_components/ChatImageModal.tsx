@@ -1,18 +1,21 @@
 import { DragEvent, useState } from 'react';
 import { MdPhotoCamera } from 'react-icons/md';
 import { IoCloseOutline } from 'react-icons/io5';
+import { useCreateNewPhotoMessage } from '@/hooks/useChatRoom/useNewChatRoom';
+import { useLoginStore } from '@/store/login/LoginUserIdStore';
 
-export default function ChatImageModal() {
+export default function ChatImageModal({ chatId }: { chatId: string }) {
+  console.log('chatId', chatId);
+
   const [photos, setPhotos] = useState<string[]>([]);
   const [countError, setCountError] = useState('');
-
-  console.log(photos);
+  const { createNewPhotoMessageMutate } = useCreateNewPhotoMessage();
+  const { loginUserId } = useLoginStore();
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       if (photos.length > 5) {
-        console.log('걸리긴해?');
         setCountError('사진은 최대 5개까지 업로드 가능합니다.');
         return;
       }
@@ -52,7 +55,13 @@ export default function ChatImageModal() {
     setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index));
   };
 
-  const handleSendButton = () => {};
+  const handleSendButton = () => {
+    if (!loginUserId) {
+      console.error('loginUserId is null');
+      return;
+    }
+    createNewPhotoMessageMutate({ photos, chatId, loginUserId });
+  };
 
   return (
     <div className="flex flex-col">

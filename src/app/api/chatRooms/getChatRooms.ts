@@ -129,7 +129,7 @@ export const createNewMessages = async ({
 //채팅 이미지 넣기
 export const createNewMessagesPhoto = async ({
   chatId,
-  photo,
+  photos,
   loginUserId
 }: SendNewPhotoMessageType): Promise<SendNewPhotoMessageType | undefined> => {
   const { data: newChat, error } = await supabase
@@ -138,7 +138,7 @@ export const createNewMessagesPhoto = async ({
     .insert([
       {
         chat_id: chatId,
-        messages: photo,
+        images: photos,
         create_by: loginUserId
       }
     ])
