@@ -75,7 +75,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
       </div>
       <div className="px-2 flex-col flex gap-1">
         <h1 className="font-bold text-xl mb-2">{classInfo.title}</h1>
-        <div className="flex flex-col gap-1 text-sm">
+        <div className="flex flex-col gap-1.5 text-sm">
           {classInfoLabels.map(({ title, description }) => {
             return (
               <div key={description} className="flex items-center gap-2 text-gray-500">
