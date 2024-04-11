@@ -7,12 +7,15 @@ import MyCommentItem from './MyCommentItem';
 
 const MyComments = () => {
   const { loginUserId } = useLoginStore();
+  // const { setStar } = useRatingStore();
+
   // 후기 리스트 불러오기
   const { data: myComments, isPending } = useQuery({
     queryKey: ['comments'],
     queryFn: () => fetchClassInfoOnComment(loginUserId),
     enabled: !!loginUserId
   });
+  // console.log('myComments', myComments);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;

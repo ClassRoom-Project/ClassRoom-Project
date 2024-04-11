@@ -1,15 +1,19 @@
-import { deleteMyComment, updateMyComment } from '@/app/api/mypage/my-comments-api';
+import { updateMyComment } from '@/app/api/mypage/my-comments-api';
+import Stars from '@/components/common/Stars';
+import { noChangedNotify } from '@/components/common/Toastify';
 import { useDeleteComment } from '@/hooks/useEditComment';
-
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { MyCommentType, NewCommentType } from '@/types/comments';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const { loginUserId } = useLoginStore();
+  // const { star, setStar } = useRatingStore();
+  // console.log('star', star);
 
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState(comment.content);
@@ -46,7 +50,8 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         }
         return;
       } else {
-        alert('수정 사항이 없습니다.');
+        // alert('수정 사항이 없습니다.');
+        noChangedNotify();
       }
     } else {
       setIsEditing((prev) => !prev);
@@ -76,6 +81,9 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const formattedDate = new Date(comment.create_at).toLocaleDateString();
   const formattedTime = new Date(comment.create_at).toLocaleTimeString();
 
+  // 별 표시하기
+  const rating = comment.star;
+
   return (
     <li className="p-4 flex gap-4 border-y border-y-border-color w-full" key={comment.comment_id}>
       <div className="w-[300px] h-[200px]">
@@ -97,6 +105,10 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
             </p>
           </div>
         </section>
+        <div className="pt-4">
+          <p>{rating}</p>
+          <Stars rating={rating} />
+        </div>
         <section className="pt-4">
           {isEditing ? (
             <textarea
@@ -113,9 +125,12 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
 
           <div className="flex justify-end gap-4 ">
             {isEditing ? (
-              <button onClick={() => handleOnClickEditBtn(commentId)} className="btn w-36">
-                완료하기
-              </button>
+              <div>
+                <button onClick={() => handleOnClickEditBtn(commentId)} className="btn w-36">
+                  완료하기
+                </button>{' '}
+                <ToastContainer />
+              </div>
             ) : (
               <button onClick={() => handleOnClickEditBtn(commentId)} className="btn w-36">
                 수정하기

@@ -4,7 +4,7 @@ import { supabase } from '../supabase/supabase';
 
 // 후기를 작성한 클래스 정보 불러오기 : db join
 export const fetchClassInfoOnComment = async (loginUserId: string | null) => {
-  const { data, error }: PostgrestResponse<MyCommentType> = await supabase.rpc('fetch_class_info_on_comment_new', {
+  const { data, error }: PostgrestResponse<MyCommentType> = await supabase.rpc('fetch_class_info_on_comment_new_new', {
     p_user_id: loginUserId as string
   });
 
