@@ -15,7 +15,7 @@ const MyClassStudentList = () => {
     queryKey: ['reserve', timeId],
     queryFn: () => getMyClassStudentInfo(timeId)
   });
-  console.log('myClassStudentInfo', myClassStudentInfo);
+  // console.log('myClassStudentInfo', myClassStudentInfo);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
