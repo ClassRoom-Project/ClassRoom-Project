@@ -5,9 +5,12 @@ import { useReadChatRooms } from '@/hooks/useChatRoom/useNewChatRoom';
 import { ChatRoom } from '@/types/chat/chatTypes';
 import { useLoginStore } from '@/store/login/LoginUserIdStore';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Virtuoso } from 'react-virtuoso';
+import ChatMessages from './_components/ChatMessages';
 
 export default function MessagesPage() {
   const { chatroomsInfo } = useReadChatRooms();
+  const { loginUserId } = useLoginStore();
   // const router = useRouter();
 
   // const chatRoomId = router.query.chatId ?? '';
@@ -17,9 +20,9 @@ export default function MessagesPage() {
   return (
     <div className="w-full">
       <div>
-        <div className="flex bg-white border-x border-border-color">
+        <div className="flex bg-white border-x border-border-color ">
           <section
-            className="w-2/5 h-full flex overflow-scroll"
+            className="w-2/5 h-full flex"
             style={{
               minHeight: 'calc(100vh - 60px)',
               maxHeight: 'calc(100vh - 60px)'
@@ -31,25 +34,30 @@ export default function MessagesPage() {
               </div>
             ) : (
               <div className="flex flex-col flex-1 w-full">
-                {chatroomsInfo.map(
-                  ({ chatId, createdAt, toClassId, fromUserId, teacherUserId, title, makeClassUserId }: ChatRoom) => (
+                <Virtuoso
+                  data={chatroomsInfo}
+                  itemContent={(
+                    _,
+                    { chatId, toClassId, fromUserId, teacherUserId, title, makeClassUserId, loginUserId }
+                  ) => (
                     <ChatPreview
                       key={chatId}
                       chatId={chatId}
-                      createdAt={createdAt}
+                      otherId={loginUserId === teacherUserId ? fromUserId : teacherUserId}
                       toClassId={toClassId}
                       fromUserId={fromUserId}
                       teacherUserId={teacherUserId}
                       title={title}
                       makeClassUserId={makeClassUserId}
+                      loginUserId={loginUserId}
                     />
-                  )
-                )}
+                  )}
+                />
               </div>
             )}
           </section>
-          <section className="w-3/5">
-            <div className="flex justify-center items-center flex-1">
+          <section className="w-3/5 border-l border-gray-500">
+            <div className="flex justify-center items-center flex-1 ">
               {!currentChatRoomId ? (
                 <a
                   className=" text-gray-500"
@@ -60,7 +68,9 @@ export default function MessagesPage() {
                 >
                   대화를선택해주세요
                 </a>
-              ) : null}
+              ) : (
+                <ChatMessages />
+              )}
             </div>
           </section>
         </div>

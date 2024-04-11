@@ -16,6 +16,11 @@ export default function AskButton({ classId, makeClassUserId }: { classId: strin
       console.log('로그인해');
       alert('로그인이 필요한 기능입니다.');
       return;
+    } else if (loginUserId === makeClassUserId) {
+      console.log('loginUserId', loginUserId);
+      console.log('makeClassUserId', makeClassUserId);
+      alert('직접 개설한 클래스에는 문의할 수 없습니다.');
+      return;
     }
     createNewRoomMutate(
       {

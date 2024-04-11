@@ -9,15 +9,16 @@ export default function ChatPreview({
   chatId,
   // createdAt,
   // toClassId,
-  // fromUserId,
-  // teacherUserId,
   // title,
-  makeClassUserId
+  // makeClassUserId,
+  otherId
 }: any) {
-  const { MakeClassUserInfo } = useReadMakeClassUserInfo(makeClassUserId);
+  const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
+  console.log(MakeClassUserInfo?.profile_image);
+  console.log('아덜', otherId);
 
   return (
-    <Link href={`/messages?chatId=${chatId}`} prefetch={false} shallow>
+    <Link href={`/messages?chatId=${chatId}&teax=${MakeClassUserInfo?.nickname}`} prefetch={false} shallow>
       <div className="flex py-4 hover:bg-[#E3E1FC] border-b-2 px-2">
         <div className="mx-3">
           <img
