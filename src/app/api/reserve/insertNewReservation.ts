@@ -1,7 +1,6 @@
 import { ReserveInfo } from '@/types/reserve';
 import { supabase } from '../supabase/supabase';
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
-import camelcaseKeys from 'camelcase-keys';
 
 export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
   const { userId, classId, reservePrice, reserveQuantity, timeId } = reserveInfo;
