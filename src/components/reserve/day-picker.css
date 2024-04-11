@@ -1,4 +1,4 @@
-/* 오늘 날짜 스타일 */
+/* 컨테이너 */
 .rdp {
   --rdp-cell-size: 40px; /* Size of the day cells. */
   --rdp-caption-font-size: 18px; /* Font size for the caption labels. */
@@ -13,6 +13,7 @@
   margin: 0;
 }
 
+/* 오늘 날짜 스타일 */
 .rdp-day_today:not(.rdp-day_outside) {
   font-weight: bold;
   font-color: #6c5ff7;
@@ -28,7 +29,7 @@
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
   border: 1px solid #6c5ff7;
   transition: all 0.2s;
-  background-color: #6c5ff7;
+  background-color: #f9f5ff;
 }
 
 /* 선택된 날짜 */
