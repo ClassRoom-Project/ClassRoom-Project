@@ -70,7 +70,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
           fill={true}
           src={classInfo.image}
           alt={classInfo.title}
-          unoptimized={true} // 추후 수정 필요
+          style={{ objectFit: 'cover' }}
         />
       </div>
       <div className="px-2 flex-col flex gap-1">
