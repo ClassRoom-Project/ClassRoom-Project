@@ -1,5 +1,6 @@
 import { supabase } from '../supabase/supabase';
 
+// 예약한 클래스인지 확인
 export const checkIsReserved = async ({ userId, classId }: { userId: string; classId: string }) => {
   const { data, error } = await supabase
     .from('reserve')

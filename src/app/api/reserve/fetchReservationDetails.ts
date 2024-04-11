@@ -12,7 +12,7 @@ export const fetchReservationDetails = async (reserveId: string) => {
     .select(
       `
         class_id, reserve_quantity, reserve_price, time_id, user_id,
-        class(title, total_time, location),
+        class (title, total_time, location),
         time (times, date(day))
   `
     )
