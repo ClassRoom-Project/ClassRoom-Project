@@ -10,11 +10,11 @@ import { PostgrestMaybeSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
 
 // User가 선생님인지 수강생인지 구분 : isTeacher 값 불러오기
-export const getUserRole = async (loginUserId: string | null): Promise<{ isTeacher: boolean } | null> => {
+export const getUserRole = async (email: string | null): Promise<{ isTeacher: boolean } | null> => {
   const { data: userRole, error }: PostgrestMaybeSingleResponse<UserRoleType | null> = await supabase
     .from('users')
     .select('isTeacher')
-    .eq('user_id', loginUserId as string)
+    .eq('email', email as string)
     .single();
 
   if (error) {
