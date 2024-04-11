@@ -5,6 +5,8 @@ import { useCheckIsWishedQuery } from '@/hooks/useWish/useWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import { GoHeart } from 'react-icons/go';
+import { GoHeartFill } from 'react-icons/go';
 
 const WishButton = ({ classId }: { classId: string | undefined }) => {
   const router = useRouter();
@@ -43,12 +45,12 @@ const WishButton = ({ classId }: { classId: string | undefined }) => {
   return (
     <div>
       {isLoading ? (
-        <div>로딩중</div>
+        <p>로딩중</p>
       ) : (
         <div>
-          <label>{isWished ? '찜했음' : '찜하기'} </label>
           <button onClick={handleWishClick} className={`btn justify-end ${isWished ? 'bg-rose-200' : 'bg-gray-200'}`}>
-            ❤️
+            {isWished ? '찜했음' : '찜하기'}
+            <span>{isWished ? <GoHeartFill color="red" /> : <GoHeart />}</span>
           </button>
         </div>
       )}
