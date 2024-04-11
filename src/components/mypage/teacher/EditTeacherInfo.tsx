@@ -137,6 +137,12 @@ const EditTeacherInfo = () => {
       if (confirm) {
         setIsEditing(false);
         setIsActiveBtn(false);
+        setNewSelectedJob(teacherInfo?.job || '');
+        setNewSelectedField(teacherInfo?.field || '');
+        setNewSelectedBank(teacherInfo?.bank || '');
+        setNewAccount(teacherInfo?.account || '');
+        setNewTeacherName(teacherInfo?.teacher_name || '');
+        setNewTeacherNumber(teacherInfo?.teacher_number || '');
       }
     }
   };
