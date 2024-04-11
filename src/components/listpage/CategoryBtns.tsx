@@ -1,10 +1,10 @@
 'use client';
 
 import React, { useCallback, useState } from 'react';
-import { useClassFilterStore } from '@/store/classFilterStore';
+import { useCategoryFilterStore } from '@/store/classFilterStore';
 
 const CategoryBtns = () => {
-  const { selectedCategory, setSelectedCategory } = useClassFilterStore((state) => ({
+  const { selectedCategory, setSelectedCategory } = useCategoryFilterStore((state) => ({
     selectedCategory: state.selectedCategory,
     setSelectedCategory: state.setSelectedCategory
   }));

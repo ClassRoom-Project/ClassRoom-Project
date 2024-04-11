@@ -1,6 +1,6 @@
 'use client';
 
-import { useClassFilterStore } from '@/store/classFilterStore';
+import { useCategoryFilterStore } from '@/store/classFilterStore';
 import { getClassForList } from '@/app/api/listpage/classInfoForList';
 import ClassCard from '@/components/main/ClassCard';
 import { ClassAllType } from '@/types/class';
@@ -9,7 +9,7 @@ import React, { useEffect, useRef } from 'react';
 
 //무한 스크롤
 function ClassList() {
-  const { selectedCategory } = useClassFilterStore();
+  const { selectedCategory } = useCategoryFilterStore();
   const targetRef = useRef<HTMLDivElement>(null);
   const {
     data: classInfos,
