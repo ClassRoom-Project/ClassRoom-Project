@@ -2,25 +2,18 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { supabase } from '@/app/api/supabase/supabase';
-
+import { FaCheck } from "react-icons/fa";
+import Link from 'next/link';
 
 const RegistCompletedPage = () => {
-    // const classId = searchParams.classId;
-    // const path = usePathname();
     const [title, setTitle] = useState('');
-    const router = useRouter();
-    // const params = useSearchParams();
-    // const id = params.get('id');
     const path = usePathname();
     const id = path.split('/').pop();
 
-    // const limitParams = params
-  
-    // classId에 해당하는 title을 가져오는 함수
     const fetchClassTitle = async () => {
       if(!id) return;
       const { data, error } = await supabase
-        .from('class') // 'classes'는 테이블 이름입니다. 실제 사용하는 테이블 이름으로 변경해주세요.
+        .from('class')
         .select('title')
         .eq('class_id', id)
         .single();
@@ -37,13 +30,18 @@ const RegistCompletedPage = () => {
       }, [id]);
   
     return (
-      <div>
-        <h2>등록 완료!</h2>
-        {title && <p>{title} 클래스가 등록되었습니다. 상세한 정보는 내가 등록한 클래스 보기에서 확인해주세요.</p>}
-        <button onClick={() => router.push(`/list/detail/${id}`)}>내가 등록한 클래스 보기</button>
+      <div className="flex flex-col items-center justify-center min-h-screen">
+        <FaCheck color="#6C5FF7" size="60"/>
+        <h1 className="text-xl font-bold mt-4">{title} 클래스가 등록되었습니다.</h1>
+        <p className="mt-2">
+          상세한 정보는 
+          <Link href={`/list/detail/${id}`} passHref>
+            <span className="text-base text-[#6C5FF7] ml-1">내가 등록한 클래스 보기</span>
+          </Link>
+          에서 확인해주세요.
+        </p>
       </div>
     );
   };
   
-
 export default RegistCompletedPage;
