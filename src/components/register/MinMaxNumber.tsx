@@ -22,18 +22,18 @@ const MinNumber = () => {
 
   return (
     <div className="my-2 flex flex-wrap sm:flex-nowrap justify-between items-center">
-      <div className="flex-1 flex items-center space-x-2 my-2 mx-2">
-        <p className='text-base flex-shrink-0 font-bold'>정원</p>
+      <div className="flex-1 flex items-center space-x-2 mr-2">
+        <p className='text-base text-[#3F3F3F] flex-shrink-0 font-bold'>모집 정원</p>
         <input 
           className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-full" 
           type="number" 
           value={personnel} 
           onChange={handlePersonnelChange} 
-          placeholder="정원 입력"
+          placeholder="모집 정원 입력"
         />
       </div>
       <div className="flex-1 flex items-center space-x-2 my-2">
-        <p className='text-base flex-shrink-0 font-bold'>최소인원</p>
+        <p className='text-base text-[#3F3F3F] flex-shrink-0 font-bold'>최소인원</p>
         <input 
           className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-full"
           type="number"
@@ -43,7 +43,7 @@ const MinNumber = () => {
         />
       </div>
       <div className="flex-1 flex items-center space-x-2 my-2 mx-2">
-        <p className='text-base flex-shrink-0 font-bold'>최대인원</p>
+        <p className='text-base text-[#3F3F3F] flex-shrink-0 font-bold'>최대인원</p>
         <input 
           className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-full"
           type="number" 
@@ -53,7 +53,7 @@ const MinNumber = () => {
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MinNumber
+export default MinNumber;

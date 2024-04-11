@@ -3,31 +3,45 @@ import DateTimePicker from '@/components/reserve/DateTimePicker';
 import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
 import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
-import CheckAlreadyReserved from '@/components/reserve/CheckAlreadyReserved';
-import { fetchReserveClassInfo, newFetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
+import { newFetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
+import Link from 'next/link';
+import { SlArrowLeft } from 'react-icons/sl';
+import ReserveUserInfo from '@/components/reserve/ReserveUserInfo';
+import SelectedDate from '@/components/reserve/SelectedDate';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
   const classInfo = await newFetchReserveClassInfo(classId);
 
+  //TODO: 컴포넌트로 정리
   return (
-    <div className="w-full h-full">
-      <h1 className="text-xl">예약하기</h1>
-      {classInfo ? (
-        <div className="flex w-full h-full bg-gray-200 p-6">
-          <DateTimePicker classDates={classInfo.dates} />
-          <div className="flex flex-col justify-between items-center w-full p-6">
-            {/* CheckAlreadyReserved : 예약한 클래스인지 확인을 위한 임시 컴포넌트  */}
-            <CheckAlreadyReserved classId={classInfo.classId} />
-            <ClassInfo classInfo={classInfo} />
-            <CurrentReserveQuantity classId={classInfo.classId} maxPeople={classInfo?.maxPeople} />
-            <PriceCalculator price={classInfo.price} classId={classInfo.classId} maxPeople={classInfo.maxPeople} />
-            <ReserveButton classId={classInfo.classId} maxPeople={classInfo.maxPeople} />
+    <>
+      <Link href={`/list/detail/${classId}`} className="flex  items-center text-lg gap-1">
+        <SlArrowLeft />
+        클래스 상세보기
+      </Link>
+      <div className="w-full box-border  bg-light-purple flex justify-center items-center flex-col text-gray-600">
+        {classInfo ? (
+          <div>
+            <div className="flex flex-col w-full lg:flex-row ">
+              <div className="flex box-border flex-col w-[400px] my-4">
+                <ClassInfo classInfo={classInfo} />
+                <ReserveUserInfo />
+              </div>
+              <div className="lg:divider-horizontal"></div>
+              <div className=" py-6  px-12 w-[420px] bg-white rounded-md  justify-between flex flex-col items-center my-4">
+                <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
+                <DateTimePicker classDates={classInfo.dates} />
+                <CurrentReserveQuantity classId={classInfo.classId} maxPeople={classInfo?.maxPeople} />
+                <PriceCalculator price={classInfo.price} classId={classInfo.classId} maxPeople={classInfo.maxPeople} />
+                <ReserveButton classId={classInfo.classId} maxPeople={classInfo.maxPeople} />
+              </div>
+            </div>
           </div>
-        </div>
-      ) : (
-        <p>클래스 정보를 불러오는데 오류가 발생했습니다. 잠시 후 다시 시도해주세요.</p>
-      )}
-    </div>
+        ) : (
+          <div>클래스 정보를 불러오지 못했어요. 🥲</div>
+        )}
+      </div>
+    </>
   );
 }

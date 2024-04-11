@@ -1,17 +1,20 @@
 import { PostgrestSingleResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
-import { reservationDetailsType } from '@/types/reserve';
+import { DBReservationDetailsType } from '@/types/reserve';
 
 // 예약 정보 조회 api
-// reserve 테이블에서 class_id를 기준으로 class 테이블을 join하여 클래스 title을 가져옴
+// reserve 테이블과 class 테이블을 class_id로 inner조인하고, class 테이블에서 title, total_time, location만 선택하여 결과에 포함
+// time 테이블을 time_id로 조인
+// time테이블에서 time_id가 일치하는 레코드의 date_id로 date 테이블 inner조인하고, date 테이블에서 day만 선택하여 결과에 포함
 export const fetchReservationDetails = async (reserveId: string) => {
-  const { data, error }: PostgrestSingleResponse<reservationDetailsType> = await supabase
+  const { data, error }: PostgrestSingleResponse<DBReservationDetailsType> = await supabase
     .from('reserve')
     .select(
       `
-  class_id,  reserve_date, reserve_time, reserve_quantity, reserve_price, time_id, user_id,
-  class ( class_id, title )
-`
+        class_id, reserve_quantity, reserve_price, time_id, user_id,
+        class(title, total_time, location),
+        time (times, date(day))
+  `
     )
     .eq('reserve_id', reserveId)
     .single();
@@ -23,15 +26,21 @@ export const fetchReservationDetails = async (reserveId: string) => {
 
   const reservationDetails = {
     classId: data.class_id,
-    reserveDate: data.reserve_date,
-    reserveTime: data.reserve_time,
     reserveQuantity: data.reserve_quantity,
     reservePrice: data.reserve_price,
     timeId: data.time_id,
     userId: data.user_id,
     class: {
       title: data.class.title,
-      class_id: data.class.class_id
+      totalTime: data.class.total_time,
+      location: data.class.location,
+      classId: data.class.class_id
+    },
+    time: {
+      date: { day: data.time.date.day },
+      times: data.time.times,
+      dateId: data.time.date_id,
+      timeId: data.time.time_id
     }
   };
 

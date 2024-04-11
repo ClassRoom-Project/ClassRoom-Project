@@ -1,4 +1,4 @@
-import { ReserveStoreType } from '@/types/reserve';
+import { CurrentReservedCountStoreType, ReserveStoreType } from '@/types/reserve';
 import { create } from 'zustand';
 
 export const defaultInitState = {
@@ -7,13 +7,15 @@ export const defaultInitState = {
   reservePrice: 0,
   reserveQuantity: 0,
   reserveDate: '',
-  reserveTime: ''
+  reserveTime: '',
+  timeId: ''
 };
 
-const useReserveStore = create<ReserveStoreType>((set) => ({
+export const useReserveStore = create<ReserveStoreType>((set) => ({
   reserveInfo: defaultInitState,
 
   setReserveInfo: (updateInfo) => {
+    console.log(defaultInitState);
     set((state) => ({
       reserveInfo: {
         ...state.reserveInfo,
@@ -23,4 +25,7 @@ const useReserveStore = create<ReserveStoreType>((set) => ({
   }
 }));
 
-export default useReserveStore;
+export const useCurrentReservedCountStore = create<CurrentReservedCountStoreType>((set) => ({
+  currentReservedCount: 0,
+  setCurrentReservedCount: (currentReservedCount: number | null | undefined) => set({ currentReservedCount })
+}));

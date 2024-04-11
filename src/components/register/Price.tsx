@@ -13,7 +13,7 @@ const Price = () => {
     <div className='mt-2'>
         <div className="flex items-center justify-between space-x-4"> {/* justify-between 추가 */}
           <div> {/* p태그를 감싸는 div 추가 */}
-            <p className='text-base font-bold'>클래스 1인 수강 금액</p>
+            <p className='text-base text-[#3F3F3F] font-bold'>클래스 1인 수강 금액</p>
           </div>
           <div className="relative w-1/3"> {/* ml-auto 삭제 */}
             <input 
@@ -27,8 +27,8 @@ const Price = () => {
             </div>
           </div>
         </div>
-    </div>
-  )
-}
+      </div>
+  );
+};
 
-export default Price
+export default Price;

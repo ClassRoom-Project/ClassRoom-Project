@@ -62,9 +62,9 @@ const TimeSelect: React.FC = () => {
 
     return (
         <div className='mt-4'>
-            <h1 className='font-bold'>클래스 날짜&시간</h1>
+            <h1 className='font-bold text-[#3F3F3F] my-4'>클래스 날짜&시간</h1>
             <div className="relative">
-                <button onClick={toggleDatePicker} className="bg-[#4D80FF] text-white p-2 rounded-md hover:bg-blue-700">일정 추가</button>
+                <button onClick={toggleDatePicker} className="border border-[#6C5FF7] text-black text-sm p-1 rounded-full hover:bg-blue-700">일정추가</button>
                 {isDayPickerOpen && (
                     <div ref={dayPickerRef} className="absolute z-10 bg-white border-2 rounded-lg p-4">
                         <DayPicker
@@ -78,15 +78,15 @@ const TimeSelect: React.FC = () => {
             <div className="flex flex-col my-4">
             {selectedDates.map((date, index) => (
                 <div key={index} className="flex items-center gap-2 my-2">
-                    <button onClick={() => handleRemoveDate(date)} className="bg-red-500 text-white p-1 w-8 h-8 rounded-full">-</button>
+                    <button onClick={() => handleRemoveDate(date)} className="bg-red-500 text-white w-6 h-6 rounded-full">-</button>
                     <p className="flex-none">{date}</p>
                     <input type="time" onChange={(e) => setTempTime(e.target.value)} className="flex-none" />
-                    <button onClick={() => handleAddTime(date)} className="bg-[#6C5FF7] text-white p-1 w-8 h-8 rounded-full">+</button>
+                    <button onClick={() => handleAddTime(date)} className="bg-[#6C5FF7] text-white w-6 h-6 rounded-full">+</button>
                     <div className="flex gap-2">
                         {schedules.find(schedule => schedule.date === date)?.times.map((time, timeIndex) => (
                             <div key={timeIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded-md">
                               <p>{time}</p>
-                              <button onClick={() => handleRemoveTime(date, time)} className="bg-red-500 text-white p-1 w-10 h-10 rounded-md">-</button>
+                              <button onClick={() => handleRemoveTime(date, time)} className="bg-red-500 text-white w-6 h-6 rounded-md">-</button>
                             </div>
                         ))}
                     </div>
