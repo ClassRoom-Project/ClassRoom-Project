@@ -110,34 +110,34 @@ const ReservationCompletePage = () => {
 
   return (
     <div className="w-full h-100vh-header  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-700">
-      <div className="w-1/2 min-w-[600px] min-h-[600px] bg-white shadow rounded-md items-center flex">
+      <div className="w-5/12 min-w-[600px] min-h-[600px] bg-white shadow rounded-md items-center flex">
         <div className="w-full flex flex-col justify-between items-center p-12">
           {!isLoading && reservationDetails ? (
             <>
-              <FiCheckCircle color="#8074FF" className="mb-6" size={70} />
+              <FiCheckCircle color="mediumseagreen" className="mb-6" size={70} />
               <h1 className="text-2xl font-bold  text-center">클래스 예약이 정상적으로 처리되었습니다.</h1>
-              <div className="divider mt-6 mb-12"></div>
+              <div className="divider mt-6 mb-8"></div>
               <div className="flex items-center w-full justify-center">
-                <div className="flex flex-col gap-4 font-bold ">
+                <div className="flex flex-col gap-4 font-bold ml-16">
                   {reserveInfoLabels.map(({ icon, title, description }) => (
                     <div key={title} className="flex gap-2 w-full">
                       <div className="flex flex-row gap-2 justify-center items-center">
                         <p className=" text-right">{icon}</p>
                         <p className="w-28">{title}</p>
                       </div>
-                      <p className="text-left w-[280px] text-gray-600 font-normal">{description}</p>
+                      <p className="text-left w-[250px] text-gray-600 font-normal">{description}</p>
                     </div>
                   ))}
                 </div>
               </div>
-              <div className="divider mt-16 mb-8"></div>
+              <div className="divider mb-6 mt-8"></div>
               <NavigationButtons />
             </>
           ) : isInvalidRequest && !reservationRequest ? (
             <div>예약 도중 오류 발생!!!</div>
           ) : (
             <div className="flex justify-center flex-col items-center gap-4">
-              <span className="loading loading-spinner loading-lg bg-point-purple"></span>
+              <span className="loading loading-spinner loading-lg bg-gray-400"></span>
               <p>잠시만 기다려주세요..</p>
             </div>
           )}
