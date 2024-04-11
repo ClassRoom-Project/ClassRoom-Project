@@ -1,8 +1,7 @@
 'use client';
 
-import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
@@ -10,6 +9,7 @@ import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetai
 import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 import { quantityWarning } from '../common/Toastify';
 import { ToastContainer } from 'react-toastify';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
@@ -63,16 +63,11 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     const { class: classDetails, reserveQuantity, reservePrice } = reservationDetails;
     const userEmail = sessionStorage.getItem('userEmail');
 
-    // console.log('제발', loginUserId, classDetails, reserveDate, reserveTime, reserveQuantity, reservePrice);
-
     // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
     await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
-    // router.push(`reserve/${reservationId}`);
-    // router.push(`reserve/${reservationId}payment?customerKey=${userId}`);
+
     router.replace(
-      `/payment?customerKey=${reserveInfo.userId}&title=${classDetails.title}&price=${
-        reserveInfo.reservePrice
-      }&userEmail=${userEmail}&goToClassDate=${'2024-04-11'}&useClassTime=${'14:00:00'}&totalPerson=${reserveQuantity}`
+      `/payment?customerKey=${reserveInfo.userId}&price=${reserveInfo.reservePrice}&classId=${reserveInfo.classId}`
     );
   };
 
@@ -80,7 +75,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     <>
       <ToastContainer />
       <button className="btn bg-point-purple text-white tracking-wide w-full" onClick={handleReserveButtonClick}>
-        결제하기
+        결제하자
       </button>
     </>
   );

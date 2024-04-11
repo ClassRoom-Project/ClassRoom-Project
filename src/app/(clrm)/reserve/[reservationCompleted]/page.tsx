@@ -55,6 +55,8 @@ const ReservationCompletePage = () => {
   // 응답 받은 예약 id로 예약 정보 불러오기
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reserveId);
 
+  console.log(isInvalidRequest, reservationRequest);
+
   if (isError) {
     console.log(isError);
     invalidReserve();
@@ -133,8 +135,10 @@ const ReservationCompletePage = () => {
             <div className="divider mb-4 mt-6"></div>
             <NavigationButtons />
           </>
-        ) : isInvalidRequest && !reservationRequest ? (
-          <div>예약 도중 오류 발생!!!</div>
+        ) : isInvalidRequest && !reservationRequest?.classId ? (
+          <div className="flex flex-col justify-center items-center">
+            <p>예약을 완료하는 도중 오류가 발생했습니다. </p>
+          </div>
         ) : (
           <div className="flex justify-center flex-col items-center gap-4">
             <span className="loading loading-spinner loading-lg bg-gray-400"></span>
