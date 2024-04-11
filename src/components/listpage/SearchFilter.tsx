@@ -1,12 +1,16 @@
 'use client';
 import { FiAlignJustify } from 'react-icons/fi';
 import React, { useState } from 'react';
-
+import { useClassFilterStore } from '@/store/classFilterStore';
 const SearchFilter = () => {
+  const { setSelectedCategory } = useClassFilterStore();
   const [isOpenCategory, setIsOpenCategory] = useState(false);
 
   const handleDropdown = () => {
     setIsOpenCategory(!isOpenCategory);
+  };
+  const handleResetBtn = () => {
+    setSelectedCategory('');
   };
   return (
     <div className="flex p-5">
@@ -43,13 +47,14 @@ const SearchFilter = () => {
             <div>time</div>
             <div>difficulty</div>
             <div>price</div>
-            <div>검색하기,초기화 버튼</div>
           </ul>
         ) : (
           <></>
         )}
       </div>
-      <button className="btn ml-12 m-5 w-17 h-12">초기화</button>
+      <button onClick={handleResetBtn} className="btn ml-12 m-5 w-17 h-12">
+        초기화
+      </button>
     </div>
   );
 };

@@ -4,17 +4,17 @@ import React, { useCallback, useState } from 'react';
 import { useClassFilterStore } from '@/store/classFilterStore';
 
 const CategoryBtns = () => {
-  const { selectedCategory, setCategory } = useClassFilterStore((state) => ({
+  const { selectedCategory, setSelectedCategory } = useClassFilterStore((state) => ({
     selectedCategory: state.selectedCategory,
-    setCategory: state.setCategory
+    setSelectedCategory: state.setSelectedCategory
   }));
   const categories = ['악기&음악', '미술', '스포츠', '공예&공방', '요리', '기타', '뷰티'];
   //useCallback을 이용해 함수 재생성을 막아서 메모리 사용 줄이기
   const handleOnClickListBtn = useCallback(
     (category: string) => {
-      setCategory(category);
+      setSelectedCategory(category);
     },
-    [setCategory]
+    [setSelectedCategory]
   );
 
   return (
