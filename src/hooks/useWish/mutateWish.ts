@@ -1,4 +1,4 @@
-import { addWish } from '@/app/api/wish/wish';
+import { addWish, cancelWish } from '@/app/api/wish/wishApi';
 import { QueryKeys } from '@/constants/QueryKeys';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -15,4 +15,18 @@ export const useAddWishMutation = () => {
   });
 
   return addWishMutation;
+};
+
+export const useCancleWishMutation = () => {
+  const queryClient = useQueryClient();
+  const cancelWishMutation = useMutation({
+    mutationFn: cancelWish,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [QueryKeys.WISH]
+      });
+    }
+  });
+
+  return cancelWishMutation;
 };

@@ -1,4 +1,4 @@
-import { checkIsWished } from '@/app/api/wish/wish';
+import { checkIsWished } from '@/app/api/wish/wishApi';
 import { QueryKeys } from '@/constants/QueryKeys';
 import { useQuery } from '@tanstack/react-query';
 

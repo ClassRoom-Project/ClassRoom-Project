@@ -17,8 +17,6 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
   const { loginUserId } = useLoginStore();
   const { setReserveInfo, reserveInfo } = useReserveStore();
 
-  console.log(loginUserId);
-
   useEffect(() => {
     setReserveInfo({ classId: classId, userId: loginUserId });
   }, [classId, setReserveInfo, loginUserId]);
