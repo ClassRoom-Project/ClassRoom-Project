@@ -110,7 +110,7 @@ const ReservationCompletePage = () => {
 
   return (
     <div className="w-full h-100vh-header  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-700">
-      <div className="w-5/12 min-w-[600px] min-h-[600px] bg-white shadow rounded-md items-center flex flex-col px-12 pt-12 pb-8">
+      <div className="w-5/12 min-w-[600px]  justify-center min-h-[600px] bg-white shadow rounded-md items-center flex flex-col px-12 pt-12 pb-8">
         {/* <div className="w-full flex flex-col justify-between items-center p-12"> */}
         {!isLoading && reservationDetails ? (
           <>
