@@ -1,4 +1,3 @@
-// store.js
 import { create } from 'zustand';
 import { ClassRegister } from '@/types/register';
 
@@ -18,9 +17,6 @@ const useRegisterStore = create<ClassRegister>((set) => ({
     totalTime: 0,
     selectDay: [],
     selectedTime: [],
-    // registrationComplete: false,
-    // classIdval: '',
-    // image: [],
 
     setCategory: (category:string) => set({ category }),
     setSubCategory: (subCategory:string) => set({ subCategory }),
@@ -37,9 +33,6 @@ const useRegisterStore = create<ClassRegister>((set) => ({
     setPrice: (price:number) => set({ price }),
     setSelectedTime: (selectedTime:string[]) => set({ selectedTime }),
     setTotalTime: (totalTime:number) => set({ totalTime }),
-    // setRegistrationComplete: (registrationComplete:boolean) => set({ registrationComplete }),
-    // setClassIdval: (classIdval:string) => set({ classIdval }),
-    // setImage: (image:string[]) => set({ image }),
 }));
 
 export default useRegisterStore;

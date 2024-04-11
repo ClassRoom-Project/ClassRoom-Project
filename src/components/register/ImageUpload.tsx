@@ -4,9 +4,9 @@ import { supabase } from '@/app/api/supabase/supabase';
 import useRegisterStore from '../../store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import PlusImage from '../../../public/plusImage.jpg';
-import { useRouter } from 'next/navigation';
 
 interface ImageFileWithPreview {
   file: File;
@@ -64,7 +64,6 @@ const ImageUpload = () => {
     }
     const userId = loginUserId;
     const imageUrls = [];
-    console.log(images);
 
     // 업로드된 이미지 URL 확인
     for (const image of images) {
@@ -75,8 +74,6 @@ const ImageUpload = () => {
         console.error('일부 이미지 업로드에 실패했습니다');
       }
     }
-
-    console.log('업로드된 이미지 URL들:', imageUrls);
 
     const { data, error } = await supabase.from('class').insert([
       {
@@ -138,9 +135,7 @@ const ImageUpload = () => {
         }
       }
       alert('등록이 완료되었습니다.');
-      console.log('데이터 저장 성공:', data);
-      // router.push(`/list/detail/${classId}`);
-      router.push(`/register/completed/${classId}`); // 디테일 페이지로 이동하도록 할건데, 중간에 페이지 필요할것같음
+      router.push(`/register/completed/${classId}`);
     }
   };
 
@@ -220,7 +215,7 @@ const ImageUpload = () => {
           </div>
         ))}
       </div>
-      <div className="mt-4"> {/* 등록하기 버튼 */}
+      <div className="mt-4">
         <button
           onClick={handleSubmit} 
           className="px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-[#4D43B8]"

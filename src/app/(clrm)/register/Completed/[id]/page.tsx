@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { supabase } from '@/app/api/supabase/supabase';
 import { FaCheck } from "react-icons/fa";
 import Link from 'next/link';

@@ -6,16 +6,17 @@ const Price = () => {
   const { price, setPrice } = useRegisterStore();
 
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value);
+    let value = parseInt(event.target.value);
+    if (isNaN(value) || value < 0) value = 0;
     setPrice(value);
   };
   return (
     <div className='mt-2'>
-        <div className="flex items-center justify-between space-x-4"> {/* justify-between 추가 */}
-          <div> {/* p태그를 감싸는 div 추가 */}
+        <div className="flex items-center justify-between space-x-4">
+          <div>
             <p className='text-base text-[#3F3F3F] font-bold'>클래스 1인 수강 금액</p>
           </div>
-          <div className="relative w-1/3"> {/* ml-auto 삭제 */}
+          <div className="relative w-1/3">
             <input 
               className="form-input px-3 py-2 border rounded w-full pr-8 text-right"
               type="text" 

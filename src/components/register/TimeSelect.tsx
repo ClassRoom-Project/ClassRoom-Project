@@ -21,7 +21,7 @@ const TimeSelect: React.FC = () => {
             const formattedDate = format(selectedDate, 'yyyy-MM-dd');
             // 이미 선택된 날짜인지 확인
             if (selectedDates.includes(formattedDate)) {
-                alert('이미 선택한 날짜입니다.'); // 이미 선택된 날짜라면 경고 메시지 표시
+                alert('이미 선택한 날짜입니다.');
             } else {
                 setSelectedDates([...selectedDates, formattedDate]); // 새로운 날짜를 selectedDates에 추가
                 addSchedule(formattedDate); // 새로운 날짜의 스케줄 추가
@@ -30,11 +30,12 @@ const TimeSelect: React.FC = () => {
         }
     };    
 
+    // 선택한 시간 추가
     const handleAddTime = (date: string) => {
         if (tempTime === '') {
-            alert('시간을 선택해주세요.'); // 시간이 입력되지 않았을 때 경고 메시지 표시
+            alert('시간을 선택해주세요.');
         } else {
-            addTimeToSchedule(date, tempTime); // 임시 저장된 시간 사용
+            addTimeToSchedule(date, tempTime);
             setTempTime(''); // 시간 입력 후 초기화
         }
     };
@@ -64,7 +65,12 @@ const TimeSelect: React.FC = () => {
         <div className='mt-4'>
             <h1 className='font-bold text-[#3F3F3F] my-4'>클래스 날짜&시간</h1>
             <div className="relative">
-                <button onClick={toggleDatePicker} className="border border-[#6C5FF7] text-black text-sm p-1 rounded-full hover:bg-[#E3E1FC]">일정추가</button>
+                <button 
+                    onClick={toggleDatePicker} 
+                    className="border border-[#6C5FF7] text-black text-sm p-1 rounded-full hover:bg-[#E3E1FC]"
+                >
+                    일정추가
+                </button>
                 {isDayPickerOpen && (
                     <div ref={dayPickerRef} className="absolute z-10 bg-white border-2 rounded-lg p-4">
                         <DayPicker

@@ -6,7 +6,8 @@ const TotalTime = () => {
   const { totalTime, setTotalTime } = useRegisterStore();
 
     const handleTotalTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = parseInt(event.target.value);
+        let value = parseInt(event.target.value);
+        if (isNaN(value) || value < 0) value = 0;
         setTotalTime(value);
     };
     return (

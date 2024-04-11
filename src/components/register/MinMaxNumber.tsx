@@ -6,17 +6,20 @@ const MinNumber = () => {
   const { minNumber, maxNumber, personnel, setMinNumber, setMaxNumber, setPersonnel } = useRegisterStore();
 
   const handlePersonnelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value);
+    let value = parseInt(event.target.value);
+    if (isNaN(value) || value < 0) value = 0;
     setPersonnel(value);
   };
 
   const handleMinNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value);
+    let value = parseInt(event.target.value);
+    if (isNaN(value) || value < 0) value = 0;
     setMinNumber(value);
   };
 
   const handleMaxNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value);
+    let value = parseInt(event.target.value);
+    if (isNaN(value) || value < 0) value = 0;
     setMaxNumber(value);
   };
 

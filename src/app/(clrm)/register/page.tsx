@@ -7,7 +7,7 @@ import TimeSelect from '@/components/register/TimeSelect';
 import Category from '@/components/register/Category';
 import HashTag from '@/components/register/HashTag';
 import MinMaxNumber from '@/components/register/MinMaxNumber';
-import ClassTypeDiff from '@/components/register/ClassTypeDiff';
+import ClassDiff from '@/components/register/ClassDiff';
 import ImageUpload from '@/components/register/ImageUpload';
 import TotalTime from '@/components/register/TotalTime';
 
@@ -23,7 +23,7 @@ const RegisterPage = () => {
           <HashTag />
           <ClassTitle />
           <ClassContent />
-          <ClassTypeDiff />
+          <ClassDiff />
           <MinMaxNumber />
           <TotalTime />
 
