@@ -6,21 +6,25 @@ import {
   UserInfoType,
   UserRoleType
 } from '@/types/user';
-import { PostgrestMaybeSingleResponse } from '@supabase/supabase-js';
+import { PostgrestMaybeSingleResponse, PostgrestResponse } from '@supabase/supabase-js';
 import { supabase } from '../supabase/supabase';
 
 // User가 선생님인지 수강생인지 구분 : isTeacher 값 불러오기
-export const getUserRole = async (email: string | null): Promise<{ isTeacher: boolean } | null> => {
-  const { data: userRole, error }: PostgrestMaybeSingleResponse<UserRoleType | null> = await supabase
+export const getUserRole = async (email: string): Promise<{ isTeacher: boolean } | null> => {
+  const { data: userRole, error }: PostgrestResponse<UserRoleType | null> = await supabase
     .from('users')
     .select('isTeacher')
-    .eq('email', email as string)
-    .single();
+    .eq('email', email)
+    .limit(1);
 
   if (error) {
     console.error(error);
   }
-  return userRole;
+  if (!userRole || userRole.length === 0 || !userRole[0]?.isTeacher) {
+    return { isTeacher: false };
+  }
+
+  return { isTeacher: userRole[0]?.isTeacher };
 };
 
 // User Role(선생님인지 수강생인지) 상태 supabase에 업데이트하기
