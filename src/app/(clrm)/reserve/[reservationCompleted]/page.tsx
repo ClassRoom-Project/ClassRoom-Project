@@ -114,7 +114,7 @@ const ReservationCompletePage = () => {
         {/* <div className="w-full flex flex-col justify-between items-center p-12"> */}
         {!isLoading && reservationDetails ? (
           <>
-            <FiCheckCircle color="mediumseagreen" className="mb-6" size={70} />
+            <FiCheckCircle color="#38c557" className="mb-6" size={70} />
             <h1 className="text-2xl font-bold  text-center">클래스 예약이 정상적으로 처리되었습니다.</h1>
             <div className="divider mt-4 mb-6"></div>
             <div className="flex items-center w-full justify-center">
