@@ -23,44 +23,42 @@ import { FiCalendar } from 'react-icons/fi';
 import { LuCalendar } from 'react-icons/lu';
 import { useSearchParams } from 'next/navigation';
 
-const ReservationCompletePage = ({ params }: { params: { id: string } }) => {
-  console.log(params);
+const ReservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
+  const keyyy = params.reservationId;
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
   const [reserveId, setReserveId] = useState('');
   const [isInvalidRequest, setIsInvalidRequest] = useState(false);
   const searchParams = useSearchParams();
   const orderId = searchParams.get('orderId');
   const paymentKey = searchParams.get('paymentKey');
-  console.log('🚀 ~ ReservationCompletePage ~ paymentKey:', paymentKey);
-  console.log(orderId);
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      // 로컬 스토리지에서 예약 정보 가져와서 set
-      const storageData = window.localStorage.getItem('reservationInfo');
-      const reserveInfo: ReserveInfo = storageData ? JSON.parse(storageData) : null; // null 처리
-      setReservationRequest(reserveInfo);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     // 로컬 스토리지에서 예약 정보 가져와서 set
+  //     const storageData = window.localStorage.getItem('reservationInfo');
+  //     const reserveInfo: ReserveInfo = storageData ? JSON.parse(storageData) : null; // null 처리
+  //     setReservationRequest(reserveInfo);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (reservationRequest) {
-      const submitReservation = async () => {
-        // db에 예약 정보  insert
-        const responseReserveId = await insertNewReservation(reservationRequest);
-        if (responseReserveId) {
-          setReserveId(responseReserveId);
-        }
-      };
-      submitReservation();
-    } else {
-      // 요청 인자가 없으면 에러 메세지 출력을 위한 state set
-      setIsInvalidRequest(true);
-    }
-  }, [reservationRequest]);
+  // useEffect(() => {
+  //   if (reservationRequest) {
+  //     const submitReservation = async () => {
+  //       // db에 예약 정보  insert
+  //       const responseReserveId = await insertNewReservation(reservationRequest);
+  //       if (responseReserveId) {
+  //         setReserveId(responseReserveId);
+  //       }
+  //     };
+  //     submitReservation();
+  //   } else {
+  //     // 요청 인자가 없으면 에러 메세지 출력을 위한 state set
+  //     setIsInvalidRequest(true);
+  //   }
+  // }, [reservationRequest]);
 
   // 응답 받은 예약 id로 예약 정보 불러오기
-  const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reserveId);
+  const { reservationDetails, isError, isLoading } = useFetchReservationDetail(keyyy);
 
   if (isError) {
     console.log(isError);

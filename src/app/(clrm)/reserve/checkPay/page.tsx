@@ -6,16 +6,12 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 
 const CheckPage = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const queryOrderId = searchParams.get('orderId');
   const storageOrderId = typeof window !== 'undefined' && window.localStorage.getItem('orderId');
-  console.log(queryOrderId, storageOrderId);
   const [reserveId, setReserveId] = useState('');
-  const [isLoaidng, setIsLoaidng] = useState(true);
-
   const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
-
-  const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -33,7 +29,6 @@ const CheckPage = () => {
         const responseReserveId = await insertNewReservation(reservationRequest);
         if (responseReserveId) {
           setReserveId(responseReserveId);
-          setIsLoaidng(false);
         }
       };
       submitReservation();
@@ -47,12 +42,17 @@ const CheckPage = () => {
     if (queryOrderId === storageOrderId) {
       console.log('여기다');
       if (reserveId) {
-        router.push(`/reserve/success/${reserveId}`);
+        router.replace(`/reserve/success/${reserveId}`);
       }
     }
   }, [reserveId]);
 
-  return <div>CheckPage</div>;
+  return (
+    <div className="flex justify-center flex-col items-center gap-4">
+      <span className="loading loading-spinner loading-lg bg-gray-400"></span>
+      <p>잠시만 기다려주세요..</p>
+    </div>
+  );
 };
 
 export default CheckPage;
