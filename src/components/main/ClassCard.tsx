@@ -2,11 +2,13 @@ import Image from 'next/image';
 import React from 'react';
 import { ClassAllType } from '@/types/class';
 import Link from 'next/link';
+
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   return classInfos ? (
     <Link href={`/list/detail/${classInfos.class_id}`}>
       <div className="card w-[250px] h-[300px] bg-base-100 shadow-xl m-1 rounded-lg overflow-hidden">
-        <figure className="w-full h-2/5 bg-gray-200">
+        <figure className="w-full h-2/5 bg-gray-200 relative">
+          {/* <button className="btn btn-sm absolute top-0 left-0">❤️</button> */}
           <Image
             width={300}
             height={200}

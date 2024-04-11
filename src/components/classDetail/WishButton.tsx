@@ -16,7 +16,9 @@ const WishButton = ({ classId }: { classId: string | undefined }) => {
 
   const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
 
-  const handleWishClick = () => {
+  const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+
     //TODO: confirm창 모달로 변경
     if (!loginUserId) {
       if (typeof window !== 'undefined' && window.confirm('로그인이 필요한 기능입니다. 로그인하시겠습니까?')) {
@@ -48,7 +50,10 @@ const WishButton = ({ classId }: { classId: string | undefined }) => {
         <p>로딩중</p>
       ) : (
         <div>
-          <button onClick={handleWishClick} className={`btn justify-end ${isWished ? 'bg-rose-200' : 'bg-gray-200'}`}>
+          <button
+            onClick={(e) => handleWishClick(e)}
+            className={`btn justify-end ${isWished ? 'bg-rose-200' : 'bg-gray-200'}`}
+          >
             {isWished ? '찜했음' : '찜하기'}
             <span>{isWished ? <GoHeartFill color="red" /> : <GoHeart />}</span>
           </button>
