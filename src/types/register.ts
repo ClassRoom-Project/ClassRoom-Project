@@ -31,6 +31,8 @@ export interface ClassRegister {
   classType: string;
   image?: string[];
   totalTime: number;
+  // registrationComplete: boolean;
+  // classIdval: string;
 
   setCategory: (category: string) => void;
   setSubCategory: (subCategory: string) => void;
@@ -47,6 +49,8 @@ export interface ClassRegister {
   setPrice: (price: number) => void;
   setSelectedTime: (selectedTime: string[]) => void;
   setTotalTime: (totalTime: number) => void;
+  // setRegistrationComplete: (registrationComplete: boolean) => void;
+  // setClassIdval: (classIdval: string) => void;
   // setImage: (image: string[]) => void;
 }
 
