@@ -5,7 +5,7 @@ import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
 
 import { ko } from 'date-fns/locale';
-import RegisterScheduleStore from '@/store/RegisterScheduleStore';
+import RegisterScheduleStore from '@/store/registerScheduleStore';
 
 const TimeSelect: React.FC = () => {
   const {
