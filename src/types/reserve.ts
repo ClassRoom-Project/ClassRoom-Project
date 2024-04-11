@@ -37,7 +37,6 @@ export interface DBReservationDetailsType {
   time_id: string;
   user_id: string;
   class: {
-    class_id: string;
     title: string;
     total_time: string;
     location: string;
@@ -45,8 +44,6 @@ export interface DBReservationDetailsType {
   time: {
     date: { day: string };
     times: string;
-    date_id: string;
-    time_id: string;
   };
 }
 export interface ReservationDetailsType {
@@ -56,7 +53,6 @@ export interface ReservationDetailsType {
   reservePrice: number;
   timeId: string;
   class: {
-    classId: string;
     title: string;
     totalTime: string;
     location: string;
@@ -64,7 +60,5 @@ export interface ReservationDetailsType {
   time: {
     date: { day: string };
     times: string;
-    dateId: string;
-    timeId: string;
   };
 }

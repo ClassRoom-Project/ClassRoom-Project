@@ -33,14 +33,11 @@ export const fetchReservationDetails = async (reserveId: string) => {
     class: {
       title: data.class.title,
       totalTime: data.class.total_time,
-      location: data.class.location,
-      classId: data.class.class_id
+      location: data.class.location
     },
     time: {
       date: { day: data.time.date.day },
-      times: data.time.times,
-      dateId: data.time.date_id,
-      timeId: data.time.time_id
+      times: data.time.times
     }
   };
 
