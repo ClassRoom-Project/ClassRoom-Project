@@ -103,7 +103,10 @@ const ReservationCompletePage = () => {
         ) : isInvalidRequest && !reservationRequest ? (
           <div>예약 도중 오류 발생!!!</div>
         ) : (
-          <LoadingSpinner />
+          <div className="flex justify-center flex-col items-center gap-4">
+            <span className="loading loading-spinner loading-lg text-primary"></span>
+            <p>잠시만 기다려주세요..</p>
+          </div>
         )}
       </div>
     </div>

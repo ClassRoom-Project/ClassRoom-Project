@@ -1,15 +1,15 @@
 'use client';
 
-import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
 import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { ToastContainer } from 'react-toastify';
+import React, { useEffect } from 'react';
+import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
+import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 import { quantityWarning } from '../common/Toastify';
+import { ToastContainer } from 'react-toastify';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
@@ -79,8 +79,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
   return (
     <>
       <ToastContainer />
-      <button onClick={handleReserveButtonClick} className="bg-white w-32 text-center self-end">
-        예약하기
+      <button className="btn bg-point-purple text-white tracking-wide w-full" onClick={handleReserveButtonClick}>
+        결제하자
       </button>
     </>
   );
