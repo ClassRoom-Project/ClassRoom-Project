@@ -23,7 +23,7 @@ const MyComments = () => {
   }
 
   return (
-    <ul className="flex flex-col flex-wrap">
+    <ul className="flex flex-col w-[1080px]">
       {myComments.map((comment) => (
         <MyCommentItem key={comment.comment_id} comment={comment} />
       ))}

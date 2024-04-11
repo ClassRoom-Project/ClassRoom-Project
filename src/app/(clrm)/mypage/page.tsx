@@ -26,7 +26,7 @@ const MyPage = () => {
 
   return (
     <>
-      <div className="w-xl flex ">
+      <div className="flex justify-center">
         {/* teacher의 boolean 값에 따라 마이페이지 구분*/}
         {isTeacher ? <TeacherMyPageTab /> : <StudentMyPageTab />}
       </div>

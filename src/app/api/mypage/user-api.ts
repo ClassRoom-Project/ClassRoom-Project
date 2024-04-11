@@ -40,7 +40,7 @@ export const updateUserRole = async (isTeacher: boolean | null, loginUserId: str
 export const getUserInfo = async ({ userId }: { userId: string }) => {
   const { data: userInfo, error }: PostgrestMaybeSingleResponse<UserInfoType> = await supabase
     .from('users')
-    .select('nickname, email, profile_image')
+    .select('nickname, email, profile_image, isTeacher')
     .eq('user_id', userId)
     .single();
 

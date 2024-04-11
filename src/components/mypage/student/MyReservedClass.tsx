@@ -13,6 +13,7 @@ const MyReservedClass = () => {
     queryFn: () => fetchMyClasses(loginUserId),
     enabled: !!loginUserId
   });
+  console.log('reservedClasses', reservedClasses);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
@@ -23,7 +24,7 @@ const MyReservedClass = () => {
   }
 
   return (
-    <div className="w-[1280px] ">
+    <div className="w-[1080px] ">
       <ul>
         {reservedClasses.map((classItem) => (
           <MyReservedClassItem key={classItem.reserve_id} classItem={classItem} />

@@ -135,92 +135,101 @@ const AddTeacherInfo = () => {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
-    <div>
-      <div className="flex flex-col">
-        <div className="m-4 p-4 flex flex-col gap-4">
-          <p>강사 이름</p>
-          <div className="flex flex-col">
-            {!isHaveTeacherInfo ? (
-              <input
-                type="text"
-                placeholder="본명을 입력해주세요."
-                className="input input-bordered w-[300px]"
-                value={teacherName}
-                onChange={handleOnChangeAddTeacherName}
-              />
-            ) : (
-              <p>{teacherName}</p>
-            )}
-            {isAvailableName ? '' : <p className="font-thin p-2">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>}
+    <div className="flex flex-col gap-8 justify-center items-center bg-light-purple w-[960px] p-4">
+      <p className=" text-center text-text-dark-gray">아래의 해당 정보를 입력하여 강사로 등록해보세요!</p>
+      <div className="flex">
+        <div className="flex flex-col">
+          <div className="p-4 flex flex-col gap-4">
+            <p className="text-text-dark-gray font-bold">강사 이름</p>
+            <div className="flex flex-col">
+              {!isHaveTeacherInfo ? (
+                <input
+                  type="text"
+                  placeholder="본명을 입력해주세요."
+                  className="input input-bordered w-[250px] border-point-purple shadow-md"
+                  value={teacherName}
+                  onChange={handleOnChangeAddTeacherName}
+                />
+              ) : (
+                <p>{teacherName}</p>
+              )}
+              {isAvailableName ? '' : <p className="font-thin p-2">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>}
+            </div>
+          </div>
+          <div className=" p-4 flex flex-col gap-4">
+            <p className="text-text-dark-gray font-bold">휴대폰 번호</p>
+            <div className="flex flex-col">
+              {!isHaveTeacherInfo ? (
+                <input
+                  type="text"
+                  placeholder="휴대폰 번호를 입력해주세요."
+                  className="input input-bordered w-[250px] border-point-purple shadow-md"
+                  value={teacherNumber}
+                  onChange={handleOnChangeAddTeacherNumber}
+                />
+              ) : (
+                <p>{teacherNumber}</p>
+              )}
+              {isAvailableNumber ? (
+                ''
+              ) : (
+                <p className="font-thin p-2">휴대폰 번호의 양식에 맞게 입력해주세요(- 제외).</p>
+              )}
+            </div>
           </div>
         </div>
-        <div className="m-4 p-4 flex flex-col gap-4">
-          <p>휴대폰 번호</p>
-          <div className="flex flex-col">
-            {!isHaveTeacherInfo ? (
-              <input
-                type="text"
-                placeholder="휴대폰 번호를 입력해주세요."
-                className="input input-bordered w-[300px]"
-                value={teacherNumber}
-                onChange={handleOnChangeAddTeacherNumber}
-              />
-            ) : (
-              <p>{teacherNumber}</p>
-            )}
-            {isAvailableNumber ? '' : <p className="font-thin p-2">휴대폰 번호의 양식에 맞게 입력해주세요.</p>}
-          </div>
-        </div>
-        <SelectOption
-          id={jobId}
-          label="직업"
-          value={selectedJob}
-          onChange={handleOnChangeJob}
-          disabled={isHaveTeacherInfo}
-          options={jobs}
-        />
-        <SelectOption
-          id={fieldId}
-          label="비지니스 분야"
-          value={selectedField}
-          onChange={handleOnChangeField}
-          disabled={isHaveTeacherInfo}
-          options={fields}
-        />
-        <SelectOption
-          id={bankId}
-          label="은행"
-          value={selectedBank}
-          onChange={handleOnChangeSelectedBank}
-          disabled={isHaveTeacherInfo}
-          options={koreanBanks}
-        />
-        <div className="m-4 p-4 flex flex-col gap-4">
-          <p>계좌 정보</p>
-          <div className="flex flex-col">
-            {!isHaveTeacherInfo ? (
-              <input
-                type="text"
-                placeholder="계좌 번호를 입력해주세요."
-                className="input input-bordered w-[300px]"
-                value={userAccount}
-                onChange={handleOnChangeAddAccount}
-              />
-            ) : (
-              <p>{secretAccount}</p>
-            )}{' '}
-            {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
+        <div>
+          <SelectOption
+            id={jobId}
+            label="직업"
+            value={selectedJob}
+            onChange={handleOnChangeJob}
+            disabled={isHaveTeacherInfo}
+            options={jobs}
+          />
+          <SelectOption
+            id={fieldId}
+            label="비지니스 분야"
+            value={selectedField}
+            onChange={handleOnChangeField}
+            disabled={isHaveTeacherInfo}
+            options={fields}
+          />
+          <SelectOption
+            id={bankId}
+            label="은행"
+            value={selectedBank}
+            onChange={handleOnChangeSelectedBank}
+            disabled={isHaveTeacherInfo}
+            options={koreanBanks}
+          />
+          <div className=" p-4 flex flex-col gap-4">
+            <p className="text-text-dark-gray font-bold">계좌 정보</p>
+            <div className="flex flex-col">
+              {!isHaveTeacherInfo ? (
+                <input
+                  type="text"
+                  placeholder="계좌 번호를 입력해주세요."
+                  className="input input-bordered w-[250px] border-point-purple shadow-md"
+                  value={userAccount}
+                  onChange={handleOnChangeAddAccount}
+                />
+              ) : (
+                <p>{secretAccount}</p>
+              )}{' '}
+              {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
+            </div>
           </div>
         </div>
       </div>
       <div className="p-4 flex gap-4">
         {isHaveTeacherInfo ? (
-          <button onClick={handleOnClickMoveToEditTeacherInfoBtn} className="btn bg-point-color text-white">
+          <button onClick={handleOnClickMoveToEditTeacherInfoBtn} className="btn bg-dark-purple-color text-white">
             선생님 정보 수정하기
           </button>
         ) : (
           <div>
-            <button onClick={handleOnClickAddTeacherInfoBtn} className="btn bg-point-color text-white">
+            <button onClick={handleOnClickAddTeacherInfoBtn} className="btn bg-dark-purple-color text-white">
               선생님 정보 등록하기
             </button>
             <ToastContainer />

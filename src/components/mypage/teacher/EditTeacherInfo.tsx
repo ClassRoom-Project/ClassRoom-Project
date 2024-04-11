@@ -154,26 +154,21 @@ const EditTeacherInfo = () => {
   }
 
   return (
-    <div className="flex">
-      <div className="flex flex-col items-center p-4 gap-4">
-        <Image
-          src={userInfo?.profile_image}
-          alt="기본 프로필 이미지"
-          width={100}
-          height={100}
-          className="rounded-full"
-        />
-      </div>
-      <div className="flex flex-col">
+    <div className="flex flex-col gap-8 justify-center items-center bg-light-purple w-[960px] p-4">
+      <p className=" text-center text-text-dark-gray">
+        회원님이 등록하신 강사 정보입니다. <br />
+        수정을 원하시면 아래 정보 수정하기 버튼을 눌러주세요.{' '}
+      </p>
+      <div className="flex gap-10">
         <div className="flex flex-col">
-          <div className="m-4 p-4 flex flex-col gap-4">
-            <p>강사 이름</p>
+          <div className="p-4 flex flex-col gap-4">
+            <p className="text-text-dark-gray font-bold">강사 이름</p>
             <div className="flex flex-col">
               {isEditing ? (
                 <input
                   type="text"
                   placeholder="본명을 입력해주세요."
-                  className="input input-bordered w-[300px]"
+                  className="input input-bordered w-[250px]  border-point-purple shadow-md"
                   value={newTeacherName}
                   onChange={handleOnChangeAddTeacherName}
                 />
@@ -183,14 +178,14 @@ const EditTeacherInfo = () => {
               {isAvailableName ? '' : <p className="font-thin p-2">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>}
             </div>
           </div>
-          <div className="m-4 p-4 flex flex-col gap-4">
-            <p>휴대폰 번호</p>
+          <div className="p-4 flex flex-col gap-4">
+            <p className="text-text-dark-gray font-bold">휴대폰 번호</p>
             <div className="flex flex-col">
               {isEditing ? (
                 <input
                   type="text"
                   placeholder="휴대폰 번호를 입력해주세요."
-                  className="input input-bordered w-[300px]"
+                  className="input input-bordered w-[250px]  border-point-purple shadow-md"
                   value={newTeacherNumber}
                   onChange={handleOnChangeAddTeacherNumber}
                 />
@@ -200,69 +195,73 @@ const EditTeacherInfo = () => {
               {isAvailableNumber ? '' : <p className="font-thin p-2">휴대폰 번호의 양식에 맞게 입력해주세요.</p>}
             </div>
           </div>
-          <SelectOption
-            id={jobId}
-            label="직업"
-            value={newSelectedJob}
-            onChange={handleOnChangeJob}
-            disabled={!isEditing}
-            options={jobs}
-          />
-          <SelectOption
-            id={fieldId}
-            label="비지니스 분야"
-            value={newSelectedField}
-            onChange={handleOnChangeField}
-            disabled={!isEditing}
-            options={fields}
-          />
-          <SelectOption
-            id={bankId}
-            label="은행"
-            value={newSelectedBank}
-            onChange={handleOnChangeSelectedBank}
-            disabled={!isEditing}
-            options={koreanBanks}
-          />
-          <div className="m-4 p-4 flex gap-4 flex-col">
-            <span>계좌 정보</span>
-            <div className="flex flex-col">
-              {isEditing ? (
-                <input
-                  type="text"
-                  placeholder="계좌 번호를 입력해주세요."
-                  className="input input-bordered w-[300px]"
-                  value={newAccount}
-                  onChange={handleOnChangeAddAccount}
-                />
-              ) : (
-                <p>{secretAccount}</p>
-              )}
-              {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
-            </div>
-          </div>
-          <div className="m-4 p-4 flex gap-4">
-            <span>총 수익</span>
+        </div>
+        <div className="flex flex-col">
+          <div className="flex flex-col">
+            <SelectOption
+              id={jobId}
+              label="직업"
+              value={newSelectedJob}
+              onChange={handleOnChangeJob}
+              disabled={!isEditing}
+              options={jobs}
+            />
+            <SelectOption
+              id={fieldId}
+              label="비지니스 분야"
+              value={newSelectedField}
+              onChange={handleOnChangeField}
+              disabled={!isEditing}
+              options={fields}
+            />
+            <SelectOption
+              id={bankId}
+              label="은행"
+              value={newSelectedBank}
+              onChange={handleOnChangeSelectedBank}
+              disabled={!isEditing}
+              options={koreanBanks}
+            />
+            <div className="p-4 flex gap-4 flex-col">
+              <span className="text-text-dark-gray font-bold">계좌 정보</span>
+              <div className="flex flex-col">
+                {isEditing ? (
+                  <input
+                    type="text"
+                    placeholder="계좌 번호를 입력해주세요."
+                    className="input input-bordered w-[250px] border-point-purple shadow-md"
+                    value={newAccount}
+                    onChange={handleOnChangeAddAccount}
+                  />
+                ) : (
+                  <p>{secretAccount}</p>
+                )}
+                {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
+              </div>
+            </div>{' '}
             {/* <span>어떤 값이 들어 가야 할까요?</span> */}
+            {/* <div className="m-4 p-4 flex gap-4">
+              <span>총 수익</span>
+            </div> */}
           </div>
         </div>
-        <div className="p-4 flex gap-4">
-          {isEditing ? (
-            <div>
-              <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px]">
-                수정 완료
-              </button>
-              <ToastContainer />
-            </div>
-          ) : (
-            <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
-              수정하기
+      </div>
+      <div className="p-4 flex gap-4">
+        {isEditing ? (
+          <div>
+            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px]">
+              수정 완료
             </button>
-          )}
-          <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-point-color text-white">
-            취소하기
+            <ToastContainer />
+          </div>
+        ) : (
+          <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
+            수정하기
           </button>
-        </div>
+        )}
+        <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-dark-purple-color text-white">
+          취소하기
+        </button>
       </div>
     </div>
   );

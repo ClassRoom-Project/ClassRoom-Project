@@ -32,29 +32,45 @@ const StudentMyPageTab = () => {
   };
 
   return (
-    <div className="m-4 p-4">
-      <div className="gap-4 flex">
+    <div className="m-4 p-4 gap-4 flex flex-col items-center w-[1280px]">
+      <div className="flex flex-row justify-center border-y-2 w-full">
         <p
           onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4 m-4 ${activePage === 'editProfile' ? 'font-bold cursor-pointer text-point-color ' : ''}`}
+          className={`p-4 ${
+            activePage === 'editProfile'
+              ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color  '
+              : ''
+          }`}
         >
           프로필 수정하기
         </p>
         <p
           onClick={() => handleOnClickTabBtn('reservedClass')}
-          className={`p-4 m-4  ${activePage === 'reservedClass' ? 'font-bold cursor-pointer text-point-color' : ''}`}
+          className={`p-4  ${
+            activePage === 'reservedClass'
+              ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
+              : ''
+          }`}
         >
           내가 예약한 클래스 보기
         </p>
         <p
           onClick={() => handleOnClickTabBtn('myComments')}
-          className={`p-4 m-4 ${activePage === 'myComments' ? 'font-bold cursor-pointer  text-point-color' : ''}`}
+          className={`p-4 ${
+            activePage === 'myComments'
+              ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
+              : ''
+          }`}
         >
           내가 쓴 후기 보기
         </p>
         <p
           onClick={() => handleOnClickTabBtn('addTeacherInfo')}
-          className={`p-4 m-4 ${activePage === 'addTeacherInfo' ? 'font-bold cursor-pointer text-point-color ' : ''}`}
+          className={`p-4 ${
+            activePage === 'addTeacherInfo'
+              ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
+              : ''
+          }`}
         >
           선생님 정보 등록하기
         </p>

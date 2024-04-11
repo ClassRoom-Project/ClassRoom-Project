@@ -3,6 +3,8 @@ import Image from 'next/image';
 import React from 'react';
 
 const MyClassStudentItem = ({ student }: { student: MyClassStudentInfoType }) => {
+  // 가격 콤마(,) 넣기
+  const formattedPrice = student.reserve_price.toLocaleString();
   return (
     <li className="flex items-center gap-4 border-y border-y-light-gray p-4 ">
       <Image
@@ -16,7 +18,7 @@ const MyClassStudentItem = ({ student }: { student: MyClassStudentInfoType }) =>
       <p>닉네임 : {student.nickname}</p>
       <p>이메일 : {student.email}</p>
       <p>예약 인원 : {student.reserve_quantity}</p>
-      <p>예약 금액 : {student.reserve_price}</p>
+      <p>예약 금액 : {formattedPrice}</p>
       <button className="btn">1:1 채팅</button>
     </li>
   );

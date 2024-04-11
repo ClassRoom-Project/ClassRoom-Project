@@ -12,6 +12,7 @@ export interface UserInfoType {
   nickname: string;
   profile_image: string;
   userId: string;
+  isTeacher: boolean;
 }
 
 // 선생님 정보 type
