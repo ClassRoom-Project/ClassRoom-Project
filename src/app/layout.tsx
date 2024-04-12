@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -16,6 +17,10 @@ export default function RootLayout({ children }: Props) {
     <html lang="ko">
       <body className={inter.className}>
         <QueryProvider>{children}</QueryProvider>
+        <Script
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74879e175ebce507c0f0c29186f18b48&libraries=services,clusterer&autoload=false"
+          strategy="beforeInteractive"
+        />
       </body>
     </html>
   );

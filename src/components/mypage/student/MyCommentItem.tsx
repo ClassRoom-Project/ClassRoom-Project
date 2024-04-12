@@ -106,7 +106,6 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
           </div>
         </section>
         <div className="pt-4">
-          <p>{rating}</p>
           <Stars rating={rating} />
         </div>
         <section className="pt-4">

@@ -24,7 +24,7 @@ const MyReservedClass = () => {
   }
 
   return (
-    <div className="w-[1080px] ">
+    <div className="w-[1280px]">
       <ul>
         {reservedClasses.map((classItem) => (
           <MyReservedClassItem key={classItem.reserve_id} classItem={classItem} />
