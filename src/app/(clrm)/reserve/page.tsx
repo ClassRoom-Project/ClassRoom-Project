@@ -1,13 +1,12 @@
+import { newFetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
 import ClassInfo from '@/components/reserve/ClassInfo';
+import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
 import DateTimePicker from '@/components/reserve/DateTimePicker';
 import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
-import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
-import { newFetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
+import ReserveUserInfo from '@/components/reserve/ReserveUserInfo';
 import Link from 'next/link';
 import { SlArrowLeft } from 'react-icons/sl';
-import ReserveUserInfo from '@/components/reserve/ReserveUserInfo';
-import SelectedDate from '@/components/reserve/SelectedDate';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
@@ -34,7 +33,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
                 <DateTimePicker classDates={classInfo.dates} />
                 <CurrentReserveQuantity classId={classInfo.classId} maxPeople={classInfo?.maxPeople} />
                 <PriceCalculator price={classInfo.price} classId={classInfo.classId} maxPeople={classInfo.maxPeople} />
-                <ReserveButton classId={classInfo.classId} maxPeople={classInfo.maxPeople} />
+                <ReserveButton classId={classInfo.classId} maxPeople={classInfo.maxPeople} title={classInfo.title} />
               </div>
             </div>
           </div>

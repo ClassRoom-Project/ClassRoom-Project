@@ -28,7 +28,6 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
 
   if (isError) {
-    console.log('에러낫어');
     console.log(isError);
     invalidReserve();
     return;

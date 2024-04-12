@@ -1,11 +1,10 @@
 'use client';
 
-import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-import { useEffect, useRef, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { useAsync } from 'react-use';
-import { nanoid } from 'nanoid';
 import { useReserveStore } from '@/store/reserveClassStore';
+import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useRef } from 'react';
+import { useAsync } from 'react-use';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
@@ -14,7 +13,7 @@ export default function PaymentPageasync() {
   const customerKey = searchParams.get('customerKey') || crypto.randomUUID();
   const price = parseInt(searchParams.get('price') || '', 10) || 0;
   const orderId = searchParams.get('orderId');
-  const classId = searchParams.get('classId') || crypto.randomUUID();
+  // const classId = searchParams.get('classId') || crypto.randomUUID();
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
   const title = searchParams.get('title');
@@ -70,7 +69,7 @@ export default function PaymentPageasync() {
             try {
               await paymentWidget?.requestPayment({
                 orderId: orderId as string,
-                orderName: 'title' as string,
+                orderName: title as string,
                 // 라우트 핸들러로 예약 정보 전송
                 successUrl: `${window.location.origin}/api/payment?classId=${reserveInfo.classId}&reserveQuantity=${reserveInfo.reserveQuantity}&timeId=${reserveInfo.timeId}&userId=${reserveInfo.userId}`,
                 //fail 시 보여줄 페이지 만들기
