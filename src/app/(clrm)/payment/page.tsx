@@ -101,11 +101,11 @@ export default function PaymentPageasync() {
             const paymentWidget = paymentWidgetRef.current;
             try {
               await paymentWidget?.requestPayment({
-                orderId: orderId as string,
+                orderId: crypto.randomUUID(),
                 orderName: `${title}__${goToClassDate}${useClassTime}_${totalPerson}명`,
                 customerEmail: userEmail as string,
                 //여기에 예약확인 페이지로 넘기기
-                successUrl: `${window.location.origin}/reserve/checkPay`,
+                successUrl: `${window.location.origin}/api/payment`,
                 //fail 시 보여줄 페이지 만들기
                 failUrl: `${window.location.origin}/fail?orderId=${customerKey}`
               });

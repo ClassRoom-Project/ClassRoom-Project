@@ -22,6 +22,7 @@ const CheckPage = () => {
     }
   }, []);
 
+  //TODO: 여기서 한번더 남은자리 체크해도 좋을듯
   useEffect(() => {
     if (reservationRequest) {
       const submitReservation = async () => {
@@ -42,14 +43,14 @@ const CheckPage = () => {
     if (queryOrderId === storageOrderId) {
       console.log('여기다');
       if (reserveId) {
-        router.replace(`/reserve/success/${reserveId}`);
+        // router.replace(`/reserve/success/${reserveId}`);
       }
     }
   }, [reserveId]);
 
   return (
-    <div className="flex justify-center flex-col items-center gap-4">
-      <span className="loading loading-spinner loading-lg bg-gray-400"></span>
+    <div className="flex justify-center flex-col items-center gap-4 w-full items-center">
+      <span className="loading loading-spinner loading-xl bg-gray-400"></span>
       <p>잠시만 기다려주세요..</p>
     </div>
   );
