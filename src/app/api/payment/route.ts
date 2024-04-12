@@ -29,8 +29,8 @@ export async function GET(request: NextRequest) {
     }
   });
 
-  const data = await response.json(); // Properly handling JSON conversion
-  console.log(data);
+  const data = await response.json();
+  // console.log(data);
 
   return NextResponse.redirect(new URL(`http://localhost:3000/reserve/success/${data.orderId}`));
 }

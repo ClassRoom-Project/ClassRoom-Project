@@ -105,7 +105,12 @@ export default function PaymentPageasync() {
                 orderName: `${title}__${goToClassDate}${useClassTime}_${totalPerson}명`,
                 customerEmail: userEmail as string,
                 //여기에 예약확인 페이지로 넘기기
-                successUrl: `${window.location.origin}/api/payment`,
+                // 라우트 핸들러로 예약 정보 전송
+                successUrl: `${window.location.origin}/api/payment?
+                classId=${reserveInfo.classId}
+                &reserveQuantity=${reserveInfo.reserveQuantity}
+                &timeId=${reserveInfo.timeId}
+                &userId=${reserveInfo.userId}}`,
                 //fail 시 보여줄 페이지 만들기
                 failUrl: `${window.location.origin}/fail?orderId=${customerKey}`
               });
