@@ -4,6 +4,8 @@ import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useAsync } from 'react-use';
+import { nanoid } from 'nanoid';
+import { useReserveStore } from '@/store/reserveClassStore';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
@@ -11,18 +13,12 @@ export default function PaymentPageasync() {
   const searchParams = useSearchParams();
   const customerKey = searchParams.get('customerKey') || crypto.randomUUID();
   const price = parseInt(searchParams.get('price') || '', 10) || 0;
+  const orderId = searchParams.get('orderId');
   const classId = searchParams.get('classId') || crypto.randomUUID();
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
-
-  const [reserveId, setReserveId] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const reservationId = window.localStorage.getItem('reservationId');
-      setReserveId(reservationId);
-    }
-  }, []);
+  const title = searchParams.get('title');
+  const { reserveInfo } = useReserveStore();
 
   useAsync(async () => {
     //초기화
@@ -73,15 +69,15 @@ export default function PaymentPageasync() {
             const paymentWidget = paymentWidgetRef.current;
             try {
               await paymentWidget?.requestPayment({
-                orderId: customerKey as string,
-                orderName: classId as string,
-                //여기에 예약확인 페이지로 넘기기
-                successUrl: `${window.location.origin}/reserve/${reserveId}`,
+                orderId: orderId as string,
+                orderName: 'title' as string,
+                // 라우트 핸들러로 예약 정보 전송
+                successUrl: `${window.location.origin}/api/payment?classId=${reserveInfo.classId}&reserveQuantity=${reserveInfo.reserveQuantity}&timeId=${reserveInfo.timeId}&userId=${reserveInfo.userId}`,
                 //fail 시 보여줄 페이지 만들기
                 failUrl: `${window.location.origin}/fail?orderId=${customerKey}`
               });
             } catch (error: any) {
-              console.log('faild to paymentWidget', error);
+              console.log('failed to paymentWidget', error);
             }
           }}
         >

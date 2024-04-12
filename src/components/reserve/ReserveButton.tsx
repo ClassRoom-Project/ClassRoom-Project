@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { quantityWarning } from '../common/Toastify';
+import { nanoid } from 'nanoid';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
@@ -30,7 +31,6 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
     if (currentReservedQuantity) {
       const currentRemainingQuantity = maxPeople - currentReservedQuantity;
-
       // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
       if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
         alert('정원 초과로 인해 예약할 수 없습니다. ');
@@ -39,10 +39,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       }
     }
 
-    const randomOrderId = crypto.randomUUID();
-
     router.replace(
-      `/payment?orderId=${randomOrderId}&price=${reserveInfo.reservePrice}&classId=${reserveInfo.classId}`
+      `/payment?orderId=${crypto.randomUUID()}&price=${reserveInfo.reservePrice}&classId=${reserveInfo.classId}`
     );
   };
 

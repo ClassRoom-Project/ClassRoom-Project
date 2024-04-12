@@ -28,6 +28,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
 
   if (isError) {
+    console.log('에러낫어');
     console.log(isError);
     invalidReserve();
     return;
@@ -101,7 +102,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
             <div className="divider mb-4 mt-6"></div>
             <NavigationButtons />
           </>
-        ) : !isLoading && isError ? (
+        ) : isError ? (
           <div className="flex flex-col justify-center items-center">
             <p>예약을 완료하는 도중 오류가 발생했습니다. </p>
           </div>
