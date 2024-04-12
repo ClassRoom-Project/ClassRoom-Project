@@ -1,6 +1,12 @@
 module.exports = {
+  images: {
+    domains: ['daisyui.com']
+  },
   plugins: {
     tailwindcss: {},
-    autoprefixer: {},
+    autoprefixer: {}
   },
+  experimental: {
+    missingSuspenseWithCSRBailout: false
+  }
 };
