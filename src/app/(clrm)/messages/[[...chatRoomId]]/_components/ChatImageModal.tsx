@@ -6,8 +6,6 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import Image from 'next/image';
 
 export default function ChatImageModal({ chatId }: { chatId: string }) {
-  console.log('chatId', chatId);
-
   const [photos, setPhotos] = useState<string[]>([]);
   const [countError, setCountError] = useState('');
   const { createNewPhotoMessageMutate } = useCreateNewPhotoMessage();
@@ -62,6 +60,8 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
       console.error('loginUserId is null');
       return;
     }
+
+    console.log(photos);
     createNewPhotoMessageMutate({ photos, chatId, loginUserId });
     setPhotos([]);
   };

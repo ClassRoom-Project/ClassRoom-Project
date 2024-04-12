@@ -27,6 +27,8 @@ const config: Config = {
         'point-purple': '#6C5FF7',
         'light-purple': '#F6F6FF',
         'disable-color': '#E3E1FC',
+
+        'background-color': '#EFEFFF',
         //button
         'button-default-color': '#6C5FF7',
         'button-hover-color': '#4D43B8',

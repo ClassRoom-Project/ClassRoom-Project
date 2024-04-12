@@ -1,5 +1,5 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { useCreateNewMessage } from '@/hooks/useChatRoom/useNewChatRoom';
+import { useCreateNewMessage, useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ChatMessagesType } from '@/types/chat/chatTypes';
 import { BsSend } from 'react-icons/bs';
@@ -9,6 +9,7 @@ import MessageBoxs from './MessageBoxs';
 export default function ChatMessages({ fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
   const { loginUserId } = useLoginStore();
   const { createNewMessageMutate } = useCreateNewMessage();
+  const { MakeClassUserInfo } = useReadMakeClassUserInfo(fromUserId);
 
   const handleSubmitMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,6 +25,8 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
     (e.target as HTMLFormElement).reset();
   };
 
+  const studentName = MakeClassUserInfo?.nickname;
+
   if (!chatId) {
     return (
       <div className="h-full flex justify-center items-center">
@@ -37,7 +40,14 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
       <div className="border-b border-grey-100 p-2 sticky top-0 w-full bg-[#EFEFFF]">
         <p className="sm:text-sm md:text-lg font-bold ">클래스명: {title}</p>
       </div>
-      <MessageBoxs toClassId={toClassId} title={title} fromUserId={fromUserId} chatId={chatId} otherId={otherId} />
+      <MessageBoxs
+        toClassId={toClassId}
+        title={title}
+        fromUserId={fromUserId}
+        chatId={chatId}
+        otherId={otherId}
+        studentName={studentName!}
+      />
       <div className="w-full flex justify-center items-center bg-white py-8 ">
         <form onSubmit={handleSubmitMessage} className="rounded-md border px-4 py-2 w-4/5 flex">
           <input

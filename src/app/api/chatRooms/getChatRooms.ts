@@ -4,7 +4,8 @@ import {
   CreateNewChatRoomType,
   MakeClassUserInfoType,
   SendNewMessageType,
-  SendNewPhotoMessageType
+  SendNewPhotoMessageType,
+  getChatRoomMessagesType
 } from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
@@ -149,4 +150,18 @@ export const createNewMessagesPhoto = async ({
   }
   console.log('삽입 성공:', newChat);
   return newChat;
+};
+
+//방 정보 가져오기
+export const getChatMessages = async (chatId: string): Promise<getChatRoomMessagesType[]> => {
+  const { data, error } = await supabase
+    .from('chat_messages')
+    .select('created_at, create_by, messages, images')
+    .eq('chat_id', chatId);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
 };

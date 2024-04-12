@@ -2,6 +2,7 @@ import {
   createChatRoom,
   createNewMessages,
   createNewMessagesPhoto,
+  getChatMessages,
   getChatRooms,
   getMakeClassUser
 } from '@/app/api/chatRooms/getChatRooms';
@@ -93,4 +94,14 @@ export function useCreateNewPhotoMessage() {
   });
 
   return { createNewPhotoMessageMutate };
+}
+
+//채팅내용 가져오기
+export function useReadChatRoomMessages(chatId: string) {
+  const { data: readChatRoomMessages } = useQuery({
+    queryKey: ['chatMessage', chatId],
+    queryFn: () => getChatMessages(chatId as string),
+    enabled: !!chatId
+  });
+  return { readChatRoomMessages };
 }

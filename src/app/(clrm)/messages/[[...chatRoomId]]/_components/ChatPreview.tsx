@@ -1,7 +1,6 @@
 import { useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import ProfileImage from '@/assets/images/profile-image.png';
 
 //데이터 불러오기,
