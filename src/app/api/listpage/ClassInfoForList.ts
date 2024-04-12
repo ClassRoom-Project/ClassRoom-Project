@@ -1,5 +1,9 @@
 import { supabase } from '../supabase/supabase';
 
+type PriceRange = {
+  min?: number;
+  max?: number;
+};
 // 페이지 번호(page)와 각 페이지당 항목 수(limit)를 인자로 받아, 페이지네이션된 데이터와 다음 페이지 정보를 반환
 export const getClassForList = async (
   page = 1,
@@ -10,7 +14,7 @@ export const getClassForList = async (
     selectedLocation?: string | null;
     selectedTime?: string[];
     selectedDifficulty?: string | null;
-    selectedPrice?: number | null;
+    selectedPrice?: PriceRange | null;
   }
 ) => {
   const PageNumber = (page - 1) * limit;
@@ -34,7 +38,15 @@ export const getClassForList = async (
   if (filters.selectedDifficulty) {
     query = query.eq('difficulty', filters.selectedDifficulty);
   }
-
+  if (filters.selectedPrice) {
+    if (filters.selectedPrice.min !== undefined && filters.selectedPrice.max !== undefined) {
+      query = query.gte('price', filters.selectedPrice.min).lte('price', filters.selectedPrice.max);
+    } else if (filters.selectedPrice.min !== undefined) {
+      query = query.gte('price', filters.selectedPrice.min);
+    } else if (filters.selectedPrice.max !== undefined) {
+      query = query.lte('price', filters.selectedPrice.max);
+    }
+  }
   const { data: classInfos, error, count } = await query;
   if (error) {
     console.error('클래스 정보들 불러오기 오류 => ', error);
