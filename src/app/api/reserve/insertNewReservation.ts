@@ -4,12 +4,13 @@ import { PostgrestSingleResponse } from '@supabase/supabase-js';
 
 export const insertNewReservation = async (reserveInfo: ReserveInfo) => {
   console.log('insertNewReservation 실행');
-  const { userId, classId, reservePrice, reserveQuantity, timeId } = reserveInfo;
+  const { reserveId, userId, classId, reservePrice, reserveQuantity, timeId } = reserveInfo;
 
   const { data, error }: PostgrestSingleResponse<{ reserve_id: string }> = await supabase
     .from('reserve')
     .insert([
       {
+        reserve_id: reserveId,
         user_id: userId,
         class_id: classId,
         reserve_price: reservePrice,

@@ -23,7 +23,7 @@ export default function PaymentPageasync() {
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
   const orderId = searchParams.get('orderId');
-  console.log(orderId, 'orderId');
+  // console.log(orderId, 'orderId');
 
   // const reservationId = typeof window !== 'undefined' ? window.localStorage.getItem('reservationId') : null;
 
@@ -99,6 +99,7 @@ export default function PaymentPageasync() {
           className="mt-8 bg-pale-color hover:bg-point-color text-white rounded-md px-5 py-2"
           onClick={async () => {
             const paymentWidget = paymentWidgetRef.current;
+
             try {
               await paymentWidget?.requestPayment({
                 orderId: crypto.randomUUID(),
@@ -106,11 +107,7 @@ export default function PaymentPageasync() {
                 customerEmail: userEmail as string,
                 //여기에 예약확인 페이지로 넘기기
                 // 라우트 핸들러로 예약 정보 전송
-                successUrl: `${window.location.origin}/api/payment?
-                classId=${reserveInfo.classId}
-                &reserveQuantity=${reserveInfo.reserveQuantity}
-                &timeId=${reserveInfo.timeId}
-                &userId=${reserveInfo.userId}}`,
+                successUrl: `${window.location.origin}/api/payment?classId=${reserveInfo.classId}&reserveQuantity=${reserveInfo.reserveQuantity}&timeId=${reserveInfo.timeId}&userId=${reserveInfo.userId}`,
                 //fail 시 보여줄 페이지 만들기
                 failUrl: `${window.location.origin}/fail?orderId=${customerKey}`
               });
