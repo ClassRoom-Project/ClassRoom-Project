@@ -2,7 +2,7 @@
 import useRegisterStore from '@/store/registerStore';
 import React from 'react';
 
-const ClassTypeDiff = () => {
+const ClassDiff = () => {
   const { difficulty, setDifficulty } = useRegisterStore();
 
   const handleDifficultyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -29,4 +29,4 @@ const ClassTypeDiff = () => {
   );
 };
 
-export default ClassTypeDiff;
+export default ClassDiff;

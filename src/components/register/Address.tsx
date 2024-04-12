@@ -3,6 +3,10 @@ import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import useRegisterStore from '@/store/registerStore';
 import { AddressData } from '@/types/register';
+<<<<<<< HEAD
+=======
+import useRegisterStore from '@/store/registerStore';
+>>>>>>> 42b02081411fbcbcffecfaf150b11d52f59e5a17
 
 const Address = () => {
   const { address, detailAddress, setAddress, setDetailAddress } = useRegisterStore();

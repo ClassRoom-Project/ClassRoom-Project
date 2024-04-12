@@ -1,6 +1,7 @@
 'use client';
 
 import LoginState from '@/components/login/LoginState';
+import Notification from '@/components/notifications/Notification'
 import { userInfoStore } from '@/store/mypage/userInfoStore';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import Image from 'next/image';
@@ -33,7 +34,12 @@ const Header = ({ children }: PropsWithChildren) => {
         <div className="flex items-center">
           <div className="mr-[10px]">
             <LuBell size={30} />
+<<<<<<< HEAD
           </div>
+=======
+          </div>{' '}
+          <Notification />
+>>>>>>> 42b02081411fbcbcffecfaf150b11d52f59e5a17
           <p className="p-4">
             {userInfo?.nickname} <span className="text-point-color font-bold">{roleName}님</span>
           </p>

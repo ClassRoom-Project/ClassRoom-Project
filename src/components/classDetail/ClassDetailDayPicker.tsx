@@ -20,7 +20,7 @@ const css = `
 const bookedStyle = { border: '1px solid #5373FF', borderRadius: '20%', backgroundColor: '#5373FF', color: 'white' };
 
 export default function App({ classDate }: { classDate: string[] }) {
-  const bookedDays = classDate.map((dateStr) => new Date(dateStr));
+  const bookedDays = classDate?.map((dateStr) => new Date(dateStr));
   return (
     <div className="flex flex-col items-center justify-center">
       <style>{css}</style>

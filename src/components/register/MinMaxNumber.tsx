@@ -1,9 +1,13 @@
 'use client';
+<<<<<<< HEAD
 
+=======
+import useRegisterStore from '@/store/registerStore';
+>>>>>>> 42b02081411fbcbcffecfaf150b11d52f59e5a17
 import React from 'react';
 import useRegisterStore from '@/store/registerStore';
 
-const MinNumber = () => {
+const MinMaxNumber = () => {
   const { minNumber, maxNumber, personnel, setMinNumber, setMaxNumber, setPersonnel } = useRegisterStore();
 
   const handlePersonnelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,4 +64,4 @@ const MinNumber = () => {
   );
 };
 
-export default MinNumber;
+export default MinMaxNumber;
