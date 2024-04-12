@@ -4,9 +4,9 @@ import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import PlusImage from '../../../public/plusImage.jpg';
 import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
+import { FiPlusCircle } from "react-icons/fi";
 
 interface ImageFileWithPreview {
   file: File;
@@ -145,7 +145,6 @@ const ImageUpload = () => {
           }
         }
       }
-
       alert('등록이 완료되었습니다.');
       router.push(`/register/completed/${classId}`);
     }
@@ -166,15 +165,6 @@ const ImageUpload = () => {
       console.log(newImages);
     }
   };
-
-  // // 이미지 맨 앞으로 이동하는 함수
-  // const handleMoveToFront = (index: number) => {
-  //   const selectedImage = images[index];
-  //   const remainingImages = images.filter((_, i) => i !== index);
-  //   // 선택된 이미지를 새 배열의 첫번째 요소로 두고 그 뒤에 나머지 애들 붙임
-  //   const newImages = [selectedImage, ...remainingImages];
-  //   setImages(newImages);
-  // };
 
   // 이미지 순서를 변경하는 함수
   const handleImageDragStart = (index: number, event: React.DragEvent<HTMLDivElement>) => {
@@ -199,7 +189,7 @@ const ImageUpload = () => {
     setImages(updatedImages);
   };
 
-  // 이미지 삭제 함수수
+  // 이미지 삭제 함수
   const handleImageDelete = (index: number) => {
     const newImage = images.filter((_, i) => i !== index);
     setImages(newImage);
@@ -208,55 +198,57 @@ const ImageUpload = () => {
   return (
     <div className='my-4 w-full'>
       <div className="flex flex-col w-full">
+        <div className="mb-4"> {/* 여기서 mb-4는 + 버튼과 이미지들 사이의 마진을 추가하기 위함입니다. */}
+        <label 
+          htmlFor="image-upload" 
+          className="border border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
+        >
+          사진추가
+        </label>
+        <input
+          id="image-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          style={{ display: 'none' }}
+        />
+        </div>
         <div className="flex flex-wrap">
-          {/* PlusImage 항상 보이게 변경 */}
-          <label htmlFor="image-upload" className="cursor-pointer">
-            <Image src={PlusImage} alt="PlusImage" width={120} height={120} unoptimized={true} />
-            <input
-              id="image-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ display: 'none' }}
-            />
-          </label>
-          {images.map((image, index) => (
-            <div 
-              key={index} 
-              className="h-[120px] w-[120px] relative ml-2" 
-              draggable={true}
-              onDragStart={(event) => handleImageDragStart(index, event)}
-              onDragOver={handleImageDragOver}
-              onDrop={(event) => handleImageDrop(index, event)}
-            >
-              <Image
-                src={image.preview}
-                alt="uploaded"
-                fill
-                className="h-full w-full object-cover rounded-[20px] border"
-              />
-              {/* <button
-                className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${
-                  index === 0 ? 'bg-blue-500' : 'bg-white-500'
-                }`}
-                onClick={() => handleMoveToFront(index)}
+          {/* 이미지와 빈 박스를 함께 순회하여 표시 */}
+          {Array.from({ length: 5 }).map((_, index) => (
+            index < images.length ? (
+              <div 
+                key={index} 
+                className="h-[142px] w-[142px] relative ml-2 mt-2" 
+                draggable={true}
+                onDragStart={(event) => handleImageDragStart(index, event)}
+                onDragOver={handleImageDragOver}
+                onDrop={(event) => handleImageDrop(index, event)}
               >
-                🌼
-              </button> */}
-              <button
-                className="btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 bg-red-500 text-white"
-                onClick={() => handleImageDelete(index)}
-              >
-                -
-              </button>
-            </div>
+                <Image
+                  src={images[index].preview}
+                  alt="uploaded"
+                  fill
+                  className="h-full w-full object-cover rounded-[20px] border"
+                />
+                <button
+                  className="btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 bg-red-500 text-white"
+                  onClick={() => handleImageDelete(index)}
+                >
+                  -
+                </button>
+              </div>
+            ) : (
+              <div key={index} className="h-[142px] w-[142px] ml-2 mt-2 border-2 border-dashed border-gray-300 rounded-[20px]"></div>
+            )
           ))}
         </div>
 
         <div className="mt-12 w-full flex justify-center">
           <div>
-            <button onClick={handleSubmit} className="btn px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-[#4D43B8]">
-              등록하기
+            <button onClick={handleSubmit} className="btn px-4 py-2 bg-[#6C5FF7] text-white text-lg rounded hover:bg-[#4D43B8]">
+              <FiPlusCircle size={20}/>
+              클래스 등록하기
             </button>
           </div>
         </div>
