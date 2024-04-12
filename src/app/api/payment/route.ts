@@ -5,7 +5,6 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
 
-  const paymentType = searchParams.get('paymentType');
   const orderId = searchParams.get('orderId');
   const paymentKey = searchParams.get('paymentKey');
   const amount = searchParams.get('amount');
@@ -20,10 +19,10 @@ export async function GET(request: NextRequest) {
   }
 
   const response = await fetch('https://api.tosspayments.com/v1/payments/confirm', {
-    method: 'PATCH',
+    method: 'POST',
     body: JSON.stringify({ orderId: orderId, amount: amount, paymentKey: paymentKey }),
     headers: {
-      Authorization: `Basic ${Buffer.from(`${process.env.TOSS_SECRET_KEYI}:`).toString('base64')}`,
+      Authorization: `Basic ${Buffer.from(`${process.env.TOSS_SECRET_KEY}:`).toString('base64')}`,
       'Content-Type': 'application/json'
     }
   });
