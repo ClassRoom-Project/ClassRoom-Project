@@ -2,6 +2,8 @@
 import { FiAlignJustify } from 'react-icons/fi';
 import React, { useState } from 'react';
 import { useCategoryFilterStore, useListFilterStore } from '@/store/classFilterStore';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
+
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
@@ -15,20 +17,13 @@ const SearchFilter = () => {
     setClassFilters({
       selectedClassType: '',
       selectedLocation: null,
-      selectedAMPM: null,
+      selectedTime: [],
       selectedDifficulty: null,
       selectedPrice: null
     });
   };
   const handleClassTypeBtn = (classType: string) => {
     setClassFilters({ ...ClassFilters, selectedClassType: classType });
-  };
-  const ampm = ClassFilters.selectedAMPM;
-  const handleAMPMClick = (ampm: string) => {
-    setClassFilters({
-      ...ClassFilters,
-      selectedAMPM: ampm
-    });
   };
 
   return (
@@ -45,9 +40,9 @@ const SearchFilter = () => {
             tabIndex={0}
             className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-white border-gray-300 border-solid border-[1px] w-[360px] h-[500px]"
           >
-            <div className="border-b-[1px] p-2 border-solid border-gray-400">
+            <div className="border-b-[1px] flex items-center justify-center w-80 border-solid border-gray-400">
               <button
-                onClick={() => handleClassTypeBtn('온라인')}
+                onClick={() => handleClassTypeBtn('온라인 클래스')}
                 className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
                   ClassFilters.selectedClassType === '온라인' ? 'bg-purple-600' : 'bg-white'
                 }`}
@@ -55,7 +50,7 @@ const SearchFilter = () => {
                 온라인
               </button>
               <button
-                onClick={() => handleClassTypeBtn('오프라인')}
+                onClick={() => handleClassTypeBtn('오프라인 클래스')}
                 className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
                   ClassFilters.selectedClassType === '오프라인' ? 'bg-purple-600' : 'bg-white'
                 }`}
@@ -64,8 +59,11 @@ const SearchFilter = () => {
               </button>
             </div>
             <div>
-              <div className="">
-                <select className="select border-b-[1px] border-solid border-gray-400 select-primary w-72">
+              <div className="border-b-[1px] border-solid border-gray-400 w-80 flex flex-col justify-center items-center">
+                <div className="flex items-start w-72 justify-start">
+                  <p>지역</p>
+                </div>
+                <select className="select select-primary w-72">
                   <option disabled selected>
                     지역을 선택하세요
                   </option>
@@ -79,29 +77,41 @@ const SearchFilter = () => {
                   <option>경상남도</option>
                   <option>전라북도</option>
                   <option>전라남도</option>
-                  <option>제주도</option>
+                  <option>제주</option>
                 </select>
               </div>
             </div>
-            <div>
-              <button
-                onClick={() => handleAMPMClick('PM')}
-                className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters.selectedAMPM === 'AM' ? 'bg-purple-600' : 'bg-white'
-                }`}
-              >
-                오전
-              </button>
-              <button
-                onClick={() => handleAMPMClick('PM')}
-                className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters.selectedAMPM === 'PM' ? 'bg-purple-600' : 'bg-white'
-                }`}
-              >
-                오후
-              </button>
+            <div className="border-b-[1px] flex items-center justify-center flex-col border-solid w-80 border-gray-400">
+              <div className="flex items-start w-72 justify-start">
+                <p>시간</p>
+              </div>
+              <div>
+                <button
+                  onClick={() => handleAMPMClick('AM')}
+                  className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                    ClassFilters.selectedTime?.some((time) => convertTimeTo12HourClock(time).includes('AM'))
+                      ? 'bg-purple-600'
+                      : 'bg-white'
+                  }`}
+                >
+                  오전
+                </button>
+                <button
+                  onClick={() => handleAMPMClick('PM')}
+                  className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                    ClassFilters.selectedTime?.some((time) => convertTimeTo12HourClock(time).includes('PM'))
+                      ? 'bg-purple-600'
+                      : 'bg-white'
+                  }`}
+                >
+                  오후
+                </button>
+              </div>
             </div>
-            <div className="flex flex-col w-80 justify-center items-center">
+            <div className="flex flex-col w-80 border-b-[1px] border-solid border-gray-400 justify-center items-center">
+              <div className="flex items-start w-72 justify-start">
+                <p>난이도</p>
+              </div>
               <div className="p-2">
                 <button
                   className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
@@ -136,17 +146,25 @@ const SearchFilter = () => {
               </div>
             </div>
             <div>
-              <div className="">
-                <input
-                  type="text"
-                  placeholder="최소 가격"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
-                <input
-                  type="text"
-                  placeholder="최대 가격"
-                  className="input input-bordered input-primary w-full max-w-xs"
-                />
+              <div className="flex w-72 flex-col justify-center items-center">
+                <div className="flex items-start w-72 justify-start">
+                  <p>금액</p>
+                </div>
+                <div className="flex items-center w-72 justify-start">
+                  <input
+                    type="text"
+                    placeholder="최소 가격"
+                    className="input input-bordered input-primary w-full min-w-[60px]"
+                  />
+                  {''}
+                  <p>~</p>
+                  {''}
+                  <input
+                    type="text"
+                    placeholder="최대 가격"
+                    className="input input-bordered input-primary w-full min-w-[60px]"
+                  />
+                </div>
               </div>
             </div>
           </ul>

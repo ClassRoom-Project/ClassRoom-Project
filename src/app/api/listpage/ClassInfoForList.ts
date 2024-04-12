@@ -1,7 +1,18 @@
 import { supabase } from '../supabase/supabase';
 
 // 페이지 번호(page)와 각 페이지당 항목 수(limit)를 인자로 받아, 페이지네이션된 데이터와 다음 페이지 정보를 반환
-export const getClassForList = async (page = 1, limit = 8, selectedCategory = '') => {
+export const getClassForList = async (
+  page = 1,
+  limit = 8,
+  selectedCategory = '',
+  filters: {
+    selectedClassType?: string | null;
+    selectedLocation?: string | null;
+    selectedTime?: string[];
+    selectedDifficulty?: string | null;
+    selectedPrice?: number | null;
+  }
+) => {
   const PageNumber = (page - 1) * limit;
 
   //필터링하기위해 query를 let으로 바꿔 유연하게 데이터를 필터링할수있도록 지정
@@ -12,6 +23,19 @@ export const getClassForList = async (page = 1, limit = 8, selectedCategory = ''
 
   if (selectedCategory) {
     query = query.eq('category', selectedCategory);
+  }
+  if (filters.selectedClassType) {
+    query = query.eq('class_type', filters.selectedClassType);
+  }
+
+  if (filters.selectedLocation) {
+    query = query.eq('location', filters.selectedLocation);
+  }
+  if (filters.selectedTime && filters.selectedTime.length > 0) {
+    query = query.in('time', filters.selectedTime);
+  }
+  if (filters.selectedDifficulty) {
+    query = query.eq('difficulty', filters.selectedDifficulty);
   }
 
   const { data: classInfos, error, count } = await query;

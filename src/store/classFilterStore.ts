@@ -14,7 +14,7 @@ export const useCategoryFilterStore = create<CategoryFilterStore>((set) => ({
 type ClassFiltersType = {
   selectedClassType?: string | null;
   selectedLocation?: string | null;
-  selectedAMPM?: string | null;
+  selectedTime?: string[];
   selectedDifficulty?: string | null;
   selectedPrice?: number | null;
 };
@@ -28,7 +28,7 @@ export const useListFilterStore = create<ListFilterStore>((set) => ({
   ClassFilters: {
     selectedClassType: null,
     selectedLocation: null,
-    selectedAMPM: null,
+    selectedTime: [],
     selectedDifficulty: null,
     selectedPrice: null
   },

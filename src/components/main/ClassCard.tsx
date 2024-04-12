@@ -24,6 +24,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
             {classInfos.location}
           </div>
           <p className="text-lg font-semibold">{classInfos.title}</p>
+          <p className="text-sm text-[#5373FF]">#{classInfos.hashtag}</p>
           <div className="mt-2 flex justify-between">
             <div className="text-md font-bold">{`${classInfos.price.toLocaleString()}원`}</div>
             <FaRegHeart />
