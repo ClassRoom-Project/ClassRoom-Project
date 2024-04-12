@@ -29,10 +29,7 @@ export const getClassForList = async (
   }
 
   if (filters.selectedLocation) {
-    query = query.eq('location', filters.selectedLocation);
-  }
-  if (filters.selectedTime && filters.selectedTime.length > 0) {
-    query = query.in('time', filters.selectedTime);
+    query = query.textSearch('location', filters.selectedLocation);
   }
   if (filters.selectedDifficulty) {
     query = query.eq('difficulty', filters.selectedDifficulty);

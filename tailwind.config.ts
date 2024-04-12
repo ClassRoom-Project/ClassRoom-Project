@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      height: {
+        '100vh-header': 'calc(100dvh - 60px)'
+        // other properties...
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
@@ -18,7 +22,10 @@ const config: Config = {
         'pale-color': '#A4BEFF',
         'border-color': '#EFEFEF',
         'point-purple': '#6C5FF7',
-        'light-purple': '#F6F6FF'
+        'light-purple': '#F6F6FF',
+        'pale-purple': '#FCFCFF',
+        'dark-purple-color': '#4D43B8',
+        'text-dark-gray': '#515B60'
       }
     }
   },

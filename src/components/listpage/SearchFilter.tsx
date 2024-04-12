@@ -25,6 +25,13 @@ const SearchFilter = () => {
   const handleClassTypeBtn = (classType: string) => {
     setClassFilters({ ...ClassFilters, selectedClassType: classType });
   };
+  const handleLocationChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedLocation = event.target.value;
+    setClassFilters({ ...ClassFilters, selectedLocation });
+  };
+  const handleClassDifficultyBtn = (classDifficulty: string) => {
+    setClassFilters({ ...ClassFilters, selectedDifficulty: classDifficulty });
+  };
 
   return (
     <div className="flex p-5">
@@ -44,7 +51,7 @@ const SearchFilter = () => {
               <button
                 onClick={() => handleClassTypeBtn('온라인 클래스')}
                 className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters.selectedClassType === '온라인' ? 'bg-purple-600' : 'bg-white'
+                  ClassFilters.selectedClassType === '온라인 클래스' ? 'bg-purple-600' : 'bg-white'
                 }`}
               >
                 온라인
@@ -52,7 +59,7 @@ const SearchFilter = () => {
               <button
                 onClick={() => handleClassTypeBtn('오프라인 클래스')}
                 className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters.selectedClassType === '오프라인' ? 'bg-purple-600' : 'bg-white'
+                  ClassFilters.selectedClassType === '오프라인 클래스' ? 'bg-purple-600' : 'bg-white'
                 }`}
               >
                 오프라인
@@ -63,21 +70,21 @@ const SearchFilter = () => {
                 <div className="flex items-start w-72 justify-start">
                   <p>지역</p>
                 </div>
-                <select className="select select-primary w-72">
+                <select className="select select-primary w-72" onChange={handleLocationChange}>
                   <option disabled selected>
                     지역을 선택하세요
                   </option>
-                  <option>서울</option>
-                  <option>경기</option>
-                  <option>인천</option>
-                  <option>충청남도</option>
-                  <option>충청북도</option>
-                  <option>강원도</option>
-                  <option>경상북도</option>
-                  <option>경상남도</option>
-                  <option>전라북도</option>
-                  <option>전라남도</option>
-                  <option>제주</option>
+                  <option value={'서울'}>서울</option>
+                  <option value={'경기'}>경기</option>
+                  <option value={'인천'}>인천</option>
+                  <option value={'충남'}>충남</option>
+                  <option value={'충북'}>충북</option>
+                  <option value={'강원'}>강원</option>
+                  <option value={'경북'}>경북</option>
+                  <option value={'경남'}>경남</option>
+                  <option value={'전북'}>전북</option>
+                  <option value={'전남'}>전남</option>
+                  <option value={'제주특별자치도'}>제주</option>
                 </select>
               </div>
             </div>
@@ -114,15 +121,17 @@ const SearchFilter = () => {
               </div>
               <div className="p-2">
                 <button
+                  onClick={() => handleClassDifficultyBtn('입문')}
                   className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                    ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                    ClassFilters.selectedDifficulty === '입문' ? 'bg-purple-600' : 'bg-white'
                   }`}
                 >
                   입문
                 </button>
                 <button
+                  onClick={() => handleClassDifficultyBtn('초급')}
                   className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                    ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                    ClassFilters.selectedDifficulty === '초급' ? 'bg-purple-600' : 'bg-white'
                   }`}
                 >
                   초급
@@ -130,15 +139,17 @@ const SearchFilter = () => {
               </div>
               <div className="p-2">
                 <button
+                  onClick={() => handleClassDifficultyBtn('중급')}
                   className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                    ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                    ClassFilters.selectedDifficulty === '중급' ? 'bg-purple-600' : 'bg-white'
                   }`}
                 >
                   중급
                 </button>
                 <button
+                  onClick={() => handleClassDifficultyBtn('고급')}
                   className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                    ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                    ClassFilters.selectedDifficulty === '고급' ? 'bg-purple-600' : 'bg-white'
                   }`}
                 >
                   고급

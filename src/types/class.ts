@@ -41,6 +41,18 @@ export interface MyRegisteredClassType {
   day: string;
   date_id: string;
   times: string;
+  time_id: string;
+}
+
+/* 마이페이지(선생님) : 클래스 등록한 수강생 정보 */
+export interface MyClassStudentInfoType {
+  user_id: string;
+  email: string;
+  nickname: string;
+  profile_image: string;
+  reserve_quantity: number;
+  reserve_price: number;
+  reserve_id: string;
 }
 
 // 예약 페이지에서 클래스 정보를 보여주기 위한 타입
