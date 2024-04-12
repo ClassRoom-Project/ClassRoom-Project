@@ -1,15 +1,12 @@
 'use client';
 
-import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
-import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
+import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
-import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
-import { quantityWarning } from '../common/Toastify';
+import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { quantityWarning } from '../common/Toastify';
 
 const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
   const router = useRouter();
@@ -42,32 +39,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       }
     }
 
-    // TODO: 미주님과 의논 필요
-    // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
-    // const reservationId = await insertNewReservation(reserveInfo);
-
-    // if (!reservationId) {
-    //   alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
-    //   return;
-    // }
-
     const randomOrderId = crypto.randomUUID();
-
-    window.localStorage.setItem('orderId', randomOrderId);
-    window.localStorage.setItem('reservationInfo', JSON.stringify(reserveInfo));
-    // const reservationDetails = await fetchReservationDetails(reservationId);
-
-    // if (!reservationDetails || !('class' in reservationDetails)) {
-    //   // 예외 처리 로직
-    //   console.error('faild to fetch reservationDtails in ReserveButton', Error);
-    //   return;
-    // }
-
-    // const { class: classDetails, reserveQuantity, reservePrice } = reservationDetails;
-    // const userEmail = sessionStorage.getItem('userEmail');
-
-    // // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
-    // await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
 
     router.replace(
       `/payment?orderId=${randomOrderId}&price=${reserveInfo.reservePrice}&classId=${reserveInfo.classId}`
