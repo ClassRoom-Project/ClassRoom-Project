@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
   const classId = searchParams.get('classId');
 
   // 값이 없으면 실패 페이지로 리다이렉트
-  if (!orderId ?? !classId ?? !amount ?? !reserveQuantity ?? !timeId ?? !userId) {
+  if (!orderId || !classId || !amount || !reserveQuantity || !timeId || !userId) {
     console.log('🚀 ~ GET ~ orderId:', orderId);
     console.log('🚀 ~ GET ~ classId:', classId);
     console.log('🚀 ~ GET ~ amount:', amount);
@@ -27,15 +27,17 @@ export async function GET(request: NextRequest) {
     console.log('🚀 ~ userId:', userId);
     // console.log('🚀 ~ GET ~ paymentKey:', paymentKey);
 
-    // return NextResponse.redirect(new URL(`http://localhost:3000/reserve/fail`));
+    return NextResponse.redirect(new URL(`http://localhost:3000/reserve/fail`));
   }
 
+  // #region
   // console.log('🚀 ~ reserveQuantity:', reserveQuantity);
   // console.log('🚀 ~ timeId:', timeId);
   // console.log('🚀 ~ userId:', userId);
   // console.log('🚀 ~ GET ~ orderId:', orderId);
   // console.log('🚀 ~ GET ~ amount:', amount);
   // console.log('🚀 ~ GET ~ paymentKey:', paymentKey);
+  // #endregion
 
   const response = await fetch('https://api.tosspayments.com/v1/payments/confirm', {
     method: 'POST',
@@ -46,24 +48,24 @@ export async function GET(request: NextRequest) {
     }
   });
 
-  // if (response.ok) {
-  //   try {
-  //     await insertNewReservation({
-  //       reserveId: orderId,
-  //       classId,
-  //       reservePrice: Number(amount),
-  //       reserveQuantity: Number(reserveQuantity),
-  //       timeId,
-  //       userId
-  //     });
-  //   } catch (error) {
-  //     console.log('라우트 핸들러의 insertNewReservation 오류 => ', error);
-  //   }
-  // }
+  if (response.ok) {
+    try {
+      await insertNewReservation({
+        reserveId: orderId,
+        classId,
+        reservePrice: Number(amount),
+        reserveQuantity: Number(reserveQuantity),
+        timeId,
+        userId
+      });
+    } catch (error) {
+      console.log('라우트 핸들러의 insertNewReservation 오류 => ', error);
+    }
+  }
 
   const data = await response.json();
-  return data;
+  // return data;
   // console.log(data);
 
-  // return NextResponse.redirect(new URL(`http://localhost:3000/reserve/success/${data.orderId}`));
+  return NextResponse.redirect(new URL(`http://localhost:3000/reserve/success/${data.orderId}`));
 }
