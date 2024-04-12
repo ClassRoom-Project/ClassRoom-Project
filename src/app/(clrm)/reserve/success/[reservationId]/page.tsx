@@ -1,64 +1,31 @@
 'use client';
 
-import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import { invalidReserve } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservationDetail';
 import { ReserveInfo } from '@/types/reserve';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FiCheckCircle, FiWatch } from 'react-icons/fi';
-import { LuClock } from 'react-icons/lu';
-import { LuClipboardEdit } from 'react-icons/lu';
-import { LuPresentation } from 'react-icons/lu';
-import { LuWatch } from 'react-icons/lu';
-
-import { PiCurrencyKrw } from 'react-icons/pi';
-import { GrLocation } from 'react-icons/gr';
-import { MdOutlineCategory } from 'react-icons/md';
-import { RiUserLocationLine } from 'react-icons/ri';
-import { HiOutlineCube } from 'react-icons/hi2';
-import { FiUserPlus } from 'react-icons/fi';
-import { FiCalendar } from 'react-icons/fi';
-import { LuCalendar } from 'react-icons/lu';
+import { LuClipboardEdit, LuClock } from 'react-icons/lu';
 import { useSearchParams } from 'next/navigation';
+import { FiCalendar, FiUserPlus } from 'react-icons/fi';
+import { GrLocation } from 'react-icons/gr';
+import { PiCurrencyKrw } from 'react-icons/pi';
+
+type ReserveInfoLabels = {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}[];
 
 const ReservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
-  const keyyy = params.reservationId;
-  const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
-  const [reserveId, setReserveId] = useState('');
-  const [isInvalidRequest, setIsInvalidRequest] = useState(false);
-  const searchParams = useSearchParams();
-  const orderId = searchParams.get('orderId');
-  const paymentKey = searchParams.get('paymentKey');
+  const reservationid = params.reservationId;
+  // const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
+  // const [isInvalidRequest, setIsInvalidRequest] = useState(false);
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     // 로컬 스토리지에서 예약 정보 가져와서 set
-  //     const storageData = window.localStorage.getItem('reservationInfo');
-  //     const reserveInfo: ReserveInfo = storageData ? JSON.parse(storageData) : null; // null 처리
-  //     setReservationRequest(reserveInfo);
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (reservationRequest) {
-  //     const submitReservation = async () => {
-  //       // db에 예약 정보  insert
-  //       const responseReserveId = await insertNewReservation(reservationRequest);
-  //       if (responseReserveId) {
-  //         setReserveId(responseReserveId);
-  //       }
-  //     };
-  //     submitReservation();
-  //   } else {
-  //     // 요청 인자가 없으면 에러 메세지 출력을 위한 state set
-  //     setIsInvalidRequest(true);
-  //   }
-  // }, [reservationRequest]);
-
-  // 응답 받은 예약 id로 예약 정보 불러오기
-  const { reservationDetails, isError, isLoading } = useFetchReservationDetail(keyyy);
+  // 라우트 핸들러에서 보내준  id로 예약 정보 불러오기
+  const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
 
   if (isError) {
     console.log(isError);
@@ -66,11 +33,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
     return;
   }
 
-  type ReserveInfoLabels = {
-    icon: React.ReactNode;
-    title: string;
-    description: string;
-  }[];
+  // #region
   let reserveInfoLabels: ReserveInfoLabels = [];
   if (reservationDetails) {
     const { class: classInfo, time: dateInfo, reserveQuantity, reservePrice } = reservationDetails;
@@ -112,12 +75,12 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
       }
     ];
   }
+  // #endregion
 
   return (
     <div className="w-full h-100vh-header  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-700">
       <div className="w-5/12 min-w-[600px]  justify-center min-h-[600px] bg-white shadow rounded-md items-center flex flex-col px-12 pt-12 pb-8">
-        {/* <div className="w-full flex flex-col justify-between items-center p-12"> */}
-        {!isLoading && reservationDetails ? (
+        {!isLoading ? (
           <>
             <FiCheckCircle color="#38c557" className="mb-6" size={70} />
             <h1 className="text-2xl font-bold  text-center">클래스 예약이 정상적으로 처리되었습니다.</h1>
@@ -138,7 +101,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
             <div className="divider mb-4 mt-6"></div>
             <NavigationButtons />
           </>
-        ) : isInvalidRequest && !reservationRequest?.classId ? (
+        ) : !isLoading && isError ? (
           <div className="flex flex-col justify-center items-center">
             <p>예약을 완료하는 도중 오류가 발생했습니다. </p>
           </div>
@@ -149,7 +112,6 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
           </div>
         )}
       </div>
-      {/* </div> */}
     </div>
   );
 };
