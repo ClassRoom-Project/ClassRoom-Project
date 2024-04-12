@@ -3,14 +3,11 @@
 import { invalidReserve } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservationDetail';
-import { ReserveInfo } from '@/types/reserve';
+import { ReservationDetailsType } from '@/types/reserve';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { useState } from 'react';
-import { FiCheckCircle, FiWatch } from 'react-icons/fi';
-import { LuClipboardEdit, LuClock } from 'react-icons/lu';
-import { useSearchParams } from 'next/navigation';
-import { FiCalendar, FiUserPlus } from 'react-icons/fi';
+import { FiCalendar, FiCheckCircle, FiUserPlus, FiWatch } from 'react-icons/fi';
 import { GrLocation } from 'react-icons/gr';
+import { LuClipboardEdit, LuClock } from 'react-icons/lu';
 import { PiCurrencyKrw } from 'react-icons/pi';
 
 type ReserveInfoLabels = {
@@ -21,10 +18,6 @@ type ReserveInfoLabels = {
 
 const ReservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
   const reservationid = params.reservationId;
-  // const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
-  // const [isInvalidRequest, setIsInvalidRequest] = useState(false);
-
-  // 라우트 핸들러에서 보내준  id로 예약 정보 불러오기
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
 
   if (isError) {
@@ -36,12 +29,27 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   // #region
   let reserveInfoLabels: ReserveInfoLabels = [];
   if (reservationDetails) {
-    const { class: classInfo, time: dateInfo, reserveQuantity, reservePrice } = reservationDetails;
+    const {
+      class: classInfo,
+      time: dateInfo,
+      reserveQuantity,
+      reservePrice
+    } = reservationDetails as ReservationDetailsType;
     reserveInfoLabels = [
+      // {
+      //   icon: <LuClipboardEdit size={20} color="#8074FF" />,
+      //   title: '클래스명',
+      //   description: `${classInfo.title}`
+      // },
+      // {
+      //   icon: <LuClipboardEdit size={20} color="#8074FF" />,
+      //   title: '클래스 타입',
+      //   description: `${classInfo.classType}`
+      // },
       {
-        icon: <LuClipboardEdit size={20} color="#8074FF" />,
-        title: '클래스명',
-        description: `${classInfo.title}`
+        icon: <FiUserPlus size={20} color="#8074FF" />,
+        title: '신청 인원',
+        description: `${reserveQuantity}명`
       },
       {
         icon: <FiCalendar size={20} color="#8074FF" />,
@@ -53,21 +61,18 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
         title: '이용 시간',
         description: `${reservationDetails && convertTimeTo12HourClock(dateInfo.times)}`
       },
-      {
-        icon: <LuClock size={20} color="#8074FF" />,
-        title: '소요 시간',
-        description: `${classInfo.totalTime}시간`
-      },
+      // {
+      //   icon: <LuClock size={20} color="#8074FF" />,
+      //   title: '소요 시간',
+      //   description: `${classInfo.totalTime}시간`
+      // },
+
       {
         icon: <GrLocation size={20} color="#8074FF" />,
         title: '위치',
         description: `${classInfo.location}`
       },
-      {
-        icon: <FiUserPlus size={20} color="#8074FF" />,
-        title: '이용 인원',
-        description: `${reserveQuantity}명`
-      },
+
       {
         icon: <PiCurrencyKrw size={20} color="#8074FF" />,
         title: '결제하신 금액',
@@ -75,6 +80,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
       }
     ];
   }
+
   // #endregion
 
   return (
@@ -84,9 +90,18 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
           <>
             <FiCheckCircle color="#38c557" className="mb-6" size={70} />
             <h1 className="text-2xl font-bold  text-center">클래스 예약이 정상적으로 처리되었습니다.</h1>
-            <div className="divider mt-4 mb-6"></div>
-            <div className="flex items-center w-full justify-center">
-              <div className="flex flex-col gap-4 font-bold ml-16">
+            <div className="divider m-4 mb-6"></div>
+            <div className="flex flex-col items-center w-full justify-center">
+              <div className="flex flex-col items-center mb-8 gap-2">
+                <p className="text-xl font-bold">{reservationDetails?.class.title}</p>
+                <div className="flex gap-4">
+                  <p>{reservationDetails?.class.classType} 클래스</p>
+                  <div className="flex justify-center items-center gap-1">
+                    <LuClock size={20} color="#8074FF" /> 총 {reservationDetails?.class.totalTime}시간
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col gap-4 font-bold ml-36">
                 {reserveInfoLabels.map(({ icon, title, description }) => (
                   <div key={title} className="flex gap-2 w-full">
                     <div className="flex flex-row gap-2 justify-center items-center">
@@ -98,7 +113,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
                 ))}
               </div>
             </div>
-            <div className="divider mb-4 mt-6"></div>
+            <div className="divider mb-4 mt-10"></div>
             <NavigationButtons />
           </>
         ) : isError ? (

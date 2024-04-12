@@ -29,9 +29,12 @@ const ReserveUserInfo = () => {
 
   return (
     <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md shadow">
-      <p className="mb-4 text-lg font-bold ">연락처 입력</p>
+      <div className="mb-3">
+        <p className="text-lg font-bold mb-1">연락처</p>
+        <p className="text-sm">알림 발송을 위해 계정 정보를 확인해주세요.</p>
+      </div>
       <div className="flex flex-col  mb-4 h-[52px]">
-        <p className="font-bold mb-1 ">계정 ID (알림 메일이 발송됩니다.)</p>
+        <p className="font-bold mb-1 ">계정 ID</p>
         <p>{userInfo?.email}</p>
       </div>
       <div className="flex flex-col">
