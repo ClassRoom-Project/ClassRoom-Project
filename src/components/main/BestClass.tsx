@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import ClassCard from './ClassCard';
-import { useClassInfoStore } from '@/store/classInfoStore';
+import { useClassInfoStore } from '@/store/ClassInfoStore';
 import { getClassAllInfo } from '@/app/api/mainpage/getClassAllInfo';
 // yarn add --dev @types/react-slick
 // yarn add react-slick
@@ -23,7 +23,7 @@ const BestClass = () => {
       setClassInfos(infos);
     };
     getClassInfos();
-  }, []);
+  }, [setClassInfos]);
 
   return (
     <div className="mr-auto ml-auto">

@@ -23,7 +23,9 @@ const ClassDetailRight = ({ classData }: { classData: ClassAllType | null }) => 
       </div>
 
       <div className="w-[350px] h-36 mt-10">
-        {classData?.class_id ? <ClassDetailBtn classId={classData.class_id} /> : null}
+        {classData?.class_id ? (
+          <ClassDetailBtn classId={classData.class_id} makeClassUserId={classData.user_id} />
+        ) : null}
       </div>
     </div>
   );

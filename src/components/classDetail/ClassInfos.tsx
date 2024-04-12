@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useDetailClassInfoStore } from '@/store/classInfoStore';
+import { useDetailClassInfoStore } from '@/store/ClassInfoStore';
 import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
 import { ClassInfoBox } from './ClassInfoBox';
 
@@ -19,7 +19,7 @@ const ClassInfos = ({ classId }: { classId: string }) => {
       }
     };
     getClassInfos();
-  }, []);
+  }, [setClassInfo, classId]);
 
   return (
     <div className="w-[350px] p-4 flex flex-col border-gray-400 border-solid border-b-[1px] justify-center items-center">

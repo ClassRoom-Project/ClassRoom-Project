@@ -1,8 +1,8 @@
 'use client';
 import React from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
-import { AddressData } from '@/types/register';
 import useRegisterStore from '@/store/RegisterStore';
+import { AddressData } from '@/types/register';
 
 const Address = () => {
   const { address, detailAddress, setAddress, setDetailAddress } = useRegisterStore();
