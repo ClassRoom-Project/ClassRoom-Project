@@ -23,6 +23,14 @@ const SearchFilter = () => {
   const handleClassTypeBtn = (classType: string) => {
     setClassFilters({ ...ClassFilters, selectedClassType: classType });
   };
+  const ampm = ClassFilters.selectedAMPM;
+  const handleAMPMClick = (ampm: string) => {
+    setClassFilters({
+      ...ClassFilters,
+      selectedAMPM: ampm
+    });
+  };
+
   return (
     <div className="flex p-5">
       <div className="dropdown dropdown-bottom w-12 h-12">
@@ -35,13 +43,13 @@ const SearchFilter = () => {
         {isOpenCategory ? (
           <ul
             tabIndex={0}
-            className="dropdown-content z-[1] menu p-2 shadow bg-white border-gray-300 border-solid border-[1px] w-80 h-[600px]"
+            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-white border-gray-300 border-solid border-[1px] w-[360px] h-[500px]"
           >
-            <div>
+            <div className="border-b-[1px] p-2 border-solid border-gray-400">
               <button
                 onClick={() => handleClassTypeBtn('온라인')}
                 className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters === '온라인' ? 'bg-purple-600' : 'bg-white'
+                  ClassFilters.selectedClassType === '온라인' ? 'bg-purple-600' : 'bg-white'
                 }`}
               >
                 온라인
@@ -49,87 +57,97 @@ const SearchFilter = () => {
               <button
                 onClick={() => handleClassTypeBtn('오프라인')}
                 className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters === '오프라인' ? 'bg-purple-600' : 'bg-white'
+                  ClassFilters.selectedClassType === '오프라인' ? 'bg-purple-600' : 'bg-white'
                 }`}
               >
                 오프라인
               </button>
             </div>
             <div>
-              <select className="select select-primary w-full max-w-xs">
-                <option disabled selected>
-                  지역을 선택하세요
-                </option>
-                <option>서울</option>
-                <option>경기</option>
-                <option>인천</option>
-                <option>충청남도</option>
-                <option>충청북도</option>
-                <option>강원도</option>
-                <option>경상북도</option>
-                <option>경상남도</option>
-                <option>전라북도</option>
-                <option>전라남도</option>
-                <option>제주도</option>
-              </select>
+              <div className="">
+                <select className="select border-b-[1px] border-solid border-gray-400 select-primary w-72">
+                  <option disabled selected>
+                    지역을 선택하세요
+                  </option>
+                  <option>서울</option>
+                  <option>경기</option>
+                  <option>인천</option>
+                  <option>충청남도</option>
+                  <option>충청북도</option>
+                  <option>강원도</option>
+                  <option>경상북도</option>
+                  <option>경상남도</option>
+                  <option>전라북도</option>
+                  <option>전라남도</option>
+                  <option>제주도</option>
+                </select>
+              </div>
             </div>
             <div>
               <button
+                onClick={() => handleAMPMClick('PM')}
                 className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                  ClassFilters.selectedAMPM === 'AM' ? 'bg-purple-600' : 'bg-white'
                 }`}
               >
                 오전
               </button>
               <button
+                onClick={() => handleAMPMClick('PM')}
                 className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                  ClassFilters.selectedAMPM === 'PM' ? 'bg-purple-600' : 'bg-white'
                 }`}
               >
                 오후
               </button>
             </div>
-            <div>
-              <button
-                className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
-                }`}
-              >
-                입문
-              </button>
-              <button
-                className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
-                }`}
-              >
-                초급
-              </button>
-              <button
-                className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
-                }`}
-              >
-                중급
-              </button>
-              <button
-                className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-                  ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
-                }`}
-              >
-                고급
-              </button>
+            <div className="flex flex-col w-80 justify-center items-center">
+              <div className="p-2">
+                <button
+                  className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                    ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                  }`}
+                >
+                  입문
+                </button>
+                <button
+                  className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                    ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                  }`}
+                >
+                  초급
+                </button>
+              </div>
+              <div className="p-2">
+                <button
+                  className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                    ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                  }`}
+                >
+                  중급
+                </button>
+                <button
+                  className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                    ClassFilters === ClassFilters ? 'bg-purple-600' : 'bg-white'
+                  }`}
+                >
+                  고급
+                </button>
+              </div>
             </div>
             <div>
-              <input
-                type="text"
-                placeholder="최소 가격"
-                className="input input-bordered input-primary w-full max-w-xs"
-              />
-              <input
-                type="text"
-                placeholder="최대 가격"
-                className="input input-bordered input-primary w-full max-w-xs"
-              />
+              <div className="">
+                <input
+                  type="text"
+                  placeholder="최소 가격"
+                  className="input input-bordered input-primary w-full max-w-xs"
+                />
+                <input
+                  type="text"
+                  placeholder="최대 가격"
+                  className="input input-bordered input-primary w-full max-w-xs"
+                />
+              </div>
             </div>
           </ul>
         ) : (
