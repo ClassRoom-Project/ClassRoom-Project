@@ -35,12 +35,11 @@ export interface MyRegisteredClassType {
   title: string;
   location: string;
   detail_location: string;
-  image: string[];
+  image: string;
   active: boolean;
-  day: string;
-  date_id: string;
-  times: string;
-  time_id: string;
+  quantity: number;
+  class_type: string;
+  dates: [{ date_id: string; day: string; times: [{ time_id: string; times: string }] }];
 }
 
 /* 마이페이지(선생님) : 클래스 등록한 수강생 정보 */

@@ -1,9 +1,9 @@
 import { getMyClassStudentInfo } from '@/app/api/mypage/my-class-api';
-import { useQuery } from '@tanstack/react-query';
-import { useSearchParams } from 'next/navigation';
-import ClassStudentItem from './MyClassStudentItem';
 import { useMyClassInfoStore } from '@/store/mypage/classInfoStore';
-import { FaRegClock, FaRegCalendarCheck } from 'react-icons/fa';
+import { useQuery } from '@tanstack/react-query';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { LuClipboardEdit } from 'react-icons/lu';
 
 const MyClassStudentList = () => {
@@ -20,7 +20,7 @@ const MyClassStudentList = () => {
   // console.log('myClassStudentInfo', myClassStudentInfo);
 
   // 시간 초 빼기
-  const formattedTime = myClassSingleInfo?.times.substring(0, 5);
+  // const formattedTime = myClassSingleInfo?.times.substring(0, 5);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
@@ -43,23 +43,56 @@ const MyClassStudentList = () => {
         <div className="flex gap-8">
           <div className="flex items-center p-2 gap-2">
             <FaRegCalendarCheck color="#6C5FF7" size="20" />
-            <p className="flex gap-4">
-              <span className="font-bold ">날짜</span> {myClassSingleInfo?.day}
-            </p>
+            <p className="flex gap-4">{/* <span className="font-bold ">날짜</span> {myClassSingleInfo?.day} */}</p>
           </div>
           <div className="flex items-center p-2 gap-2">
             <FaRegClock color="#6C5FF7" size="20" />
-            <p className="flex gap-4">
-              <span className="font-bold ">시간</span> {formattedTime}
-            </p>
+            <p className="flex gap-4">{/* <span className="font-bold ">시간</span> {formattedTime} */}</p>
           </div>
         </div>
       </div>
-      <ul className="flex flex-col gap-4">
-        {myClassStudentInfo.map((student) => (
-          <ClassStudentItem key={student.user_id} student={student} />
-        ))}
-      </ul>
+      <div className="overflow-x-auto">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>닉네임</th>
+              <th>이메일</th>
+              <th>예약 인원</th>
+              <th>예약 금액</th>
+              <th>채팅 보내기</th>
+            </tr>
+          </thead>
+          <tbody>
+            {myClassStudentInfo.map((student) => (
+              <tr key={student.user_id}>
+                {/* 각 요소에 고유한 키를 제공해야 함 */}
+                <th className="flex gap-4 items-center">
+                  {student.nickname}
+                  <Image
+                    src={student.profile_image}
+                    alt="프로필 이미지"
+                    width={50}
+                    height={50}
+                    className="rounded-full"
+                    unoptimized={true}
+                  />
+                </th>
+                <td>{student.email}</td>
+                <td>{student.reserve_quantity}명</td>
+                <td>{student.reserve_price.toLocaleString()}원</td>
+                <td>
+                  <button className="btn">1:1 채팅</button>
+                </td>{' '}
+                {/* 버튼을 <td> 안에 넣어야 함 */}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {/* <ul className="flex flex-col gap-4">
+       
+      </ul> */}
     </div>
   );
 };
