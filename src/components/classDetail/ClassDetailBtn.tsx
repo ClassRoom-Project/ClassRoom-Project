@@ -6,11 +6,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import React from 'react';
+
+import AskButton from '../chatRooms/AskButton';
+
 import { ToastContainer } from 'react-toastify';
 import { alreadyReserved } from '../common/Toastify';
 
 //Todo :  href chat ID, 받아서 입력할것
-const ClassDetailBtn = ({ classId }: { classId: string }) => {
+const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeClassUserId: string }) => {
   const { loginUserId } = useLoginStore();
 
   const router = useRouter();
@@ -39,12 +42,7 @@ const ClassDetailBtn = ({ classId }: { classId: string }) => {
       >
         신청하기
       </button>
-      <Link
-        href={'/message'}
-        className="flex justify-center items-center rounded-2xl w-20 border-[#5373FF] border-solid border-[1px] h-9 ml-3"
-      >
-        문의하기
-      </Link>
+      <AskButton classId={classId} makeClassUserId={makeClassUserId} />
     </div>
   );
 };

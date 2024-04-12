@@ -8,6 +8,7 @@ import { ReactNode, Suspense } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: '클룸',
+
   description: '원데이 클래스를 즐겨보세요~!'
 };
 
@@ -19,8 +20,10 @@ export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
   return (
     <div>
       <SideBar>
-        <Header />
-        <Suspense>{children}</Suspense>
+        <Suspense>
+          <Header />
+        </Suspense>
+        {children}
       </SideBar>
     </div>
   );

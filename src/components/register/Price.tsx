@@ -1,6 +1,7 @@
 'use client';
-import useRegisterStore from '@/store/RegisterStore';
+
 import React from 'react';
+import useRegisterStore from '@/store/RegisterStore';
 
 const Price = () => {
   const { price, setPrice } = useRegisterStore();
