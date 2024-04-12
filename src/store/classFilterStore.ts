@@ -38,3 +38,13 @@ export const useListFilterStore = create<ListFilterStore>((set) => ({
       ClassFilters: filters
     }))
 }));
+
+type SearchTitle = {
+  selectedTitle: string;
+  setSelectedTitle: (title: string) => void;
+};
+
+export const useSearchStore = create<SearchTitle>((set) => ({
+  selectedTitle: '',
+  setSelectedTitle: (title: string) => set(() => ({ selectedTitle: title }))
+}));

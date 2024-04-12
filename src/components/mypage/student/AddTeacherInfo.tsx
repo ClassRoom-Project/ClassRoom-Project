@@ -118,7 +118,7 @@ const AddTeacherInfo = () => {
     const confirm = window.confirm('선생님으로 전환됩니다. 선생님 마이페이지로 이동하시겠습니까?');
     if (confirm) {
       // 선생님 마이페이지로 이동하는 로직
-      updateUserRole(isTeacher, loginUserId);
+      updateUserRole(!!isTeacher, loginUserId);
       setIsTeacher(!isTeacher);
     }
   };

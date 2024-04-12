@@ -10,7 +10,7 @@ export default function useLoginUserId({ userEmail }: { userEmail: string | null
     if (userData && userData.user_id) {
       setUserId(userData.user_id);
     }
-  }, [userData]);
+  }, [userData, setUserId]);
 
   if (isError) return console.log('Faild to get userId from Store');
   return;

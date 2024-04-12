@@ -1,13 +1,12 @@
 'use client';
 import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
-
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import PlusImage from '../../../public/plusImage.jpg';
-import useRegisterStore from '@/store/RegisterStore';
-import RegisterScheduleStore from '@/store/RegisterScheduleStore';
+import useRegisterStore from '@/store/registerStore';
+import RegisterScheduleStore from '@/store/registerScheduleStore';
 
 interface ImageFileWithPreview {
   file: File;
@@ -188,7 +187,12 @@ const ImageUpload = () => {
         )}
         {images.map((image, index) => (
           <div key={index} className="h-[100px] w-[100px] relative ml-2">
-            <img src={image.preview} alt="uploaded" className="h-full w-full object-cover rounded-[20px] border" />
+            <Image
+              src={image.preview}
+              alt="uploaded"
+              fill
+              className="h-full w-full object-cover rounded-[20px] border"
+            />
             <button
               className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${
                 index === 0 ? 'bg-blue-500' : 'bg-white-500'

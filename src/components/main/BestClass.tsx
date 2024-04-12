@@ -23,7 +23,7 @@ const BestClass = () => {
       setClassInfos(infos);
     };
     getClassInfos();
-  }, []);
+  }, [setClassInfos]);
 
   return (
     <div className="mr-auto ml-auto">
