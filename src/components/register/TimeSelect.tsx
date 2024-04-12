@@ -5,10 +5,6 @@ import 'react-day-picker/dist/style.css';
 import { format } from 'date-fns';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { ko } from 'date-fns/locale';
-<<<<<<< HEAD
-=======
-import RegisterScheduleStore from '@/store/registerScheduleStore';
->>>>>>> 42b02081411fbcbcffecfaf150b11d52f59e5a17
 
 const TimeSelect: React.FC = () => {
   const {
@@ -74,7 +70,7 @@ const TimeSelect: React.FC = () => {
   }, []);
 
   return (
-    <div className="mt-4">
+    <div className="my-4">
       <h1 className="font-bold text-[#3F3F3F] my-4">클래스 날짜&시간</h1>
       <div className="relative">
         <button

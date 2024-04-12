@@ -1,9 +1,4 @@
 'use client';
-<<<<<<< HEAD
-
-=======
-import useRegisterStore from '@/store/registerStore';
->>>>>>> 42b02081411fbcbcffecfaf150b11d52f59e5a17
 import React from 'react';
 import useRegisterStore from '@/store/registerStore';
 
@@ -15,7 +10,7 @@ const Category = () => {
   };
 
   return (
-    <div className="my-2">
+    <div className="my-4">
       <div className="flex items-center space-x-4 my-2">
         <div>
           {/* 카테고리 드롭다운 */}

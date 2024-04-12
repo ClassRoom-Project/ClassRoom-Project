@@ -9,7 +9,7 @@ const HashTag = () => {
     setSubCategory(event.target.value);
   };
   return (
-    <div className="my-2">
+    <div className="my-4">
       <div className="flex items-center space-x-4 my-2">
         <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">소분류</p>
         <input

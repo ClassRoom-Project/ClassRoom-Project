@@ -1,9 +1,4 @@
 'use client';
-<<<<<<< HEAD
-
-=======
-import useRegisterStore from '@/store/registerStore';
->>>>>>> 42b02081411fbcbcffecfaf150b11d52f59e5a17
 import React from 'react';
 import useRegisterStore from '@/store/registerStore';
 
@@ -15,7 +10,7 @@ const ClassContent = () => {
   };
 
   return (
-    <div className="my-2">
+    <div className="my-4">
       <div className="flex items-start space-x-4">
         <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">클래스 설명</p>
         <textarea

@@ -9,7 +9,7 @@ const ClassDiff = () => {
     setDifficulty(event.target.value);
   };
   return (
-    <div className="flex items-center space-x-4">
+    <div className="my-4">
       <div className="flex items-center space-x-4">
         <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">클래스 난이도</p>
         {/* 난이도 드롭다운 */}
