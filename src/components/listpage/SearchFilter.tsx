@@ -24,6 +24,11 @@ const SearchFilter = () => {
     setMinPrice('');
     setMaxPrice('');
   };
+
+  const isPriceSelected = (min: number, max: number) => {
+    return ClassFilters.selectedPrice?.min === min && ClassFilters.selectedPrice?.max === max;
+  };
+
   const handleClassTypeBtn = (classType: string) => {
     setClassFilters({ ...ClassFilters, selectedClassType: classType });
   };
@@ -36,14 +41,8 @@ const SearchFilter = () => {
     setClassFilters({ ...ClassFilters, selectedDifficulty: classDifficulty });
   };
 
-  const handlePriceChange = () => {
-    setClassFilters({
-      ...ClassFilters,
-      selectedPrice: {
-        min: minPrice ? parseInt(minPrice) : undefined,
-        max: maxPrice ? parseInt(maxPrice) : undefined
-      }
-    });
+  const handlePriceFilter = (min: number, max: number) => {
+    setClassFilters({ ...ClassFilters, selectedPrice: { min, max } });
   };
 
   return (
@@ -147,24 +146,43 @@ const SearchFilter = () => {
                 <div className="flex items-start w-72 justify-start">
                   <p>금액</p>
                 </div>
-                <div className="flex items-center w-72 justify-start">
-                  <input
-                    type="text"
-                    placeholder="최소 가격"
-                    className="input input-bordered input-primary w-full min-w-[60px]"
-                    value={minPrice}
-                    onChange={(e) => setMinPrice(e.target.value)}
-                    onBlur={handlePriceChange}
-                  />
-                  <p>~</p>
-                  <input
-                    type="text"
-                    placeholder="최대 가격"
-                    className="input input-bordered input-primary w-full min-w-[60px]"
-                    value={maxPrice}
-                    onChange={(e) => setMaxPrice(e.target.value)}
-                    onBlur={handlePriceChange}
-                  />
+                <div className="flex flex-col items-center w-72 justify-start">
+                  <div className="flex items-center justify-center">
+                    <button
+                      onClick={() => handlePriceFilter(0, 20000)}
+                      className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                        isPriceSelected(0, 20000) ? 'bg-purple-600' : 'bg-white'
+                      }`}
+                    >
+                      20,000원 미만
+                    </button>
+                    <button
+                      onClick={() => handlePriceFilter(20001, 50000)}
+                      className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                        isPriceSelected(20001, 50000) ? 'bg-purple-600' : 'bg-white'
+                      }`}
+                    >
+                      50,000원 미만
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <button
+                      onClick={() => handlePriceFilter(50001, 100000)}
+                      className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                        isPriceSelected(50001, 100000) ? 'bg-purple-600' : 'bg-white'
+                      }`}
+                    >
+                      100,000원 미만
+                    </button>
+                    <button
+                      onClick={() => handlePriceFilter(100001, 1000000000000000)}
+                      className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+                        isPriceSelected(100001, 1000000000000000) ? 'bg-purple-600' : 'bg-white'
+                      }`}
+                    >
+                      100,000원 이상
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

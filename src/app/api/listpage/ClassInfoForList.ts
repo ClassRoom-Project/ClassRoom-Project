@@ -12,7 +12,6 @@ export const getClassForList = async (
   filters: {
     selectedClassType?: string | null;
     selectedLocation?: string | null;
-    selectedTime?: string[];
     selectedDifficulty?: string | null;
     selectedPrice?: PriceRange | null;
   }
@@ -41,12 +40,9 @@ export const getClassForList = async (
   if (filters.selectedPrice) {
     if (filters.selectedPrice.min !== undefined && filters.selectedPrice.max !== undefined) {
       query = query.gte('price', filters.selectedPrice.min).lte('price', filters.selectedPrice.max);
-    } else if (filters.selectedPrice.min !== undefined) {
-      query = query.gte('price', filters.selectedPrice.min);
-    } else if (filters.selectedPrice.max !== undefined) {
-      query = query.lte('price', filters.selectedPrice.max);
     }
   }
+
   const { data: classInfos, error, count } = await query;
   if (error) {
     console.error('클래스 정보들 불러오기 오류 => ', error);
