@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import useRegisterStore from '@/store/RegisterStore';
+import useRegisterStore from '@/store/registerStore';
 
 const ClassTitle = () => {
   const { classTitle, classType, setClassTitle, setClassType } = useRegisterStore();

@@ -5,8 +5,8 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import PlusImage from '../../../public/plusImage.jpg';
-import useRegisterStore from '@/store/RegisterStore';
-import RegisterScheduleStore from '@/store/RegisterScheduleStore';
+import useRegisterStore from '@/store/registerStore';
+import RegisterScheduleStore from '@/store/registerScheduleStore';
 
 interface ImageFileWithPreview {
   file: File;

@@ -1,5 +1,5 @@
 'use client';
-import useRegisterStore from '@/store/RegisterStore';
+import useRegisterStore from '@/store/registerStore';
 import React from 'react';
 
 const HashTag = () => {
