@@ -29,17 +29,17 @@ const ReserveUserInfo = () => {
 
   return (
     <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md shadow">
-      <div className="mb-3">
+      <div className="mb-4">
         <p className="text-lg font-bold mb-1">연락처</p>
         <p className="text-sm">알림 발송을 위해 계정 정보를 확인해주세요.</p>
       </div>
-      <div className="flex flex-col  mb-4 h-[52px]">
-        <p className="font-bold mb-1 ">계정 ID</p>
-        <p>{userInfo?.email}</p>
+      <div className="flex flex-col  mb-4 h-[52px] ml-2">
+        <p className="font-bold mb-1 text-sm">계정 ID</p>
+        <p className="">{userInfo?.email}</p>
       </div>
-      <div className="flex flex-col">
-        <p className="font-bold mb-1">이름 (닉네임)</p>
-        <p>{userInfo?.nickname}</p>
+      <div className="flex flex-col ml-2">
+        <p className="font-bold mb-1 text-sm ">이름 (닉네임)</p>
+        <p className="">{userInfo?.nickname}</p>
       </div>
       <div className="tooltip mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
         <button
