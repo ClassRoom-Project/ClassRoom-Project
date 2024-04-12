@@ -2,6 +2,7 @@ import { useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import ProfileImage from '@/assets/images/profile-image.png';
 
 //데이터 불러오기,
 
@@ -23,8 +24,9 @@ export default function ChatPreview({
     >
       <div className="flex py-4 hover:bg-[#E3E1FC] mt-2 mb-2 px-2">
         <div className="mx-3">
-          <img
-            src={MakeClassUserInfo?.profile_image}
+          <Image
+            unoptimized
+            src={MakeClassUserInfo?.profile_image ?? ProfileImage}
             alt="profileImg"
             width={50}
             height={50}

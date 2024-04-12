@@ -1,26 +1,14 @@
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { BsSend } from 'react-icons/bs';
-import { MdPhotoCamera } from 'react-icons/md';
-import MessageBoxs from './MessageBoxs';
 import { useCreateNewMessage } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ChatMessagesType } from '@/types/chat/chatTypes';
-import { useStartTyping } from 'react-use';
-import { DragEvent, useState } from 'react';
+import { BsSend } from 'react-icons/bs';
 import ChatImageModal from './ChatImageModal';
+import MessageBoxs from './MessageBoxs';
 
 export default function ChatMessages({ fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
-  if (!chatId) {
-    return (
-      <div className="h-full flex justify-center items-center">
-        <LoadingSpinner />
-      </div>
-    );
-  }
   const { loginUserId } = useLoginStore();
   const { createNewMessageMutate } = useCreateNewMessage();
-  const [photos, setPhotos] = useState<string[]>([]);
-  const [countError, setCountError] = useState('');
 
   const handleSubmitMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,6 +23,14 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
     createNewMessageMutate({ message, loginUserId, chatId });
     (e.target as HTMLFormElement).reset();
   };
+
+  if (!chatId) {
+    return (
+      <div className="h-full flex justify-center items-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-full flex-col w-full">

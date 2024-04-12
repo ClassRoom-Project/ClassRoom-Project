@@ -187,7 +187,12 @@ const ImageUpload = () => {
         )}
         {images.map((image, index) => (
           <div key={index} className="h-[100px] w-[100px] relative ml-2">
-            <img src={image.preview} alt="uploaded" className="h-full w-full object-cover rounded-[20px] border" />
+            <Image
+              src={image.preview}
+              alt="uploaded"
+              fill
+              className="h-full w-full object-cover rounded-[20px] border"
+            />
             <button
               className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${
                 index === 0 ? 'bg-blue-500' : 'bg-white-500'

@@ -1,8 +1,9 @@
 import { DragEvent, useState } from 'react';
 import { MdPhotoCamera } from 'react-icons/md';
-import { IoCloseOutline } from 'react-icons/io5';
+import { RiCloseCircleLine } from 'react-icons/ri';
 import { useCreateNewPhotoMessage } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+import Image from 'next/image';
 
 export default function ChatImageModal({ chatId }: { chatId: string }) {
   console.log('chatId', chatId);
@@ -84,9 +85,9 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
               style={{ margin: 5 }}
               className="relative"
             >
-              <img src={image} alt={`preview-${index}`} style={{ width: 100, height: 100 }} />
+              <Image src={image} alt={`preview-${index}`} width={100} height={100} />
               <button onClick={() => handleDeletePhoto(index)} className="absolute right-1 top-1 text-lg">
-                <IoCloseOutline />
+                <RiCloseCircleLine className=" text-button-default-color text-xl" />
               </button>
             </div>
           ))}
