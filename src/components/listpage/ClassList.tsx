@@ -1,6 +1,7 @@
 'use client';
 
-import { getClassForList } from '@/app/api/listpage/ClassInfoForList';
+import { useCategoryFilterStore, useListFilterStore } from '@/store/classFilterStore';
+import { getClassForList } from '@/app/api/listpage/classInfoForList';
 import ClassCard from '@/components/main/ClassCard';
 import { ClassAllType } from '@/types/class';
 import { useInfiniteQuery } from '@tanstack/react-query';
@@ -8,8 +9,9 @@ import React, { useEffect, useRef } from 'react';
 
 //무한 스크롤
 function ClassList() {
+  const { selectedCategory } = useCategoryFilterStore();
+  const { ClassFilters } = useListFilterStore();
   const targetRef = useRef<HTMLDivElement>(null);
-
   const {
     data: classInfos,
     error,
@@ -19,8 +21,9 @@ function ClassList() {
     isFetchingNextPage,
     status
   } = useInfiniteQuery({
-    queryKey: ['infiniteClass'],
-    queryFn: ({ pageParam = 1 }) => getClassForList(pageParam, 8), //한페이지당 불러오는 데이터 수 지정
+    //키값을 변수로해두면 유즈이펙트 사용할 필요없이 키값이 변경될 때 마다 리액트 쿼리에서 리페칭해옵니다!
+    queryKey: ['infiniteClass', selectedCategory, ClassFilters],
+    queryFn: ({ pageParam = 1 }) => getClassForList(pageParam, 8, selectedCategory, ClassFilters), //한페이지당 불러오는 데이터 수 지정
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage //다음페이지로 넘어가는 로직
   });
@@ -36,7 +39,7 @@ function ClassList() {
         }
       },
       {
-        threshold: 0.1 // targetRef의 10%가 보일 때 콜백이 실행됩니다.
+        threshold: 0.5 // targetRef의 해당수치만큼이 보일 때 콜백이 실행됩니다.
       }
     );
     observer.observe(targetRef.current);
@@ -45,9 +48,13 @@ function ClassList() {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return status === 'pending' ? (
-    <p>Loading...</p>
+    <div className="w-full h-screen text-[#5373FF] flex justify-center items-center">
+      <p>로딩중입니다!</p>
+    </div>
   ) : status === 'error' ? (
-    <p>Error: {error.message}</p>
+    <div className="w-full h-screen text-[#5373FF] flex justify-center items-center">
+      <p>Error: {error.message}</p>
+    </div>
   ) : (
     <div className="flex justify-center min-w-full">
       <div className="grid grid-cols-4 min-w-[90px]">
