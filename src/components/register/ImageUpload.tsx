@@ -35,6 +35,7 @@ const ImageUpload = () => {
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
   const classId = crypto.randomUUID();
+  const noticeId = crypto.randomUUID();
   const router = useRouter();
 
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
@@ -99,6 +100,16 @@ const ImageUpload = () => {
     if (error) {
       console.error('Supabase에 데이터 저장 중 오류 발생:', error);
     } else {
+      // 알림 데이터 저장
+      const notice = `${classTitle} 클래스 등록이 완료되었습니다.`;
+      const { data:noticeData, error:noticeError } = await supabase.from('notifications')
+        .insert([
+          { notice_id: noticeId, user_id : userId, class_id: classId, notice:notice, isread: false, created_at: new Date() }
+        ]);
+      if (noticeError) {
+        console.error('Error creating notification', noticeError);
+      }
+
       // 각 날짜에 대한 데이터 저장
       for (const date of selectedDates) {
         const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
@@ -134,6 +145,7 @@ const ImageUpload = () => {
           }
         }
       }
+
       alert('등록이 완료되었습니다.');
       router.push(`/register/completed/${classId}`);
     }
