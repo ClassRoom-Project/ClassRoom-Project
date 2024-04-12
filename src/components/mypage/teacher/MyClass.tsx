@@ -2,7 +2,7 @@
 
 import { getMyRegisteredClass } from '@/app/api/mypage/my-class-api';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
-import { useMyClassInfoStore } from '@/store/mypage/classInfoStore';
+import { useMyClassInfoStore } from '@/store/mypage/myClassInfoStore';
 import { MyRegisteredClassType } from '@/types/class';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';

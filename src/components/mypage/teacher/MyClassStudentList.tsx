@@ -1,5 +1,5 @@
 import { getMyClassStudentInfo } from '@/app/api/mypage/my-class-api';
-import { useMyClassInfoStore } from '@/store/mypage/classInfoStore';
+import { useMyClassInfoStore } from '@/store/mypage/myClassInfoStore';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -11,7 +11,7 @@ const MyClassStudentList = () => {
   const timeId = param.get('timeId');
   // 클래스 정보 한 번 더 보여주기?
   const { myClassSingleInfo } = useMyClassInfoStore();
-  console.log('여긴 값 들어옴?', myClassSingleInfo);
+  // console.log('여긴 값 들어옴?', myClassSingleInfo);
 
   const { data: myClassStudentInfo, isPending } = useQuery({
     queryKey: ['reserve', timeId],
