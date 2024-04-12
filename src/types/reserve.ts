@@ -1,12 +1,11 @@
 // store에서 사용하기 위한 타입
 export type ReserveInfo = {
+  reserveId: string;
   classId: string;
   userId: string;
   reservePrice: number;
   reserveQuantity: number;
   timeId: string;
-  reserveDate: string;
-  reserveTime: string;
 };
 
 // export type DBReserveInfo = {
