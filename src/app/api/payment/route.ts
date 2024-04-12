@@ -4,9 +4,6 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
-  console.log('서치파람스~~~~~~~~~~~~~', searchParams);
-  // console.log(searchParams);
-  console.log(searchParams.get('classId'), 'if문 전');
 
   const paymentType = searchParams.get('paymentType');
   const orderId = searchParams.get('orderId');
@@ -48,24 +45,25 @@ export async function GET(request: NextRequest) {
     }
   });
 
+  const data = await response.json();
+
+  //TODO: 페이먼트키 추가
   if (response.ok) {
     try {
       await insertNewReservation({
-        reserveId: orderId,
+        reserveId: data.orderId,
         classId,
-        reservePrice: Number(amount),
+        reservePrice: data.totalAmount,
         reserveQuantity: Number(reserveQuantity),
         timeId,
         userId
       });
+
+      //TODO: 배포 주소로 변경
+      return NextResponse.redirect(new URL(`http://localhost:3000/reserve/success/${data.orderId}`));
     } catch (error) {
       console.log('라우트 핸들러의 insertNewReservation 오류 => ', error);
+      return NextResponse.redirect(new URL(`http://localhost:3000/reserve/fail`));
     }
   }
-
-  const data = await response.json();
-  // return data;
-  // console.log(data);
-
-  return NextResponse.redirect(new URL(`http://localhost:3000/reserve/success/${data.orderId}`));
 }
