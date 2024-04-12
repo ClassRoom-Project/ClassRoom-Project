@@ -71,7 +71,7 @@ const TimeSelect: React.FC = () => {
 
   return (
     <div className="my-4">
-      <h1 className="font-bold text-[#3F3F3F] my-6">클래스 날짜&시간</h1>
+      <h1 className="font-bold text-[#3F3F3F] my-6">* 클래스 날짜&시간</h1>
       <div className="relative">
         <button
           onClick={toggleDatePicker}

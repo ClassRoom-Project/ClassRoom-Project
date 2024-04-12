@@ -26,7 +26,7 @@ const MinMaxNumber = () => {
   return (
     <div className="my-4 flex flex-wrap sm:flex-nowrap justify-between items-center">
       <div className="flex-1 flex items-center space-x-2">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">모집 정원</p>
+        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 모집 정원</p>
         <input
           className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-1/2"
           type="number"
@@ -36,7 +36,7 @@ const MinMaxNumber = () => {
         />
       </div>
       <div className="flex-1 flex items-center space-x-2 mx-3">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">최소인원</p>
+        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 최소인원</p>
         <input
           className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-1/2"
           type="number"
@@ -46,7 +46,7 @@ const MinMaxNumber = () => {
         />
       </div>
       <div className="flex-1 flex items-center space-x-2 mx-3">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">최대인원</p>
+        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 최대인원</p>
         <input
           className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-1/2"
           type="number"

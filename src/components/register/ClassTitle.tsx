@@ -16,7 +16,7 @@ const ClassTitle = () => {
   return (
     <div className="my-4">
       <div className="flex items-center space-x-4">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">클래스명</p>
+        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 클래스명</p>
         <input
           className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0"
           type="text"
@@ -24,7 +24,7 @@ const ClassTitle = () => {
           onChange={handleClassTitleChange}
           placeholder="클래스명을 입력해주세요"
         />
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">클래스타입</p>
+        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 클래스타입</p>
         {/* 클래스 타입 드롭다운 */}
         <select
           value={classType}
