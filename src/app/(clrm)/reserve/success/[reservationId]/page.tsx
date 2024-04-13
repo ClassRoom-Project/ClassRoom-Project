@@ -22,10 +22,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
 
   if (isError) {
-    console.log('first');
-    console.log(isError);
     invalidReserve();
-    // return;
   }
 
   // #region
@@ -38,16 +35,6 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
       reservePrice
     } = reservationDetails as ReservationDetailsType;
     reserveInfoLabels = [
-      // {
-      //   icon: <LuClipboardEdit size={20} color="#8074FF" />,
-      //   title: '클래스명',
-      //   description: `${classInfo.title}`
-      // },
-      // {
-      //   icon: <LuClipboardEdit size={20} color="#8074FF" />,
-      //   title: '클래스 타입',
-      //   description: `${classInfo.classType}`
-      // },
       {
         icon: <FiUserPlus size={20} color="#8074FF" />,
         title: '신청 인원',
@@ -63,11 +50,6 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
         title: '이용 시간',
         description: `${reservationDetails && convertTimeTo12HourClock(dateInfo.times)}`
       },
-      // {
-      //   icon: <LuClock size={20} color="#8074FF" />,
-      //   title: '소요 시간',
-      //   description: `${classInfo.totalTime}시간`
-      // },
 
       {
         icon: <GrLocation size={20} color="#8074FF" />,
