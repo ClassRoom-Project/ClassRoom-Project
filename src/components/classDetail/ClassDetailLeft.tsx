@@ -30,6 +30,7 @@ const ClassDetailLeft = ({
           <Image
             width={30}
             height={30}
+            className="rounded-full"
             src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
             alt="profileImage"
             unoptimized={true}

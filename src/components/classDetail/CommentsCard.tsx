@@ -21,13 +21,12 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center">
           <div className="flex justify-center items-center">
-            <div className="w-10 h-10 rounded-full mr-3">
+            <div className="w-10 h-10 rounded-full  mr-3">
               <Image
                 src={comment.profile_image}
                 alt="Profile"
-                objectFit="cover"
+                className="rounded-full"
                 unoptimized={true}
-                layout="responsive"
                 width={30}
                 height={30}
               />
