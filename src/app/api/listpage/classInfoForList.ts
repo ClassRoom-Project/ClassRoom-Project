@@ -30,9 +30,6 @@ export const getClassForList = async (
   if (selectedTitle) {
     query = query.ilike('title', `%${selectedTitle}%`);
   }
-  if (userId) {
-    query = query.filter('wish.user_id', 'eq', `${userId}`);
-  }
 
   if (selectedCategory) {
     query = query.eq('category', selectedCategory);
@@ -53,6 +50,10 @@ export const getClassForList = async (
     }
   }
 
+  if (userId) {
+    query = query.filter('wish.user_id', 'eq', `${userId}`);
+  }
+
   const { data: classInfos, error, count } = await query;
   if (error) {
     console.error('클래스 정보들 불러오기 오류 => ', error);
@@ -61,7 +62,7 @@ export const getClassForList = async (
   const totalCount = count ?? 0;
   const nextPage = PageNumber + limit < totalCount ? page + 1 : undefined;
 
-  console.log(classInfos);
+  // console.log(classInfos);
 
   return { classInfos, nextPage }; // classinfo랑 다음페이지를 반환값으로 가져야 무한루프 넥스트페이지를 사용가능
 };

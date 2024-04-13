@@ -3,6 +3,8 @@ import React from 'react';
 import { ClassAllType } from '@/types/class';
 import Link from 'next/link';
 import { FaRegHeart } from 'react-icons/fa';
+import WishButton from '../classDetail/WishButton';
+import ListPageWishButton from '../listpage/ListPageWishButton';
 
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   return classInfos ? (
@@ -28,7 +30,9 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
           <p className="text-sm text-[#5373FF]">#{classInfos.hashtag}</p>
           <div className="mt-2 flex justify-between">
             <div className="text-md font-bold">{`${classInfos.price.toLocaleString()}원`}</div>
-            <FaRegHeart />
+            {/* <FaRegHeart /> */}
+            <ListPageWishButton classId={classInfos.class_id} wishInfo={classInfos.wish} />
+            {/* <WishButton classId={classInfos.class_id} /> */}
           </div>
         </div>
       </div>
