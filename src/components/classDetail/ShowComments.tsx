@@ -1,5 +1,6 @@
 'use client';
 
+import { DetailCommentType } from '@/types/detailComment';
 import React from 'react';
 import CommentsCard from './CommentsCard';
 import { useQuery } from '@tanstack/react-query';
@@ -18,8 +19,8 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <div className="min-w-full bg-purple-900">
-      {data?.map((comment) => (
+    <div className="min-w-[1024px]">
+      {data?.map((comment: DetailCommentType) => (
         <CommentsCard key={comment.comment_id} comment={comment} />
       ))}
     </div>

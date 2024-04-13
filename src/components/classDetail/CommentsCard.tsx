@@ -3,32 +3,37 @@ import { DetailCommentType } from '@/types/detailComment';
 import Image from 'next/image';
 
 const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
-  console.log('11111', comment);
+  const Stars = () => {
+    return [1, 2, 3, 4, 5].map((star) => (
+      <input
+        key={star}
+        type="radio"
+        name={comment.comment_id}
+        className="mask bg-[#6C5FF7] mask-star-2"
+        readOnly
+        checked={comment.star >= star}
+      />
+    ));
+  };
+  console.log('11111', comment.star);
   return (
-    <div className="bg-white shadow rounded-md p-4 max-w-sm w-full mx-auto">
+    <div className="bg-white shadow rounded-md p-4 max-w-[1000px] w-full mt-5 mx-auto">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center">
-          <div className="w-10 h-10 rounded-full mr-3">
-            <Image src={comment.profile_image} alt="Profile" unoptimized={true} width={30} height={30} />
-          </div>
-          <div>
+          <div className="flex justify-center items-center">
+            <div className="w-10 h-10 rounded-full mr-3">
+              <Image src={comment.profile_image} alt="Profile" unoptimized={true} width={30} height={30} />
+            </div>
             <h5 className="text-lg font-bold">{comment.nickname}</h5>
-            <p className="text-sm text-gray-600">{comment.job}</p>
+            <p className="text-sm ml-2 text-gray-600">{comment.job}</p>
           </div>
         </div>
         <div className="flex">
-          <div className="rating rating-sm">
-            <input type="radio" name="rating-9" className="rating-hidden" />
-            <input type="radio" name="rating-9" className="mask mask-star-2" />
-            <input type="radio" name="rating-9" className="mask mask-star-2" checked />
-            <input type="radio" name="rating-9" className="mask mask-star-2" />
-            <input type="radio" name="rating-9" className="mask mask-star-2" />
-            <input type="radio" name="rating-9" className="mask mask-star-2" />
-          </div>
+          <div className="rating rating-sm">{Stars()}</div>
         </div>
       </div>
       <div>
-        <p className="text-gray-800 text-sm">{comment.content}</p>
+        <p className="text-gray-800 overflow-hidden w-[800px] h-28 text-sm">{comment.content}</p>
       </div>
       <div className="text-right text-gray-500 text-xs">{new Date(comment.create_at).toLocaleDateString()}</div>
     </div>
