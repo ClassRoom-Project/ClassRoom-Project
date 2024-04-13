@@ -1,12 +1,11 @@
 // store에서 사용하기 위한 타입
 export type ReserveInfo = {
+  reserveId: string;
   classId: string;
   userId: string;
   reservePrice: number;
   reserveQuantity: number;
   timeId: string;
-  reserveDate: string;
-  reserveTime: string;
 };
 
 // export type DBReserveInfo = {
@@ -31,40 +30,36 @@ export interface CurrentReservedCountStoreType {
 // DB에서 받아온 예약 정보 타입
 export interface DBReservationDetailsType {
   class_id: string;
-  userId: string;
   reserve_quantity: number;
   reserve_price: number;
+  userId: string;
   time_id: string;
   user_id: string;
   class: {
-    class_id: string;
     title: string;
     total_time: string;
     location: string;
+    class_type: string;
   };
   time: {
     date: { day: string };
     times: string;
-    date_id: string;
-    time_id: string;
   };
 }
 export interface ReservationDetailsType {
   classId: string;
-  userId: string;
   reserveQuantity: number;
   reservePrice: number;
+  userId: string;
   timeId: string;
   class: {
-    classId: string;
     title: string;
     totalTime: string;
     location: string;
+    classType: string;
   };
   time: {
     date: { day: string };
     times: string;
-    dateId: string;
-    timeId: string;
   };
 }
