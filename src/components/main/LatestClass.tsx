@@ -23,7 +23,7 @@ const LatestClass = () => {
       setClassInfos(infos);
     };
     getClassInfos();
-  }, []);
+  }, [setClassInfos]);
 
   return (
     <div className="mr-auto ml-auto p-5">

@@ -4,7 +4,7 @@ import ClassDetailLeft from '@/components/classDetail/ClassDetailLeft';
 import ClassDetailRight from '@/components/classDetail/ClassDetailRight';
 import DetailComments from '@/components/classDetail/DetailComments';
 
-// export const revalidate = 3600;
+export const revalidate = 10;
 export async function generateStaticParams() {
   //데이터 불러오는 로직
   const classId = await detailClassIdOnly();

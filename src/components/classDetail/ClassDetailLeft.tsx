@@ -33,7 +33,7 @@ const ClassDetailLeft = ({
           <Image
             width={30}
             height={30}
-            src={userData?.profile_image[0] ? userData.profile_image[0] : defaultProfileImageSrc}
+            src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
             alt="profileImage"
             unoptimized={true}
           ></Image>

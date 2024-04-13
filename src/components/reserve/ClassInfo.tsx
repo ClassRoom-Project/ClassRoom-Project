@@ -46,7 +46,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
     {
       title: (
         <div className="flex items-center gap-1">
-          {<GrLocation className="text-gray-400" />} {`위치`}
+          {<GrLocation className="text-gray-400" />} {<p className="w-[30px]">위치</p>}
         </div>
       ),
       description: `${classInfo.location}`
@@ -62,14 +62,20 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   ];
 
   return (
-    <div className="p-6 bg-white h-[500px] mb-4 rounded-md   ">
+    <div className="p-6 bg-white mb-4 rounded-md shadow">
       <h1 className="font-bold text-lg mb-1">선택하신 클래스</h1>
       <div className="w-full relative h-[210px] mb-2 ">
-        <Image className="rounded-lg" fill={true} src={classInfo.image} alt={classInfo.title} />
+        <Image
+          className="rounded-lg"
+          fill={true}
+          src={classInfo.image}
+          alt={classInfo.title}
+          style={{ objectFit: 'cover' }}
+        />
       </div>
       <div className="px-2 flex-col flex gap-1">
         <h1 className="font-bold text-xl mb-2">{classInfo.title}</h1>
-        <div className="flex flex-col gap-1 text-sm">
+        <div className="flex flex-col gap-1.5 text-sm">
           {classInfoLabels.map(({ title, description }) => {
             return (
               <div key={description} className="flex items-center gap-2 text-gray-500">

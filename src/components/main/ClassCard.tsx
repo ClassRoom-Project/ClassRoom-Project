@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 import { ClassAllType } from '@/types/class';
 import Link from 'next/link';
+import { FaRegHeart } from 'react-icons/fa';
 
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   return classInfos ? (
@@ -10,7 +11,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
         <figure className="w-full h-2/5 bg-gray-200 relative">
           {/* <button className="btn btn-sm absolute top-0 left-0">❤️</button> */}
           <Image
-            width={300}
+            width={250}
             height={200}
             src={classInfos.image && classInfos.image.length > 0 ? classInfos.image[0] : 'no image'}
             alt="클래스 이미지"
@@ -23,10 +24,12 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
           <div className="text-xs bg-black overflow-hidden w-[200px] text-white py-1 px-2 inline-block rounded">
             {classInfos.location}
           </div>
-
           <p className="text-lg font-semibold">{classInfos.title}</p>
-          <p className="text-sm text-gray-600">{classInfos.description}</p>
-          <div className="mt-2 text-md font-bold">{`${classInfos.price.toLocaleString()}원`}</div>
+          <p className="text-sm text-[#5373FF]">#{classInfos.hashtag}</p>
+          <div className="mt-2 flex justify-between">
+            <div className="text-md font-bold">{`${classInfos.price.toLocaleString()}원`}</div>
+            <FaRegHeart />
+          </div>
         </div>
       </div>
     </Link>

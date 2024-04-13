@@ -6,28 +6,27 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import React from 'react';
+
+import AskButton from '../chatRooms/AskButton';
+
 import { ToastContainer } from 'react-toastify';
 import { alreadyReserved } from '../common/Toastify';
 
 //Todo :  href chat ID, 받아서 입력할것
-const ClassDetailBtn = ({ classId }: { classId: string }) => {
+const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeClassUserId: string }) => {
   const { loginUserId } = useLoginStore();
 
   const router = useRouter();
   const handleApplyClick = async () => {
     if (!loginUserId) {
-      if (window.confirm('로그인이 필요합니다. 로그인하시겠습니까?')) {
-        //TODO: 모달창으로 바꾸기
-        router.push(`/hello`);
-      }
-      return;
+      router.push(`/reserve?classId=${classId}`);
+    } else {
+      const isReserved = await checkIsReserved({ userId: loginUserId, classId });
+      if (isReserved) {
+        alreadyReserved();
+        return;
+      } else router.push(`/reserve?classId=${classId}`);
     }
-
-    const isReserved = await checkIsReserved({ userId: loginUserId, classId });
-    if (isReserved) {
-      alreadyReserved();
-      return;
-    } else router.push(`/reserve?classId=${classId}`);
   };
 
   return (
@@ -39,12 +38,7 @@ const ClassDetailBtn = ({ classId }: { classId: string }) => {
       >
         신청하기
       </button>
-      <Link
-        href={'/message'}
-        className="flex justify-center items-center rounded-2xl w-20 border-[#5373FF] border-solid border-[1px] h-9 ml-3"
-      >
-        문의하기
-      </Link>
+      <AskButton classId={classId} makeClassUserId={makeClassUserId} />
     </div>
   );
 };

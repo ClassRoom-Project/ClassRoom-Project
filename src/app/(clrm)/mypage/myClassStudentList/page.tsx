@@ -1,10 +1,14 @@
+'use client';
+
 import MyClassStudentList from '@/components/mypage/teacher/MyClassStudentList';
-import React from 'react';
+import { Suspense } from 'react';
 
 const MyClassStudentListPage = () => {
   return (
     <div>
-      <MyClassStudentList />
+      <Suspense>
+        <MyClassStudentList />
+      </Suspense>
     </div>
   );
 };

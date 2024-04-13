@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import useRegisterStore from '@/store/registerStore';
 
@@ -6,21 +7,26 @@ const Price = () => {
   const { price, setPrice } = useRegisterStore();
 
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(event.target.value);
+    let value = parseInt(event.target.value);
+    if (isNaN(value) || value < 0) value = 0;
     setPrice(value);
   };
   return (
     <div className="mt-2">
-      <div className="flex items-center space-x-4">
-        <p className="text-base flex-shrink-0 font-bold">가격</p>
+      <div className="flex items-center justify-between space-x-4">
         <div>
+          <p className="text-base text-[#3F3F3F] font-bold">클래스 1인 수강 금액</p>
+        </div>
+        <div className="relative w-1/3">
           <input
-            className="form-input px-3 py-2 border rounded flex-grow"
+            className="form-input px-3 py-2 border rounded w-full pr-8 text-right"
             type="text"
             value={price}
             onChange={handlePriceChange}
-            placeholder="가격"
           />
+          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+            <span>원</span>
+          </div>
         </div>
       </div>
     </div>

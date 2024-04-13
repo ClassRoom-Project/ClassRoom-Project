@@ -2,6 +2,7 @@ import { CurrentReservedCountStoreType, ReserveStoreType } from '@/types/reserve
 import { create } from 'zustand';
 
 export const defaultInitState = {
+  reserveId: '',
   classId: '',
   userId: '',
   reservePrice: 0,

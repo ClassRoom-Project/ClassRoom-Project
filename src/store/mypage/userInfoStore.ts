@@ -10,7 +10,8 @@ export const defaultInitState: UserInfoType = {
   userId: '',
   nickname: '',
   email: '',
-  profile_image: ''
+  profile_image: '',
+  isTeacher: false
 };
 
 export const userInfoStore = create<UserStateType>()((set) => ({

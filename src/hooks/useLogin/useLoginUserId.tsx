@@ -1,6 +1,6 @@
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReadLoginUserId } from './useSetEmailToApi';
 import { useEffect } from 'react';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 export default function useLoginUserId({ userEmail }: { userEmail: string | null }) {
   const { data: userData, isError } = useReadLoginUserId(userEmail);
@@ -10,7 +10,7 @@ export default function useLoginUserId({ userEmail }: { userEmail: string | null
     if (userData && userData.user_id) {
       setUserId(userData.user_id);
     }
-  }, [userData]);
+  }, [userData, setUserId]);
 
   if (isError) return console.log('Faild to get userId from Store');
   return;
