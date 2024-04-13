@@ -85,7 +85,11 @@ const SearchFilter = () => {
                 <div className="flex flex-col items-start w-72 mb-3 justify-start">
                   <p>지역</p>
                 </div>
-                <select className="select select-primary w-72" onChange={handleLocationChange}>
+                <select
+                  className="select select-primary w-72"
+                  value={ClassFilters.selectedLocation || ''}
+                  onChange={handleLocationChange}
+                >
                   <option disabled selected>
                     지역을 선택하세요
                   </option>

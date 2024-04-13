@@ -23,7 +23,6 @@ const ClassDetailLeft = ({
   const handleThumbnailClick = (imageSrc: string) => {
     setMainImageSrc(imageSrc);
   };
-
   return (
     <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg h-[900px] border-[#5373FF] border-solid border-[1px]">
       <div className="flex items-start justify-start w-[350px]">
@@ -31,6 +30,7 @@ const ClassDetailLeft = ({
           <Image
             width={30}
             height={30}
+            className="rounded-full"
             src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
             alt="profileImage"
             unoptimized={true}
