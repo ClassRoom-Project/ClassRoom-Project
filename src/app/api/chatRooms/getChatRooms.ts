@@ -116,8 +116,7 @@ export const createNewMessages = async ({
       {
         chat_id: chatId,
         messages: message,
-        create_by: loginUserId,
-        check: true
+        create_by: loginUserId
       }
     ])
     .single();
@@ -178,6 +177,7 @@ export const getChatMessages = async (chatId: string, loginUserId: string): Prom
   const { data, error } = await supabase
     .from('chat_messages')
     .select('created_at, create_by, messages, images')
+    .order('created_at', { ascending: true })
     .eq('chat_id', chatId);
 
   await updateCheckMessage(chatId, loginUserId);
