@@ -24,6 +24,12 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
   }, [classId, setReserveInfo, loginUserId]);
 
   const handleReserveButtonClick = async () => {
+    if (!loginUserId) {
+      if (window.confirm('로그인이 필요합니다. 로그인하시겠습니까?')) {
+        router.push('/hello');
+      } else return;
+    }
+
     if (reserveInfo.reserveQuantity === 0) {
       quantityWarning();
       return;
