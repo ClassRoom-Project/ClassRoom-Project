@@ -21,7 +21,7 @@ export const fetchReservationDetails = async (reserveId: string) => {
 
   if (error) {
     console.log('fetchReservationDetails error =>', error);
-    return;
+    throw new Error('fetchReservationDetails error occurred');
   }
 
   const reservationDetails = {

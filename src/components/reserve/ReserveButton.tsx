@@ -1,12 +1,12 @@
 'use client';
 
-import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { quantityWarning } from '../common/Toastify';
+import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
 
 type ReserveButtonParams = {
   classId: string;
@@ -37,14 +37,12 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
     }
 
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
-    const currentReservedQuantity = await countReservationsByTimeId(reserveInfo.timeId);
-    if (currentReservedQuantity) {
-      const currentRemainingQuantity = maxPeople - currentReservedQuantity;
-      if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
-        alert('정원 초과로 인해 예약할 수 없습니다. ');
-        router.refresh();
-        return;
-      }
+    const currentReservedQuantity = await sumReserveQuantityByTimeId(reserveInfo.timeId);
+    const currentRemainingQuantity = maxPeople - currentReservedQuantity;
+    if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
+      alert('정원 초과로 인해 예약할 수 없습니다. ');
+      router.refresh();
+      return;
     }
 
     router.replace(
