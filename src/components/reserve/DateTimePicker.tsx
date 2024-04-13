@@ -26,6 +26,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   useEffect(() => {
     const setInitialReservedCount = async () => {
       const initialReservedCount = await sumReserveQuantityByTimeId(classDates[0].times[0].timeId);
+
       setCurrentReservedCount(initialReservedCount);
     };
     setInitialReservedCount();

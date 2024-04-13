@@ -11,11 +11,8 @@ export const sumReserveQuantityByTimeId = async (timeId: string) => {
 
   if (error) {
     console.log('sumReserveQuantityByTimeId 오류 =>', error);
-    return;
+    throw new Error('Server error occurred');
   }
-
-  console.log(timeId);
-  console.log(currentReservedCount);
 
   return currentReservedCount;
 };

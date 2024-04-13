@@ -38,13 +38,11 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
 
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
     const currentReservedQuantity = await sumReserveQuantityByTimeId(reserveInfo.timeId);
-    if (currentReservedQuantity) {
-      const currentRemainingQuantity = maxPeople - currentReservedQuantity;
-      if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
-        alert('정원 초과로 인해 예약할 수 없습니다. ');
-        router.refresh();
-        return;
-      }
+    const currentRemainingQuantity = maxPeople - currentReservedQuantity;
+    if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
+      alert('정원 초과로 인해 예약할 수 없습니다. ');
+      router.refresh();
+      return;
     }
 
     router.replace(
