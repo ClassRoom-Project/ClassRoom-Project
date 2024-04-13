@@ -83,3 +83,15 @@ export const commentLoginWarning = () =>
     progress: undefined,
     theme: 'light'
   });
+
+export const defaultWarning = () =>
+  toast.error('오류가 발생했습니다. 잠시 후 다시 시도해주세요.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });

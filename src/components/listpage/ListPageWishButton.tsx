@@ -1,15 +1,12 @@
 'use client';
 
 import { useAddWishMutation, useCancleWishMutation } from '@/hooks/useWish/mutateWish';
-import { useCheckIsWishedQuery } from '@/hooks/useWish/useWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ClassAllType } from '@/types/class';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { FaRegHeart } from 'react-icons/fa';
-import { GoHeart } from 'react-icons/go';
-import { GoHeartFill } from 'react-icons/go';
-import { useStartTyping } from 'react-use';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
+import { defaultWarning } from '../common/Toastify';
 
 const ListPageWishButton = ({
   classId,
@@ -24,19 +21,16 @@ const ListPageWishButton = ({
   const addWishMutation = useAddWishMutation();
   const cancleWishMutation = useCancleWishMutation();
   const { loginUserId } = useLoginStore();
-
-  const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
-
-  const isWishedClass = wishInfo.some((item) => item.user_id === loginUserId);
   const [isWishedState, setIsWishedState] = useState<boolean>();
+  const isWishedClass = wishInfo.some((item) => item.user_id === loginUserId);
 
   useEffect(() => {
     setIsWishedState(isWishedClass);
   }, [isWishedClass]);
 
-  if (isWishedClass) {
-    console.log(isWishedClass, title, loginUserId, isWishedState);
-  }
+  // if (isWishedClass) {
+  //   console.log(isWishedClass, title, loginUserId, isWishedState);
+  // }
 
   const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
@@ -47,14 +41,14 @@ const ListPageWishButton = ({
         router.push('/hello');
       } else return;
     }
-    //필요한거 유저아이디, 클래스아이디
+
     if (loginUserId && classId) {
-      if (!isWished) {
+      if (!isWishedState) {
         try {
           addWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(true);
         } catch (error) {
-          alert('위시 추가 오류 😴');
+          defaultWarning();
           console.log(error);
         }
       } else {
@@ -62,7 +56,7 @@ const ListPageWishButton = ({
           cancleWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(false);
         } catch (error) {
-          alert('위시 취소 오류.');
+          defaultWarning();
         }
       }
     }
@@ -70,12 +64,19 @@ const ListPageWishButton = ({
 
   return (
     <div>
-      {isLoading ? (
-        <p>로딩중</p>
+      {!wishInfo ? (
+        <p></p>
       ) : (
         <button onClick={(e) => handleWishClick(e)}>
-          {isWishedState ? <div>❤️</div> : <div>🤍</div>}
-          {/* <FaRegHeart /> */}
+          {isWishedState ? (
+            <p>
+              <GoHeartFill color="red" />
+            </p>
+          ) : (
+            <p>
+              <GoHeart />
+            </p>
+          )}
         </button>
       )}
     </div>
