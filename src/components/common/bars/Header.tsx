@@ -36,24 +36,34 @@ const Header = ({ children }: PropsWithChildren) => {
           <div className="mr-[10px]">
             <LuBell size={30} />
           </div>
+          {/*todo : 비로그인 시 삭제*/}
           <p className="p-4">
             {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
           </p>
           {/*todo : 드랍다운으로 변경*/}
-          <Link href={'/mypage'}>
-            <Image
-              src={profileImage}
-              alt="Profile image"
-              className="mr-[5px] rounded-full"
-              width={50}
-              height={50}
-              unoptimized={true}
-            />
-          </Link>
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="w-12 h-12 rounded-full  m-1">
+              <Image
+                src={profileImage}
+                alt="Profile image"
+                className="rounded-full"
+                width={60}
+                height={60}
+                unoptimized={true}
+              />
+            </div>
+            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+              <div className="border-gray-400 borderb-[1px] border-solid w-52 mb-2">
+                <Link href={'/mypage'}>마이페이지</Link>
+              </div>
+              <div>
+                <Suspense fallback={<div>Logout</div>}>
+                  <LoginState />
+                </Suspense>
+              </div>
+            </ul>
+          </div>
         </div>
-        <Suspense fallback={<div>Logout</div>}>
-          <LoginState />
-        </Suspense>
       </div>
       {children}
     </>
