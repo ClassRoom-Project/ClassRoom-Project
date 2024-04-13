@@ -9,7 +9,7 @@ import { PropsWithChildren, Suspense } from 'react';
 import { LuBell } from 'react-icons/lu';
 import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
-
+import Logo from '../../../../public/loginLogo.png';
 const Header = ({ children }: PropsWithChildren) => {
   const { userInfo } = userInfoStore();
 
@@ -25,7 +25,9 @@ const Header = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="flex p-[15px] justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
-        <Link href="/">Logo</Link>
+        <Link href="/">
+          <Image className="rounded-full" src={Logo} alt="클룸 로고" width={50} height={50} />
+        </Link>
         <div className="flex items-center justify-center ml-60">
           <SearchClass />
         </div>
@@ -35,7 +37,7 @@ const Header = ({ children }: PropsWithChildren) => {
             <LuBell size={30} />
           </div>
           <p className="p-4">
-            {userInfo?.nickname} <span className="text-point-color font-bold">{roleName}님</span>
+            {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
           </p>
           {/*todo : 드랍다운으로 변경*/}
           <Link href={'/mypage'}>
