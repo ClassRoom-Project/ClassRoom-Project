@@ -17,7 +17,7 @@ export const getDetailComment = async (classId: string | undefined) => {
 export const createDetailComment = async (
   classId: string | undefined,
   star: number | undefined,
-  userId: Promise<getLoginUserType> | undefined,
+  userId: string | undefined,
   content: string | undefined
 ) => {
   const { data: comments, error } = await supabase.from('comments').insert([

@@ -22,7 +22,15 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
         <div className="flex items-center">
           <div className="flex justify-center items-center">
             <div className="w-10 h-10 rounded-full mr-3">
-              <Image src={comment.profile_image} alt="Profile" unoptimized={true} width={30} height={30} />
+              <Image
+                src={comment.profile_image}
+                alt="Profile"
+                objectFit="cover"
+                unoptimized={true}
+                layout="responsive"
+                width={30}
+                height={30}
+              />
             </div>
             <h5 className="text-lg font-bold">{comment.nickname}</h5>
             <p className="text-sm ml-2 text-gray-600">{comment.job}</p>

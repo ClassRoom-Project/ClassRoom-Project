@@ -2,22 +2,32 @@
 
 import React, { useState } from 'react';
 import { createDetailComment } from '@/app/api/classdetail/detailComment';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
 import { commentWarning, commentLoginWarning } from '../common/Toastify';
 import { useSession } from 'next-auth/react';
 import { getUserIdByEmail } from '@/app/api/userEmail/loginUserId';
-import { getLoginUserType } from '@/types/authUser/authUserTypes';
 
-//Todo : 예약한 사람만 댓글 입력가능하게 하기
+//Todo : 예약한 사람만 댓글 입력가능하게 하기 , 댓글 수정삭제 구현
 const CreateComments = ({ classId }: { classId: string | undefined }) => {
   const [content, setContent] = useState('');
-  const [star, setStar] = useState<number | undefined>();
+  const [star, setStar] = useState<number | undefined>(undefined);
   const { data: session } = useSession();
   const queryClient = useQueryClient();
 
-  const email = session?.user?.email;
-  const userId: Promise<getLoginUserType> | undefined = email ? getUserIdByEmail(email) : undefined;
+  const email: string = session?.user?.email ?? '';
+
+  const {
+    data: userData,
+    error: userDataError,
+    status: userDataStatus
+  } = useQuery({
+    queryKey: ['getUserIdByEmail'],
+    queryFn: () => getUserIdByEmail(email),
+    enabled: !!email
+  });
+
+  const userId: string | undefined = userData?.user_id;
 
   const { mutate, error, status } = useMutation({
     mutationKey: ['createDetailComment'],
@@ -39,7 +49,7 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!content || !star) {
+    if (!content.trim() || !star) {
       commentWarning();
       return;
     }
@@ -77,8 +87,9 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
             ))}
           </div>
           <textarea
+            maxLength={100}
             className="w-full h-24 p-2 border rounded-md"
-            placeholder="후기을 입력해주세요."
+            placeholder="후기을 입력해주세요.(10자 이상)"
             value={content}
             onChange={handleContentChange}
           ></textarea>
