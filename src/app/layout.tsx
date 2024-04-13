@@ -13,14 +13,12 @@ export const metadata: Metadata = {
 type Props = { children: React.ReactNode };
 
 export default function RootLayout({ children }: Props) {
+  const mapScriptSrc = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&libraries=services,clusterer&autoload=false`;
   return (
     <html lang="ko">
       <body className={inter.className}>
         <QueryProvider>{children}</QueryProvider>
-        <Script
-          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=74879e175ebce507c0f0c29186f18b48&libraries=services,clusterer&autoload=false"
-          strategy="beforeInteractive"
-        />
+        <Script src={mapScriptSrc} strategy="beforeInteractive" />
       </body>
     </html>
   );
