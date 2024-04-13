@@ -7,7 +7,7 @@ export const useFetchReservationDetail = (reserveId: string) => {
     data: reservationDetails,
     isError,
     isLoading
-  } = useQuery<ReservationDetailsType | undefined>({
+  } = useQuery<ReservationDetailsType>({
     queryKey: ['reservationDetail'],
     queryFn: () => fetchReservationDetails(reserveId),
     enabled: !!reserveId

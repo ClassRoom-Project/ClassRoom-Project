@@ -28,7 +28,7 @@
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
   border: 1px solid #6c5ff7;
   transition: all 0.2s;
-  background-color: #6c5ff7;
+  background-color: #f9f6ff;
 }
 
 /* 선택된 날짜 */
