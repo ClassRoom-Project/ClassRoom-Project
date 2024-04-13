@@ -1,13 +1,13 @@
 'use client';
 
 import LoginState from '@/components/login/LoginState';
-import Notification from '@/components/notifications/Notification'
 import { userInfoStore } from '@/store/mypage/userInfoStore';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren, Suspense } from 'react';
 import { LuBell } from 'react-icons/lu';
+import Notification from '@/components/notifications/Notification'
 import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
 
@@ -32,9 +32,7 @@ const Header = ({ children }: PropsWithChildren) => {
         </div>
         <div className="flex justify-center items-center"></div>
         <div className="flex items-center">
-          <div className="mr-[10px]">
-            <LuBell size={30} />
-          </div>
+          <Notification />
           <p className="p-4">
             {userInfo?.nickname} <span className="text-point-color font-bold">{roleName}님</span>
           </p>
