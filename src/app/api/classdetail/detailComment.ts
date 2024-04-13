@@ -12,12 +12,19 @@ export const getDetailComment = async (classId: string | undefined) => {
   return comments;
 };
 //댓글 작성하기
-export const createDetailComment = async (classId: string, userId: string, content: string) => {
+
+export const createDetailComment = async (
+  classId: string | undefined,
+  star: number | undefined,
+  userId: string | undefined,
+  content: string | undefined
+) => {
   const { data: comments, error } = await supabase.from('comments').insert([
     {
       class_id: classId,
       user_id: userId,
       content: content,
+      star: star,
       create_at: new Date()
     }
   ]);

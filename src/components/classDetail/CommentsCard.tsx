@@ -17,7 +17,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
   };
   console.log('11111', comment.star);
   return (
-    <div className="bg-white shadow rounded-md p-4 max-w-[1000px] w-full mt-5 mx-auto">
+    <div className="bg-white rounded-md p-4 shadow-xl max-w-[1000px] w-full mt-5 mx-auto">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center">
           <div className="flex justify-center items-center">
