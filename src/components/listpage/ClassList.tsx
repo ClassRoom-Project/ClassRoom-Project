@@ -7,6 +7,7 @@ import { ClassAllType } from '@/types/class';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { QueryKeys } from '@/constants/QueryKeys';
 
 //무한 스크롤
 function ClassList() {
