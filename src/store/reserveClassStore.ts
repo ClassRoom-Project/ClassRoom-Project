@@ -27,5 +27,5 @@ export const useReserveStore = create<ReserveStoreType>((set) => ({
 
 export const useCurrentReservedCountStore = create<CurrentReservedCountStoreType>((set) => ({
   currentReservedCount: 0,
-  setCurrentReservedCount: (currentReservedCount: number | null | undefined) => set({ currentReservedCount })
+  setCurrentReservedCount: (currentReservedCount: number) => set({ currentReservedCount })
 }));

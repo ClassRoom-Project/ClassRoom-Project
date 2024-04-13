@@ -23,8 +23,8 @@ export type ReserveStoreType = {
 };
 
 export interface CurrentReservedCountStoreType {
-  currentReservedCount: number | null | undefined;
-  setCurrentReservedCount: (currentReservedCount: number | null | undefined) => void;
+  currentReservedCount: number;
+  setCurrentReservedCount: (currentReservedCount: number) => void;
 }
 
 // DB에서 받아온 예약 정보 타입
