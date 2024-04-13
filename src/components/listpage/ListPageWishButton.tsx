@@ -63,23 +63,23 @@ const ListPageWishButton = ({
   };
 
   return (
-    <div>
+    <button onClick={(e) => handleWishClick(e)}>
       {!wishInfo ? (
         <p></p>
       ) : (
-        <button onClick={(e) => handleWishClick(e)}>
+        <div>
           {isWishedState ? (
             <p>
-              <GoHeartFill color="red" />
+              <GoHeartFill color="red" size={18} />
             </p>
           ) : (
             <p>
-              <GoHeart />
+              <GoHeart color="dimgray" size={18} />
             </p>
           )}
-        </button>
+        </div>
       )}
-    </div>
+    </button>
   );
 };
 

@@ -7,8 +7,9 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import { GoHeart } from 'react-icons/go';
 import { GoHeartFill } from 'react-icons/go';
+import { defaultWarning } from '../common/Toastify';
 
-const WishButton = ({ classId }: { classId: string | undefined }) => {
+const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
   const cancleWishMutation = useCancleWishMutation();
@@ -25,42 +26,37 @@ const WishButton = ({ classId }: { classId: string | undefined }) => {
         router.push('/hello');
       } else return;
     }
-    //필요한거 유저아이디, 클래스아이디
+
     if (loginUserId && classId) {
       if (!isWished) {
         try {
           addWishMutation.mutate({ userId: loginUserId, classId });
         } catch (error) {
-          alert('위시 추가 오류 😴');
+          defaultWarning();
           console.log(error);
         }
       } else {
         try {
           cancleWishMutation.mutate({ userId: loginUserId, classId });
         } catch (error) {
-          alert('위시 취소 오류.');
+          defaultWarning();
+          console.log(error);
         }
       }
     }
   };
 
   return (
-    <div>
+    <div className=" h-[20px]">
       {isLoading ? (
         <p>로딩중</p>
       ) : (
-        <div>
-          <button
-            onClick={(e) => handleWishClick(e)}
-            className={`btn justify-end ${isWished ? 'bg-rose-200' : 'bg-gray-200'}`}
-          >
-            {isWished ? '찜했음' : '찜하기'}
-            <span>{isWished ? <GoHeartFill color="red" /> : <GoHeart />}</span>
-          </button>
-        </div>
+        <button onClick={(e) => handleWishClick(e)}>
+          <span>{isWished ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
+        </button>
       )}
     </div>
   );
 };
 
-export default WishButton;
+export default DetailWishButton;
