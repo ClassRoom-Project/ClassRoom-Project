@@ -12,8 +12,6 @@ import { ToastContainer } from 'react-toastify';
 
 const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const { loginUserId } = useLoginStore();
-  // const { star, setStar } = useRatingStore();
-  // console.log('star', star);
 
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState(comment.content);

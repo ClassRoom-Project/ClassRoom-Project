@@ -11,7 +11,7 @@ import { BiCategoryAlt } from 'react-icons/bi';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GoPersonAdd } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
-import NoImage from '../../../../public/noimage.png';
+import NoImage from '@/assets/images/no_img.jpg';
 
 const MyClass = () => {
   const { loginUserId } = useLoginStore();
@@ -97,9 +97,13 @@ const MyClass = () => {
                 <div className="flex gap-4">
                   <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl">
                     <GrLocation color="#6C5FF7" size="20" />
-                    <p className="flex-grow">
-                      위치 : {classInfo?.location} {classInfo?.detail_location}
-                    </p>
+                    {classInfo?.location ? (
+                      <p className="flex-grow">
+                        위치 : {classInfo?.location} {classInfo?.detail_location}
+                      </p>
+                    ) : (
+                      <p>위치 정보가 없습니다.</p>
+                    )}
                   </div>
                 </div>
               </div>

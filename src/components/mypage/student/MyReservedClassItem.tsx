@@ -8,6 +8,7 @@ import { GrLocation } from 'react-icons/gr';
 import { GoPeople } from 'react-icons/go';
 import { BiMoneyWithdraw } from 'react-icons/bi';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
+import NoImage from '@/assets/images/no_img.jpg';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const [classes, setClasses] = useState<ClassItem[]>([]);
@@ -31,9 +32,6 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
 
   // 이미지 대표사진
   const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음';
-
-  // 시간 초 빼기
-  const formattedTime = classItem.times.substring(0, 5);
 
   return (
     <li className="flex gap-4 border-y border-y-border-color w-[1280px]">
@@ -71,12 +69,16 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
               <span>이용 금액 : {formattedPrice}원</span>
             </div>
           </div>
-          <div className="flex gap-4 py-4">
+          <div className="flex gap-4">
             <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
               <GrLocation color="#6C5FF7" size="20" />
-              <span>
-                위치 : {classItem.location} {classItem.detail_location}
-              </span>
+              {classItem.location ? (
+                <p>
+                  위치 : {classItem.location} {classItem.detail_location}
+                </p>
+              ) : (
+                <p>위치 정보가 없습니다.</p>
+              )}
             </div>
           </div>
         </section>
