@@ -1,13 +1,11 @@
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
-import React from 'react';
-import defaultClassImage from '../../../public/favicon.ico.png';
-import { LuClock } from 'react-icons/lu';
-import { PiCurrencyKrw } from 'react-icons/pi';
 import { GrLocation } from 'react-icons/gr';
-import { MdOutlineCategory } from 'react-icons/md';
-import { RiUserLocationLine } from 'react-icons/ri';
 import { HiOutlineCube } from 'react-icons/hi2';
+import { LuClock } from 'react-icons/lu';
+import { MdOutlineCategory } from 'react-icons/md';
+import { PiCurrencyKrw } from 'react-icons/pi';
+import { RiUserLocationLine } from 'react-icons/ri';
 
 const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   const classInfoLabels = [
