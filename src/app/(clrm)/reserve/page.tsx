@@ -6,7 +6,6 @@ import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
 import ReserveUserInfo from '@/components/reserve/ReserveUserInfo';
 import Link from 'next/link';
-import { SlArrowLeft } from 'react-icons/sl';
 import { IoIosArrowBack } from 'react-icons/io';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
