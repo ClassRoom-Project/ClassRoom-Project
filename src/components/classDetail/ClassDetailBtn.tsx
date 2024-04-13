@@ -19,18 +19,14 @@ const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeCla
   const router = useRouter();
   const handleApplyClick = async () => {
     if (!loginUserId) {
-      if (window.confirm('로그인이 필요합니다. 로그인하시겠습니까?')) {
-        //TODO: 모달창으로 바꾸기
-        router.push(`/hello`);
-      }
-      return;
+      router.push(`/reserve?classId=${classId}`);
+    } else {
+      const isReserved = await checkIsReserved({ userId: loginUserId, classId });
+      if (isReserved) {
+        alreadyReserved();
+        return;
+      } else router.push(`/reserve?classId=${classId}`);
     }
-
-    const isReserved = await checkIsReserved({ userId: loginUserId, classId });
-    if (isReserved) {
-      alreadyReserved();
-      return;
-    } else router.push(`/reserve?classId=${classId}`);
   };
 
   return (

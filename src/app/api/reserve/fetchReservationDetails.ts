@@ -12,7 +12,7 @@ export const fetchReservationDetails = async (reserveId: string) => {
     .select(
       `
         class_id, reserve_quantity, reserve_price, time_id, user_id,
-        class(title, total_time, location),
+        class(title, total_time, location, class_type),
         time (times, date(day))
   `
     )
@@ -21,7 +21,7 @@ export const fetchReservationDetails = async (reserveId: string) => {
 
   if (error) {
     console.log('fetchReservationDetails error =>', error);
-    return;
+    throw new Error('fetchReservationDetails error occurred');
   }
 
   const reservationDetails = {
@@ -34,13 +34,11 @@ export const fetchReservationDetails = async (reserveId: string) => {
       title: data.class.title,
       totalTime: data.class.total_time,
       location: data.class.location,
-      classId: data.class.class_id
+      classType: data.class.class_type
     },
     time: {
       date: { day: data.time.date.day },
-      times: data.time.times,
-      dateId: data.time.date_id,
-      timeId: data.time.time_id
+      times: data.time.times
     }
   };
 

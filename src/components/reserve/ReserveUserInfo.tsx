@@ -29,23 +29,35 @@ const ReserveUserInfo = () => {
 
   return (
     <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md shadow">
-      <p className="mb-4 text-lg font-bold ">연락처 입력</p>
-      <div className="flex flex-col  mb-4 h-[52px]">
-        <p className="font-bold mb-1 ">계정 ID (알림 메일이 발송됩니다.)</p>
-        <p>{userInfo?.email}</p>
+      <div className="mb-4">
+        <p className="text-lg font-bold mb-1">연락처</p>
+        <p className="text-sm">알림 발송을 위해 계정 정보를 확인해주세요.</p>
       </div>
-      <div className="flex flex-col">
-        <p className="font-bold mb-1">이름 (닉네임)</p>
-        <p>{userInfo?.nickname}</p>
-      </div>
-      <div className="tooltip mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
-        <button
-          onClick={() => router.push('/mypage')}
-          className="btn w-full btn-ghost border border-solid border-gray-300"
-        >
-          프로필 수정하기
-        </button>
-      </div>
+      {loginUserId ? (
+        <>
+          <div className="flex flex-col  mb-4 h-[52px] ml-2">
+            <p className="font-bold mb-1 text-sm">계정 ID</p>
+            <p className="">{userInfo?.email}</p>
+          </div>
+          <div className="flex flex-col ml-2">
+            <p className="font-bold mb-1 text-sm ">이름 (닉네임)</p>
+            <p className="">{userInfo?.nickname}</p>
+          </div>
+          <div className="tooltip mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
+            <button
+              onClick={() => router.push('/mypage')}
+              className="btn w-full btn-ghost border border-solid border-gray-300"
+            >
+              프로필 수정하기
+            </button>
+          </div>
+        </>
+      ) : (
+        <div className="w-full h-full flex items-center justify-center">
+          {' '}
+          <p className="bg-base-200 text-center py-4 px-6 rounded-md">로그인이 필요합니다</p>
+        </div>
+      )}
     </div>
   );
 };
