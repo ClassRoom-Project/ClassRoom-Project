@@ -1,5 +1,6 @@
 import { DateList } from './date';
 
+//데이터 베이스 수정후 수정예정
 export interface ClassAllType {
   class_id: string;
   user_id: string;

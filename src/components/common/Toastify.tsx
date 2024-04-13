@@ -50,9 +50,8 @@ export const quantityWarning = () =>
   });
 
 export const invalidReserve = () =>
-  toast.error('클래스를 예약하는 도중 오류가 발생했습니다.', {
+  toast.error('클래스 예약을 완료하는 도중 오류가 발생했습니다.', {
     position: 'top-right',
-    autoClose: 3000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
