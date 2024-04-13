@@ -6,10 +6,10 @@ import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { CaptionProps, DayPicker } from 'react-day-picker';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
+import { DateList } from '@/types/date';
+import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
 import 'react-day-picker/dist/style.css';
 import './day-picker.css'; // dist css 밑에 둬야 적용됨
-import { DateList } from '@/types/date';
-import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const { setReserveInfo } = useReserveStore();
@@ -25,28 +25,22 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   useEffect(() => {
     const setInitialReservedCount = async () => {
-      const initialReservedCount = await countReservationsByTimeId(classDates[0].times[0].timeId);
+      const initialReservedCount = await sumReserveQuantityByTimeId(classDates[0].times[0].timeId);
       setCurrentReservedCount(initialReservedCount);
     };
     setInitialReservedCount();
   }, [setCurrentReservedCount, classDates]);
 
+  // 시간 버튼 클릭
   const handleTimeClick = async (times: string, timeId: string) => {
     setSelectedTime(times);
     setTimeId(timeId);
 
-    const currentReservedAmount = await countReservationsByTimeId(timeId);
+    const currentReservedAmount = await sumReserveQuantityByTimeId(timeId);
     setCurrentReservedCount(currentReservedAmount);
   };
 
-  /* 데이피커 */
-  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
-  function CustomCaption(props: CaptionProps) {
-    return (
-      <div className="flex justify-center font-bold">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>
-    );
-  }
-
+  // 날짜 버튼 클릭
   const handleDateChange = async (newDate: Date | undefined) => {
     const formattedDate = format(newDate as Date, 'yyyy-MM-dd');
     const firstAvailableTime = classDates.find(({ day }) => day === formattedDate)?.times[0];
@@ -59,7 +53,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
       setTimeId(timeId);
 
       // 일자를 선택했을 때 첫 번째 시간의 예약 인원수로 setCurrentReservedCount
-      const reservedCountOfSelectedDate = await countReservationsByTimeId(timeId);
+      const reservedCountOfSelectedDate = await sumReserveQuantityByTimeId(timeId);
       setCurrentReservedCount(reservedCountOfSelectedDate);
     }
   };
@@ -79,6 +73,13 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     .map((day) => {
       return new Date(2024, today.getMonth(), day);
     });
+
+  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
+  function CustomCaption(props: CaptionProps) {
+    return (
+      <div className="flex justify-center font-bold">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>
+    );
+  }
 
   return (
     <div className="w-full mb-2">
