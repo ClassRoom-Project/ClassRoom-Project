@@ -1,15 +1,34 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useMutation } from '@tanstack/react-query';
 import { createDetailComment } from '@/app/api/classdetail/detailComment';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { ToastContainer } from 'react-toastify';
+import { commentWarning, commentLoginWarning } from '../common/Toastify';
+import { useSession } from 'next-auth/react';
+import { getUserIdByEmail } from '@/app/api/userEmail/loginUserId';
+import { getLoginUserType } from '@/types/authUser/authUserTypes';
 
-const CreateComments = ({ classId, userId }: { classId: string | undefined; userId: string | undefined }) => {
+//Todo : 예약한 사람만 댓글 입력가능하게 하기
+const CreateComments = ({ classId }: { classId: string | undefined }) => {
   const [content, setContent] = useState('');
   const [star, setStar] = useState<number | undefined>();
+  const { data: session } = useSession();
+  const queryClient = useQueryClient();
 
-  const { mutate, isPending, isError, error } = useMutation(createDetailComment);
+  const email = session?.user?.email;
+  const userId: Promise<getLoginUserType> | undefined = email ? getUserIdByEmail(email) : undefined;
 
+  const { mutate, error, status } = useMutation({
+    mutationKey: ['createDetailComment'],
+    mutationFn: () => createDetailComment(classId, star, userId, content),
+    retry: 1,
+    onSuccess: () => {
+      queryClient.invalidateQueries();
+      setContent('');
+      setStar(0);
+    }
+  });
   const handleContentChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
   };
@@ -21,47 +40,54 @@ const CreateComments = ({ classId, userId }: { classId: string | undefined; user
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!content || !star) {
-      alert('별점과 댓글을 모두 입력해주세요.');
+      commentWarning();
       return;
     }
-    mutate({ classId, userId, content, star });
+    if (!userId) {
+      commentLoginWarning();
+      return;
+    }
+    mutate();
   };
 
-  if (isPending) {
+  if (status == 'pending') {
     return <div>Loading...</div>;
   }
 
-  if (isError && error instanceof Error) {
+  if (status == 'error') {
     return <div>Error: {error.message}</div>;
   }
 
   return (
-    <div className="min-w-full bg-white rounded-xl border-[#6C5FF7] border-[1px] border-solid p-4">
-      <form onSubmit={handleSubmit}>
-        <div className="rating rating-sm">
-          {[1, 2, 3, 4, 5].map((num) => (
-            <input
-              key={num}
-              type="radio"
-              name="rating"
-              className="mask mask-star-2 bg-[#5373FF]"
-              value={num}
-              onChange={handleStarChange}
-              checked={star === num}
-            />
-          ))}
-        </div>
-        <textarea
-          className="w-full h-24 p-2 border rounded-md"
-          placeholder="댓글을 입력해주세요."
-          value={content}
-          onChange={handleContentChange}
-        ></textarea>
-        <button type="submit" className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          댓글 등록
-        </button>
-      </form>
-    </div>
+    <>
+      <ToastContainer />
+      <div className="w-[1000px] bg-white rounded-xl shadow-2xl border-solid p-4">
+        <form onSubmit={handleSubmit}>
+          <div className="rating rating-sm flex justify-end items-center">
+            {[1, 2, 3, 4, 5].map((num) => (
+              <input
+                key={num}
+                type="radio"
+                name="rating"
+                className="mask mask-star-2 mb-1 bg-[#5373FF]"
+                value={num}
+                onChange={handleStarChange}
+                checked={star === num}
+              />
+            ))}
+          </div>
+          <textarea
+            className="w-full h-24 p-2 border rounded-md"
+            placeholder="후기을 입력해주세요."
+            value={content}
+            onChange={handleContentChange}
+          ></textarea>
+          <button type="submit" className="mt-2 bg-[#5373FF] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            후기 등록
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

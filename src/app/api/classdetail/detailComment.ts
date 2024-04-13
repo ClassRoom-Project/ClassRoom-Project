@@ -1,3 +1,4 @@
+import { getLoginUserType } from '@/types/authUser/authUserTypes';
 import { supabase } from '../supabase/supabase';
 
 //댓글 불러오기 api, rpc로 쿼리문 작성해야된다 이렇게하니까 안나온다 데이터가
@@ -16,7 +17,7 @@ export const getDetailComment = async (classId: string | undefined) => {
 export const createDetailComment = async (
   classId: string | undefined,
   star: number | undefined,
-  userId: string | undefined,
+  userId: Promise<getLoginUserType> | undefined,
   content: string | undefined
 ) => {
   const { data: comments, error } = await supabase.from('comments').insert([

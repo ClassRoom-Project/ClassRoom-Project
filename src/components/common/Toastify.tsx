@@ -59,3 +59,27 @@ export const invalidReserve = () =>
     progress: undefined,
     theme: 'light'
   });
+
+export const commentWarning = () =>
+  toast.error('별점과 후기를 모두 입력하세요.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const commentLoginWarning = () =>
+  toast.error('로그인후 작성할 수 있습니다', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
