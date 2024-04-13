@@ -27,6 +27,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
     if (!loginUserId) {
       if (window.confirm('로그인이 필요합니다. 로그인하시겠습니까?')) {
         router.push('/hello');
+        return;
       } else return;
     }
 
