@@ -11,9 +11,9 @@ import 'dayjs/locale/ko';
 dayjs.locale('ko');
 
 export default function MessageBoxs({ toClassId, title, fromUserId, chatId, otherId, studentName }: MessagesBoxsType) {
-  const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
-  const { readChatRoomMessages } = useReadChatRoomMessages(chatId);
   const { loginUserId } = useLoginStore();
+  const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
+  const { readChatRoomMessages } = useReadChatRoomMessages(chatId, loginUserId!);
 
   return (
     <div className="flex-1 overflow-scroll">

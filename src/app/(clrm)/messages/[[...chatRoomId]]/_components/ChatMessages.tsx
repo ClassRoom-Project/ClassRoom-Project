@@ -27,6 +27,7 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
     (e.target as HTMLFormElement).reset();
   };
 
+  //supabase realtime test
   // useEffect(() => {
   //   console.log('시작은하니?');
   //   const subscribeChat = supabase
