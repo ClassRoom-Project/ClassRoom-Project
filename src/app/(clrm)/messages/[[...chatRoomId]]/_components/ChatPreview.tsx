@@ -1,7 +1,16 @@
-import { useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
+import {
+  useReadChatRoomMessages,
+  useReadLastMessages,
+  useReadMakeClassUserInfo
+} from '@/hooks/useChatRoom/useNewChatRoom';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProfileImage from '@/assets/images/profile-image.png';
+import { useEffect } from 'react';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+
+dayjs.locale('ko');
 
 //데이터 불러오기,
 
@@ -14,6 +23,11 @@ export default function ChatPreview({
   otherId
 }: any) {
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
+  const { readLastMessages } = useReadLastMessages(chatId);
+
+  useEffect(() => {
+    const lastMessage = async () => await readLastMessages;
+  }, [readLastMessages]);
 
   return (
     <Link
@@ -34,8 +48,21 @@ export default function ChatPreview({
         </div>
         <div className="flex flex-col mx-3 flex-1 w-0">
           <p className="sm:text-sm md:text-lg font-bold text-nowrap">{MakeClassUserInfo?.nickname}</p>
-          <div className="truncate">
-            <p className="sm:text-sm text-gray-500">메시지</p>
+          <div className="flex flex-row justify-between">
+            <div>
+              {!readLastMessages ? (
+                <p className="sm:text-sm text-gray-500">메시지가 없습니다</p>
+              ) : (
+                <div>
+                  {readLastMessages?.messages ? (
+                    <p className="sm:text-sm text-gray-500">{readLastMessages.messages}</p>
+                  ) : (
+                    <p className="sm:text-sm text-gray-500">이미지</p>
+                  )}
+                </div>
+              )}
+            </div>
+            <div className="text-xs text-gray-400">{dayjs(readLastMessages?.createdAt).format('A hh:mm')}</div>
           </div>
         </div>
       </div>

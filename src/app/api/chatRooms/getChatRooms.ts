@@ -5,7 +5,8 @@ import {
   MakeClassUserInfoType,
   SendNewMessageType,
   SendNewPhotoMessageType,
-  getChatRoomMessagesType
+  getChatRoomMessagesType,
+  getLastMessageType
 } from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
@@ -127,7 +128,26 @@ export const createNewMessages = async ({
   return newChat;
 };
 
-//채팅 이미지 넣기
+// Supabase에 파일을 업로드하고, 업로드된 파일의 URL을 반환하는 함수
+export const uploadPhotosToSupabase = async (files: File[]) => {
+  const urls = [];
+  for (const file of files) {
+    const randomUUID = crypto.randomUUID();
+    const filePath = `messageImage/${randomUUID}`;
+
+    const { data, error } = await supabase.storage.from('chatImages').upload(filePath, file);
+    if (error) {
+      console.error('Error uploading file:', error);
+      continue;
+    }
+    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/chatImages/${data.path}`;
+    urls.push(url);
+  }
+  console.log('urls', urls);
+  return urls;
+};
+
+// 채팅 이미지 넣기
 export const createNewMessagesPhoto = async ({
   chatId,
   photos,
@@ -164,4 +184,27 @@ export const getChatMessages = async (chatId: string): Promise<getChatRoomMessag
   }
 
   return data;
+};
+
+// 마지막 메시지 가져오기
+export const getLastChatMessage = async (chatId: string): Promise<getLastMessageType | undefined> => {
+  const { data, error } = await supabase
+    .from('chat_messages')
+    .select('created_at, messages, images')
+    .order('created_at', { ascending: false })
+    .eq('chat_id', chatId)
+    .limit(1)
+    .single();
+
+  const lastMessages = {
+    createdAt: data?.created_at,
+    messages: data?.messages,
+    images: data?.images
+  };
+
+  if (error) {
+    throw error;
+  }
+
+  return lastMessages;
 };

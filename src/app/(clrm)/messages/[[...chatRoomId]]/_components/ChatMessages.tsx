@@ -1,3 +1,5 @@
+'use client';
+
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useCreateNewMessage, useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -24,6 +26,31 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
     createNewMessageMutate({ message, loginUserId, chatId });
     (e.target as HTMLFormElement).reset();
   };
+
+  // useEffect(() => {
+  //   console.log('시작은하니?');
+  //   const subscribeChat = supabase
+  //     .channel(`chat_on_${chatId}`) //
+  //     .on(
+  //       'postgres_changes',
+  //       {
+  //         event: 'INSERT',
+  //         schema: 'public',
+  //         table: 'chat_messages',
+  //         filter: `chat_rooms=eq.${chatId}`
+  //       },
+  //       (payload) => {
+  //         console.log('payload', payload);
+  //         console.log('여기뭐가없어?');
+  //       }
+  //     );
+
+  //   subscribeChat.subscribe();
+  //   return () => {
+  //     console.log('혹시?');
+  //     subscribeChat.unsubscribe();
+  //   };
+  // }, [chatId]);
 
   const studentName = MakeClassUserInfo?.nickname;
 

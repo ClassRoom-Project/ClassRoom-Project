@@ -98,3 +98,9 @@ export interface MessagesBoxsType {
   otherId: string;
   studentName: string;
 }
+
+export interface getLastMessageType {
+  messages: string;
+  images: string;
+  createdAt: string;
+}

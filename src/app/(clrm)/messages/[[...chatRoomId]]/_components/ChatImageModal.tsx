@@ -4,9 +4,11 @@ import { RiCloseCircleLine } from 'react-icons/ri';
 import { useCreateNewPhotoMessage } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import Image from 'next/image';
+import { uploadPhotosToSupabase } from '@/app/api/chatRooms/getChatRooms';
 
 export default function ChatImageModal({ chatId }: { chatId: string }) {
-  const [photos, setPhotos] = useState<string[]>([]);
+  const [photos, setPhotos] = useState<File[]>([]);
+  const [showImage, setShowImage] = useState<string[]>([]);
   const [countError, setCountError] = useState('');
   const { createNewPhotoMessageMutate } = useCreateNewPhotoMessage();
   const { loginUserId } = useLoginStore();
@@ -19,8 +21,10 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
         return;
       }
       const selectedFiles = Array.from(e.target.files).slice(0, 5);
+      setPhotos((prevPhotos) => [...prevPhotos, ...selectedFiles]);
+
       const newPhotosArray = selectedFiles.map((file) => URL.createObjectURL(file));
-      setPhotos((prevPhotos) => [...prevPhotos, ...newPhotosArray]);
+      setShowImage((prevPhotos) => [...prevPhotos, ...newPhotosArray]);
       setCountError('');
     }
   };
@@ -45,24 +49,35 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
     const dragIndex = parseInt(e.dataTransfer.getData('dragIndex'));
     if (dragIndex === dropIndex) return;
 
+    const updatedShowImages = [...showImage];
+    const dragShowImage = updatedShowImages.splice(dragIndex, 1)[0];
+    updatedShowImages.splice(dropIndex, 0, dragShowImage);
+    setShowImage(updatedShowImages);
+
     const updatedPhotos = [...photos];
-    const dragItem = updatedPhotos.splice(dragIndex, 1)[0];
-    updatedPhotos.splice(dropIndex, 0, dragItem);
+    const dragPhoto = updatedPhotos.splice(dragIndex, 1)[0];
+    updatedPhotos.splice(dropIndex, 0, dragPhoto);
     setPhotos(updatedPhotos);
   };
 
   const handleDeletePhoto = (index: number) => {
-    setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index));
+    setShowImage((prevPhotos) => prevPhotos.filter((_, i) => i !== index));
   };
 
-  const handleSendButton = () => {
+  const handleSendButton = async () => {
     if (!loginUserId) {
       console.error('loginUserId is null');
       return;
     }
 
-    console.log(photos);
-    createNewPhotoMessageMutate({ photos, chatId, loginUserId });
+    // 여기서 photos 배열에 저장된 File 객체들을 서버에 업로드하고,
+    // 성공적으로 업로드된 파일의 URL을 반환
+    const uploadedPhotoUrls = await uploadPhotosToSupabase(photos);
+
+    createNewPhotoMessageMutate({ photos: uploadedPhotoUrls, chatId, loginUserId });
+
+    // 상태 초기화
+    setShowImage([]);
     setPhotos([]);
   };
 
@@ -75,7 +90,7 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
 
         <input type="file" name="photo" id="photo" accept="image/*" hidden multiple onChange={handleImageChange} />
         <div className="w-full flex flex-row">
-          {photos.map((image, index) => (
+          {showImage.map((image, index) => (
             <div
               key={index}
               draggable
