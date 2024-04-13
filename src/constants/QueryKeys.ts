@@ -1,3 +1,4 @@
 export const QueryKeys = {
-  WISH: 'wish'
+  WISH: 'wish',
+  RESERVATION_DETAIL: 'reservationDetail'
 };
