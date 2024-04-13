@@ -7,8 +7,9 @@ import { ReservationDetailsType } from '@/types/reserve';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { FiCalendar, FiCheckCircle, FiUserPlus, FiWatch } from 'react-icons/fi';
 import { GrLocation } from 'react-icons/gr';
-import { LuClipboardEdit, LuClock } from 'react-icons/lu';
+import { LuClock } from 'react-icons/lu';
 import { PiCurrencyKrw } from 'react-icons/pi';
+import { RiErrorWarningLine } from 'react-icons/ri';
 
 type ReserveInfoLabels = {
   icon: React.ReactNode;
@@ -21,9 +22,10 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
 
   if (isError) {
+    console.log('first');
     console.log(isError);
     invalidReserve();
-    return;
+    // return;
   }
 
   // #region
@@ -86,7 +88,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   return (
     <div className="w-full h-100vh-header  box-border  bg-light-purple flex justify-center items-center flex-col text-gray-700">
       <div className="w-5/12 min-w-[600px]  justify-center min-h-[600px] bg-white shadow rounded-md items-center flex flex-col px-12 pt-12 pb-8">
-        {!isLoading ? (
+        {!isLoading && !isError ? (
           <>
             <FiCheckCircle color="#38c557" className="mb-6" size={70} />
             <h1 className="text-2xl font-bold  text-center">클래스 예약이 정상적으로 처리되었습니다.</h1>
@@ -118,7 +120,8 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
           </>
         ) : isError ? (
           <div className="flex flex-col justify-center items-center">
-            <p>예약을 완료하는 도중 오류가 발생했습니다. </p>
+            <RiErrorWarningLine size={100} color="#6C5FF7" />
+            <p className="font-bold text-lg mt-5">예약을 완료하는 도중 오류가 발생했습니다. </p>
           </div>
         ) : (
           <div className="flex justify-center flex-col items-center gap-4">

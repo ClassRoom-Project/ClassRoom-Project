@@ -2,24 +2,30 @@
 
 import { useReserveStore } from '@/store/reserveClassStore';
 import { PaymentWidgetInstance, loadPaymentWidget } from '@tosspayments/payment-widget-sdk';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { useAsync } from 'react-use';
 
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
 export default function PaymentPageasync() {
+  const router = useRouter();
   const searchParams = useSearchParams();
-  const customerKey = searchParams.get('customerKey') || crypto.randomUUID();
+  const customerKey = searchParams.get('customerKey');
   const price = parseInt(searchParams.get('price') || '', 10) || 0;
   const orderId = searchParams.get('orderId');
-  // const classId = searchParams.get('classId') || crypto.randomUUID();
+  const classId = searchParams.get('classId') || crypto.randomUUID();
   const paymentWidgetRef = useRef<PaymentWidgetInstance | null>(null);
   const paymentMethodsWidgetRef = useRef<ReturnType<PaymentWidgetInstance['renderPaymentMethods']> | null>(null);
   const title = searchParams.get('title');
   const { reserveInfo } = useReserveStore();
 
   useAsync(async () => {
+    if (customerKey === 'null' || !customerKey) {
+      alert('유저 정보가 존재하지 않습니다. 로그인 상태를 확인해주세요.');
+      router.replace(`/`);
+      return;
+    }
     //초기화
     const paymentWidget = await loadPaymentWidget(clientKey, customerKey);
     if (!loadPaymentWidget) {
@@ -65,6 +71,10 @@ export default function PaymentPageasync() {
           type="button"
           className="mt-8 bg-pale-color hover:bg-point-color text-white rounded-md px-5 py-2"
           onClick={async () => {
+            if (customerKey === 'null' || !customerKey) {
+              alert('유저 정보가 존재하지 않습니다. 로그인 상태를 확인해주세요.');
+              router.replace('/');
+            }
             const paymentWidget = paymentWidgetRef.current;
             try {
               await paymentWidget?.requestPayment({
