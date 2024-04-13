@@ -18,7 +18,7 @@ const CategoryBtns = () => {
   );
 
   return (
-    <div className="min-w-full bg-[#5373FF] h-16 flex justify-center items-center">
+    <div className="w-[1024px] bg-[#5373FF] h-16 flex justify-center items-center">
       {categories.map((category) => (
         <button
           key={category}
