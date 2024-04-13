@@ -7,11 +7,7 @@ import Image from 'next/image';
 import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from "react-icons/fi";
-
-interface ImageFileWithPreview {
-  file: File;
-  preview: string;
-}
+import { ImageFileWithPreview } from '@/types/register';
 
 const ImageUpload = () => {
   const {
@@ -106,7 +102,7 @@ const ImageUpload = () => {
       console.error('Supabase에 데이터 저장 중 오류 발생:', error);
     } else {
       // 알림 데이터 저장
-      const notice = `신청하신 "${classTitle}" 클래스 등록이 완료되었습니다.`;
+      const notice = `"${classTitle}" 클래스 등록이 완료되었습니다.`;
       const { data:noticeData, error:noticeError } = await supabase.from('notifications')
         .insert([
           { notice_id: noticeId, user_id : userId, class_id: classId, notice:notice, isread: false, created_at: new Date() }

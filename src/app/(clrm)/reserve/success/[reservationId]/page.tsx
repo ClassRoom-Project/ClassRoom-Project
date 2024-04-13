@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
 import { invalidReserve } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservationDetail';
@@ -10,6 +11,7 @@ import { GrLocation } from 'react-icons/gr';
 import { LuClock } from 'react-icons/lu';
 import { PiCurrencyKrw } from 'react-icons/pi';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { insertNotice } from '@/app/api/reserve/insertNotice';
 
 type ReserveInfoLabels = {
   icon: React.ReactNode;
@@ -20,7 +22,28 @@ type ReserveInfoLabels = {
 const ReservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
   const reservationid = params.reservationId;
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
+  const [dataSaved, setDataSaved] = useState(false);
 
+  useEffect(() => {
+    // 로딩이 완료되었고, 오류가 없으며, 예약 세부 정보가 존재할 때
+    if (!isLoading && !isError && reservationDetails && !dataSaved) {
+      // 여기에서 insertNotice 함수를 호출합니다.
+      insertNotice(reservationDetails.userId, reservationDetails.classId, reservationDetails.class.title)
+        .then((noticeData) => {
+          // 알림 데이터 저장에 성공했을 때의 처리
+          console.log('Notification saved:', noticeData);
+          setDataSaved(true);
+          console.log(reservationDetails.userId);
+          console.log(reservationDetails.classId);
+          console.log(reservationDetails.class.title);
+        })
+        .catch((error) => {
+          // 알림 데이터 저장에 실패했을 때의 처리
+          console.error('Failed to save notification:', error);
+        });
+    }
+  }, [isLoading, isError, reservationDetails, dataSaved]);
+  
   if (isError) {
     invalidReserve();
   }
