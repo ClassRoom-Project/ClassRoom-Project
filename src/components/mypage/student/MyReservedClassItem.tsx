@@ -34,7 +34,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음';
 
   return (
-    <li className="flex gap-4 border-y border-y-border-color w-[1280px]">
+    <li className="flex gap-4 border-y border-y-border-color w-[1080px]">
       <div className="w-[300px] h-[200px]">
         <Image
           src={mainImage}

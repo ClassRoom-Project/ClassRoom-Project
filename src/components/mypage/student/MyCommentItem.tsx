@@ -83,7 +83,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const rating = comment.star;
 
   return (
-    <li className="p-4 flex gap-4 border-y border-y-border-color w-full" key={comment.comment_id}>
+    <li className="p-4 flex gap-4 border-y border-y-border-color w-[1080px]" key={comment.comment_id}>
       <div className="w-[300px] h-[200px]">
         <Image
           src={comment.image[0]}
