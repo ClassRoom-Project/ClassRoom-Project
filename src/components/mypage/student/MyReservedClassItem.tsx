@@ -7,6 +7,7 @@ import { FaRegClock, FaRegCalendarCheck } from 'react-icons/fa';
 import { GrLocation } from 'react-icons/gr';
 import { GoPeople } from 'react-icons/go';
 import { BiMoneyWithdraw } from 'react-icons/bi';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const [classes, setClasses] = useState<ClassItem[]>([]);
@@ -59,7 +60,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
             </div>
             <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
               <FaRegClock color="#6C5FF7" size="20" />
-              <span>시간 : {formattedTime}</span>
+              <span>시간 : {convertTimeTo12HourClock(classItem.times)}</span>
             </div>
             <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
               <GoPeople color="#6C5FF7" size="20" />

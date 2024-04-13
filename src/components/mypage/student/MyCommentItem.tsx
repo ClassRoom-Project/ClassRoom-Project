@@ -97,13 +97,11 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         />
       </div>
       <div className="p-4">
-        <section className="flex gap-8">
+        <section className="flex gap-10">
           <p className="font-bold text-xl text-dark-purple-color">{comment.title}</p>
-          <div className="flex gap-4">
-            <p>
-              작성일 : {formattedDate} {formattedTime}
-            </p>
-          </div>
+          <p className="flex gap-4">
+            <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
+          </p>
         </section>
         <div className="pt-4">
           <Stars rating={rating} />
