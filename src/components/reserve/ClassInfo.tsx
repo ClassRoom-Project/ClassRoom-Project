@@ -46,7 +46,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
     {
       title: (
         <div className="flex items-center gap-1">
-          {<GrLocation className="text-gray-400" />} {`위치`}
+          {<GrLocation className="text-gray-400" />} {<p className="w-[30px]">위치</p>}
         </div>
       ),
       description: `${classInfo.location}`
@@ -62,7 +62,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   ];
 
   return (
-    <div className="p-6 bg-white h-[500px] mb-4 rounded-md shadow">
+    <div className="p-6 bg-white mb-4 rounded-md shadow">
       <h1 className="font-bold text-lg mb-1">선택하신 클래스</h1>
       <div className="w-full relative h-[210px] mb-2 ">
         <Image

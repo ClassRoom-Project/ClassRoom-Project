@@ -14,7 +14,8 @@ export const getClassForList = async (
     selectedLocation?: string | null;
     selectedDifficulty?: string | null;
     selectedPrice?: PriceRange | null;
-  }
+  },
+  selectedTitle = ''
 ) => {
   const PageNumber = (page - 1) * limit;
 
@@ -24,6 +25,10 @@ export const getClassForList = async (
     .select('*', { count: 'exact' })
     .range(PageNumber, PageNumber + limit - 1); // range란? (a,b) a번째부터 b번째까지의 데이터만 가져오는 메서드 ex 1페이지 0~9 2페이지 10~19
 
+  //검색기능
+  if (selectedTitle) {
+    query = query.ilike('title', `%${selectedTitle}%`);
+  }
   if (selectedCategory) {
     query = query.eq('category', selectedCategory);
   }

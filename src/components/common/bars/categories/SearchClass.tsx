@@ -1,11 +1,16 @@
 import { useSearchStore } from '@/store/classFilterStore';
+import { useRouter } from 'next/navigation';
 
 export const SearchClass = () => {
+  const router = useRouter();
   const { selectedTitle, setSelectedTitle } = useSearchStore();
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedTitle(e.target.value);
   };
-  const handleSearchBtn = () => {};
+  const handleSearchBtn = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push('/list');
+  };
   return (
     <form className="h-[120px] flex items-center justify-center" onSubmit={handleSearchBtn}>
       <input

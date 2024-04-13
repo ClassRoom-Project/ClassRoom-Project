@@ -1,28 +1,36 @@
 'use client';
 
-import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
-import { increaseReservedCount } from '@/app/api/reserve/updateReservationCounts';
+import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
-import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
-import { countReservationsByTimeId } from '@/app/api/reserve/countReservationsByTimeId';
-import { quantityWarning } from '../common/Toastify';
+import { useEffect } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { quantityWarning } from '../common/Toastify';
 
-const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: number }) => {
+type ReserveButtonParams = {
+  classId: string;
+  title: string;
+  maxPeople: number;
+};
+
+const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
   const router = useRouter();
   const { loginUserId } = useLoginStore();
   const { setReserveInfo, reserveInfo } = useReserveStore();
 
-  console.log(loginUserId);
-
   useEffect(() => {
-    setReserveInfo({ classId: classId, userId: loginUserId });
+    setReserveInfo({ classId, userId: loginUserId });
   }, [classId, setReserveInfo, loginUserId]);
 
   const handleReserveButtonClick = async () => {
+    if (!loginUserId) {
+      if (window.confirm('로그인이 필요합니다. 로그인하시겠습니까?')) {
+        router.push('/hello');
+        return;
+      } else return;
+    }
+
     if (reserveInfo.reserveQuantity === 0) {
       quantityWarning();
       return;
@@ -30,11 +38,8 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
 
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
     const currentReservedQuantity = await countReservationsByTimeId(reserveInfo.timeId);
-
     if (currentReservedQuantity) {
       const currentRemainingQuantity = maxPeople - currentReservedQuantity;
-
-      // 현재 남은 자리가 사용자가 선택한 인원수보다 적으면
       if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
         alert('정원 초과로 인해 예약할 수 없습니다. ');
         router.refresh();
@@ -42,32 +47,10 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
       }
     }
 
-    // TODO: 미주님과 의논 필요
-    // reservationId: supabase의 응답으로 받아온 Insert된 예약 정보의 아이디
-    const reservationId = await insertNewReservation(reserveInfo);
-
-    if (!reservationId) {
-      alert('예약 도중 오류가 발생했습니다. 잠시 후 다시 시도해주세요,');
-      return;
-    }
-
-    window.localStorage.setItem('reservationId', reservationId);
-    const reservationDetails = await fetchReservationDetails(reservationId);
-
-    if (!reservationDetails || !('class' in reservationDetails)) {
-      // 예외 처리 로직
-      console.error('faild to fetch reservationDtails in ReserveButton', Error);
-      return;
-    }
-
-    const { class: classDetails, reserveQuantity, reservePrice } = reservationDetails;
-    const userEmail = sessionStorage.getItem('userEmail');
-
-    // class 테이블의 reserved_count 에 예약한 인원 수 업데이트
-    await increaseReservedCount({ classId, quantity: reserveInfo.reserveQuantity });
-
     router.replace(
-      `/payment?customerKey=${reserveInfo.userId}&price=${reserveInfo.reservePrice}&classId=${reserveInfo.classId}`
+      `/payment?orderId=${crypto.randomUUID()}&price=${reserveInfo.reservePrice}&classId=${
+        reserveInfo.classId
+      }&title=${title}&customerKey=${reserveInfo.userId}`
     );
   };
 
@@ -75,7 +58,7 @@ const ReserveButton = ({ classId, maxPeople }: { classId: string; maxPeople: num
     <>
       <ToastContainer />
       <button className="btn bg-point-purple text-white tracking-wide w-full" onClick={handleReserveButtonClick}>
-        결제하기
+        결제하자
       </button>
     </>
   );
