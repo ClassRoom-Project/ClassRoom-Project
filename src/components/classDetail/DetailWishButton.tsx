@@ -5,7 +5,6 @@ import { useCheckIsWishedQuery } from '@/hooks/useWish/useWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import React, { useEffect, useState } from 'react';
 import { GoHeart } from 'react-icons/go';
 import { GoHeartFill } from 'react-icons/go';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';

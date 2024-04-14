@@ -100,7 +100,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-4 font-bold ml-36">
+              <div className="flex flex-col gap-4 font-bold ml-28">
                 {reserveInfoLabels.map(({ icon, title, description }) => (
                   <div key={title} className="flex gap-2 w-full">
                     <div className="flex flex-row gap-2 justify-center items-center">
