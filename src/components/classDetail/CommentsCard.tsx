@@ -1,6 +1,7 @@
 import React from 'react';
 import { DetailCommentType } from '@/types/detailComment';
 import Image from 'next/image';
+import defaultProfile from '../../assets/images/profile-image.png';
 
 const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
   const Stars = () => {
@@ -23,7 +24,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
           <div className="flex justify-center items-center">
             <div className="w-10 h-10 rounded-full  mr-3">
               <Image
-                src={comment.profile_image}
+                src={comment.profile_image || defaultProfile}
                 alt="Profile"
                 className="rounded-full"
                 unoptimized={true}

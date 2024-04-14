@@ -22,7 +22,6 @@ const MyClass = () => {
     queryKey: ['class', loginUserId],
     queryFn: () => getMyRegisteredClass(loginUserId)
   });
-  // console.log('myClassInfo', myClassInfo);
 
   // 클래스 삭제하기 : mutation
   const { mutate: deleteClassMutation } = useMutation({
@@ -122,7 +121,7 @@ const MyClass = () => {
             {/* 클래스 날짜 및 시간 정보 */}
             <div className="flex flex-col collapse-content">
               {/* 클래스 날짜 표시 */}
-              {classInfo.dates.map((date, dateIndex) => (
+              {classInfo?.dates?.map((date, dateIndex) => (
                 <div key={dateIndex} className="flex gap-20 border-y-2 justify-center">
                   <div className="flex items-center p-2 gap-2 ">
                     <FaRegCalendarCheck color="#6C5FF7" size="20" />
@@ -130,7 +129,7 @@ const MyClass = () => {
                   </div>
                   <div>
                     {/* 클래스 시간 표시 */}
-                    {date.times.map((time, timeIndex) => (
+                    {date?.times?.map((time, timeIndex) => (
                       <div key={timeIndex} className="flex gap-20 p-2">
                         <div className="flex items-center p-2 gap-2">
                           <FaRegClock color="#6C5FF7" size="20" />

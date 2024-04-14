@@ -2,8 +2,12 @@ import { ClassAllType } from '@/types/class';
 import Image from 'next/image';
 import Link from 'next/link';
 import ListPageWishButton from '../listpage/ListPageWishButton';
+import { GrLocation } from 'react-icons/gr';
 
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
+  // 주소 괄호 제외
+  const formattedLocation = classInfos.location.replace(/\s*\([^)]*\)\s*/, '');
+
   return classInfos ? (
     <div className="card w-[250px] h-[350px] bg-base-100 shadow-xl m-1 rounded-lg overflow-hidden">
       <Link href={`/list/detail/${classInfos.class_id}`} className="">
@@ -20,12 +24,15 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
           />
         </figure>
         <div className="card-body p-4 flex flex-col justify-between">
-          <div className="text-xs justify-center items-center bg-black h-10 overflow-hidden w-[200px] text-white py-1 px-2 inline-block rounded">
-            {classInfos.location}
+          <div className="flex gap-1 items-center">
+            <GrLocation color="#6C5FF7" size="25" />
+            <p className="text-xs flex-grow items-center p-2 gap-2 border-2 border-point-purple rounded-3xl">
+              {formattedLocation}
+            </p>
           </div>
           <p className="text-md h-12 overflow-hidden font-semibold">{classInfos.title}</p>
           {/*해시태그 고정시키기*/}
-          <p className="text-sm text-[#5373FF]">#{classInfos.hashtag}</p>
+          <p className="text-sm text-dark-purple-color">#{classInfos.hashtag}</p>
         </div>
       </Link>
       <div className="flex justify-between px-4 pb-4 mt-auto">

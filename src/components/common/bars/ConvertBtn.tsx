@@ -54,10 +54,11 @@ const ConvertBtn = () => {
         router.push('/hello');
       }
     };
+
     return (
-      <div className="p-4 text-white">
+      <div className="p-4">
         <button onClick={handler}>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center hover:text-main-color transition ease-in">
             <TbArrowsExchange size={30} />
             <p className="text-xs">선생님으로 전환하기</p>
           </div>
@@ -70,9 +71,9 @@ const ConvertBtn = () => {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
-    <div className="p-4 text-white">
+    <div className="p-4">
       <button onClick={handleOnClickChangedRoleBtn}>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center hover:text-main-color transition ease-in">
           <TbArrowsExchange size={30} />
           <p className="text-xs">{isTeacher ? '수강생으로 전환하기' : '선생님으로 전환하기'}</p>
         </div>

@@ -13,6 +13,8 @@ export const addWish = async ({ userId, classId }: { userId: string | undefined;
 // 찜 여부 체크
 export const checkIsWished = async ({ userId, classId }: { userId: string | null; classId: string | undefined }) => {
   console.log(userId, classId);
+  // console.log('userId', userId);
+  // console.log('classId', classId);
   if (!userId || !classId) {
     return;
   }
@@ -33,6 +35,7 @@ export const checkIsWished = async ({ userId, classId }: { userId: string | null
 
 // 찜 취소하기 - 위시리스트에서 삭제
 export const cancelWish = async ({ userId, classId }: { userId: string | undefined; classId: string }) => {
+  console.log('classId', classId);
   const { error } = await supabase.from('wish').delete().eq('user_id', userId).eq('class_id', classId);
 
   console.log('cancelWish 실행');
