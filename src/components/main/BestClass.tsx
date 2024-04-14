@@ -27,7 +27,7 @@ const BestClass = () => {
 
   return (
     <div className="mr-auto ml-auto">
-      <p>BestClass</p>
+      <p className=" text-text-color">인기순</p>
       <div className="slider-container w-[85vw]">
         <Slider {...settings}>
           {classInfos.map((info) => (

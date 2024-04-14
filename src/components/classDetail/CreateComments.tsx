@@ -70,7 +70,6 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
 
   return (
     <>
-      <ToastContainer />
       <div className="w-[1000px] bg-white rounded-xl shadow-2xl border-solid p-4">
         <form onSubmit={handleSubmit}>
           <div className="rating rating-sm flex justify-end items-center">
@@ -79,7 +78,7 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
                 key={num}
                 type="radio"
                 name="rating"
-                className="mask mask-star-2 mb-1 bg-[#5373FF]"
+                className="mask mask-star-2 mb-1 bg-[#6C5FF7]"
                 value={num}
                 onChange={handleStarChange}
                 checked={star === num}
@@ -93,7 +92,10 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
             value={content}
             onChange={handleContentChange}
           ></textarea>
-          <button type="submit" className="mt-2 bg-[#5373FF] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          <button
+            type="submit"
+            className="mt-2 bg-[#6C5FF7] hover:bg-button-focus-color text-white font-bold py-2 px-4 rounded"
+          >
             후기 등록
           </button>
         </form>

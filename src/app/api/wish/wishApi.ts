@@ -32,6 +32,7 @@ export const checkIsWished = async ({ userId, classId }: { userId: string | null
 
 // 찜 취소하기 - 위시리스트에서 삭제
 export const cancelWish = async ({ userId, classId }: { userId: string | undefined; classId: string }) => {
+  console.log('classId', classId);
   const { error } = await supabase.from('wish').delete().eq('user_id', userId).eq('class_id', classId);
 
   console.log('cancelWish 실행');

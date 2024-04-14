@@ -1,5 +1,5 @@
 import { supabase } from '@/app/api/supabase/supabase';
-import { MyClassSingleInfoType, MyClassStudentInfoType, MyRegisteredClassType } from '@/types/class';
+import { MyClassSingleInfoType, MyClassStudentInfoType, MyRegisteredClassType, MyWishClassType } from '@/types/class';
 import { PostgrestResponse } from '@supabase/supabase-js';
 
 export const getMyRegisteredClass = async (loginUserId: string | null) => {
@@ -56,3 +56,16 @@ export const getClassSingleInfo = async (timeId: string | null) => {
 
   return classSingleInfo;
 };
+
+// 마이 클래스 위시리스트
+export async function getMyWishClass(loginUserId: string | null) {
+  const { data, error }: PostgrestResponse<MyWishClassType> = await supabase.rpc('fetch_my_wish_class', {
+    p_user_id: loginUserId as string
+  });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+  return data;
+}

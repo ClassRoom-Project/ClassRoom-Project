@@ -35,7 +35,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
         });
     }
   }, [isLoading, isError, reservationDetails, dataSaved]);
-  
+
   if (isError) {
     invalidReserve();
   }
@@ -91,8 +91,8 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
             <h1 className="text-2xl font-bold  text-center">클래스 예약이 정상적으로 처리되었습니다.</h1>
             <div className="divider m-4"></div>
             <div className="flex flex-col items-center w-full justify-center">
-              <div className="flex flex-col bg-base-200  w-1/2 rounded-lg   py-4 items-center mb-5 gap-2">
-                <p className="text-xl font-bold">{reservationDetails?.class.title}</p>
+              <div className="flex flex-col bg-base-200 min-w-[400px] w-1/2 rounded-lg   py-4 items-center mb-5 gap-2">
+                <p className="text-xl font-bold text-center mx-4">{reservationDetails?.class.title}</p>
                 <div className="flex gap-4">
                   <p>{reservationDetails?.class.classType} 클래스</p>
                   <div className="flex justify-center items-center gap-1">
@@ -100,7 +100,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col gap-4 font-bold ml-36">
+              <div className="flex flex-col gap-4 font-bold ml-28">
                 {reserveInfoLabels.map(({ icon, title, description }) => (
                   <div key={title} className="flex gap-2 w-full">
                     <div className="flex flex-row gap-2 justify-center items-center">

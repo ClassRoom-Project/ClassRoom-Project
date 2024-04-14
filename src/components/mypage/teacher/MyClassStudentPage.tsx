@@ -17,6 +17,7 @@ const MyClassStudentPage = () => {
     queryKey: ['class', timeId],
     queryFn: () => getClassSingleInfo(timeId)
   });
+  console.log('classSingleInfo', classSingleInfo);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
@@ -25,6 +26,7 @@ const MyClassStudentPage = () => {
   if (!classSingleInfo || classSingleInfo.length === 0) {
     return <div>클래스 정보를 불러올 수 없습니다.</div>;
   }
+
   return (
     <div className="m-4 p-4 flex flex-col gap-4">
       <p className="font-bold text-text-purple-color text-xl"> 예약한 수강생 리스트</p>
@@ -55,7 +57,7 @@ const MyClassStudentPage = () => {
                 <span className="font-bold ">최소 인원</span> {String(classSingleInfo?.[0].min_people)}명
               </p>
               <p className="flex gap-4">
-                <span className="font-bold ">최대 인원</span> {String(classSingleInfo?.[0].max_people)}명
+                <span className="font-bold ">최대 인원</span> {String(classSingleInfo?.[0].quantity)}명
               </p>
             </div>
           </div>

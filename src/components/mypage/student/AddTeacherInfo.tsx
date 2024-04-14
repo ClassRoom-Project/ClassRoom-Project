@@ -12,7 +12,6 @@ const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
   const { isTeacher, setIsTeacher } = useUserRoleStore();
   const { teacherInfo, isPending } = useTeacherInfo();
-  // console.log('teacherInfo', teacherInfo);
 
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
   // 선생님 정보가 없으면(null) : false => 정보 입력하기
@@ -107,7 +106,6 @@ const AddTeacherInfo = () => {
 
         // 수강생에서 선생님으로 전환 로직 추가
         setIsHaveTeacherInfo(true);
-        // console.log('data', data);
         return teacherInfo;
       }
     }
@@ -232,7 +230,6 @@ const AddTeacherInfo = () => {
             <button onClick={handleOnClickAddTeacherInfoBtn} className="btn bg-dark-purple-color text-white">
               선생님 정보 등록하기
             </button>
-            <ToastContainer />
           </div>
         )}
       </div>

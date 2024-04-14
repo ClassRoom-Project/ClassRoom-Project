@@ -3,7 +3,7 @@ import { SlickArrowProps } from '@/types/reactSlick';
 export const settings = {
   dots: false,
   infinite: true,
-  slidesToShow: 4,
+  slidesToShow: 5,
   slidesToScroll: 1,
   autoplay: true,
   speed: 500,

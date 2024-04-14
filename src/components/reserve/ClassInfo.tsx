@@ -32,7 +32,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
     {
       icon: <GrLocation className="text-gray-400" />,
       title: '위치',
-      description: classInfo.location
+      description: classInfo.location.substring(0, classInfo.location.indexOf('('))
     },
     {
       icon: <PiCurrencyKrw className="text-gray-400" />,

@@ -1,30 +1,25 @@
 'use client';
 
+import ChatButton from '@/components/chatRooms/ChatButton';
+import MyPageBtn from '@/components/mypage/MyPageBtn';
+import CreateBtn from '@/components/register/CreateBtn';
 import Link from 'next/link';
 import { PropsWithChildren } from 'react';
 import { FiHome } from 'react-icons/fi';
-import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
-import { SlNote } from 'react-icons/sl';
 import ConvertBtn from './ConvertBtn';
-import ChatButton from '@/components/chatRooms/ChatButton';
-import { useRouter } from 'next/navigation';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
-import MyPageBtn from '@/components/mypage/MyPageBtn';
 
 const SideBar = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <div className="fixed p-3 top-0 bg-background-color  border-solid  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
-        <div className="mt-[5vh] flex flex-col text-black items-center ">
-          <Link href="/" className="p-4  flex flex-col items-center">
-            <FiHome size={30} className="hover:text-main-color" />
+      <div className="fixed p-3 top-0 bg-background-color border-solid  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
+        <div className="mt-[5vh] flex flex-col text-black items-center">
+          <Link href="/" className="p-4  flex flex-col items-center hover:text-main-color transition ease-in">
+            <FiHome size={30} />
             HOME
           </Link>
           <ChatButton />
-          <Link href="/register" className="p-4 flex flex-col items-center">
-            <SlNote size={30} className="hover:text-main-color" />
-            CREATE
-          </Link>
+          <CreateBtn />
+
           <MyPageBtn />
           {/* 예약 페이지 확인을 위한 임시 링크 */}
         </div>

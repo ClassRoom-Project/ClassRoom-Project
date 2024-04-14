@@ -1,10 +1,10 @@
 'use client';
 
-import { useAddWishMutation, useCancleWishMutation } from '@/hooks/useWish/mutateWish';
+import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
 import { useCheckIsWishedQuery } from '@/hooks/useWish/useWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { GoHeart } from 'react-icons/go';
 import { GoHeartFill } from 'react-icons/go';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
@@ -12,17 +12,21 @@ import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
 const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
-  const cancleWishMutation = useCancleWishMutation();
+  const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
-
   const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
+  const [isWishedState, setIsWishedState] = useState<boolean>();
+
+  useEffect(() => {
+    setIsWishedState(isWished);
+  }, [isWished]);
 
   const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
 
     //TODO: confirm창 모달로 변경
     if (!loginUserId) {
-      if (typeof window !== 'undefined' && window.confirm('로그인 후 이용 가능합니다. 로그인하시겠습니까?')) {
+      if (typeof window !== 'undefined' && window.confirm('로그인 후 이용 가능합니다.. 로그인하시겠습니까?')) {
         router.push('/hello');
       } else return;
     }
@@ -38,7 +42,7 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
         }
       } else {
         try {
-          cancleWishMutation.mutate({ userId: loginUserId, classId });
+          cancelWishMutation.mutate({ userId: loginUserId, classId });
           cancelWish();
         } catch (error) {
           defaultWarning();
@@ -54,7 +58,7 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
         <p></p>
       ) : (
         <button onClick={(e) => handleWishClick(e)}>
-          <span>{isWished ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
+          <span>{isWishedState ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
         </button>
       )}
     </div>
