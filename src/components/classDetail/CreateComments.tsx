@@ -71,7 +71,7 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
   return (
     <>
       <ToastContainer />
-      <div className="w-[1000px] bg-white rounded-xl shadow-2xl border-solid p-4">
+      <div className="w-[1000px] bg-disable-color rounded-xl shadow-2xl border-solid p-4">
         <form onSubmit={handleSubmit}>
           <div className="rating rating-sm flex justify-end items-center">
             {[1, 2, 3, 4, 5].map((num) => (
@@ -95,7 +95,7 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
           ></textarea>
           <button
             type="submit"
-            className="mt-2 bg-[#6C5FF7] hover:bg-button-focus-color text-white font-bold py-2 px-4 rounded"
+            className="mt-2 bg-[#6C5FF7] hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
           >
             후기 등록
           </button>

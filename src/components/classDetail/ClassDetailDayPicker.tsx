@@ -17,7 +17,7 @@ const css = `
     margin: 0; /* Remove default margin */
   }
 `;
-const bookedStyle = { border: '1px solid ##5373FF', borderRadius: '20%', backgroundColor: '##5373FF', color: 'white' };
+const bookedStyle = { border: '1px solid #6C5FF7', borderRadius: '20%', backgroundColor: '#6C5FF7', color: 'white' };
 
 export default function App({ classDate }: { classDate: Array<{ day: string; date_id: string; class_id: string }> }) {
   if (!classDate || !Array.isArray(classDate)) {
