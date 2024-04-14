@@ -36,12 +36,13 @@ export interface MyRegisteredClassType {
   title: string;
   location: string;
   detail_location: string;
-  image: string[];
+  image: string;
   active: boolean;
-  day: string;
-  date_id: string;
-  times: string;
-  time_id: string;
+  quantity: number;
+  class_type: string;
+  category: string;
+  difficulty: string;
+  dates: [{ date_id: string; day: string; times: [{ time_id: string; times: string }] }];
 }
 
 /* 마이페이지(선생님) : 클래스 등록한 수강생 정보 */
@@ -50,9 +51,21 @@ export interface MyClassStudentInfoType {
   email: string;
   nickname: string;
   profile_image: string;
-  reserve_quantity: number;
-  reserve_price: number;
+  reserve_quantity: bigint;
+  reserve_price: bigint;
   reserve_id: string;
+}
+
+/* 마이페이지(선생님) : 클래스 등록한 수강생 정보 페이지 -> 해당 클래스 날짜, 시간 등 클래스 정보 보여주기 */
+export interface MyClassSingleInfoType {
+  times: string;
+  day: string;
+  title: string;
+  description: string;
+  price: bigint;
+  quantity: bigint;
+  max_people: bigint;
+  min_people: bigint;
 }
 
 // 예약 페이지에서 클래스 정보를 보여주기 위한 타입

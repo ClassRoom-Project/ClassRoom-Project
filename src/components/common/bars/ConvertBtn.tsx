@@ -49,7 +49,7 @@ const ConvertBtn = () => {
   // 로그인 전, 값을 받아오기 전에도 버튼은 그대로 보이게 하되, 로그인 페이지로 이동 유도
   if (isPending) {
     const handler = () => {
-      const confirm = window.confirm('로그인 상태에서 이용 가능합니다. 로그인 페이지로 이동 하시겠습니까?');
+      const confirm = window.confirm('로그인 후 이용이 가능합니다. 로그인 페이지로 이동 하시겠습니까?');
       if (confirm) {
         router.push('/hello');
       }

@@ -35,8 +35,9 @@ export default function useSetSessionStorage() {
       }
       try {
         const userRole = await getUserRole(userEmail);
-        // console.log('로그인하는 user의 role', userRole);
         const isTeacher = userRole?.isTeacher ?? false;
+
+        // zustand에 상태 저장
         useUserRoleStore.setState({ isTeacher });
       } catch (error) {
         console.error('Failed to fetch user role', error);

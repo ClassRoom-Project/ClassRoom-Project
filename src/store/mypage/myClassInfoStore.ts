@@ -8,5 +8,5 @@ interface ClassInfoState {
 
 export const useMyClassInfoStore = create<ClassInfoState>((set) => ({
   myClassSingleInfo: null,
-  setMyClassSingleInfo: (myClassSingleInfo) => set({ myClassSingleInfo })
+  setMyClassSingleInfo: (newInfo) => set({ myClassSingleInfo: newInfo })
 }));

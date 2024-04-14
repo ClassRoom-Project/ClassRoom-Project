@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -12,10 +13,12 @@ export const metadata: Metadata = {
 type Props = { children: React.ReactNode };
 
 export default function RootLayout({ children }: Props) {
+  const mapScriptSrc = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&libraries=services,clusterer&autoload=false`;
   return (
     <html lang="ko">
       <body className={inter.className}>
         <QueryProvider>{children}</QueryProvider>
+        <Script src={mapScriptSrc} strategy="beforeInteractive" />
       </body>
     </html>
   );
