@@ -12,6 +12,7 @@ export const addWish = async ({ userId, classId }: { userId: string | undefined;
 
 // 찜 여부 체크
 export const checkIsWished = async ({ userId, classId }: { userId: string | null; classId: string | undefined }) => {
+  console.log(userId, classId);
   if (!userId || !classId) {
     return;
   }

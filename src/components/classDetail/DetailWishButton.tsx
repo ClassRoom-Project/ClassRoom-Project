@@ -1,6 +1,6 @@
 'use client';
 
-import { useAddWishMutation, useCancleWishMutation } from '@/hooks/useWish/mutateWish';
+import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
 import { useCheckIsWishedQuery } from '@/hooks/useWish/useWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
@@ -17,12 +17,14 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
 
   const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
 
+  console.log(isWished);
+
   const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
 
     //TODO: confirm창 모달로 변경
     if (!loginUserId) {
-      if (typeof window !== 'undefined' && window.confirm('로그인 후 이용 가능합니다. 로그인하시겠습니까?')) {
+      if (typeof window !== 'undefined' && window.confirm('로그인 후 이용 가능합니다.. 로그인하시겠습니까?')) {
         router.push('/hello');
       } else return;
     }
@@ -38,7 +40,7 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
         }
       } else {
         try {
-          cancleWishMutation.mutate({ userId: loginUserId, classId });
+          cancelWishMutation.mutate({ userId: loginUserId, classId });
           cancelWish();
         } catch (error) {
           defaultWarning();

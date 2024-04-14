@@ -17,7 +17,7 @@ export const useAddWishMutation = () => {
   return addWishMutation;
 };
 
-export const useCancleWishMutation = () => {
+export const useCancelWishMutation = () => {
   const queryClient = useQueryClient();
   const cancelWishMutation = useMutation({
     mutationFn: cancelWish,

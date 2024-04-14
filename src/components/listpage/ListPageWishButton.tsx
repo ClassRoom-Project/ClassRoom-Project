@@ -1,6 +1,6 @@
 'use client';
 
-import { useAddWishMutation, useCancleWishMutation } from '@/hooks/useWish/mutateWish';
+import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ClassAllType } from '@/types/class';
 import { useRouter } from 'next/navigation';
@@ -11,7 +11,7 @@ import { defaultWarning } from '../common/Toastify';
 const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined; wishInfo: ClassAllType['wish'] }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
-  const cancleWishMutation = useCancleWishMutation();
+  const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
   const [isWishedState, setIsWishedState] = useState<boolean>();
   const isWishedClass = wishInfo.some((item) => item.user_id === loginUserId);
@@ -41,7 +41,7 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined
         }
       } else {
         try {
-          cancleWishMutation.mutate({ userId: loginUserId, classId });
+          cancelWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(false);
         } catch (error) {
           defaultWarning();
