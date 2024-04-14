@@ -124,7 +124,6 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
                 <button onClick={() => handleOnClickEditBtn(commentId)} className="btn w-36">
                   완료하기
                 </button>{' '}
-                <ToastContainer />
               </div>
             ) : (
               <button onClick={() => handleOnClickEditBtn(commentId)} className="btn w-36">

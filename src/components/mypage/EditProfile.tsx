@@ -139,7 +139,6 @@ const EditProfile = () => {
             <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
               수정 완료
             </button>
-            <ToastContainer />
           </div>
         ) : (
           <button onClick={() => setIsEditing(true)} className="btn w-[100px]">

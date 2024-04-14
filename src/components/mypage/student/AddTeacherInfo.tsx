@@ -230,7 +230,6 @@ const AddTeacherInfo = () => {
             <button onClick={handleOnClickAddTeacherInfoBtn} className="btn bg-dark-purple-color text-white">
               선생님 정보 등록하기
             </button>
-            <ToastContainer />
           </div>
         )}
       </div>
