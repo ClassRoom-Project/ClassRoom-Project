@@ -45,7 +45,7 @@ const ClassDetailLeft = ({
       <div className="w-[350px] h-[350px] mt-2 flex bg-black">
         <Image width={350} height={350} src={mainImageSrc} alt="classImage 0" unoptimized={true}></Image>
       </div>
-      <div className="w-[350px] h-[50px] flex mt-2">
+      <div className="w-[350px] mb-24 h-[50px] flex mt-2">
         <div
           onClick={() => handleThumbnailClick(classData?.image[0] || defaultImageSrc)}
           className="w-[50px] h-[50px] cursor-pointer flex mr-[15px]"

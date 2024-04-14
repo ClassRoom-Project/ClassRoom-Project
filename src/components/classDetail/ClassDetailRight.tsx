@@ -4,6 +4,7 @@ import { ListDetailClassInfo } from '@/types/class';
 import ClassInfos from './ClassInfos';
 import ClassDetailBtn from './ClassDetailBtn';
 import ClassDetailDayPicker from './ClassDetailDayPicker';
+import { Suspense } from 'react';
 
 //오른쪽 컴포넌트
 const ClassDetailRight = ({ classData }: { classData: ListDetailClassInfo | null }) => {
@@ -19,8 +20,8 @@ const ClassDetailRight = ({ classData }: { classData: ListDetailClassInfo | null
       <div className="w-[350px] h-36 mt-2">
         {classData?.class_id ? <ClassInfos classId={classData.class_id} /> : null}
       </div>
-      <div className="w-[300px] h-[300px] mt-12 flex justify-center items-center ">
-        {classData?.class_id ? <ClassDetailDayPicker classDate={classData.date} /> : null}
+      <div className="w-[300px] h-[300px] mt-20 flex justify-center items-center ">
+        <Suspense>{classData?.class_id ? <ClassDetailDayPicker classDate={classData.date} /> : null}</Suspense>
       </div>
 
       <div className="w-[350px] h-36 mt-10">
