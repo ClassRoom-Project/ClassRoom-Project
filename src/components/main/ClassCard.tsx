@@ -20,10 +20,11 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
           />
         </figure>
         <div className="card-body p-4 flex flex-col justify-between">
-          <div className="text-xs bg-black overflow-hidden w-[200px] text-white py-1 px-2 inline-block rounded">
+          <div className="text-xs justify-center items-center bg-black h-10 overflow-hidden w-[200px] text-white py-1 px-2 inline-block rounded">
             {classInfos.location}
           </div>
-          <p className="text-lg font-semibold">{classInfos.title}</p>
+          <p className="text-md h-12 overflow-hidden font-semibold">{classInfos.title}</p>
+          {/*해시태그 고정시키기*/}
           <p className="text-sm text-[#5373FF]">#{classInfos.hashtag}</p>
         </div>
       </Link>
