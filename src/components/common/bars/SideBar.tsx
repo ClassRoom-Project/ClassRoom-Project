@@ -14,15 +14,15 @@ import MyPageBtn from '@/components/mypage/MyPageBtn';
 const SideBar = ({ children }: PropsWithChildren) => {
   return (
     <>
-      <div className="fixed p-3 top-0 bg-[#6C5FF7]  border-solid  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
-        <div className="mt-[5vh] flex flex-col text-white items-center">
+      <div className="fixed p-3 top-0 bg-background-color  border-solid  bottom-0 flex flex-col justify-between items-center left-0 w-[100px] z-50">
+        <div className="mt-[5vh] flex flex-col text-black items-center ">
           <Link href="/" className="p-4  flex flex-col items-center">
-            <FiHome size={30} />
+            <FiHome size={30} className="hover:text-main-color" />
             HOME
           </Link>
           <ChatButton />
           <Link href="/register" className="p-4 flex flex-col items-center">
-            <SlNote size={30} />
+            <SlNote size={30} className="hover:text-main-color" />
             CREATE
           </Link>
           <MyPageBtn />
