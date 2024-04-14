@@ -22,7 +22,7 @@ const MinMaxNumber = () => {
       <div className="flex-1 flex items-center space-x-2">
         <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 모집 정원</p>
         <input
-          className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-1/2"
+          className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-1/3"
           type="text"
           value={personnel}
           onChange={handlePersonnelChange}
@@ -32,7 +32,7 @@ const MinMaxNumber = () => {
       <div className="flex-1 flex items-center space-x-2 mx-3">
         <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 최소 모집 인원</p>
         <input
-          className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-1/2"
+          className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-1/3"
           type="text"
           value={minNumber}
           onChange={handleMinNumberChange}
