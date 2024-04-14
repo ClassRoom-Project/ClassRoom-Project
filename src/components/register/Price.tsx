@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 import useRegisterStore from '@/store/registerStore';
 
@@ -12,7 +11,7 @@ const Price = () => {
     setPrice(value);
   };
   return (
-    <div className="mt-2">
+    <div className="my-4">
       <div className="flex items-center justify-between space-x-4">
         <div>
           <p className="text-base text-[#3F3F3F] font-bold">클래스 1인 수강 금액</p>
