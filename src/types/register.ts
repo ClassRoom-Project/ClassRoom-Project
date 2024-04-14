@@ -21,7 +21,6 @@ export interface ClassRegister {
   classContent: string;
   address: string;
   detailAddress: string;
-  maxNumber: number;
   minNumber: number;
   price: number;
   personnel: number;
@@ -31,8 +30,6 @@ export interface ClassRegister {
   classType: string;
   image?: string[];
   totalTime: number;
-  // registrationComplete: boolean;
-  // classIdval: string;
 
   setCategory: (category: string) => void;
   setSubCategory: (subCategory: string) => void;
@@ -44,14 +41,10 @@ export interface ClassRegister {
   setClassType: (classType: string) => void;
   setDifficulty: (difficulty: string) => void;
   setMinNumber: (minNumber: number) => void;
-  setMaxNumber: (maxNumber: number) => void;
   setPersonnel: (personnel: number) => void;
   setPrice: (price: number) => void;
   setSelectedTime: (selectedTime: string[]) => void;
   setTotalTime: (totalTime: number) => void;
-  // setRegistrationComplete: (registrationComplete: boolean) => void;
-  // setClassIdval: (classIdval: string) => void;
-  // setImage: (image: string[]) => void;
 }
 
 export interface AddressData {
