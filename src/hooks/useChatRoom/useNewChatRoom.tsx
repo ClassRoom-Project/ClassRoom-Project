@@ -74,13 +74,16 @@ export function useCreateNewMessage() {
     mutationFn: async ({ chatId, message, loginUserId }: SendNewMessageType) => {
       await createNewMessages({ chatId, loginUserId, message });
     },
-    onSuccess: (_, { chatId }) => {
-      // 해당 채팅방의 메시지 리스트를 갱신
+    onSuccess: (_, { chatId, loginUserId }) => {
+      // 해당 채팅방의 메시지 리스트를 업데이트
       queryClient.invalidateQueries({ queryKey: ['chatMessage', chatId] });
-      // 최근 메시지를 갱신
+      // 최근 메시지를 업데이트
       queryClient.invalidateQueries({ queryKey: ['lastMessage', chatId] });
-      // 메시지 카운트 갱신
+      // 메시지 카운트 업데이트
       queryClient.invalidateQueries({ queryKey: ['countMessage', chatId] });
+      // 전체 메시지 카운트 업데이트
+      //따로 빼준이유는 얘는 chatId를 안받고 loginUserId로만 전달하고 조회함
+      queryClient.invalidateQueries({ queryKey: ['countMessageAll', loginUserId] });
     }
   });
 
@@ -126,7 +129,7 @@ export function useReadCheckMessages(chatId: string, loginUserId: string) {
 //읽지않은 전체 채팅 개수 가져오기
 export function useReadCheckMessageAll(loginUserId: string) {
   const { data: readLeftChekcMessageAll } = useQuery({
-    queryKey: ['countMessage', loginUserId],
+    queryKey: ['countMessageAll', loginUserId],
     queryFn: () => readCheckMessagesAll(loginUserId as string),
     enabled: !!loginUserId
   });

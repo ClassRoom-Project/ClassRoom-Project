@@ -8,7 +8,6 @@ export default function ChatButton() {
   const { loginUserId } = useLoginStore();
   const router = useRouter();
   const { readLeftChekcMessageAll } = useReadCheckMessageAll(loginUserId!);
-  console.log('readLeftChekcMessageAll', readLeftChekcMessageAll);
 
   const handleClick = () => {
     if (!loginUserId) {

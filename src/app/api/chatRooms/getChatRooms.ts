@@ -116,7 +116,8 @@ export const createNewMessages = async ({
       {
         chat_id: chatId,
         messages: message,
-        create_by: loginUserId
+        create_by: loginUserId,
+        check: false
       }
     ])
     .single();
@@ -240,22 +241,6 @@ export const readCheckMessages = async (chatId: string, loginUserId: string): Pr
 
   return count;
 };
-
-// //읽지 않은 채팅 개수 가져오기
-// export const readCheckMessagesAll = async (loginUserId: string): Promise<number | null> => {
-//   const { error, count } = await supabase
-//     .from('chat_messages')
-//     .select('', { count: 'exact' })
-//     .eq('check', false)
-//     .neq('create_by', loginUserId);
-
-//   if (error) {
-//     throw error;
-//   }
-
-//   console.log(count);
-//   return count;
-// };
 
 export const readCheckMessagesAll = async (loginUserId: string): Promise<number | null> => {
   //로그인한 사용자가 참여한 채팅방 목록 조회

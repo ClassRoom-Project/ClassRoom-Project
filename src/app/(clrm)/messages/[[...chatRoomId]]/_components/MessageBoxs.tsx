@@ -25,7 +25,7 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
   }, [readChatRoomMessages]);
 
   return (
-    <div className="flex-1 overflow-scroll">
+    <div className="flex-1 overflow-auto">
       <div className="flex flex-col justify-center items-center h-full px-3">
         <div className="bg-gray-100 rounded-md w-3/5 flex flex-col sm:text-xs md:text-sm justify-center items-center border border-gray-200 p-3 mb-16">
           <p>
