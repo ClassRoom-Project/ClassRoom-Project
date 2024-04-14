@@ -6,6 +6,7 @@ import MyComments from './MyComments';
 import MyReservedClass from './MyReservedClass';
 import { useRouter } from 'next/navigation';
 import AddTeacherInfo from './AddTeacherInfo';
+import MyWishClass from './MyWishClass';
 
 type StudentTabComponent = {
   [key: string]: React.ReactNode;
@@ -19,6 +20,7 @@ const StudentMyPageTab = () => {
     editProfile: <EditProfile key="editProfile" />,
     reservedClass: <MyReservedClass key="reservedClass" />,
     myComments: <MyComments key="myComments" />,
+    myWishClass: <MyWishClass key="myWishClass" />,
     addTeacherInfo: <AddTeacherInfo key="addTeacherInfo" />
   };
 
@@ -63,6 +65,16 @@ const StudentMyPageTab = () => {
           }`}
         >
           내가 쓴 후기 보기
+        </p>
+        <p
+          onClick={() => handleOnClickTabBtn('myWishClass')}
+          className={`p-4 ${
+            activePage === 'myWishClass'
+              ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
+              : ''
+          }`}
+        >
+          클래스 위시리스트
         </p>
         <p
           onClick={() => handleOnClickTabBtn('addTeacherInfo')}

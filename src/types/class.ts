@@ -96,3 +96,18 @@ export type DBReserveClassType = {
   max_people: number;
   dates: [{ date_id: string; day: string; times: [{ time_id: string; times: string }] }];
 };
+
+// 마이페이지 클래시 위시리스트
+export type MyWishClassType = {
+  wish_id: string;
+  class_id: string;
+  user_id: string;
+  title: string;
+  category: string;
+  location: string;
+  detail_location: string;
+  image: string[];
+  quantity: bigint;
+  class_type: string;
+  difficulty: string;
+};

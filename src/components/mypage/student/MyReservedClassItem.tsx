@@ -1,14 +1,13 @@
 import { cancelReservation } from '@/app/api/mypage/fetchMyClasses';
 import { ClassItem } from '@/types/register';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
-import { FaRegClock, FaRegCalendarCheck } from 'react-icons/fa';
-import { GrLocation } from 'react-icons/gr';
-import { GoPeople } from 'react-icons/go';
+import { useState } from 'react';
 import { BiMoneyWithdraw } from 'react-icons/bi';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import NoImage from '@/assets/images/no_img.jpg';
+import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
+import { GoPeople } from 'react-icons/go';
+import { GrLocation } from 'react-icons/gr';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const [classes, setClasses] = useState<ClassItem[]>([]);
@@ -83,6 +82,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
           </div>
         </section>
         <section className="flex gap-4 my-8">
+          {/* <AskButton classId={classItem.class_id} makeClassUserId={classItem.}/> */}
           <button className="btn w-36">문의하기</button>
           <button
             className="btn  bg-dark-purple-color text-white w-36"
