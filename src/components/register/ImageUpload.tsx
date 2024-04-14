@@ -1,5 +1,5 @@
 'use client';
-import React, { DragEvent, useState } from 'react';
+import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
@@ -43,10 +43,8 @@ const ImageUpload = () => {
   const uploadFile = async (file: File) => {
     const cleanName = cleanFileName(file.name);
     const filePath = `uploads/${classId}_${cleanName}`;
-    console.log('File Path:', filePath);
     const { data, error } = await supabase.storage.from('classImages').upload(filePath, file);
     if (error) {
-      console.error('파일 업로드 실패:', error);
       return null;
     } else {
       const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/classImages/${data.path}`;
@@ -72,8 +70,6 @@ const ImageUpload = () => {
       const url = await uploadFile(image.file);
       if (url) {
         imageUrls.push(url);
-      } else {
-        console.error('일부 이미지 업로드에 실패했습니다');
       }
     }
 
@@ -99,7 +95,7 @@ const ImageUpload = () => {
     ]);
 
     if (error) {
-      console.error('Supabase에 데이터 저장 중 오류 발생:', error);
+      console.error('error:', error);
     } else {
       // 알림 데이터 저장
       const notice = `"${classTitle}" 클래스 등록이 완료되었습니다.`;
@@ -108,7 +104,7 @@ const ImageUpload = () => {
           { notice_id: noticeId, user_id : userId, class_id: classId, notice:notice, isread: false, created_at: new Date() }
         ]);
       if (noticeError) {
-        console.error('Error creating notification', noticeError);
+        console.error('Error: ', noticeError);
       }
 
       // 각 날짜에 대한 데이터 저장
@@ -122,9 +118,8 @@ const ImageUpload = () => {
           }
         ]);
         if (dateError) {
-          console.error('date 테이블에 데이터 저장 중 오류 발생:', dateError);
+          console.error('date db upload error:', dateError);
         } else {
-          console.log('date 테이블에 데이터 저장 성공:', dateData);
           const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
 
           if (selectedTimes && selectedTimes.length > 0) {
@@ -138,9 +133,7 @@ const ImageUpload = () => {
                 }
               ]);
               if (timeError) {
-                console.error('time 테이블에 데이터 저장 중 오류 발생:', timeError);
-              } else {
-                console.log('time 테이블에 데이터 저장 성공:', timeData);
+                console.error('time db upload error:', timeError);
               }
             }
           }
@@ -163,7 +156,6 @@ const ImageUpload = () => {
       const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 URL을 생성!
       const newImages = [...images, { file, preview }];
       setImages(newImages);
-      console.log(newImages);
     }
   };
 

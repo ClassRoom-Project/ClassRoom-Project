@@ -71,7 +71,8 @@ const TimeSelect: React.FC = () => {
 
   return (
     <div className="my-4">
-      <h1 className="font-bold text-[#3F3F3F] my-6">* 클래스 날짜&시간</h1>
+      <h1 className="font-bold text-[#3F3F3F] mt-6">* 클래스 날짜&시간</h1>
+      <p className='text-sm mt-1 mb-2 text-[#7E7E7E]'>*해당 날짜의 시간을 입력한 후 +버튼을 클릭하면 시간 정보가 추가됩니다*</p>
       <div className="relative">
         <button
           onClick={toggleDatePicker}

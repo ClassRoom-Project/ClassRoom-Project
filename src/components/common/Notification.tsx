@@ -29,8 +29,6 @@ const NotificationComponent = () => {
         const unreadNotifications = data.filter(n => !n.isread);
         setNotifications(unreadNotifications);
         setIsBellFilled(unreadNotifications.length > 0);
-      } else {
-        console.error('알림 데이터를 가져오는데 실패했습니다.', error);
       }
     };
     
