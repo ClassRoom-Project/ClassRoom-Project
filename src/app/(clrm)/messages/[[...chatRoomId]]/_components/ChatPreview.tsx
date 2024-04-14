@@ -7,33 +7,25 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import ProfileImage from '@/assets/images/profile-image.png';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { readCheckMessages } from '@/app/api/chatRooms/getChatRooms';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 dayjs.locale('ko');
 
 //데이터 불러오기,
 
-export default function ChatPreview({
-  chatId,
-  toClassId,
-  title,
-  fromUserId,
-  // makeClassUserId,
-  otherId
-}: any) {
+export default function ChatPreview({ chatId, toClassId, title, fromUserId, otherId }: any) {
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readLastMessages } = useReadLastMessages(chatId);
   const { readLastChekcMessages } = useReadCheckMessages(chatId, loginUserId!);
 
-  useEffect(() => {
-    const lastMessage = async () => await readLastMessages;
-    const notReadCount = async () => await readLastChekcMessages;
-  }, [readLastMessages, readLastChekcMessages]);
+  // useEffect(() => {
+  //   const lastMessage = async () => await readLastMessages;
+  //   const notReadCount = async () => await readLastChekcMessages;
+  // }, [readLastMessages, readLastChekcMessages]);
 
   return (
     <Link

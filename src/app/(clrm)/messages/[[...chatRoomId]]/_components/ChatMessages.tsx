@@ -85,7 +85,9 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
             placeholder="메시지를 입력하세요"
             className="outline-0 bg-transparent flex-1"
           />
-          <BsSend className="text-xl text-gray-400 " />
+          <button type="submit" className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center">
+            <BsSend className="text-xl text-main-color" />
+          </button>
         </form>
       </div>
       <ChatImageModal chatId={chatId} />

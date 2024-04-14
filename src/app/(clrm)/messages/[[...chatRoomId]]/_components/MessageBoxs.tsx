@@ -7,6 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
+import { useEffect, useRef } from 'react';
 
 dayjs.locale('ko');
 
@@ -14,6 +15,14 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readChatRoomMessages } = useReadChatRoomMessages(chatId, loginUserId!);
+  const endOfMessagesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const scrollToBottom = () => {
+      endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+    scrollToBottom();
+  }, [readChatRoomMessages]);
 
   return (
     <div className="flex-1 overflow-scroll">
@@ -33,7 +42,7 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
         {readChatRoomMessages?.map((message, index) => (
           <div
             key={index}
-            className={`flex w-full text-sm items-start ${
+            className={`flex w-full text-sm items-start px-4 ${
               message.create_by === loginUserId ? 'justify-end' : 'justify-start'
             }`}
           >
@@ -51,12 +60,12 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
                 </div>
               )}
               <div
-                className={`flex flex-row items-center py-4 ${
-                  message.create_by === loginUserId ? 'flex flex-row' : 'flex-row-reverse '
+                className={`flex flex-row items-center py-4 px-4 ${
+                  message.create_by === loginUserId ? 'flex flex-row' : 'flex-row-reverse'
                 }`}
               >
                 <div>
-                  <p className=" text-gray-400 text-xs mr-2">{dayjs(message.created_at).format('A hh:mm')}</p>
+                  <p className=" text-gray-400 text-xs px-4">{dayjs(message.created_at).format('A hh:mm')}</p>
                 </div>
                 {message.messages ? (
                   <div className="">
@@ -85,6 +94,7 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
           </div>
         ))}
       </div>
+      <div ref={endOfMessagesRef} />
     </div>
   );
 }

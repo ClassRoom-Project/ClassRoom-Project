@@ -5,6 +5,7 @@ import { useCreateNewPhotoMessage } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import Image from 'next/image';
 import { uploadPhotosToSupabase } from '@/app/api/chatRooms/getChatRooms';
+import { BsSend } from 'react-icons/bs';
 
 export default function ChatImageModal({ chatId }: { chatId: string }) {
   const [photos, setPhotos] = useState<File[]>([]);
@@ -82,7 +83,7 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col px-8">
       <div className="flex flex-row">
         <label htmlFor="photo" className=" cursor-pointer">
           <MdPhotoCamera className="text-main-color text-2xl right-12 bottom-2 hover:text-button-hover-color" />
@@ -107,7 +108,13 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
             </div>
           ))}
         </div>
-        <button onClick={handleSendButton}>전송</button>
+        <button
+          onClick={handleSendButton}
+          type="submit"
+          className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center"
+        >
+          <BsSend className="text-xl text-main-color" />
+        </button>
       </div>
       {countError && <p className="text-red-500">{countError}</p>}
     </div>
