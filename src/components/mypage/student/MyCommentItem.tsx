@@ -12,8 +12,6 @@ import { ToastContainer } from 'react-toastify';
 
 const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const { loginUserId } = useLoginStore();
-  // const { star, setStar } = useRatingStore();
-  // console.log('star', star);
 
   const [isEditing, setIsEditing] = useState(false);
   const [newContent, setNewContent] = useState(comment.content);
@@ -85,7 +83,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const rating = comment.star;
 
   return (
-    <li className="p-4 flex gap-4 border-y border-y-border-color w-full" key={comment.comment_id}>
+    <li className="p-4 flex gap-4 border-y border-y-border-color w-[1080px]" key={comment.comment_id}>
       <div className="w-[300px] h-[200px]">
         <Image
           src={comment.image[0]}
@@ -97,16 +95,13 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         />
       </div>
       <div className="p-4">
-        <section className="flex gap-8">
+        <section className="flex gap-10">
           <p className="font-bold text-xl text-dark-purple-color">{comment.title}</p>
-          <div className="flex gap-4">
-            <p>
-              작성일 : {formattedDate} {formattedTime}
-            </p>
-          </div>
+          <p className="flex gap-4">
+            <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
+          </p>
         </section>
         <div className="pt-4">
-          <p>{rating}</p>
           <Stars rating={rating} />
         </div>
         <section className="pt-4">

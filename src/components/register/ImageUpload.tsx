@@ -4,14 +4,10 @@ import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import PlusImage from '../../../public/plusImage.jpg';
 import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
-
-interface ImageFileWithPreview {
-  file: File;
-  preview: string;
-}
+import { FiPlusCircle } from "react-icons/fi";
+import { ImageFileWithPreview } from '@/types/register';
 
 const ImageUpload = () => {
   const {
@@ -35,6 +31,7 @@ const ImageUpload = () => {
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
   const classId = crypto.randomUUID();
+  const noticeId = crypto.randomUUID();
   const router = useRouter();
 
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
@@ -46,10 +43,8 @@ const ImageUpload = () => {
   const uploadFile = async (file: File) => {
     const cleanName = cleanFileName(file.name);
     const filePath = `uploads/${classId}_${cleanName}`;
-    console.log('File Path:', filePath);
     const { data, error } = await supabase.storage.from('classImages').upload(filePath, file);
     if (error) {
-      console.error('파일 업로드 실패:', error);
       return null;
     } else {
       const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/classImages/${data.path}`;
@@ -59,6 +54,11 @@ const ImageUpload = () => {
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
+    if (!category || !subCategory || !classContent || !classTitle || !classType || !difficulty || !minNumber || !maxNumber || !personnel || !totalTime || !selectedDates || !schedules) {
+      alert('모든 필수 항목을 입력해주세요.');
+      return;
+    }
+    
     if (!window.confirm('등록하시겠습니까?')) {
       return;
     }
@@ -70,8 +70,6 @@ const ImageUpload = () => {
       const url = await uploadFile(image.file);
       if (url) {
         imageUrls.push(url);
-      } else {
-        console.error('일부 이미지 업로드에 실패했습니다');
       }
     }
 
@@ -97,8 +95,18 @@ const ImageUpload = () => {
     ]);
 
     if (error) {
-      console.error('Supabase에 데이터 저장 중 오류 발생:', error);
+      console.error('error:', error);
     } else {
+      // 알림 데이터 저장
+      const notice = `"${classTitle}" 클래스 등록이 완료되었습니다.`;
+      const { data:noticeData, error:noticeError } = await supabase.from('notifications')
+        .insert([
+          { notice_id: noticeId, user_id : userId, class_id: classId, notice:notice, isread: false, created_at: new Date() }
+        ]);
+      if (noticeError) {
+        console.error('Error: ', noticeError);
+      }
+
       // 각 날짜에 대한 데이터 저장
       for (const date of selectedDates) {
         const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
@@ -110,9 +118,8 @@ const ImageUpload = () => {
           }
         ]);
         if (dateError) {
-          console.error('date 테이블에 데이터 저장 중 오류 발생:', dateError);
+          console.error('date db upload error:', dateError);
         } else {
-          console.log('date 테이블에 데이터 저장 성공:', dateData);
           const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
 
           if (selectedTimes && selectedTimes.length > 0) {
@@ -126,9 +133,7 @@ const ImageUpload = () => {
                 }
               ]);
               if (timeError) {
-                console.error('time 테이블에 데이터 저장 중 오류 발생:', timeError);
-              } else {
-                console.log('time 테이블에 데이터 저장 성공:', timeData);
+                console.error('time db upload error:', timeError);
               }
             }
           }
@@ -151,69 +156,95 @@ const ImageUpload = () => {
       const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 URL을 생성!
       const newImages = [...images, { file, preview }];
       setImages(newImages);
-      console.log(newImages);
     }
   };
 
-  // 이미지 맨 앞으로 이동하는 함수
-  const handleMoveToFront = (index: number) => {
-    const selectedImage = images[index];
-    const remainingImages = images.filter((_, i) => i !== index);
-    // 선택된 이미지를 새 배열의 첫번째 요소로 두고 그 뒤에 나머지 애들 붙임
-    const newImages = [selectedImage, ...remainingImages];
-    setImages(newImages);
+  // 이미지 순서를 변경하는 함수
+  const handleImageDragStart = (index: number, event: React.DragEvent<HTMLDivElement>) => {
+    event.dataTransfer.setData('index', index.toString());
   };
 
-  // 이미지 삭제 함수수
+  const handleImageDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  const handleImageDrop = (index: number, event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const draggedIndex = parseInt(event.dataTransfer.getData('index'));
+    
+    // 이미지의 순서 변경
+    const updatedImages = [...images];
+    const draggedImage = updatedImages[draggedIndex];
+    updatedImages.splice(draggedIndex, 1);
+    updatedImages.splice(index, 0, draggedImage);
+    
+    // 변경된 순서를 배열에 반영
+    setImages(updatedImages);
+  };
+
+  // 이미지 삭제 함수
   const handleImageDelete = (index: number) => {
     const newImage = images.filter((_, i) => i !== index);
     setImages(newImage);
   };
 
   return (
-    <div className="flex flex-col items-center w-full">
-      <div className="flex justify-center items-center flex-wrap">
-        {images.length < 5 && (
-          <label htmlFor="image-upload" className="cursor-pointer">
-            <Image src={PlusImage} alt="PlusImage" width={100} height={100} unoptimized={true} />
-            <input
-              id="image-upload"
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              style={{ display: 'none' }}
-            />
-          </label>
-        )}
-        {images.map((image, index) => (
-          <div key={index} className="h-[100px] w-[100px] relative ml-2">
-            <Image
-              src={image.preview}
-              alt="uploaded"
-              fill
-              className="h-full w-full object-cover rounded-[20px] border"
-            />
-            <button
-              className={`btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 ${
-                index === 0 ? 'bg-blue-500' : 'bg-white-500'
-              }`}
-              onClick={() => handleMoveToFront(index)}
-            >
-              🌼
-            </button>
-            <button
-              className="btn btn-circle btn-xs mt-1 mr-1 absolute top-0 left-0 bg-red-500"
-              onClick={() => handleImageDelete(index)}
-            >
-              🗑️
+    <div className='my-4 w-full'>
+      <div className="flex flex-col w-full">
+        <div className="mb-4">
+        <label 
+          htmlFor="image-upload" 
+          className="border border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
+        >
+          사진추가
+        </label>
+        <input
+          id="image-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          style={{ display: 'none' }}
+        />
+        </div>
+        <div className="flex flex-wrap">
+          {/* 이미지와 빈 박스를 함께 순회하여 표시 */}
+          {Array.from({ length: 5 }).map((_, index) => (
+            index < images.length ? (
+              <div 
+                key={index} 
+                className="h-[142px] w-[142px] relative ml-2 mt-2" 
+                draggable={true}
+                onDragStart={(event) => handleImageDragStart(index, event)}
+                onDragOver={handleImageDragOver}
+                onDrop={(event) => handleImageDrop(index, event)}
+              >
+                <Image
+                  src={images[index].preview}
+                  alt="uploaded"
+                  fill
+                  className="h-full w-full object-cover rounded-[20px] border"
+                />
+                <button
+                  className="btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 bg-red-500 text-white"
+                  onClick={() => handleImageDelete(index)}
+                >
+                  -
+                </button>
+              </div>
+            ) : (
+              <div key={index} className="h-[142px] w-[142px] ml-2 mt-2 border-2 border-dashed border-gray-300 rounded-[20px]"></div>
+            )
+          ))}
+        </div>
+
+        <div className="mt-12 w-full flex justify-center">
+          <div>
+            <button onClick={handleSubmit} className="btn px-4 py-2 bg-[#6C5FF7] text-white text-lg rounded hover:bg-[#4D43B8]">
+              <FiPlusCircle size={20}/>
+              클래스 등록하기
             </button>
           </div>
-        ))}
-      </div>
-      <div className="mt-4">
-        <button onClick={handleSubmit} className="px-4 py-2 bg-[#6C5FF7] text-white rounded hover:bg-[#4D43B8]">
-          등록하기
-        </button>
+        </div>
       </div>
     </div>
   );

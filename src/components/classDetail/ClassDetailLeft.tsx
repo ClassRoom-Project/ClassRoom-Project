@@ -5,6 +5,7 @@ import { ClassAllType } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
 import DetailWishButton from './DetailWishButton';
+import MapComponent from './MapComponent';
 
 //왼쪽 컴포넌트
 const ClassDetailLeft = ({
@@ -107,7 +108,7 @@ const ClassDetailLeft = ({
           ></Image>
         </div>
       </div>
-      <div className="w-[350px] mt-6 h-[350px] text-white bg-black">지도 들어갈 자리</div>
+      <MapComponent />
     </div>
   );
 };

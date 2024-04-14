@@ -1,5 +1,6 @@
 'use client';
 
+import React, { useEffect, useState } from 'react';
 import { invalidReserve } from '@/components/common/Toastify';
 import NavigationButtons from '@/components/reserve/reservationComplete/NavigationButtons';
 import { useFetchReservationDetail } from '@/hooks/useReserve/useFetchReservationDetail';
@@ -10,6 +11,7 @@ import { GrLocation } from 'react-icons/gr';
 import { LuClock } from 'react-icons/lu';
 import { PiCurrencyKrw } from 'react-icons/pi';
 import { RiErrorWarningLine } from 'react-icons/ri';
+import { insertNotice } from '@/app/api/reserve/insertNotice';
 
 type ReserveInfoLabels = {
   icon: React.ReactNode;
@@ -20,7 +22,20 @@ type ReserveInfoLabels = {
 const ReservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
   const reservationid = params.reservationId;
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
+  const [dataSaved, setDataSaved] = useState(false);
 
+  useEffect(() => {
+    if (!isLoading && !isError && reservationDetails && !dataSaved) {
+      insertNotice(reservationDetails.userId, reservationDetails.classId, reservationDetails.class.title)
+        .then((noticeData) => {
+          setDataSaved(true);
+        })
+        .catch((error) => {
+          console.error('Failed to save notification:', error);
+        });
+    }
+  }, [isLoading, isError, reservationDetails, dataSaved]);
+  
   if (isError) {
     invalidReserve();
   }
