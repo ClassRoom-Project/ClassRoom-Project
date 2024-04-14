@@ -12,7 +12,7 @@ import { PropsWithChildren, Suspense, useEffect } from 'react';
 import Notification from '@/components/common/Notification';
 import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
-import Logo from '../../../../public/loginLogo.svg';
+import Logo from '@/assets/images/logo.svg';
 import { useSession } from 'next-auth/react';
 import { getUserInfo } from '@/app/api/mypage/user-api';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -46,7 +46,6 @@ const Header = ({ children }: PropsWithChildren) => {
 
   // 수강생인지 강사인지 명시적으로 보여주기
   const roleName = isTeacher === true ? '강사' : '회원';
-  // console.log('roleName', roleName);
 
   // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기
   const profileImage = userInfo?.profile_image ? userInfo?.profile_image : basicProfileImage;
@@ -55,12 +54,12 @@ const Header = ({ children }: PropsWithChildren) => {
     <>
       <div className="flex p-[15px] w-full justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
         <Link href="/">
-          <Image className="rounded-full" src={Logo} alt="클룸 로고" width={50} height={50} />
+          <Image className="rounded-full" src={Logo} alt="클룸 로고" width={100} height={100} />
         </Link>
         <div className="flex items-center justify-center">
           <SearchClass />
         </div>
-        <div className="w-80 flex items-end justify-end">
+        <div className="w-100 flex items-end justify-end">
           <div className="flex items-center">
             {userEmail ? (
               <div className="mr-[10px]">

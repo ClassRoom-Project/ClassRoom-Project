@@ -52,7 +52,7 @@ const SearchFilter = () => {
     <div className="flex min-w-[80vw] items-start justify-start p-5">
       <div className="dropdown dropdown-bottom w-12 h-12">
         <div tabIndex={0} onClick={handleDropdown} role="button" className="btn ">
-          <FiAlignJustify size={30} color="#5373FF">
+          <FiAlignJustify size={30} color="#6C5FF7">
             검색필터
           </FiAlignJustify>
         </div>
@@ -60,21 +60,21 @@ const SearchFilter = () => {
         {isOpenCategory ? (
           <ul
             tabIndex={0}
-            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-white border-[##5373FF] border-solid border-[1px] w-[400px] h-[650px]"
+            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-white border-[##6C5FF7] border-solid border-[1px] w-[400px] h-[650px]"
           >
             <div className="border-b-[1px] flex items-center justify-center w-80 h-[125px] border-solid border-gray-400">
               <button
                 onClick={() => handleClassTypeBtn('온라인 클래스')}
-                className={`p-2 font-bold border-solid border-[##5373FF] border-[1px] rounded-2xl mx-3 w-24 ${
-                  ClassFilters.selectedClassType === '온라인 클래스' ? 'bg-purple-600' : 'bg-white'
+                className={`p-2 font-bold border-solid border-[##6C5FF7] border-[1px] rounded-2xl mx-3 w-24 ${
+                  ClassFilters.selectedClassType === '온라인 클래스' ? 'bg-button-focus-color' : 'bg-white'
                 }`}
               >
                 온라인
               </button>
               <button
                 onClick={() => handleClassTypeBtn('오프라인 클래스')}
-                className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                  ClassFilters.selectedClassType === '오프라인 클래스' ? 'bg-purple-600' : 'bg-white'
+                className={`p-2 font-bold rounded-2xl border-solid border-[##6C5FF7] border-[1px] mx-3 w-24 ${
+                  ClassFilters.selectedClassType === '오프라인 클래스' ? 'bg-button-focus-color' : 'bg-white'
                 }`}
               >
                 오프라인
@@ -115,7 +115,7 @@ const SearchFilter = () => {
                 <button
                   onClick={() => handleClassDifficultyBtn('입문')}
                   className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedDifficulty === '입문' ? 'bg-purple-600' : 'bg-white'
+                    ClassFilters.selectedDifficulty === '입문' ? 'bg-button-focus-color' : 'bg-white'
                   }`}
                 >
                   입문
@@ -123,7 +123,7 @@ const SearchFilter = () => {
                 <button
                   onClick={() => handleClassDifficultyBtn('초급')}
                   className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedDifficulty === '초급' ? 'bg-purple-600' : 'bg-white'
+                    ClassFilters.selectedDifficulty === '초급' ? 'bg-button-focus-color' : 'bg-white'
                   }`}
                 >
                   초급
@@ -133,7 +133,7 @@ const SearchFilter = () => {
                 <button
                   onClick={() => handleClassDifficultyBtn('중급')}
                   className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedDifficulty === '중급' ? 'bg-purple-600' : 'bg-white'
+                    ClassFilters.selectedDifficulty === '중급' ? 'bg-button-focus-color' : 'bg-white'
                   }`}
                 >
                   중급
@@ -141,7 +141,7 @@ const SearchFilter = () => {
                 <button
                   onClick={() => handleClassDifficultyBtn('고급')}
                   className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedDifficulty === '고급' ? 'bg-purple-600' : 'bg-white'
+                    ClassFilters.selectedDifficulty === '고급' ? 'bg-button-focus-color' : 'bg-white'
                   }`}
                 >
                   고급
@@ -157,16 +157,16 @@ const SearchFilter = () => {
                   <div className="flex items-center justify-center">
                     <button
                       onClick={() => handlePriceFilter(0, 20000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                        isPriceSelected(0, 20000) ? 'bg-purple-600' : 'bg-white'
+                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-30 ${
+                        isPriceSelected(0, 20000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       20,000원 미만
                     </button>
                     <button
                       onClick={() => handlePriceFilter(20001, 50000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                        isPriceSelected(20001, 50000) ? 'bg-purple-600' : 'bg-white'
+                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-30 ${
+                        isPriceSelected(20001, 50000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       50,000원 미만
@@ -175,16 +175,16 @@ const SearchFilter = () => {
                   <div className="flex items-center mt-4 justify-center">
                     <button
                       onClick={() => handlePriceFilter(50001, 100000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                        isPriceSelected(50001, 100000) ? 'bg-purple-600' : 'bg-white'
+                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-30 ${
+                        isPriceSelected(50001, 100000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       100,000원 미만
                     </button>
                     <button
                       onClick={() => handlePriceFilter(100001, 1000000000000000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
-                        isPriceSelected(100001, 1000000000000000) ? 'bg-purple-600' : 'bg-white'
+                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-30 ${
+                        isPriceSelected(100001, 1000000000000000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       100,000원 이상

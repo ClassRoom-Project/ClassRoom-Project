@@ -13,7 +13,6 @@ import EditProfileImage from './EditProfileImage';
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
   const userId = loginUserId as string;
-  // console.log('userId', userId);
 
   const queryClient = useQueryClient();
 

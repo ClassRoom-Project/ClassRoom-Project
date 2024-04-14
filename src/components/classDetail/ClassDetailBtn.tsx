@@ -34,7 +34,7 @@ const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeCla
       <ToastContainer />
       <button
         onClick={handleApplyClick}
-        className="flex justify-center items-center rounded-2xl w-20 h-9 bg-[#5373FF] text-white mr-3"
+        className="flex justify-center items-center rounded-2xl w-20 h-9 bg-[#6C5FF7] text-white mr-3"
       >
         신청하기
       </button>

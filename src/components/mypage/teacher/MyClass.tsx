@@ -22,7 +22,6 @@ const MyClass = () => {
     queryKey: ['class', loginUserId],
     queryFn: () => getMyRegisteredClass(loginUserId)
   });
-  // console.log('myClassInfo', myClassInfo);
 
   // 클래스 삭제하기 : mutation
   const { mutate: deleteClassMutation } = useMutation({
