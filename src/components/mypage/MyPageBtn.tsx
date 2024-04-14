@@ -20,7 +20,10 @@ const MyPageBtn = () => {
   };
   return (
     <div>
-      <button onClick={handleMyPageIconOnClick} className="p-4 flex flex-col items-center cursor-pointer">
+      <button
+        onClick={handleMyPageIconOnClick}
+        className="p-4 flex flex-col items-center cursor-pointer hover:text-main-color"
+      >
         <GoPerson size={30} />
         MYPAGE
       </button>

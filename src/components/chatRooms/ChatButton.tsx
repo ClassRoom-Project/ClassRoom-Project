@@ -16,7 +16,7 @@ export default function ChatButton() {
   };
 
   return (
-    <button onClick={handleClick} className="p-4 flex flex-col items-center">
+    <button onClick={handleClick} className="p-4 flex flex-col items-center hover:text-main-color">
       <IoChatbubbleEllipsesOutline size={30} />
       CHAT
     </button>

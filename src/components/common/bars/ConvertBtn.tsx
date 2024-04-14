@@ -55,7 +55,7 @@ const ConvertBtn = () => {
       }
     };
     return (
-      <div className="p-4 text-white">
+      <div className="p-4 text-black hover:text-main-color">
         <button onClick={handler}>
           <div className="flex flex-col items-center">
             <TbArrowsExchange size={30} />
@@ -70,11 +70,11 @@ const ConvertBtn = () => {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
-    <div className="p-4 text-white">
+    <div className="p-4 text-black hover:text-main-color">
       <button onClick={handleOnClickChangedRoleBtn}>
         <div className="flex flex-col items-center">
           <TbArrowsExchange size={30} />
-          <p className="text-xs">{isTeacher ? '수강생으로 전환하기' : '선생님으로 전환하기'}</p>
+          <p className="text-xs ">{isTeacher ? '수강생으로 전환하기' : '선생님으로 전환하기'}</p>
         </div>
       </button>
     </div>

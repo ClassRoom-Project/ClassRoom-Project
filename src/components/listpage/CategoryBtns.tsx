@@ -1,8 +1,6 @@
 'use client';
-
 import React, { useCallback, useState } from 'react';
 import { useCategoryFilterStore } from '@/store/classFilterStore';
-
 const CategoryBtns = () => {
   const { selectedCategory, setSelectedCategory } = useCategoryFilterStore((state) => ({
     selectedCategory: state.selectedCategory,
@@ -16,15 +14,14 @@ const CategoryBtns = () => {
     },
     [setSelectedCategory]
   );
-
   return (
-    <div className="w-[1024px] bg-[#5373FF] h-16 flex justify-center items-center">
+    <div className="w-[1024px] bg-disable-color h-16 flex justify-center items-center">
       {categories.map((category) => (
         <button
           key={category}
           onClick={() => handleOnClickListBtn(category)}
           className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-            selectedCategory === category ? 'bg-purple-600' : 'bg-white'
+            selectedCategory === category ? 'bg-button-press-color' : 'bg-white'
           }`}
         >
           {category}
@@ -33,5 +30,4 @@ const CategoryBtns = () => {
     </div>
   );
 };
-
 export default CategoryBtns;

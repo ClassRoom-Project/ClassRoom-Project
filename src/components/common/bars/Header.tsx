@@ -12,7 +12,7 @@ import { PropsWithChildren, Suspense } from 'react';
 import Notification from '@/components/common/Notification';
 import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
-import Logo from '../../../../public/loginLogo.png';
+import Logo from '../../../../public/loginLogo.svg';
 import { useSession } from 'next-auth/react';
 const Header = ({ children }: PropsWithChildren) => {
   const { userInfo } = userInfoStore();
