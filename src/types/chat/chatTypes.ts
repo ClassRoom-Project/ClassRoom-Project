@@ -82,3 +82,25 @@ export interface SendNewPhotoMessageType {
   photos: string[];
   loginUserId: string;
 }
+
+export interface getChatRoomMessagesType {
+  created_at: string;
+  create_by: string;
+  messages: string;
+  images: string;
+}
+
+export interface MessagesBoxsType {
+  toClassId: string;
+  title: string;
+  fromUserId: string;
+  chatId: string;
+  otherId: string;
+  studentName: string;
+}
+
+export interface getLastMessageType {
+  messages: string;
+  images: string;
+  createdAt: string;
+}
