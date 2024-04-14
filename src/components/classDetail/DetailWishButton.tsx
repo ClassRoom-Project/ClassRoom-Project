@@ -22,7 +22,7 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
 
     //TODO: confirm창 모달로 변경
     if (!loginUserId) {
-      if (typeof window !== 'undefined' && window.confirm('로그인이 필요한 기능입니다. 로그인하시겠습니까?')) {
+      if (typeof window !== 'undefined' && window.confirm('로그인 후 이용 가능합니다. 로그인하시겠습니까?')) {
         router.push('/hello');
       } else return;
     }

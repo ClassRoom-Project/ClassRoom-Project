@@ -29,9 +29,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
       </Link>
       <div className="flex justify-between px-4 pb-4 mt-auto">
         <div className="text-md font-bold">{`${classInfos.price.toLocaleString()}원`}</div>
-        {classInfos.wish && (
-          <ListPageWishButton classId={classInfos.class_id} wishInfo={classInfos.wish} title={classInfos.title} />
-        )}
+        {classInfos.wish && <ListPageWishButton classId={classInfos.class_id} wishInfo={classInfos.wish} />}
       </div>
     </div>
   ) : (

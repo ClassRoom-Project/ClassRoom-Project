@@ -8,15 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { defaultWarning } from '../common/Toastify';
 
-const ListPageWishButton = ({
-  classId,
-  wishInfo,
-  title
-}: {
-  classId: string | undefined;
-  wishInfo: ClassAllType['wish'];
-  title: string;
-}) => {
+const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined; wishInfo: ClassAllType['wish'] }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
   const cancleWishMutation = useCancleWishMutation();
@@ -28,16 +20,12 @@ const ListPageWishButton = ({
     setIsWishedState(isWishedClass);
   }, [isWishedClass]);
 
-  // if (isWishedClass) {
-  //   console.log(isWishedClass, title, loginUserId, isWishedState);
-  // }
-
   const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
 
     //TODO: confirm창 모달로 변경
     if (!loginUserId) {
-      if (typeof window !== 'undefined' && window.confirm('로그인이 필요한 기능입니다. 로그인하시겠습니까?')) {
+      if (typeof window !== 'undefined' && window.confirm('로그인 후 이용 가능합니다. 로그인하시겠습니까?')) {
         router.push('/hello');
       } else return;
     }
