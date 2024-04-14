@@ -16,7 +16,7 @@ export const defaultInitState: UserInfoType = {
 
 export const userInfoStore = create<UserStateType>()((set) => ({
   userInfo: defaultInitState,
-  setUserInfo: (userInfo) => {
-    set(() => ({ userInfo }));
+  setUserInfo: (newInfo) => {
+    set(() => ({ userInfo: newInfo }));
   }
 }));

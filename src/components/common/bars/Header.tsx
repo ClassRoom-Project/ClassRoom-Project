@@ -8,23 +8,41 @@ import useSetSessionStorage from '@/hooks/useLogin/useSetStorage';
 import { useReadLoginUserId } from '@/hooks/useLogin/useSetEmailToApi';
 import useLoginUserId from '@/hooks/useLogin/useLoginUserId';
 import Link from 'next/link';
-import { PropsWithChildren, Suspense } from 'react';
+import { PropsWithChildren, Suspense, useEffect } from 'react';
 import Notification from '@/components/common/Notification';
 import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
-import Logo from '../../../../public/loginLogo.png';
+import Logo from '../../../../public/loginLogo.svg';
 import { useSession } from 'next-auth/react';
+import { getUserInfo } from '@/app/api/mypage/user-api';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
+
 const Header = ({ children }: PropsWithChildren) => {
-  const { userInfo } = userInfoStore();
+  const { userInfo, setUserInfo } = userInfoStore();
   const { isTeacher } = useUserRoleStore();
 
-  const { data: session, status } = useSession();
+  const { loginUserId } = useLoginStore();
+  const userId = loginUserId as string;
 
+  const { data: session, status } = useSession();
   const userEmail = session?.user?.email ?? null;
 
   useSetSessionStorage();
   useReadLoginUserId(userEmail);
   useLoginUserId({ userEmail });
+
+  // 로그인 시, userInfo 불러오기
+  useEffect(() => {
+    if (userId) {
+      const fetchUserInfo = async () => {
+        const userInfoData = await getUserInfo({ userId });
+        if (userInfoData !== null) {
+          setUserInfo(userInfoData);
+        }
+      };
+      fetchUserInfo();
+    }
+  }, [userId, setUserInfo]);
 
   // 수강생인지 강사인지 명시적으로 보여주기
   const roleName = isTeacher === true ? '강사' : '회원';

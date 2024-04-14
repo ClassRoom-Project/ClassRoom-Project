@@ -55,7 +55,7 @@ const ConvertBtn = () => {
       }
     };
     return (
-      <div className="p-4 text-white">
+      <div className="p-4">
         <button onClick={handler}>
           <div className="flex flex-col items-center">
             <TbArrowsExchange size={30} />
@@ -70,7 +70,7 @@ const ConvertBtn = () => {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
-    <div className="p-4 text-white">
+    <div className="p-4">
       <button onClick={handleOnClickChangedRoleBtn}>
         <div className="flex flex-col items-center">
           <TbArrowsExchange size={30} />

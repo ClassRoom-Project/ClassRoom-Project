@@ -21,8 +21,6 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
     setIsWishedState(isWished);
   }, [isWished]);
 
-  console.log(isWished);
-
   const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
 

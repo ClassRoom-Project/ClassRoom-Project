@@ -21,7 +21,7 @@ export const SearchClass = () => {
   };
   return (
     <form className="h-[120px] w-[400px] flex items-center justify-center" onSubmit={handleSearchBtn}>
-      <div className="border-[1px] rounded-xl w-80 items-end justify-end border-main-color">
+      <div className="border-[1px] rounded-xl w-96 items-end justify-end border-main-color relative">
         <input
           onChange={throttling}
           value={selectedTitle}
@@ -31,9 +31,9 @@ export const SearchClass = () => {
         />
         <button
           type="submit"
-          className="btn w-[80px] rounded-xl ml-[57px] text-white bg-main-color hover:bg-button-hover-color"
+          className="btn w-16 rounded-xl absolute right-0 bottom-0 text-white bg-main-color hover:bg-button-hover-color"
         >
-          <IoIosSearch />
+          <IoIosSearch className="text-2xl" />
         </button>
       </div>
     </form>

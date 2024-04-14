@@ -1,14 +1,14 @@
 'use client';
 
-import { checkUserNickname, getUserInfo, updateUserInfo } from '@/app/api/mypage/user-api';
+import { checkUserNickname, updateUserInfo } from '@/app/api/mypage/user-api';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
-import { UpdateUserInfoType, UserInfoType } from '@/types/user';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { userInfoStore } from '@/store/mypage/userInfoStore';
+import { UpdateUserInfoType } from '@/types/user';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
-import { userInfoStore } from '@/store/mypage/userInfoStore';
 
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
@@ -18,20 +18,7 @@ const EditProfile = () => {
   const queryClient = useQueryClient();
 
   // zustand로 userInfo 상태 관리
-  const { userInfo, setUserInfo } = userInfoStore();
-
-  useEffect(() => {
-    if (userId) {
-      const fetchUserInfo = async () => {
-        const userInfoData = await getUserInfo({ userId });
-        if (userInfoData !== null) {
-          setUserInfo(userInfoData);
-        }
-      };
-      fetchUserInfo();
-    }
-  }, [userId, setUserInfo]);
-  // console.log('userInfo', userInfo);
+  const { userInfo } = userInfoStore();
 
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
