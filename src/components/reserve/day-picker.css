@@ -1,4 +1,4 @@
-/* 오늘 날짜 스타일 */
+/* 컨테이너 */
 .rdp {
   --rdp-cell-size: 40px; /* Size of the day cells. */
   --rdp-caption-font-size: 18px; /* Font size for the caption labels. */
@@ -13,22 +13,23 @@
   margin: 0;
 }
 
-.rdp-day_today:not(.rdp-day_outside) {
-  font-weight: bold;
-  font-color: #6c5ff7;
-}
-
 .rdp-months {
   display: flex;
   justify-content: center;
   font-weight: 400;
 }
 
+/* 오늘 날짜 스타일 */
+.rdp-day_today:not(.rdp-day_outside) {
+  font-weight: bold;
+  font-color: #6c5ff7;
+}
+
 /* 활성화 && 선택되지 않은 버튼의 hover */
 .rdp-button:hover:not([disabled]):not(.rdp-day_selected) {
   border: 1px solid #6c5ff7;
-  transition: all 0.2s;
-  background-color: #f9f6ff;
+  transition: all 0.3s;
+  background-color: #f3f1ff;
 }
 
 /* 선택된 날짜 */
@@ -38,9 +39,32 @@
   color: var(--rdp-selected-color);
   opacity: 1;
   background-color: #6c5ff7;
+  color: white;
 }
 
 /* 비활성화된 날짜 */
 .rdp-button[disabled]:not(.rdp-day_selected) {
   opacity: 0.25;
+}
+
+.rdp-weeknumber,
+.rdp-day {
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: var(--rdp-cell-size);
+  max-width: var(--rdp-cell-size);
+  height: var(--rdp-cell-size);
+  margin: 0;
+  border: 2px solid transparent;
+  border-radius: 100%;
+
+  font-size: 15px;
+}
+
+.rdp-button:not([disabled]):not(.rdp-day_selected) {
+  cursor: pointer;
+  color: black;
 }

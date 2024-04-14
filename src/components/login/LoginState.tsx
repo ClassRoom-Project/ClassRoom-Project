@@ -29,5 +29,5 @@ export default function LoginState() {
   if (status === 'loading') {
     return <p>Logout</p>;
   }
-  return <div>{userEmail ? <button onClick={handleLogout}>Logout</button> : <Link href="/hello">Login</Link>}</div>;
+  return <Link href="/hello">Login</Link>;
 }

@@ -6,12 +6,16 @@ import ClassCard from '@/components/main/ClassCard';
 import { ClassAllType } from '@/types/class';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { QueryKeys } from '@/constants/QueryKeys';
 
 //무한 스크롤
 function ClassList() {
   const { selectedCategory } = useCategoryFilterStore();
   const { ClassFilters } = useListFilterStore();
   const { selectedTitle } = useSearchStore();
+  const { loginUserId } = useLoginStore();
+
   const targetRef = useRef<HTMLDivElement>(null);
   const {
     data: classInfos,
@@ -24,7 +28,8 @@ function ClassList() {
   } = useInfiniteQuery({
     //키값을 변수로해두면 유즈이펙트 사용할 필요없이 키값이 변경될 때 마다 리액트 쿼리에서 리페칭해옵니다!
     queryKey: ['infiniteClass', selectedCategory, ClassFilters, selectedTitle],
-    queryFn: ({ pageParam = 1 }) => getClassForList(pageParam, 8, selectedCategory, ClassFilters, selectedTitle), //한페이지당 불러오는 데이터 수 지정
+    queryFn: ({ pageParam = 1 }) =>
+      getClassForList(pageParam, 8, selectedCategory, ClassFilters, selectedTitle, loginUserId), //한페이지당 불러오는 데이터 수 지정
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage //다음페이지로 넘어가는 로직
   });
