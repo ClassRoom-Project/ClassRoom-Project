@@ -16,9 +16,8 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
       />
     ));
   };
-  console.log('11111', comment.star);
   return (
-    <div className="bg-white rounded-md p-4 shadow-xl max-w-[1000px] w-full mt-5 mx-auto">
+    <div className="bg-disable-color mb-5 rounded-lg p-4 shadow-xl max-w-[1000px] w-full mt-5 mx-auto">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center">
           <div className="flex justify-center items-center">
@@ -32,8 +31,8 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
                 height={30}
               />
             </div>
-            <h5 className="text-lg font-bold">{comment.nickname}</h5>
-            <p className="text-sm ml-2 text-gray-600">{comment.job}</p>
+            <h5 className="text-lg text-text-color font-bold">{comment.nickname}</h5>
+            <p className="text-sm ml-2 text-white">{comment.job}</p>
           </div>
         </div>
         <div className="flex">
