@@ -11,7 +11,7 @@ const CategoryBtns = () => {
     setSelectedCategory: state.setSelectedCategory
   }));
 
-  const categories = ['악기&음악', '미술', '운동', '공예&공방', '요리', '기타', '뷰티'];
+  const categories = ['악기&음악', '미술', '운동', '공예&공방', '요리', '뷰티', '교육', '기타'];
   //useCallback을 이용해 함수 재생성을 막아서 메모리 사용 줄이기
   const handleOnClickListBtn = useCallback(
     (category: string) => {

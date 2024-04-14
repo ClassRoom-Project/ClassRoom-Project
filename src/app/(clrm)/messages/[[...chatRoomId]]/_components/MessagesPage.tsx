@@ -37,6 +37,7 @@ export default function MessagesPage() {
                       chatId={chatId}
                       otherId={loginUserId === teacherUserId ? fromUserId : teacherUserId}
                       toClassId={toClassId}
+                      fromUserId={fromUserId}
                       title={title}
                       makeClassUserId={makeClassUserId}
                       loginUserId={loginUserId}

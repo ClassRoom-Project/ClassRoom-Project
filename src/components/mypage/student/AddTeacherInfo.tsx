@@ -7,11 +7,13 @@ import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
+import { useRouter } from 'next/navigation';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
   const { isTeacher, setIsTeacher } = useUserRoleStore();
   const { teacherInfo, isPending } = useTeacherInfo();
+  const router = useRouter();
 
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
   // 선생님 정보가 없으면(null) : false => 정보 입력하기
@@ -106,6 +108,7 @@ const AddTeacherInfo = () => {
 
         // 수강생에서 선생님으로 전환 로직 추가
         setIsHaveTeacherInfo(true);
+        router.refresh();
         return teacherInfo;
       }
     }
