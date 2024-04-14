@@ -4,7 +4,9 @@ import {
   CreateNewChatRoomType,
   MakeClassUserInfoType,
   SendNewMessageType,
-  SendNewPhotoMessageType
+  SendNewPhotoMessageType,
+  getChatRoomMessagesType,
+  getLastMessageType
 } from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
@@ -126,7 +128,26 @@ export const createNewMessages = async ({
   return newChat;
 };
 
-//채팅 이미지 넣기
+// Supabase에 파일을 업로드하고, 업로드된 파일의 URL을 반환하는 함수
+export const uploadPhotosToSupabase = async (files: File[]) => {
+  const urls = [];
+  for (const file of files) {
+    const randomUUID = crypto.randomUUID();
+    const filePath = `messageImage/${randomUUID}`;
+
+    const { data, error } = await supabase.storage.from('chatImages').upload(filePath, file);
+    if (error) {
+      console.error('Error uploading file:', error);
+      continue;
+    }
+    const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/chatImages/${data.path}`;
+    urls.push(url);
+  }
+  console.log('urls', urls);
+  return urls;
+};
+
+// 채팅 이미지 넣기
 export const createNewMessagesPhoto = async ({
   chatId,
   photos,
@@ -149,4 +170,74 @@ export const createNewMessagesPhoto = async ({
   }
   console.log('삽입 성공:', newChat);
   return newChat;
+};
+
+//메시지 내용 가져오기
+export const getChatMessages = async (chatId: string, loginUserId: string): Promise<getChatRoomMessagesType[]> => {
+  const { data, error } = await supabase
+    .from('chat_messages')
+    .select('created_at, create_by, messages, images')
+    .order('created_at', { ascending: true })
+    .eq('chat_id', chatId);
+
+  await updateCheckMessage(chatId, loginUserId);
+
+  if (error) {
+    throw error;
+  }
+
+  return data;
+};
+
+//메시지 읽음 처리
+const updateCheckMessage = async (chatId: string, loginUserId: string): Promise<void> => {
+  const { error } = await supabase
+    .from('chat_messages')
+    .update({ check: true })
+    .neq('create_by', loginUserId)
+    .eq('chat_id', chatId);
+
+  if (error) {
+    throw error;
+  }
+};
+
+// 마지막 메시지 가져오기
+export const getLastChatMessage = async (chatId: string): Promise<getLastMessageType | undefined> => {
+  const { data, error } = await supabase
+    .from('chat_messages')
+    .select('created_at, messages, images')
+    .order('created_at', { ascending: false })
+    .eq('chat_id', chatId)
+    .limit(1)
+    .single();
+
+  const lastMessages = {
+    createdAt: data?.created_at,
+    messages: data?.messages,
+    images: data?.images
+  };
+
+  if (error) {
+    throw error;
+  }
+
+  return lastMessages;
+};
+
+//읽지 않은 채팅 개수 가져오기
+export const readCheckMessages = async (chatId: string, loginUserId: string): Promise<number | null> => {
+  const { error, count } = await supabase
+    .from('chat_messages')
+    .select('', { count: 'exact' })
+    .eq('chat_id', chatId)
+    .eq('check', false)
+    .neq('create_by', loginUserId);
+
+  if (error) {
+    throw error;
+  }
+
+  console.log(count);
+  return count;
 };

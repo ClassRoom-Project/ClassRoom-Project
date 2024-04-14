@@ -18,16 +18,10 @@ export default function MessagesPage() {
   const fromUserId = searchParams.get('fromUserId');
 
   return (
-    <div className="w-full">
+    <div className="w-full h-screen flex flex-col">
       <div>
-        <div className="flex bg-white border-x border-border-color ">
-          <section
-            className="w-2/5 h-full flex"
-            style={{
-              minHeight: 'calc(100vh - 60px)',
-              maxHeight: 'calc(100vh - 60px)'
-            }}
-          >
+        <div className="flex flex-1 bg-white border-x border-border-color ">
+          <section className="w-2/5 flex flex-col overflow-hidden flex-1">
             {!chatroomsInfo ? (
               <div className="flex justify-center items-center flex-1">
                 <a>채팅 목록이 없습니다.</a>
@@ -35,6 +29,7 @@ export default function MessagesPage() {
             ) : (
               <div className="flex flex-col flex-1 w-full">
                 <Virtuoso
+                  className="h-full overflow-y-auto"
                   data={chatroomsInfo}
                   itemContent={(_, { chatId, toClassId, fromUserId, teacherUserId, title, makeClassUserId }) => (
                     <ChatPreview
@@ -42,8 +37,6 @@ export default function MessagesPage() {
                       chatId={chatId}
                       otherId={loginUserId === teacherUserId ? fromUserId : teacherUserId}
                       toClassId={toClassId}
-                      fromUserId={fromUserId}
-                      teacherUserId={teacherUserId}
                       title={title}
                       makeClassUserId={makeClassUserId}
                       loginUserId={loginUserId}
@@ -54,7 +47,7 @@ export default function MessagesPage() {
             )}
           </section>
           <section
-            className="w-3/5 border-l border-gray-500"
+            className="w-3/5 border-l border-gray-500 flex flex-col overflow-hidden"
             style={{
               minHeight: 'calc(100vh - 60px)',
               maxHeight: 'calc(100vh - 60px)'

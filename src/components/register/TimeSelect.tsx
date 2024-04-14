@@ -70,12 +70,13 @@ const TimeSelect: React.FC = () => {
   }, []);
 
   return (
-    <div className="mt-4">
-      <h1 className="font-bold text-[#3F3F3F] my-4">클래스 날짜&시간</h1>
+    <div className="my-4">
+      <h1 className="font-bold text-[#3F3F3F] mt-6">* 클래스 날짜&시간</h1>
+      <p className='text-sm mt-1 mb-2 text-[#7E7E7E]'>*해당 날짜의 시간을 입력한 후 +버튼을 클릭하면 시간 정보가 추가됩니다*</p>
       <div className="relative">
         <button
           onClick={toggleDatePicker}
-          className="border border-[#6C5FF7] text-black text-sm p-1 rounded-full hover:bg-[#E3E1FC]"
+          className="border border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
         >
           일정추가
         </button>

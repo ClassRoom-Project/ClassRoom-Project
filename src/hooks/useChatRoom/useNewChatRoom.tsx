@@ -2,10 +2,12 @@ import {
   createChatRoom,
   createNewMessages,
   createNewMessagesPhoto,
+  getChatMessages,
   getChatRooms,
-  getMakeClassUser
+  getLastChatMessage,
+  getMakeClassUser,
+  readCheckMessages
 } from '@/app/api/chatRooms/getChatRooms';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { SendNewMessageType, SendNewPhotoMessageType } from '@/types/chat/chatTypes';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -59,11 +61,6 @@ export function useCreateNewMessage() {
 
   const { mutate: createNewMessageMutate } = useMutation({
     mutationFn: async ({ chatId, message, loginUserId }: SendNewMessageType) => {
-      console.log('chatId', chatId);
-
-      console.log('message', message);
-      console.log('create_by', loginUserId);
-
       await createNewMessages({ chatId, loginUserId, message });
     },
     onSuccess: () => {
@@ -93,4 +90,34 @@ export function useCreateNewPhotoMessage() {
   });
 
   return { createNewPhotoMessageMutate };
+}
+
+//채팅내용 가져오기
+export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
+  const { data: readChatRoomMessages } = useQuery({
+    queryKey: ['chatMessage', chatId],
+    queryFn: () => getChatMessages(chatId as string, loginUserId as string),
+    enabled: !!chatId
+  });
+  return { readChatRoomMessages };
+}
+
+//마지막 메시지 가져오기
+export function useReadLastMessages(chatId: string) {
+  const { data: readLastMessages } = useQuery({
+    queryKey: ['lastMessage', chatId],
+    queryFn: () => getLastChatMessage(chatId as string),
+    enabled: !!chatId
+  });
+  return { readLastMessages };
+}
+
+//채팅 안읽은 개수 값 가져오기
+export function useReadCheckMessages(chatId: string, loginUserId: string) {
+  const { data: readLastChekcMessages } = useQuery({
+    queryKey: ['countMessage', chatId],
+    queryFn: () => readCheckMessages(chatId as string, loginUserId as string),
+    enabled: !!chatId
+  });
+  return { readLastChekcMessages };
 }
