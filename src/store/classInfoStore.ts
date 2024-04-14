@@ -1,4 +1,4 @@
-import { ClassAllType } from '@/types/class';
+import { ClassAllType, ListDetailClassInfo } from '@/types/class';
 import { create } from 'zustand';
 
 //class 정보들 각각 배열에 담는 로직임다
@@ -7,8 +7,8 @@ export type ClassStoreType = {
   setClassInfos: (classInfos: ClassAllType[]) => void;
 };
 export type DetailClassStoreType = {
-  classInfo: ClassAllType | null;
-  setClassInfo: (classInfo: ClassAllType | null) => void;
+  classInfo: ListDetailClassInfo | null;
+  setClassInfo: (classInfo: ListDetailClassInfo | null) => void;
 };
 export const useClassInfoStore = create<ClassStoreType>((set) => ({
   classInfos: [],
