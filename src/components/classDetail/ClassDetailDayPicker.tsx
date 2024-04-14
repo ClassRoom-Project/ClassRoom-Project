@@ -17,7 +17,7 @@ const css = `
     margin: 0; /* Remove default margin */
   }
 `;
-const bookedStyle = { border: '1px solid #6C5FF7', borderRadius: '20%', backgroundColor: '#6C5FF7', color: 'white' };
+const bookedStyle = { border: '1px solid #6C5FF7', borderRadius: '100%', backgroundColor: '#6C5FF7', color: 'white' };
 
 export default function App({ classDate }: { classDate: Array<{ day: string; date_id: string; class_id: string }> }) {
   if (!classDate || !Array.isArray(classDate)) {
@@ -35,7 +35,7 @@ export default function App({ classDate }: { classDate: Array<{ day: string; dat
         modifiers={{ booked: bookedDays }}
         modifiersStyles={{ booked: bookedStyle }}
       />
-      <p className="mt-2">클래스가 있는 날을 확인하세요</p>
+      <p className="mt-2 text-text-color">클래스가 있는 날을 확인하세요</p>
     </div>
   );
 }
