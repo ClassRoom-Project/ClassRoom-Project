@@ -20,7 +20,6 @@ const ImageUpload = () => {
     classType,
     difficulty,
     minNumber,
-    maxNumber,
     personnel,
     price,
     totalTime
@@ -54,7 +53,7 @@ const ImageUpload = () => {
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
-    if (!category || !subCategory || !classContent || !classTitle || !classType || !difficulty || !minNumber || !maxNumber || !personnel || !totalTime || !selectedDates || !schedules) {
+    if (!category || !subCategory || !classContent || !classTitle || !classType || !difficulty || !minNumber || !personnel || !totalTime || !selectedDates || !schedules) {
       alert('모든 필수 항목을 입력해주세요.');
       return;
     }
@@ -84,7 +83,6 @@ const ImageUpload = () => {
         title: classTitle,
         description: classContent,
         quantity: personnel,
-        max_people: maxNumber,
         min_people: minNumber,
         price: price,
         location: address,
