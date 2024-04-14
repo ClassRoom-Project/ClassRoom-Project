@@ -12,7 +12,7 @@ import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
 const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
-  const cancleWishMutation = useCancleWishMutation();
+  const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
 
   const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
