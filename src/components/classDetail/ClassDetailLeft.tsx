@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ClassAllType } from '@/types/class';
+import { ListDetailClassInfo } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
 import DetailWishButton from './DetailWishButton';
@@ -12,7 +12,7 @@ const ClassDetailLeft = ({
   classData,
   userData
 }: {
-  classData: ClassAllType | null;
+  classData: ListDetailClassInfo | null;
   userData: DetailUserInfoType | null;
 }) => {
   const defaultImageSrc = '/noimage.png';
@@ -26,7 +26,7 @@ const ClassDetailLeft = ({
     setMainImageSrc(imageSrc);
   };
   return (
-    <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg h-[900px] bg-light-purple ">
+    <div className="flex flex-col p-5 mr-4 shadow-2xl justify-center items-center w-[500px] rounded-lg h-[1000px] bg-light-purple ">
       <div className="flex items-center justify-between w-[350px]">
         <div className="flex justify-center items-center mr-2 h-8 gap-2">
           <Image
@@ -45,7 +45,7 @@ const ClassDetailLeft = ({
       <div className="w-[350px] h-[350px] mt-2 flex bg-black">
         <Image width={350} height={350} src={mainImageSrc} alt="classImage 0" unoptimized={true}></Image>
       </div>
-      <div className="w-[350px] h-[50px] flex mt-2">
+      <div className="w-[350px] mb-24 h-[50px] flex mt-2">
         <div
           onClick={() => handleThumbnailClick(classData?.image[0] || defaultImageSrc)}
           className="w-[50px] h-[50px] cursor-pointer flex mr-[15px]"

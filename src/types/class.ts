@@ -111,3 +111,31 @@ export type MyWishClassType = {
   class_type: string;
   difficulty: string;
 };
+
+//리스트 디테일 페이지 클래스정보
+export interface ListDetailClassInfo {
+  class_id: string;
+  user_id: string;
+  category: string;
+  hashtag: string;
+  title: string;
+  description: string;
+  max_people: number;
+  min_people: number;
+  location: string;
+  price: number;
+  date: { day: string; date_id: string; class_id: string }[];
+  time: string[];
+  quantity: number;
+  detail_location: string;
+  total_time: number;
+  image: string[];
+  class_type: string;
+  difficulty: string;
+  active: boolean;
+  reserved_count: number;
+  reserved_user_id: string[];
+  wish: { user_id: string }[];
+  date_id: string;
+  day: string;
+}

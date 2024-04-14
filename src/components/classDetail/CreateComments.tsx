@@ -94,7 +94,7 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
           ></textarea>
           <button
             type="submit"
-            className="mt-2 bg-[#6C5FF7] hover:bg-button-focus-color text-white font-bold py-2 px-4 rounded"
+            className="mt-2 bg-[#6C5FF7] hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
           >
             후기 등록
           </button>
