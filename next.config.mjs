@@ -9,7 +9,8 @@ const nextConfig = {
       'http://localhost:3000/messages',
       'encrypted-tbn3.gstatic.com',
       'encrypted-tbn0.gstatic.com',
-      'lh3.googleusercontent.com'
+      'lh3.googleusercontent.com',
+      'k.kakaocdn.net'
     ]
   }
 };
