@@ -58,11 +58,13 @@ const ImageUpload = () => {
       return;
     }
 
-    if (selectedDates.length === 0 || schedules.length === 0) {
+    const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
+
+    if (selectedDates.length === 0 || isAnyTimes) {
       alert('일정와 시간을 선택해주세요.');
       return;
     }
-    
+
     if (!window.confirm('등록하시겠습니까?')) {
       return;
     }

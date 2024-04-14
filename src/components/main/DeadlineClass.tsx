@@ -28,7 +28,7 @@ const DeadlineClass = () => {
 
   return (
     <div className="mr-auto ml-auto">
-      <p>마감 임박</p>
+      <p className="text-text-color">마감임박</p>
       <div className="slider-container w-[85vw]">
         <Slider {...settings}>
           {classInfos.map((info) => (

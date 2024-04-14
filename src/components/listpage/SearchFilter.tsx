@@ -49,7 +49,7 @@ const SearchFilter = () => {
   };
 
   return (
-    <div className="flex w-[1024px] items-start justify-start p-5">
+    <div className="flex min-w-[80vw] items-start justify-start p-5">
       <div className="dropdown dropdown-bottom w-12 h-12">
         <div tabIndex={0} onClick={handleDropdown} role="button" className="btn ">
           <FiAlignJustify size={30} color="#5373FF">
@@ -90,7 +90,7 @@ const SearchFilter = () => {
                   value={ClassFilters.selectedLocation || ''}
                   onChange={handleLocationChange}
                 >
-                  <option disabled selected>
+                  <option value="" disabled>
                     지역을 선택하세요
                   </option>
                   <option value={'서울'}>서울</option>
