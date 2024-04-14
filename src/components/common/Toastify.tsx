@@ -95,6 +95,7 @@ export const defaultWarning = () =>
     progress: undefined,
     theme: 'light'
   });
+
 export const addWish = () =>
   toast('❤️ 위시리스트에 추가했습니다.', {
     position: 'top-right',
@@ -104,8 +105,10 @@ export const addWish = () =>
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
+    pauseOnFocusLoss: false,
     theme: 'light'
   });
+
 export const cancelWish = () =>
   toast('❤️ 위시리스트에서 삭제했습니다.', {
     position: 'top-right',
@@ -115,5 +118,6 @@ export const cancelWish = () =>
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
+    pauseOnFocusLoss: false,
     theme: 'light'
   });

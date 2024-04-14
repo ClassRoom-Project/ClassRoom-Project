@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { QueryProvider } from './provider';
 import Script from 'next/script';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -17,7 +18,10 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="ko">
       <body className={inter.className}>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+          {children}
+        </QueryProvider>
         <Script src={mapScriptSrc} strategy="beforeInteractive" />
       </body>
     </html>
