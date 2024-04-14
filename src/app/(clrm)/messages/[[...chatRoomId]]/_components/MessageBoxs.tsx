@@ -84,7 +84,7 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
                     {message.images &&
                       JSON.parse(message.images).map((imgUrl: string, imgIndex: number) => (
                         <div key={imgIndex} className="image-container">
-                          <Image src={`${imgUrl}`} width={100} height={100} alt={`Photo ${imgIndex + 1}`} />
+                          <Image src={`${imgUrl}`} layout="fill" objectFit="cover" alt={`Photo ${imgIndex + 1}`} />
                         </div>
                       ))}
                   </div>

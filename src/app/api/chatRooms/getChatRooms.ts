@@ -1,12 +1,14 @@
 import {
+  ChatMessageType,
   ChatRoom,
   ChatRoomFromDB,
   CreateNewChatRoomType,
+  GetChatRoomMessagesType,
+  GetLastMessageType,
   MakeClassUserInfoType,
+  PushImageType,
   SendNewMessageType,
-  SendNewPhotoMessageType,
-  getChatRoomMessagesType,
-  getLastMessageType
+  SendNewPhotoMessageType
 } from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
@@ -149,32 +151,33 @@ export const uploadPhotosToSupabase = async (files: File[]) => {
 };
 
 // 채팅 이미지 넣기
-export const createNewMessagesPhoto = async ({
-  chatId,
-  photos,
-  loginUserId
-}: SendNewPhotoMessageType): Promise<SendNewPhotoMessageType | undefined> => {
-  const { data: newChat, error } = await supabase
+export const createNewMessagesPhoto = async ({ chatId, photos, loginUserId }: PushImageType) => {
+  // 배열 초기화
+  const results: ChatMessageType[] = [];
 
-    .from('chat_messages')
-    .insert([
-      {
+  // 초기화된 배열 반복 실행
+  for (const photo of photos) {
+    const { data: newChat, error } = await supabase
+      .from('chat_messages')
+      .insert({
         chat_id: chatId,
-        images: photos,
+        images: [photo],
         create_by: loginUserId
-      }
-    ])
-    .single();
-  if (error) {
-    console.error('삽입 중 에러 발생:', error);
-    throw error;
+      })
+      .single();
+
+    if (error) {
+      console.error('삽입 중 에러 발생:', error);
+      continue;
+    }
+    console.log('삽입 성공:', newChat);
+    results.push(newChat);
   }
-  console.log('삽입 성공:', newChat);
-  return newChat;
+  return results;
 };
 
 //메시지 내용 가져오기
-export const getChatMessages = async (chatId: string, loginUserId: string): Promise<getChatRoomMessagesType[]> => {
+export const getChatMessages = async (chatId: string, loginUserId: string): Promise<GetChatRoomMessagesType[]> => {
   const { data, error } = await supabase
     .from('chat_messages')
     .select('created_at, create_by, messages, images')
@@ -204,7 +207,7 @@ const updateCheckMessage = async (chatId: string, loginUserId: string): Promise<
 };
 
 // 마지막 메시지 가져오기
-export const getLastChatMessage = async (chatId: string): Promise<getLastMessageType | undefined> => {
+export const getLastChatMessage = async (chatId: string): Promise<GetLastMessageType | undefined> => {
   const { data, error } = await supabase
     .from('chat_messages')
     .select('created_at, messages, images')
