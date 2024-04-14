@@ -14,8 +14,8 @@ const NotificationComponent = () => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const router = useRouter();
-  const notificationRef = useRef<HTMLDivElement>(null); // 수정: ref 타입 변경
-  const lastIconClickTimeRef = useRef<Date | null>(null); // 알림창 닫는 이슈때문에
+  const notificationRef = useRef<HTMLDivElement>(null);
+  const lastIconClickTimeRef = useRef<Date | null>(null);
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -40,10 +40,10 @@ const NotificationComponent = () => {
   const toggleBellIcon = () => {
     setIsBellFilled(!isBellFilled);
     setIsNotificationOpen(prevState => !prevState);
-    // 아이콘 클릭 시간 기록
-    lastIconClickTimeRef.current = new Date();
+    lastIconClickTimeRef.current = new Date(); // 아이콘 클릭 시간 기록
   };
 
+  // 바깥 영역 클릭시 알림창 닫기
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const timeSinceLastIconClick = lastIconClickTimeRef.current ? new Date().getTime() - lastIconClickTimeRef.current.getTime() : null;
@@ -56,7 +56,6 @@ const NotificationComponent = () => {
       }
     };
   
-    // 바깥 영역 클릭 이벤트 리스너 등록 및 제거 로직을 변경하지 않음
     if (isNotificationOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     } else {
@@ -68,6 +67,7 @@ const NotificationComponent = () => {
     };
   }, [isNotificationOpen, notifications]);
 
+  // 알림 클릭시
   const handleNotificationClick = async (notification: Notification) => {
     if (!notification.isread) {
       const { error } = await supabase
@@ -95,7 +95,7 @@ const NotificationComponent = () => {
       ) : (
         <LuBell size={30} onClick={toggleBellIcon} className="cursor-pointer" />
       )}
-      {isNotificationOpen && ( // 조건 변경
+      {isNotificationOpen && (
         <div className="absolute mt-2 w-80 bg-white shadow-lg rounded-md z-10">
           <div className="px-4 py-2 font-bold border-b border-gray-200">알림</div>
           <div className="max-h-60 overflow-y-auto">

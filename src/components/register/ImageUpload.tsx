@@ -199,7 +199,7 @@ const ImageUpload = () => {
   return (
     <div className='my-4 w-full'>
       <div className="flex flex-col w-full">
-        <div className="mb-4"> {/* 여기서 mb-4는 + 버튼과 이미지들 사이의 마진을 추가하기 위함입니다. */}
+        <div className="mb-4">
         <label 
           htmlFor="image-upload" 
           className="border border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"

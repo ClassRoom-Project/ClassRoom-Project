@@ -6,7 +6,7 @@ import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import Image from 'next/image';
 import Link from 'next/link';
 import { PropsWithChildren, Suspense } from 'react';
-import Notification from '@/components/notifications/Notification'
+import Notification from '@/components/common/Notification'
 import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
 
