@@ -1,6 +1,6 @@
 'use client';
 
-import { useAddWishMutation, useCancleWishMutation } from '@/hooks/useWish/mutateWish';
+import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
 import { useCheckIsWishedQuery } from '@/hooks/useWish/useWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
@@ -12,7 +12,7 @@ import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
 const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
-  const cancelWishMutation = useCancleWishMutation();
+  const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
   const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
   const [isWishedState, setIsWishedState] = useState<boolean>();

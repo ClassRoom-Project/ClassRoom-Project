@@ -1,17 +1,17 @@
 'use client';
 
-import { useAddWishMutation, useCancleWishMutation } from '@/hooks/useWish/mutateWish';
+import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ClassAllType } from '@/types/class';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
-import { defaultWarning } from '../common/Toastify';
+import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
 
 const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined; wishInfo: ClassAllType['wish'] }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
-  const cancleWishMutation = useCancleWishMutation();
+  const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
   const [isWishedState, setIsWishedState] = useState<boolean>();
   const isWishedClass = wishInfo.some((item) => item.user_id === loginUserId);
@@ -35,14 +35,16 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined
         try {
           addWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(true);
+          addWish();
         } catch (error) {
           defaultWarning();
           console.log(error);
         }
       } else {
         try {
-          cancleWishMutation.mutate({ userId: loginUserId, classId });
+          cancelWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(false);
+          cancelWish();
         } catch (error) {
           defaultWarning();
         }
