@@ -4,6 +4,7 @@ import './globals.css';
 import { QueryProvider } from './provider';
 import Script from 'next/script';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ToastContainer } from 'react-toastify';
 
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: Props) {
       <body className={inter.className}>
         <QueryProvider>
           <ReactQueryDevtools initialIsOpen={false} />
+          <ToastContainer />
           {children}
         </QueryProvider>
         <Script src={mapScriptSrc} strategy="beforeInteractive" />

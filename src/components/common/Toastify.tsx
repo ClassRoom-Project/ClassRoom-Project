@@ -100,7 +100,7 @@ export const addWish = () =>
   toast('❤️ 위시리스트에 추가했습니다.', {
     position: 'top-right',
     autoClose: 2000,
-    hideProgressBar: false,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
@@ -110,10 +110,10 @@ export const addWish = () =>
   });
 
 export const cancelWish = () =>
-  toast('❤️ 위시리스트에서 삭제했습니다.', {
+  toast('🤍 위시리스트에서 삭제했습니다.', {
     position: 'top-right',
     autoClose: 2000,
-    hideProgressBar: false,
+    hideProgressBar: true,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,

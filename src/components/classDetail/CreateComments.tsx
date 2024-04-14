@@ -70,7 +70,6 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
 
   return (
     <>
-      <ToastContainer />
       <div className="w-[1000px] bg-white rounded-xl shadow-2xl border-solid p-4">
         <form onSubmit={handleSubmit}>
           <div className="rating rating-sm flex justify-end items-center">

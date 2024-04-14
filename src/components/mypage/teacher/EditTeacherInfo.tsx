@@ -258,7 +258,6 @@ const EditTeacherInfo = () => {
             <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px]">
               수정 완료
             </button>
-            <ToastContainer />
           </div>
         ) : (
           <button onClick={() => setIsEditing(true)} className="btn w-[100px]">

@@ -6,7 +6,7 @@ import { ClassAllType } from '@/types/class';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
-import { defaultWarning } from '../common/Toastify';
+import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
 
 const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined; wishInfo: ClassAllType['wish'] }) => {
   const router = useRouter();
@@ -35,6 +35,7 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined
         try {
           addWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(true);
+          addWish();
         } catch (error) {
           defaultWarning();
           console.log(error);
@@ -43,6 +44,7 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined
         try {
           cancelWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(false);
+          cancelWish();
         } catch (error) {
           defaultWarning();
         }

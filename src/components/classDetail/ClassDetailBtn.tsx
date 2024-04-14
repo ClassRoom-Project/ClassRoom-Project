@@ -31,7 +31,6 @@ const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeCla
 
   return (
     <div className="w-[350px] flex justify-center items-center mt-20">
-      <ToastContainer />
       <button
         onClick={handleApplyClick}
         className="flex justify-center items-center rounded-2xl w-20 h-9 bg-[#5373FF] text-white mr-3"
