@@ -9,7 +9,7 @@ import { useReadLoginUserId } from '@/hooks/useLogin/useSetEmailToApi';
 import useLoginUserId from '@/hooks/useLogin/useLoginUserId';
 import Link from 'next/link';
 import { PropsWithChildren, Suspense } from 'react';
-import { LuBell } from 'react-icons/lu';
+import Notification from '@/components/common/Notification';
 import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
 import Logo from '../../../../public/loginLogo.png';
@@ -42,11 +42,11 @@ const Header = ({ children }: PropsWithChildren) => {
         <div className="flex items-center justify-center">
           <SearchClass />
         </div>
-        <div className="w-44 flex items-end justify-end">
+        <div className="w-48 flex items-end justify-end">
           <div className="flex items-center">
             {userEmail ? (
               <div className="mr-[10px]">
-                <LuBell size={30} />
+                <Notification />
               </div>
             ) : null}
             {userEmail ? (

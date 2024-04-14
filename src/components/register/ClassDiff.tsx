@@ -2,16 +2,16 @@
 import useRegisterStore from '@/store/registerStore';
 import React from 'react';
 
-const ClassTypeDiff = () => {
+const ClassDiff = () => {
   const { difficulty, setDifficulty } = useRegisterStore();
 
   const handleDifficultyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setDifficulty(event.target.value);
   };
   return (
-    <div className="flex items-center space-x-4">
+    <div className="my-4">
       <div className="flex items-center space-x-4">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">클래스 난이도</p>
+        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 클래스 난이도</p>
         {/* 난이도 드롭다운 */}
         <select
           value={difficulty}
@@ -29,4 +29,4 @@ const ClassTypeDiff = () => {
   );
 };
 
-export default ClassTypeDiff;
+export default ClassDiff;

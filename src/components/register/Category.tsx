@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 import useRegisterStore from '@/store/registerStore';
 
@@ -11,7 +10,7 @@ const Category = () => {
   };
 
   return (
-    <div className="my-2">
+    <div className="my-4">
       <div className="flex items-center space-x-4 my-2">
         <div>
           {/* 카테고리 드롭다운 */}

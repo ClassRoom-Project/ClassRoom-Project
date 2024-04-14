@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { ClassAllType } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
+import DetailWishButton from './DetailWishButton';
+import MapComponent from './MapComponent';
 
 //왼쪽 컴포넌트
 const ClassDetailLeft = ({
@@ -25,8 +27,8 @@ const ClassDetailLeft = ({
   };
   return (
     <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg h-[900px] border-[#5373FF] border-solid border-[1px]">
-      <div className="flex items-start justify-start w-[350px]">
-        <div className="w-8 mr-2 h-8">
+      <div className="flex items-center justify-between w-[350px]">
+        <div className="flex justify-center items-center mr-2 h-8 gap-2">
           <Image
             width={30}
             height={30}
@@ -35,8 +37,10 @@ const ClassDetailLeft = ({
             alt="profileImage"
             unoptimized={true}
           ></Image>
+
+          <p>{userData?.nickname}</p>
         </div>
-        <p>{userData?.nickname}</p>
+        <DetailWishButton classId={classData?.class_id} />
       </div>
       <div className="w-[350px] h-[350px] mt-2 flex bg-black">
         <Image width={350} height={350} src={mainImageSrc} alt="classImage 0" unoptimized={true}></Image>
@@ -104,7 +108,7 @@ const ClassDetailLeft = ({
           ></Image>
         </div>
       </div>
-      <div className="w-[350px] mt-6 h-[350px] text-white bg-black">지도 들어갈 자리</div>
+      <MapComponent />
     </div>
   );
 };

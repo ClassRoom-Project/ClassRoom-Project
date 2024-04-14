@@ -15,6 +15,7 @@ const CurrentReserveQuantity = ({ classId, maxPeople }: { classId: string; maxPe
     }
   }, [classId, currentReservedCount, maxPeople]);
 
+  //TODO: 추가 기능: 실시간으로 해서 daisyUI 카운트 적용해보기
   return (
     <div className="flex flex-row w-full justify-center bg-base-200 rounded-md  text-sm py-2 px-3 items-center">
       {!isLoading && remainingQuantity ? (

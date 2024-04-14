@@ -1,20 +1,20 @@
-import Image from 'next/image';
-import React from 'react';
 import { ClassAllType } from '@/types/class';
+import Image from 'next/image';
 import Link from 'next/link';
-import { FaRegHeart } from 'react-icons/fa';
+import ListPageWishButton from '../listpage/ListPageWishButton';
 
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   return classInfos ? (
-    <Link href={`/list/detail/${classInfos.class_id}`}>
-      <div className="card w-[250px] h-[300px] bg-base-100 shadow-md m-1 rounded-lg overflow-hidden">
-        <figure className="w-full h-2/5 bg-gray-200">
+    <div className="card w-[250px] h-[350px] bg-base-100 shadow-xl m-1 rounded-lg overflow-hidden">
+      <Link href={`/list/detail/${classInfos.class_id}`} className="">
+        <figure className="w-full h-[150px] bg-gray-200 relative">
           <Image
-            width={250}
-            height={200}
+            // width={250}
+            // height={200}
+            fill={true}
             src={classInfos.image && classInfos.image.length > 0 ? classInfos.image[0] : 'no image'}
             alt="클래스 이미지"
-            layout="responsive"
+            // layout="responsive"
             objectFit="cover"
             unoptimized={true}
           />
@@ -25,13 +25,13 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
           </div>
           <p className="text-lg font-semibold">{classInfos.title}</p>
           <p className="text-sm text-[#5373FF]">#{classInfos.hashtag}</p>
-          <div className="mt-2 flex justify-between">
-            <div className="text-md font-bold">{`${classInfos.price.toLocaleString()}원`}</div>
-            <FaRegHeart />
-          </div>
         </div>
+      </Link>
+      <div className="flex justify-between px-4 pb-4 mt-auto">
+        <div className="text-md font-bold">{`${classInfos.price.toLocaleString()}원`}</div>
+        {classInfos.wish && <ListPageWishButton classId={classInfos.class_id} wishInfo={classInfos.wish} />}
       </div>
-    </Link>
+    </div>
   ) : (
     <div className="text-center">Data Loading...</div>
   );
