@@ -24,6 +24,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
             {classInfos.location}
           </div>
           <p className="text-lg font-semibold">{classInfos.title}</p>
+          {/*해시태그 고정시키기*/}
           <p className="text-sm text-[#5373FF]">#{classInfos.hashtag}</p>
         </div>
       </Link>

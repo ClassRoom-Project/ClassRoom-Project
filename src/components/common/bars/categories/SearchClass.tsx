@@ -20,8 +20,8 @@ export const SearchClass = () => {
     router.push('/list');
   };
   return (
-    <form className="h-[120px] w-[300px] flex items-center justify-center" onSubmit={handleSearchBtn}>
-      <div className="border-[1px] rounded-xl w-64 items-end justify-end border-main-color">
+    <form className="h-[120px] w-[400px] flex items-center justify-center" onSubmit={handleSearchBtn}>
+      <div className="border-[1px] rounded-xl w-80 items-end justify-end border-main-color">
         <input
           onChange={throttling}
           value={selectedTitle}
@@ -29,7 +29,10 @@ export const SearchClass = () => {
           type="text"
           placeholder="  클래스명"
         />
-        <button type="submit" className="btn w-[72px] rounded-xl text-white bg-main-color hover:bg-button-hover-color">
+        <button
+          type="submit"
+          className="btn w-[80px] rounded-xl ml-[57px] text-white bg-main-color hover:bg-button-hover-color"
+        >
           <IoIosSearch />
         </button>
       </div>

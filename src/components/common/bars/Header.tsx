@@ -42,7 +42,7 @@ const Header = ({ children }: PropsWithChildren) => {
         <div className="flex items-center justify-center">
           <SearchClass />
         </div>
-        <div className="w-48 flex items-end justify-end">
+        <div className="w-80 flex items-end justify-end">
           <div className="flex items-center">
             {userEmail ? (
               <div className="mr-[10px]">
