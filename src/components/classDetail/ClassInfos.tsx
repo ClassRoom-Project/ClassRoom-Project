@@ -39,7 +39,7 @@ const ClassInfos = ({ classId }: { classId: string }) => {
       </div>
       <div className="w-[250px] justify-start">
         <div className="rounded-2xl border-[#5373FF] border-solid border-[1px] p-1 flex justify-center items-center">
-          수용가능인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.max_people} 명
+          수용가능인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.quantity} 명
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ const LatestClass = () => {
 
   return (
     <div className="mr-auto ml-auto p-5">
-      <p>LatestClass</p>
+      <p className="text-text-color">최신순</p>
       <div className="slider-container w-[85vw]">
         <Slider {...settings}>
           {classInfos.map((info) => (
