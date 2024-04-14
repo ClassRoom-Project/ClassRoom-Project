@@ -138,7 +138,7 @@ const ImageUpload = () => {
         }
       }
       alert('등록이 완료되었습니다.');
-      router.push(`/register/completed/${classId}`);
+      router.push(`/register/completedPage/${classId}`);
     }
   };
 
