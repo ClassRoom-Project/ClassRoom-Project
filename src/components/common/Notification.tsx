@@ -94,7 +94,7 @@ const NotificationComponent = () => {
         <LuBell size={30} onClick={toggleBellIcon} className="cursor-pointer" />
       )}
       {isNotificationOpen && (
-        <div className="absolute mt-2 w-80 bg-white shadow-lg rounded-md z-10">
+        <div className="absolute right-[-8px] mt-2 w-80 bg-white shadow-lg rounded-md z-10">
           <div className="px-4 py-2 font-bold border-b border-gray-200">알림</div>
           <div className="max-h-60 overflow-y-auto">
             {notifications.length > 0 ? (
