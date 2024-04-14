@@ -63,7 +63,7 @@ function ClassList() {
     </div>
   ) : (
     <div className="flex justify-center min-w-full">
-      <div className="grid grid-cols-4 min-w-[90px]">
+      <div className="grid grid-cols-4 min-w-[80vw]">
         {classInfos?.pages.map((page, i) => (
           <React.Fragment key={i}>
             {page.classInfos.map((classInfos: ClassAllType) => (
