@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { ClassAllType } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
+import MapComponent from './MapComponent';
 
 //왼쪽 컴포넌트
 const ClassDetailLeft = ({
@@ -23,7 +24,6 @@ const ClassDetailLeft = ({
   const handleThumbnailClick = (imageSrc: string) => {
     setMainImageSrc(imageSrc);
   };
-
   return (
     <div className="flex flex-col p-5 mr-4 justify-center items-center w-[500px] rounded-lg h-[900px] border-[#5373FF] border-solid border-[1px]">
       <div className="flex items-start justify-start w-[350px]">
@@ -31,6 +31,7 @@ const ClassDetailLeft = ({
           <Image
             width={30}
             height={30}
+            className="rounded-full"
             src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
             alt="profileImage"
             unoptimized={true}
@@ -104,7 +105,7 @@ const ClassDetailLeft = ({
           ></Image>
         </div>
       </div>
-      <div className="w-[350px] mt-6 h-[350px] text-white bg-black">지도 들어갈 자리</div>
+      <MapComponent />
     </div>
   );
 };
