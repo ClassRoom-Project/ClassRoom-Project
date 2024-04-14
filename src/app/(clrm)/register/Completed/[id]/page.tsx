@@ -16,7 +16,7 @@ const RegistCompletedPage = () => {
       const { data, error } = await supabase.from('class').select('title').eq('class_id', id).single();
 
       if (error) {
-        console.error('Error fetching class title', error);
+        console.error('Error: ', error);
       } else {
         setTitle(data.title);
       }

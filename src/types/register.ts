@@ -60,3 +60,8 @@ export interface AddressData {
   bname: string;
   buildingName: string;
 }
+
+export interface ImageFileWithPreview {
+  file: File;
+  preview: string;
+}
