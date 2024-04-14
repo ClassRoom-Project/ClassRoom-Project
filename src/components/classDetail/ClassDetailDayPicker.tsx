@@ -17,21 +17,21 @@ const css = `
     margin: 0; /* Remove default margin */
   }
 `;
-const bookedStyle = { border: '1px solid #6C5FF7', borderRadius: '20%', backgroundColor: '#6C5FF7', color: 'white' };
+const bookedStyle = { border: '1px solid ##5373FF', borderRadius: '20%', backgroundColor: '##5373FF', color: 'white' };
 
-export default function App({ classDate }: { classDate: string[] }) {
-  if (!classDate || classDate.length === 0) {
+export default function App({ classDate }: { classDate: Array<{ day: string; date_id: string; class_id: string }> }) {
+  if (!classDate || !Array.isArray(classDate)) {
     return null;
   }
 
-  const bookedDays = classDate?.map((dateStr) => new Date(dateStr));
+  const bookedDays = classDate?.map((dateStr) => new Date(dateStr.day));
   return (
     <div className="flex flex-col items-center justify-center">
       <style>{css}</style>
       <DayPicker
         locale={ko}
         weekStartsOn={1}
-        defaultMonth={new Date(classDate[0])}
+        defaultMonth={bookedDays[0]}
         modifiers={{ booked: bookedDays }}
         modifiersStyles={{ booked: bookedStyle }}
       />

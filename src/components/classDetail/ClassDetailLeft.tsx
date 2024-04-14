@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ClassAllType } from '@/types/class';
+import { ListDetailClassInfo } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
 import DetailWishButton from './DetailWishButton';
@@ -12,7 +12,7 @@ const ClassDetailLeft = ({
   classData,
   userData
 }: {
-  classData: ClassAllType | null;
+  classData: ListDetailClassInfo | null;
   userData: DetailUserInfoType | null;
 }) => {
   const defaultImageSrc = '/noimage.png';
