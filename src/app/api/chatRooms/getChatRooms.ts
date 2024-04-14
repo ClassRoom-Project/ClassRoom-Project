@@ -225,7 +225,7 @@ export const getLastChatMessage = async (chatId: string): Promise<getLastMessage
   return lastMessages;
 };
 
-//읽지 않은 채팅 개수 가져오기
+//읽지 않은 방채팅 개수 가져오기
 export const readCheckMessages = async (chatId: string, loginUserId: string): Promise<number | null> => {
   const { error, count } = await supabase
     .from('chat_messages')
@@ -238,6 +238,49 @@ export const readCheckMessages = async (chatId: string, loginUserId: string): Pr
     throw error;
   }
 
-  console.log(count);
+  return count;
+};
+
+// //읽지 않은 채팅 개수 가져오기
+// export const readCheckMessagesAll = async (loginUserId: string): Promise<number | null> => {
+//   const { error, count } = await supabase
+//     .from('chat_messages')
+//     .select('', { count: 'exact' })
+//     .eq('check', false)
+//     .neq('create_by', loginUserId);
+
+//   if (error) {
+//     throw error;
+//   }
+
+//   console.log(count);
+//   return count;
+// };
+
+export const readCheckMessagesAll = async (loginUserId: string): Promise<number | null> => {
+  //로그인한 사용자가 참여한 채팅방 목록 조회
+  console.log('들어왔어?');
+  const { data: chatRooms, error: roomsError } = await supabase
+    .from('chat_rooms')
+    .select('chat_id')
+    .or(`from_user_id.eq.${loginUserId},teacher_user_id.eq.${loginUserId}`);
+
+  if (roomsError) {
+    throw roomsError;
+  }
+
+  const chatIds = chatRooms.map((room) => room.chat_id);
+
+  const { count, error: messagesError } = await supabase
+    .from('chat_messages')
+    .select('', { count: 'exact' })
+    .in('chat_id', chatIds)
+    .eq('check', false)
+    .neq('create_by', loginUserId);
+
+  if (messagesError) {
+    throw messagesError;
+  }
+
   return count;
 };

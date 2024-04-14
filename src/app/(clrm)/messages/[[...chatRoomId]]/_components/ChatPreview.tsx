@@ -1,5 +1,6 @@
+'use client';
+
 import {
-  useReadChatRoomMessages,
   useReadCheckMessages,
   useReadLastMessages,
   useReadMakeClassUserInfo
@@ -20,7 +21,7 @@ export default function ChatPreview({ chatId, toClassId, title, fromUserId, othe
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readLastMessages } = useReadLastMessages(chatId);
-  const { readLastChekcMessages } = useReadCheckMessages(chatId, loginUserId!);
+  const { readleftChekcMessages } = useReadCheckMessages(chatId, loginUserId!);
 
   // useEffect(() => {
   //   const lastMessage = async () => await readLastMessages;
@@ -34,11 +35,11 @@ export default function ChatPreview({ chatId, toClassId, title, fromUserId, othe
       shallow
     >
       <div className="flex py-4 hover:bg-[#E3E1FC] mt-2 mb-2 px-2 relative">
-        {readLastChekcMessages === 0 ? (
+        {readleftChekcMessages === 0 ? (
           ''
         ) : (
           <div className="flex items-center justify-center bg-main-color rounded-full h-7 w-7 absolute right-6 bottom-12">
-            <div className="text-white">{readLastChekcMessages}</div>
+            <div className="text-white">{readleftChekcMessages}</div>
           </div>
         )}
         <div className="mx-3">

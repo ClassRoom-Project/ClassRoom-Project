@@ -18,7 +18,7 @@ export default function MessagesPage() {
   const fromUserId = searchParams.get('fromUserId');
 
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full" style={{ height: 'calc(100vh - 60px)' }}>
       <div>
         <div className="flex flex-1 bg-white border-x border-border-color ">
           <section className="w-2/5 flex flex-col overflow-hidden flex-1">
