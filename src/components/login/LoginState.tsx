@@ -27,7 +27,22 @@ export default function LoginState() {
   }
 
   if (status === 'loading') {
-    return <p>Logout</p>;
+    return (
+      <div className="bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded">Login</div>
+    );
   }
-  return <Link href="/hello">Login</Link>;
+  return (
+    <div>
+      {userEmail ? (
+        <button onClick={handleLogout}>Logout</button>
+      ) : (
+        <Link
+          className="bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
+          href="/hello"
+        >
+          Login
+        </Link>
+      )}
+    </div>
+  );
 }
