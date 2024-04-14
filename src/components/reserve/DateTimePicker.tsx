@@ -84,7 +84,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   return (
     <div className="w-full mb-2">
-      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md py-1 mb-4 ">
+      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md py-2 mb-4 ">
         <DayPicker
           mode="single"
           required

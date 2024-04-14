@@ -1,4 +1,5 @@
 import { fetchReservationDetails } from '@/app/api/reserve/fetchReservationDetails';
+import { QueryKeys } from '@/constants/QueryKeys';
 import { ReservationDetailsType } from '@/types/reserve';
 import { useQuery } from '@tanstack/react-query';
 
@@ -8,7 +9,7 @@ export const useFetchReservationDetail = (reserveId: string) => {
     isError,
     isLoading
   } = useQuery<ReservationDetailsType>({
-    queryKey: ['reservationDetail'],
+    queryKey: [QueryKeys.RESERVATION_DETAIL],
     queryFn: () => fetchReservationDetails(reserveId),
     enabled: !!reserveId
   });

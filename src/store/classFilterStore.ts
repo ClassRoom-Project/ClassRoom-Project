@@ -48,3 +48,13 @@ export const useSearchStore = create<SearchTitle>((set) => ({
   selectedTitle: '',
   setSelectedTitle: (title: string) => set(() => ({ selectedTitle: title }))
 }));
+
+interface wishStoreType {
+  isWishedClass: boolean;
+  setIsWishedClass: (isWishedClass: boolean) => void;
+}
+
+export const useWishStore = create<wishStoreType>((set) => ({
+  isWishedClass: false,
+  setIsWishedClass: (isWishedClass: boolean) => set({ isWishedClass })
+}));

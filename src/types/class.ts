@@ -23,6 +23,7 @@ export interface ClassAllType {
   active: boolean;
   reserved_count: number;
   reserved_user_id: string[];
+  wish: { user_id: string }[];
 }
 
 export interface ClassItem {
