@@ -20,7 +20,6 @@ const ImageUpload = () => {
     classType,
     difficulty,
     minNumber,
-    maxNumber,
     personnel,
     price,
     totalTime
@@ -54,11 +53,18 @@ const ImageUpload = () => {
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
-    if (!category || !subCategory || !classContent || !classTitle || !classType || !difficulty || !minNumber || !maxNumber || !personnel || !totalTime || !selectedDates || !schedules) {
+    if (!category || !subCategory || !classContent || !classTitle || !classType || !difficulty || !minNumber || !personnel || !totalTime ) {
       alert('모든 필수 항목을 입력해주세요.');
       return;
     }
-    
+
+    const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
+
+    if (selectedDates.length === 0 || isAnyTimes) {
+      alert('일정와 시간을 선택해주세요.');
+      return;
+    }
+
     if (!window.confirm('등록하시겠습니까?')) {
       return;
     }
@@ -84,7 +90,6 @@ const ImageUpload = () => {
         title: classTitle,
         description: classContent,
         quantity: personnel,
-        max_people: maxNumber,
         min_people: minNumber,
         price: price,
         location: address,
@@ -140,7 +145,7 @@ const ImageUpload = () => {
         }
       }
       alert('등록이 완료되었습니다.');
-      router.push(`/register/completed/${classId}`);
+      router.push(`/register/completedPage/${classId}`);
     }
   };
 
