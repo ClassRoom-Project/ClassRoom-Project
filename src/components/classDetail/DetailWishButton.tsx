@@ -1,13 +1,14 @@
 'use client';
 
 import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
-import { useCheckIsWishedQuery } from '@/hooks/useWish/useWish';
+import { useCheckIsWishedQuery, useCountWishQuery } from '@/hooks/useWish/useWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { GoHeart } from 'react-icons/go';
 import { GoHeartFill } from 'react-icons/go';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
+import { countWish } from '@/app/api/wish/wishApi';
 
 const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const router = useRouter();
@@ -16,6 +17,9 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const { loginUserId } = useLoginStore();
   const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
   const [isWishedState, setIsWishedState] = useState<boolean>();
+  const { data: wishCount, isLoading: isCountLoading, isError: isCountError } = useCountWishQuery(classId);
+
+  console.log(wishCount, 'wishCount');
 
   useEffect(() => {
     setIsWishedState(isWished);
@@ -57,8 +61,9 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
       {isLoading ? (
         <p></p>
       ) : (
-        <button onClick={(e) => handleWishClick(e)}>
-          <span>{isWishedState ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
+        <button onClick={(e) => handleWishClick(e)} className="flex">
+          <span>{isWished ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
+          <span>{!isLoading ? wishCount : 0}</span>
         </button>
       )}
     </div>

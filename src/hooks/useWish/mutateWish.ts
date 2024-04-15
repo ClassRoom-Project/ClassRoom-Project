@@ -8,9 +8,8 @@ export const useAddWishMutation = () => {
   const addWishMutation = useMutation({
     mutationFn: addWish,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QueryKeys.WISH]
-      });
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.WISH] }),
+        queryClient.invalidateQueries({ queryKey: [QueryKeys.WISH_COUNT] });
     }
   });
 
@@ -22,9 +21,8 @@ export const useCancelWishMutation = () => {
   const cancelWishMutation = useMutation({
     mutationFn: cancelWish,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [QueryKeys.WISH]
-      });
+      queryClient.invalidateQueries({ queryKey: [QueryKeys.WISH] }),
+        queryClient.invalidateQueries({ queryKey: [QueryKeys.WISH_COUNT] });
     }
   });
 
