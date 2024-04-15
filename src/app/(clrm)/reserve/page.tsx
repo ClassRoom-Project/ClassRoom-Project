@@ -1,4 +1,4 @@
-import { newFetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
+import { fetchReserveClassInfo } from '@/app/api/reserve/fetchReserveClassInfo';
 import ClassInfo from '@/components/reserve/ClassInfo';
 import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity';
 import DateTimePicker from '@/components/reserve/DateTimePicker';
@@ -10,7 +10,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
-  const classInfo = await newFetchReserveClassInfo(classId);
+  const classInfo = await fetchReserveClassInfo(classId);
 
   //TODO: 컴포넌트로 정리
   return (
