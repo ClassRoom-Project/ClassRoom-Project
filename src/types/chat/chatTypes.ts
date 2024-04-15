@@ -88,6 +88,7 @@ export interface GetChatRoomMessagesType {
   create_by: string;
   messages: string;
   images: string;
+  messages_id: number;
 }
 
 export interface MessagesBoxsType {

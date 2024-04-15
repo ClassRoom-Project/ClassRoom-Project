@@ -180,7 +180,7 @@ export const createNewMessagesPhoto = async ({ chatId, photos, loginUserId }: Pu
 export const getChatMessages = async (chatId: string, loginUserId: string): Promise<GetChatRoomMessagesType[]> => {
   const { data, error } = await supabase
     .from('chat_messages')
-    .select('created_at, create_by, messages, images')
+    .select('created_at, create_by, messages, images, messages_id')
     .order('created_at', { ascending: true })
     .eq('chat_id', chatId);
 
@@ -279,6 +279,19 @@ export const deleteRoom = async (chatId: string) => {
     .from('chat_rooms')
     .delete()
     .eq('chat_id', chatId);
+
+  if (error) {
+    console.error('failed to deleteRoom', error);
+    return;
+  }
+};
+
+// 메시지 일부 삭제
+export const deleteMessage = async (messagesId: number) => {
+  const { error } = await supabase //
+    .from('chat_messages')
+    .delete()
+    .eq('messages_id', messagesId);
 
   if (error) {
     console.error('failed to deleteRoom', error);

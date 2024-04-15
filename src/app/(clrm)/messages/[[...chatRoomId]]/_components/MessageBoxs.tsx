@@ -1,6 +1,10 @@
 'use client';
 
-import { useReadChatRoomMessages, useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
+import {
+  useDeleteMessage,
+  useReadChatRoomMessages,
+  useReadMakeClassUserInfo
+} from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { MessagesBoxsType } from '@/types/chat/chatTypes';
 import Image from 'next/image';
@@ -16,6 +20,11 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readChatRoomMessages } = useReadChatRoomMessages(chatId, loginUserId!);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
+  const { deleteMessageMutate } = useDeleteMessage();
+
+  const handleMessageDelete = (messageId: number) => {
+    deleteMessageMutate(messageId);
+  };
 
   useEffect(() => {
     const scrollToBottom = () => {
@@ -67,6 +76,7 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
                 <div>
                   <p className=" text-gray-400 text-xs px-4">{dayjs(message.created_at).format('A hh:mm')}</p>
                 </div>
+                <button onClick={() => handleMessageDelete(message.messages_id)}>삭제</button>
                 {message.messages ? (
                   <div className="">
                     {message.messages && (
