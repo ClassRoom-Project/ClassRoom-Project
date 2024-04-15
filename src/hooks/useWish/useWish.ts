@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export const useCheckIsWishedQuery = ({ userId, classId }: { userId: string | null; classId: string | undefined }) => {
   return useQuery({
-    queryKey: [QueryKeys.WISH],
+    queryKey: [QueryKeys.WISH_CHECK],
     queryFn: () => checkIsWished({ userId, classId }),
     enabled: !!userId && !!classId
   });
