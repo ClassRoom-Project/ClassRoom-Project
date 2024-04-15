@@ -19,6 +19,7 @@ const SideBar = ({ children }: PropsWithChildren) => {
           </Link>
           <ChatButton />
           <CreateBtn />
+
           <MyPageBtn />
           {/* 예약 페이지 확인을 위한 임시 링크 */}
         </div>

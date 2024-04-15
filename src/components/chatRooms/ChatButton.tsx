@@ -1,3 +1,5 @@
+'use client';
+import { useReadCheckMessageAll } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
@@ -5,6 +7,7 @@ import { IoChatbubbleEllipsesOutline } from 'react-icons/io5';
 export default function ChatButton() {
   const { loginUserId } = useLoginStore();
   const router = useRouter();
+  const { readLeftChekcMessageAll } = useReadCheckMessageAll(loginUserId!);
 
   const handleClick = () => {
     if (!loginUserId) {
@@ -18,9 +21,18 @@ export default function ChatButton() {
   };
 
   return (
-    <button onClick={handleClick} className="p-4 flex flex-col items-center hover:text-main-color transition ease-in">
-      <IoChatbubbleEllipsesOutline size={30} />
-      CHAT
-    </button>
+    <div className="relative">
+      <button onClick={handleClick} className="p-4 flex flex-col items-center hover:text-main-color transition ease-in">
+        <IoChatbubbleEllipsesOutline className="text-4xl" />
+        CHAT
+      </button>
+      {readLeftChekcMessageAll ? (
+        <div className="flex items-center justify-center bg-main-color rounded-full h-5 w-5 absolute right-3 bottom-14">
+          <div className="text-white">{readLeftChekcMessageAll}</div>
+        </div>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 }

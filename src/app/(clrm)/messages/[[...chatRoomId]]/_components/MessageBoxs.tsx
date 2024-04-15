@@ -25,8 +25,8 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
   }, [readChatRoomMessages]);
 
   return (
-    <div className="flex-1 overflow-scroll">
-      <div className="flex flex-col justify-center items-center h-full px-3">
+    <div className="flex-1 overflow-y-auto">
+      <div className="flex flex-col justify-center items-center h-auto px-3">
         <div className="bg-gray-100 rounded-md w-3/5 flex flex-col sm:text-xs md:text-sm justify-center items-center border border-gray-200 p-3 mb-16">
           <p>
             안녕하세요 {studentName} 수강생님! <br /> &quot;{title}&quot; 원데이 클래스에 궁금하신 사항이 있으시면 문의
@@ -84,7 +84,7 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
                     {message.images &&
                       JSON.parse(message.images).map((imgUrl: string, imgIndex: number) => (
                         <div key={imgIndex} className="image-container">
-                          <Image src={`${imgUrl}`} width={100} height={100} alt={`Photo ${imgIndex + 1}`} />
+                          <Image src={`${imgUrl}`} layout="fill" objectFit="cover" alt={`Photo ${imgIndex + 1}`} />
                         </div>
                       ))}
                   </div>

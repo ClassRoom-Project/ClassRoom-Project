@@ -18,10 +18,10 @@ export default function MessagesPage() {
   const fromUserId = searchParams.get('fromUserId');
 
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full" style={{ height: 'calc(100vh - 60px)' }}>
       <div>
         <div className="flex flex-1 bg-white border-x border-border-color ">
-          <section className="w-2/5 flex flex-col overflow-hidden flex-1">
+          <section className="w-2/5 flex flex-col flex-1">
             {!chatroomsInfo ? (
               <div className="flex justify-center items-center flex-1">
                 <a>채팅 목록이 없습니다.</a>
@@ -37,6 +37,7 @@ export default function MessagesPage() {
                       chatId={chatId}
                       otherId={loginUserId === teacherUserId ? fromUserId : teacherUserId}
                       toClassId={toClassId}
+                      fromUserId={fromUserId}
                       title={title}
                       makeClassUserId={makeClassUserId}
                       loginUserId={loginUserId}
@@ -47,7 +48,7 @@ export default function MessagesPage() {
             )}
           </section>
           <section
-            className="w-3/5 border-l border-gray-500 flex flex-col overflow-hidden"
+            className="w-3/5 border-l border-gray-500 flex flex-col "
             style={{
               minHeight: 'calc(100vh - 60px)',
               maxHeight: 'calc(100vh - 60px)'

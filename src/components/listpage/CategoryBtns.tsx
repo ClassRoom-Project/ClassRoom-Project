@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useCallback, useState } from 'react';
 import { useCategoryFilterStore } from '@/store/classFilterStore';
 import { useRouter } from 'next/navigation';
@@ -20,7 +19,6 @@ const CategoryBtns = () => {
     },
     [setSelectedCategory, router]
   );
-
   return (
     <div className="min-w-[85vw] bg-disable-color h-16 flex justify-center items-center">
       {categories.map((category) => (
@@ -37,5 +35,4 @@ const CategoryBtns = () => {
     </div>
   );
 };
-
 export default CategoryBtns;
