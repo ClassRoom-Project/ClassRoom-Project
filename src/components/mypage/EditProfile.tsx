@@ -124,6 +124,7 @@ const EditProfile = () => {
                   className="input input-bordered w-[250px] max-w-xs border-point-purple shadow-md"
                   value={newNickname}
                   onChange={handleOnChangeNickname}
+                  maxLength={20}
                 />
               ) : (
                 <p>{newNickname}</p>

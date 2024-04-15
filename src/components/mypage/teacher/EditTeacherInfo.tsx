@@ -1,18 +1,20 @@
 'use client';
 
 import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
-import { noChangedNotify } from '@/components/common/Toastify';
+import { changeInfoNotify, checkFormValidation, noChangedNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
 import { userInfoStore } from '@/store/mypage/userInfoStore';
 import Image from 'next/image';
+import { UpdateTeacherInfoType } from '@/types/user';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
+  const queryClient = useQueryClient();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isActiveBtn, setIsActiveBtn] = useState(false);
@@ -25,8 +27,6 @@ const EditTeacherInfo = () => {
   const [isAvailableName, setIsAvailableName] = useState(true); // 이름 유효성 검사
   const [newTeacherNumber, setNewTeacherNumber] = useState('');
   const [isAvailableNumber, setIsAvailableNumber] = useState(true); // 폰 번호 숫자만 유효성 검사
-
-  const { userInfo } = userInfoStore();
 
   const { data: teacherInfo, isPending } = useQuery({
     queryKey: ['user', loginUserId],
@@ -99,6 +99,27 @@ const EditTeacherInfo = () => {
     }
   };
 
+  // 선생님 정보 수정하기 : useMutation
+  const { mutate: updateTeacherInfoMutation } = useMutation({
+    mutationFn: ({
+      newSelectedJob,
+      newSelectedField,
+      newSelectedBank,
+      newAccount,
+      newTeacherName,
+      newTeacherNumber
+    }: UpdateTeacherInfoType) =>
+      updateTeacherInfo(
+        { newSelectedJob, newSelectedField, newSelectedBank, newAccount, newTeacherName, newTeacherNumber },
+        loginUserId
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['users']
+      });
+    }
+  });
+
   // 수정하기 버튼 -> supabase에 수정한 정보 update
   const handleOnClickEditTeacherInfoBtn = () => {
     // 수정된 사항이 없는 경우
@@ -119,15 +140,22 @@ const EditTeacherInfo = () => {
     ) {
       noChangedNotify(); // react-toastify 사용
       return;
+    } else if (!isAvailableName || !isAvailableNumber || !isAvailableAccount) {
+      checkFormValidation();
+      return;
+    } else {
+      // 수정된 사항이 있는 경우
+      changeInfoNotify();
+      updateTeacherInfoMutation({
+        newSelectedJob,
+        newSelectedField,
+        newSelectedBank,
+        newAccount,
+        newTeacherName,
+        newTeacherNumber
+      });
+      setIsEditing(false);
     }
-
-    // 수정된 사항이 있는 경우
-    updateTeacherInfo(
-      { newSelectedJob, newSelectedField, newSelectedBank, newAccount, newTeacherName, newTeacherNumber },
-      loginUserId
-    );
-    setIsEditing(false);
-    alert('선생님 정보 수정이 완료되었습니다.');
   };
 
   // 취소하기 버튼

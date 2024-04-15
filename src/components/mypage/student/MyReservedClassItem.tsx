@@ -12,7 +12,6 @@ import { GoPeople } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
-  const [classes, setClasses] = useState<ClassItem[]>([]);
   const queryClient = useQueryClient();
 
   // 예약한 클래스 취소 useMutation

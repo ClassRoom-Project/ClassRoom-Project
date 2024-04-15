@@ -8,12 +8,15 @@ import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
 import { useRouter } from 'next/navigation';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { InsertTeacherInfo } from '@/types/user';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
   const { isTeacher, setIsTeacher } = useUserRoleStore();
   const { teacherInfo, isPending } = useTeacherInfo();
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
   // 선생님 정보가 없으면(null) : false => 정보 입력하기
@@ -93,6 +96,20 @@ const AddTeacherInfo = () => {
     }
   };
 
+  // 선생님 정보 수정 mutation
+  const { mutate: updateTeacherInfo } = useMutation({
+    mutationFn: () =>
+      addTeacherInfo(
+        { selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber },
+        loginUserId
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['users']
+      });
+    }
+  });
+
   // 선생님 정보 등록하기 버튼
   const handleOnClickAddTeacherInfoBtn = async () => {
     if (!selectedJob || !selectedField || !selectedBank || !userAccount || !teacherName || !teacherNumber) {
@@ -101,10 +118,7 @@ const AddTeacherInfo = () => {
     } else {
       const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
       if (confirm) {
-        addTeacherInfo(
-          { selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber },
-          loginUserId
-        );
+        updateTeacherInfo();
 
         // 수강생에서 선생님으로 전환 로직 추가
         setIsHaveTeacherInfo(true);
