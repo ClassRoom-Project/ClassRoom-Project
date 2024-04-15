@@ -2,7 +2,6 @@ import React from 'react';
 import CreateComments from './CreateComments';
 import ShowComments from './ShowComments';
 
-//Todo: 댓글 부분 추가
 const DetailComments = ({ classId }: { classId: string | undefined }) => {
   return (
     <div className="w-[1024px] flex flex-col justify-center items-center mt-9">

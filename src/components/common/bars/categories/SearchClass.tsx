@@ -13,7 +13,7 @@ export const SearchClass = () => {
     console.log(e.target.value);
   };
 
-  //Todo: 쓰로틀링 잘 적용안되는 에러 해결
+  //TODO - 쓰로틀링 잘 적용안되는 에러 해결
   const throttling = _.throttle(handleSearchChange, 300);
   const handleSearchBtn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,15 +25,15 @@ export const SearchClass = () => {
         <input
           onChange={throttling}
           value={selectedTitle}
-          className="h-12 rounded-xl"
+          className="h-12 w-[368px] ml-3 outline-none rounded-xl"
           type="text"
-          placeholder="  클래스명"
+          placeholder="클래스명"
         />
         <button
           type="submit"
-          className="btn w-16 rounded-xl absolute right-0 bottom-0 text-white bg-main-color hover:bg-button-hover-color"
+          className="btn border-[1px] border-transparent shadow-none hover:bg-transparent hover:border-transparent  w-16 rounded-xl absolute right-0 bottom-0 bg-transparent"
         >
-          <IoIosSearch className="text-2xl" />
+          <IoIosSearch className="text-2xl text-main-color" />
         </button>
       </div>
     </form>

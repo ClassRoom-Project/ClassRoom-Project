@@ -7,6 +7,7 @@ import Image from 'next/image';
 import DetailWishButton from './DetailWishButton';
 import MapComponent from './MapComponent';
 
+//TODO - 온라인 클래스일경우 주소입력을 안하므로 지도대신 다른 대체방안 구현
 //왼쪽 컴포넌트
 const ClassDetailLeft = ({
   classData,

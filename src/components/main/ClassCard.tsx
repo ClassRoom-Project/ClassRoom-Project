@@ -4,6 +4,7 @@ import Link from 'next/link';
 import ListPageWishButton from '../listpage/ListPageWishButton';
 import { GrLocation } from 'react-icons/gr';
 
+//TODO - 주소 글자 넘칠 경우 해결 , 온라인일 경우 주소가 필요없으므로 주소 대체할 것 구현 필요
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   // 주소 괄호 제외
   const formattedLocation = classInfos.location.replace(/\s*\([^)]*\)\s*/, '');
