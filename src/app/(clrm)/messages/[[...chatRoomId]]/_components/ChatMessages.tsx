@@ -12,6 +12,7 @@ import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import { IoIosLogOut } from 'react-icons/io';
 import { deleteRoom } from '@/components/common/Toastify';
+import { useRouter } from 'next/navigation';
 
 export default function ChatMessages({ fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
   const { loginUserId } = useLoginStore();
@@ -19,6 +20,7 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(fromUserId);
   const { deleteRoomMutate } = useDeleteRoom();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const handleSubmitMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,7 +66,9 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
     const confirm = window.confirm('방을 나가시겠습니까?');
     if (confirm) {
       deleteRoomMutate(chatId);
-      return deleteRoom();
+      deleteRoom();
+      router.replace('/messages');
+      return;
     } else {
       return;
     }

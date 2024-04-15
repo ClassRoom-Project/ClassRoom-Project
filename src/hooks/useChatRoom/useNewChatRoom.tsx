@@ -23,6 +23,20 @@ export function useReadChatRooms(loginUserId: string) {
   return { chatroomsInfo };
 }
 
+//채팅방 삭제하기
+export function useDeleteRoom() {
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteRoomMutate } = useMutation<void, Error, string>({
+    mutationFn: (chatId: string) => deleteRoom(chatId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['chatRooms'] });
+    }
+  });
+
+  return { deleteRoomMutate };
+}
+
 // 상대방 프로필, 닉네임 가져오기
 export function useReadMakeClassUserInfo(otherUserId: string) {
   const { data: MakeClassUserInfo } = useQuery({
@@ -135,17 +149,4 @@ export function useReadCheckMessageAll(loginUserId: string) {
     enabled: !!loginUserId
   });
   return { readLeftChekcMessageAll };
-}
-
-export function useDeleteRoom() {
-  const queryClient = useQueryClient();
-
-  const { mutate: deleteRoomMutate } = useMutation<void, Error, string>({
-    mutationFn: (chatId: string) => deleteRoom(chatId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['chatRooms'] });
-    }
-  });
-
-  return { deleteRoomMutate };
 }
