@@ -2,6 +2,16 @@
 const nextConfig = {
   // 외부 image 파일을 불러와서 쓰려면 이미지 호스트 허용 목록에 추가해야함.
   images: {
+    // remotePatterns: [
+    //   {
+    //     protocol : 'https',
+    //     hostname : 'img.freepik.com',
+    //   },
+    //   {
+    //     protocol : 'https',
+    //     hostname :  'hdurwturhsczrdeugmon.supabase.co',
+    //   },
+    // ]
     domains: [
       'img.freepik.com',
       'hdurwturhsczrdeugmon.supabase.co',

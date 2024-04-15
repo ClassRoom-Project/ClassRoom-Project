@@ -7,7 +7,7 @@ import { UpdateUserInfoType } from '@/types/user';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { noChangedNotify } from '../common/Toastify';
+import { changeInfoNotify, noChangedNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
 
 const EditProfile = () => {
@@ -17,7 +17,7 @@ const EditProfile = () => {
   const queryClient = useQueryClient();
 
   // zustand로 userInfo 상태 관리
-  const { userInfo } = userInfoStore();
+  const { userInfo, setUserInfo } = userInfoStore();
 
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
@@ -65,11 +65,19 @@ const EditProfile = () => {
     if (!isNicknameChanged && !isProfileImageChanged) {
       noChangedNotify();
       return;
+    } else {
+      // 수정된 사항이 있는 경우
+      changeInfoNotify();
+      updateUserInfoMutation({ newNickname, newProfileImage });
+      setUserInfo({
+        userId: userInfo.userId,
+        nickname: newNickname,
+        email: userInfo.email,
+        profile_image: newProfileImage,
+        isTeacher: userInfo.isTeacher
+      });
+      // alert('프로필 수정이 완료되었습니다.');
     }
-
-    // 수정된 사항이 있는 경우
-    updateUserInfoMutation({ newNickname, newProfileImage });
-    alert('프로필 수정이 완료되었습니다.');
   };
 
   // 취소하기 버튼
@@ -134,20 +142,24 @@ const EditProfile = () => {
         </div>
       </div>{' '}
       <div className="m-4 p-4 flex gap-4">
+        <button onClick={handleOnClickCancleBtn} className="btn w-[100px] ">
+          취소하기
+        </button>
         {isEditing ? (
           <div>
-            <button onClick={handleOnClickEditProfileBtn} className="btn w-[100px]" disabled={isActiveBtn}>
+            <button
+              onClick={handleOnClickEditProfileBtn}
+              className="btn w-[100px]  bg-dark-purple-color text-white"
+              disabled={isActiveBtn}
+            >
               수정 완료
             </button>
           </div>
         ) : (
-          <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
+          <button onClick={() => setIsEditing(true)} className="btn w-[100px]  bg-dark-purple-color text-white">
             수정하기
           </button>
         )}
-        <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-dark-purple-color text-white">
-          취소하기
-        </button>
       </div>
     </div>
   );

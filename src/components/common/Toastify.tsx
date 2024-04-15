@@ -13,6 +13,18 @@ export const noChangedNotify = () =>
     theme: 'light'
   });
 
+export const changeInfoNotify = () =>
+  toast.info('프로필 수정이 완료되었습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
 export const noInfoNotify = () =>
   toast.error('입력되지 않은 정보가 있습니다.', {
     position: 'top-right',

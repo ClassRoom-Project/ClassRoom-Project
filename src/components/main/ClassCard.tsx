@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ListPageWishButton from '../listpage/ListPageWishButton';
 import { GrLocation } from 'react-icons/gr';
+import { FaLocationDot } from 'react-icons/fa6';
 
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   // 주소 괄호 제외
@@ -25,10 +26,8 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
         </figure>
         <div className="card-body p-4 flex flex-col justify-between">
           <div className="flex gap-1 items-center">
-            <GrLocation color="#6C5FF7" size="25" />
-            <p className="text-xs flex-grow items-center p-2 gap-2 border-2 border-point-purple rounded-3xl">
-              {formattedLocation}
-            </p>
+            <FaLocationDot color="#6C5FF7" size="25" />
+            <p className="text-xs flex-grow items-center p-2 gap-2">{formattedLocation}</p>
           </div>
           <p className="text-md h-12 overflow-hidden font-semibold">{classInfos.title}</p>
           {/*해시태그 고정시키기*/}

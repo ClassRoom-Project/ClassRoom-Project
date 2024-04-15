@@ -48,7 +48,6 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         }
         return;
       } else {
-        // alert('수정 사항이 없습니다.');
         noChangedNotify();
       }
     } else {
