@@ -8,6 +8,7 @@ import MyReservedClassItem from './MyReservedClassItem';
 const MyReservedClass = () => {
   const { loginUserId } = useLoginStore();
 
+  // 예약한 클래스 정보 불러오기
   const { data: reservedClasses, isPending } = useQuery({
     queryKey: ['reserve'],
     queryFn: () => fetchMyClasses(loginUserId),

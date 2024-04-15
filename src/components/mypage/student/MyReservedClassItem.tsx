@@ -1,6 +1,8 @@
 import { cancelReservation } from '@/app/api/mypage/fetchMyClasses';
+import { defaultWarning, successCancelReservation } from '@/components/common/Toastify';
 import { ClassItem } from '@/types/register';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -11,17 +13,29 @@ import { GrLocation } from 'react-icons/gr';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const [classes, setClasses] = useState<ClassItem[]>([]);
+  const queryClient = useQueryClient();
+
+  // 예약한 클래스 취소 useMutation
+  const { mutate: cancelReservaionMutation } = useMutation({
+    mutationFn: (commentId: string) => cancelReservation(commentId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['reserve']
+      });
+    }
+  });
 
   // 예약 취소
   const handleCancelReservation = async (reserve_id: string) => {
     if (window.confirm('정말 취소하시겠습니까?')) {
       try {
-        await cancelReservation(reserve_id);
-        setClasses(classes.filter((classItem) => classItem.reserve_id !== reserve_id));
-        alert('예약이 취소되었습니다.');
+        await cancelReservaionMutation(reserve_id);
+        successCancelReservation();
+        // alert('예약이 취소되었습니다.');
       } catch (error) {
         console.error('예약 취소 중 오류 발생:', error);
-        alert('예약 취소 중 오류가 발생했습니다.');
+        defaultWarning();
+        // alert('예약 취소 중 오류가 발생했습니다.');
       }
     }
   };
