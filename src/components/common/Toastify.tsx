@@ -121,3 +121,16 @@ export const cancelWish = () =>
     pauseOnFocusLoss: false,
     theme: 'light'
   });
+
+export const deleteRoom = () =>
+  toast('방이 삭제되었습니다.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnFocusLoss: false,
+    theme: 'light'
+  });

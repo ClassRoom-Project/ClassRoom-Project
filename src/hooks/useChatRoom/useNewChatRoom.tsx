@@ -2,6 +2,7 @@ import {
   createChatRoom,
   createNewMessages,
   createNewMessagesPhoto,
+  deleteRoom,
   getChatMessages,
   getChatRooms,
   getLastChatMessage,
@@ -134,4 +135,17 @@ export function useReadCheckMessageAll(loginUserId: string) {
     enabled: !!loginUserId
   });
   return { readLeftChekcMessageAll };
+}
+
+export function useDeleteRoom() {
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteRoomMutate } = useMutation<void, Error, string>({
+    mutationFn: (chatId: string) => deleteRoom(chatId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['chatRooms'] });
+    }
+  });
+
+  return { deleteRoomMutate };
 }

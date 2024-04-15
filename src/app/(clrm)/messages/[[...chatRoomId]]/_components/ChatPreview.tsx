@@ -1,17 +1,16 @@
 'use client';
 
+import ProfileImage from '@/assets/images/profile-image.png';
 import {
   useReadCheckMessages,
   useReadLastMessages,
   useReadMakeClassUserInfo
 } from '@/hooks/useChatRoom/useNewChatRoom';
-import Image from 'next/image';
-import Link from 'next/link';
-import ProfileImage from '@/assets/images/profile-image.png';
-import { useEffect, useState } from 'react';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useLoginStore } from '@/store/login/loginUserIdStore';
+import Image from 'next/image';
+import Link from 'next/link';
 
 dayjs.locale('ko');
 
@@ -34,7 +33,7 @@ export default function ChatPreview({ chatId, toClassId, title, fromUserId, othe
       prefetch={false}
       shallow
     >
-      <div className="flex py-4 hover:bg-[#E3E1FC] mt-2 mb-2 px-2 relative">
+      <div className="flex py-4 mt-2 mb-2 px-2 relative">
         {readleftChekcMessages === 0 ? (
           ''
         ) : (

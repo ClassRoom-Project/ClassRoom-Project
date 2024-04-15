@@ -1,7 +1,7 @@
 'use client';
 
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { useCreateNewMessage, useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
+import { useCreateNewMessage, useDeleteRoom, useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ChatMessagesType } from '@/types/chat/chatTypes';
 import { BsSend } from 'react-icons/bs';
@@ -10,11 +10,14 @@ import MessageBoxs from './MessageBoxs';
 import { useEffect } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
+import { IoIosLogOut } from 'react-icons/io';
+import { deleteRoom } from '@/components/common/Toastify';
 
 export default function ChatMessages({ fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
   const { loginUserId } = useLoginStore();
   const { createNewMessageMutate } = useCreateNewMessage();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(fromUserId);
+  const { deleteRoomMutate } = useDeleteRoom();
   const queryClient = useQueryClient();
 
   const handleSubmitMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -57,6 +60,16 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
   //   };
   // }, [chatId, queryClient]);
 
+  const handleDelete = () => {
+    const confirm = window.confirm('방을 나가시겠습니까?');
+    if (confirm) {
+      deleteRoomMutate(chatId);
+      return deleteRoom();
+    } else {
+      return;
+    }
+  };
+
   const studentName = MakeClassUserInfo?.nickname;
 
   if (!chatId) {
@@ -69,8 +82,11 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
 
   return (
     <div className="flex h-full flex-col w-full">
-      <div className="border-b border-grey-100 p-2 sticky top-0 w-full bg-[#EFEFFF]">
+      <div className="flex justify-between border-b border-grey-100 p-4 sticky top-0 w-full bg-[#EFEFFF]">
         <p className="sm:text-sm md:text-lg font-bold ">클래스명: {title}</p>
+        <button onClick={handleDelete}>
+          <IoIosLogOut className="text-2xl text-button-default-color hover:text-button-hover-color" />
+        </button>
       </div>
       <MessageBoxs
         toClassId={toClassId}

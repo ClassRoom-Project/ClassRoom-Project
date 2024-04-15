@@ -272,3 +272,16 @@ export const readCheckMessagesAll = async (loginUserId: string): Promise<number 
 
   return count;
 };
+
+// 채팅 방 삭제
+export const deleteRoom = async (chatId: string) => {
+  const { error } = await supabase //
+    .from('chat_rooms')
+    .delete()
+    .eq('chat_id', chatId);
+
+  if (error) {
+    console.error('failed to deleteRoom', error);
+    return;
+  }
+};
