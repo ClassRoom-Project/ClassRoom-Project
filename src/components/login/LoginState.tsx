@@ -11,6 +11,7 @@ import { Suspense } from 'react';
 export default function LoginState() {
   const { data: session, status } = useSession();
 
+  // const userEmail = session?.user?.email ?? null;
   const userEmail = session?.user?.email ?? null;
 
   useSetSessionStorage();

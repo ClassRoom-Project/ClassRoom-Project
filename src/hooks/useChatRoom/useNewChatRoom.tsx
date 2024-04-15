@@ -6,7 +6,8 @@ import {
   getChatRooms,
   getLastChatMessage,
   getMakeClassUser,
-  readCheckMessages
+  readCheckMessages,
+  readCheckMessagesAll
 } from '@/app/api/chatRooms/getChatRooms';
 import { SendNewMessageType, SendNewPhotoMessageType } from '@/types/chat/chatTypes';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -19,6 +20,16 @@ export function useReadChatRooms(loginUserId: string) {
     enabled: !!loginUserId
   });
   return { chatroomsInfo };
+}
+
+// 상대방 프로필, 닉네임 가져오기
+export function useReadMakeClassUserInfo(otherUserId: string) {
+  const { data: MakeClassUserInfo } = useQuery({
+    queryKey: ['MakeClassUser', otherUserId],
+    queryFn: () => getMakeClassUser(otherUserId as string),
+    enabled: !!otherUserId
+  });
+  return { MakeClassUserInfo };
 }
 
 //채팅방 생성하기
@@ -45,14 +56,14 @@ export function useCreateNewRoom() {
   return { createNewRoomMutate };
 }
 
-// 상대방 프로필, 닉네임 가져오기
-export function useReadMakeClassUserInfo(otherUserId: string) {
-  const { data: MakeClassUserInfo } = useQuery({
-    queryKey: ['MakeClassUser', otherUserId],
-    queryFn: () => getMakeClassUser(otherUserId as string),
-    enabled: !!otherUserId
+//채팅내용 가져오기
+export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
+  const { data: readChatRoomMessages } = useQuery({
+    queryKey: ['chatMessage', chatId],
+    queryFn: () => getChatMessages(chatId as string, loginUserId as string),
+    enabled: !!chatId
   });
-  return { MakeClassUserInfo };
+  return { readChatRoomMessages };
 }
 
 //채팅방 메시지 보내기
@@ -63,8 +74,16 @@ export function useCreateNewMessage() {
     mutationFn: async ({ chatId, message, loginUserId }: SendNewMessageType) => {
       await createNewMessages({ chatId, loginUserId, message });
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['chatMessage'] });
+    onSuccess: (_, { chatId, loginUserId }) => {
+      // 해당 채팅방의 메시지 리스트를 업데이트
+      queryClient.invalidateQueries({ queryKey: ['chatMessage', chatId] });
+      // 최근 메시지를 업데이트
+      queryClient.invalidateQueries({ queryKey: ['lastMessage', chatId] });
+      // 메시지 카운트 업데이트
+      queryClient.invalidateQueries({ queryKey: ['countMessage', chatId] });
+      // 전체 메시지 카운트 업데이트
+      //따로 빼준이유는 얘는 chatId를 안받고 loginUserId로만 전달하고 조회함
+      queryClient.invalidateQueries({ queryKey: ['countMessageAll', loginUserId] });
     }
   });
 
@@ -77,11 +96,6 @@ export function useCreateNewPhotoMessage() {
 
   const { mutate: createNewPhotoMessageMutate } = useMutation({
     mutationFn: async ({ chatId, photos, loginUserId }: SendNewPhotoMessageType) => {
-      console.log('chatId', chatId);
-
-      console.log('message', photos);
-      console.log('create_by', loginUserId);
-
       await createNewMessagesPhoto({ chatId, loginUserId, photos });
     },
     onSuccess: () => {
@@ -90,16 +104,6 @@ export function useCreateNewPhotoMessage() {
   });
 
   return { createNewPhotoMessageMutate };
-}
-
-//채팅내용 가져오기
-export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
-  const { data: readChatRoomMessages } = useQuery({
-    queryKey: ['chatMessage', chatId],
-    queryFn: () => getChatMessages(chatId as string, loginUserId as string),
-    enabled: !!chatId
-  });
-  return { readChatRoomMessages };
 }
 
 //마지막 메시지 가져오기
@@ -112,12 +116,22 @@ export function useReadLastMessages(chatId: string) {
   return { readLastMessages };
 }
 
-//채팅 안읽은 개수 값 가져오기
+//방별로 채팅 안읽은 개수 값 가져오기
 export function useReadCheckMessages(chatId: string, loginUserId: string) {
-  const { data: readLastChekcMessages } = useQuery({
+  const { data: readleftChekcMessages } = useQuery({
     queryKey: ['countMessage', chatId],
     queryFn: () => readCheckMessages(chatId as string, loginUserId as string),
     enabled: !!chatId
   });
-  return { readLastChekcMessages };
+  return { readleftChekcMessages };
+}
+
+//읽지않은 전체 채팅 개수 가져오기
+export function useReadCheckMessageAll(loginUserId: string) {
+  const { data: readLeftChekcMessageAll } = useQuery({
+    queryKey: ['countMessageAll', loginUserId],
+    queryFn: () => readCheckMessagesAll(loginUserId as string),
+    enabled: !!loginUserId
+  });
+  return { readLeftChekcMessageAll };
 }

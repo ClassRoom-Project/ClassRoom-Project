@@ -83,7 +83,7 @@ export interface SendNewPhotoMessageType {
   loginUserId: string;
 }
 
-export interface getChatRoomMessagesType {
+export interface GetChatRoomMessagesType {
   created_at: string;
   create_by: string;
   messages: string;
@@ -99,8 +99,20 @@ export interface MessagesBoxsType {
   studentName: string;
 }
 
-export interface getLastMessageType {
+export interface GetLastMessageType {
   messages: string;
   images: string;
   createdAt: string;
+}
+
+export interface PushImageType {
+  chatId: string;
+  photos: string[];
+  loginUserId: string;
+}
+
+export interface ChatMessageType {
+  chat_id: string;
+  images: string[];
+  create_by: string;
 }
