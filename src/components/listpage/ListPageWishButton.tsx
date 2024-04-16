@@ -1,12 +1,12 @@
 'use client';
 
-import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ClassAllType } from '@/types/class';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
+import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/useWishQueries';
 
 const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: ClassAllType['wish'] }) => {
   const router = useRouter();

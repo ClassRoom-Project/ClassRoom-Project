@@ -1,7 +1,9 @@
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
+import Link from 'next/link';
 import { GrLocation } from 'react-icons/gr';
 import { HiOutlineCube } from 'react-icons/hi2';
+import { IoIosArrowBack } from 'react-icons/io';
 import { LuClock } from 'react-icons/lu';
 import { MdOutlineCategory } from 'react-icons/md';
 import { PiCurrencyKrw } from 'react-icons/pi';
@@ -43,7 +45,9 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
 
   return (
     <div className="p-6 bg-white mb-4 rounded-md shadow">
-      <h1 className="font-bold text-lg mb-1">선택하신 클래스</h1>
+      <div className="flex justify-between w-full">
+        <h1 className="font-bold text-lg mb-1">선택하신 클래스</h1>
+      </div>
       <div className="w-full relative h-[210px] mb-2 ">
         <Image
           className="rounded-lg"

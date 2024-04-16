@@ -1,7 +1,11 @@
 'use client';
 
-import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
-import { useCheckIsWishedQuery, useCountWishQuery } from '@/hooks/useWish/useWish';
+import {
+  useAddWishMutation,
+  useCancelWishMutation,
+  useCheckIsWishedQuery,
+  useCountWishQuery
+} from '@/hooks/useWish/useWishQueries';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -19,6 +23,7 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const [isWishedState, setIsWishedState] = useState<boolean>();
   const { data: wishCount, isLoading: isCountLoading, isError: isCountError } = useCountWishQuery(classId);
 
+  //TODO: query client .. 하나만?
   console.log(wishCount, 'wishCount');
 
   useEffect(() => {
