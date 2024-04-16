@@ -8,11 +8,9 @@ import {
 } from '@/hooks/useWish/useWishQueries';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { GoHeart } from 'react-icons/go';
-import { GoHeartFill } from 'react-icons/go';
+import React from 'react';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
-import { countWish } from '@/app/api/wish/wishApi';
+import WishIcon from '../common/WishIcon';
 
 const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const router = useRouter();
@@ -61,18 +59,7 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
     }
   };
 
-  return (
-    <div className=" h-[20px]">
-      {isCheckLoading ? (
-        <p></p>
-      ) : (
-        <button onClick={(e) => handleWishClick(e)} className="flex">
-          <span>{isWished ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
-          <span>{!isCountLoading ? wishCount : ''}</span>
-        </button>
-      )}
-    </div>
-  );
+  return <WishIcon handleWishClick={handleWishClick} isWished={isWished} wishCount={wishCount} />;
 };
 
 export default DetailWishButton;

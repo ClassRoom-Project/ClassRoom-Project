@@ -1,23 +1,21 @@
 'use client';
 
+import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/useWishQueries';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ClassAllType } from '@/types/class';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
-import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/useWishQueries';
+import WishIcon from '../common/WishIcon';
 
 const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: ClassAllType['wish'] }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
   const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
-  const [isWishedState, setIsWishedState] = useState<boolean>();
+  const [isWishedState, setIsWishedState] = useState<boolean>(false);
   const [wishCountState, setWishCountState] = useState<number>(wishInfo.length);
   const isWishedClass = wishInfo.some((item) => item.user_id === loginUserId);
-
-  console.log(wishInfo, 'wishCount');
 
   useEffect(() => {
     setIsWishedState(isWishedClass);
@@ -59,29 +57,7 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: 
 
   console.log(wishCountState);
 
-  return (
-    <button onClick={(e) => handleWishClick(e)}>
-      {!wishInfo ? (
-        <p></p>
-      ) : (
-        <div
-          className="flex gap-1.5 items-center justify-center badge border-gray-300 border border-solid py-2.5
-        "
-        >
-          {isWishedState ? (
-            <p>
-              <GoHeartFill color="red" size={18} />
-            </p>
-          ) : (
-            <p>
-              <GoHeart color="dimgray" size={18} />
-            </p>
-          )}
-          <p className="text-xs">{wishCountState}</p>
-        </div>
-      )}
-    </button>
-  );
+  return <WishIcon handleWishClick={handleWishClick} isWished={isWishedState} wishCount={wishCountState} />;
 };
 
 export default ListPageWishButton;
