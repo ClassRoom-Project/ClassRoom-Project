@@ -25,14 +25,26 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
           />
         </figure>
         <div className="card-body p-4 flex flex-col justify-between">
-          <div className="flex gap-1 justify-start items-center">
-            <GrLocation color="#6C5FF7" size="25" />
-            <div className="flex justify-start items-center">
-              <p className="text-sm flex-grow items-center p-2 gap-2 h-7 overflow-hidden rounded-3xl">
-                {formattedLocation}
-              </p>
+          {classInfos.location ? (
+            <div className="flex gap-1 justify-start items-center">
+              <GrLocation color="#6C5FF7" size="25" />
+              <div className="flex justify-start items-center">
+                <p className="text-sm flex-grow items-center p-2 gap-2 h-7 overflow-hidden rounded-3xl">
+                  {formattedLocation}
+                </p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="flex gap-1 justify-start items-center">
+              <GrLocation color="#6C5FF7" size="25" />
+              <div className="flex justify-start items-center">
+                <p className="text-sm font-bold flex-grow items-center p-2 gap-2 h-7 overflow-hidden rounded-3xl">
+                  온라인 클래스
+                </p>
+              </div>
+            </div>
+          )}
+
           <p className="text-md h-12 overflow-hidden font-semibold">{classInfos.title}</p>
           {/*해시태그 고정시키기*/}
           <p className="text-sm h-7 overflow-hidden text-dark-purple-color">#{classInfos.hashtag}</p>
