@@ -6,11 +6,8 @@ const HashTag = () => {
   const { setSubCategory } = useRegisterStore();
 
   const handleSubCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // 사용자 입력값에서 영문자, 숫자, 한글만 포함한 해시태그를 추출
     const hashTags = event.target.value.match(/#([a-zA-Z0-9가-힣]+)/g) || [];
-    // 해시태그(#) 기호를 제거하여 배열 생성
     const tagsWithoutHash = hashTags.map(tag => tag.slice(1));
-    // 배열 상태 업데이트
     setSubCategory(tagsWithoutHash);
   };
 
@@ -22,7 +19,7 @@ const HashTag = () => {
           className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0"
           type="text"
           onChange={handleSubCategoryChange}
-          placeholder="해시태그를 입력해주세요(최대 3개까지 입력가능 ex.#태그1 #태그2 #태그3)"
+          placeholder="해시태그를 입력해주세요(최대 10개까지 입력가능 ex.#태그1 #태그2 #태그3)"
         />
       </div>
     </div>
