@@ -4,22 +4,24 @@ import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { useCreateNewMessage, useDeleteRoom, useReadMakeClassUserInfo } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ChatMessagesType } from '@/types/chat/chatTypes';
-import { BsSend } from 'react-icons/bs';
 import ChatImageModal from './ChatImageModal';
 import MessageBoxs from './MessageBoxs';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
-import { IoIosLogOut } from 'react-icons/io';
 import { deleteRoom } from '@/components/common/Toastify';
 import { useRouter } from 'next/navigation';
+//아이콘
+import { MdPhotoCamera } from 'react-icons/md';
+import { IoIosLogOut } from 'react-icons/io';
+import { BsSend } from 'react-icons/bs';
 
 export default function ChatMessages({ fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
+  const [imageModal, setImageModal] = useState(false);
   const { loginUserId } = useLoginStore();
   const { createNewMessageMutate } = useCreateNewMessage();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(fromUserId);
   const { deleteRoomMutate } = useDeleteRoom();
-  const queryClient = useQueryClient();
   const router = useRouter();
 
   const handleSubmitMessage = (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,35 +34,13 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
       return;
     }
 
+    if (message.length === 0) {
+      return;
+    }
+
     createNewMessageMutate({ message, loginUserId, chatId });
     (e.target as HTMLFormElement).reset();
   };
-
-  //supabase realtime test
-  // useEffect(() => {
-  //   console.log('시작은하니?');
-  //   const subscribeChat = supabase
-  //     .channel(`chat_on_${chatId}`) //
-  //     .on(
-  //       'postgres_changes',
-  //       {
-  //         event: 'INSERT',
-  //         schema: 'public',
-  //         table: 'chat_messages',
-  //         filter: `chat_rooms=eq.${chatId}`
-  //       },
-  //       (payload) => {
-  //         console.log('payload', payload);
-  //         console.log('여기뭐가없어?');
-  //       }
-  //     );
-
-  //   subscribeChat.subscribe();
-  //   return () => {
-  //     console.log('혹시?');
-  //     subscribeChat.unsubscribe();
-  //   };
-  // }, [chatId, queryClient]);
 
   const handleDelete = () => {
     const confirm = window.confirm('방을 나가시겠습니까?');
@@ -72,6 +52,10 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
     } else {
       return;
     }
+  };
+
+  const handleOpenModal = () => {
+    setImageModal(true);
   };
 
   const studentName = MakeClassUserInfo?.nickname;
@@ -101,20 +85,25 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
         studentName={studentName!}
       />
       <div className="w-full flex justify-center items-center bg-white py-8 border-t border-gray-300">
-        <form onSubmit={handleSubmitMessage} className="rounded-md border px-4 py-2 w-4/5 flex">
-          <input
-            type="text"
-            name="message"
-            autoComplete="off"
-            placeholder="메시지를 입력하세요"
-            className="outline-0 bg-transparent flex-1"
-          />
-          <button type="submit" className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center">
-            <BsSend className="text-xl text-main-color" />
+        <div className="px-4 py-2 w-4/5 h-16 flex relative ">
+          <form onSubmit={handleSubmitMessage} className="rounded-md border w-full h-full items-center px-2  flex ">
+            <input
+              type="text"
+              name="message"
+              autoComplete="off"
+              placeholder="메시지를 입력하세요"
+              className="outline-0 bg-transparent flex-1 px-3"
+            />
+            <button type="submit" className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center">
+              <BsSend className="text-xl text-main-color" />
+            </button>
+          </form>
+          <button className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center mr-1 absolute right-16 bottom-4">
+            <MdPhotoCamera className="text-xl text-main-color" onClick={handleOpenModal} />
           </button>
-        </form>
+        </div>
       </div>
-      <ChatImageModal chatId={chatId} />
+      {imageModal && <ChatImageModal chatId={chatId} closeModal={setImageModal} />}
     </div>
   );
 }

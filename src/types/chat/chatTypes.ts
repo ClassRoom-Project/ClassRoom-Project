@@ -43,17 +43,17 @@ export interface ChatRoom {
   profileImg: string;
 }
 export interface ChatRoomFromDB {
-  chat_id: any;
-  created_at: any;
-  to_class_id: any;
-  from_user_id: any;
-  teacher_user_id: any;
+  chat_id: string;
+  created_at: string;
+  to_class_id: string;
+  from_user_id: string;
+  teacher_user_id: string;
   class: {
-    title: any;
-    user_id: any;
+    title: string;
+    user_id: string;
     users: {
-      nickname: any;
-      profile_image: any;
+      nickname: string;
+      profile_image: string;
     };
   };
 }
@@ -116,4 +116,9 @@ export interface ChatMessageType {
   chat_id: string;
   images: string[];
   create_by: string;
+}
+
+export interface ChatImageeModalType {
+  chatId: string;
+  closeModal: (value: boolean) => void;
 }

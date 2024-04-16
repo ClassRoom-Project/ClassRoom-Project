@@ -1,5 +1,6 @@
 'use client';
 
+import { supabase } from '@/app/api/supabase/supabase';
 import ProfileImage from '@/assets/images/profile-image.png';
 import {
   useReadCheckMessages,
@@ -7,25 +8,25 @@ import {
   useReadMakeClassUserInfo
 } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useQueryClient } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 dayjs.locale('ko');
 
 //데이터 불러오기,
-
+interface PostData {
+  [key: string]: any; // 더 구체적인 타입 정보를 사용할 수 있으면 좋습니다.
+}
 export default function ChatPreview({ chatId, toClassId, title, fromUserId, otherId }: any) {
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readLastMessages } = useReadLastMessages(chatId);
   const { readleftChekcMessages } = useReadCheckMessages(chatId, loginUserId!);
-
-  // useEffect(() => {
-  //   const lastMessage = async () => await readLastMessages;
-  //   const notReadCount = async () => await readLastChekcMessages;
-  // }, [readLastMessages, readLastChekcMessages]);
+  const [postData, setPostData] = useState<PostData | undefined>();
 
   return (
     <Link
@@ -41,14 +42,14 @@ export default function ChatPreview({ chatId, toClassId, title, fromUserId, othe
             <div className="text-white">{readleftChekcMessages}</div>
           </div>
         )}
-        <div className="mx-3">
+        <div className="mx-3 w-12 h-12">
           <Image
             unoptimized
             src={MakeClassUserInfo?.profile_image ?? ProfileImage}
             alt="profileImg"
-            width={41}
-            height={41}
-            className="border border-black rounded-full"
+            width={40}
+            height={40}
+            className="w-full h-full border border-black rounded-full object-cover"
           />
         </div>
         <div className="flex flex-col mx-3 flex-1 w-0">
@@ -58,11 +59,11 @@ export default function ChatPreview({ chatId, toClassId, title, fromUserId, othe
               {!readLastMessages ? (
                 <p className="sm:text-sm text-gray-500">메시지가 없습니다</p>
               ) : (
-                <div>
+                <div className="w-40">
                   {readLastMessages?.messages ? (
-                    <p className="sm:text-sm text-gray-500">{readLastMessages.messages}</p>
+                    <p className="sm:text-sm text-gray-500 truncate">{readLastMessages.messages}</p>
                   ) : (
-                    <p className="sm:text-sm text-gray-500">이미지</p>
+                    <p className="sm:text-sm text-gray-500 ">이미지</p>
                   )}
                 </div>
               )}

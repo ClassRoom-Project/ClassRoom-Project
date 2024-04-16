@@ -11,7 +11,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { supabase } from '@/app/api/supabase/supabase';
+import { useQueryClient } from '@tanstack/react-query';
+import { subscribe } from 'diagnostics_channel';
 
 dayjs.locale('ko');
 
@@ -21,6 +24,38 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
   const { readChatRoomMessages } = useReadChatRoomMessages(chatId, loginUserId!);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    const subscribeChat = supabase
+      .channel(`test${chatId}`)
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'chat_messages',
+          filter: `chat_id=eq.${chatId}`
+        },
+        (payload) => {
+          queryClient.setQueryData(['chatMessage', chatId], (oldMessages: any) => {
+            if (oldMessages === payload.new) {
+              return payload.new;
+            }
+            return [...oldMessages, payload.new];
+          });
+
+          queryClient.invalidateQueries({ queryKey: ['lastMessage', chatId] });
+          queryClient.invalidateQueries({ queryKey: ['countMessage', chatId] });
+          queryClient.invalidateQueries({ queryKey: ['countMessageAll', loginUserId] });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      subscribeChat.unsubscribe();
+    };
+  }, [chatId, loginUserId, queryClient]);
 
   const handleMessageDelete = (messageId: number) => {
     deleteMessageMutate(messageId);
@@ -58,13 +93,15 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
             <div>
               {message.create_by !== loginUserId && (
                 <div className="mr-2 flex flex-row items-center text-xs gap-1">
-                  <Image
-                    src={MakeClassUserInfo?.profile_image || '/default-profile.png'}
-                    height={40}
-                    width={40}
-                    alt="Profile"
-                    className="rounded-full border border-black"
-                  />
+                  <div className="w-12 h-12">
+                    <Image
+                      src={MakeClassUserInfo?.profile_image || '/default-profile.png'}
+                      height={40}
+                      width={40}
+                      alt="Profile"
+                      className="w-full h-full border border-black rounded-full object-cover"
+                    />
+                  </div>
                   <p className=" font-semibold">{MakeClassUserInfo?.nickname}</p>
                 </div>
               )}
@@ -76,7 +113,11 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
                 <div>
                   <p className=" text-gray-400 text-xs px-4">{dayjs(message.created_at).format('A hh:mm')}</p>
                 </div>
-                <button onClick={() => handleMessageDelete(message.messages_id)}>삭제</button>
+                {message.create_by === loginUserId ? (
+                  <button onClick={() => handleMessageDelete(message.messages_id)}>삭제</button>
+                ) : (
+                  ''
+                )}
                 {message.messages ? (
                   <div className="">
                     {message.messages && (

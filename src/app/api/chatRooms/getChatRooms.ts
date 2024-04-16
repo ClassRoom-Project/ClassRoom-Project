@@ -195,6 +195,10 @@ export const getChatMessages = async (chatId: string, loginUserId: string): Prom
 
 //메시지 읽음 처리
 const updateCheckMessage = async (chatId: string, loginUserId: string): Promise<void> => {
+  if (!loginUserId) {
+    return;
+  }
+
   const { error } = await supabase
     .from('chat_messages')
     .update({ check: true })
