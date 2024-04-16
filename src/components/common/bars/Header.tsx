@@ -12,7 +12,7 @@ import { PropsWithChildren, Suspense, useEffect } from 'react';
 import Notification from '@/components/common/Notification';
 import basicProfileImage from '../../../../public/profile-image.png';
 import { SearchClass } from './categories/SearchClass';
-import Logo from '@/assets/images/logo.svg';
+import Logo from '@/assets/images/Frame 1775.svg';
 import { useSession } from 'next-auth/react';
 import { getUserInfo } from '@/app/api/mypage/user-api';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -48,19 +48,21 @@ const Header = ({ children }: PropsWithChildren) => {
   // 수강생인지 강사인지 명시적으로 보여주기
   const roleName = isTeacher === true ? '강사' : '회원';
 
+  //TODO - 간격 맞추기
   // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기
   const profileImage = userInfo?.profile_image ? userInfo?.profile_image : basicProfileImage;
 
   return (
     <div className="">
-      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-Full justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
-        <Link href="/">
-          <Image className="rounded-full" src={Logo} alt="클룸 로고" width={100} height={100} />
-        </Link>
-        <div className="flex items-center justify-center">
+      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-Full justify-between items-center h-[80px] border-b-[1px] border-solid border-gray-300">
+        <div className="flex items-center ml-14 justify-center">
+          <Link href="/">
+            <Image className="rounded-full" src={Logo} alt="클룸 로고" width={75} height={75} />
+          </Link>
           <SearchClass />
         </div>
-        <div className="w-100 flex items-end justify-end">
+
+        <div className="w-100 mr-[65px] flex items-end justify-end">
           <div className="flex items-center">
             {userEmail ? (
               <div className="mr-[10px]">
@@ -103,7 +105,7 @@ const Header = ({ children }: PropsWithChildren) => {
           </div>
         </div>
       </div>
-      <div className="mt-[60px]">{children}</div>
+      <div className="mt-[80px]">{children}</div>
     </div>
   );
 };

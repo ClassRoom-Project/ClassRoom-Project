@@ -38,7 +38,8 @@ const config: Config = {
 
         'pale-purple': '#FCFCFF',
         'dark-purple-color': '#4D43B8',
-        'text-dark-gray': '#515B60'
+        'text-dark-gray': '#515B60',
+        'icon-color': '#3f3f3f'
       }
     }
   },

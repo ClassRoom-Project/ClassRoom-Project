@@ -25,19 +25,21 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
           />
         </figure>
         <div className="card-body p-4 flex flex-col justify-between">
-          <div className="flex gap-1 items-center">
+          <div className="flex gap-1 justify-start items-center">
             <GrLocation color="#6C5FF7" size="25" />
-            <p className="text-xs flex-grow items-center p-2 gap-2 border-2 border-point-purple rounded-3xl">
-              {formattedLocation}
-            </p>
+            <div className="flex justify-start items-center">
+              <p className="text-sm flex-grow items-center p-2 gap-2 h-7 overflow-hidden rounded-3xl">
+                {formattedLocation}
+              </p>
+            </div>
           </div>
           <p className="text-md h-12 overflow-hidden font-semibold">{classInfos.title}</p>
           {/*해시태그 고정시키기*/}
-          <p className="text-sm text-dark-purple-color">#{classInfos.hashtag}</p>
+          <p className="text-sm h-7 overflow-hidden text-dark-purple-color">#{classInfos.hashtag}</p>
         </div>
       </Link>
       <div className="flex justify-between px-4 pb-4 mt-auto">
-        <div className="text-md font-bold">{`${classInfos.price.toLocaleString()}원`}</div>
+        <div className="text-md font-bold overflow-hidden">{`${classInfos.price.toLocaleString()}원`}</div>
         {classInfos.wish && <ListPageWishButton classId={classInfos.class_id} wishInfo={classInfos.wish} />}
       </div>
     </div>
