@@ -111,8 +111,10 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
                 key={timeInfo.timeId}
                 onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
                 className={`btn btn-sm font-normal ${
-                  timeInfo.times === selectedTime ? 'bg-point-purple text-white' : 'bg-white'
-                } tracking-wide rounded-md h-[48px] border-solid border border-gray-300 hover:bg-#4D43B8`}
+                  timeInfo.times === selectedTime
+                    ? 'bg-point-purple text-white hover:bg-button-hover-color'
+                    : 'bg-white hover:bg-background-color hover:border-button-focus-color'
+                } tracking-wide rounded-md h-[48px] border-solid border border-gray-300 `}
               >
                 {convertTimeTo12HourClock(timeInfo.times)}
               </button>

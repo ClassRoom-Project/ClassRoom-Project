@@ -43,10 +43,10 @@ const ReserveUserInfo = () => {
             <p className="font-bold mb-1 text-sm ">이름 (닉네임)</p>
             <p className="">{userInfo?.nickname}</p>
           </div>
-          <div className="tooltip mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
+          <div className="tooltip ju mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
             <button
               onClick={() => router.push('/mypage')}
-              className="btn w-full btn-ghost border border-solid border-gray-300"
+              className="btn w-full btn-ghost border border-solid border-gray-300 hover:bg-background-color hover:border-button-focus-color"
             >
               프로필 수정하기
             </button>
@@ -54,7 +54,6 @@ const ReserveUserInfo = () => {
         </>
       ) : (
         <div className="w-full h-full flex items-center justify-center">
-          {' '}
           <p className="bg-base-200 text-center py-4 px-6 rounded-md">로그인이 필요합니다</p>
         </div>
       )}

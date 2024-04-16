@@ -11,12 +11,12 @@ export const fetchReservationDetails = async (reserveId: string) => {
     .from('reserve')
     .select(
       `
-        class_id, reserve_quantity, reserve_price, time_id, user_id,
+        reserve_quantity, reserve_price, user_id,
         class(title, total_time, location, class_type),
         time (times, date(day))
   `
     )
-    .eq('reserve_id', reserveId)
+    .eq('reserve_id', '4392293f-15e7-471a-8096-1fcd475bbb97')
     .single();
 
   if (error) {

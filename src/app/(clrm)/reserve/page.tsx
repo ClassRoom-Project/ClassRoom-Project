@@ -11,7 +11,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   const classInfo = await fetchReserveClassInfo(classId);
 
   return (
-    <div className="min-h-100vh-header bg-light-purple min-w-100vw flex pb-6 flex flex-col">
+    <div className="min-h-100vh-header bg-light-purple min-w-100vw flex pb-6 flex-col">
       <Link
         href={`/list/detail/${classInfo.classId}`}
         className="bg-white px-2 py-2 flex items-center text-text-dark-gray"
