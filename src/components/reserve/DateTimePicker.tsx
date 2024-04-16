@@ -107,6 +107,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
           .map(({ times }) =>
             /* 각 시간의 정보 렌더링 */
             times.map((timeInfo) => (
+              // TODO: 시간 개수에 따라 grid 개수 조건부렌더링
               <button
                 key={timeInfo.timeId}
                 onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
