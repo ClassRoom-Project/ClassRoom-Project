@@ -84,6 +84,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   return (
     <div className="w-full mb-2">
+      <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
       <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md py-2 mb-4 ">
         <DayPicker
           mode="single"
@@ -111,7 +112,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
                 onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
                 className={`btn btn-sm font-normal ${
                   timeInfo.times === selectedTime ? 'bg-point-purple text-white' : 'bg-white'
-                } tracking-wide rounded-md h-[48px] border-solid border border-gray-300`}
+                } tracking-wide rounded-md h-[48px] border-solid border border-gray-300 hover:bg-#4D43B8`}
               >
                 {convertTimeTo12HourClock(timeInfo.times)}
               </button>

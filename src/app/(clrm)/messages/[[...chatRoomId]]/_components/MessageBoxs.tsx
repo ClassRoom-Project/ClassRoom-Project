@@ -8,6 +8,8 @@ import Link from 'next/link';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useEffect, useRef } from 'react';
+import { QueryClient } from '@tanstack/react-query';
+import { supabase } from '@/app/api/supabase/supabase';
 
 dayjs.locale('ko');
 
@@ -16,6 +18,38 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readChatRoomMessages } = useReadChatRoomMessages(chatId, loginUserId!);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
+
+  const channels = supabase
+    .channel('custom-all-channel')
+    .on('postgres_changes', { event: '*', schema: 'public', table: 'chat_messages' }, (payload) => {
+      console.log('Change received!', payload.new);
+    })
+    .subscribe();
+
+  // useEffect(() => {
+  //   console.log('시작은하니?');
+  //   const subscribeChat = supabase
+  //     .channel(`chat_on_${chatId}`) //
+  //     .on(
+  //       'postgres_changes',
+  //       {
+  //         event: '*',
+  //         schema: 'public',
+  //         table: 'chat_messages'
+  //         // filter: `chat_rooms=eq.${chatId}`
+  //       },
+  //       (payload) => {
+  //         console.log('payload', payload.new);
+  //         console.log('여기뭐가없어?');
+  //       }
+  //     );
+
+  //   subscribeChat.subscribe();
+  //   return () => {
+  //     console.log('혹시?');
+  //     subscribeChat.unsubscribe();
+  //   };
+  // }, [chatId]);
 
   useEffect(() => {
     const scrollToBottom = () => {
