@@ -1,28 +1,46 @@
 'use client';
 
-import React, { useState } from 'react';
-import EditProfile from '../EditProfile';
-import MyComments from './MyComments';
-import MyReservedClass from './MyReservedClass';
-import { useRouter } from 'next/navigation';
-import AddTeacherInfo from './AddTeacherInfo';
-import MyWishClass from './MyWishClass';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import EditProfile from '@/components/mypage/EditProfile';
+import MyReservedClass from '@/components/mypage/student/MyReservedClass';
+import MyComments from '@/components/mypage/student/MyComments';
+import MyWishClass from '@/components/mypage/student/MyWishClass';
+import AddTeacherInfo from '@/components/mypage/student/AddTeacherInfo';
+import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 
 type StudentTabComponent = {
   [key: string]: React.ReactNode;
 };
 
 const StudentMyPageTab = () => {
+  const { isTeacher } = useUserRoleStore();
   const router = useRouter();
+  const params = useSearchParams();
+  const studentTab = params.get('studentTab');
 
   const [activePage, setActivePage] = useState('editProfile');
-  const activeStudentMyPageTab: StudentTabComponent = {
-    editProfile: <EditProfile key="editProfile" />,
-    reservedClass: <MyReservedClass key="reservedClass" />,
-    myComments: <MyComments key="myComments" />,
-    myWishClass: <MyWishClass key="myWishClass" />,
-    addTeacherInfo: <AddTeacherInfo key="addTeacherInfo" />
-  };
+
+  const activeStudentMyPageTab: StudentTabComponent = useMemo(
+    () => ({
+      editProfile: <EditProfile key="editProfile" />,
+      reservedClass: <MyReservedClass key="reservedClass" />,
+      myComments: <MyComments key="myComments" />,
+      myWishClass: <MyWishClass key="myWishClass" />,
+      addTeacherInfo: <AddTeacherInfo key="addTeacherInfo" />
+    }),
+    []
+  );
+
+  useEffect(() => {
+    if (isTeacher) {
+      router.push('/teacherMypage');
+      return;
+    }
+    if (studentTab && Object.keys(activeStudentMyPageTab).includes(studentTab)) {
+      setActivePage(studentTab);
+    }
+  }, [isTeacher, router, activeStudentMyPageTab, studentTab]);
 
   const handleOnClickTabBtn = (tab: string) => {
     if (!tab) {
@@ -30,7 +48,7 @@ const StudentMyPageTab = () => {
       return;
     }
     setActivePage(tab);
-    router.push(`/mypage?studentMypage=${tab}`);
+    router.push(`/studentMypage?studentTab=${tab}`);
   };
 
   return (

@@ -18,7 +18,7 @@ const MyClassStudentPage = () => {
 
   // 수강생 전환 시, 마이페이지로 이동
   if (isTeacher === false) {
-    router.push('/mypage');
+    router.push('/studentMypage');
   }
 
   const { data: classSingleInfo, isPending } = useQuery({

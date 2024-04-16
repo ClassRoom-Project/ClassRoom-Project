@@ -44,7 +44,7 @@ const MyClass = () => {
 
   // 클래스 예약한 수강생 보러가기
   const handleOnClickGoToReservedStudentList = (timeId: string) => {
-    router.push(`/mypage/myClassStudentList?timeId=${timeId}`);
+    router.push(`/myClassStudentList?timeId=${timeId}`);
   };
 
   if (isPending) {
@@ -101,7 +101,7 @@ const MyClass = () => {
                         위치 : {classInfo?.location} {classInfo?.detail_location}
                       </p>
                     ) : (
-                      <p>위치 정보가 없습니다.</p>
+                      <p>등록된 위치 정보가 없습니다.</p>
                     )}
                   </div>
                 </div>

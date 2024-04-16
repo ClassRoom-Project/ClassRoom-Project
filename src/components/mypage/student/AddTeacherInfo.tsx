@@ -144,7 +144,8 @@ const AddTeacherInfo = () => {
     if (confirm) {
       // 선생님 마이페이지로 이동하는 로직
       updateUserRole(!!isTeacher, loginUserId);
-      setIsTeacher(!isTeacher);
+      setIsTeacher(true);
+      router.push('teacherMypage?teacherTab=editTeacherInfo');
     }
   };
 

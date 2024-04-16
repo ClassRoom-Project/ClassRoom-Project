@@ -4,13 +4,10 @@ import { getTeacherInfo, updateTeacherInfo } from '@/app/api/mypage/user-api';
 import { changeInfoNotify, checkFormValidation, noChangedNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { UpdateTeacherInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
-import { userInfoStore } from '@/store/mypage/userInfoStore';
-import Image from 'next/image';
-import { UpdateTeacherInfoType } from '@/types/user';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();

@@ -16,10 +16,12 @@ import Logo from '@/assets/images/logo.svg';
 import { useSession } from 'next-auth/react';
 import { getUserInfo } from '@/app/api/mypage/user-api';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { useRouter } from 'next/navigation';
 
 const Header = ({ children }: PropsWithChildren) => {
   const { userInfo, setUserInfo } = userInfoStore();
   const { isTeacher } = useUserRoleStore();
+  const router = useRouter();
 
   const { loginUserId } = useLoginStore();
   const userId = loginUserId as string;
@@ -49,6 +51,15 @@ const Header = ({ children }: PropsWithChildren) => {
 
   // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기
   const profileImage = userInfo?.profile_image ? userInfo?.profile_image : basicProfileImage;
+
+  // 마이페이지 이동
+  const handleMoveToMypage = () => {
+    if (isTeacher) {
+      router.push('/teacherMypage');
+    } else {
+      router.push('/studentMypage');
+    }
+  };
 
   return (
     <>
@@ -85,7 +96,7 @@ const Header = ({ children }: PropsWithChildren) => {
                 </div>
                 <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
                   <div className="border-gray-400 borderb-[1px] border-solid w-52 mb-2">
-                    <Link href={'/mypage'}>마이페이지</Link>
+                    <button onClick={handleMoveToMypage}>마이페이지</button>
                   </div>
                   <div>
                     <Suspense fallback={<div>Logout</div>}>
