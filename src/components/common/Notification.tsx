@@ -1,22 +1,20 @@
-"use client";
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import { Notification } from '@/types/notice';
-import { useQuery } from '@tanstack/react-query';
-
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { LuBell } from 'react-icons/lu';
 import { GoBellFill } from "react-icons/go";
 
 const NotificationComponent = () => {
   const { loginUserId } = useLoginStore();
-  const [isNotificationOpen, setIsNotificationOpen] = React.useState(false);
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const [isNotificationOpen, setIsNotificationOpen] = React.useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const lastIconClickTimeRef = useRef<Date | null>(null);
 
-  // useQuery를 사용하여 notifications 데이터를 가져옵니다.
   const { data: notifications = [], refetch } = useQuery({
     queryKey: ['notifications', loginUserId],
     queryFn: async () => {
@@ -33,16 +31,16 @@ const NotificationComponent = () => {
       return data;
     },
     enabled: !!loginUserId,
+    refetchInterval: 10000,
   });
 
   const unreadNotificationsCount = notifications.filter(notification => !notification.isread).length;
 
   const toggleBellIcon = () => {
     setIsNotificationOpen(prevState => !prevState);
-    lastIconClickTimeRef.current = new Date(); // 아이콘 클릭 시간 기록
+    lastIconClickTimeRef.current = new Date();
   };
 
-  // 바깥 영역 클릭시 알림창 닫기
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const timeSinceLastIconClick = lastIconClickTimeRef.current ? new Date().getTime() - lastIconClickTimeRef.current.getTime() : null;
@@ -66,7 +64,6 @@ const NotificationComponent = () => {
     };
   }, [isNotificationOpen, notifications]);
 
-  // 알림 클릭시
   const handleNotificationClick = async (notification: Notification) => {
     if (!notification.isread) {
       const { error } = await supabase
@@ -75,9 +72,9 @@ const NotificationComponent = () => {
         .eq('notice_id', notification.notice_id);
 
       if (error) {
-        console.error('알림 읽음 처리 실패', error);
+        console.error('Failed to mark notification as read', error);
       } else {
-        refetch(); // 알림 상태 업데이트 후, 알림 목록을 다시 불러옵니다.
+        refetch();
       }
     }
     router.push(`/list/detail/${notification.class_id}`);
@@ -119,4 +116,3 @@ const NotificationComponent = () => {
 };
 
 export default NotificationComponent;
-
