@@ -1,5 +1,5 @@
 import { addTeacherInfo, updateUserRole } from '@/app/api/mypage/user-api';
-import { noChangedNotify, noInfoNotify } from '@/components/common/Toastify';
+import { checkFormValidation, noChangedNotify, noInfoNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
 import { useTeacherInfo } from '@/hooks/useLogin/useTeacherInfo';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -98,14 +98,21 @@ const AddTeacherInfo = () => {
 
   // 선생님 정보 수정 mutation
   const { mutate: updateTeacherInfo } = useMutation({
-    mutationFn: () =>
+    mutationFn: ({
+      selectedJob,
+      selectedField,
+      selectedBank,
+      userAccount,
+      teacherName,
+      teacherNumber
+    }: InsertTeacherInfo) =>
       addTeacherInfo(
         { selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber },
         loginUserId
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['users']
+        queryKey: ['updateTeacherInfo']
       });
     }
   });
@@ -115,10 +122,13 @@ const AddTeacherInfo = () => {
     if (!selectedJob || !selectedField || !selectedBank || !userAccount || !teacherName || !teacherNumber) {
       noInfoNotify(); // 아무것도 입력되지 않은 경우
       return;
+    } else if (!isAvailableName || !isAvailableNumber || !isAvailableAccount) {
+      checkFormValidation();
+      return;
     } else {
       const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
       if (confirm) {
-        updateTeacherInfo();
+        updateTeacherInfo({ selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber });
 
         // 수강생에서 선생님으로 전환 로직 추가
         setIsHaveTeacherInfo(true);
@@ -151,7 +161,15 @@ const AddTeacherInfo = () => {
   }
   return (
     <div className="flex flex-col gap-8 justify-center items-center bg-light-purple w-[960px] p-4">
-      <p className=" text-center text-text-dark-gray">아래의 해당 정보를 입력하여 강사로 등록해보세요!</p>
+      {isHaveTeacherInfo ? (
+        <p className=" text-center text-text-dark-gray">
+          선생님 정보가 이미 등록되었습니다. <br />
+          선생님 마이페이지에서 정보를 수정해주세요.
+        </p>
+      ) : (
+        <p className=" text-center text-text-dark-gray">아래의 해당 정보를 입력하여 강사로 등록해보세요!</p>
+      )}
+
       <div className="flex">
         <div className="flex flex-col">
           <div className="p-4 flex flex-col gap-4">

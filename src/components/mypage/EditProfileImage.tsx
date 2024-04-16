@@ -2,16 +2,19 @@ import { supabase } from '@/app/api/supabase/supabase';
 import Image from 'next/image';
 import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 import basicProfileImage from '../../../public/profile-image.png';
+import { UserInfoType } from '@/types/user';
+import { userInfo } from 'os';
 
 interface EditProfileImageProps {
   newProfileImage: string;
   setNewProfileImage: Dispatch<SetStateAction<string>>;
   isEditing: boolean;
+  userInfo: UserInfoType;
 }
 
-const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing }: EditProfileImageProps) => {
+const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, userInfo }: EditProfileImageProps) => {
   const fileInput = useRef<HTMLInputElement | null>(null);
-
+  // console.log('userInfo', userInfo);
   // 프로필 이미지 수정 버튼 클릭
   const handleOnClickEditImageBtn = () => {
     fileInput.current?.click();
@@ -43,25 +46,26 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing }: Ed
   };
 
   // 프로필 이미지가 없을 때, 기본 프로필 이미지 보여주기
-  const profileImage = newProfileImage ? newProfileImage : basicProfileImage;
+  const profileImage = newProfileImage ? newProfileImage || userInfo.profile_image : basicProfileImage;
 
   return (
     <div>
-      <div className="flex flex-col items-center p-4 gap-4">
+      <div className="flex flex-col items-center p-4 gap-4 w-[150px] h-[150px] rounded-full">
         <Image
           src={profileImage}
           width={100}
           height={100}
-          className="rounded-full"
+          className="w-full h-full rounded-full object-cover"
           alt="프로필 이미지"
-          unoptimized={true} // 추후 수정 해야함
+          unoptimized={true}
         />
         <input
           type="file"
           name="image_URL"
           accept="image/*" // 모든 이미지 파일 형식 가능
           style={{
-            display: 'none'
+            display: 'none',
+            objectFit: 'cover'
           }}
           ref={fileInput}
           onChange={handleOnChangeImage}

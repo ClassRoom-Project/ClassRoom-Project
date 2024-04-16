@@ -73,11 +73,11 @@ const Header = ({ children }: PropsWithChildren) => {
             ) : null}
             {userEmail ? (
               <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="w-12 h-12 rounded-full  m-1">
+                <div tabIndex={0} role="button" className="w-12 h-12 rounded-full m-1">
                   <Image
                     src={profileImage}
                     alt="Profile image"
-                    className="rounded-full"
+                    className="w-full h-full rounded-full object-cover"
                     width={60}
                     height={60}
                     unoptimized={true}

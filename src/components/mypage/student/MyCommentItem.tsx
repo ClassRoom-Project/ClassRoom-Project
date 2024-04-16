@@ -82,42 +82,42 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const rating = comment.star;
 
   return (
-    <li className="p-4 flex gap-4 border-y border-y-border-color w-[1080px]" key={comment.comment_id}>
-      <div className="w-[300px] h-[200px]">
-        <Image
-          src={comment.image[0]}
-          alt="클래스 대표 사진"
-          width={300}
-          height={200}
-          className="w-full h-full p-4"
-          style={{ objectFit: 'contain' }}
-        />
-      </div>
-      <div className="p-4">
-        <section className="flex gap-10">
-          <p className="font-bold text-xl text-dark-purple-color">{comment.title}</p>
-          <p className="flex gap-4">
-            <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
-          </p>
-        </section>
-        <div className="pt-4">
-          <Stars rating={rating} />
+    <li className="border-b-2 border-b-border-color max-w-screen-xl w-[1080px]" key={comment.comment_id}>
+      <div className="flex gap-4 bg-pale-purple my-4 p-4">
+        <div className="w-[300px] h-[200px]">
+          <Image
+            src={comment.image[0]}
+            alt="클래스 대표 사진"
+            width={300}
+            height={200}
+            className="w-full h-full p-4 object-contain"
+          />
         </div>
-        <section className="pt-4">
-          {isEditing ? (
-            <textarea
-              name=""
-              placeholder="후기를 작성해봅시다"
-              id=""
-              className="w-[500px] h-[100px] textarea textarea-bordered"
-              value={newContent}
-              onChange={handleOnChangeComment}
-            />
-          ) : (
-            <p className="w-[500px] h-[100px] py-4-">{comment.content}</p>
-          )}
-
-          <div className="flex justify-end gap-4 ">
+        <div className="flex flex-col p-4 gap-4 w-full h-full">
+          <section className="flex gap-10">
+            <p className="font-bold text-xl text-dark-purple-color">{comment.title}</p>
+            <p className="flex gap-4">
+              <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
+            </p>
+          </section>
+          <div>
+            <Stars rating={rating} />
+          </div>
+          <section className="pb-4">
+            {isEditing ? (
+              <textarea
+                name=""
+                placeholder="후기를 작성해봅시다"
+                id=""
+                className="w-[600px] h-full textarea textarea-bordered"
+                value={newContent}
+                onChange={handleOnChangeComment}
+              />
+            ) : (
+              <p className="w-[600px] h-full">{comment.content}</p>
+            )}
+          </section>
+          <section className="flex justify-end gap-4 pt-4 right-4">
             {isEditing ? (
               <div>
                 <button onClick={() => handleOnClickEditBtn(commentId)} className="btn w-36">
@@ -147,8 +147,8 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
             <Link href={`list/detail/${comment.class_id}`}>
               <button className="btn bg-point-purple text-white w-36">클래스 보러가기</button>
             </Link>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     </li>
   );

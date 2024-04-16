@@ -19,6 +19,8 @@ const EditProfile = () => {
   // zustand로 userInfo 상태 관리
   const { userInfo, setUserInfo } = userInfoStore();
 
+  // console.log('userInfo', userInfo);
+
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
   const [isEditing, setIsEditing] = useState(false); // 수정된 사항 확인 여부
@@ -105,12 +107,13 @@ const EditProfile = () => {
   return (
     <div className="flex flex-col justify-center items-center bg-light-purple w-[960px] p-4">
       <p className="flex items-start text-xl text-dark-purple-color font-bold">프로필 수정하기</p>
-      <div className="flex gap-10">
+      <div className="flex gap-10 justify-center items-center">
         <div className="flex flex-col justify-center items-center">
           <EditProfileImage
             newProfileImage={newProfileImage}
             setNewProfileImage={setNewProfileImage}
             isEditing={isEditing}
+            userInfo={userInfo}
           />
         </div>
         <div>

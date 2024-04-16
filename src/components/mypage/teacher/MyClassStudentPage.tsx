@@ -1,6 +1,6 @@
 import { getClassSingleInfo } from '@/app/api/mypage/my-class-api';
 import { useQuery } from '@tanstack/react-query';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { LuClipboardEdit } from 'react-icons/lu';
@@ -8,16 +8,24 @@ import MyClassStudentList from './MyClassStudentList';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { GoPeople } from 'react-icons/go';
 import { BiMoneyWithdraw } from 'react-icons/bi';
+import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 
 const MyClassStudentPage = () => {
+  const { isTeacher } = useUserRoleStore();
   const param = useSearchParams();
   const timeId = param.get('timeId');
+  const router = useRouter();
+
+  // 수강생 전환 시, 마이페이지로 이동
+  if (isTeacher === false) {
+    router.push('/mypage');
+  }
 
   const { data: classSingleInfo, isPending } = useQuery({
     queryKey: ['class', timeId],
     queryFn: () => getClassSingleInfo(timeId)
   });
-  console.log('classSingleInfo', classSingleInfo);
+  // console.log('classSingleInfo', classSingleInfo);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;

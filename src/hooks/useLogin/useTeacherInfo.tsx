@@ -6,7 +6,7 @@ export const useTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
 
   const { data: teacherInfo, isPending } = useQuery({
-    queryKey: ['user', loginUserId],
+    queryKey: ['updateTeacherInfo', loginUserId],
     queryFn: () => getTeacherInfo(loginUserId),
     enabled: !!loginUserId
   });

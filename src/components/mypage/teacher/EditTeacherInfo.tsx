@@ -29,7 +29,7 @@ const EditTeacherInfo = () => {
   const [isAvailableNumber, setIsAvailableNumber] = useState(true); // 폰 번호 숫자만 유효성 검사
 
   const { data: teacherInfo, isPending } = useQuery({
-    queryKey: ['user', loginUserId],
+    queryKey: ['updateTeacherInfo', loginUserId],
     queryFn: () => getTeacherInfo(loginUserId),
     enabled: !!loginUserId
   });
@@ -115,7 +115,7 @@ const EditTeacherInfo = () => {
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['users']
+        queryKey: ['updateTeacherInfo']
       });
     }
   });
@@ -281,20 +281,20 @@ const EditTeacherInfo = () => {
         </div>
       </div>
       <div className="p-4 flex gap-4">
+        <button onClick={handleOnClickCancleBtn} className="btn w-[100px] ">
+          취소하기
+        </button>
         {isEditing ? (
           <div>
-            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px]">
+            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px] bg-dark-purple-color text-white">
               수정 완료
             </button>
           </div>
         ) : (
-          <button onClick={() => setIsEditing(true)} className="btn w-[100px]">
+          <button onClick={() => setIsEditing(true)} className="btn w-[100px] bg-dark-purple-color text-white">
             수정하기
           </button>
         )}
-        <button onClick={handleOnClickCancleBtn} className="btn w-[100px]  bg-dark-purple-color text-white">
-          취소하기
-        </button>
       </div>
     </div>
   );
