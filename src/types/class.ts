@@ -138,4 +138,8 @@ export interface ListDetailClassInfo {
   wish: { user_id: string }[];
   date_id: string;
   day: string;
+  users: {
+    teacher_name: string;
+    user_id: string;
+  };
 }
