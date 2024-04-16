@@ -36,6 +36,7 @@ const ReserveUserInfo = () => {
       router.push('/studentMypage');
     }
   };
+
   return (
     <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md shadow">
       <div className="mb-4">

@@ -56,7 +56,7 @@ const StudentMyPageTab = () => {
       <div className="flex flex-row justify-center border-y-2 w-full">
         <p
           onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4 ${
+          className={`p-4 text-lg ${
             activePage === 'editProfile'
               ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color  '
               : ''
@@ -66,7 +66,7 @@ const StudentMyPageTab = () => {
         </p>
         <p
           onClick={() => handleOnClickTabBtn('reservedClass')}
-          className={`p-4  ${
+          className={`p-4 text-lg  ${
             activePage === 'reservedClass'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
@@ -76,7 +76,7 @@ const StudentMyPageTab = () => {
         </p>
         <p
           onClick={() => handleOnClickTabBtn('myComments')}
-          className={`p-4 ${
+          className={`p-4 text-lg ${
             activePage === 'myComments'
               ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
@@ -86,7 +86,7 @@ const StudentMyPageTab = () => {
         </p>
         <p
           onClick={() => handleOnClickTabBtn('myWishClass')}
-          className={`p-4 ${
+          className={`p-4 text-lg ${
             activePage === 'myWishClass'
               ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
@@ -96,7 +96,7 @@ const StudentMyPageTab = () => {
         </p>
         <p
           onClick={() => handleOnClickTabBtn('addTeacherInfo')}
-          className={`p-4 ${
+          className={`p-4 text-lg ${
             activePage === 'addTeacherInfo'
               ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''

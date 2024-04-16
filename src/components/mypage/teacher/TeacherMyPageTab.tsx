@@ -51,7 +51,7 @@ const TeacherMyPageTab = () => {
       <div className="flex flex-row justify-center border-y-2 w-full">
         <p
           onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4  ${
+          className={`p-4 text-lg  ${
             activePage === 'editProfile'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
@@ -61,7 +61,7 @@ const TeacherMyPageTab = () => {
         </p>
         <p
           onClick={() => handleOnClickTabBtn('editTeacherInfo')}
-          className={`p-4  ${
+          className={`p-4 text-lg  ${
             activePage === 'editTeacherInfo'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
@@ -71,7 +71,7 @@ const TeacherMyPageTab = () => {
         </p>
         <p
           onClick={() => handleOnClickTabBtn('myClass')}
-          className={`p-4 ${
+          className={`p-4 text-lg ${
             activePage === 'myClass'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''

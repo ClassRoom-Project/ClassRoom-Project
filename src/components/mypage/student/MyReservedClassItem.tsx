@@ -82,7 +82,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
               </div>
             </div>
             <div className="flex gap-4">
-              <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
+              <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl">
                 <GrLocation color="#6C5FF7" size="20" />
                 {classItem.location ? (
                   <p>
