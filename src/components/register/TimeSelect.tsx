@@ -83,7 +83,12 @@ const TimeSelect: React.FC = () => {
         </button>
         {isDayPickerOpen && (
           <div ref={dayPickerRef} className="absolute z-10 bg-white border-2 rounded-lg p-4">
-            <DayPicker mode="single" onSelect={handleDateSelect} locale={ko} />
+            <DayPicker 
+              mode="single" 
+              onSelect={handleDateSelect} 
+              locale={ko} 
+              disableNavigation={true} // 한달단위
+            />
           </div>
         )}
       </div>

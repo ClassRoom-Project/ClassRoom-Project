@@ -1,42 +1,43 @@
 "use client";
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import { Notification } from '@/types/notice';
+import { useQuery } from '@tanstack/react-query';
 
 import { LuBell } from 'react-icons/lu';
 import { GoBellFill } from "react-icons/go";
 
 const NotificationComponent = () => {
   const { loginUserId } = useLoginStore();
-  const [isBellFilled, setIsBellFilled] = useState(false);
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = React.useState(false);
   const router = useRouter();
   const notificationRef = useRef<HTMLDivElement>(null);
   const lastIconClickTimeRef = useRef<Date | null>(null);
 
-  useEffect(() => {
-    const fetchNotifications = async () => {
+  // useQuery를 사용하여 notifications 데이터를 가져옵니다.
+  const { data: notifications = [], refetch } = useQuery({
+    queryKey: ['notifications', loginUserId],
+    queryFn: async () => {
       const { data, error } = await supabase
         .from('notifications')
         .select('*')
         .eq('user_id', loginUserId)
         .order('created_at', { ascending: false });
-    
-      if (!error && data) {
-        const unreadNotifications = data.filter(n => !n.isread);
-        setNotifications(unreadNotifications);
-        setIsBellFilled(unreadNotifications.length > 0);
+
+      if (error) {
+        throw new Error(error.message);
       }
-    };
-    
-    fetchNotifications();
-  }, [loginUserId]);
+
+      return data;
+    },
+    enabled: !!loginUserId,
+  });
+
+  const unreadNotificationsCount = notifications.filter(notification => !notification.isread).length;
 
   const toggleBellIcon = () => {
-    setIsBellFilled(!isBellFilled);
     setIsNotificationOpen(prevState => !prevState);
     lastIconClickTimeRef.current = new Date(); // 아이콘 클릭 시간 기록
   };
@@ -76,11 +77,7 @@ const NotificationComponent = () => {
       if (error) {
         console.error('알림 읽음 처리 실패', error);
       } else {
-        setNotifications(prevNotifications =>
-          prevNotifications.map(notif => 
-            notif.notice_id === notification.notice_id ? {...notif, isread: true} : notif
-          )
-        );
+        refetch(); // 알림 상태 업데이트 후, 알림 목록을 다시 불러옵니다.
       }
     }
     router.push(`/list/detail/${notification.class_id}`);
@@ -88,7 +85,7 @@ const NotificationComponent = () => {
 
   return (
     <div className="mr-2.5 relative" ref={notificationRef}>
-      {(isBellFilled || notifications.some(notif => !notif.isread)) ? (
+      {(unreadNotificationsCount > 0) ? (
         <GoBellFill size={30} onClick={toggleBellIcon} className="cursor-pointer" />
       ) : (
         <LuBell size={30} onClick={toggleBellIcon} className="cursor-pointer" />
@@ -119,7 +116,7 @@ const NotificationComponent = () => {
       )}
     </div>
   );
-}
+};
 
+export default NotificationComponent;
 
-export default NotificationComponent
