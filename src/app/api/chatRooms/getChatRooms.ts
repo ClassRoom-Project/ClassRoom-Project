@@ -1,12 +1,14 @@
 import {
+  ChatMessageType,
   ChatRoom,
   ChatRoomFromDB,
   CreateNewChatRoomType,
+  GetChatRoomMessagesType,
+  GetLastMessageType,
   MakeClassUserInfoType,
+  PushImageType,
   SendNewMessageType,
-  SendNewPhotoMessageType,
-  getChatRoomMessagesType,
-  getLastMessageType
+  SendNewPhotoMessageType
 } from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
@@ -116,7 +118,8 @@ export const createNewMessages = async ({
       {
         chat_id: chatId,
         messages: message,
-        create_by: loginUserId
+        create_by: loginUserId,
+        check: false
       }
     ])
     .single();
@@ -148,32 +151,33 @@ export const uploadPhotosToSupabase = async (files: File[]) => {
 };
 
 // 채팅 이미지 넣기
-export const createNewMessagesPhoto = async ({
-  chatId,
-  photos,
-  loginUserId
-}: SendNewPhotoMessageType): Promise<SendNewPhotoMessageType | undefined> => {
-  const { data: newChat, error } = await supabase
+export const createNewMessagesPhoto = async ({ chatId, photos, loginUserId }: PushImageType) => {
+  // 배열 초기화
+  const results: ChatMessageType[] = [];
 
-    .from('chat_messages')
-    .insert([
-      {
+  // 초기화된 배열 반복 실행
+  for (const photo of photos) {
+    const { data: newChat, error } = await supabase
+      .from('chat_messages')
+      .insert({
         chat_id: chatId,
-        images: photos,
+        images: [photo],
         create_by: loginUserId
-      }
-    ])
-    .single();
-  if (error) {
-    console.error('삽입 중 에러 발생:', error);
-    throw error;
+      })
+      .single();
+
+    if (error) {
+      console.error('삽입 중 에러 발생:', error);
+      continue;
+    }
+    console.log('삽입 성공:', newChat);
+    results.push(newChat);
   }
-  console.log('삽입 성공:', newChat);
-  return newChat;
+  return results;
 };
 
 //메시지 내용 가져오기
-export const getChatMessages = async (chatId: string, loginUserId: string): Promise<getChatRoomMessagesType[]> => {
+export const getChatMessages = async (chatId: string, loginUserId: string): Promise<GetChatRoomMessagesType[]> => {
   const { data, error } = await supabase
     .from('chat_messages')
     .select('created_at, create_by, messages, images')
@@ -203,7 +207,7 @@ const updateCheckMessage = async (chatId: string, loginUserId: string): Promise<
 };
 
 // 마지막 메시지 가져오기
-export const getLastChatMessage = async (chatId: string): Promise<getLastMessageType | undefined> => {
+export const getLastChatMessage = async (chatId: string): Promise<GetLastMessageType | undefined> => {
   const { data, error } = await supabase
     .from('chat_messages')
     .select('created_at, messages, images')
@@ -225,7 +229,7 @@ export const getLastChatMessage = async (chatId: string): Promise<getLastMessage
   return lastMessages;
 };
 
-//읽지 않은 채팅 개수 가져오기
+//읽지 않은 방채팅 개수 가져오기
 export const readCheckMessages = async (chatId: string, loginUserId: string): Promise<number | null> => {
   const { error, count } = await supabase
     .from('chat_messages')
@@ -238,6 +242,33 @@ export const readCheckMessages = async (chatId: string, loginUserId: string): Pr
     throw error;
   }
 
-  console.log(count);
+  return count;
+};
+
+export const readCheckMessagesAll = async (loginUserId: string): Promise<number | null> => {
+  //로그인한 사용자가 참여한 채팅방 목록 조회
+  console.log('들어왔어?');
+  const { data: chatRooms, error: roomsError } = await supabase
+    .from('chat_rooms')
+    .select('chat_id')
+    .or(`from_user_id.eq.${loginUserId},teacher_user_id.eq.${loginUserId}`);
+
+  if (roomsError) {
+    throw roomsError;
+  }
+
+  const chatIds = chatRooms.map((room) => room.chat_id);
+
+  const { count, error: messagesError } = await supabase
+    .from('chat_messages')
+    .select('', { count: 'exact' })
+    .in('chat_id', chatIds)
+    .eq('check', false)
+    .neq('create_by', loginUserId);
+
+  if (messagesError) {
+    throw messagesError;
+  }
+
   return count;
 };

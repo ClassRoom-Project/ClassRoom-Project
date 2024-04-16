@@ -7,11 +7,15 @@ import { ChatMessagesType } from '@/types/chat/chatTypes';
 import { BsSend } from 'react-icons/bs';
 import ChatImageModal from './ChatImageModal';
 import MessageBoxs from './MessageBoxs';
+import { useEffect } from 'react';
+import { supabase } from '@/app/api/supabase/supabase';
+import { useQueryClient } from '@tanstack/react-query';
 
 export default function ChatMessages({ fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
   const { loginUserId } = useLoginStore();
   const { createNewMessageMutate } = useCreateNewMessage();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(fromUserId);
+  const queryClient = useQueryClient();
 
   const handleSubmitMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,7 +55,7 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
   //     console.log('혹시?');
   //     subscribeChat.unsubscribe();
   //   };
-  // }, [chatId]);
+  // }, [chatId, queryClient]);
 
   const studentName = MakeClassUserInfo?.nickname;
 
@@ -76,7 +80,7 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
         otherId={otherId}
         studentName={studentName!}
       />
-      <div className="w-full flex justify-center items-center bg-white py-8 ">
+      <div className="w-full flex justify-center items-center bg-white py-8 border-t border-gray-300">
         <form onSubmit={handleSubmitMessage} className="rounded-md border px-4 py-2 w-4/5 flex">
           <input
             type="text"

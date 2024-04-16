@@ -27,6 +27,7 @@ const Header = ({ children }: PropsWithChildren) => {
   const { data: session, status } = useSession();
   const userEmail = session?.user?.email ?? null;
 
+  //
   useSetSessionStorage();
   useReadLoginUserId(userEmail);
   useLoginUserId({ userEmail });
@@ -51,8 +52,8 @@ const Header = ({ children }: PropsWithChildren) => {
   const profileImage = userInfo?.profile_image ? userInfo?.profile_image : basicProfileImage;
 
   return (
-    <>
-      <div className="flex p-[15px] w-full justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
+    <div className="">
+      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-Full justify-between items-center h-[60px] border-b-[1px] border-solid border-gray-300">
         <Link href="/">
           <Image className="rounded-full" src={Logo} alt="클룸 로고" width={100} height={100} />
         </Link>
@@ -102,8 +103,8 @@ const Header = ({ children }: PropsWithChildren) => {
           </div>
         </div>
       </div>
-      {children}
-    </>
+      <div className="mt-[60px]">{children}</div>
+    </div>
   );
 };
 

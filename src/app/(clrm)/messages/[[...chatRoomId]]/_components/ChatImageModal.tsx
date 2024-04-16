@@ -88,7 +88,6 @@ export default function ChatImageModal({ chatId }: { chatId: string }) {
         <label htmlFor="photo" className=" cursor-pointer">
           <MdPhotoCamera className="text-main-color text-2xl right-12 bottom-2 hover:text-button-hover-color" />
         </label>
-
         <input type="file" name="photo" id="photo" accept="image/*" hidden multiple onChange={handleImageChange} />
         <div className="w-full flex flex-row">
           {showImage.map((image, index) => (
