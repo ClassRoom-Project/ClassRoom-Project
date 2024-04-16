@@ -91,13 +91,15 @@ const NotificationComponent = () => {
         <div className="absolute right-[-8px] mt-2 w-80 bg-white shadow-lg rounded-md z-10">
           <div className="px-4 py-2 font-bold border-b border-gray-200">알림</div>
           <div className="max-h-60 overflow-y-auto">
-            {notifications.length > 0 ? (
-              notifications.map((notification, index) => (
+            {notifications.filter(notification => !notification.isread).length > 0 ? (
+              notifications.filter(notification => !notification.isread).map((notification, index) => (
                 <div 
                   key={index} 
-                  className={`px-4 py-3 cursor-pointer flex items-center hover:bg-[#EFEFEF] ${notification.isread ? 'bg-gray-300' : ''} ${index !== notifications.length - 1 ? 'border-b border-gray-200' : ''}`} onClick={() => handleNotificationClick(notification)}>
-                    <span className="h-4 w-4 bg-[#7D95FF] rounded-full mr-2 flex-shrink-0"></span>
-                    <span className='text-sm'>{notification.notice}</span>
+                  className={`px-4 py-3 cursor-pointer flex items-center hover:bg-[#EFEFEF] ${notification.isread ? 'bg-gray-300' : ''}`} 
+                  onClick={() => handleNotificationClick(notification)}
+                >
+                  <span className="h-4 w-4 bg-[#7D95FF] rounded-full mr-2 flex-shrink-0"></span>
+                  <span className='text-sm'>{notification.notice}</span>
                 </div>
               ))
             ) : (
