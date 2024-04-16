@@ -4,10 +4,7 @@ import CurrentReserveQuantity from '@/components/reserve/CurrentReserveQuantity'
 import DateTimePicker from '@/components/reserve/DateTimePicker';
 import PriceCalculator from '@/components/reserve/PriceCalculator';
 import ReserveButton from '@/components/reserve/ReserveButton';
-import ReserveContainer from '@/components/reserve/ClassAndUserInfo';
 import ReserveUserInfo from '@/components/reserve/ReserveUserInfo';
-import Link from 'next/link';
-import { IoIosArrowBack } from 'react-icons/io';
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;

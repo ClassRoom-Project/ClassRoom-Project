@@ -19,16 +19,16 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const addWishMutation = useAddWishMutation();
   const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
-  const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
-  const [isWishedState, setIsWishedState] = useState<boolean>();
+  const {
+    data: isWished,
+    isLoading: isCheckLoading,
+    isError: isCheckError
+  } = useCheckIsWishedQuery({ userId: loginUserId, classId });
   const { data: wishCount, isLoading: isCountLoading, isError: isCountError } = useCountWishQuery(classId);
 
-  //TODO: query client .. 하나만?
-  console.log(wishCount, 'wishCount');
-
-  useEffect(() => {
-    setIsWishedState(isWished);
-  }, [isWished]);
+  if (isCheckError ?? isCountError) {
+    return;
+  }
 
   const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
@@ -63,12 +63,12 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
 
   return (
     <div className=" h-[20px]">
-      {isLoading ? (
+      {isCheckLoading ? (
         <p></p>
       ) : (
         <button onClick={(e) => handleWishClick(e)} className="flex">
           <span>{isWished ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
-          <span>{!isLoading ? wishCount : 0}</span>
+          <span>{!isCountLoading ? wishCount : ''}</span>
         </button>
       )}
     </div>
