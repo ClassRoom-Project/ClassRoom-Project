@@ -8,6 +8,7 @@ import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from "react-icons/fi";
 import { ImageFileWithPreview } from '@/types/register';
+import { noInfoNotify, noDateTimeNotify, noLimitImageNotify } from '@/components/common/Toastify';
 
 const ImageUpload = () => {
   const {
@@ -29,6 +30,7 @@ const ImageUpload = () => {
 
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const classId = crypto.randomUUID();
   const noticeId = crypto.randomUUID();
   const router = useRouter();
@@ -53,19 +55,25 @@ const ImageUpload = () => {
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
+    setIsLoading(true);
     if (!category || !subCategory || !classContent || !classTitle || !classType || !difficulty || !minNumber || !personnel || !totalTime ) {
-      alert('모든 필수 항목을 입력해주세요.');
+      //alert('모든 필수 항목을 입력해주세요.');
+      noInfoNotify();
+      setIsLoading(false);
       return;
     }
 
     const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
 
     if (selectedDates.length === 0 || isAnyTimes) {
-      alert('일정와 시간을 선택해주세요.');
+      // alert('일정와 시간을 선택해주세요.');
+      noDateTimeNotify();
+      setIsLoading(false);
       return;
     }
 
     if (!window.confirm('등록하시겠습니까?')) {
+      setIsLoading(false);
       return;
     }
     const userId = loginUserId;
@@ -144,6 +152,7 @@ const ImageUpload = () => {
           }
         }
       }
+      setIsLoading(false);
       alert('등록이 완료되었습니다.');
       router.push(`/register/completedPage/${classId}`);
     }
@@ -153,7 +162,8 @@ const ImageUpload = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       if (images.length >= 5) {
-        alert('최대 5개의 이미지만 추가할 수 있습니다.');
+        // alert('최대 5개의 이미지만 추가할 수 있습니다.');
+        noLimitImageNotify();
         return;
       }
 
@@ -194,6 +204,12 @@ const ImageUpload = () => {
   };
 
   return (
+    <>
+    {isLoading && (
+      <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
+        <span className="loading loading-infinity loading-lg bg-[#CAC6FC]"></span>
+      </div>
+    )}
     <div className='my-4 w-full'>
       <div className="flex flex-col w-full">
         <div className="mb-4">
@@ -241,7 +257,6 @@ const ImageUpload = () => {
             )
           ))}
         </div>
-
         <div className="mt-12 w-full flex justify-center">
           <div>
             <button onClick={handleSubmit} className="btn px-4 py-2 bg-[#6C5FF7] text-white text-lg rounded hover:bg-[#4D43B8]">
@@ -252,6 +267,7 @@ const ImageUpload = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
