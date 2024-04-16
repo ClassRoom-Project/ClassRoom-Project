@@ -1,7 +1,7 @@
 import React from 'react';
 import Address from '@/components/register/Address';
 import ClassContent from '@/components/register/ClassContent';
-import ClassTitle from '@/components/register/ClassTitle';
+import ClassTitleType from '@/components/register/ClassTitleType';
 import Price from '@/components/register/Price';
 import TimeSelect from '@/components/register/TimeSelect';
 import Category from '@/components/register/Category';
@@ -21,7 +21,7 @@ const RegisterPage = () => {
           <hr className="my-4 border-[#4D43B8]" />
           <Category />
           <HashTag />
-          <ClassTitle />
+          <ClassTitleType />
           <ClassContent />
           <ClassDiff />
           <MinMaxNumber />
