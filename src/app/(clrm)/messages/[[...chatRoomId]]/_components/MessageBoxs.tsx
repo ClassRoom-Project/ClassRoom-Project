@@ -18,6 +18,16 @@ import { subscribe } from 'diagnostics_channel';
 
 dayjs.locale('ko');
 
+interface ChatMessage {
+  chat_id: string;
+  check: boolean;
+  create_by: string;
+  created_at: string;
+  images: string | null;
+  messages: string | null;
+  messages_id: number;
+}
+
 export default function MessageBoxs({ toClassId, title, fromUserId, chatId, otherId, studentName }: MessagesBoxsType) {
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
@@ -25,6 +35,7 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
   const queryClient = useQueryClient();
+  const [firstMessage] = readChatRoomMessages || [];
 
   useEffect(() => {
     const subscribeChat = supabase
@@ -38,11 +49,14 @@ export default function MessageBoxs({ toClassId, title, fromUserId, chatId, othe
           filter: `chat_id=eq.${chatId}`
         },
         (payload) => {
-          queryClient.setQueryData(['chatMessage', chatId], (oldMessages: any) => {
-            if (oldMessages === payload.new) {
-              return payload.new;
+          queryClient.setQueryData<ChatMessage[]>(['chatMessage', chatId], (oldMessages = []) => {
+            const newMessage: ChatMessage = payload.new;
+            const isMessageExist = oldMessages.some((message) => message.messages_id === newMessage.messages_id);
+            if (!isMessageExist) {
+              return [...oldMessages, newMessage];
+            } else {
+              return oldMessages.map((msg) => (msg.messages_id === newMessage.messages_id ? newMessage : msg));
             }
-            return [...oldMessages, payload.new];
           });
 
           queryClient.invalidateQueries({ queryKey: ['lastMessage', chatId] });
