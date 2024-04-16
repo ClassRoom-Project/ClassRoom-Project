@@ -1,3 +1,5 @@
+'use client';
+
 import { getClassSingleInfo } from '@/app/api/mypage/my-class-api';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter, useSearchParams } from 'next/navigation';
