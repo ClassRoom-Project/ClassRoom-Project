@@ -12,7 +12,7 @@ import AskButton from '../chatRooms/AskButton';
 import { ToastContainer } from 'react-toastify';
 import { alreadyReserved } from '../common/Toastify';
 
-//Todo :  href chat ID, 받아서 입력할것
+//TODO - href chat ID, 받아서 입력할것
 const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeClassUserId: string }) => {
   const { loginUserId } = useLoginStore();
 

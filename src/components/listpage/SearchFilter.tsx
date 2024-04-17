@@ -103,7 +103,7 @@ const SearchFilter = () => {
                   <option value={'인천'}>인천</option>
                   <option value={'충남'}>충남</option>
                   <option value={'충북'}>충북</option>
-                  <option value={'강원'}>강원</option>
+                  <option value={'강원특별자치도'}>강원</option>
                   <option value={'경북'}>경북</option>
                   <option value={'경남'}>경남</option>
                   <option value={'전북'}>전북</option>

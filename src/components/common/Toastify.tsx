@@ -71,9 +71,20 @@ export const invalidReserve = () =>
     progress: undefined,
     theme: 'light'
   });
-
 export const commentWarning = () =>
-  toast.error('별점과 후기를 모두 입력하세요.', {
+  toast.error('후기를 10자 이상 입력해주세요', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const commentStarWarning = () =>
+  toast.error('별점을 입력해 주세요', {
     position: 'top-right',
     autoClose: 2000,
     hideProgressBar: false,
