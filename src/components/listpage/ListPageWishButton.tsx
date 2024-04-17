@@ -57,8 +57,6 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: 
     }
   };
 
-  console.log(wishCountState);
-
   return <WishIcon handleWishClick={handleWishClick} isWished={isWishedState} wishCount={wishCountState} />;
 };
 
