@@ -50,7 +50,7 @@ export interface getLoginUserType {
 }
 
 export interface SetUserLoginIdType {
-  loginUserId: string | null;
+  loginUserId: string;
   setLoginUserId: (id: string) => void;
 }
 
