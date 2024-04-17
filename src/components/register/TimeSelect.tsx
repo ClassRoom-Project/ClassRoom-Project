@@ -45,7 +45,7 @@ const TimeSelect: React.FC = () => {
       alert('시간을 선택해주세요.');
     } else {
       addTimeToSchedule(date, tempTime);
-      setTempTime(''); // 시간 입력 후 초기화
+      setTempTime('');
     }
   };
 

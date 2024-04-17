@@ -3,14 +3,13 @@ import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import { Notification } from '@/types/notice';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { LuBell } from 'react-icons/lu';
 import { GoBellFill } from "react-icons/go";
 
 const NotificationComponent = () => {
   const { loginUserId } = useLoginStore();
   const router = useRouter();
-  const queryClient = useQueryClient();
   const [isNotificationOpen, setIsNotificationOpen] = React.useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const lastIconClickTimeRef = useRef<Date | null>(null);

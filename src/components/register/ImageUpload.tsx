@@ -57,7 +57,6 @@ const ImageUpload = () => {
   const handleSubmit = async () => {
     setIsLoading(true);
     if (!category || !subCategory || !classContent || !classTitle || !classType || !difficulty || !minNumber || !personnel || !totalTime ) {
-      //alert('모든 필수 항목을 입력해주세요.');
       noInfoNotify();
       setIsLoading(false);
       return;
@@ -66,7 +65,6 @@ const ImageUpload = () => {
     const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
 
     if (selectedDates.length === 0 || isAnyTimes) {
-      // alert('일정와 시간을 선택해주세요.');
       noDateTimeNotify();
       setIsLoading(false);
       return;
@@ -162,7 +160,6 @@ const ImageUpload = () => {
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       if (images.length >= 5) {
-        // alert('최대 5개의 이미지만 추가할 수 있습니다.');
         noLimitImageNotify();
         return;
       }
