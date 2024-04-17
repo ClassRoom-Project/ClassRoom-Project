@@ -38,22 +38,36 @@ export interface ChatRoom {
   fromUserId: string;
   teacherUserId: string;
   title: string;
+  image: string[];
   makeClassUserId: string;
   nickName: string;
   profileImg: string;
 }
+
+export interface ChatPreviewType {
+  chatId: string;
+  toClassId: string;
+  fromUserId: string;
+  otherId: string;
+  title: string;
+  image: string[];
+  makeClassUserId: string;
+  loginUserId: string;
+}
+
 export interface ChatRoomFromDB {
-  chat_id: any;
-  created_at: any;
-  to_class_id: any;
-  from_user_id: any;
-  teacher_user_id: any;
+  chat_id: string;
+  created_at: string;
+  to_class_id: string;
+  from_user_id: string;
+  teacher_user_id: string;
   class: {
-    title: any;
-    user_id: any;
+    title: string;
+    user_id: string;
+    image: string[];
     users: {
-      nickname: any;
-      profile_image: any;
+      nickname: string;
+      profile_image: string;
     };
   };
 }
@@ -64,6 +78,7 @@ export interface ChatMessagesType {
   title: string;
   toClassId: string;
   fromUserId: string;
+  mainImage: string | null;
 }
 
 export interface MakeClassUserInfoType {
@@ -88,6 +103,7 @@ export interface GetChatRoomMessagesType {
   create_by: string;
   messages: string;
   images: string;
+  messages_id: number;
 }
 
 export interface MessagesBoxsType {
@@ -97,6 +113,7 @@ export interface MessagesBoxsType {
   chatId: string;
   otherId: string;
   studentName: string;
+  mainImage: string | null;
 }
 
 export interface GetLastMessageType {
@@ -115,4 +132,19 @@ export interface ChatMessageType {
   chat_id: string;
   images: string[];
   create_by: string;
+}
+
+export interface ChatImageeModalType {
+  chatId: string;
+  closeModal: (value: boolean) => void;
+}
+
+export interface ChatMessage {
+  chat_id: string;
+  check: boolean;
+  create_by: string;
+  created_at: string;
+  images: string | null;
+  messages: string | null;
+  messages_id: number;
 }

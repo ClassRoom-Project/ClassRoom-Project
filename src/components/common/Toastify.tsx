@@ -160,8 +160,21 @@ export const checkFormValidation = () =>
     theme: 'light'
   });
 
+export const deleteRoom = () =>
+  toast('방이 삭제되었습니다.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnFocusLoss: false,
+    theme: 'light'
+  });
+
 export const noDateTimeNotify = () =>
-  toast.error('일정와 시간을 선택해주세요.', {
+  toast.error('일정과 시간을 선택해주세요.', {
     position: 'top-right',
     autoClose: 3000,
     hideProgressBar: false,
