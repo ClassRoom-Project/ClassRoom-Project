@@ -16,6 +16,7 @@ export default function MessagesPage() {
   const title = searchParams.get('title');
   const toClassId = searchParams.get('toClassId');
   const fromUserId = searchParams.get('fromUserId');
+  const mainImage = searchParams.get('mainImage');
 
   return (
     <div className="w-full" style={{ height: 'calc(100vh - 60px)' }}>
@@ -31,7 +32,7 @@ export default function MessagesPage() {
                 <Virtuoso
                   className="h-full overflow-y-auto"
                   data={chatroomsInfo}
-                  itemContent={(_, { chatId, toClassId, fromUserId, teacherUserId, title, makeClassUserId }) => (
+                  itemContent={(_, { chatId, toClassId, fromUserId, image, teacherUserId, title, makeClassUserId }) => (
                     <ChatPreview
                       key={chatId}
                       chatId={chatId}
@@ -39,6 +40,7 @@ export default function MessagesPage() {
                       toClassId={toClassId}
                       fromUserId={fromUserId}
                       title={title}
+                      image={image}
                       makeClassUserId={makeClassUserId}
                       loginUserId={loginUserId}
                     />
@@ -65,6 +67,7 @@ export default function MessagesPage() {
                 title={title!}
                 toClassId={toClassId!}
                 fromUserId={fromUserId!}
+                mainImage={mainImage}
               />
             )}
           </section>
