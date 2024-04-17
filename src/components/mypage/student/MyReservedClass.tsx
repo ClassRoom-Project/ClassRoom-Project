@@ -22,7 +22,6 @@ const MyReservedClass = () => {
     queryFn: () => fetchMyClasses(loginUserId),
     enabled: !!loginUserId
   });
-  // console.log('reservedClasses', reservedClasses);
 
   useEffect(() => {
     window.scrollTo(0, 0); // 페이지 이동 시 스크롤 위치 맨 위로 초기화

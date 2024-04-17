@@ -28,7 +28,6 @@ const MyClassStudentPage = () => {
     queryKey: ['class', timeId],
     queryFn: () => getClassSingleInfo(timeId)
   });
-  // console.log('classSingleInfo', classSingleInfo);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
