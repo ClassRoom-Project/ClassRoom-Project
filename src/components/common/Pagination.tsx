@@ -51,7 +51,7 @@ const Pagination = ({ totalItems, itemCountPerPage, pageCount, currentPage }: Pa
           <>
             {start + i <= totalPages && (
               <li key={start + i}>
-                <Link href={pathname + '?' + createQueryString('page', `${start + i}`)}>
+                <Link key={start + i} href={pathname + '?' + createQueryString('page', `${start + i}`)}>
                   <p
                     className={`px-3 py-1 m-2 rounded-full ${
                       currentPage === start + i

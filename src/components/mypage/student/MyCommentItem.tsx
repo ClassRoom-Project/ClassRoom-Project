@@ -1,6 +1,6 @@
 import { updateMyComment } from '@/app/api/mypage/my-comments-api';
 import Stars from '@/components/common/Stars';
-import { noChangedNotify } from '@/components/common/Toastify';
+import { noChangedNotify, successDeleteReservation } from '@/components/common/Toastify';
 import { useDeleteComment } from '@/hooks/useEditComment';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { MyCommentType, NewCommentType } from '@/types/comments';
@@ -69,6 +69,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
       if (confirm) {
         deleteCommentMutation(commentId);
         setIsEditing((prev) => !prev);
+        successDeleteReservation();
       }
       return;
     }
