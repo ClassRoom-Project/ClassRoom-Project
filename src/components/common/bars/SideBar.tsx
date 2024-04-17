@@ -38,10 +38,10 @@ const SideBar = ({ children }: PropsWithChildren) => {
       </div>
 
       <div className="flex-1 ml-[100px]">{children}</div>
-      <AlertModal />
+      {/* <AlertModal />
       <button className="bg-red-500 ml-52 w-40 h-40" onClick={toggleModal}>
         모달 버튼
-      </button>
+      </button> */}
     </>
   );
 };
