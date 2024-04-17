@@ -4,19 +4,21 @@ import React, { useState } from 'react';
 import { createDetailComment } from '@/app/api/classdetail/detailComment';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { ToastContainer } from 'react-toastify';
-import { commentWarning, commentLoginWarning } from '../common/Toastify';
+import { commentWarning, commentLoginWarning, commentStarWarning } from '../common/Toastify';
 import { useSession } from 'next-auth/react';
 import { getUserIdByEmail } from '@/app/api/userEmail/loginUserId';
+import { ListDetailClassInfo } from '@/types/class';
+import { useLoginStore } from '@/store/login/loginUserIdStore';
 
 //Todo : 예약한 사람만 댓글 입력가능하게 하기 , 댓글 수정삭제 구현 ,사진 기능
-const CreateComments = ({ classId }: { classId: string | undefined }) => {
+const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }) => {
   const [content, setContent] = useState('');
   const [star, setStar] = useState<number | undefined>(undefined);
   const { data: session } = useSession();
   const queryClient = useQueryClient();
+  const { loginUserId } = useLoginStore();
 
   const email: string = session?.user?.email ?? '';
-
   const {
     data: userData,
     error: userDataError,
@@ -31,7 +33,7 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
 
   const { mutate, error, status } = useMutation({
     mutationKey: ['createDetailComment'],
-    mutationFn: () => createDetailComment(classId, star, userId, content),
+    mutationFn: () => createDetailComment(classData?.class_id, star, userId, content),
     retry: 1,
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -49,10 +51,15 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!content.trim() || !star) {
+    if (!content.trim() || content.trim().length < 10) {
       commentWarning();
       return;
     }
+    if (!star) {
+      commentStarWarning();
+      return;
+    }
+
     if (!userId) {
       commentLoginWarning();
       return;
@@ -70,36 +77,39 @@ const CreateComments = ({ classId }: { classId: string | undefined }) => {
 
   return (
     <>
-      <div className="w-[1000px] bg-disable-color rounded-xl shadow-2xl border-solid p-4">
-        <form onSubmit={handleSubmit}>
-          <div className="rating rating-sm flex justify-end items-center">
-            {[1, 2, 3, 4, 5].map((num) => (
-              <input
-                key={num}
-                type="radio"
-                name="rating"
-                className="mask mask-star-2 mb-1 bg-[#6C5FF7]"
-                value={num}
-                onChange={handleStarChange}
-                checked={star === num}
-              />
-            ))}
-          </div>
-          <textarea
-            maxLength={100}
-            className="w-full h-24 p-2 border rounded-md"
-            placeholder="후기을 입력해주세요.(10자 이상)"
-            value={content}
-            onChange={handleContentChange}
-          ></textarea>
-          <button
-            type="submit"
-            className="mt-2 bg-[#6C5FF7] hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
-          >
-            후기 등록
-          </button>
-        </form>
-      </div>
+      {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
+        <div className="w-[1000px] bg-disable-color rounded-xl shadow-2xl border-solid p-4">
+          <form onSubmit={handleSubmit}>
+            <div className="rating rating-sm flex justify-end items-center">
+              {[1, 2, 3, 4, 5].map((num) => (
+                <input
+                  key={num}
+                  type="radio"
+                  name="rating"
+                  className="mask mask-star-2 mb-1 bg-[#6C5FF7]"
+                  value={num}
+                  onChange={handleStarChange}
+                  checked={star === num}
+                />
+              ))}
+            </div>
+            <textarea
+              minLength={10}
+              maxLength={100}
+              className="w-full h-24 p-2 border rounded-md"
+              placeholder="후기을 입력해주세요.(10자 이상)"
+              value={content}
+              onChange={handleContentChange}
+            ></textarea>
+            <button
+              type="submit"
+              className="mt-2 bg-[#6C5FF7] hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
+            >
+              후기 등록
+            </button>
+          </form>
+        </div>
+      ) : null}
     </>
   );
 };

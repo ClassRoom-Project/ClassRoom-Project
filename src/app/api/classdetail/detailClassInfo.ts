@@ -10,7 +10,8 @@ export const detailClassInfo = async (classId: string) => {
       ` class_id,user_id,category,hashtag,title,description,max_people,min_people,
         location,price,quantity,detail_location,total_time,image,class_type,difficulty,
         date (date_id,class_id,day),
-        users (teacher_name,user_id)
+        users (teacher_name,user_id),
+        reserve(user_id)
       `
     )
     .eq('class_id', classId)

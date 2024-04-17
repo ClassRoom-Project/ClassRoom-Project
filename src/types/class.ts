@@ -134,7 +134,6 @@ export interface ListDetailClassInfo {
   difficulty: string;
   active: boolean;
   reserved_count: number;
-  reserved_user_id: string[];
   wish: { user_id: string }[];
   date_id: string;
   day: string;
@@ -142,4 +141,5 @@ export interface ListDetailClassInfo {
     teacher_name: string;
     user_id: string;
   };
+  reserve: { user_id: string }[];
 }

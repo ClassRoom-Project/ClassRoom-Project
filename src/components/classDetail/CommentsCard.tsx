@@ -17,7 +17,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
     ));
   };
   return (
-    <div className="bg-disable-color mb-5 rounded-lg p-4 shadow-xl max-w-[1000px] w-full mt-5 mx-auto">
+    <div className="bg-disable-color mb-5 rounded-lg p-4 shadow-xl min-w-[1000px] w-full mt-5 mx-auto">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center">
           <div className="flex justify-center items-center">
