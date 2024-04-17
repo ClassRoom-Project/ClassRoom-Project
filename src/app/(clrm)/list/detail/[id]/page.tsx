@@ -23,7 +23,7 @@ const page = async ({ params }: { params: { id: string } }) => {
         <ClassDetailLeft classData={classData} userData={userData} />
         <ClassDetailRight classData={classData} />
       </div>
-      <DetailComments classId={classData?.class_id} />
+      <DetailComments classData={classData} />
     </div>
   );
 };
