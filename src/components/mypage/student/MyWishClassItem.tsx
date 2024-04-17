@@ -1,3 +1,4 @@
+import AskButton from '@/components/chatRooms/AskButton';
 import DetailWishButton from '@/components/classDetail/DetailWishButton';
 import { MyWishClassType } from '@/types/class';
 import Image from 'next/image';
@@ -67,8 +68,11 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
             </div>
           </section>
           <section className="flex justify-end gap-4 pt-4 right-4">
-            {/* <AskButton classId={classItem.class_id} makeClassUserId={classItem.}/> */}
-            <button className="btn w-36 hover:bg-transparent hover:text-text-dark-gray">문의하기</button>
+            <AskButton
+              classId={classItem.class_id}
+              makeClassUserId={classItem.user_id}
+              buttonStyle="btn w-36 hover:bg-transparent hover:text-text-dark-gray"
+            />
             <Link href={`reserve?classId=${classItem.class_id}`}>
               <div className="btn bg-dark-purple-color text-white w-36 hover:bg-transparent hover:text-dark-purple-color">
                 클래스 신청하기

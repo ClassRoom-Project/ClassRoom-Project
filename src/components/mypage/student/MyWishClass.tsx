@@ -11,6 +11,7 @@ const MyWishClass = () => {
     queryFn: () => getMyWishClass(loginUserId),
     enabled: !!loginUserId
   });
+  // console.log('myWishClassList', myWishClassList);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;

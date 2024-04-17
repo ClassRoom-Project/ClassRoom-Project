@@ -37,7 +37,11 @@ const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeCla
       >
         신청하기
       </button>
-      <AskButton classId={classId} makeClassUserId={makeClassUserId} />
+      <AskButton
+        classId={classId}
+        makeClassUserId={makeClassUserId}
+        buttonStyle="flex justify-center items-center rounded-2xl w-20 border-[#5373FF] border-solid border-[1px] h-9 ml-3"
+      />
     </div>
   );
 };

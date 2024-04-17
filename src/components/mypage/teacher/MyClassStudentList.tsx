@@ -29,7 +29,7 @@ const MyClassStudentList = () => {
             <th>이메일</th>
             <th>예약 인원</th>
             <th>예약 금액</th>
-            <th>채팅 보내기</th>
+            {/* <th>채팅 보내기</th> */}
           </tr>
         </thead>
         <tbody>
@@ -51,9 +51,9 @@ const MyClassStudentList = () => {
               <td>{student.email}</td>
               <td>{student.reserve_quantity.toLocaleString()}명</td>
               <td>{student.reserve_price.toLocaleString()}원</td>
-              <td>
+              {/* <td>
                 <button className="btn">1:1 채팅</button>
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>

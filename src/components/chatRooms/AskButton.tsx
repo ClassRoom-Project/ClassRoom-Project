@@ -2,11 +2,17 @@
 
 import { useCreateNewRoom } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
-
 import { useRouter } from 'next/navigation';
-import { toast } from 'react-toastify';
 
-export default function AskButton({ classId, makeClassUserId }: { classId: string; makeClassUserId: string }) {
+export default function AskButton({
+  classId,
+  makeClassUserId,
+  buttonStyle
+}: {
+  classId: string;
+  makeClassUserId: string;
+  buttonStyle: string;
+}) {
   const router = useRouter();
   const { loginUserId } = useLoginStore();
   const { createNewRoomMutate } = useCreateNewRoom();
@@ -38,10 +44,7 @@ export default function AskButton({ classId, makeClassUserId }: { classId: strin
   };
 
   return (
-    <button
-      onClick={onhandleClick}
-      className="flex justify-center items-center rounded-2xl w-20 border-[#5373FF] border-solid border-[1px] h-9 ml-3"
-    >
+    <button onClick={onhandleClick} className={buttonStyle}>
       문의하기
     </button>
   );
