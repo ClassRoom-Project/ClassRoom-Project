@@ -8,8 +8,10 @@ import { ReactNode, Suspense } from 'react';
 const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: '클룸',
-
-  description: '원데이 클래스를 즐겨보세요~!'
+  description: '원데이 클래스를 즐겨보세요~!',
+  icons: {
+    icon: '/logo.svg'
+  }
 };
 
 interface ClrmRootLayoutProps {

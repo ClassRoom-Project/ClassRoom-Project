@@ -1,6 +1,6 @@
 import { updateMyComment } from '@/app/api/mypage/my-comments-api';
 import Stars from '@/components/common/Stars';
-import { noChangedNotify } from '@/components/common/Toastify';
+import { noChangedNotify, successDeleteReservation } from '@/components/common/Toastify';
 import { useDeleteComment } from '@/hooks/useEditComment';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { MyCommentType, NewCommentType } from '@/types/comments';
@@ -69,6 +69,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
       if (confirm) {
         deleteCommentMutation(commentId);
         setIsEditing((prev) => !prev);
+        successDeleteReservation();
       }
       return;
     }
@@ -82,7 +83,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const rating = comment.star;
 
   return (
-    <li className="border-b-2 border-b-border-color max-w-screen-xl w-[1080px]" key={comment.comment_id}>
+    <li className="border-b-2 max-w-screen-xl w-[1080px]" key={comment.comment_id}>
       <div className="flex gap-4 bg-pale-purple my-4 p-4">
         <div className="w-[300px] h-[200px]">
           <Image

@@ -158,6 +158,19 @@ export const successCancelReservation = () =>
     theme: 'light'
   });
 
+export const successDeleteReservation = () =>
+  toast.success('댓글이 삭제되었습니다.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnFocusLoss: false,
+    theme: 'light'
+  });
+
 export const checkFormValidation = () =>
   toast.error('양식에 맞는 값을 입력해주세요.', {
     position: 'top-right',
@@ -181,5 +194,29 @@ export const deleteRoom = () =>
     draggable: true,
     progress: undefined,
     pauseOnFocusLoss: false,
+    theme: 'light'
+  });
+
+export const noDateTimeNotify = () =>
+  toast.error('일정과 시간을 선택해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noLimitImageNotify = () =>
+  toast.error('최대 5개의 이미지만 추가할 수 있습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
     theme: 'light'
   });

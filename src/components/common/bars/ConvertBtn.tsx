@@ -60,7 +60,7 @@ const ConvertBtn = () => {
         <button onClick={handler}>
           <div className="flex flex-col items-center hover:text-main-color transition ease-in">
             <TbArrowsExchange size={30} />
-            <p className="text-xs">선생님으로 전환하기</p>
+            <p className="text-xs ">선생님 전환</p>
           </div>
         </button>
       </div>
@@ -75,7 +75,7 @@ const ConvertBtn = () => {
       <button onClick={handleOnClickChangedRoleBtn}>
         <div className="flex flex-col items-center hover:text-main-color transition ease-in">
           <TbArrowsExchange size={30} />
-          <p className="text-xs ">{isTeacher ? '수강생으로 전환하기' : '선생님으로 전환하기'}</p>
+          <p className="text-xs ">{isTeacher ? '수강생 전환' : '선생님 전환'}</p>
         </div>
       </button>
     </div>

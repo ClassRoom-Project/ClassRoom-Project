@@ -28,7 +28,7 @@ const MyPageBtn = () => {
     <div>
       <button
         onClick={handleMyPageIconOnClick}
-        className="py-4 flex flex-col items-center cursor-pointer hover:text-main-color transition ease-in"
+        className="py-4 flex flex-col items-center cursor-pointer hover:text-main-color transition ease-in whitespace-nowrap"
       >
         <GoPerson size={30} />
         마이페이지

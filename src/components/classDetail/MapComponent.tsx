@@ -41,8 +41,6 @@ const MapComponent = () => {
 
     fetchData();
   }, [placeAddress]);
-  // console.log('latitude', latitude);
-  // console.log('longitude', longitude);
 
   return (
     <div className="flex justify-center items-center w-[400px] h-[300px] m-10">

@@ -10,13 +10,14 @@ export interface ClassItem {
   reserve_price: number;
   reserve_quantity: number;
   times: string;
+  user_id: string;
 }
 
 export interface ClassRegister {
   class_id?: string;
   user_id?: string;
   category: string;
-  subCategory: string;
+  subCategory: string[];
   classTitle: string;
   classContent: string;
   address: string;
@@ -32,7 +33,7 @@ export interface ClassRegister {
   totalTime: number;
 
   setCategory: (category: string) => void;
-  setSubCategory: (subCategory: string) => void;
+  setSubCategory: (subCategory: string[]) => void;
   setAddress: (address: string) => void;
   setDetailAddress: (detailAddress: string) => void;
   setSelectDay: (selectDay: Date[]) => void;
