@@ -27,7 +27,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
             <ReserveUserInfo />
           </div>
           <div className="lg:divider-horizontal" />
-          <div className=" py-6  px-12 min-w-[400px] max-w-[400px] h-[800px] justify-between bg-white rounded-md  flex flex-col shadow">
+          <div className=" py-6 px-8 min-w-[400px] max-w-[400px] h-[800px] justify-between bg-white rounded-md  flex flex-col shadow">
             <ReservationScheduler classInfo={classInfo} />
             <SetQuantityAndPay classInfo={classInfo} />
           </div>
