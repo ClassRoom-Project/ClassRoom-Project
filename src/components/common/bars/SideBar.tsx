@@ -18,10 +18,10 @@ const SideBar = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="fixed p-3 overflow-hidden pr-[15px] bottom-0 top-0 bg-background-color border-solid   flex flex-col justify-between items-center left-0 w-[100px] z-50">
-        <div className="mt-[5vh] flex flex-col text-black items-center">
+        <div className="mt-[5vh] w-full flex flex-col text-black items-center">
           <Link
             href="/"
-            className="p-4  flex flex-col items-center hover:text-main-color transition ease-in text-icon-color"
+            className="py-4 flex flex-col items-center hover:text-main-color transition ease-in text-icon-color"
           >
             <HiOutlineHome className=" font-light text-4xl" />
             <p className="">홈</p>

@@ -24,7 +24,7 @@ export default function ChatButton() {
     <div className="relative">
       <button
         onClick={handleClick}
-        className="p-4 flex flex-col items-center hover:text-main-color transition ease-in text-icon-color"
+        className="py-4 flex flex-col items-center hover:text-main-color transition ease-in text-icon-color"
       >
         <IoChatbubbleEllipsesOutline className="text-4xl " />
         채팅
