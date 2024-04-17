@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { createDetailComment } from '@/app/api/classdetail/detailComment';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ToastContainer } from 'react-toastify';
 import { commentWarning, commentLoginWarning, commentStarWarning } from '../common/Toastify';
 import { useSession } from 'next-auth/react';
 import { getUserIdByEmail } from '@/app/api/userEmail/loginUserId';
@@ -49,15 +48,24 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
       return url;
     }
   };
-  const handleCommentImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+
+  const handleCommentImageChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 임시 URL을 생성!
+      const newImages = [...commentImage, { file, preview }];
+      setCommentImage(newImages);
+    }
+  };
   const { mutate, error, status } = useMutation({
     mutationKey: ['createDetailComment'],
-    mutationFn: () => createDetailComment(classData?.class_id, star, userId, content, commentImage),
+    mutationFn: (data) => createDetailComment(classData?.class_id, star, userId, content, commentImage),
     retry: 1,
     onSuccess: () => {
       queryClient.invalidateQueries();
       setContent('');
       setStar(0);
+      setCommentImage([]);
     }
   });
 
@@ -71,7 +79,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   };
 
   //후기 등록
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleCommentSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!content.trim() || content.trim().length < 10) {
       commentWarning();
@@ -86,6 +94,15 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
       commentLoginWarning();
       return;
     }
+    const imageUrls = [];
+
+    for (const image of commentImage) {
+      const url = await uploadFile(image.file);
+      if (url) {
+        imageUrls.push(url);
+      }
+    }
+    const imagesString = imageUrls.join(',');
     mutate();
   };
 
@@ -101,57 +118,72 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
         <div className="w-[1000px] bg-disable-color rounded-xl shadow-2xl border-solid p-4">
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label
-                htmlFor="image-upload"
-                className="border border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
-              >
-                사진추가
-              </label>
-              <input
-                id="image-upload"
-                type="file"
-                accept="image/*"
-                onChange={handleCommentImageChange}
-                style={{ display: 'none' }}
-              />
-              <Image
-                src={commentImage[0].preview || noImage}
-                alt="uploaded"
-                fill
-                className="h-full w-full object-cover rounded-[20px] border"
-              />
-            </div>
-            <div className="w-[600px] flex flex-col justify-center items-start">
-              <div className="rating min-w-full rating-sm flex justify-end items-center">
-                {[1, 2, 3, 4, 5].map((num) => (
-                  <input
-                    key={num}
-                    type="radio"
-                    name="rating"
-                    className="mask mask-star-2 mb-1 bg-[#6C5FF7]"
-                    value={num}
-                    onChange={handleStarChange}
-                    checked={star === num}
+          <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col">
+            <div className="flex">
+              {/* <div className="w-64 h-64 items-center justify-center flex relative mr-5">
+                {commentImage.length > 0 ? (
+                  <Image
+                    src={commentImage[0].preview}
+                    alt="uploaded image preview"
+                    fill
+                    className="h-full w-full object-cover rounded-[20px] border"
                   />
-                ))}
+                ) : (
+                  <Image
+                    src={noImage}
+                    alt="no image"
+                    fill
+                    className="h-full w-full object-cover rounded-[20px] border"
+                  />
+                )}
+              </div> */}
+              <div className="w-[700px] flex flex-col justify-center items-start">
+                <div className="w-full flex justify-between items-center">
+                  {/* <div className="flex items-center mb-4">
+                    <label
+                      htmlFor="image-upload"
+                      className="border flex border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
+                    >
+                      <p>사진추가</p>
+                    </label>
+                    <input
+                      id="image-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleCommentImageChange}
+                      style={{ display: 'none' }}
+                    />
+                  </div> */}
+                  <div className="rating mb-2 rating-sm flex justify-end items-center">
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <input
+                        key={num}
+                        type="radio"
+                        name="rating"
+                        className="mask mask-star-2 mb-1 bg-[#6C5FF7]"
+                        value={num}
+                        onChange={handleStarChange}
+                        checked={star === num}
+                      />
+                    ))}
+                  </div>
+                </div>
+                <textarea
+                  minLength={10}
+                  maxLength={100}
+                  className="w-full h-52 p-2 border rounded-md"
+                  placeholder="후기을 입력해주세요.(10자 이상)"
+                  value={content}
+                  onChange={handleContentChange}
+                ></textarea>
               </div>
-              <textarea
-                minLength={10}
-                maxLength={100}
-                className="w-full h-24 p-2 border rounded-md"
-                placeholder="후기을 입력해주세요.(10자 이상)"
-                value={content}
-                onChange={handleContentChange}
-              ></textarea>
-              <button
-                type="submit"
-                className="mt-2 bg-[#6C5FF7] hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
-              >
-                후기 등록
-              </button>
             </div>
+            <button
+              type="submit"
+              className="mt-4 bg-[#6C5FF7] hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
+            >
+              후기 등록
+            </button>
           </form>
         </div>
       ) : null}

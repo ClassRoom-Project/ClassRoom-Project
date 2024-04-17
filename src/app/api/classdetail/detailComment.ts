@@ -1,6 +1,7 @@
 import { getLoginUserType } from '@/types/authUser/authUserTypes';
 import { supabase } from '../supabase/supabase';
 import { comment } from 'postcss';
+import { ImageFileWithPreview } from '@/types/register';
 
 //댓글 불러오기 api, rpc로 쿼리문 작성해야된다 이렇게하니까 안나온다 데이터가
 export const getDetailComment = async (classId: string | undefined, page = 1, limit_val = 5) => {
@@ -24,7 +25,7 @@ export const createDetailComment = async (
   star: number | undefined,
   userId: string | undefined,
   content: string | undefined,
-  commentImage: string | undefined
+  comment_image: ImageFileWithPreview[] | undefined
 ) => {
   const { data: comments, error } = await supabase.from('comments').insert([
     {
@@ -33,7 +34,7 @@ export const createDetailComment = async (
       content: content,
       star: star,
       create_at: new Date(),
-      commentImage: commentImage
+      comment_image: comment_image ? comment_image.join(',') : null
     }
   ]);
 
