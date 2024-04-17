@@ -252,7 +252,6 @@ export const readCheckMessages = async (chatId: string, loginUserId: string): Pr
 
 export const readCheckMessagesAll = async (loginUserId: string): Promise<number | null> => {
   //로그인한 사용자가 참여한 채팅방 목록 조회
-  console.log('들어왔어?');
   const { data: chatRooms, error: roomsError } = await supabase
     .from('chat_rooms')
     .select('chat_id')
