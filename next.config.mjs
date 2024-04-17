@@ -5,12 +5,14 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**'
+        hostname: '**',
+        port: ''
+      },
+      {
+        protocol: 'http',
+        hostname: '**',
+        port: ''
       }
-      //   {
-      //     protocol : 'https',
-      //     hostname :  'hdurwturhsczrdeugmon.supabase.co',
-      //   },
     ]
     // domains: [
     //   'img.freepik.com',
@@ -20,8 +22,7 @@ const nextConfig = {
     //   'encrypted-tbn3.gstatic.com',
     //   'encrypted-tbn0.gstatic.com',
     //   'lh3.googleusercontent.com',
-    //   'k.kakaocdn.net',
-    //   'phinf.pstatic.net'
+    //   'k.kakaocdn.net'
     // ]
   },
   async headers() {
