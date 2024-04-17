@@ -27,42 +27,53 @@ const ClassInfos = ({ classId }: { classId: string }) => {
     };
     getClassInfos();
   }, [setClassInfo, classId]);
+  const hashtagString = classInfo?.hashtag.map((tag) => {
+    return (
+      <div key={classInfo.class_id} className="flex justify-center items-center">
+        <RiHashtag className="text-main-color" />
+        <p>{tag}</p>
+      </div>
+    );
+  });
 
   return (
-    <div className="w-[350px] p-4 flex flex-col border-gray-400 border-solid border-b-[1px] justify-center items-center">
-      <div className="w-[350px] flex justify-between">
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
-          <IoMdTime className="text-main-color" /> 총 {classInfo?.total_time}시간
+    <div className="w-[400px] py-4 flex flex-col border-gray-400 border-solid border-b-[1px] justify-center items-start">
+      <div className="w-[400px] flex justify-between">
+        <div className="rounded-2xl flex-wrap border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+          {hashtagString}
         </div>
         <div>
           <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
             <BiSolidCategory className="text-main-color" />
-            {classInfo?.category}
+            <p>{classInfo?.category}</p>
           </div>
+        </div>
+      </div>
+      <div className="w-[400px] flex justify-between py-4">
+        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+          <IoMdTime className="text-main-color" />
+          <p>총 {classInfo?.total_time}시간</p>
         </div>
         <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
           <GiLevelEndFlag className="text-main-color" />
-          {classInfo?.difficulty}
+          <p>{classInfo?.difficulty}</p>
+        </div>
+
+        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+          <BiBookAlt className="text-main-color" />
+          <p>{classInfo?.class_type}</p>
         </div>
       </div>
-      <div className="w-[350px] flex justify-between py-4">
+      <div className="min-w-[400px] flex justify-between">
         <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
-          <RiHashtag className="text-main-color" />
-          {classInfo?.hashtag}
+          <MdOutlinePersonAddAlt1 className="text-main-color" />
+          <p>
+            수용가능인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.quantity} 명
+          </p>
         </div>
         <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
           <FaWonSign className="text-main-color" />
-          {classInfo?.price}원
-        </div>
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
-          <BiBookAlt className="text-main-color" />
-          {classInfo?.class_type}
-        </div>
-      </div>
-      <div className="w-[250px] justify-start">
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
-          <MdOutlinePersonAddAlt1 className="text-main-color" />
-          수용가능인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.quantity} 명
+          <p>{classInfo?.price.toLocaleString()}원</p>
         </div>
       </div>
     </div>

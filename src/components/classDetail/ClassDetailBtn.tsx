@@ -30,7 +30,7 @@ const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeCla
   };
 
   return (
-    <div className="w-[350px] flex justify-center items-center mt-20">
+    <div className="w-[400px] flex justify-center items-center">
       <button
         onClick={handleApplyClick}
         className="flex justify-center items-center rounded-2xl w-20 h-9 bg-[#6C5FF7] text-white mr-3"

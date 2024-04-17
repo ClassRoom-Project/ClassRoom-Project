@@ -5,7 +5,7 @@ export interface ClassAllType {
   class_id: string;
   user_id: string;
   category: string;
-  hashtag: string;
+  hashtag: string[];
   title: string;
   description: string;
   max_people: number;
@@ -119,7 +119,7 @@ export interface ListDetailClassInfo {
   class_id: string;
   user_id: string;
   category: string;
-  hashtag: string;
+  hashtag: string[];
   title: string;
   description: string;
   max_people: number;

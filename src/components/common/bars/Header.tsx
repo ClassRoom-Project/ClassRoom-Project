@@ -65,8 +65,8 @@ const Header = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <div className="">
-      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-Full justify-between items-center h-[80px] border-b-[1px] border-solid border-gray-300">
+    <>
+      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-full justify-between items-center h-20 border-b-[1px] border-solid border-gray-300">
         <div className="flex items-center ml-14 justify-center">
           <Link href="/">
             <Image className="rounded-full" src={Logo} alt="클룸 로고" width={75} height={75} />
@@ -74,7 +74,7 @@ const Header = ({ children }: PropsWithChildren) => {
           <SearchClass />
         </div>
 
-        <div className="w-100 mr-[65px] flex items-end justify-end">
+        <div className="w-100 mr-[100px] flex items-end justify-end">
           <div className="flex items-center">
             {userEmail ? (
               <div className="mr-[10px]">
@@ -117,8 +117,8 @@ const Header = ({ children }: PropsWithChildren) => {
           </div>
         </div>
       </div>
-      <div className="mt-[80px]">{children}</div>
-    </div>
+      <div className="mt-20">{children}</div>
+    </>
   );
 };
 

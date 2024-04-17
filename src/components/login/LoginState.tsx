@@ -24,24 +24,26 @@ export default function LoginState() {
   };
 
   if (status === 'authenticated') {
-    return <div>{userEmail ? <button onClick={handleLogout}>Logout</button> : <Link href="/hello">Login</Link>}</div>;
+    return (
+      <div>{userEmail ? <button onClick={handleLogout}>로그아웃</button> : <Link href="/hello">로그인</Link>}</div>
+    );
   }
 
   if (status === 'loading') {
     return (
-      <div className="bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded">Login</div>
+      <div className="bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded">로그인</div>
     );
   }
   return (
-    <div>
+    <div className="mr-20">
       {userEmail ? (
-        <button onClick={handleLogout}>Logout</button>
+        <button onClick={handleLogout}>로그아웃</button>
       ) : (
         <Link
           className="bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
           href="/hello"
         >
-          Login
+          로그인
         </Link>
       )}
     </div>

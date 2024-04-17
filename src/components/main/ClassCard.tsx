@@ -9,6 +9,8 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   // 주소 괄호 제외
   const formattedLocation = classInfos.location.replace(/\s*\([^)]*\)\s*/, '');
 
+  const hashtagString = classInfos.hashtag.map((tag) => `#${tag}`).join(' ');
+
   return classInfos ? (
     <div className="card w-[250px] h-[350px] bg-base-100 m-1 rounded-xl overflow-hidden">
       <Link href={`/list/detail/${classInfos.class_id}`} className="">
@@ -24,7 +26,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
             unoptimized={true}
           />
         </figure>
-        <div className="card-body p-4 flex flex-col justify-between">
+        <div className="py-4 flex flex-col justify-between">
           {classInfos.location ? (
             <div className="flex justify-start items-center">
               <FaLocationDot color="#6C5FF7" size="25" />
@@ -38,13 +40,11 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
               </p>
             </div>
           )}
-
-          <p className="text-md h-12 overflow-hidden font-semibold">{classInfos.title}</p>
-          {/*해시태그 고정시키기*/}
-          <p className="text-sm h-4 overflow-hidden text-dark-purple-color">#{classInfos.hashtag}</p>
+          <p className="py-2 text-md h-16 overflow-hidden font-semibold">{classInfos.title}</p>
+          <p className="py-2 text-sm h-6 overflow-hidden text-dark-purple-color">{hashtagString}</p>{' '}
         </div>
       </Link>
-      <div className="flex justify-between px-4 pb-4">
+      <div className="flex justify-between pb-4">
         <div className="text-md font-bold overflow-hidden">{`${classInfos.price.toLocaleString()}원`}</div>
         {classInfos.wish && <ListPageWishButton classId={classInfos.class_id} wishInfo={classInfos.wish} />}
       </div>
