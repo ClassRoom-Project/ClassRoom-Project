@@ -13,7 +13,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL('/hello', request.url));
     }
   }
-  console.log('콘솔', token);
+
   if (pathname.startsWith('/hello') && isLoggedIn) {
     return NextResponse.redirect(new URL('/', request.url));
   }
