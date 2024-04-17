@@ -23,7 +23,7 @@ export const getClassForList = async (
   //필터링하기위해 query를 let으로 바꿔 유연하게 데이터를 필터링할수있도록 지정
   let query = supabase
     .from('class')
-    .select('*, wish(user_id)', { count: 'exact' })
+    .select(`*, wish(user_id)`, { count: 'exact' })
     .range(PageNumber, PageNumber + limit - 1); // range란? (a,b) a번째부터 b번째까지의 데이터만 가져오는 메서드 ex 1페이지 0~9 2페이지 10~19
 
   //검색기능
@@ -50,9 +50,9 @@ export const getClassForList = async (
     }
   }
 
-  if (userId) {
-    query = query.filter('wish.user_id', 'eq', `${userId}`);
-  }
+  // if (userId) {
+  //   query = query.filter('wish.user_id', 'eq', `${userId}`); // wish테이블에서 user_id가 같은 행을 filter해서 클래스 데이터에 추가
+  // }
 
   const { data: classInfos, error, count } = await query;
   if (error) {
@@ -62,7 +62,7 @@ export const getClassForList = async (
   const totalCount = count ?? 0;
   const nextPage = PageNumber + limit < totalCount ? page + 1 : undefined;
 
-  // console.log(classInfos);
+  console.log(classInfos);
 
   return { classInfos, nextPage }; // classinfo랑 다음페이지를 반환값으로 가져야 무한루프 넥스트페이지를 사용가능
 };

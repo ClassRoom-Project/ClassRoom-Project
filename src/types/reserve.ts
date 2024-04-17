@@ -1,3 +1,5 @@
+import { ReserveClassType } from './class';
+
 // store에서 사용하기 위한 타입
 export type ReserveInfo = {
   reserveId: string;
@@ -20,6 +22,11 @@ export type ReserveInfo = {
 export type ReserveStoreType = {
   reserveInfo: ReserveInfo;
   setReserveInfo: ({}) => void;
+};
+
+export type ReserveClassInfoStoreType = {
+  reserveClassInfo: ReserveClassType;
+  setReserveClassInfo: (reserveClassInfo: ReserveClassType) => void;
 };
 
 export interface CurrentReservedCountStoreType {

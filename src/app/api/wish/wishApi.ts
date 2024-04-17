@@ -42,3 +42,23 @@ export const cancelWish = async ({ userId, classId }: { userId: string | undefin
     return;
   }
 };
+
+// 디테일 페이지에서 찜 정보 가져오기
+export const countWish = async (classId: string | undefined) => {
+  //TODO: undefined 안오게 수정 필요
+  if (!classId) {
+    return;
+  }
+  const { count, error } = await supabase
+    .from('wish')
+    .select('*', { count: 'exact', head: true })
+    .eq('class_id', classId);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  console.log(count);
+
+  return count;
+};
