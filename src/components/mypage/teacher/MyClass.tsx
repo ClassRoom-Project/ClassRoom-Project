@@ -110,12 +110,14 @@ const MyClass = () => {
             <div className="flex gap-4 m-4 justify-end">
               <button
                 onClick={() => handleOnClickDeleteMyClass(classInfo.class_id)}
-                className="btn w-36 bg-dark-purple-color text-white"
+                className="btn w-36 bg-dark-purple-color text-white hover:bg-transparent hover:text-dark-purple-color"
               >
                 클래스 삭제하기
               </button>
               <Link href={`list/detail/${classInfo.class_id}`}>
-                <button className="btn w-36 bg-point-purple text-white">클래스 보러가기</button>
+                <button className="btn w-36 bg-point-purple text-white hover:bg-transparent hover:text-point-purple">
+                  클래스 보러가기
+                </button>
               </Link>
             </div>
             {/* 클래스 날짜 및 시간 정보 */}

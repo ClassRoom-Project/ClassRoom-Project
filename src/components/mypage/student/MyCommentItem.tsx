@@ -118,34 +118,22 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
             )}
           </section>
           <section className="flex justify-end gap-4 pt-4 right-4">
-            {isEditing ? (
-              <div>
-                <button onClick={() => handleOnClickEditBtn(commentId)} className="btn w-36">
-                  완료하기
-                </button>{' '}
-              </div>
-            ) : (
-              <button onClick={() => handleOnClickEditBtn(commentId)} className="btn w-36">
-                수정하기
-              </button>
-            )}
-            {isEditing ? (
-              <button
-                onClick={() => handleOnClickDeleteCancleBtn(commentId)}
-                className="btn  bg-dark-purple-color text-white w-36"
-              >
-                취소하기
-              </button>
-            ) : (
-              <button
-                onClick={() => handleOnClickDeleteCancleBtn(commentId)}
-                className="btn  bg-dark-purple-color text-white w-36"
-              >
-                삭제하기
-              </button>
-            )}
+            <button
+              onClick={() => handleOnClickEditBtn(commentId)}
+              className="btn w-36 hover:bg-transparent hover:text-text-dark-gray"
+            >
+              {isEditing ? '완료하기' : '수정하기'}
+            </button>
+            <button
+              onClick={() => handleOnClickDeleteCancleBtn(commentId)}
+              className="btn  bg-dark-purple-color text-white w-36 hover:bg-transparent hover:text-dark-purple-color"
+            >
+              {isEditing ? '취소하기' : '삭제하기'}
+            </button>
             <Link href={`list/detail/${comment.class_id}`}>
-              <button className="btn bg-point-purple text-white w-36">클래스 보러가기</button>
+              <button className="btn bg-point-purple text-white w-36 hover:bg-transparent hover:text-point-purple">
+                클래스 보러가기
+              </button>
             </Link>
           </section>
         </div>

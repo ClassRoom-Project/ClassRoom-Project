@@ -96,15 +96,17 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
           </section>
           <section className="flex justify-end gap-4 pt-4 right-4">
             {/* <AskButton classId={classItem.class_id} makeClassUserId={classItem.}/> */}
-            <button className="btn w-36">문의하기</button>
+            <button className="btn w-36 hover:bg-transparent hover:text-text-dark-gray">문의하기</button>
             <button
-              className="btn  bg-dark-purple-color text-white w-36"
+              className="btn  bg-dark-purple-color text-white w-36 hover:bg-transparent hover:text-dark-purple-color"
               onClick={() => handleCancelReservation(classItem.reserve_id)}
             >
               예약 취소하기
             </button>
             <Link href={`list/detail/${classItem.class_id}`}>
-              <div className="btn bg-point-purple text-white w-36">클래스 보러가기</div>
+              <div className="btn bg-point-purple text-white w-36 hover:bg-transparent hover:text-point-purple">
+                클래스 보러가기
+              </div>
             </Link>
           </section>
         </div>
