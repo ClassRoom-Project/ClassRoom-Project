@@ -9,9 +9,12 @@ import { HiOutlineHome } from 'react-icons/hi2';
 import ConvertBtn from './ConvertBtn';
 import { useModalStore } from '@/store/modalstore';
 import { AlertModal } from '../AlertModal';
+import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 
 const SideBar = ({ children }: PropsWithChildren) => {
+  const { isTeacher } = useUserRoleStore();
   const { isOpen, toggleModal } = useModalStore();
+
   return (
     <>
       <div className="fixed p-3 overflow-hidden pr-[15px] bottom-0 top-0 bg-background-color border-solid   flex flex-col justify-between items-center left-0 w-[100px] z-50">
@@ -24,10 +27,9 @@ const SideBar = ({ children }: PropsWithChildren) => {
             <p className="">홈</p>
           </Link>
           <ChatButton />
-          <CreateBtn />
-
+          {/* 강사 일때만 클래스 등록하기 버튼 띄우기 */}
+          {isTeacher ? <CreateBtn /> : ''}
           <MyPageBtn />
-          {/* 예약 페이지 확인을 위한 임시 링크 */}
         </div>
         <div>
           {/* 수강생/강사 전환 버튼입니다. */}

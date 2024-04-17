@@ -1,7 +1,9 @@
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
+import Link from 'next/link';
 import { GrLocation } from 'react-icons/gr';
 import { HiOutlineCube } from 'react-icons/hi2';
+import { IoIosArrowBack } from 'react-icons/io';
 import { LuClock } from 'react-icons/lu';
 import { MdOutlineCategory } from 'react-icons/md';
 import { PiCurrencyKrw } from 'react-icons/pi';
@@ -14,11 +16,11 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
       title: `클래스 유형`,
       description: `${classInfo.classType}`
     },
-    {
-      icon: <MdOutlineCategory className="text-gray-400" />,
-      title: '카테고리',
-      description: classInfo.category
-    },
+    // {
+    //   icon: <MdOutlineCategory className="text-gray-400" />,
+    //   title: '카테고리',
+    //   description: classInfo.category
+    // },
     {
       icon: <HiOutlineCube className="text-gray-400" />,
       title: '난이도',
@@ -42,8 +44,10 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   ];
 
   return (
-    <div className="p-6 bg-white mb-4 rounded-md shadow">
-      <h1 className="font-bold text-lg mb-1">선택하신 클래스</h1>
+    <div className="p-6 bg-white rounded-md shadow">
+      <div className="flex justify-between w-full">
+        <h1 className="font-bold text-lg mb-1">선택하신 클래스</h1>
+      </div>
       <div className="w-full relative h-[210px] mb-2 ">
         <Image
           className="rounded-lg"
@@ -60,7 +64,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
             return (
               <div key={title} className="flex items-center gap-1 text-gray-500">
                 <div className="font-bold ">{icon}</div>
-                <div className="font-bold mr-1">{title}</div>
+                <div className={'font-bold mr-1 shrink-0'}>{title}</div>
                 <p className="font-normal">{description}</p>
               </div>
             );

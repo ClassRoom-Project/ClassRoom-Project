@@ -24,6 +24,7 @@ export interface ClassAllType {
   reserved_count: number;
   reserved_user_id: string[];
   wish: { user_id: string }[];
+  wishCount: { user_id: string }[];
 }
 
 export interface ClassItem {
@@ -43,6 +44,7 @@ export interface MyRegisteredClassType {
   class_type: string;
   category: string;
   difficulty: string;
+  total_time: bigint;
   dates: [{ date_id: string; day: string; times: [{ time_id: string; times: string }] }];
 }
 
@@ -65,8 +67,8 @@ export interface MyClassSingleInfoType {
   description: string;
   price: bigint;
   quantity: bigint;
-  max_people: bigint;
   min_people: bigint;
+  total_time: bigint;
 }
 
 // 예약 페이지에서 클래스 정보를 보여주기 위한 타입

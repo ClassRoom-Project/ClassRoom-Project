@@ -2,7 +2,7 @@ import { ClassAllType } from '@/types/class';
 import Image from 'next/image';
 import Link from 'next/link';
 import ListPageWishButton from '../listpage/ListPageWishButton';
-import { GrLocation } from 'react-icons/gr';
+import { FaLocationDot } from 'react-icons/fa6';
 
 //TODO - 주소 글자 넘칠 경우 해결 , 온라인일 경우 주소가 필요없으므로 주소 대체할 것 구현 필요
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
@@ -27,12 +27,12 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
         <div className="card-body p-4 flex flex-col justify-between">
           {classInfos.location ? (
             <div className="flex justify-start items-center">
-              <GrLocation color="#6C5FF7" size="25" />
+              <FaLocationDot color="#6C5FF7" size="25" />
               <p className="text-sm flex-grow items-center h-7 p-1 overflow-hidden rounded-3xl">{formattedLocation}</p>
             </div>
           ) : (
             <div className="flex justify-start items-center">
-              <GrLocation color="#6C5FF7" size="25" />
+              <FaLocationDot color="#6C5FF7" size="25" />
               <p className="text-sm font-bold flex-grow items-center h-7 p-1 overflow-hidden rounded-3xl">
                 온라인 클래스
               </p>
