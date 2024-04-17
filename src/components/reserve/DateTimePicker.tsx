@@ -82,6 +82,12 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     );
   }
 
+  const GridCols = {
+    2: 'grid-cols-2',
+    3: 'grid-cols-3',
+    4: 'grid-cols-4'
+  };
+
   return (
     <div className="w-full mb-2">
       <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
@@ -106,7 +112,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
           const gridColNum =
             dateInfo.times.length <= 4 ? '2' : dateInfo.times.length > 4 && dateInfo.times.length <= 6 ? '3' : '4'; // 등록된 시간 개수에 따라 grid 숫자 조절
           return (
-            <div key={dateInfo.dateId} className={`grid grid-cols-${gridColNum} gap-2 w-full mb-3`}>
+            <div key={dateInfo.dateId} className={`grid ${GridCols[gridColNum]} gap-2 w-full mb-3`}>
               {/* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */}
               {dateInfo.times.map((timeInfo) => (
                 <button
