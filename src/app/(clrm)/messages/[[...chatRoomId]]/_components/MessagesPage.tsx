@@ -6,7 +6,6 @@ import { useSearchParams } from 'next/navigation';
 import { Virtuoso } from 'react-virtuoso';
 import ChatPreview from './ChatPreview';
 import ChatMessages from './ChatMessages';
-import { supabase } from '@/app/api/supabase/supabase';
 
 export default function MessagesPage() {
   const { loginUserId } = useLoginStore();
@@ -17,22 +16,7 @@ export default function MessagesPage() {
   const title = searchParams.get('title');
   const toClassId = searchParams.get('toClassId');
   const fromUserId = searchParams.get('fromUserId');
-
-  // supabase
-  //   .channel('table-db-changes')
-  //   .on(
-  //     'postgres_changes',
-  //     {
-  //       event: '*', // listen할 이벤트 트리거 (INSERT, UPDATE, DELETE, *)
-  //       schema: 'public',
-  //       table: 'chat_messages' // listen할 테이블 이름
-  //     },
-  //     (payload) => {
-  //       // new, old, eventType ..
-  //       console.log(payload.new);
-  //     }
-  //   )
-  //   .subscribe();
+  const mainImage = searchParams.get('mainImage');
 
   return (
     <div className="w-full" style={{ height: 'calc(100vh - 60px)' }}>
@@ -48,7 +32,7 @@ export default function MessagesPage() {
                 <Virtuoso
                   className="h-full overflow-y-auto"
                   data={chatroomsInfo}
-                  itemContent={(_, { chatId, toClassId, fromUserId, teacherUserId, title, makeClassUserId }) => (
+                  itemContent={(_, { chatId, toClassId, fromUserId, image, teacherUserId, title, makeClassUserId }) => (
                     <ChatPreview
                       key={chatId}
                       chatId={chatId}
@@ -56,6 +40,7 @@ export default function MessagesPage() {
                       toClassId={toClassId}
                       fromUserId={fromUserId}
                       title={title}
+                      image={image}
                       makeClassUserId={makeClassUserId}
                       loginUserId={loginUserId}
                     />
@@ -82,6 +67,7 @@ export default function MessagesPage() {
                 title={title!}
                 toClassId={toClassId!}
                 fromUserId={fromUserId!}
+                mainImage={mainImage}
               />
             )}
           </section>

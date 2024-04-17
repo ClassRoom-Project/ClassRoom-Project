@@ -38,10 +38,23 @@ export interface ChatRoom {
   fromUserId: string;
   teacherUserId: string;
   title: string;
+  image: string[];
   makeClassUserId: string;
   nickName: string;
   profileImg: string;
 }
+
+export interface ChatPreviewType {
+  chatId: string;
+  toClassId: string;
+  fromUserId: string;
+  otherId: string;
+  title: string;
+  image: string[];
+  makeClassUserId: string;
+  loginUserId: string;
+}
+
 export interface ChatRoomFromDB {
   chat_id: string;
   created_at: string;
@@ -51,6 +64,7 @@ export interface ChatRoomFromDB {
   class: {
     title: string;
     user_id: string;
+    image: string[];
     users: {
       nickname: string;
       profile_image: string;
@@ -64,6 +78,7 @@ export interface ChatMessagesType {
   title: string;
   toClassId: string;
   fromUserId: string;
+  mainImage: string | null;
 }
 
 export interface MakeClassUserInfoType {
@@ -98,6 +113,7 @@ export interface MessagesBoxsType {
   chatId: string;
   otherId: string;
   studentName: string;
+  mainImage: string | null;
 }
 
 export interface GetLastMessageType {

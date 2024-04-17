@@ -1,6 +1,5 @@
 'use client';
 
-import { supabase } from '@/app/api/supabase/supabase';
 import ProfileImage from '@/assets/images/profile-image.png';
 import {
   useReadCheckMessages,
@@ -8,12 +7,11 @@ import {
   useReadMakeClassUserInfo
 } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
-import { useQueryClient } from '@tanstack/react-query';
+import { ChatPreviewType } from '@/types/chat/chatTypes';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 
 dayjs.locale('ko');
 
@@ -21,16 +19,16 @@ dayjs.locale('ko');
 interface PostData {
   [key: string]: any; // 더 구체적인 타입 정보를 사용할 수 있으면 좋습니다.
 }
-export default function ChatPreview({ chatId, toClassId, title, fromUserId, otherId }: any) {
+export default function ChatPreview({ chatId, toClassId, title, image, fromUserId, otherId }: ChatPreviewType) {
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readLastMessages } = useReadLastMessages(chatId);
   const { readleftChekcMessages } = useReadCheckMessages(chatId, loginUserId!);
-  const [postData, setPostData] = useState<PostData | undefined>();
+  const mainImage = image && image.length > 0 ? image[0] : '';
 
   return (
     <Link
-      href={`/messages?fromUserId=${fromUserId}&chatId=${chatId}&otherId=${otherId}&title=${title}&toClassId=${toClassId}`}
+      href={`/messages?fromUserId=${fromUserId}&chatId=${chatId}&otherId=${otherId}&title=${title}&toClassId=${toClassId}&mainImage=${mainImage}`}
       prefetch={false}
       shallow
     >

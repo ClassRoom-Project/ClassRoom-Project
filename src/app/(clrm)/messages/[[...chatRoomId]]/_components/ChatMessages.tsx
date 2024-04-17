@@ -16,7 +16,7 @@ import { MdPhotoCamera } from 'react-icons/md';
 import { IoIosLogOut } from 'react-icons/io';
 import { BsSend } from 'react-icons/bs';
 
-export default function ChatMessages({ fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
+export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
   const [imageModal, setImageModal] = useState(false);
   const { loginUserId } = useLoginStore();
   const { createNewMessageMutate } = useCreateNewMessage();
@@ -83,6 +83,7 @@ export default function ChatMessages({ fromUserId, chatId, otherId, title, toCla
         chatId={chatId}
         otherId={otherId}
         studentName={studentName!}
+        mainImage={mainImage}
       />
       <div className="w-full flex justify-center items-center bg-white py-8 border-t border-gray-300">
         <div className="px-4 py-2 w-4/5 h-16 flex relative ">

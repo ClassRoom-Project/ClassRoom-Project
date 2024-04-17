@@ -59,7 +59,7 @@ export const getChatRooms = async (loginUserId: string): Promise<ChatRoom[]> => 
     .select(
       `
       chat_id, created_at, to_class_id, from_user_id, teacher_user_id,
-      class!inner(title, user_id, users!inner(nickname, profile_image))
+      class!inner(title,image, user_id, users!inner(nickname, profile_image))
     `
     )
     .or(`from_user_id.eq.${loginUserId},teacher_user_id.eq.${loginUserId}`);
@@ -79,6 +79,7 @@ export const getChatRooms = async (loginUserId: string): Promise<ChatRoom[]> => 
       fromUserId: chatRoom.from_user_id,
       teacherUserId: chatRoom.teacher_user_id,
       title: chatRoom.class.title,
+      image: chatRoom.class.image,
       makeClassUserId: chatRoom.class.user_id,
       nickName: chatRoom.class.users.nickname,
       profileImg: chatRoom.class.users.profile_image
