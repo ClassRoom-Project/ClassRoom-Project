@@ -6,17 +6,26 @@ import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { BiCategoryAlt } from 'react-icons/bi';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GoPersonAdd } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
 import NoImage from '@/assets/images/no_img.jpg';
+import Pagination from '@/components/common/Pagination';
+import { useEffect, useState } from 'react';
+import ClassInfo from '@/components/reserve/ClassInfo';
 
 const MyClass = () => {
   const { loginUserId } = useLoginStore();
   const router = useRouter();
   const queryClient = useQueryClient();
+
+  // 페이지네이션
+  const searchParams = useSearchParams();
+  const page = searchParams.get('page');
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 2; // 한 페이지당 보여줄 포스트의 개수
 
   const { data: myClassInfo, isPending } = useQuery({
     queryKey: ['class', loginUserId],
@@ -47,6 +56,11 @@ const MyClass = () => {
     router.push(`/myClassStudentList?timeId=${timeId}`);
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0); // 페이지 이동 시 스크롤 위치 맨 위로 초기화
+    setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
+  }, [page]);
+
   if (isPending) {
     return <div> 로딩중 ... </div>;
   }
@@ -55,9 +69,13 @@ const MyClass = () => {
     return <div>현재 등록한 클래스가 없습니다.</div>;
   }
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = myClassInfo.slice(indexOfFirstPost, indexOfLastPost);
+
   return (
     <ul className="flex flex-col align-center ">
-      {myClassInfo?.map((classInfo, classIndex) => (
+      {currentPosts?.map((classInfo, classIndex) => (
         <li key={classIndex} className="flex flex-col align-center gap-4 my-4 w-[1080px] py-4">
           {/* 클래스 기본 정보 부분 */}
           <div className="collapse collapse-arrow">
@@ -149,6 +167,12 @@ const MyClass = () => {
           </div>
         </li>
       ))}
+      <Pagination
+        totalItems={myClassInfo.length}
+        itemCountPerPage={postsPerPage}
+        pageCount={5}
+        currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
+      />
     </ul>
   );
 };

@@ -16,7 +16,6 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: 
   const [isWishedState, setIsWishedState] = useState<boolean>(false);
   const [wishCountState, setWishCountState] = useState<number>(wishInfo.length);
   const isWishedClass = wishInfo.some((item) => item.user_id === loginUserId);
-  console.log('wishInfo', wishInfo);
 
   useEffect(() => {
     setIsWishedState(isWishedClass);

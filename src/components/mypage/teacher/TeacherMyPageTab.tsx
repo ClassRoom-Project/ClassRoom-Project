@@ -5,7 +5,7 @@ import EditTeacherInfo from '@/components/mypage/teacher/EditTeacherInfo';
 import MyClass from '@/components/mypage/teacher/MyClass';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 
 type TeacherTabComponent = {
   [key: string]: React.ReactNode;
@@ -23,7 +23,11 @@ const TeacherMyPageTab = () => {
     () => ({
       editProfile: <EditProfile />,
       editTeacherInfo: <EditTeacherInfo />,
-      myClass: <MyClass />
+      myClass: (
+        <Suspense>
+          <MyClass />
+        </Suspense>
+      )
     }),
     []
   );
