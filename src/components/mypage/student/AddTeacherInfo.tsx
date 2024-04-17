@@ -1,5 +1,5 @@
 import { addTeacherInfo, updateUserRole } from '@/app/api/mypage/user-api';
-import { noChangedNotify, noInfoNotify } from '@/components/common/Toastify';
+import { checkFormValidation, noChangedNotify, noInfoNotify } from '@/components/common/Toastify';
 import { fields, jobs, koreanBanks } from '@/constants/options';
 import { useTeacherInfo } from '@/hooks/useLogin/useTeacherInfo';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -7,11 +7,16 @@ import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import React, { useEffect, useId, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import SelectOption from '../SelectOption';
+import { useRouter } from 'next/navigation';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { InsertTeacherInfo } from '@/types/user';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
   const { isTeacher, setIsTeacher } = useUserRoleStore();
   const { teacherInfo, isPending } = useTeacherInfo();
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
   // 선생님 정보가 없으면(null) : false => 정보 입력하기
@@ -91,21 +96,43 @@ const AddTeacherInfo = () => {
     }
   };
 
+  // 선생님 정보 수정 mutation
+  const { mutate: updateTeacherInfo } = useMutation({
+    mutationFn: ({
+      selectedJob,
+      selectedField,
+      selectedBank,
+      userAccount,
+      teacherName,
+      teacherNumber
+    }: InsertTeacherInfo) =>
+      addTeacherInfo(
+        { selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber },
+        loginUserId
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['updateTeacherInfo']
+      });
+    }
+  });
+
   // 선생님 정보 등록하기 버튼
   const handleOnClickAddTeacherInfoBtn = async () => {
     if (!selectedJob || !selectedField || !selectedBank || !userAccount || !teacherName || !teacherNumber) {
       noInfoNotify(); // 아무것도 입력되지 않은 경우
       return;
+    } else if (!isAvailableName || !isAvailableNumber || !isAvailableAccount) {
+      checkFormValidation();
+      return;
     } else {
       const confirm = window.confirm('선생님 정보를 등록하시겠습니까?');
       if (confirm) {
-        addTeacherInfo(
-          { selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber },
-          loginUserId
-        );
+        updateTeacherInfo({ selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber });
 
         // 수강생에서 선생님으로 전환 로직 추가
         setIsHaveTeacherInfo(true);
+        router.refresh();
         return teacherInfo;
       }
     }
@@ -117,7 +144,8 @@ const AddTeacherInfo = () => {
     if (confirm) {
       // 선생님 마이페이지로 이동하는 로직
       updateUserRole(!!isTeacher, loginUserId);
-      setIsTeacher(!isTeacher);
+      setIsTeacher(true);
+      router.push('teacherMypage?teacherTab=editTeacherInfo');
     }
   };
 
@@ -134,7 +162,15 @@ const AddTeacherInfo = () => {
   }
   return (
     <div className="flex flex-col gap-8 justify-center items-center bg-light-purple w-[960px] p-4">
-      <p className=" text-center text-text-dark-gray">아래의 해당 정보를 입력하여 강사로 등록해보세요!</p>
+      {isHaveTeacherInfo ? (
+        <p className=" text-center text-text-dark-gray">
+          선생님 정보가 이미 등록되었습니다. <br />
+          선생님 마이페이지에서 정보를 수정해주세요.
+        </p>
+      ) : (
+        <p className=" text-center text-text-dark-gray">아래의 해당 정보를 입력하여 강사로 등록해보세요!</p>
+      )}
+
       <div className="flex">
         <div className="flex flex-col">
           <div className="p-4 flex flex-col gap-4">

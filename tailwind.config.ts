@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      height: {
+      minHeight: {
         '100vh-header': 'calc(100dvh - 60px)'
         // other properties...
       },

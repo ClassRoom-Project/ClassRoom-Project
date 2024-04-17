@@ -1,19 +1,20 @@
 'use client';
 
-import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
+import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/useWishQueries';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ClassAllType } from '@/types/class';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
+import WishIcon from '../common/WishIcon';
 
-const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined; wishInfo: ClassAllType['wish'] }) => {
+const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: ClassAllType['wish'] }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
   const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
-  const [isWishedState, setIsWishedState] = useState<boolean>();
+  const [isWishedState, setIsWishedState] = useState<boolean>(false);
+  const [wishCountState, setWishCountState] = useState<number>(wishInfo.length);
   const isWishedClass = wishInfo.some((item) => item.user_id === loginUserId);
 
   useEffect(() => {
@@ -30,11 +31,12 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined
       } else return;
     }
 
-    if (loginUserId && classId) {
+    if (loginUserId) {
       if (!isWishedState) {
         try {
           addWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(true);
+          setWishCountState((prev) => prev + 1);
           addWish();
         } catch (error) {
           defaultWarning();
@@ -44,6 +46,7 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined
         try {
           cancelWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(false);
+          setWishCountState((prev) => prev - 1);
           cancelWish();
         } catch (error) {
           defaultWarning();
@@ -52,25 +55,9 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string | undefined
     }
   };
 
-  return (
-    <button onClick={(e) => handleWishClick(e)}>
-      {!wishInfo ? (
-        <p></p>
-      ) : (
-        <div>
-          {isWishedState ? (
-            <p>
-              <GoHeartFill color="red" size={18} />
-            </p>
-          ) : (
-            <p>
-              <GoHeart color="dimgray" size={18} />
-            </p>
-          )}
-        </div>
-      )}
-    </button>
-  );
+  console.log(wishCountState);
+
+  return <WishIcon handleWishClick={handleWishClick} isWished={isWishedState} wishCount={wishCountState} />;
 };
 
 export default ListPageWishButton;

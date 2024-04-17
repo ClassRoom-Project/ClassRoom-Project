@@ -1,25 +1,32 @@
 'use client';
 
-import { useAddWishMutation, useCancelWishMutation } from '@/hooks/useWish/mutateWish';
-import { useCheckIsWishedQuery } from '@/hooks/useWish/useWish';
+import {
+  useAddWishMutation,
+  useCancelWishMutation,
+  useCheckIsWishedQuery,
+  useCountWishQuery
+} from '@/hooks/useWish/useWishQueries';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { GoHeart } from 'react-icons/go';
-import { GoHeartFill } from 'react-icons/go';
+import React from 'react';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
+import WishIcon from '../common/WishIcon';
 
 const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
   const router = useRouter();
   const addWishMutation = useAddWishMutation();
   const cancelWishMutation = useCancelWishMutation();
   const { loginUserId } = useLoginStore();
-  const { data: isWished, isLoading, isError } = useCheckIsWishedQuery({ userId: loginUserId, classId });
-  const [isWishedState, setIsWishedState] = useState<boolean>();
+  const {
+    data: isWished,
+    isLoading: isCheckLoading,
+    isError: isCheckError
+  } = useCheckIsWishedQuery({ userId: loginUserId, classId });
+  const { data: wishCount, isLoading: isCountLoading, isError: isCountError } = useCountWishQuery(classId);
 
-  useEffect(() => {
-    setIsWishedState(isWished);
-  }, [isWished]);
+  if (isCheckError ?? isCountError) {
+    return;
+  }
 
   const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
@@ -52,17 +59,7 @@ const DetailWishButton = ({ classId }: { classId: string | undefined }) => {
     }
   };
 
-  return (
-    <div className=" h-[20px]">
-      {isLoading ? (
-        <p></p>
-      ) : (
-        <button onClick={(e) => handleWishClick(e)}>
-          <span>{isWishedState ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
-        </button>
-      )}
-    </div>
-  );
+  return <WishIcon handleWishClick={handleWishClick} isWished={isWished} wishCount={wishCount} />;
 };
 
 export default DetailWishButton;

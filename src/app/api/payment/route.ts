@@ -15,7 +15,7 @@ export async function GET(request: NextRequest) {
 
   // 값이 없으면 실패 페이지로 리다이렉트
   if (!orderId || !classId || !amount || !reserveQuantity || !timeId || !userId) {
-    return NextResponse.redirect(new URL(`http://localhost:3000/reserve/fail`));
+    return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/fail`));
   }
 
   const response = await fetch('https://api.tosspayments.com/v1/payments/confirm', {
@@ -29,9 +29,10 @@ export async function GET(request: NextRequest) {
 
   // console.log(response);
 
+  console.log(process.env.NEXT_PUBLIC_BASE_URL);
+
   const res = await response.json();
 
-  //TODO: 페이먼트키 추가
   if (response.ok) {
     try {
       await insertNewReservation({

@@ -60,30 +60,35 @@ const SearchFilter = () => {
         {isOpenCategory ? (
           <ul
             tabIndex={0}
-            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-white border-[##6C5FF7] border-solid border-[1px] w-[400px] h-[650px]"
+            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-disable-color border-main-color border-solid border-[1px] w-[400px] h-[650px]"
           >
-            <div className="border-b-[1px] flex items-center justify-center w-80 h-[125px] border-solid border-gray-400">
-              <button
-                onClick={() => handleClassTypeBtn('온라인 클래스')}
-                className={`p-2 font-bold border-solid border-[##6C5FF7] border-[1px] rounded-2xl mx-3 w-24 ${
-                  ClassFilters.selectedClassType === '온라인 클래스' ? 'bg-button-focus-color' : 'bg-white'
-                }`}
-              >
-                온라인
-              </button>
-              <button
-                onClick={() => handleClassTypeBtn('오프라인 클래스')}
-                className={`p-2 font-bold rounded-2xl border-solid border-[##6C5FF7] border-[1px] mx-3 w-24 ${
-                  ClassFilters.selectedClassType === '오프라인 클래스' ? 'bg-button-focus-color' : 'bg-white'
-                }`}
-              >
-                오프라인
-              </button>
+            <div className="border-b-[1px] flex flex-col items-center justify-center w-80 h-[125px] border-solid border-gray-400">
+              <div className="flex mb-3 items-start w-72 justify-start">
+                <p className="text-text-color">클래스 타입</p>
+              </div>
+              <div className="flex">
+                <button
+                  onClick={() => handleClassTypeBtn('온라인 클래스')}
+                  className={`p-2 font-bold border-solid border-main-color border-[1px] rounded-2xl mx-3 w-24 ${
+                    ClassFilters.selectedClassType === '온라인 클래스' ? 'bg-button-focus-color' : 'bg-white'
+                  }`}
+                >
+                  온라인
+                </button>
+                <button
+                  onClick={() => handleClassTypeBtn('오프라인 클래스')}
+                  className={`p-2 font-bold rounded-2xl border-solid border-main-color border-[1px] mx-3 w-24 ${
+                    ClassFilters.selectedClassType === '오프라인 클래스' ? 'bg-button-focus-color' : 'bg-white'
+                  }`}
+                >
+                  오프라인
+                </button>
+              </div>
             </div>
             <div>
               <div className="border-b-[1px] border-solid border-gray-400 mt-2 w-80 h-[125px] flex flex-col justify-center items-center">
                 <div className="flex flex-col items-start w-72 mb-3 justify-start">
-                  <p>지역</p>
+                  <p className="text-text-color">지역</p>
                 </div>
                 <select
                   className="select select-primary w-72"
@@ -109,12 +114,12 @@ const SearchFilter = () => {
             </div>
             <div className="flex flex-col w-80 mt-9 h-[125px] border-b-[1px] border-solid border-gray-400 justify-center items-center">
               <div className="flex items-start w-72 justify-start">
-                <p>난이도</p>
+                <p className="text-text-color">난이도</p>
               </div>
               <div className="p-2">
                 <button
                   onClick={() => handleClassDifficultyBtn('입문')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
+                  className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
                     ClassFilters.selectedDifficulty === '입문' ? 'bg-button-focus-color' : 'bg-white'
                   }`}
                 >
@@ -122,7 +127,7 @@ const SearchFilter = () => {
                 </button>
                 <button
                   onClick={() => handleClassDifficultyBtn('초급')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
+                  className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
                     ClassFilters.selectedDifficulty === '초급' ? 'bg-button-focus-color' : 'bg-white'
                   }`}
                 >
@@ -132,7 +137,7 @@ const SearchFilter = () => {
               <div className="p-2">
                 <button
                   onClick={() => handleClassDifficultyBtn('중급')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
+                  className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
                     ClassFilters.selectedDifficulty === '중급' ? 'bg-button-focus-color' : 'bg-white'
                   }`}
                 >
@@ -140,7 +145,7 @@ const SearchFilter = () => {
                 </button>
                 <button
                   onClick={() => handleClassDifficultyBtn('고급')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-24 ${
+                  className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
                     ClassFilters.selectedDifficulty === '고급' ? 'bg-button-focus-color' : 'bg-white'
                   }`}
                 >
@@ -150,14 +155,14 @@ const SearchFilter = () => {
             </div>
             <div>
               <div className="flex my-9 w-72 h-[125px] flex-col justify-center items-center">
-                <div className="flex items-start w-72 justify-start">
-                  <p>금액</p>
+                <div className="flex items-start mb-3 w-72 justify-start">
+                  <p className="text-text-color">금액</p>
                 </div>
                 <div className="flex flex-col items-center w-72 justify-start">
                   <div className="flex items-center justify-center">
                     <button
                       onClick={() => handlePriceFilter(0, 20000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-30 ${
+                      className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-30 ${
                         isPriceSelected(0, 20000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
@@ -165,7 +170,7 @@ const SearchFilter = () => {
                     </button>
                     <button
                       onClick={() => handlePriceFilter(20001, 50000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-30 ${
+                      className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-30 ${
                         isPriceSelected(20001, 50000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
@@ -175,7 +180,7 @@ const SearchFilter = () => {
                   <div className="flex items-center mt-4 justify-center">
                     <button
                       onClick={() => handlePriceFilter(50001, 100000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-30 ${
+                      className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-2 w-30 ${
                         isPriceSelected(50001, 100000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
@@ -183,7 +188,7 @@ const SearchFilter = () => {
                     </button>
                     <button
                       onClick={() => handlePriceFilter(100001, 1000000000000000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-[##5373FF] border-[1px] mx-3 w-30 ${
+                      className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-2 w-30 ${
                         isPriceSelected(100001, 1000000000000000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >

@@ -28,7 +28,7 @@ const ConvertBtn = () => {
         '입력된 선생님 정보가 없습니다. 마이페이지에서 선생님 정보를 입력해주세요. 마이페이지로 이동 하시겠습니까?'
       );
       if (confirm) {
-        router.push('/mypage');
+        router.push(`/studentMypage?studentTab=addTeacherInfo`);
       }
       return;
     } else {

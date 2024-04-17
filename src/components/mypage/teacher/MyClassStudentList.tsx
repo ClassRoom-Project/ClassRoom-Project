@@ -24,7 +24,7 @@ const MyClassStudentList = () => {
     <div className="overflow-x-auto">
       <table className="table">
         <thead>
-          <tr>
+          <tr className=" bg-light-purple text-point-purple">
             <th>닉네임</th>
             <th>이메일</th>
             <th>예약 인원</th>
@@ -36,15 +36,17 @@ const MyClassStudentList = () => {
           {myClassStudentInfo.map((student) => (
             <tr key={student.user_id}>
               <th className="flex gap-4 items-center">
+                <div className=" w-12 h-12">
+                  <Image
+                    src={student.profile_image}
+                    alt="프로필 이미지"
+                    width={50}
+                    height={50}
+                    className="rounded-full w-full h-full object-cover"
+                    unoptimized={true}
+                  />
+                </div>{' '}
                 {student.nickname}
-                <Image
-                  src={student.profile_image}
-                  alt="프로필 이미지"
-                  width={50}
-                  height={50}
-                  className="rounded-full"
-                  unoptimized={true}
-                />
               </th>
               <td>{student.email}</td>
               <td>{student.reserve_quantity.toLocaleString()}명</td>
