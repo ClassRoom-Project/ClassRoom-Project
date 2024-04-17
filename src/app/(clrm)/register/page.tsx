@@ -3,7 +3,7 @@ import Address from '@/components/register/Address';
 import ClassContent from '@/components/register/ClassContent';
 import ClassTitleType from '@/components/register/ClassTitleType';
 import Price from '@/components/register/Price';
-import TimeSelect from '@/components/register/TimeSelect';
+import SelectTime from '@/components/register/SelectTime';
 import Category from '@/components/register/Category';
 import HashTag from '@/components/register/HashTag';
 import MinMaxNumber from '@/components/register/MinMaxNumber';
@@ -30,7 +30,7 @@ const RegisterPage = () => {
           <h1 className="text-lg mt-14">클래스 세부요소 입력란</h1>
           <hr className="my-4 border-[#4D43B8]" />
           <Address />
-          <TimeSelect />
+          <SelectTime />
 
           <h1 className="text-lg mt-14">클래스 금액</h1>
           <hr className="my-4 border-[#4D43B8]" />

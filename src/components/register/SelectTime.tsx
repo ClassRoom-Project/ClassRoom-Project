@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { ko } from 'date-fns/locale';
 
-const TimeSelect: React.FC = () => {
+const SelectTime: React.FC = () => {
   const {
     schedules,
     selectedDates,
@@ -125,4 +125,4 @@ const TimeSelect: React.FC = () => {
   );
 };
 
-export default TimeSelect;
+export default SelectTime;
