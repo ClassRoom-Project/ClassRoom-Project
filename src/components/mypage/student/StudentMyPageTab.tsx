@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import EditProfile from '@/components/mypage/EditProfile';
 import MyReservedClass from '@/components/mypage/student/MyReservedClass';
@@ -24,9 +24,21 @@ const StudentMyPageTab = () => {
   const activeStudentMyPageTab: StudentTabComponent = useMemo(
     () => ({
       editProfile: <EditProfile key="editProfile" />,
-      reservedClass: <MyReservedClass key="reservedClass" />,
-      myComments: <MyComments key="myComments" />,
-      myWishClass: <MyWishClass key="myWishClass" />,
+      reservedClass: (
+        <Suspense>
+          <MyReservedClass key="reservedClass" />
+        </Suspense>
+      ),
+      myComments: (
+        <Suspense>
+          <MyComments key="myComments" />
+        </Suspense>
+      ),
+      myWishClass: (
+        <Suspense>
+          <MyWishClass key="myWishClass" />
+        </Suspense>
+      ),
       addTeacherInfo: <AddTeacherInfo key="addTeacherInfo" />
     }),
     []

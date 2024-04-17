@@ -14,7 +14,7 @@ interface EditProfileImageProps {
 
 const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, userInfo }: EditProfileImageProps) => {
   const fileInput = useRef<HTMLInputElement | null>(null);
-  // console.log('userInfo', userInfo);
+
   // 프로필 이미지 수정 버튼 클릭
   const handleOnClickEditImageBtn = () => {
     fileInput.current?.click();
@@ -30,7 +30,7 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, user
       throw error;
     } else {
       const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profileImages/${data.path}`;
-      // console.log('url', url);
+
       return setNewProfileImage(url);
     }
   };

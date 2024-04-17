@@ -10,6 +10,7 @@ export interface ClassItem {
   reserve_price: number;
   reserve_quantity: number;
   times: string;
+  user_id: string;
 }
 
 export interface ClassRegister {

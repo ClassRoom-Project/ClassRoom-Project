@@ -1,24 +1,20 @@
+import AskButton from '@/components/chatRooms/AskButton';
 import DetailWishButton from '@/components/classDetail/DetailWishButton';
-import { MyWishClassType } from '@/types/class';
+import { ClassAllType, MyWishClassType } from '@/types/class';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { BiCategoryAlt } from 'react-icons/bi';
 import { GoPersonAdd } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
+import MyPageWishButton from './MyPageWishButton';
 
 const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
-  // const [isWishedState, setIsWishedState] = useState<boolean>(false);
-  // const handleWishChange = (isWished: boolean) => {
-  //   setIsWishedState(isWished);
-  // };
-  // console.log('classItem', classItem);
-
   // 이미지 대표사진
   const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음';
 
   return (
-    <li className="border-b-2 border-b-border-color max-w-screen-xl w-[1080px] ">
+    <li className="border-b-2 max-w-screen-xl w-[1080px] ">
       <div className="flex gap-4  bg-pale-purple my-4 p-4">
         <div className="w-[300px] h-[200px]">
           <Image
@@ -34,7 +30,9 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
           <section>
             <div className="flex  gap-4 items-center">
               <p className="font-bold text-xl text-dark-purple-color">{classItem.title}</p>
-              <DetailWishButton classId={classItem.class_id} />
+              {classItem && (
+                <MyPageWishButton key={classItem.class_id} classId={classItem.class_id} classItem={classItem} />
+              )}
             </div>
             <div className="flex gap-4 py-4">
               <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
@@ -67,8 +65,11 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
             </div>
           </section>
           <section className="flex justify-end gap-4 pt-4 right-4">
-            {/* <AskButton classId={classItem.class_id} makeClassUserId={classItem.}/> */}
-            <button className="btn w-36 hover:bg-transparent hover:text-text-dark-gray">문의하기</button>
+            <AskButton
+              classId={classItem.class_id}
+              makeClassUserId={classItem.user_id}
+              buttonStyle="btn w-36 hover:bg-transparent hover:text-text-dark-gray"
+            />
             <Link href={`reserve?classId=${classItem.class_id}`}>
               <div className="btn bg-dark-purple-color text-white w-36 hover:bg-transparent hover:text-dark-purple-color">
                 클래스 신청하기

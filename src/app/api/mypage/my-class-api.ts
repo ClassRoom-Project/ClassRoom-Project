@@ -59,7 +59,7 @@ export const getClassSingleInfo = async (timeId: string | null) => {
 
 // 마이 클래스 위시리스트
 export async function getMyWishClass(loginUserId: string | null) {
-  const { data, error }: PostgrestResponse<MyWishClassType> = await supabase.rpc('fetch_my_wish_class', {
+  const { data, error }: PostgrestResponse<MyWishClassType> = await supabase.rpc('fetch_my_wish_class_new', {
     p_user_id: loginUserId as string
   });
 

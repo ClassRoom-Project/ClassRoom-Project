@@ -1,4 +1,5 @@
 import { cancelReservation } from '@/app/api/mypage/fetchMyClasses';
+import AskButton from '@/components/chatRooms/AskButton';
 import { defaultWarning, successCancelReservation } from '@/components/common/Toastify';
 import { ClassItem } from '@/types/register';
 import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
@@ -46,7 +47,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음';
 
   return (
-    <li className="border-b-2 border-b-border-color max-w-screen-xl w-[1080px]">
+    <li className="border-b-2 max-w-screen-xl w-[1080px]">
       <div className="flex gap-4 bg-pale-purple my-4 p-4">
         <div className="w-[300px] h-[200px]">
           <Image
@@ -95,8 +96,11 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
             </div>
           </section>
           <section className="flex justify-end gap-4 pt-4 right-4">
-            {/* <AskButton classId={classItem.class_id} makeClassUserId={classItem.}/> */}
-            <button className="btn w-36 hover:bg-transparent hover:text-text-dark-gray">문의하기</button>
+            <AskButton
+              classId={classItem.class_id}
+              makeClassUserId={classItem.user_id}
+              buttonStyle="btn w-36 hover:bg-transparent hover:text-text-dark-gray"
+            />
             <button
               className="btn  bg-dark-purple-color text-white w-36 hover:bg-transparent hover:text-dark-purple-color"
               onClick={() => handleCancelReservation(classItem.reserve_id)}

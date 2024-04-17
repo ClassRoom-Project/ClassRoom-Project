@@ -132,7 +132,6 @@ const AddTeacherInfo = () => {
 
         // 수강생에서 선생님으로 전환 로직 추가
         setIsHaveTeacherInfo(true);
-        router.refresh();
         return teacherInfo;
       }
     }

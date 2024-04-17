@@ -19,8 +19,6 @@ const EditProfile = () => {
   // zustand로 userInfo 상태 관리
   const { userInfo, setUserInfo } = userInfoStore();
 
-  // console.log('userInfo', userInfo);
-
   const [newNickname, setNewNickname] = useState('');
   const [newProfileImage, setNewProfileImage] = useState('');
   const [isEditing, setIsEditing] = useState(false); // 수정된 사항 확인 여부

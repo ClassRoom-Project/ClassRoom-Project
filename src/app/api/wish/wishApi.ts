@@ -3,7 +3,7 @@ import { supabase } from '../supabase/supabase';
 // 찜하기 - 위시리스트에 추가
 export const addWish = async ({ userId, classId }: { userId: string | undefined; classId: string }) => {
   const { error } = await supabase.from('wish').insert([{ user_id: userId, class_id: classId }]);
-  console.log('addWish 실행');
+
   if (error) {
     console.error('addWish 에러 => ', error);
     return;
@@ -31,11 +31,8 @@ export const checkIsWished = async ({ userId, classId }: { userId: string | null
 };
 
 // 찜 취소하기 - 위시리스트에서 삭제
-export const cancelWish = async ({ userId, classId }: { userId: string | undefined; classId: string }) => {
-  console.log('classId', classId);
+export const cancelWish = async ({ userId, classId }: { userId: string | undefined | null; classId: string }) => {
   const { error } = await supabase.from('wish').delete().eq('user_id', userId).eq('class_id', classId);
-
-  console.log('cancelWish 실행');
 
   if (error) {
     console.error('cancelWish 오류 => ', error);
@@ -57,8 +54,6 @@ export const countWish = async (classId: string | undefined) => {
   if (error) {
     throw new Error(error.message);
   }
-
-  console.log(count);
 
   return count;
 };
