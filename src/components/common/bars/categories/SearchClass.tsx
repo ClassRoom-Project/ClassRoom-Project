@@ -16,7 +16,7 @@ export const SearchClass = () => {
   // const debouncing = _.debounce(handleSearchChange, 300);
   const handleSearchBtn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setSelectedTitle('');
+    // setSelectedTitle('');
     router.push('/list');
   };
 
