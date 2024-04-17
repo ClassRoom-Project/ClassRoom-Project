@@ -59,7 +59,7 @@ export const getChatRooms = async (loginUserId: string): Promise<ChatRoom[]> => 
     .select(
       `
       chat_id, created_at, to_class_id, from_user_id, teacher_user_id,
-      class!inner(title, user_id, users!inner(nickname, profile_image))
+      class!inner(title,image, user_id, users!inner(nickname, profile_image))
     `
     )
     .or(`from_user_id.eq.${loginUserId},teacher_user_id.eq.${loginUserId}`);
@@ -79,6 +79,7 @@ export const getChatRooms = async (loginUserId: string): Promise<ChatRoom[]> => 
       fromUserId: chatRoom.from_user_id,
       teacherUserId: chatRoom.teacher_user_id,
       title: chatRoom.class.title,
+      image: chatRoom.class.image,
       makeClassUserId: chatRoom.class.user_id,
       nickName: chatRoom.class.users.nickname,
       profileImg: chatRoom.class.users.profile_image
@@ -180,7 +181,7 @@ export const createNewMessagesPhoto = async ({ chatId, photos, loginUserId }: Pu
 export const getChatMessages = async (chatId: string, loginUserId: string): Promise<GetChatRoomMessagesType[]> => {
   const { data, error } = await supabase
     .from('chat_messages')
-    .select('created_at, create_by, messages, images')
+    .select('created_at, create_by, messages, images, messages_id')
     .order('created_at', { ascending: true })
     .eq('chat_id', chatId);
 
@@ -195,6 +196,10 @@ export const getChatMessages = async (chatId: string, loginUserId: string): Prom
 
 //메시지 읽음 처리
 const updateCheckMessage = async (chatId: string, loginUserId: string): Promise<void> => {
+  if (!loginUserId) {
+    return;
+  }
+
   const { error } = await supabase
     .from('chat_messages')
     .update({ check: true })
@@ -271,4 +276,30 @@ export const readCheckMessagesAll = async (loginUserId: string): Promise<number 
   }
 
   return count;
+};
+
+// 채팅 방 삭제
+export const deleteRoom = async (chatId: string) => {
+  const { error } = await supabase //
+    .from('chat_rooms')
+    .delete()
+    .eq('chat_id', chatId);
+
+  if (error) {
+    console.error('failed to deleteRoom', error);
+    return;
+  }
+};
+
+// 메시지 일부 삭제
+export const deleteMessage = async (messagesId: number) => {
+  const { error } = await supabase //
+    .from('chat_messages')
+    .delete()
+    .eq('messages_id', messagesId);
+
+  if (error) {
+    console.error('failed to deleteRoom', error);
+    return;
+  }
 };

@@ -2,6 +2,8 @@ import {
   createChatRoom,
   createNewMessages,
   createNewMessagesPhoto,
+  deleteMessage,
+  deleteRoom,
   getChatMessages,
   getChatRooms,
   getLastChatMessage,
@@ -20,6 +22,20 @@ export function useReadChatRooms(loginUserId: string) {
     enabled: !!loginUserId
   });
   return { chatroomsInfo };
+}
+
+//채팅방 삭제하기
+export function useDeleteRoom() {
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteRoomMutate } = useMutation<void, Error, string>({
+    mutationFn: (chatId: string) => deleteRoom(chatId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['chatRooms'] });
+    }
+  });
+
+  return { deleteRoomMutate };
 }
 
 // 상대방 프로필, 닉네임 가져오기
@@ -104,6 +120,20 @@ export function useCreateNewPhotoMessage() {
   });
 
   return { createNewPhotoMessageMutate };
+}
+
+//메시지 삭제하기
+export function useDeleteMessage() {
+  const queryClient = useQueryClient();
+
+  const { mutate: deleteMessageMutate } = useMutation<void, Error, number>({
+    mutationFn: (messagesId: number) => deleteMessage(messagesId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['chatMessage'] });
+    }
+  });
+
+  return { deleteMessageMutate };
 }
 
 //마지막 메시지 가져오기

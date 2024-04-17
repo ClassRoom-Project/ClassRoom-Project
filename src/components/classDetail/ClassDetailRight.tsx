@@ -8,7 +8,6 @@ import { Suspense } from 'react';
 
 //오른쪽 컴포넌트
 const ClassDetailRight = ({ classData }: { classData: ListDetailClassInfo | null }) => {
-  console.log('클래스 데이터', classData?.date);
   return (
     <div className="flex flex-col p-5 ml-4 shadow-2xl justify-center items-center w-[500px] rounded-lg h-[1000px] bg-light-purple">
       <div className="flex items-center mt-2 justify-center h-9 w-[350px]">
