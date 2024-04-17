@@ -3,7 +3,7 @@ import { ClassRegister } from '@/types/register';
 
 const useRegisterStore = create<ClassRegister>((set) => ({
     category: '',
-    subCategory: '',
+    subCategory: [],
     address: '',
     detailAddress: '',
     classContent: '',
@@ -18,7 +18,7 @@ const useRegisterStore = create<ClassRegister>((set) => ({
     selectedTime: [],
 
     setCategory: (category:string) => set({ category }),
-    setSubCategory: (subCategory:string) => set({ subCategory }),
+    setSubCategory: (subCategory:string[]) => set({ subCategory }),
     setAddress: (address:string) => set({ address }),
     setDetailAddress: (detailAddress:string) => set({ detailAddress }),
     setSelectDay: (selectDay:Date[]) => set({ selectDay }),

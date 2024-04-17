@@ -196,3 +196,27 @@ export const deleteRoom = () =>
     pauseOnFocusLoss: false,
     theme: 'light'
   });
+
+export const noDateTimeNotify = () =>
+  toast.error('일정과 시간을 선택해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noLimitImageNotify = () =>
+  toast.error('최대 5개의 이미지만 추가할 수 있습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
