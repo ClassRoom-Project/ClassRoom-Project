@@ -21,7 +21,7 @@ const MyWishClass = () => {
   }
 
   return (
-    <div className="flex flex-col align-center w-[1080px]">
+    <div className="flex flex-col align-center max-w-screen-xl">
       <ul>
         {myWishClassList.map((classItem) => (
           <MyWishClassItem key={classItem.wish_id} classItem={classItem} />

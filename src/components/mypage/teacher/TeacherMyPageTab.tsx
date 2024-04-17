@@ -1,26 +1,41 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
-import EditProfile from '../EditProfile';
-import EditTeacherInfo from './EditTeacherInfo';
-import MyClass from './MyClass';
+import EditProfile from '@/components/mypage/EditProfile';
+import EditTeacherInfo from '@/components/mypage/teacher/EditTeacherInfo';
+import MyClass from '@/components/mypage/teacher/MyClass';
+import { useUserRoleStore } from '@/store/mypage/userRoleStore';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useMemo, useState } from 'react';
 
 type TeacherTabComponent = {
   [key: string]: React.ReactNode;
 };
 
 const TeacherMyPageTab = () => {
+  const { isTeacher } = useUserRoleStore();
   const router = useRouter();
-  // const params = useSearchParams();
+  const params = useSearchParams();
+  const teacherTab = params.get('teacherTab');
 
   const [activePage, setActivePage] = useState('editProfile');
 
-  const activeTeacherMyPageTab: TeacherTabComponent = {
-    editProfile: <EditProfile />,
-    editTeacherInfo: <EditTeacherInfo />,
-    myClass: <MyClass />
-  };
+  const activeTeacherMyPageTab: TeacherTabComponent = useMemo(
+    () => ({
+      editProfile: <EditProfile />,
+      editTeacherInfo: <EditTeacherInfo />,
+      myClass: <MyClass />
+    }),
+    []
+  );
+
+  useEffect(() => {
+    if (!isTeacher) {
+      router.push('/studentMypage');
+    }
+    if (teacherTab && Object.keys(activeTeacherMyPageTab).includes(teacherTab)) {
+      setActivePage(teacherTab);
+    }
+  }, [isTeacher, router, activeTeacherMyPageTab, teacherTab]);
 
   const handleOnClickTabBtn = (tab: string) => {
     if (!tab) {
@@ -28,7 +43,7 @@ const TeacherMyPageTab = () => {
       return;
     }
     setActivePage(tab);
-    router.push(`/mypage?teacherMypage=${tab}`);
+    router.push(`/teacherMypage?teacherTab=${tab}`);
   };
 
   return (
@@ -36,7 +51,7 @@ const TeacherMyPageTab = () => {
       <div className="flex flex-row justify-center border-y-2 w-full">
         <p
           onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4  ${
+          className={`p-4 text-lg  ${
             activePage === 'editProfile'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
@@ -46,7 +61,7 @@ const TeacherMyPageTab = () => {
         </p>
         <p
           onClick={() => handleOnClickTabBtn('editTeacherInfo')}
-          className={`p-4  ${
+          className={`p-4 text-lg  ${
             activePage === 'editTeacherInfo'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
@@ -56,7 +71,7 @@ const TeacherMyPageTab = () => {
         </p>
         <p
           onClick={() => handleOnClickTabBtn('myClass')}
-          className={`p-4 ${
+          className={`p-4 text-lg ${
             activePage === 'myClass'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''

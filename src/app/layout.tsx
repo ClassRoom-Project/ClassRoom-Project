@@ -23,8 +23,8 @@ export default function RootLayout({ children }: Props) {
           <ReactQueryDevtools initialIsOpen={false} />
           <ToastContainer />
           {children}
+          <Script src={mapScriptSrc} strategy="beforeInteractive" />
         </QueryProvider>
-        <Script src={mapScriptSrc} strategy="beforeInteractive" />
       </body>
     </html>
   );
