@@ -21,10 +21,10 @@ const CreateBtn = () => {
     <div>
       <button
         onClick={handleCreateIconOnClick}
-        className="p-4 flex flex-col items-center cursor-pointer hover:text-main-color transition ease-in"
+        className="py-4 flex flex-col items-center cursor-pointer hover:text-main-color transition ease-in"
       >
         <SlNote size={30} />
-        CREATE
+        클래스등록
       </button>
     </div>
   );
