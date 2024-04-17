@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { ko } from 'date-fns/locale';
 
-const TimeSelect: React.FC = () => {
+const SelectTime: React.FC = () => {
   const {
     schedules,
     selectedDates,
@@ -45,7 +45,7 @@ const TimeSelect: React.FC = () => {
       alert('시간을 선택해주세요.');
     } else {
       addTimeToSchedule(date, tempTime);
-      setTempTime(''); // 시간 입력 후 초기화
+      setTempTime('');
     }
   };
 
@@ -83,7 +83,12 @@ const TimeSelect: React.FC = () => {
         </button>
         {isDayPickerOpen && (
           <div ref={dayPickerRef} className="absolute z-10 bg-white border-2 rounded-lg p-4">
-            <DayPicker mode="single" onSelect={handleDateSelect} locale={ko} />
+            <DayPicker 
+              mode="single" 
+              onSelect={handleDateSelect} 
+              locale={ko} 
+              disableNavigation={true} // 한달단위
+            />
           </div>
         )}
       </div>
@@ -120,4 +125,4 @@ const TimeSelect: React.FC = () => {
   );
 };
 
-export default TimeSelect;
+export default SelectTime;

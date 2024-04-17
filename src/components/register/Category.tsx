@@ -26,6 +26,7 @@ const Category = () => {
             <option value="교육">교육</option>
             <option value="악기&음악">악기&음악</option>
             <option value="뷰티">뷰티</option>
+            <option value="예술">예술</option>
             <option value="기타">기타</option>
           </select>
         </div>
