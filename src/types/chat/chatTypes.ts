@@ -138,3 +138,13 @@ export interface ChatImageeModalType {
   chatId: string;
   closeModal: (value: boolean) => void;
 }
+
+export interface ChatMessage {
+  chat_id: string;
+  check: boolean;
+  create_by: string;
+  created_at: string;
+  images: string | null;
+  messages: string | null;
+  messages_id: number;
+}
