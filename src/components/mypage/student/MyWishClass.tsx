@@ -3,32 +3,30 @@ import MyWishClassItem from './MyWishClassItem';
 import { useQuery } from '@tanstack/react-query';
 import { getMyWishClass } from '@/app/api/mypage/my-class-api';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
+import { QueryKeys } from '@/constants/QueryKeys';
 
 const MyWishClass = () => {
   const { loginUserId } = useLoginStore();
   const { data: myWishClassList, isPending } = useQuery({
-    queryKey: ['wish', loginUserId],
+    queryKey: [QueryKeys.WISH_CHECK, loginUserId],
     queryFn: () => getMyWishClass(loginUserId),
     enabled: !!loginUserId
   });
-  // console.log('myWishClassList', myWishClassList);
 
   if (isPending) {
     return <div> 로딩중 ... </div>;
   }
 
-  if (!Array.isArray(myWishClassList) || myWishClassList.length === 0) {
+  if (!myWishClassList || myWishClassList.length === 0) {
     return <div> 즐겨찾기한 클래스가 없습니다.</div>;
   }
 
   return (
-    <div className="flex flex-col align-center max-w-screen-xl">
-      <ul>
-        {myWishClassList.map((classItem) => (
-          <MyWishClassItem key={classItem.wish_id} classItem={classItem} />
-        ))}
-      </ul>
-    </div>
+    <ul className="flex flex-col align-center max-w-screen-xl">
+      {myWishClassList.map((classItem) => (
+        <MyWishClassItem key={classItem.class_id} classItem={classItem} />
+      ))}
+    </ul>
   );
 };
 
