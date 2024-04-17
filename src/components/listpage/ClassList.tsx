@@ -63,11 +63,11 @@ function ClassList() {
     </div>
   ) : (
     <div className="flex justify-center min-w-full">
-      <div className="grid grid-cols-4 min-w-[80vw]">
+      <div className="grid grid-cols-4 min-w-[70vw]">
         {classInfos?.pages.map((page, i) => (
           <React.Fragment key={i}>
             {page.classInfos.map((classInfos: ClassAllType) => (
-              <div key={classInfos.class_id} className="p-3">
+              <div key={classInfos.class_id} className="px-3 py-8">
                 <ClassCard key={classInfos.class_id} classInfos={classInfos} />
               </div>
             ))}
