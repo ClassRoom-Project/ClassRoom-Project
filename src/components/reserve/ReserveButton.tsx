@@ -54,7 +54,10 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
 
   return (
     <>
-      <button className="btn bg-point-purple text-white tracking-wide w-full" onClick={handleReserveButtonClick}>
+      <button
+        className="btn bg-point-purple text-white tracking-wide w-full hover:bg-button-hover-color"
+        onClick={handleReserveButtonClick}
+      >
         결제하기
       </button>
     </>

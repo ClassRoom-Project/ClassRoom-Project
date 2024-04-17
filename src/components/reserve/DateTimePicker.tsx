@@ -84,6 +84,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   return (
     <div className="w-full mb-2">
+      <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
       <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md py-2 mb-4 ">
         <DayPicker
           mode="single"
@@ -106,12 +107,15 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
           .map(({ times }) =>
             /* 각 시간의 정보 렌더링 */
             times.map((timeInfo) => (
+              // TODO: 시간 개수에 따라 grid 개수 조건부렌더링
               <button
                 key={timeInfo.timeId}
                 onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
                 className={`btn btn-sm font-normal ${
-                  timeInfo.times === selectedTime ? 'bg-point-purple text-white' : 'bg-white'
-                } tracking-wide rounded-md h-[48px] border-solid border border-gray-300`}
+                  timeInfo.times === selectedTime
+                    ? 'bg-point-purple text-white hover:bg-button-hover-color'
+                    : 'bg-white hover:bg-background-color hover:border-button-focus-color'
+                } tracking-wide rounded-md h-[48px] border-solid border border-gray-300 `}
               >
                 {convertTimeTo12HourClock(timeInfo.times)}
               </button>

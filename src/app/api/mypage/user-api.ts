@@ -138,7 +138,7 @@ export const addTeacherInfo = async (
   { selectedJob, selectedField, selectedBank, userAccount, teacherName, teacherNumber }: InsertTeacherInfo,
   loginUserId: string | null
 ) => {
-  const { data, error } = await supabase
+  const { data, error }: PostgrestMaybeSingleResponse<InsertTeacherInfo> = await supabase
     .from('users')
     .update([
       {

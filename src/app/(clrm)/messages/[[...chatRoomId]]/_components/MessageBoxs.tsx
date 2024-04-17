@@ -13,7 +13,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import { useEffect, useRef } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
-import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import defaultimage from '../../../../../assets/images/profile-image.png';
 import { deleteRoom } from '@/components/common/Toastify';
 

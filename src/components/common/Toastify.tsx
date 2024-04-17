@@ -13,6 +13,18 @@ export const noChangedNotify = () =>
     theme: 'light'
   });
 
+export const changeInfoNotify = () =>
+  toast.info('프로필 수정이 완료되었습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
 export const noInfoNotify = () =>
   toast.error('입력되지 않은 정보가 있습니다.', {
     position: 'top-right',
@@ -111,6 +123,32 @@ export const addWish = () =>
 
 export const cancelWish = () =>
   toast('🤍 위시리스트에서 삭제했습니다.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnFocusLoss: false,
+    theme: 'light'
+  });
+
+export const successCancelReservation = () =>
+  toast.success('예약이 취소되었습니다.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnFocusLoss: false,
+    theme: 'light'
+  });
+
+export const checkFormValidation = () =>
+  toast.error('양식에 맞는 값을 입력해주세요.', {
     position: 'top-right',
     autoClose: 2000,
     hideProgressBar: true,
