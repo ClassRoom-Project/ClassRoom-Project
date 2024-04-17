@@ -53,7 +53,7 @@ const ReserveUserInfo = () => {
             <p className="font-bold mb-1 text-sm ">이름 (닉네임)</p>
             <p className="">{userInfo?.nickname}</p>
           </div>
-          <div className="tooltip ju mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
+          <div className="tooltip mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
             <button
               onClick={handleMoveToMypage}
               className="btn w-full btn-ghost border border-solid border-gray-300 hover:bg-background-color hover:border-button-focus-color"

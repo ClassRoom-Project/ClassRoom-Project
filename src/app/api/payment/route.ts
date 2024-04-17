@@ -33,7 +33,6 @@ export async function GET(request: NextRequest) {
 
   const res = await response.json();
 
-  //TODO: 페이먼트키 추가
   if (response.ok) {
     try {
       await insertNewReservation({
@@ -46,14 +45,14 @@ export async function GET(request: NextRequest) {
       });
 
       //TODO: 배포 주소로 변경
-      return NextResponse.redirect(new URL(`http://localhost:3000/reserve/success/${res.orderId}`));
+      return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/success/${res.orderId}`));
     } catch (error) {
       console.log('라우트 핸들러의 insertNewReservation 오류 => ', error);
-      return NextResponse.redirect(new URL(`http://localhost:3000/reserve/fail`));
+      return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/fail`));
     }
   } else {
     return NextResponse.redirect(
-      new URL(`http://localhost:3000/reserve/fail?code=${res.code}&statusText=${res.message}`)
+      new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/fail?code=${res.code}&statusText=${res.message}`)
     );
   }
 }
