@@ -18,7 +18,6 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
   if (status === 'error') {
     return <div>Error: {error.message}</div>;
   }
-  console.log(data);
   return (
     <div className="min-w-[1024px] relative flex flex-col justify-center items-center">
       {data.length > 0 ? (

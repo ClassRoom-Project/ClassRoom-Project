@@ -30,21 +30,18 @@ export default function LoginState() {
   }
 
   if (status === 'loading') {
-    return (
-      <div className="bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded">로그인</div>
-    );
+    return <div className="btn mr-3 bg-main-color text-white ">로그인</div>;
   }
   return (
-    <div className="mr-20">
+    <div className="w-full flex relative justify-end items-end">
       {userEmail ? (
         <button onClick={handleLogout}>로그아웃</button>
       ) : (
-        <Link
-          className="bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
-          href="/hello"
-        >
-          로그인
-        </Link>
+        <div className="w-full flex justify-end">
+          <Link className="btn mr-3 bg-main-color text-white" href="/hello">
+            로그인
+          </Link>
+        </div>
       )}
     </div>
   );

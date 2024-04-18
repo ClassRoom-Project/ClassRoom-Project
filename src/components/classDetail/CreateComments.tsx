@@ -103,7 +103,6 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
       }
     }
     setDataBaseImage(imageUrls[0]);
-    console.log('댓글테스트중', imageUrls[0]);
     mutate();
   };
 

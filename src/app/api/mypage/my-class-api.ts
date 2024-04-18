@@ -4,7 +4,7 @@ import { PostgrestResponse } from '@supabase/supabase-js';
 
 export const getMyRegisteredClass = async (loginUserId: string | null) => {
   const { data: myClassInfo, error }: PostgrestResponse<MyRegisteredClassType> = await supabase.rpc(
-    'fetch_my_class_info_new',
+    'get_my_class_info_new',
     { _user_id: loginUserId as string }
   );
 

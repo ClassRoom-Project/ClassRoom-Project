@@ -73,15 +73,15 @@ const Header = ({ children }: PropsWithChildren) => {
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
           </div>
-          <div className="w-3/5 md:w-1/2 xs:1/3">
+          <div className="w-3/5  xs:1/3">
             <SearchClass />
           </div>
         </div>
-        <div className="w-1/4 relative flex items-end justify-end xl:mr-[150px] md:mr-[100px] lg:w-4/5">
+        <div className="w-1/3 relative flex items-end justify-end xl:mr-48 md:mr-24 lg:w-4/5">
           <div className="flex w-full justify-end items-center">
             {userEmail ? (
               <div className="flex justify-end items-en">
-                <p className="p-4 hidden w-full lg:block">
+                <p className="p-4 hidden w-full whitespace-nowrap lg:block">
                   {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
                 </p>
               </div>
@@ -116,7 +116,9 @@ const Header = ({ children }: PropsWithChildren) => {
               </div>
             ) : (
               <Suspense fallback={<div>Logout</div>}>
-                <LoginState />
+                <div className="w-full flex justify-end">
+                  <LoginState />
+                </div>
               </Suspense>
             )}
           </div>
