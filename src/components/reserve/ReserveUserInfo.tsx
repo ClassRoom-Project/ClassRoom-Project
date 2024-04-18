@@ -7,7 +7,6 @@ import { UserInfoType } from '@/types/user';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-// TODO: 유저 정보 불러오기
 const ReserveUserInfo = () => {
   const { loginUserId } = useLoginStore();
   const [userInfo, setUserInfo] = useState<UserInfoType>();

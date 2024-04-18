@@ -1,11 +1,8 @@
 import { ReserveClassType } from '@/types/class';
 import Image from 'next/image';
-import Link from 'next/link';
 import { GrLocation } from 'react-icons/gr';
 import { HiOutlineCube } from 'react-icons/hi2';
-import { IoIosArrowBack } from 'react-icons/io';
 import { LuClock } from 'react-icons/lu';
-import { MdOutlineCategory } from 'react-icons/md';
 import { PiCurrencyKrw } from 'react-icons/pi';
 import { RiUserLocationLine } from 'react-icons/ri';
 
@@ -16,11 +13,6 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
       title: `클래스 유형`,
       description: `${classInfo.classType}`
     },
-    // {
-    //   icon: <MdOutlineCategory className="text-gray-400" />,
-    //   title: '카테고리',
-    //   description: classInfo.category
-    // },
     {
       icon: <HiOutlineCube className="text-gray-400" />,
       title: '난이도',

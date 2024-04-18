@@ -40,7 +40,7 @@ export const cancelWish = async ({ userId, classId }: { userId: string | undefin
   }
 };
 
-// 디테일 페이지에서 찜 정보 가져오기
+// 디테일 페이지에서 찜 개수 가져오기
 export const countWish = async (classId: string | undefined) => {
   //TODO: undefined 안오게 수정 필요
   if (!classId) {
