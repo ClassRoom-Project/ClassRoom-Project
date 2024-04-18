@@ -30,7 +30,7 @@ const NotificationComponent = () => {
       return data;
     },
     enabled: !!loginUserId,
-    refetchInterval: 10000,
+    refetchInterval: 3000,
   });
 
   const unreadNotificationsCount = notifications.filter(notification => !notification.isread).length;
@@ -71,7 +71,7 @@ const NotificationComponent = () => {
         .eq('notice_id', notification.notice_id);
 
       if (error) {
-        console.error('Failed to mark notification as read', error);
+        console.error('error', error);
       } else {
         refetch();
       }
