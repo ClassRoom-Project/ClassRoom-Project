@@ -84,7 +84,6 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   }
 
   //무한스크롤
-
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="flex flex-col justify-center items-center h-auto px-3">
