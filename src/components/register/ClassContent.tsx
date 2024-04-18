@@ -66,7 +66,7 @@ const ClassContent = () => {
           modules={modules}
           formats={formats}
           placeholder="클래스의 상세 설명을 입력해주세요"
-          className="form-input rounded flex-grow w-full"
+          className="form-input rounded flex-grow w-full bg-white"
           style={{ height: '400px' }}
         />
       </div>
