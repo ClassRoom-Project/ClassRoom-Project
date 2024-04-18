@@ -16,13 +16,14 @@ import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import defaultimage from '../../../../../assets/images/profile-image.png';
 import { deleteRoom } from '@/components/common/Toastify';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 dayjs.locale('ko');
 
 export default function MessageBoxs({ toClassId, title, chatId, otherId, studentName, mainImage }: MessagesBoxsType) {
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
-  const { readChatRoomMessages } = useReadChatRoomMessages(chatId, loginUserId!);
+  const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
   const queryClient = useQueryClient();
@@ -73,6 +74,14 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
     };
     scrollToBottom();
   }, [readChatRoomMessages]);
+
+  if (isLoading) {
+    return (
+      <div className="flex flex-col justify-center items-center h-full px-3">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   //무한스크롤
 
@@ -155,7 +164,13 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                     {message.images &&
                       JSON.parse(message.images).map((imgUrl: string, imgIndex: number) => (
                         <div key={imgIndex} className="image-container">
-                          <Image src={imgUrl} layout="fill" objectFit="cover" alt={`Photo ${imgIndex + 1}`} />
+                          <Image
+                            src={imgUrl}
+                            layout="fill"
+                            unoptimized
+                            objectFit="cover"
+                            alt={`Photo ${imgIndex + 1}`}
+                          />
                         </div>
                       ))}
                   </div>
