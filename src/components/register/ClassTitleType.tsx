@@ -2,7 +2,7 @@
 import React from 'react';
 import useRegisterStore from '@/store/registerStore';
 
-const ClassTitle = () => {
+const ClassTitleType = () => {
   const { classTitle, classType, setClassTitle, setClassType } = useRegisterStore();
 
   const handleClassTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,4 +39,4 @@ const ClassTitle = () => {
   );
 };
 
-export default ClassTitle;
+export default ClassTitleType;
