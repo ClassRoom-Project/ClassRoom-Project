@@ -5,7 +5,7 @@ export interface ClassAllType {
   class_id: string;
   user_id: string;
   category: string;
-  hashtag: string;
+  hashtag: string[];
   title: string;
   description: string;
   max_people: number;
@@ -39,7 +39,7 @@ export interface MyRegisteredClassType {
   location: string;
   detail_location: string;
   image: string;
-  active: boolean;
+  isActive: boolean;
   quantity: number;
   class_type: string;
   category: string;
@@ -119,7 +119,7 @@ export interface ListDetailClassInfo {
   class_id: string;
   user_id: string;
   category: string;
-  hashtag: string;
+  hashtag: string[];
   title: string;
   description: string;
   max_people: number;
