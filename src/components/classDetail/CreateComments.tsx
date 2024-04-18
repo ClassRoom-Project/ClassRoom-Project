@@ -120,7 +120,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
         <div className="w-[1000px] bg-disable-color rounded-xl shadow-2xl border-solid p-4">
           <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col">
             <div className="flex">
-              {/* <div className="w-64 h-64 items-center justify-center flex relative mr-5">
+              <div className="w-64 h-64 items-center justify-center flex relative mr-5">
                 {commentImage.length > 0 ? (
                   <Image
                     src={commentImage[0].preview}
@@ -136,10 +136,10 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                     className="h-full w-full object-cover rounded-[20px] border"
                   />
                 )}
-              </div> */}
+              </div>
               <div className="w-[700px] flex flex-col justify-center items-start">
                 <div className="w-full flex justify-between items-center">
-                  {/* <div className="flex items-center mb-4">
+                  <div className="flex items-center mb-4">
                     <label
                       htmlFor="image-upload"
                       className="border flex border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
@@ -153,7 +153,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                       onChange={handleCommentImageChange}
                       style={{ display: 'none' }}
                     />
-                  </div> */}
+                  </div>
                   <div className="rating mb-2 rating-sm flex justify-end items-center">
                     {[1, 2, 3, 4, 5].map((num) => (
                       <input

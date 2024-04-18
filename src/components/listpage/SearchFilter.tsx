@@ -2,14 +2,14 @@
 import { FiAlignJustify } from 'react-icons/fi';
 import React, { useState } from 'react';
 import { useCategoryFilterStore, useListFilterStore } from '@/store/classFilterStore';
-
+import { useSearchStore } from '@/store/classFilterStore';
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-
+  const { setSelectedTitle } = useSearchStore();
   const handleDropdown = () => {
     setIsOpenCategory(!isOpenCategory);
   };
@@ -24,6 +24,7 @@ const SearchFilter = () => {
     });
     setMinPrice('');
     setMaxPrice('');
+    setSelectedTitle('');
   };
 
   //가격 버튼 색상 스테이트 함수
