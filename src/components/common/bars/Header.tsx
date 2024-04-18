@@ -66,38 +66,38 @@ const Header = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-full justify-between  items-center h-20 border-b-[1px] border-solid border-gray-300">
-        <div className="flex items-center ml-0 justify-center lg:ml-14">
-          <div className="rounded-full relative w-20 h-20">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white flex p-[15px] w-full justify-between  items-center h-20 border-b-[1px] border-solid border-gray-300 ml-0 md:ml-[100px]">
+        <div className="flex items-center ml-0 w-full justify-start xl:ml-20">
+          <div className="rounded-full relative w-16 h-16">
             <Link href="/">
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
           </div>
-          <div className="">
+          <div className="w-3/5 md:w-1/2 xs:1/3">
             <SearchClass />
           </div>
         </div>
-        <div className="w-100 mr-[100px] flex items-end justify-end">
+        <div className="w-100 flex items-end justify-end xl:mr-[150px] md:mr-[100px]">
           <div className="flex items-center">
             {userEmail ? (
-              <div className="mr-[10px] hidden lg:block">
-                <Notification />
-              </div>
-            ) : null}
-            {userEmail ? (
-              <p className="p-4 hidden xl:block">
+              <p className="p-4 hidden lg:block">
                 {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
               </p>
             ) : null}
             {userEmail ? (
+              <div className="mr-[10px] hidden xl:block">
+                <Notification />
+              </div>
+            ) : null}
+
+            {userEmail ? (
               <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="w-12 h-12 rounded-full m-1">
+                <div tabIndex={0} role="button" className="w-16 h-16 relative rounded-full m-1">
                   <Image
                     src={profileImage}
                     alt="Profile image"
                     className="w-full h-full rounded-full object-cover"
-                    width={60}
-                    height={60}
+                    fill
                     unoptimized={true}
                   />
                 </div>

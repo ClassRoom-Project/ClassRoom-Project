@@ -21,15 +21,12 @@ export const SearchClass = () => {
   };
 
   return (
-    <form
-      className="h-[120px] ml-[66px] w-[250px] flex items-center justify-center lg:w-[500px] lg:ml-10"
-      onSubmit={handleSearchBtn}
-    >
-      <div className="border-[1px] rounded-xl w-[500px] items-end justify-end border-point-color relative">
+    <form className="h-[120px ml-2 relative w-full flex items-center justify-center" onSubmit={handleSearchBtn}>
+      <div className="border-[1px] rounded-xl w-full items-end justify-end border-point-color relative">
         <input
           onChange={handleSearchChange}
           value={selectedTitle}
-          className="h-12 w-[316px] ml-16 outline-none rounded-xl"
+          className="h-12 ml-16 outline-none rounded-xl"
           type="text"
           placeholder="검색하기"
         />
