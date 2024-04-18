@@ -77,7 +77,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
 
   if (isLoading) {
     return (
-      <div className="flex flex-col justify-center items-center h-full px-3">
+      <div className="flex flex-col justify-center items-center h-auto px-3">
         <LoadingSpinner />
       </div>
     );
@@ -160,7 +160,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                     )}
                   </div>
                 ) : (
-                  <div className=" relative" style={{ width: '130px', height: '150px' }}>
+                  <div className=" relative" style={{ width: '180px', height: '200px' }}>
                     {message.images &&
                       JSON.parse(message.images).map((imgUrl: string, imgIndex: number) => (
                         <div key={imgIndex} className="image-container">
