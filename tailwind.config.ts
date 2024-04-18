@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       minHeight: {
-        '100vh-header': 'calc(100dvh - 60px)'
+        '100vh-header-default': 'calc(100dvh - 80px)',
+        '100vh-header-reserve': 'calc(100dvh - 110px)'
         // other properties...
       },
       backgroundImage: {
