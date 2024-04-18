@@ -28,16 +28,17 @@ const ClassDetailLeft = ({
   return (
     <div className="flex flex-col p-5 mr-4 shadow-md justify-center items-center w-[500px] rounded-lg h-[1000px] bg-light-purple ">
       <div className="flex items-center justify-between w-[350px]">
-        <div className="flex justify-center items-center mr-2 h-8 gap-2">
-          <Image
-            width={30}
-            height={30}
-            className="rounded-full"
-            src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
-            alt="profileImage"
-            unoptimized={true}
-          ></Image>
-
+        <div className="flex justify-center items-center mr-2 h-8 gap-2 ">
+          <div className="w-8 h-8">
+            <Image
+              width={30}
+              height={30}
+              className="rounded-full w-full h-full object-cover"
+              src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
+              alt="profileImage"
+              unoptimized={true}
+            />
+          </div>
           <p>{classData?.users.teacher_name}</p>
         </div>
         <DetailWishButton classId={classData?.class_id} />

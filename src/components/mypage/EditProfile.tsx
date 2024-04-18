@@ -7,7 +7,7 @@ import { UpdateUserInfoType } from '@/types/user';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { changeInfoNotify, noChangedNotify } from '../common/Toastify';
+import { changeInfoNotify, noChangedNotify, noInfoNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
 
 const EditProfile = () => {
@@ -34,7 +34,7 @@ const EditProfile = () => {
 
   // 닉네임 수정
   const handleOnChangeNickname = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newNickname = e.target.value;
+    const newNickname = e.target.value.trim();
     setNewNickname(newNickname); // 새로 작성한 닉네임
 
     const isAvailable = !(await checkUserNickname({ newNickname }, userId));
@@ -61,6 +61,11 @@ const EditProfile = () => {
     // 수정된 사항이 없는 경우
     const isNicknameChanged = newNickname !== userInfo?.nickname;
     const isProfileImageChanged = newProfileImage != userInfo?.profile_image;
+
+    if (!newNickname.trim()) {
+      noInfoNotify();
+      return;
+    }
 
     if (!isNicknameChanged && !isProfileImageChanged) {
       noChangedNotify();
