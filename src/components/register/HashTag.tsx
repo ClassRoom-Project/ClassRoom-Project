@@ -41,7 +41,7 @@ const HashTag = () => {
           className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0"
           type="text"
           onChange={handleSubCategoryChange}
-          placeholder="해시태그를 입력해주세요(최대 5개까지 입력가능 ex.#태그1 #태그2 #태그3)"
+          placeholder="해시태그 최대 5개까지 입력가능합니다(ex.#태그1 #태그2 #태그3)"
         />
       </div>
     </div>
