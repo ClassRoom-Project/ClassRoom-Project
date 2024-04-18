@@ -5,7 +5,7 @@ import { ImageFileWithPreview } from '@/types/register';
 
 //댓글 불러오기 api, rpc로 쿼리문 작성해야된다 이렇게하니까 안나온다 데이터가
 export const getDetailComment = async (classId: string | undefined, page = 1, limit_val = 5) => {
-  const { data: comments, error } = await supabase.rpc('get_comments_with_user_info', {
+  const { data: comments, error } = await supabase.rpc('get_comments', {
     input_class_id: classId,
     page: page,
     limit_val: limit_val
@@ -25,7 +25,7 @@ export const createDetailComment = async (
   star: number | undefined,
   userId: string | undefined,
   content: string | undefined,
-  comment_image: ImageFileWithPreview[] | undefined
+  comment_image: string | undefined
 ) => {
   const { data: comments, error } = await supabase.from('comments').insert([
     {
@@ -34,7 +34,7 @@ export const createDetailComment = async (
       content: content,
       star: star,
       create_at: new Date(),
-      comment_image: comment_image ? comment_image.join(',') : null
+      comment_image: comment_image
     }
   ]);
 

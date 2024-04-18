@@ -21,7 +21,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   const queryClient = useQueryClient();
   const { loginUserId } = useLoginStore();
   const [commentImage, setCommentImage] = useState<ImageFileWithPreview[]>([]);
-
+  const [dataBaseImage, setDataBaseImage] = useState<string>('');
   const email: string = session?.user?.email ?? '';
   const { data: userData } = useQuery({
     queryKey: ['getUserIdByEmail'],
@@ -59,7 +59,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   };
   const { mutate, error, status } = useMutation({
     mutationKey: ['createDetailComment'],
-    mutationFn: (data) => createDetailComment(classData?.class_id, star, userId, content, commentImage),
+    mutationFn: () => createDetailComment(classData?.class_id, star, userId, content, dataBaseImage),
     retry: 1,
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -102,7 +102,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
         imageUrls.push(url);
       }
     }
-    const imagesString = imageUrls.join(',');
+    setDataBaseImage(imageUrls[0]);
     mutate();
   };
 
@@ -117,10 +117,10 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="w-[1000px] bg-disable-color rounded-xl shadow-2xl border-solid p-4">
+        <div className="w-[1000px] bg-disable-color rounded-xl shadow-md border-solid p-4">
           <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col">
             <div className="flex">
-              {/* <div className="w-64 h-64 items-center justify-center flex relative mr-5">
+              <div className="w-64 h-64 items-center justify-center flex relative mr-5">
                 {commentImage.length > 0 ? (
                   <Image
                     src={commentImage[0].preview}
@@ -136,13 +136,13 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                     className="h-full w-full object-cover rounded-[20px] border"
                   />
                 )}
-              </div> */}
+              </div>
               <div className="w-[700px] flex flex-col justify-center items-start">
                 <div className="w-full flex justify-between items-center">
-                  {/* <div className="flex items-center mb-4">
+                  <div className="flex items-center mb-4">
                     <label
                       htmlFor="image-upload"
-                      className="border flex border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
+                      className="border flex border-main-color bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-main-color cursor-pointer"
                     >
                       <p>사진추가</p>
                     </label>
@@ -153,14 +153,14 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                       onChange={handleCommentImageChange}
                       style={{ display: 'none' }}
                     />
-                  </div> */}
+                  </div>
                   <div className="rating mb-2 rating-sm flex justify-end items-center">
                     {[1, 2, 3, 4, 5].map((num) => (
                       <input
                         key={num}
                         type="radio"
                         name="rating"
-                        className="mask mask-star-2 mb-1 bg-[#6C5FF7]"
+                        className="mask mask-star-2 mb-1 bg-main-color"
                         value={num}
                         onChange={handleStarChange}
                         checked={star === num}
@@ -170,7 +170,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 </div>
                 <textarea
                   minLength={10}
-                  maxLength={100}
+                  maxLength={150}
                   className="w-full h-52 p-2 border rounded-md"
                   placeholder="후기을 입력해주세요.(10자 이상)"
                   value={content}
@@ -180,7 +180,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
             </div>
             <button
               type="submit"
-              className="mt-4 bg-[#6C5FF7] hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
+              className="mt-4 bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded-2xl"
             >
               후기 등록
             </button>
