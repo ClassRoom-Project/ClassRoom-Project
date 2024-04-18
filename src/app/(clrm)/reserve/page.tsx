@@ -11,23 +11,23 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   const classInfo = await fetchReserveClassInfo(classId);
 
   return (
-    <div className="min-h-100vh-header bg-light-purple min-w-100vw flex pb-6 flex-col">
+    <div className=" min-w-100vw flex flex-col">
       <Link
         href={`/list/detail/${classInfo.classId}`}
-        className="bg-white px-2 py-2 flex items-center text-text-dark-gray"
+        className="mobile:m-0  md:mx-10 lg:mx-20 sm:mx-10  bg-white px-2 py-2 flex items-center text-text-dark-gray mx-20"
       >
         <IoIosArrowBack size={18} />
         상세보기
       </Link>
 
       {classInfo ? (
-        <div className="w-ful   box-border  bg-light-purple flex justify-center items-center flex-col text-gray-600 lg:flex-row ">
-          <div className="flex box-border flex-col h-[800px] min-w-[400px] max-w-[400px] justify-between">
+        <div className="mobile:m-0 box-border py-8 lg:min-w-fit md:mx-10 lg:mx-20 lg:px-8 bg-light-purple  sm:mx-10 flex justify-center items-center flex-col text-gray-600 lg:flex-row ">
+          <div className="flex w-1/3 min-w-96 box-border flex-col h-[780px]  justify-between 2xl: ">
             <ClassInfo classInfo={classInfo} />
             <ReserveUserInfo />
           </div>
           <div className="lg:divider-horizontal" />
-          <div className=" py-6 px-9 min-w-[400px] max-w-[400px] h-[800px] justify-between bg-white rounded-md  flex flex-col shadow">
+          <div className=" md:mt-4 sm:mt-4 mobile:mt-4 lg:mt-0 py-4 px-9 min-w-96 w-1/3 h-[780px] justify-between bg-white rounded-md  flex flex-col shadow">
             <ReservationScheduler classInfo={classInfo} />
             <SetQuantityAndPay classInfo={classInfo} />
           </div>

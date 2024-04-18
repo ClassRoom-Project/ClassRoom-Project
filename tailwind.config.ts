@@ -40,6 +40,9 @@ const config: Config = {
         'dark-purple-color': '#4D43B8',
         'text-dark-gray': '#515B60',
         'icon-color': '#3f3f3f'
+      },
+      screens: {
+        mobile: '320px' // 모바일 스크린용 breakpoint prefix
       }
     }
   },

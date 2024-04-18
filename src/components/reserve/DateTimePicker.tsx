@@ -89,9 +89,9 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   };
 
   return (
-    <div className="w-full mb-2">
+    <div className="w-full mb-2 flex flex-col justify-center items-center">
       <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
-      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md py-2 mb-4 ">
+      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md p-2 min-w-2/3 mb-4 ">
         <DayPicker
           mode="single"
           required

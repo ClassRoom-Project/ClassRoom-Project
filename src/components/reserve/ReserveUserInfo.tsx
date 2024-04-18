@@ -38,7 +38,7 @@ const ReserveUserInfo = () => {
   };
 
   return (
-    <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md shadow">
+    <div className="md:mt-4 sm:mt-4 mobile:mt-4  2xl:h-[310px] rounded-md h-[300px] flex flex-col bg-white p-6 text-md shadow">
       <div className="mb-4">
         <p className="text-lg font-bold mb-1">연락처</p>
         <p className="text-sm">알림 발송을 위해 계정 정보를 확인해주세요.</p>
