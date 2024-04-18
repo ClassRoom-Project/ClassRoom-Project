@@ -65,36 +65,41 @@ const Header = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <div>
-      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-Full justify-between items-center h-[80px] border-b-[1px] border-solid border-gray-300">
-        <div className="flex items-center ml-14 justify-center">
-          <Link href="/">
-            <Image className="rounded-full" src={Logo} alt="클룸 로고" width={75} height={75} />
-          </Link>
-          <SearchClass />
+    <>
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white flex p-[15px] w-full justify-between  items-center h-20 border-b-[1px] border-solid border-gray-300 ml-0 md:ml-[100px]">
+        <div className="flex items-center ml-0 w-full justify-start xl:ml-20">
+          <div className="rounded-full relative w-16 h-16">
+            <Link href="/">
+              <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
+            </Link>
+          </div>
+          <div className="w-3/5  xs:1/3">
+            <SearchClass />
+          </div>
         </div>
-
-        <div className="w-100 mr-[65px] flex items-end justify-end">
-          <div className="flex items-center">
+        <div className="w-1/3 relative flex items-end justify-end xl:mr-48 md:mr-24 lg:w-4/5">
+          <div className="flex w-full justify-end items-center">
             {userEmail ? (
-              <div className="mr-[10px]">
-                <Notification />
+              <div className="flex justify-end items-en">
+                <p className="p-4 hidden w-full whitespace-nowrap lg:block">
+                  {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
+                </p>
               </div>
             ) : null}
             {userEmail ? (
-              <p className="p-4">
-                {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
-              </p>
+              <div className="mr-[10px] hidden xl:block">
+                <Notification />
+              </div>
             ) : null}
+
             {userEmail ? (
               <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="w-12 h-12 rounded-full m-1">
+                <div tabIndex={0} role="button" className="w-16 h-16 relative rounded-full m-1">
                   <Image
                     src={profileImage}
                     alt="Profile image"
                     className="w-full h-full rounded-full object-cover"
-                    width={60}
-                    height={60}
+                    fill
                     unoptimized={true}
                   />
                 </div>
@@ -111,14 +116,16 @@ const Header = ({ children }: PropsWithChildren) => {
               </div>
             ) : (
               <Suspense fallback={<div>Logout</div>}>
-                <LoginState />
+                <div className="w-full flex justify-end">
+                  <LoginState />
+                </div>
               </Suspense>
             )}
           </div>
         </div>
       </div>
-      <div className="mt-[80px]">{children}</div>
-    </div>
+      <div className="mt-20">{children}</div>
+    </>
   );
 };
 
