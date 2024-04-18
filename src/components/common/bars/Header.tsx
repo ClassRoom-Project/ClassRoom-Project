@@ -65,7 +65,7 @@ const Header = ({ children }: PropsWithChildren) => {
   };
 
   return (
-    <div className="">
+    <div>
       <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-Full justify-between items-center h-[80px] border-b-[1px] border-solid border-gray-300">
         <div className="flex items-center ml-14 justify-center">
           <Link href="/">

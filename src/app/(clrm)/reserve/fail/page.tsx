@@ -1,7 +1,10 @@
-import React from 'react';
+import PaymentFailPage from '@/components/payments/PaymentFailPage';
+import { Suspense } from 'react';
 
-const FailPage = () => {
-  return <div>FailPage</div>;
-};
-
-export default FailPage;
+export default function FailPage() {
+  return (
+    <Suspense>
+      <PaymentFailPage />
+    </Suspense>
+  );
+}

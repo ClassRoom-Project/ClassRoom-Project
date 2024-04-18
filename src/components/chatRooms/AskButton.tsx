@@ -19,7 +19,6 @@ export default function AskButton({
 
   const onhandleClick = () => {
     if (!loginUserId) {
-      console.log('로그인해');
       alert('로그인이 필요한 기능입니다.');
       return;
     } else if (loginUserId === makeClassUserId) {
