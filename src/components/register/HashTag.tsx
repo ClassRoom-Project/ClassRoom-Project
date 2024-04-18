@@ -10,7 +10,7 @@ const HashTag = () => {
   const handleSubCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let inputValue = event.target.value;
     const hashCount = (inputValue.match(/#/g) || []).length;
-
+  
     if (hashCount > 5) {
       if (!isLimitNotified) {
         LimitHashTagNotify(); // 알림 표시
@@ -18,19 +18,20 @@ const HashTag = () => {
       }
       // #의 개수가 5개를 초과하면 더 이상 입력을 받지 않음
       event.target.value = inputValue.slice(0, inputValue.lastIndexOf("#"));
-      return; // 추가 처리 방지
+      return;
     } else {
       if (isLimitNotified) {
         setIsLimitNotified(false); // 알림 상태 초기화
       }
     }
-
-    const hashTags = inputValue.match(/#([a-zA-Z0-9가-힣]+)/g) || [];
+  
+    const rawHashTags = inputValue.split('#').slice(1);
+    const hashTags = rawHashTags.map(tag => tag.trim()).filter(tag => tag !== '');
+  
     if (hashTags.length <= 5) {
-      const tagsWithoutHash = hashTags.map(tag => tag.slice(1));
-      setSubCategory(tagsWithoutHash);
+      setSubCategory(hashTags);
     }
-  };
+  };  
 
   return (
     <div className="my-4">
