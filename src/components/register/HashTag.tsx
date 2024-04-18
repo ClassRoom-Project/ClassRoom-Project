@@ -25,7 +25,6 @@ const HashTag = () => {
       }
     }
 
-    // 정규식을 통해 해시태그 추출 및 소분류로 설정
     const hashTags = inputValue.match(/#([a-zA-Z0-9가-힣]+)/g) || [];
     if (hashTags.length <= 5) {
       const tagsWithoutHash = hashTags.map(tag => tag.slice(1));
