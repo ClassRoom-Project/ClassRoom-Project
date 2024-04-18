@@ -180,7 +180,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
             </div>
             <button
               type="submit"
-              className="mt-4 bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
+              className="mt-4 bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded-2xl"
             >
               후기 등록
             </button>

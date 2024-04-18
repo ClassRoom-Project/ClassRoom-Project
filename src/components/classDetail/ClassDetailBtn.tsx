@@ -30,18 +30,18 @@ const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeCla
   };
 
   return (
-    <div className="w-[400px] flex justify-center items-center">
-      <button
-        onClick={handleApplyClick}
-        className="flex justify-center items-center rounded-2xl w-20 h-9 bg-[#6C5FF7] text-white mr-3"
-      >
-        신청하기
-      </button>
+    <div className="w-[400px] gap-3 flex justify-center items-center">
       <AskButton
         classId={classId}
         makeClassUserId={makeClassUserId}
-        buttonStyle="flex justify-center items-center rounded-2xl w-20 border-[#5373FF] border-solid border-[1px] h-9 ml-3"
+        buttonStyle="flex justify-center items-center rounded-md w-20 border-[#5373FF] border-solid border-[1px] h-9 ml-3 hover:bg-disable-color"
       />
+      <button
+        onClick={handleApplyClick}
+        className="flex justify-center items-center rounded-md w-20 h-9 bg-[#6C5FF7] text-white mr-3 hover:bg-button-hover-color"
+      >
+        신청하기
+      </button>
     </div>
   );
 };
