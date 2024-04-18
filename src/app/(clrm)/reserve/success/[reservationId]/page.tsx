@@ -87,7 +87,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   // #endregion
 
   return (
-    <div className=" min-w-100vw flex flex-col mx-16 mobile:m-0  md:mx-16 lg:mx-20 sm:bg-gray-600 md:bg-amber-300 lg:bg-400 min-h-100vh-header-default ">
+    <div className=" min-w-100vw flex flex-col mx-16 mobile:m-0  md:mx-16 lg:mx-16  lg:bg-400 min-h-100vh-header-default ">
       {!isLoading && !isError ? (
         <>
           <div className="w-full min-h-100vh-header-default  box-border bg-light-purple  flex justify-center mobile:justify-center mobile:py-2 items-center flex-col text-gray-700">

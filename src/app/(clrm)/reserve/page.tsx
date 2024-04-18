@@ -14,14 +14,14 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
     <div className=" min-w-100vw flex flex-col">
       <Link
         href={`/list/detail/${classInfo.classId}`}
-        className="mobile:m-0  md:mx-10 lg:mx-20 sm:mx-10  bg-white px-2 py-2 flex items-center text-text-dark-gray mx-20"
+        className="mobile:m-0  md:mx-10 lg:mx-16 sm:mx-10  bg-white px-2 py-2 flex items-center text-text-dark-gray mx-16"
       >
         <IoIosArrowBack size={18} />
         상세보기
       </Link>
 
       {classInfo ? (
-        <div className="min-h-100vh-header-reserve mobile:m-0 box-border py-8 lg:min-w-fit md:mx-10 lg:mx-20 lg:px-8 bg-light-purple  sm:mx-10 flex justify-center items-center flex-col text-gray-600 lg:flex-row ">
+        <div className="min-h-100vh-header-reserve mobile:m-0 box-border py-8 lg:min-w-fit md:mx-10 lg:mx-16 lg:px-8 bg-light-purple  sm:mx-10 flex justify-center items-center flex-col text-gray-600 lg:flex-row ">
           <div className="flex w-1/3 mobile:min-w-[350px] sm:min-w-96 box-border flex-col h-[780px]  justify-between">
             <ClassInfo classInfo={classInfo} />
             <ReserveUserInfo />
