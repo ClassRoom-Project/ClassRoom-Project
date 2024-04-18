@@ -21,7 +21,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   const queryClient = useQueryClient();
   const { loginUserId } = useLoginStore();
   const [commentImage, setCommentImage] = useState<ImageFileWithPreview[]>([]);
-
+  const [dataBaseImage, setDataBaseImage] = useState<string>('');
   const email: string = session?.user?.email ?? '';
   const { data: userData } = useQuery({
     queryKey: ['getUserIdByEmail'],
@@ -59,7 +59,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   };
   const { mutate, error, status } = useMutation({
     mutationKey: ['createDetailComment'],
-    mutationFn: (data) => createDetailComment(classData?.class_id, star, userId, content, commentImage),
+    mutationFn: () => createDetailComment(classData?.class_id, star, userId, content, dataBaseImage),
     retry: 1,
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -102,7 +102,8 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
         imageUrls.push(url);
       }
     }
-    const imagesString = imageUrls.join(',');
+    setDataBaseImage(imageUrls[0]);
+    console.log('댓글테스트중', imageUrls[0]);
     mutate();
   };
 
@@ -142,7 +143,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                   <div className="flex items-center mb-4">
                     <label
                       htmlFor="image-upload"
-                      className="border flex border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
+                      className="border flex border-main-color bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-main-color cursor-pointer"
                     >
                       <p>사진추가</p>
                     </label>
@@ -160,7 +161,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                         key={num}
                         type="radio"
                         name="rating"
-                        className="mask mask-star-2 mb-1 bg-[#6C5FF7]"
+                        className="mask mask-star-2 mb-1 bg-main-color"
                         value={num}
                         onChange={handleStarChange}
                         checked={star === num}
@@ -180,7 +181,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
             </div>
             <button
               type="submit"
-              className="mt-4 bg-[#6C5FF7] hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
+              className="mt-4 bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded"
             >
               후기 등록
             </button>

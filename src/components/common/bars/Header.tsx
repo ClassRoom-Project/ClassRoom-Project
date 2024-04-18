@@ -66,23 +66,26 @@ const Header = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-full justify-between items-center h-20 border-b-[1px] border-solid border-gray-300">
-        <div className="flex items-center ml-14 justify-center">
-          <Link href="/">
-            <Image className="rounded-full" src={Logo} alt="클룸 로고" width={75} height={75} />
-          </Link>
-          <SearchClass />
+      <div className="fixed top-0 left-0 right-0 z-40 ml-[100px] bg-white flex p-[15px] w-full justify-between  items-center h-20 border-b-[1px] border-solid border-gray-300">
+        <div className="flex items-center ml-0 justify-center lg:ml-14">
+          <div className="rounded-full relative w-20 h-20">
+            <Link href="/">
+              <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
+            </Link>
+          </div>
+          <div className="">
+            <SearchClass />
+          </div>
         </div>
-
         <div className="w-100 mr-[100px] flex items-end justify-end">
           <div className="flex items-center">
             {userEmail ? (
-              <div className="mr-[10px]">
+              <div className="mr-[10px] hidden lg:block">
                 <Notification />
               </div>
             ) : null}
             {userEmail ? (
-              <p className="p-4">
+              <p className="p-4 hidden xl:block">
                 {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
               </p>
             ) : null}

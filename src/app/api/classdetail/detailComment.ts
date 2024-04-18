@@ -25,7 +25,7 @@ export const createDetailComment = async (
   star: number | undefined,
   userId: string | undefined,
   content: string | undefined,
-  comment_image: ImageFileWithPreview[] | undefined
+  comment_image: string | undefined
 ) => {
   const { data: comments, error } = await supabase.from('comments').insert([
     {
@@ -34,7 +34,7 @@ export const createDetailComment = async (
       content: content,
       star: star,
       create_at: new Date(),
-      comment_image: comment_image ? comment_image.join(',') : null
+      comment_image: comment_image
     }
   ]);
 

@@ -21,7 +21,10 @@ export const SearchClass = () => {
   };
 
   return (
-    <form className="h-[120px] ml-10 w-[500px] flex items-center justify-center" onSubmit={handleSearchBtn}>
+    <form
+      className="h-[120px] ml-[66px] w-[250px] flex items-center justify-center lg:w-[500px] lg:ml-10"
+      onSubmit={handleSearchBtn}
+    >
       <div className="border-[1px] rounded-xl w-[500px] items-end justify-end border-point-color relative">
         <input
           onChange={handleSearchChange}
