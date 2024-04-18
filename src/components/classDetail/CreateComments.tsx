@@ -118,7 +118,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="w-[1000px] bg-disable-color rounded-xl shadow-2xl border-solid p-4">
+        <div className="w-[1000px] bg-disable-color rounded-xl shadow-md border-solid p-4">
           <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col">
             <div className="flex">
               <div className="w-64 h-64 items-center justify-center flex relative mr-5">
@@ -171,7 +171,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 </div>
                 <textarea
                   minLength={10}
-                  maxLength={100}
+                  maxLength={150}
                   className="w-full h-52 p-2 border rounded-md"
                   placeholder="후기을 입력해주세요.(10자 이상)"
                   value={content}

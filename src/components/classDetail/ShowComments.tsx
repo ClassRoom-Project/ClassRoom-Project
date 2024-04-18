@@ -20,9 +20,9 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
   }
   console.log(data);
   return (
-    <div className="min-w-[1024px] flex flex-col justify-center items-center">
+    <div className="min-w-[1024px] relative flex flex-col justify-center items-center">
       {data.length > 0 ? (
-        <div>
+        <div className="w-full">
           {data?.map((comment: DetailCommentType) => (
             <CommentsCard key={comment.comment_id} comment={comment} />
           ))}

@@ -77,12 +77,14 @@ const Header = ({ children }: PropsWithChildren) => {
             <SearchClass />
           </div>
         </div>
-        <div className="w-100 flex items-end justify-end xl:mr-[150px] md:mr-[100px]">
-          <div className="flex items-center">
+        <div className="w-1/4 relative flex items-end justify-end xl:mr-[150px] md:mr-[100px] lg:w-4/5">
+          <div className="flex w-full justify-end items-center">
             {userEmail ? (
-              <p className="p-4 hidden lg:block">
-                {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
-              </p>
+              <div className="flex justify-end items-en">
+                <p className="p-4 hidden w-full lg:block">
+                  {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
+                </p>
+              </div>
             ) : null}
             {userEmail ? (
               <div className="mr-[10px] hidden xl:block">
