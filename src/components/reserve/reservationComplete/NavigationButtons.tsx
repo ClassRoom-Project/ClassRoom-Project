@@ -19,16 +19,16 @@ const NavigationButtons = () => {
   };
 
   return (
-    <div className="flex md:flex md:w-full gap-8 md:justify-center mobile:flex-col mobile:gap-2 sm:flex-col sm:gap-2 sm:w-full mobile:w-full md:flex-row">
+    <div className="flex md:flex md:w-full md:justify-center  flex-col  gap-2  sm:w-full  w-full md:flex-row">
       <Link
         href="/"
-        className="btn sm:w-full md:w-1/3  lg:w-1/3 mobile:w-full bg-white border border-button-focus-color  border-solid w-38 p-4 text-center self-end hover:bg-background-color hover:border-button-default-color"
+        className="btn sm:w-full md:w-1/3  lg:w-1/3  w-full bg-white border border-button-focus-color  border-solid w-38 p-4 text-center self-end hover:bg-background-color hover:border-button-default-color"
       >
         홈 바로가기
       </Link>
       <button
         onClick={handleCheckClassReservation}
-        className="btn sm:w-full md:w-1/3 lg:w-1/3 mobile:w-full bg-point-purple  text-white font-normal w-48 p-4 text-center self-end hover:bg-button-hover-color"
+        className="btn md:w-1/3 lg:w-1/3  w-full bg-point-purple  text-white font-normal  sm:w-full p-4 text-center self-end hover:bg-button-hover-color"
       >
         예약 상세 보기
       </button>

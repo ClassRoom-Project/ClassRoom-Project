@@ -42,9 +42,7 @@ const config: Config = {
         'text-dark-gray': '#515B60',
         'icon-color': '#3f3f3f'
       },
-      screens: {
-        mobile: '320px' // 모바일 스크린용 breakpoint prefix
-      }
+      screens: {}
     }
   },
   plugins: [require('daisyui')],
