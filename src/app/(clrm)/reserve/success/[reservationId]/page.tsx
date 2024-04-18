@@ -87,11 +87,11 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   // #endregion
 
   return (
-    <div className=" min-w-100vw flex flex-col mx-16 mobile:m-0  md:mx-16 lg:mx-20 sm:bg-gray-600 md:bg-amber-300 lg:bg-400 bg-black">
-      <div className="w-full min-h-100vh-header  box-border bg-light-purple  flex justify-center mobile:justify-start mobile:py-2 items-center flex-col text-gray-700">
-        <div className=" mobile:w-11/12 lg:w-1/2 xl:min-w-1/2 sm:w-11/12 md:w-3/4  md:min-w-[500px] lg:min-w-[600px]  2xl:w-1/2   justify-center min-h-[600px] bg-white shadow rounded-md items-center flex flex-col px-12 mobile:px-6 pt-12 pb-8">
-          {!isLoading && !isError ? (
-            <>
+    <div className=" min-w-100vw flex flex-col mx-16 mobile:m-0  md:mx-16 lg:mx-20 sm:bg-gray-600 md:bg-amber-300 lg:bg-400 w-full min-h-100vh-header ">
+      {!isLoading && !isError ? (
+        <>
+          <div className="w-full min-h-100vh-header  box-border bg-light-purple  flex justify-center mobile:justify-start mobile:py-2 items-center flex-col text-gray-700">
+            <div className=" mobile:w-11/12 lg:w-1/2 xl:min-w-1/2 sm:w-11/12 md:w-3/4  md:min-w-[500px] lg:min-w-[600px]  2xl:w-1/2   justify-center min-h-[600px] bg-white shadow rounded-md items-center flex flex-col px-12 mobile:px-6 pt-12 pb-8">
               <FiCheckCircle color="#38c557" className="mb-6" size={70} />
               <h1 className="text-2xl font-bold sm:text-xl  text-center md:text-xl xl:text-2xl lg:text-2xl mobile:text-base">
                 클래스 예약이 정상적으로 처리되었습니다.
@@ -122,20 +122,20 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
               </div>
               <div className="divider mb-4 mt-10 mobile:mt-4 mobile:mb-2"></div>
               <NavigationButtons />
-            </>
-          ) : isError ? (
-            <div className="flex flex-col justify-center items-center">
-              <RiErrorWarningLine size={100} color="#6C5FF7" />
-              <p className="font-bold text-lg mt-5">예약을 완료하는 도중 오류가 발생했습니다. </p>
             </div>
-          ) : (
-            <div className="flex justify-center flex-col items-center gap-4">
-              <span className="loading loading-spinner loading-lg bg-gray-400"></span>
-              <p>잠시만 기다려주세요..</p>
-            </div>
-          )}
+          </div>
+        </>
+      ) : isError ? (
+        <div className="flex flex-col justify-center items-center">
+          <RiErrorWarningLine size={100} color="#6C5FF7" />
+          <p className="font-bold text-lg mt-5">예약을 완료하는 도중 오류가 발생했습니다. </p>
         </div>
-      </div>
+      ) : (
+        <div className="flex justify-center flex-col items-center gap-4 min-h-100vh-header bg-light-purple">
+          <span className="loading loading-spinner loading-lg bg-gray-400"></span>
+          <p>잠시만 기다려주세요..</p>
+        </div>
+      )}
     </div>
   );
 };
