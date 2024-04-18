@@ -87,7 +87,7 @@ const SelectTime: React.FC = () => {
               mode="single" 
               onSelect={handleDateSelect} 
               locale={ko} 
-              disableNavigation={true} // 한달단위
+              // disableNavigation={true} // 한달단위
             />
           </div>
         )}
