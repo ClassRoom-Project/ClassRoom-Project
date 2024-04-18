@@ -15,7 +15,7 @@ const MyComments = () => {
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 2; // 한 페이지당 보여줄 포스트의 개수
+  const postsPerPage = 5; // 한 페이지당 보여줄 포스트의 개수
 
   // 후기 리스트 불러오기
   const { data: myComments, isPending } = useQuery({

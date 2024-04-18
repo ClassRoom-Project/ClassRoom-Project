@@ -14,7 +14,7 @@ const MyReservedClass = () => {
   const page = searchParams.get('page');
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 2; // 한 페이지당 보여줄 포스트의 개수
+  const postsPerPage = 5; // 한 페이지당 보여줄 포스트의 개수
 
   // 예약한 클래스 정보 불러오기
   const { data: reservedClasses, isPending } = useQuery({

@@ -13,7 +13,7 @@ const MyWishClass = () => {
   const page = searchParams.get('page');
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 3; // 한 페이지당 보여줄 포스트의 개수
+  const postsPerPage = 5; // 한 페이지당 보여줄 포스트의 개수
 
   const { data: myWishClassList, isPending } = useQuery({
     queryKey: [QueryKeys.WISH_CHECK, loginUserId],

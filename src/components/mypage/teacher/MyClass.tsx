@@ -14,7 +14,6 @@ import { GrLocation } from 'react-icons/gr';
 import NoImage from '@/assets/images/no_img.jpg';
 import Pagination from '@/components/common/Pagination';
 import { useEffect, useState } from 'react';
-import ClassInfo from '@/components/reserve/ClassInfo';
 
 const MyClass = () => {
   const { loginUserId } = useLoginStore();
@@ -25,11 +24,12 @@ const MyClass = () => {
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 2; // 한 페이지당 보여줄 포스트의 개수
+  const postsPerPage = 5; // 한 페이지당 보여줄 포스트의 개수
 
   const { data: myClassInfo, isPending } = useQuery({
     queryKey: ['class', loginUserId],
-    queryFn: () => getMyRegisteredClass(loginUserId)
+    queryFn: () => getMyRegisteredClass(loginUserId),
+    enabled: !!loginUserId
   });
 
   // 클래스 삭제하기 : mutation
@@ -71,7 +71,7 @@ const MyClass = () => {
 
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = myClassInfo.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPosts = myClassInfo?.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <ul className="flex flex-col align-center ">

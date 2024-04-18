@@ -25,7 +25,7 @@ const MyClassStudentPage = () => {
   }
 
   const { data: classSingleInfo, isPending } = useQuery({
-    queryKey: ['class', timeId],
+    queryKey: ['singleClass', timeId],
     queryFn: () => getClassSingleInfo(timeId)
   });
 
