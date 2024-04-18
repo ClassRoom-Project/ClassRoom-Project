@@ -39,7 +39,6 @@ function ClassList() {
     //IntersectionObserver 인자 2개를 받는다
     const observer = new IntersectionObserver(
       (entries) => {
-        console.log(entries);
         if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
           fetchNextPage();
         }

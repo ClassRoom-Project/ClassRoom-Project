@@ -2,14 +2,14 @@
 import { FiAlignJustify } from 'react-icons/fi';
 import React, { useState } from 'react';
 import { useCategoryFilterStore, useListFilterStore } from '@/store/classFilterStore';
-
+import { useSearchStore } from '@/store/classFilterStore';
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
-
+  const { setSelectedTitle } = useSearchStore();
   const handleDropdown = () => {
     setIsOpenCategory(!isOpenCategory);
   };
@@ -24,6 +24,7 @@ const SearchFilter = () => {
     });
     setMinPrice('');
     setMaxPrice('');
+    setSelectedTitle('');
   };
 
   //가격 버튼 색상 스테이트 함수
@@ -60,7 +61,7 @@ const SearchFilter = () => {
         {isOpenCategory ? (
           <ul
             tabIndex={0}
-            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-disable-color border-main-color border-solid border-[1px] w-[400px] h-[650px]"
+            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-disable-color border-border-color border-solid border-[1px] w-[400px] h-[650px]"
           >
             <div className="border-b-[1px] flex flex-col items-center justify-center w-80 h-[125px] border-solid border-gray-400">
               <div className="flex mb-3 items-start w-72 justify-start">

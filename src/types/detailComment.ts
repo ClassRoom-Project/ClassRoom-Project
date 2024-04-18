@@ -8,4 +8,5 @@ export interface DetailCommentType {
   nickname: string;
   job: string;
   profile_image: string;
+  comment_image: string;
 }

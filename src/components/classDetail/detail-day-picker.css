@@ -54,9 +54,9 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  width: var(--rdp-cell-size);
-  max-width: var(--rdp-cell-size);
-  height: var(--rdp-cell-size);
+  width: 37px;
+  max-width: 37px;
+  height: 37px;
   margin: 0;
   border: 2px solid transparent;
   border-radius: 100%;
@@ -67,4 +67,11 @@
 .rdp-button:not([disabled]):not(.rdp-day_selected) {
   cursor: pointer;
   color: black;
+}
+
+.rdp-next-button,
+.rdp-previous-button {
+  background-color: #6c5ff7;
+  color: white;
+  border: none;
 }
