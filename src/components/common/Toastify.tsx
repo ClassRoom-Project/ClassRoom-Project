@@ -220,3 +220,16 @@ export const noLimitImageNotify = () =>
     progress: undefined,
     theme: 'light'
   });
+
+export const LimitHashTagNotify = () =>
+  toast.error('최대 5개의 해시태그만 추가할 수 있습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+  

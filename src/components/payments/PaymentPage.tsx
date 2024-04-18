@@ -83,7 +83,7 @@ export default function PaymentPageasync() {
                 // 라우트 핸들러로 예약 정보 전송
                 successUrl: `${window.location.origin}/api/payment?classId=${reserveInfo.classId}&reserveQuantity=${reserveInfo.reserveQuantity}&timeId=${reserveInfo.timeId}&userId=${reserveInfo.userId}`,
                 //fail 시 보여줄 페이지 만들기
-                failUrl: `${window.location.origin}/fail?orderId=${orderId}`
+                failUrl: `${window.location.origin}/fail?orderId=${orderId}&classId=${classId}`
               });
             } catch (error: any) {
               console.log('failed to paymentWidget', error);
