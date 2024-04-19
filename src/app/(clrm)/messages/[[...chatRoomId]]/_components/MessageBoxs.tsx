@@ -15,7 +15,7 @@ import { useEffect, useRef } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import defaultimage from '../../../../../assets/images/profile-image.png';
-import { deleteRoom } from '@/components/common/Toastify';
+import { deleteMessage } from '@/components/common/Toastify';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 dayjs.locale('ko');
@@ -64,7 +64,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
 
   const handleMessageDelete = (messageId: number) => {
     deleteMessageMutate(messageId);
-    deleteRoom();
+    deleteMessage();
   };
 
   //새로운 메시지 들어오는 경우 자동으로 스크롤 하단으로 이동
@@ -139,7 +139,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                 }`}
               >
                 <div>
-                  <p className=" text-gray-400 text-xs px-4">{dayjs(message.created_at).format('A hh:mm')}</p>
+                  <p className=" text-gray-400 text-xs px-4">{dayjs(message.created_at).format('MM월DD일 HH:mm')}</p>
                 </div>
                 {message.create_by === loginUserId ? (
                   <button onClick={() => handleMessageDelete(message.messages_id)}>삭제</button>

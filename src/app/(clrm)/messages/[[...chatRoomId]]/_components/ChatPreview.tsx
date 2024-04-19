@@ -47,7 +47,9 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
           />
         </div>
         <div className="flex flex-col mx-3 flex-1 w-0">
-          <p className="sm:text-sm md:text-base font-bold text-nowrap">{MakeClassUserInfo?.nickname}</p>
+          <div className="w-40">
+            <p className="sm:text-sm md:text-base font-bold text-nowrap truncate">{MakeClassUserInfo?.nickname}</p>
+          </div>
           <div className="flex flex-row justify-between">
             <div>
               {!readLastMessages ? (
@@ -63,7 +65,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
               )}
             </div>
             <div className=" whitespace-nowrap text-xs text-gray-400">
-              {dayjs(readLastMessages?.createdAt).format('A hh:mm')}
+              {dayjs(readLastMessages?.createdAt).format('MM월DD일 HH:mm')}
             </div>
           </div>
         </div>

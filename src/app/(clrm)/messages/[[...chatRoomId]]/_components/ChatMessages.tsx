@@ -70,7 +70,7 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
   }
 
   return (
-    <div className="flex h-full flex-col w-full">
+    <div className="flex h-full flex-col w-full sm:mb-16">
       <div className="flex justify-between border-b border-grey-100 p-4 sticky top-0 w-full bg-[#EFEFFF]">
         <p className="sm:text-sm md:text-lg font-bold ">클래스명: {title}</p>
         <button onClick={handleDelete}>

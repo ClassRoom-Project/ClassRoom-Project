@@ -20,7 +20,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="ko">
       <body className={inter.className}>
         <QueryProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           <ToastContainer />
           {children}
           <Script src={mapScriptSrc} strategy="beforeInteractive" />
