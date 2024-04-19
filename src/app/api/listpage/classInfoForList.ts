@@ -62,7 +62,5 @@ export const getClassForList = async (
   const totalCount = count ?? 0;
   const nextPage = PageNumber + limit < totalCount ? page + 1 : undefined;
 
-  console.log(classInfos);
-
   return { classInfos, nextPage }; // classinfo랑 다음페이지를 반환값으로 가져야 무한루프 넥스트페이지를 사용가능
 };

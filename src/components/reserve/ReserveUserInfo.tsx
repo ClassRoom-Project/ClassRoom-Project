@@ -7,7 +7,6 @@ import { UserInfoType } from '@/types/user';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-// TODO: 유저 정보 불러오기
 const ReserveUserInfo = () => {
   const { loginUserId } = useLoginStore();
   const [userInfo, setUserInfo] = useState<UserInfoType>();
@@ -38,7 +37,7 @@ const ReserveUserInfo = () => {
   };
 
   return (
-    <div className="rounded-md h-[300px] flex flex-col bg-white p-6 text-md shadow">
+    <div className=" h-[310px] rounded-md flex flex-col bg-white p-6 text-md shadow mt-4">
       <div className="mb-4">
         <p className="text-lg font-bold mb-1">연락처</p>
         <p className="text-sm">알림 발송을 위해 계정 정보를 확인해주세요.</p>

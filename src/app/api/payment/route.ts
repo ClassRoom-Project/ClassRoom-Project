@@ -13,8 +13,13 @@ export async function GET(request: NextRequest) {
   const userId = searchParams.get('userId');
   const classId = searchParams.get('classId');
 
-  // 값이 없으면 실패 페이지로 리다이렉트
+  if (!process.env.NEXT_PUBLIC_BASE_URL) {
+    console.log('NEXT_PUBLIC_BASE_URL is undefined');
+    return;
+  }
+
   if (!orderId || !classId || !amount || !reserveQuantity || !timeId || !userId) {
+    // 값이 없으면 실패 페이지로 리다이렉트
     return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/fail`));
   }
 
@@ -26,10 +31,6 @@ export async function GET(request: NextRequest) {
       'Content-Type': 'application/json'
     }
   });
-
-  // console.log(response);
-
-  console.log(process.env.NEXT_PUBLIC_BASE_URL);
 
   const res = await response.json();
 
@@ -44,7 +45,6 @@ export async function GET(request: NextRequest) {
         userId
       });
 
-      //TODO: 배포 주소로 변경
       return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/success/${res.orderId}`));
     } catch (error) {
       console.log('라우트 핸들러의 insertNewReservation 오류 => ', error);
