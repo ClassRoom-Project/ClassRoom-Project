@@ -113,9 +113,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
                         <p className=" text-right">{icon}</p>
                         <p className=" hidden sm:flex flex-shrink-0 mr-2">{title}</p>
                       </div>
-                      <p
-                        className={`text-left text-gray-600 font-normal    text-sm md:text-base sm:font-normal truncate`}
-                      >
+                      <p className={`text-left text-gray-600 font-normal text-sm md:text-base sm:font-normal truncate`}>
                         {description}
                       </p>
                     </div>
@@ -134,7 +132,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
         </div>
       ) : (
         <div className="flex justify-center flex-col items-center gap-4 min-h-100vh-header-default bg-light-purple">
-          <span className="loading loading-spinner loading-lg bg-gray-400"></span>
+          <span className="loading loading-spinner loading-lg bg-point-purple"></span>
           <p>잠시만 기다려주세요..</p>
         </div>
       )}
