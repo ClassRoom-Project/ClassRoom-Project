@@ -61,6 +61,9 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     }
   };
 
+  // DB에서 받아온 day 배열 생성
+  const availableDays = classDates.map((dateInfo) => dateInfo.day);
+
   // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
   function CustomCaption(props: CaptionProps) {
     const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -91,10 +94,6 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     4: 'grid-cols-4'
   };
 
-  const availableDays = classDates.map((dateInfo) => dateInfo.day);
-  console.log(availableDays);
-
-  console.log('🚀 ~ DateTimePicker ~ Number(new Date().getFullYear + 1:', new Date().getFullYear() + 1);
   return (
     <div className="w-full mb-2 flex flex-col justify-center items-center">
       <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
