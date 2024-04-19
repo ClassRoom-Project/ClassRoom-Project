@@ -88,6 +88,17 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     4: 'grid-cols-4'
   };
 
+  // console.log(classDates.map(({ day }) => new Date(day)));
+  const offset = new Date().getTimezoneOffset() * 60000;
+
+  const available = classDates.map((dateInfo) => dateInfo.day);
+  console.log(available);
+
+  available.map((item) => {
+    console.log(item, '내꺼');
+  });
+
+  // console.log(available);
   return (
     <div className="w-full mb-2 flex flex-col justify-center items-center">
       <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
@@ -95,14 +106,13 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
         <DayPicker
           mode="single"
           required
-          disableNavigation
           selected={new Date(selectedDate)}
           onSelect={handleDateChange}
-          disabled={nonAvailableDays}
+          disabled={(day) => available.indexOf(format(day, 'yyyy-MM-dd')) === -1}
           locale={ko}
-          components={{
-            Caption: CustomCaption
-          }}
+          // components={{
+          //   Caption: CustomCaption
+          // }}
         />
       </div>
 
