@@ -16,13 +16,14 @@ import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import defaultimage from '../../../../../assets/images/profile-image.png';
 import { deleteRoom } from '@/components/common/Toastify';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 dayjs.locale('ko');
 
 export default function MessageBoxs({ toClassId, title, chatId, otherId, studentName, mainImage }: MessagesBoxsType) {
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
-  const { readChatRoomMessages } = useReadChatRoomMessages(chatId, loginUserId!);
+  const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
   const queryClient = useQueryClient();
@@ -74,8 +75,15 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
     scrollToBottom();
   }, [readChatRoomMessages]);
 
-  //무한스크롤
+  if (isLoading) {
+    return (
+      <div className="flex flex-col justify-center items-center h-auto px-3">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
+  //무한스크롤
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="flex flex-col justify-center items-center h-auto px-3">
@@ -151,11 +159,17 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                     )}
                   </div>
                 ) : (
-                  <div className=" relative" style={{ width: '130px', height: '150px' }}>
+                  <div className=" relative" style={{ width: '180px', height: '200px' }}>
                     {message.images &&
                       JSON.parse(message.images).map((imgUrl: string, imgIndex: number) => (
                         <div key={imgIndex} className="image-container">
-                          <Image src={imgUrl} layout="fill" objectFit="cover" alt={`Photo ${imgIndex + 1}`} />
+                          <Image
+                            src={imgUrl}
+                            layout="fill"
+                            unoptimized
+                            objectFit="cover"
+                            alt={`Photo ${imgIndex + 1}`}
+                          />
                         </div>
                       ))}
                   </div>
