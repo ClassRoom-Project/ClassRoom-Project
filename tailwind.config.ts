@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       minHeight: {
-        '100vh-header': 'calc(100dvh - 60px)'
+        '100vh-header-default': 'calc(100dvh - 80px)',
+        '100vh-header-reserve': 'calc(100dvh - 110px)'
         // other properties...
       },
       backgroundImage: {
@@ -40,7 +41,8 @@ const config: Config = {
         'dark-purple-color': '#4D43B8',
         'text-dark-gray': '#515B60',
         'icon-color': '#3f3f3f'
-      }
+      },
+      screens: {}
     }
   },
   plugins: [require('daisyui')],

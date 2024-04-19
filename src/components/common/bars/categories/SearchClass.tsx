@@ -19,7 +19,7 @@ export const SearchClass = () => {
     // setSelectedTitle('');
     router.push('/list');
   };
-
+  console.log(selectedTitle, '데이터입니다!!!!!!!!!!!');
   return (
     <form className="h-[120px ml-2 relative w-full flex items-center justify-center" onSubmit={handleSearchBtn}>
       <div className="border-[1px] rounded-xl w-full items-end justify-end border-point-color relative">
