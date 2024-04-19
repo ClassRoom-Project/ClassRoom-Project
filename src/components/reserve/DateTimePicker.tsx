@@ -61,22 +61,6 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     }
   };
 
-  /* 비활성화할 날짜 배열 생성 */
-  // 1~31일 배열 생성
-  // const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
-
-  // // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
-  // const availableDays = classDates.map(({ day }) => new Date(day).getDate());
-
-  // // 1~31 일중 DB에 있는 날짜를 삭제한 date 배열 생성
-  // const nonAvailableDays = dayList
-  //   .filter((day) => {
-  //     return !availableDays.includes(day);
-  //   })
-  //   .map((day) => {
-  //     return new Date(2024, today.getMonth(), day);
-  //   });
-
   // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
   function CustomCaption(props: CaptionProps) {
     const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -87,7 +71,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
           onClick={() => previousMonth && goToMonth(previousMonth)}
           className="bg-point-purple rounded-full text-white w-6  flex justify-center items-center"
         >
-          <IoIosArrowBack size={18} className=" mr-[3px]" />
+          <IoIosArrowBack size={18} className=" mr-[2px]" />
         </button>
         <div className="flex justify-center font-bold">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>
         <button
@@ -95,7 +79,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
           onClick={() => nextMonth && goToMonth(nextMonth)}
           className="bg-point-purple rounded-full text-white w-6  flex justify-center items-center"
         >
-          <IoIosArrowForward size={18} className=" ml-[3px]" />
+          <IoIosArrowForward size={18} className=" ml-[2px]" />
         </button>
       </h2>
     );
@@ -110,10 +94,6 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const availableDays = classDates.map((dateInfo) => dateInfo.day);
   console.log(availableDays);
 
-  // availableDays.map((item) => {
-  //   console.log(item, '내꺼');
-  // });
-
   console.log('🚀 ~ DateTimePicker ~ Number(new Date().getFullYear + 1:', new Date().getFullYear() + 1);
   return (
     <div className="w-full mb-2 flex flex-col justify-center items-center">
@@ -124,7 +104,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
           required
           selected={new Date(selectedDate)}
           onSelect={handleDateChange}
-          disabled={(day) => availableDays.indexOf(format(day, 'yyyy-MM-dd')) === -1}
+          disabled={(day) => !availableDays.includes(format(day, 'yyyy-MM-dd'))}
           locale={ko}
           fromYear={new Date().getFullYear()}
           toYear={new Date().getFullYear() + 1}
