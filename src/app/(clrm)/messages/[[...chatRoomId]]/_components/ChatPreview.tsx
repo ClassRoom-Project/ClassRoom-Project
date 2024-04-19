@@ -15,10 +15,6 @@ import Link from 'next/link';
 
 dayjs.locale('ko');
 
-//데이터 불러오기,
-interface PostData {
-  [key: string]: any; // 더 구체적인 타입 정보를 사용할 수 있으면 좋습니다.
-}
 export default function ChatPreview({ chatId, toClassId, title, image, fromUserId, otherId }: ChatPreviewType) {
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
@@ -55,7 +51,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
           <div className="flex flex-row justify-between">
             <div>
               {!readLastMessages ? (
-                <p className="sm:text-sm text-gray-500">메시지가 없습니다</p>
+                <p className=" whitespace-nowrap sm:text-sm text-gray-500">메시지가 없습니다</p>
               ) : (
                 <div className="w-40">
                   {readLastMessages?.messages ? (
@@ -66,7 +62,9 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
                 </div>
               )}
             </div>
-            <div className="text-xs text-gray-400">{dayjs(readLastMessages?.createdAt).format('A hh:mm')}</div>
+            <div className=" whitespace-nowrap text-xs text-gray-400">
+              {dayjs(readLastMessages?.createdAt).format('A hh:mm')}
+            </div>
           </div>
         </div>
       </div>
