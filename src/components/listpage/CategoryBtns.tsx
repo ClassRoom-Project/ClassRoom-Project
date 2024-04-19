@@ -25,7 +25,7 @@ const CategoryBtns = () => {
         <button
           key={category}
           onClick={() => handleOnClickListBtn(category)}
-          className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
+          className={`p-2 font-bold rounded-2xl mx-3 w-12 text-xs lg:text-lg lg:w-24 ${
             selectedCategory === category ? 'bg-button-press-color' : 'bg-white'
           }`}
         >
