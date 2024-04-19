@@ -28,10 +28,10 @@ const MyPageBtn = () => {
     <div>
       <button
         onClick={handleMyPageIconOnClick}
-        className="py-4 flex flex-col items-center cursor-pointer hover:text-main-color transition ease-in whitespace-nowrap"
+        className="flex flex-col items-center text-background-color hover:text-main-color transition ease-in md:text-icon-color whitespace-nowrap"
       >
-        <GoPerson size={30} />
-        마이페이지
+        <GoPerson className="text-4xl sm:text-4xl md:text-4xl" />
+        <div className=" hidden sm:flex md:sm:flex">마이페이지</div>
       </button>
     </div>
   );

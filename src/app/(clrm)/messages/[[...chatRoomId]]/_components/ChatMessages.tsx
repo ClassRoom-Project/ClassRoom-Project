@@ -34,7 +34,8 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
       return;
     }
 
-    if (message.length === 0) {
+    const trimmedMessage = message.replace(/\s/g, '');
+    if (trimmedMessage.length === 0) {
       return;
     }
 
