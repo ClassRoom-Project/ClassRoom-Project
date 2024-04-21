@@ -6,11 +6,17 @@ import { format } from 'date-fns';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { ko } from 'date-fns/locale';
 
+interface ScheduleType {
+  date: string;
+  times: string[];
+}
+
 interface InitialDataType {
-  day: Date;
-  times: string;
+  day?: Date;
+  times?: string;
   selectedDates: string[];
-  schedules: any;
+  timeData: string[];
+  schedules?: ScheduleType[];
 }
 
 interface SelectTimeProps {
@@ -34,11 +40,14 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
   const dayPickerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (isEditMode && initialData) {
+    if (isEditMode && initialData && initialData.schedules && initialData.schedules.length > 0 && initialData.schedules[0].times.length > 0) {
       setSelectedDates(initialData.selectedDates);
-      setTempTime(initialData.schedules.time);
+      // 첫 번째 스케줄의 첫 번째 시간을 설정합니다.
+      setTempTime(initialData.schedules[0].times[0]);
     }
   }, [initialData, isEditMode, setSelectedDates, setTempTime]);
+  
+  
 
   const toggleDatePicker = () => {
     setIsDayPickerOpen(!isDayPickerOpen);
@@ -123,20 +132,20 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
               +
             </button>
             <div className="flex gap-2">
-              {schedules
-                .find((schedule) => schedule.date === date)
-                ?.times.map((time, timeIndex) => (
-                  <div key={timeIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded-md">
-                    <p>{time}</p>
-                    <button
-                      onClick={() => handleRemoveTime(date, time)}
-                      className="bg-red-500 text-white w-6 h-6 rounded-md"
-                    >
-                      -
-                    </button>
-                  </div>
-                ))}
-            </div>
+  {schedules
+    .find((schedule) => schedule.date === date)
+    ?.times.map((time, timeIndex) => (
+      <div key={timeIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded-md">
+        <p>{time}</p>
+        <button
+          onClick={() => handleRemoveTime(date, time)}
+          className="bg-red-500 text-white w-6 h-6 rounded-md"
+        >
+          -
+        </button>
+      </div>
+    ))}
+</div>
           </div>
         ))}
       </div>

@@ -10,7 +10,16 @@ import { FiPlusCircle } from "react-icons/fi";
 import { ImageFileWithPreview } from '@/types/register';
 import { noInfoNotify, noDateTimeNotify, noLimitImageNotify, LimitHashTagSizeNotify } from '@/components/common/Toastify';
 
-const ImageUpload = () => {
+interface InitialDataType {
+  image: string[];
+}
+
+interface ImageUploadProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType; 
+}
+
+const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData }) => {
   const {
     category,
     subCategory,
@@ -34,37 +43,6 @@ const ImageUpload = () => {
   const classId = crypto.randomUUID();
   const noticeId = crypto.randomUUID();
   const router = useRouter();
-
-  const updateClassData = async () => {
-    // Zustand 스토어에서 상태 값 가져오기
-    const { classTitle, classType, /* 나머지 상태 값들 */ } = useRegisterStore.getState();
-  
-    const { data, error } = await supabase
-      .from('class')
-      .update({ 
-        category: category,
-        hashtag: subCategory,
-        class_type: classType,
-        difficulty: difficulty,
-        title: classTitle,
-        description: classContent,
-        quantity: personnel,
-        min_people: minNumber,
-        price: price,
-        location: address,
-        detail_location: detailAddress,
-        total_time: totalTime,
-        // image: imageUrls,
-        image: images
-      })
-      .eq('class_id', classId);
-  
-    if (error) {
-      console.error('Error: ', error);
-    } else {
-      console.log('updated success', data);
-    }
-  };
   
 
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
@@ -121,6 +99,75 @@ const ImageUpload = () => {
       if (url) {
         imageUrls.push(url);
       }
+    }
+
+    // isEditMode가 true일 경우, 기존 데이터 업데이트
+    if (isEditMode) {
+      const { data, error } = await supabase.from('class').update({
+        category: category,
+        hashtag: subCategory,
+        class_type: classType,
+        difficulty: difficulty,
+        title: classTitle,
+        description: classContent,
+        quantity: personnel,
+        min_people: minNumber,
+        price: price,
+        location: address,
+        detail_location: detailAddress,
+        total_time: totalTime,
+        image: imageUrls
+      }).match({ class_id: classId }); // class_id를 기준으로 매칭하여 업데이트
+
+      if (error) {
+        console.error('error:', error);
+        setIsLoading(false);
+        return;
+      }
+    
+      // 날짜와 시간 데이터 업데이트 로직 추가
+      // 기존 날짜와 시간 데이터 삭제
+      const deleteDate = await supabase.from('date').delete().match({ class_id: classId });
+      if (deleteDate.error) {
+        console.error('date db delete error:', deleteDate.error);
+      }
+    
+      // 새로운 날짜와 시간 데이터 삽입
+      for (const date of selectedDates) {
+        const dateId = crypto.randomUUID();
+        const { data: dateData, error: dateError } = await supabase.from('date').update([
+          {
+            date_id: dateId,
+            class_id: classId,
+            day: date
+          }
+        ]);
+        if (dateError) {
+          console.error('date db upload error:', dateError);
+        } else {
+          const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
+    
+          if (selectedTimes && selectedTimes.length > 0) {
+            for (const time of selectedTimes) {
+              const timeId = crypto.randomUUID();
+              const { data: timeData, error: timeError } = await supabase.from('time').update([
+                {
+                  time_id: timeId,
+                  date_id: dateId,
+                  times: time
+                }
+              ]);
+              if (timeError) {
+                console.error('time db upload error:', timeError);
+              }
+            }
+          }
+        }
+      }
+    
+      setIsLoading(false);
+      router.push(`/register/completedPage/${classId}?notification=true`);
+      return;
     }
 
     const { data, error } = await supabase.from('class').insert([
