@@ -36,7 +36,6 @@ const SideBar = ({ children }: PropsWithChildren) => {
           <ConvertBtn />
         </div>
       </div>
-
       <div className="md:flex-1 md:ml-[100px] md:pb-0">{children}</div>
       {/* <AlertModal />
       <button className="bg-red-500 ml-52 w-40 h-40" onClick={toggleModal}>
