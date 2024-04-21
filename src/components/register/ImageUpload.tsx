@@ -94,6 +94,12 @@ const ImageUpload = () => {
       return;
     }
 
+    if (subCategory.length === 0) {
+      noInfoNotify();
+      setIsLoading(false);
+      return;
+    }
+
     const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
 
     if (selectedDates.length === 0 || isAnyTimes) {
