@@ -43,11 +43,11 @@ const MapComponent = () => {
   }, [placeAddress]);
 
   return (
-    <div className="flex justify-center items-center w-[400px] h-[300px] m-10">
+    <div className="flex justify-center items-center w-[400px] h-[400px] m-10">
       {classLocation ? (
         <div>
           <Map
-            className="w-[400px] h-[300px] m-4 p-4" // 지도 크기
+            className="w-[400px] h-[400px] m-4 p-4" // 지도 크기
             center={{ lat: latitude ?? 0, lng: longitude ?? 0 }} // 지도의 중심 좌표
             level={3} // 지도 확대 레벨
           >

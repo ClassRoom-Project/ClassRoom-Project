@@ -29,7 +29,8 @@ const MyClass = () => {
 
   const { data: myClassInfo, isPending } = useQuery({
     queryKey: ['class', loginUserId],
-    queryFn: () => getMyRegisteredClass(loginUserId)
+    queryFn: () => getMyRegisteredClass(loginUserId),
+    enabled: !!loginUserId
   });
 
   // 클래스 삭제하기 : mutation
