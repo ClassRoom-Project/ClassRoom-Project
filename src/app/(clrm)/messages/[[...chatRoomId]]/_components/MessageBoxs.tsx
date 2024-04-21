@@ -11,7 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import defaultimage from '../../../../../assets/images/profile-image.png';
@@ -28,6 +28,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
   const queryClient = useQueryClient();
+  const [stateLoading, setStateLoading] = useState(false);
   //Dom요소나 컴포넌트의 직접적인 접근을 가능하게 해줌Ref
   const zoom = mediumZoom({ background: '#000' });
 
@@ -66,7 +67,9 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   }, [chatId, loginUserId, queryClient]);
 
   const handleMessageDelete = (messageId: number) => {
+    setStateLoading(true);
     deleteMessageMutate(messageId);
+    setStateLoading(false);
     deleteMessage();
   };
 
@@ -94,6 +97,11 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
 
   return (
     <div className="h-screen overflow-y-auto">
+      {isLoading && (
+        <div className="fixed z-50 inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+          <LoadingSpinner />
+        </div>
+      )}
       <div className="flex flex-col justify-center items-center px-3">
         <div className="text-xs w-full flex flex-row h-36 mt-5 rounded-md xl:w-3/5 sm:text-xs md:text-sm text-button-hover-color justify-center items-center border border-border-color mb-16 overflow-hidden">
           <div className=" relative h-full w-1/3 p-2">

@@ -6,9 +6,7 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ChatMessagesType } from '@/types/chat/chatTypes';
 import ChatImageModal from './ChatImageModal';
 import MessageBoxs from './MessageBoxs';
-import { useEffect, useState } from 'react';
-import { supabase } from '@/app/api/supabase/supabase';
-import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 import { deleteRoom } from '@/components/common/Toastify';
 import { useRouter } from 'next/navigation';
 //아이콘
