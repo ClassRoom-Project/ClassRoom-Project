@@ -41,7 +41,7 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, user
     if (!file) {
       return;
     }
-
+    console.log('file', file);
     uploadProfileImage(file);
   };
 

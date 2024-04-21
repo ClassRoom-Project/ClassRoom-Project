@@ -73,9 +73,7 @@ const Header = ({ children }: PropsWithChildren) => {
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
           </div>
-          <div className="w-3/5  xs:1/3">
-            <SearchClass />
-          </div>
+          <div className="w-3/5  xs:1/3">{/* <SearchClass /> */}</div>
         </div>
         <div className="w-1/3 relative flex items-end justify-end xl:mr-48 md:mr-24 lg:w-4/5">
           <div className="flex w-full justify-end items-center">

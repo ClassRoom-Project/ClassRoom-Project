@@ -51,7 +51,7 @@ const TeacherMyPageTab = () => {
   };
 
   return (
-    <div className="m-4 p-4 gap-4 flex flex-col items-center w-[1280px]">
+    <div className="m-4 p-4 gap-4 flex flex-col items-center">
       <div className="flex flex-row justify-center border-y-2 w-full">
         <p
           onClick={() => handleOnClickTabBtn('editProfile')}
@@ -84,7 +84,7 @@ const TeacherMyPageTab = () => {
           내가 등록한 클래스
         </p>
       </div>
-      <div className="m-4 p-4">{activeTeacherMyPageTab[activePage]}</div>
+      <div className="m-4 p-4 flex justify-center items-center md:w-[1080px]">{activeTeacherMyPageTab[activePage]}</div>
     </div>
   );
 };

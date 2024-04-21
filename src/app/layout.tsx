@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="ko">
       <body className={noto.className}>
         <QueryProvider>
-          <ReactQueryDevtools initialIsOpen={true} />
+          {/* <ReactQueryDevtools initialIsOpen={true} /> */}
           <ToastContainer />
           {children}
           <Script src={mapScriptSrc} strategy="beforeInteractive" />

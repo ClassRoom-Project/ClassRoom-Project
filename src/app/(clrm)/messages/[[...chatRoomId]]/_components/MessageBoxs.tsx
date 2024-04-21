@@ -3,6 +3,7 @@
 import {
   useDeleteMessage,
   useReadChatRoomMessages,
+  useReadLastMessages,
   useReadMakeClassUserInfo
 } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -26,6 +27,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
+  const { readLastMessages } = useReadLastMessages(chatId);
   const queryClient = useQueryClient();
 
   useEffect(() => {
@@ -41,11 +43,15 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
         },
         (payload) => {
           queryClient.setQueryData<ChatMessage[]>(['chatMessage', chatId], (oldMessages = []) => {
+            console.log('oldMessages', oldMessages);
             const newMessage = payload.new as ChatMessage;
+            console.log('newMessage', newMessage);
             const isMessageExist = oldMessages.some((message) => message.messages_id === newMessage.messages_id);
             if (!isMessageExist) {
+              console.log('얍');
               return [...oldMessages, newMessage];
             } else {
+              console.log('메롱');
               return oldMessages.map((msg) => (msg.messages_id === newMessage.messages_id ? newMessage : msg));
             }
           });
@@ -73,7 +79,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
       endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
     scrollToBottom();
-  }, [readChatRoomMessages]);
+  }, [readLastMessages]);
 
   if (isLoading) {
     return (

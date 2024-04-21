@@ -79,6 +79,7 @@ export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
     queryFn: () => getChatMessages(chatId as string, loginUserId as string),
     enabled: !!chatId
   });
+  console.log('readChatRoomMessages', readChatRoomMessages);
   return { readChatRoomMessages, isLoading };
 }
 

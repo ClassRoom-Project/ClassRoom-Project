@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 
 const teacherMypage = () => {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center items-center">
       <Suspense>
         <TeacherMyPageTab />
       </Suspense>
