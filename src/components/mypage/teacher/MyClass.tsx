@@ -75,7 +75,7 @@ const MyClass = () => {
 
   return (
     <ul className="flex flex-col gap-4 justify-center items-center p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
-      <p className="flex items-start text-xl text-dark-purple-color font-bold">내가 등록한 클래스</p>
+      <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden ">내가 등록한 클래스</p>
       <p className="flex items-start text-lg text-text-dark-gray text-center p-4 md:hidden">
         자세한 날짜 및 시간, 예약한 수강생 정보는 PC 버전에서 확인해주세요.
       </p>
@@ -97,28 +97,28 @@ const MyClass = () => {
                 />
               </div>
               <div className="flex flex-col gap-4 m-4">
-                <p className="font-bold text-xl text-dark-purple-color">{classInfo?.title}</p>
+                <p className="font-bold md:text-xl text-base text-dark-purple-color">{classInfo?.title}</p>
                 <div className="flex gap-4">
                   <div className="md:flex items-center p-2 gap-2 border border-point-purple rounded-3xl hidden">
-                    <p>난이도 : {classInfo?.difficulty}</p>
+                    <p className="text-sm">난이도 : {classInfo?.difficulty}</p>
                   </div>
                   <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
-                    <p>{classInfo?.class_type}</p>
+                    <p className=" text-sm">{classInfo?.class_type}</p>
                   </div>
                   <div className="md:flex items-center p-2 gap-2 border border-point-purple rounded-3xl hidden">
                     <BiCategoryAlt color="#6C5FF7" size="20" />
-                    <p>카테고리 : {classInfo?.category}</p>
+                    <p className=" text-sm">카테고리 : {classInfo?.category}</p>
                   </div>
                   <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl">
                     <GoPersonAdd color="#6C5FF7" size="20" />
-                    <p>수강 인원수 : {classInfo?.quantity}명</p>
+                    <p className=" text-sm">수강 인원수 : {classInfo?.quantity}명</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
                   <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl">
                     <GrLocation color="#6C5FF7" size="20" />
                     {classInfo?.location ? (
-                      <p className="flex-grow">
+                      <p className="flex-grow  text-sm">
                         위치 : {classInfo?.location} {classInfo?.detail_location}
                       </p>
                     ) : (
@@ -128,7 +128,7 @@ const MyClass = () => {
                 </div>
               </div>
             </div>
-            <div className="flex gap-4 m-4 justify-end">
+            <div className="flex gap-4 m-4 md:justify-end justify-center">
               <button
                 onClick={() => handleOnClickDeleteMyClass(classInfo.class_id)}
                 className="btn w-36 bg-dark-purple-color text-white hover:bg-transparent hover:text-dark-purple-color"

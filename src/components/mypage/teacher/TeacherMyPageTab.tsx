@@ -98,7 +98,7 @@ const TeacherMyPageTab = () => {
       </div>
 
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="m-4 p-4 justify-start md:hidden">
+      <div className="m-4 p-4 flex w-full justify-start md:hidden">
         <div className="dropdown-right dropdown">
           <div
             tabIndex={0}
@@ -136,7 +136,7 @@ const TeacherMyPageTab = () => {
           </div>
         </div>
       </div>
-      <div className="md:m-4 md:p-4 flex justify-center items-center md:w-[1080px] min-w-[500px]">
+      <div className="md:m-4 md:p-4 px-2 flex justify-center items-center md:w-[1080px]">
         {activeTeacherMyPageTab[activePage]}
       </div>
     </div>

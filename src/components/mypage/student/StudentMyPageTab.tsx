@@ -180,7 +180,7 @@ const StudentMyPageTab = () => {
           </div>
         </div>
       </div>
-      <div className="md:m-4 md:p-4 flex justify-center items-center md:w-[1080px] min-w-[500px]">
+      <div className="md:m-4 md:p-4 px-2 flex justify-center items-center md:w-[1080px]">
         {activeStudentMyPageTab[activePage]}
       </div>
     </div>

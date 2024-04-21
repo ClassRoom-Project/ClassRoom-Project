@@ -47,9 +47,9 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음';
 
   return (
-    <li className="border-b-2 max-w-screen-xl w-[1080px]">
-      <div className="flex gap-4 bg-pale-purple my-4 p-4">
-        <div className="w-[300px] h-[200px]">
+    <li className="border-b-2 flex flex-col align-center gap-4 my-4 py-4 w-full md:flex-row">
+      <div className="flex gap-4 bg-pale-purple my-4 p-4 w-full flex-col md:flex-row items-center">
+        <div className="md:w-[300px] md:h-[200px] w-3/5">
           <Image
             src={mainImage}
             alt="클래스 대표 사진"
@@ -95,14 +95,14 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
               </div>
             </div>
           </section>
-          <section className="flex justify-end gap-4 pt-4 right-4">
+          <section className="flex md:justify-end justify-center gap-4 pt-4 right-4">
             <AskButton
               classId={classItem.class_id}
               makeClassUserId={classItem.user_id}
-              buttonStyle="btn w-36 hover:bg-transparent hover:text-text-dark-gray"
+              buttonStyle="btn md:w-36 w-1/3 hover:bg-transparent hover:text-text-dark-gray"
             />
             <button
-              className="btn  bg-dark-purple-color text-white w-36 hover:bg-transparent hover:text-dark-purple-color"
+              className="btn bg-dark-purple-color text-white w-36 hover:bg-transparent hover:text-dark-purple-color"
               onClick={() => handleCancelReservation(classItem.reserve_id)}
             >
               예약 취소하기

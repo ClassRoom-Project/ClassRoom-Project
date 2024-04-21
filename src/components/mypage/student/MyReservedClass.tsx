@@ -41,8 +41,11 @@ const MyReservedClass = () => {
   const currentPosts = reservedClasses.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <div className="flex flex-col align-center max-w-screen-xl">
+    <div className="flex flex-col gap-4 justify-center items-center p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
       <ul>
+        <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center ">
+          내가 예약한 클래스 보기
+        </p>
         {currentPosts.map((classItem) => (
           <MyReservedClassItem key={classItem.reserve_id} classItem={classItem} />
         ))}
