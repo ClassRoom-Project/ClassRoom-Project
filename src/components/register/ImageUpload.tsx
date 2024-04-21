@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
@@ -183,7 +183,7 @@ const ImageUpload = () => {
         }
       }
       setIsLoading(false);
-      router.push(`/register/completedPage/${classId}`);
+      router.push(`/register/completedPage/${classId}?notification=true`);
     }
   };
 

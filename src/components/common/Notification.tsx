@@ -3,16 +3,35 @@ import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import { Notification } from '@/types/notice';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { LuBell } from 'react-icons/lu';
 import { GoBellFill } from "react-icons/go";
 
 const NotificationComponent = () => {
   const { loginUserId } = useLoginStore();
-  const router = useRouter();
   const [isNotificationOpen, setIsNotificationOpen] = React.useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const lastIconClickTimeRef = useRef<Date | null>(null);
+
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  // useEffect(() => {
+  //   const fetchNotifications = async () => {
+  //     await queryClient.invalidateQueries({
+  //       queryKey: ['notifications', loginUserId],
+  //     }); 
+  //     const params = new URLSearchParams(window.location.search);
+  //     const notificationParam = params.get('notification');
+  //     if (notificationParam && notificationParam === 'true') {
+  //       // 새로운 알림을 가져오는 함수를 직접 호출하지 않고,
+  //       // 다음 줄에서 선언된 useQuery의 결과로부터 refetch를 사용합니다.
+  //     }
+  //   };
+
+  //   fetchNotifications();
+  // // refetch를 의존성 배열에서 제거합니다.
+  // }, [queryClient, loginUserId]);
 
   const { data: notifications = [], refetch } = useQuery({
     queryKey: ['notifications', loginUserId],
@@ -30,14 +49,24 @@ const NotificationComponent = () => {
       return data;
     },
     enabled: !!loginUserId,
-    //refetchInterval: 5000,
   });
 
   const unreadNotificationsCount = notifications.filter(notification => !notification.isread).length;
 
+  useEffect(() => {
+    // URL에서 'notification=true' 파라미터 확인
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('notification') === 'true') {
+      refetch(); // 조건이 만족하는 경우 refetch 호출
+    }
+  }, [refetch]);
+
   const toggleBellIcon = () => {
     setIsNotificationOpen(prevState => !prevState);
     lastIconClickTimeRef.current = new Date();
+    if (!isNotificationOpen) {
+      refetch(); // 알림 아이콘을 클릭하여 알림을 열 때 새로고침
+    }
   };
 
   useEffect(() => {
@@ -63,18 +92,30 @@ const NotificationComponent = () => {
     };
   }, [isNotificationOpen, notifications]);
 
+  // const handleNotificationClick = async (notification: Notification) => {
+  //   if (!notification.isread) {
+  //     const { error } = await supabase
+  //       .from('notifications')
+  //       .update({ isread: true })
+  //       .eq('notice_id', notification.notice_id);
+
+  //     if (error) {
+  //       console.error('error', error);
+  //     } else {
+  //       refetch();
+  //     }
+  //   }
+  //   router.push(`/list/detail/${notification.class_id}`);
+  // };
+
   const handleNotificationClick = async (notification: Notification) => {
     if (!notification.isread) {
-      const { error } = await supabase
+      await supabase
         .from('notifications')
         .update({ isread: true })
         .eq('notice_id', notification.notice_id);
 
-      if (error) {
-        console.error('error', error);
-      } else {
-        refetch();
-      }
+      refetch(); // 알림을 읽음 처리 후 새로고침
     }
     router.push(`/list/detail/${notification.class_id}`);
   };

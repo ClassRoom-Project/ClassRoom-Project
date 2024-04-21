@@ -233,3 +233,14 @@ export const LimitHashTagNotify = () =>
     theme: 'light'
   });
   
+export const LimitHashTagSizeNotify = () =>
+  toast.error('이미지는 5MB 이하만 업로드할 수 있습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
