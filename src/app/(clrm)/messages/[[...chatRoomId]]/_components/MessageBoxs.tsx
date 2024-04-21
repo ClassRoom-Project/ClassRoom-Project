@@ -17,6 +17,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import defaultimage from '../../../../../assets/images/profile-image.png';
 import { deleteMessage } from '@/components/common/Toastify';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
+import mediumZoom from 'medium-zoom';
 
 dayjs.locale('ko');
 
@@ -27,6 +28,8 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
   const queryClient = useQueryClient();
+  //Dom요소나 컴포넌트의 직접적인 접근을 가능하게 해줌Ref
+  const zoom = mediumZoom({ background: '#000' });
 
   useEffect(() => {
     const subscribeChat = supabase
@@ -75,6 +78,12 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
     scrollToBottom();
   }, [readChatRoomMessages]);
 
+  //medium-zoom
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    zoom.attach(e.currentTarget);
+  };
+
+  //무한스크롤
   if (isLoading) {
     return (
       <div className="flex flex-col justify-center items-center h-auto px-3">
@@ -83,7 +92,6 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
     );
   }
 
-  //무한스크롤
   return (
     <div className="h-screen overflow-y-auto">
       <div className="flex flex-col justify-center items-center px-3">
@@ -173,6 +181,9 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                             unoptimized
                             objectFit="cover"
                             alt={`Photo ${imgIndex + 1}`}
+                            // 이미지가 완전히 업로드 되고 플레이스홀더가 제거되면 호출되는 콜백함수!!
+                            //img 요소를 참조하는 대상을 가진 event라는 하나의 인수로 호출
+                            onLoad={handleImageLoad}
                           />
                         </div>
                       ))}
