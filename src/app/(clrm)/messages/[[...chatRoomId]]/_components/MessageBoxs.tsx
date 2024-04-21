@@ -85,9 +85,9 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
 
   //무한스크롤
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="flex flex-col justify-center items-center h-auto px-3">
-        <div className=" flex flex-row h-36 mt-5 rounded-md w-3/5 sm:text-xs md:text-sm text-button-hover-color justify-center items-center border border-border-color mb-16 overflow-hidden">
+    <div className="h-screen overflow-y-auto">
+      <div className="flex flex-col justify-center items-center px-3">
+        <div className="text-xs w-full flex flex-row h-36 mt-5 rounded-md xl:w-3/5 sm:text-xs md:text-sm text-button-hover-color justify-center items-center border border-border-color mb-16 overflow-hidden">
           <div className=" relative h-full w-1/3 p-2">
             <Image
               src={mainImage!}
@@ -98,14 +98,14 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
             />
           </div>
           <div className="flex h-36 flex-col items-center justify-center w-2/3 p-2">
-            <p className="whitespace-nowrap flex flex-col items-center justify-center text-center">
-              안녕하세요 {studentName} 수강생님! <br /> &quot;{title}&quot; 원데이 클래스에 궁금하신 <br />
-              사항이 있으시면 문의 주시길 바랍니다!
+            <p className="text-xs flex flex-col items-center justify-center text-center lg:text-sm">
+              안녕하세요 {studentName} 수강생님! <br /> &quot;{title}&quot; 원데이 클래스에 궁금하신 사항이 있으시면
+              문의 주시길 바랍니다!
             </p>
 
             <Link
               href={`/list/detail/${toClassId}`}
-              className="flex sm:w-3/4 mb:w-3/4 lg:w-1/4 whitespace-nowrap mt-4 rounded-3xl h-8 items-center justify-center text-xs p-2 text-white bg-button-default-color hover:bg-button-hover-color"
+              className="flex w-3/4 whitespace-nowrap mt-4 rounded-3xl h-8 items-center justify-center text-xs p-2 text-white bg-button-default-color hover:bg-button-hover-color"
             >
               클래스 보러가기
             </Link>
@@ -121,7 +121,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
             <div>
               {message.create_by !== loginUserId && (
                 <div className="mr-2 flex flex-row items-center text-xs gap-1">
-                  <div className="w-12 h-12">
+                  <div className="w-8 h-8 lg:w-12 lg:h-12">
                     <Image
                       src={MakeClassUserInfo?.profile_image || defaultimage}
                       height={40}
@@ -134,15 +134,19 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                 </div>
               )}
               <div
-                className={`flex flex-row items-center py-4 px-4 ${
+                className={`text-xs flex flex-row items-center py-4 px-4 lg:text-md ${
                   message.create_by === loginUserId ? 'flex flex-row' : 'flex-row-reverse'
                 }`}
               >
                 <div>
-                  <p className=" text-gray-400 text-xs px-4">{dayjs(message.created_at).format('MM월DD일 HH:mm')}</p>
+                  <p className="text-gray-400 text-xs px-4 whitespace-nowrap">
+                    {dayjs(message.created_at).format('A hh:mm')}
+                  </p>
                 </div>
                 {message.create_by === loginUserId ? (
-                  <button onClick={() => handleMessageDelete(message.messages_id)}>삭제</button>
+                  <button onClick={() => handleMessageDelete(message.messages_id)} className="whitespace-nowrap">
+                    삭제
+                  </button>
                 ) : (
                   ''
                 )}

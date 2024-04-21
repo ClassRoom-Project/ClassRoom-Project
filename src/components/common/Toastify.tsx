@@ -198,7 +198,7 @@ export const deleteRoom = () =>
   });
 
 export const deleteMessage = () =>
-  toast('방이 삭제되었습니다.', {
+  toast('메시지가 삭제되었습니다.', {
     position: 'top-right',
     autoClose: 2000,
     hideProgressBar: true,

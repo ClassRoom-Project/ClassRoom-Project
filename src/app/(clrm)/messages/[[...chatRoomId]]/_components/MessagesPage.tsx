@@ -18,11 +18,11 @@ export default function MessagesPage() {
   const fromUserId = searchParams.get('fromUserId');
   const mainImage = searchParams.get('mainImage');
 
-  const firstSectionClasses = `flex flex-col w-full h-full md:w-2/5 lg:w-2/5 ${
-    currentChatRoomId ? 'hidden md:hidden lg:block' : 'block'
+  const firstSectionClasses = `flex flex-col w-full h-full lg:w-2/5 lg:w-2/5 ${
+    currentChatRoomId ? 'hidden sm:hidden md:block' : 'block'
   }`;
   const secondSectionClasses = `flex h-full flex-col w-full lg:w-3/5 border-l border-gray-500 ${
-    currentChatRoomId ? 'block' : 'hidden md:hidden lg:block'
+    currentChatRoomId ? 'block' : 'hidden sm:hidden md:block'
   }`;
 
   if (!chatroomsInfo || chatroomsInfo.length === 0) {
@@ -34,12 +34,7 @@ export default function MessagesPage() {
   }
 
   return (
-    <div
-      className="flex flex-col max-h-full  md:flex-row lg:flex-row mb-16 md:mb-0"
-      style={{
-        height: 'calc(100vh - 80px)'
-      }}
-    >
+    <div className="flex flex-col max-h-full md:flex-row lg:flex-row mb-16 md:mb-0 responsiveHeight">
       <section className={firstSectionClasses}>
         {chatroomsInfo.map(({ chatId, toClassId, fromUserId, image, teacherUserId, title, makeClassUserId }) => (
           <ChatPreview
