@@ -74,14 +74,18 @@ const MyClass = () => {
   const currentPosts = myClassInfo?.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col align-center ">
+    <ul className="flex flex-col gap-4 justify-center items-center p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
+      <p className="flex items-start text-xl text-dark-purple-color font-bold">내가 등록한 클래스</p>
+      <p className="flex items-start text-lg text-text-dark-gray text-center p-4 md:hidden">
+        자세한 날짜 및 시간, 예약한 수강생 정보는 PC 버전에서 확인해주세요.
+      </p>
       {currentPosts?.map((classInfo, classIndex) => (
-        <li key={classIndex} className="flex flex-col align-center gap-4 my-4 w-[1080px] py-4">
+        <li key={classIndex} className="flex flex-col align-center gap-4 my-4 py-4 w-full md:flex-row">
           {/* 클래스 기본 정보 부분 */}
-          <div className="collapse collapse-arrow">
-            <input type="checkbox" />
-            <div className="flex collapse-title">
-              <div className="w-[300px] h-[200px] ">
+          <div className="collapse collapse-arrow cursor-pointer">
+            <input type="checkbox" className="md:flex hidden" />
+            <div className="flex md:collapse-title w-full flex-col md:flex-row gap-4 items-center">
+              <div className="md:w-[300px] md:h-[200px] w-4/5">
                 <Image
                   src={classInfo?.image ? classInfo?.image : NoImage}
                   alt="클래스 대표 사진"
@@ -95,18 +99,17 @@ const MyClass = () => {
               <div className="flex flex-col gap-4 m-4">
                 <p className="font-bold text-xl text-dark-purple-color">{classInfo?.title}</p>
                 <div className="flex gap-4">
-                  <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
+                  <div className="md:flex items-center p-2 gap-2 border border-point-purple rounded-3xl hidden">
                     <p>난이도 : {classInfo?.difficulty}</p>
                   </div>
                   <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
                     <p>{classInfo?.class_type}</p>
                   </div>
-
-                  <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
+                  <div className="md:flex items-center p-2 gap-2 border border-point-purple rounded-3xl hidden">
                     <BiCategoryAlt color="#6C5FF7" size="20" />
                     <p>카테고리 : {classInfo?.category}</p>
                   </div>
-                  <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
+                  <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl">
                     <GoPersonAdd color="#6C5FF7" size="20" />
                     <p>수강 인원수 : {classInfo?.quantity}명</p>
                   </div>
@@ -139,7 +142,7 @@ const MyClass = () => {
               </Link>
             </div>
             {/* 클래스 날짜 및 시간 정보 */}
-            <div className="flex flex-col collapse-content">
+            <div className="md:flex flex-col md:collapse-content hidden">
               {/* 클래스 날짜 표시 */}
               {classInfo?.dates?.map((date, dateIndex) => (
                 <div key={dateIndex} className="flex gap-20 border-y-2 justify-center">

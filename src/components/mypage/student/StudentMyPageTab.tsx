@@ -8,6 +8,7 @@ import MyComments from '@/components/mypage/student/MyComments';
 import MyWishClass from '@/components/mypage/student/MyWishClass';
 import AddTeacherInfo from '@/components/mypage/student/AddTeacherInfo';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
+import { IoMenu } from 'react-icons/io5';
 
 type StudentTabComponent = {
   [key: string]: React.ReactNode;
@@ -20,6 +21,7 @@ const StudentMyPageTab = () => {
   const studentTab = params.get('studentTab');
 
   const [activePage, setActivePage] = useState('editProfile');
+  const [isOpen, setIsOpen] = useState(false);
 
   const activeStudentMyPageTab: StudentTabComponent = useMemo(
     () => ({
@@ -63,9 +65,19 @@ const StudentMyPageTab = () => {
     router.push(`/studentMypage?studentTab=${tab}`);
   };
 
+  const toggleDropdown = () => {
+    setIsOpen((prev) => !prev);
+  };
+
+  const handleDropdownItemClick = (tab: string) => {
+    handleOnClickTabBtn(tab);
+    setIsOpen(false); // 항목을 클릭하면 드롭다운 닫기
+  };
+
   return (
-    <div className="m-4 p-4 gap-4 flex flex-col items-center w-[1280px]">
-      <div className="flex flex-row justify-center border-y-2 w-full">
+    <div className="m-4 py-4 gap-4 flex flex-col md:items-center justify-center">
+      {/* md 이상 일 때, 가로 탭 */}
+      <div className="hidden md:flex flex-row md:justify-center md:items-center sm:items-start border-y-2 w-full">
         <p
           onClick={() => handleOnClickTabBtn('editProfile')}
           className={`p-4 text-lg ${
@@ -117,7 +129,60 @@ const StudentMyPageTab = () => {
           선생님 정보 등록하기
         </p>
       </div>
-      <div className="m-4 p-4">{activeStudentMyPageTab[activePage]}</div>
+      {/* md 미만 일 때, 드롭다운 */}
+      <div className="m-4 p-4 justify-start md:hidden">
+        <div className="dropdown-right dropdown">
+          <div
+            tabIndex={0}
+            role="button"
+            className="m-1"
+            onClick={toggleDropdown}
+            onKeyDown={(e) => e.key === 'Enter' && toggleDropdown()}
+          >
+            <IoMenu size={30} />
+          </div>
+          <div
+            tabIndex={0}
+            className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
+              isOpen ? 'block' : 'hidden'
+            }`}
+          >
+            <p
+              onClick={() => handleDropdownItemClick('editProfile')}
+              className={`text-lg cursor-pointer ${activePage === 'editProfile' ? 'font-bold' : ''}`}
+            >
+              프로필 수정하기
+            </p>
+            <p
+              onClick={() => handleDropdownItemClick('reservedClass')}
+              className={`text-lg cursor-pointer ${activePage === 'reservedClass' ? 'font-bold' : ''}`}
+            >
+              내가 예약한 클래스 보기
+            </p>
+            <p
+              onClick={() => handleDropdownItemClick('myComments')}
+              className={`text-lg cursor-pointer ${activePage === 'myComments' ? 'font-bold' : ''}`}
+            >
+              내가 쓴 후기 보기
+            </p>
+            <p
+              onClick={() => handleDropdownItemClick('myWishClass')}
+              className={`text-lg cursor-pointer ${activePage === 'myWishClass' ? 'font-bold' : ''}`}
+            >
+              클래스 위시리스트
+            </p>
+            <p
+              onClick={() => handleDropdownItemClick('addTeacherInfo')}
+              className={`text-lg cursor-pointer ${activePage === 'addTeacherInfo' ? 'font-bold' : ''}`}
+            >
+              선생님 정보 등록하기
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="md:m-4 md:p-4 flex justify-center items-center md:w-[1080px] min-w-[500px]">
+        {activeStudentMyPageTab[activePage]}
+      </div>
     </div>
   );
 };

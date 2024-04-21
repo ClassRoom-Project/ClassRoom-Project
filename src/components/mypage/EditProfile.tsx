@@ -108,9 +108,9 @@ const EditProfile = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center bg-light-purple p-4 md:w-4/5 md:justify-items-center w-[500px] ">
+    <div className="flex flex-col gap-4 justify-center items-center bg-light-purple p-4 md:w-4/5 md:justify-items-center w-full">
       <p className="flex items-start text-xl text-dark-purple-color font-bold">프로필 수정하기</p>
-      <div className="flex gap-10 justify-center items-center flex-col w-full md:flex-row mobile:justify-items-center">
+      <div className="flex gap-10 justify-center items-center flex-col w-full md:flex-row">
         <div className="flex flex-col justify-center items-center">
           <EditProfileImage
             newProfileImage={newProfileImage}
