@@ -1,16 +1,31 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, {useEffect} from 'react';
 import useRegisterStore from '@/store/registerStore';
 import 'react-quill/dist/quill.snow.css';
+
+interface InitialDataType {
+  classContent: string;
+}
+
+interface ClassContentProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });
 
-const ClassContent = () => {
+const ClassContent: React.FC<ClassContentProps> = ({ isEditMode, initialData }) => {
   const { classContent, setClassContent } = useRegisterStore();
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setClassContent(initialData.classContent);
+    }
+  }, [isEditMode, initialData, setClassContent]);
 
   const handleClassContentChange = (value:string) => {
     setClassContent(value);

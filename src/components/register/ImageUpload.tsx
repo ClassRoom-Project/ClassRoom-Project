@@ -8,7 +8,7 @@ import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from "react-icons/fi";
 import { ImageFileWithPreview } from '@/types/register';
-import { noInfoNotify, noDateTimeNotify, noLimitImageNotify } from '@/components/common/Toastify';
+import { noInfoNotify, noDateTimeNotify, noLimitImageNotify, LimitHashTagSizeNotify } from '@/components/common/Toastify';
 
 const ImageUpload = () => {
   const {
@@ -34,6 +34,38 @@ const ImageUpload = () => {
   const classId = crypto.randomUUID();
   const noticeId = crypto.randomUUID();
   const router = useRouter();
+
+  const updateClassData = async () => {
+    // Zustand 스토어에서 상태 값 가져오기
+    const { classTitle, classType, /* 나머지 상태 값들 */ } = useRegisterStore.getState();
+  
+    const { data, error } = await supabase
+      .from('class')
+      .update({ 
+        category: category,
+        hashtag: subCategory,
+        class_type: classType,
+        difficulty: difficulty,
+        title: classTitle,
+        description: classContent,
+        quantity: personnel,
+        min_people: minNumber,
+        price: price,
+        location: address,
+        detail_location: detailAddress,
+        total_time: totalTime,
+        // image: imageUrls,
+        image: images
+      })
+      .eq('class_id', classId);
+  
+    if (error) {
+      console.error('Error: ', error);
+    } else {
+      console.log('updated success', data);
+    }
+  };
+  
 
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
@@ -151,7 +183,6 @@ const ImageUpload = () => {
         }
       }
       setIsLoading(false);
-      // alert('등록이 완료되었습니다.');
       router.push(`/register/completedPage/${classId}`);
     }
   };
@@ -159,12 +190,19 @@ const ImageUpload = () => {
   // 이미지 최대 5개까지만 추가할 수 있도록!
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      // 파일 크기 체크
+      const fileSize = file.size / (1024 * 1024);
+      if (fileSize > 5) {
+        LimitHashTagSizeNotify();
+        return;
+      }
+
       if (images.length >= 5) {
         noLimitImageNotify();
         return;
       }
-
-      const file = event.target.files[0];
       const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 URL을 생성!
       const newImages = [...images, { file, preview }];
       setImages(newImages);

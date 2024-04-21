@@ -6,7 +6,19 @@ import { format } from 'date-fns';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { ko } from 'date-fns/locale';
 
-const SelectTime: React.FC = () => {
+interface InitialDataType {
+  day: Date;
+  times: string;
+  selectedDates: string[];
+  schedules: any;
+}
+
+interface SelectTimeProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
   const {
     schedules,
     selectedDates,
@@ -20,6 +32,13 @@ const SelectTime: React.FC = () => {
   const [isDayPickerOpen, setIsDayPickerOpen] = useState(false);
   const [tempTime, setTempTime] = useState<string>(''); // 임시 시간 상태 추가
   const dayPickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setSelectedDates(initialData.selectedDates);
+      setTempTime(initialData.schedules.time);
+    }
+  }, [initialData, isEditMode, setSelectedDates, setTempTime]);
 
   const toggleDatePicker = () => {
     setIsDayPickerOpen(!isDayPickerOpen);

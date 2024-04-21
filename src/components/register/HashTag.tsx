@@ -1,11 +1,26 @@
 'use client';
 import useRegisterStore from '@/store/registerStore';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LimitHashTagNotify } from '@/components/common/Toastify';
 
-const HashTag = () => {
-  const { setSubCategory } = useRegisterStore();
+interface InitialDataType {
+  subCategory: string[];
+}
+
+interface HashTagProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType; 
+}
+
+const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
+  const { subCategory, setSubCategory } = useRegisterStore();
   const [isLimitNotified, setIsLimitNotified] = useState(false);
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setSubCategory(initialData.subCategory);
+    }
+  }, [isEditMode, initialData, setSubCategory]);
 
   const handleSubCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let inputValue = event.target.value;

@@ -1,9 +1,26 @@
 'use client';
-import React from 'react';
+import React, {useEffect} from 'react';
 import useRegisterStore from '@/store/registerStore';
 
-const MinMaxNumber = () => {
+interface InitialDataType {
+  minNumber: number;
+  personnel: number;
+}
+
+interface MinMaxNumberProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const MinMaxNumber:React.FC<MinMaxNumberProps> = ({ isEditMode, initialData }) => {
   const { minNumber, personnel, setMinNumber, setPersonnel } = useRegisterStore();
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setMinNumber(initialData.minNumber);
+      setPersonnel(initialData.personnel);
+    }
+  }, [isEditMode, initialData, setMinNumber, setPersonnel]);
 
   const handlePersonnelChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = parseInt(event.target.value);

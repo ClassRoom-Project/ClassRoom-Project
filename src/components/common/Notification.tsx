@@ -30,7 +30,7 @@ const NotificationComponent = () => {
       return data;
     },
     enabled: !!loginUserId,
-    refetchInterval: 3000,
+    //refetchInterval: 5000,
   });
 
   const unreadNotificationsCount = notifications.filter(notification => !notification.isread).length;
