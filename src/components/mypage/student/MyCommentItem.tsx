@@ -83,9 +83,12 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
   const rating = comment.star;
 
   return (
-    <li className="border-b-2 max-w-screen-xl w-[1080px]" key={comment.comment_id}>
-      <div className="flex gap-4 bg-pale-purple my-4 p-4">
-        <div className="w-[300px] h-[200px]">
+    <li
+      className="border-b-2 flex flex-col align-center gap-4 my-4 py-4 w-full md:flex-row justify-center items-center"
+      key={comment.comment_id}
+    >
+      <div className="flex gap-4 bg-pale-purple w-full flex-col md:flex-row justify-center items-center">
+        <div className="md:w-[300px] md:h-[200px] w-3/5">
           <Image
             src={comment.image[0]}
             alt="클래스 대표 사진"
@@ -95,7 +98,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
           />
         </div>
         <div className="flex flex-col p-4 gap-4 w-full h-full">
-          <section className="flex gap-10">
+          <section className="flex md:gap-10 md:flex-row flex-col gap-4">
             <p className="font-bold text-xl text-dark-purple-color">{comment.title}</p>
             <p className="flex gap-4">
               <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
@@ -104,38 +107,37 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
           <div>
             <Stars rating={rating} />
           </div>
-          <section className="pb-4">
+          <section className="pb-4 flex flex-col items-center md:items-start w-full">
             {isEditing ? (
               <textarea
                 name=""
                 placeholder="후기를 작성해봅시다"
                 id=""
-                className="w-[600px] h-full textarea textarea-bordered"
+                className="w-full md:w-4/5 h-full textarea textarea-bordered"
                 value={newContent}
                 onChange={handleOnChangeComment}
               />
             ) : (
-              <p className="w-[600px] h-full">{comment.content}</p>
+              <p className="w-full md:w-4/5 h-full">{comment.content}</p>
             )}
           </section>
-          <section className="flex justify-end gap-4 pt-4 right-4">
+          <section className="flex md:justify-end justify-center gap-4 md:gap-4 p-2 md:right-4 items-center w-full">
             <button
               onClick={() => handleOnClickEditBtn(commentId)}
-              className="btn w-36 hover:bg-transparent hover:text-text-dark-gray"
+              className="btn  md:w-36 w-1/3 hover:bg-transparent text-xs md:text-sm hover:text-text-dark-gray"
             >
               {isEditing ? '완료하기' : '수정하기'}
             </button>
             <button
               onClick={() => handleOnClickDeleteCancleBtn(commentId)}
-              className="btn  bg-dark-purple-color text-white w-36 hover:bg-transparent hover:text-dark-purple-color"
+              className="btn  bg-dark-purple-color text-white  md:w-36 w-1/3 hover:bg-transparent text-xs md:text-sm hover:text-dark-purple-color"
             >
               {isEditing ? '취소하기' : '삭제하기'}
             </button>
-            <Link href={`list/detail/${comment.class_id}`}>
-              <button className="btn bg-point-purple text-white w-36 hover:bg-transparent hover:text-point-purple">
-                클래스 보러가기
-              </button>
-            </Link>
+
+            <button className="btn bg-point-purple text-white  md:w-36 w-1/3 whitespace-nowrap hover:bg-transparent text-xs md:text-sm hover:text-point-purple">
+              <Link href={`list/detail/${comment.class_id}`}>클래스 보러가기 </Link>
+            </button>
           </section>
         </div>
       </div>

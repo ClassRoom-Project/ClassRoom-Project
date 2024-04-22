@@ -3,6 +3,7 @@
 import {
   useDeleteMessage,
   useReadChatRoomMessages,
+  useReadLastMessages,
   useReadMakeClassUserInfo
 } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -27,6 +28,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
+  const { readLastMessages } = useReadLastMessages(chatId);
   const queryClient = useQueryClient();
   const [stateLoading, setStateLoading] = useState(false);
   //Dom요소나 컴포넌트의 직접적인 접근을 가능하게 해줌Ref
@@ -79,7 +81,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
       endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
     scrollToBottom();
-  }, [readChatRoomMessages]);
+  }, [readLastMessages]);
 
   //medium-zoom
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {

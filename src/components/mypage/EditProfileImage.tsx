@@ -42,6 +42,12 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, user
       return;
     }
 
+    const maxFileSize = 5 * 1024 * 1024;
+    if (file.size > maxFileSize) {
+      alert('파일첨부 사이즈는 5MB 이내로 가능합니다.');
+      return;
+    }
+
     uploadProfileImage(file);
   };
 
@@ -72,7 +78,10 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, user
         />
       </div>
       {isEditing ? (
-        <button className="btn p-4 bg-point-purple text-white rounded-full" onClick={handleOnClickEditImageBtn}>
+        <button
+          className="btn p-4 bg-point-purple text-white rounded-full hover:bg-white hover:text-dark-purple-color"
+          onClick={handleOnClickEditImageBtn}
+        >
           프로필 이미지 변경
         </button>
       ) : (

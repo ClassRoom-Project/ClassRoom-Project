@@ -17,7 +17,7 @@ export const getMyRegisteredClass = async (loginUserId: string | null) => {
 
 // 내가 등록한 클래스 삭제하기 : delete
 export const deleteMyClass = async (classId: string, loginUserId: string | null) => {
-  const { data, error } = await supabase
+  const { data, error }: PostgrestResponse<MyRegisteredClassType> = await supabase
     .from('class')
     .delete()
     .eq('user_id', loginUserId as string)

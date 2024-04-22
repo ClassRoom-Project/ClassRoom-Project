@@ -185,7 +185,7 @@ export const getChatMessages = async (chatId: string, loginUserId: string): Prom
   if (error) {
     throw error;
   }
-
+  // console.log('data', data);
   return data;
 };
 

@@ -3,10 +3,12 @@ import React, { Suspense } from 'react';
 
 const teacherMypage = () => {
   return (
-    <div className="flex justify-center">
-      <Suspense>
-        <TeacherMyPageTab />
-      </Suspense>
+    <div className=" responsiveHeight overflow-y-auto h-screen scrollbar-hide">
+      <div className="flex justify-center items-center">
+        <Suspense>
+          <TeacherMyPageTab />
+        </Suspense>
+      </div>
     </div>
   );
 };
