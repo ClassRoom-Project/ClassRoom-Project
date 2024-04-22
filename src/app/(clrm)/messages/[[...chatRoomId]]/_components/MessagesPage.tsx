@@ -3,9 +3,10 @@
 import { useReadChatRooms } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useSearchParams } from 'next/navigation';
-import { Virtuoso } from 'react-virtuoso';
 import ChatPreview from './ChatPreview';
 import ChatMessages from './ChatMessages';
+import Link from 'next/link';
+import { IoLogoSnapchat } from 'react-icons/io';
 
 export default function MessagesPage() {
   const { loginUserId } = useLoginStore();
@@ -27,14 +28,23 @@ export default function MessagesPage() {
 
   if (!chatroomsInfo || chatroomsInfo.length === 0) {
     return (
-      <div className="flex justify-center items-center h-full">
-        <p>채팅 목록이 없습니다.</p>
+      <div className="flex flex-col max-h-full  responsiveHeight">
+        <div className="flex flex-col justify-center items-center h-full">
+          <IoLogoSnapchat className=" text-button-focus-color text-9xl " />
+          <p className="text-2xl py-10">채팅 목록이 없습니다.</p>
+          <Link
+            href="/list"
+            className="bg-button-default-color px-4 py-2 rounded-full text-white text-xl hover:bg-button-hover-color"
+          >
+            클래스 둘러보기
+          </Link>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col max-h-full md:flex-row lg:flex-row mb-16 md:mb-0 responsiveHeight">
+    <div className="flex flex-col max-h-full md:flex-row lg:flex-row responsiveHeight">
       <section className={firstSectionClasses}>
         {chatroomsInfo.map(({ chatId, toClassId, fromUserId, image, teacherUserId, title, makeClassUserId }) => (
           <ChatPreview
