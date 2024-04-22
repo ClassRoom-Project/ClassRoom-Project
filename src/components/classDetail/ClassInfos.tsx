@@ -37,41 +37,41 @@ const ClassInfos = ({ classId }: { classId: string }) => {
   });
 
   return (
-    <div className="w-[400px] py-4 flex flex-col border-gray-400 border-solid border-b-[1px] justify-center items-start">
-      <div className="w-[400px] flex justify-between">
-        <div className="rounded-2xl flex-wrap border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+    <div className="w-[400px] relative py-4 flex flex-col px-2  border-gray-400 border-solid border-b-[1px] justify-center items-center">
+      <div className="flex items-center w-full justify-between ">
+        <div className="rounded-2xl max-w-full flex-wrap bg-white border-main-color border-solid border-[1px] py-1 px-2 flex justify-center items-center">
           {hashtagString}
         </div>
         <div>
-          <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+          <div className="rounded-2xl max-w-full bg-white border-main-color border-solid border-[1px] py-1 px-2  flex justify-center items-center">
             <BiSolidCategory className="text-main-color" />
             <p>{classInfo?.category}</p>
           </div>
         </div>
       </div>
-      <div className="w-[400px] flex justify-between py-4">
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+      <div className="flex py-2 items-center w-full justify-between">
+        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2  flex justify-center items-center">
           <IoMdTime className="text-main-color" />
           <p>총 {classInfo?.total_time}시간</p>
         </div>
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+        <div className="rounded-2xl border-main-color mx-auto bg-white border-solid border-[1px] py-1  px-2 flex justify-center items-center">
           <GiLevelEndFlag className="text-main-color" />
           <p>{classInfo?.difficulty}</p>
         </div>
 
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
           <BiBookAlt className="text-main-color" />
           <p>{classInfo?.class_type}</p>
         </div>
       </div>
-      <div className="min-w-[400px] flex justify-between">
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+      <div className="flex items-center w-full justify-between">
+        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
           <MdOutlinePersonAddAlt1 className="text-main-color" />
           <p>
-            수용가능인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.quantity} 명
+            인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.quantity} 명
           </p>
         </div>
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
           <FaWonSign className="text-main-color" />
           <p>{classInfo?.price.toLocaleString()}원</p>
         </div>
