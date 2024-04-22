@@ -1,10 +1,12 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import RegisterScheduleStore from '@/store/registerScheduleStore';
+import { format } from 'date-fns';
+import { ko } from 'date-fns/locale';
+import React, { useEffect, useRef, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import { format } from 'date-fns';
-import RegisterScheduleStore from '@/store/registerScheduleStore';
-import { ko } from 'date-fns/locale';
+import CustomCaption from '../common/CustomCaption';
+import '../common/day-picker.css';
 
 interface ScheduleType {
   date: string;
@@ -101,7 +103,9 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
   return (
     <div className="my-4">
       <h1 className="font-bold text-[#3F3F3F] mt-6">* 클래스 날짜&시간</h1>
-      <p className='text-sm mt-1 mb-2 text-[#7E7E7E]'>*해당 날짜의 시간을 선택한 후 +버튼을 클릭해야 시간 정보가 추가됩니다*</p>
+      <p className="text-sm mt-1 mb-2 text-[#7E7E7E]">
+        *해당 날짜의 시간을 선택한 후 +버튼을 클릭해야 시간 정보가 추가됩니다*
+      </p>
       <div className="relative">
         <button
           onClick={toggleDatePicker}
@@ -111,11 +115,17 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
         </button>
         {isDayPickerOpen && (
           <div ref={dayPickerRef} className="absolute z-10 bg-white border-2 rounded-lg p-4">
-            <DayPicker 
-              mode="single" 
-              onSelect={handleDateSelect} 
-              locale={ko} 
+            <DayPicker
+              mode="single"
+              onSelect={handleDateSelect}
+              locale={ko}
               // disableNavigation={true} // 한달단위
+              disabled={{ before: new Date() }} // 오늘 이전 날짜 비활성화
+              fromYear={new Date().getFullYear()}
+              toYear={new Date().getFullYear() + 1} // 현재 년도 +1 까지만 navigate
+              components={{
+                Caption: CustomCaption
+              }}
             />
           </div>
         )}

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
