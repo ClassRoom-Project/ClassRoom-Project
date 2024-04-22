@@ -197,6 +197,19 @@ export const deleteRoom = () =>
     theme: 'light'
   });
 
+export const deleteMessage = () =>
+  toast('메시지가 삭제되었습니다.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnFocusLoss: false,
+    theme: 'light'
+  });
+
 export const noDateTimeNotify = () =>
   toast.error('일정과 시간을 선택해주세요.', {
     position: 'top-right',
@@ -232,4 +245,3 @@ export const LimitHashTagNotify = () =>
     progress: undefined,
     theme: 'light'
   });
-  

@@ -36,7 +36,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
             <div className="text-white">{readleftChekcMessages}</div>
           </div>
         )}
-        <div className="mx-3 w-12 h-12">
+        <div className="w-8 h-8 mx-3 lg:w-12 lg:h-12">
           <Image
             unoptimized
             src={MakeClassUserInfo?.profile_image ?? ProfileImage}
@@ -46,23 +46,25 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
             className="w-full h-full border border-black rounded-full object-cover"
           />
         </div>
-        <div className="flex flex-col mx-3 flex-1 w-0">
-          <p className="sm:text-sm md:text-base font-bold text-nowrap">{MakeClassUserInfo?.nickname}</p>
+        <div className="flex flex-col mx-3 flex-1 w-0 text-xs">
+          <div className="w-40">
+            <p className=" font-bold text-nowrap truncate">{MakeClassUserInfo?.nickname}</p>
+          </div>
           <div className="flex flex-row justify-between">
             <div>
               {!readLastMessages ? (
-                <p className=" whitespace-nowrap sm:text-sm text-gray-500">메시지가 없습니다</p>
+                <p className="whitespace-nowrap text-gray-500">메시지가 없습니다</p>
               ) : (
                 <div className="w-40">
                   {readLastMessages?.messages ? (
-                    <p className="sm:text-sm text-gray-500 truncate">{readLastMessages.messages}</p>
+                    <p className=" text-gray-500 truncate">{readLastMessages.messages}</p>
                   ) : (
-                    <p className="sm:text-sm text-gray-500 ">이미지</p>
+                    <p className="text-gray-500 ">이미지</p>
                   )}
                 </div>
               )}
             </div>
-            <div className=" whitespace-nowrap text-xs text-gray-400">
+            <div className="text-xs whitespace-nowrap text-gray-400">
               {dayjs(readLastMessages?.createdAt).format('A hh:mm')}
             </div>
           </div>
