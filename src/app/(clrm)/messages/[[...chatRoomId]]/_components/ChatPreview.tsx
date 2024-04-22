@@ -38,7 +38,6 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
         )}
         <div className="w-8 h-8 mr-3 lg:w-12 lg:h-12">
           <Image
-            unoptimized
             src={MakeClassUserInfo?.profile_image ?? ProfileImage}
             alt="profileImg"
             width={40}

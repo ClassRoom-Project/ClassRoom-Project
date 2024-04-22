@@ -63,7 +63,6 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, user
           height={100}
           className="w-full h-full rounded-full object-cover"
           alt="프로필 이미지"
-          unoptimized={true}
         />
         <input
           type="file"

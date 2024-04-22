@@ -1,9 +1,24 @@
 'use client';
-import React from 'react';
+import React, {useEffect} from 'react';
 import useRegisterStore from '@/store/registerStore';
 
-const TotalTime = () => {
+interface InitialDataType {
+  totalTime: number;
+}
+
+interface TotalTimeProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const TotalTime:React.FC<TotalTimeProps> = ({isEditMode, initialData}) => {
   const { totalTime, setTotalTime } = useRegisterStore();
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setTotalTime(initialData.totalTime);
+    }
+  }, [isEditMode, initialData, setTotalTime]);
 
   const handleTotalTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = parseInt(event.target.value);

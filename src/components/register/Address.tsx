@@ -1,11 +1,28 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 import useRegisterStore from '@/store/registerStore';
 import { AddressData } from '@/types/register';
 
-const Address = () => {
+interface InitialDataType {
+  address: string;
+  detailAddress: string;
+}
+
+interface AddressProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const Address: React.FC<AddressProps> = ({ isEditMode, initialData }) => {
   const { address, detailAddress, setAddress, setDetailAddress } = useRegisterStore();
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setAddress(initialData.address);
+      setDetailAddress(initialData.detailAddress);
+    }
+  }, [isEditMode, initialData, setAddress, setDetailAddress]);
 
   // Daum Postcode Popup을 사용하기 위한 스크립트 URL
   const scriptUrl = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';

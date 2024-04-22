@@ -3,14 +3,25 @@ import React, { useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from 'react-icons/fi';
 import { ImageFileWithPreview } from '@/types/register';
-import { noInfoNotify, noDateTimeNotify, noLimitImageNotify } from '@/components/common/Toastify';
+import { noInfoNotify, noDateTimeNotify, noLimitImageNotify, LimitHashTagSizeNotify } from '@/components/common/Toastify';
 
-const ImageUpload = () => {
+interface InitialDataType {
+  image: string[];
+}
+
+interface ImageUploadProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType; 
+  class_Id?: string;
+}
+
+const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class_Id }) => {
   const {
     category,
     subCategory,
@@ -31,10 +42,11 @@ const ImageUpload = () => {
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const classId = crypto.randomUUID();
+  const classId = isEditMode ? class_Id : crypto.randomUUID();
   const noticeId = crypto.randomUUID();
   const router = useRouter();
-
+  const queryClient = useQueryClient();
+  
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
     return fileName.replace(/[^a-zA-Z0-9.]/g, '_');
@@ -72,7 +84,13 @@ const ImageUpload = () => {
       return;
     }
 
-    const isAnyTimes = schedules.some((schedule) => schedule.times.length === 0);
+    if (subCategory.length === 0) {
+      noInfoNotify();
+      setIsLoading(false);
+      return;
+    }
+
+    const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
 
     if (selectedDates.length === 0 || isAnyTimes) {
       noDateTimeNotify();
@@ -93,6 +111,75 @@ const ImageUpload = () => {
       if (url) {
         imageUrls.push(url);
       }
+    }
+
+    // isEditMode가 true일 경우, 기존 데이터 업데이트
+    if (isEditMode) {
+      const { data, error } = await supabase.from('class').update({
+        category: category,
+        hashtag: subCategory,
+        class_type: classType,
+        difficulty: difficulty,
+        title: classTitle,
+        description: classContent,
+        quantity: personnel,
+        min_people: minNumber,
+        price: price,
+        location: address,
+        detail_location: detailAddress,
+        total_time: totalTime,
+        image: imageUrls
+      }).eq('class_id', classId);
+
+      if (error) {
+        console.error('error:', error);
+        setIsLoading(false);
+        return;
+      }
+    
+      // 날짜와 시간 데이터 업데이트 로직 추가
+      // 기존 날짜와 시간 데이터 삭제
+      const deleteDate = await supabase.from('date').delete().match({ class_id: classId });
+      if (deleteDate.error) {
+        console.error('date db delete error:', deleteDate.error);
+      }
+    
+      // 새로운 날짜와 시간 데이터 삽입
+      for (const date of selectedDates) {
+        const dateId = crypto.randomUUID();
+        const { data: dateData, error: dateError } = await supabase.from('date').insert([
+          {
+            date_id: dateId,
+            class_id: classId,
+            day: date
+          }
+        ]);
+        if (dateError) {
+          console.error('date db upload error:', dateError);
+        } else {
+          const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
+    
+          if (selectedTimes && selectedTimes.length > 0) {
+            for (const time of selectedTimes) {
+              const timeId = crypto.randomUUID();
+              const { data: timeData, error: timeError } = await supabase.from('time').insert([
+                {
+                  time_id: timeId,
+                  date_id: dateId,
+                  times: time
+                }
+              ]);
+              if (timeError) {
+                console.error('time db upload error:', timeError);
+              }
+            }
+          }
+        }
+      }
+    
+      setIsLoading(false);
+      router.push(`/register/completedPage/${classId}`);
+      return;
     }
 
     const { data, error } = await supabase.from('class').insert([
@@ -134,6 +221,10 @@ const ImageUpload = () => {
         ]);
       if (noticeError) {
         console.error('Error: ', noticeError);
+      } else {
+        queryClient.invalidateQueries({
+          queryKey: ['notifications', userId]
+        });        
       }
 
       // 각 날짜에 대한 데이터 저장
@@ -169,7 +260,6 @@ const ImageUpload = () => {
         }
       }
       setIsLoading(false);
-      // alert('등록이 완료되었습니다.');
       router.push(`/register/completedPage/${classId}`);
     }
   };
@@ -177,12 +267,19 @@ const ImageUpload = () => {
   // 이미지 최대 5개까지만 추가할 수 있도록!
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      // 파일 크기 체크
+      const fileSize = file.size / (1024 * 1024);
+      if (fileSize > 5) {
+        LimitHashTagSizeNotify();
+        return;
+      }
+
       if (images.length >= 5) {
         noLimitImageNotify();
         return;
       }
-
-      const file = event.target.files[0];
       const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 URL을 생성!
       const newImages = [...images, { file, preview }];
       setImages(newImages);
