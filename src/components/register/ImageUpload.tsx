@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
@@ -44,6 +45,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
   const classId = isEditMode ? class_Id : crypto.randomUUID();
   const noticeId = crypto.randomUUID();
   const router = useRouter();
+  const queryClient = useQueryClient();
   
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
@@ -117,7 +119,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
         detail_location: detailAddress,
         total_time: totalTime,
         image: imageUrls
-      }).match({ class_id: classId }); // class_id를 기준으로 매칭하여 업데이트
+      }).eq('class_id', classId);
 
       if (error) {
         console.error('error:', error);
@@ -135,7 +137,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
       // 새로운 날짜와 시간 데이터 삽입
       for (const date of selectedDates) {
         const dateId = crypto.randomUUID();
-        const { data: dateData, error: dateError } = await supabase.from('date').update([
+        const { data: dateData, error: dateError } = await supabase.from('date').insert([
           {
             date_id: dateId,
             class_id: classId,
@@ -150,7 +152,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
           if (selectedTimes && selectedTimes.length > 0) {
             for (const time of selectedTimes) {
               const timeId = crypto.randomUUID();
-              const { data: timeData, error: timeError } = await supabase.from('time').update([
+              const { data: timeData, error: timeError } = await supabase.from('time').insert([
                 {
                   time_id: timeId,
                   date_id: dateId,
@@ -166,7 +168,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
       }
     
       setIsLoading(false);
-      router.push(`/register/completedPage/${classId}?notification=true`);
+      router.push(`/register/completedPage/${classId}`);
       return;
     }
 
@@ -201,6 +203,10 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
         ]);
       if (noticeError) {
         console.error('Error: ', noticeError);
+      } else {
+        queryClient.invalidateQueries({
+          queryKey: ['notifications', userId]
+        });        
       }
 
       // 각 날짜에 대한 데이터 저장
@@ -236,7 +242,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
         }
       }
       setIsLoading(false);
-      router.push(`/register/completedPage/${classId}?notification=true`);
+      router.push(`/register/completedPage/${classId}`);
     }
   };
 

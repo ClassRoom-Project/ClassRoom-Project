@@ -1,6 +1,7 @@
+"use client";
 import { supabase } from '../supabase/supabase';
 
-export const insertNotice = async (userId : string, classId: string, classTitle:string) => {
+export const insertNotice = async (userId : string, classId: string, classTitle:string, queryClient: any) => {
     const { data: existingData, error: existingError } = await supabase.from('notifications')
         .select('*')
         .eq('user_id', userId)
@@ -22,6 +23,10 @@ export const insertNotice = async (userId : string, classId: string, classTitle:
         ]);
     if (noticeError) {
         console.error('Error: ', noticeError);
+    } else {
+        queryClient.invalidateQueries({
+          queryKey: ['notifications', userId]
+        });        
     }
   
     return noticeData;
