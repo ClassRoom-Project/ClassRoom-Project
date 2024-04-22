@@ -26,9 +26,9 @@ const BestClass = () => {
   }, [setClassInfos]);
 
   return (
-    <div className="mr-auto ml-auto">
-      <p className=" text-text-color">인기순</p>
-      <div className="slider-container w-[85vw]">
+    <div className="mr-auto w-full ml-auto">
+      <p className="text-text-color">인기순</p>
+      <div className="slider-container w-full">
         <Slider {...settings}>
           {classInfos.map((info) => (
             <ClassCard key={info.class_id} classInfos={info} />

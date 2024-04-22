@@ -117,10 +117,10 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="w-[1000px] bg-disable-color rounded-xl shadow-md border-solid p-4">
+        <div className="w-[600px] h-[404px] flex justify-center items-center bg-disable-color rounded-xl shadow-md border-solid p-4 xl:w-[1116px]">
           <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col">
-            <div className="flex">
-              <div className="w-64 h-64 items-center justify-center flex relative mr-5">
+            <div className="flex items-center justify-center">
+              <div className="w-32 h-32 items-center justify-center flex relative mr-5 xl:w-64 xl:h-64">
                 {commentImage.length > 0 ? (
                   <Image
                     src={commentImage[0].preview}
@@ -137,7 +137,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                   />
                 )}
               </div>
-              <div className="w-[700px] flex flex-col justify-center items-start">
+              <div className="w-[400px] flex flex-col justify-center items-start xl:w-[700px]">
                 <div className="w-full flex justify-between items-center">
                   <div className="flex items-center mb-4">
                     <label
