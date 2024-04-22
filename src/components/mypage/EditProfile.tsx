@@ -108,7 +108,7 @@ const EditProfile = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:min-w-[1080px] md:justify-items-center w-full">
+    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:justify-items-center w-full">
       <p className="flex items-center justify-center text-xl text-dark-purple-color font-bold">프로필 수정하기</p>
       <div className="flex gap-10 justify-center items-center flex-col w-full md:flex-row">
         <div className="flex flex-col justify-center items-center">

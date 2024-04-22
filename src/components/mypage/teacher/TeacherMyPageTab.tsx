@@ -62,7 +62,7 @@ const TeacherMyPageTab = () => {
   };
 
   return (
-    <div className="md:m-4 my-4 py-4 gap-4 flex flex-col md:items-center justify-center mb-20 w-full">
+    <div className="w-full h-screen">
       {/* md 이상 일 때, 가로 탭 */}
       <div className="hidden md:flex flex-row md:justify-start gap-20 md:items-center sm:items-start border-y-2 w-full md:w-full lg:w-full">
         <p
@@ -136,7 +136,7 @@ const TeacherMyPageTab = () => {
           </div>
         </div>
       </div>
-      <div className="md:my-4 md:py-4 flex justify-center items-center md:w-4/5 w-full p-4">
+      <div className="flex justify-center items-center w-full p-4 md:py-4 md:p-0">
         {activeTeacherMyPageTab[activePage]}
       </div>
     </div>
