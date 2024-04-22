@@ -47,9 +47,8 @@ export const createChatRoom = async ({
       throw error;
     }
 
-    console.log('삽입 성공:', insertedData);
-    return insertedData; // 삽입된 새로운 행의 데이터를 반환합니다.
-  } else console.log('이미 방이있어요');
+    return insertedData;
+  }
 };
 
 //방 정보 가져오기
