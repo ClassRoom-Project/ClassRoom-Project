@@ -39,7 +39,7 @@ export interface MyRegisteredClassType {
   location: string;
   detail_location: string;
   image: string;
-  active: boolean;
+  isActive: boolean;
   quantity: number;
   class_type: string;
   category: string;

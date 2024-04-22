@@ -2,7 +2,7 @@ import { useModalStore } from '@/store/modalstore';
 
 export const AlertModal = () => {
   const { isOpen, toggleModal } = useModalStore();
-  console.log(isOpen);
+  // console.log(isOpen);
 
   return (
     <>

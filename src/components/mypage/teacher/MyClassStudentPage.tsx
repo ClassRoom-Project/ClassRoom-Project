@@ -25,7 +25,7 @@ const MyClassStudentPage = () => {
   }
 
   const { data: classSingleInfo, isPending } = useQuery({
-    queryKey: ['class', timeId],
+    queryKey: ['singleClass', timeId],
     queryFn: () => getClassSingleInfo(timeId)
   });
 
@@ -38,7 +38,7 @@ const MyClassStudentPage = () => {
   }
 
   return (
-    <div className="m-4 p-4 flex flex-col gap-4 w-[1280px]">
+    <div className="m-4 p-4 flex flex-col gap-4 w-full">
       <div className="border-y-2 w-full flex items-center">
         <button className="flex  items-center text-gray-500" onClick={() => router.back()}>
           <IoIosArrowBack size={20} />

@@ -15,7 +15,7 @@ const MyComments = () => {
   const searchParams = useSearchParams();
   const page = searchParams.get('page');
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 2; // 한 페이지당 보여줄 포스트의 개수
+  const postsPerPage = 5; // 한 페이지당 보여줄 포스트의 개수
 
   // 후기 리스트 불러오기
   const { data: myComments, isPending } = useQuery({
@@ -42,7 +42,8 @@ const MyComments = () => {
   const currentPosts = myComments.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col align-center max-w-screen-xl">
+    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
+      <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center">내가 쓴 후기</p>
       {currentPosts.map((comment) => (
         <MyCommentItem key={comment.comment_id} comment={comment} />
       ))}

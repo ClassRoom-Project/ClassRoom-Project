@@ -185,12 +185,13 @@ const EditTeacherInfo = () => {
   }
 
   return (
-    <div className="flex flex-col gap-8 justify-center items-center bg-light-purple w-[960px] p-4">
-      <p className=" text-center text-text-dark-gray">
+    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 sm:w-[500px] lg:w-full md:w-full md:min-w-[1080px] md:justify-items-center w-full">
+      <p className="md:hidden items-start text-xl text-dark-purple-color font-bold pt-4">선생님 정보 수정하기</p>
+      <p className=" text-center text-text-dark-gray p-4">
         회원님이 등록하신 강사 정보입니다. <br />
         수정을 원하시면 아래 정보 수정하기 버튼을 눌러주세요.{' '}
       </p>
-      <div className="flex gap-10">
+      <div className="flex md:gap-10 justify-center items-start flex-col w-full md:flex-row">
         <div className="flex flex-col">
           <div className="p-4 flex flex-col gap-4">
             <p className="text-text-dark-gray font-bold">강사 이름</p>
@@ -278,17 +279,23 @@ const EditTeacherInfo = () => {
         </div>
       </div>
       <div className="p-4 flex gap-4">
-        <button onClick={handleOnClickCancleBtn} className="btn w-[100px] ">
+        <button onClick={handleOnClickCancleBtn} className="btn w-24 hover:bg-white hover:text-text-dark-gray ">
           취소하기
         </button>
         {isEditing ? (
           <div>
-            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px] bg-dark-purple-color text-white">
+            <button
+              onClick={handleOnClickEditTeacherInfoBtn}
+              className="btn w-24 bg-dark-purple-color text-white hover:bg-white hover:text-dark-purple-color"
+            >
               수정 완료
             </button>
           </div>
         ) : (
-          <button onClick={() => setIsEditing(true)} className="btn w-[100px] bg-dark-purple-color text-white">
+          <button
+            onClick={() => setIsEditing(true)}
+            className="btn w-24 bg-dark-purple-color text-white hover:bg-white hover:text-dark-purple-color"
+          >
             수정하기
           </button>
         )}
