@@ -2,6 +2,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { useCategoryFilterStore } from '@/store/classFilterStore';
 import { usePathname, useRouter } from 'next/navigation';
+import { useSearchStore } from '@/store/classFilterStore';
 
 const CategoryBtns = () => {
   const pathName = usePathname();
@@ -16,7 +17,7 @@ const CategoryBtns = () => {
   const handleOnClickListBtn = useCallback(
     (category: string) => {
       setSelectedCategory(category);
-      router.push('/list');
+      router.push(`/list`);
     },
     [setSelectedCategory, router]
   );
@@ -24,7 +25,7 @@ const CategoryBtns = () => {
   //List페이지가 떠날 때 카테고리 초기화
   useEffect(() => {
     const handleLeavePage = () => {
-      if (pathName !== '/list') {
+      if (pathName !== `/list`) {
         setSelectedCategory('');
       }
     };
@@ -33,12 +34,12 @@ const CategoryBtns = () => {
   }, [pathName, setSelectedCategory]);
 
   return (
-    <div className="min-w-[85vw] bg-disable-color h-16 flex justify-center items-center">
+    <div className="min-w-[85vw] bg-disable-color h-16 flex justify-between items-center">
       {categories.map((category) => (
         <button
           key={category}
           onClick={() => handleOnClickListBtn(category)}
-          className={`p-2 font-bold rounded-2xl mx-3 w-12 text-xs lg:text-lg lg:w-24 ${
+          className={`p-2 font-bold rounded-2xl mx-auto w-12 text-xs lg:text-lg lg:w-24 ${
             selectedCategory === category ? 'bg-button-press-color' : 'bg-white'
           }`}
         >

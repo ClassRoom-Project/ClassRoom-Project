@@ -24,13 +24,13 @@ export default function ChatButton() {
     <div className="relative">
       <button
         onClick={handleClick}
-        className="py-4 flex flex-col items-center hover:text-main-color transition ease-in text-icon-color"
+        className="flex flex-col items-center text-background-color hover:text-main-color transition ease-in md:text-icon-color"
       >
-        <IoChatbubbleEllipsesOutline className="text-4xl " />
-        채팅
+        <IoChatbubbleEllipsesOutline className="text-4xl sm:text-4xl md:text-4xl" />
+        <div className=" hidden sm:flex md:sm:flex">채팅</div>
       </button>
       {readLeftChekcMessageAll ? (
-        <div className="flex items-center justify-center bg-main-color rounded-full h-5 w-5 absolute -right-1 bottom-14">
+        <div className="flex items-center justify-center bg-main-color rounded-full h-5 w-5 absolute -right-1 bottom-10">
           <div className="text-white">{readLeftChekcMessageAll}</div>
         </div>
       ) : (

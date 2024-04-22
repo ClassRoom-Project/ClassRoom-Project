@@ -74,12 +74,12 @@ export function useCreateNewRoom() {
 
 //채팅내용 가져오기
 export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
-  const { data: readChatRoomMessages } = useQuery({
+  const { data: readChatRoomMessages, isLoading } = useQuery({
     queryKey: ['chatMessage', chatId],
     queryFn: () => getChatMessages(chatId as string, loginUserId as string),
     enabled: !!chatId
   });
-  return { readChatRoomMessages };
+  return { readChatRoomMessages, isLoading };
 }
 
 //채팅방 메시지 보내기

@@ -11,21 +11,26 @@ import Image from 'next/image';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import defaultimage from '../../../../../assets/images/profile-image.png';
-import { deleteRoom } from '@/components/common/Toastify';
+import { deleteMessage } from '@/components/common/Toastify';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import mediumZoom from 'medium-zoom';
 
 dayjs.locale('ko');
 
 export default function MessageBoxs({ toClassId, title, chatId, otherId, studentName, mainImage }: MessagesBoxsType) {
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
-  const { readChatRoomMessages } = useReadChatRoomMessages(chatId, loginUserId!);
+  const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
   const queryClient = useQueryClient();
+  const [stateLoading, setStateLoading] = useState(false);
+  //Dom요소나 컴포넌트의 직접적인 접근을 가능하게 해줌Ref
+  const zoom = mediumZoom({ background: '#000' });
 
   useEffect(() => {
     const subscribeChat = supabase
@@ -62,8 +67,10 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   }, [chatId, loginUserId, queryClient]);
 
   const handleMessageDelete = (messageId: number) => {
+    setStateLoading(true);
     deleteMessageMutate(messageId);
-    deleteRoom();
+    setStateLoading(false);
+    deleteMessage();
   };
 
   //새로운 메시지 들어오는 경우 자동으로 스크롤 하단으로 이동
@@ -74,12 +81,29 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
     scrollToBottom();
   }, [readChatRoomMessages]);
 
+  //medium-zoom
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    zoom.attach(e.currentTarget);
+  };
+
   //무한스크롤
+  if (isLoading) {
+    return (
+      <div className="flex flex-col justify-center items-center h-auto px-3">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
-    <div className="flex-1 overflow-y-auto">
-      <div className="flex flex-col justify-center items-center h-auto px-3">
-        <div className=" flex flex-row h-36 mt-5 rounded-md w-3/5 sm:text-xs md:text-sm text-button-hover-color justify-center items-center border border-border-color mb-16 overflow-hidden">
+    <div className="h-screen overflow-y-auto">
+      {isLoading && (
+        <div className="fixed z-50 inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+          <LoadingSpinner />
+        </div>
+      )}
+      <div className="flex flex-col justify-center items-center px-3">
+        <div className="text-xs w-full flex flex-row h-36 mt-5 rounded-md xl:w-3/5 sm:text-xs md:text-sm text-button-hover-color justify-center items-center border border-border-color mb-16 overflow-hidden">
           <div className=" relative h-full w-1/3 p-2">
             <Image
               src={mainImage!}
@@ -90,14 +114,14 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
             />
           </div>
           <div className="flex h-36 flex-col items-center justify-center w-2/3 p-2">
-            <p className="whitespace-nowrap flex flex-col items-center justify-center text-center">
-              안녕하세요 {studentName} 수강생님! <br /> &quot;{title}&quot; 원데이 클래스에 궁금하신 <br />
-              사항이 있으시면 문의 주시길 바랍니다!
+            <p className="text-xs flex flex-col items-center justify-center text-center lg:text-sm">
+              안녕하세요 {studentName} 수강생님! <br /> &quot;{title}&quot; 원데이 클래스에 궁금하신 사항이 있으시면
+              문의 주시길 바랍니다!
             </p>
 
             <Link
               href={`/list/detail/${toClassId}`}
-              className="flex sm:w-3/4 mb:w-3/4 lg:w-1/4 whitespace-nowrap mt-4 rounded-3xl h-8 items-center justify-center text-xs p-2 text-white bg-button-default-color hover:bg-button-hover-color"
+              className="flex w-3/4 whitespace-nowrap mt-4 rounded-3xl h-8 items-center justify-center text-xs p-2 text-white bg-button-default-color hover:bg-button-hover-color"
             >
               클래스 보러가기
             </Link>
@@ -113,7 +137,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
             <div>
               {message.create_by !== loginUserId && (
                 <div className="mr-2 flex flex-row items-center text-xs gap-1">
-                  <div className="w-12 h-12">
+                  <div className="w-8 h-8 lg:w-12 lg:h-12">
                     <Image
                       src={MakeClassUserInfo?.profile_image || defaultimage}
                       height={40}
@@ -126,15 +150,19 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                 </div>
               )}
               <div
-                className={`flex flex-row items-center py-4 px-4 ${
+                className={`text-xs flex flex-row items-center py-4 px-4 lg:text-md ${
                   message.create_by === loginUserId ? 'flex flex-row' : 'flex-row-reverse'
                 }`}
               >
                 <div>
-                  <p className=" text-gray-400 text-xs px-4">{dayjs(message.created_at).format('A hh:mm')}</p>
+                  <p className="text-gray-400 text-xs px-4 whitespace-nowrap">
+                    {dayjs(message.created_at).format('A hh:mm')}
+                  </p>
                 </div>
                 {message.create_by === loginUserId ? (
-                  <button onClick={() => handleMessageDelete(message.messages_id)}>삭제</button>
+                  <button onClick={() => handleMessageDelete(message.messages_id)} className="whitespace-nowrap">
+                    삭제
+                  </button>
                 ) : (
                   ''
                 )}
@@ -151,11 +179,20 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                     )}
                   </div>
                 ) : (
-                  <div className=" relative" style={{ width: '130px', height: '150px' }}>
+                  <div className=" relative" style={{ width: '180px', height: '200px' }}>
                     {message.images &&
                       JSON.parse(message.images).map((imgUrl: string, imgIndex: number) => (
                         <div key={imgIndex} className="image-container">
-                          <Image src={imgUrl} layout="fill" objectFit="cover" alt={`Photo ${imgIndex + 1}`} />
+                          <Image
+                            src={imgUrl}
+                            layout="fill"
+                            unoptimized
+                            objectFit="cover"
+                            alt={`Photo ${imgIndex + 1}`}
+                            // 이미지가 완전히 업로드 되고 플레이스홀더가 제거되면 호출되는 콜백함수!!
+                            //img 요소를 참조하는 대상을 가진 event라는 하나의 인수로 호출
+                            onLoad={handleImageLoad}
+                          />
                         </div>
                       ))}
                   </div>
