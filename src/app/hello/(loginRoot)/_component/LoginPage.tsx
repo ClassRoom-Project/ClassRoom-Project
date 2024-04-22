@@ -15,7 +15,7 @@ export default function LoginPage() {
           </p>
         </section>
         <div className="flex w-full h-full items-center md:w-3/5 justify-center flex-col">
-          <section className="  w-full  p-5 items-center">
+          <section className="h-1/3  w-full  p-5 items-center">
             <div className="flex flex-col w-full items-center gap-4">
               <Image src="/logintext.svg" alt="LoginLogoImage" width={100} height={100} priority />
               <p className="mb-10 text-[#7D95FF] pt-4 flex flex-col items-center border-t border-gray-300 w-5/6 md:max-w-2xl mx-auto sm:text-sm md:text-xl">

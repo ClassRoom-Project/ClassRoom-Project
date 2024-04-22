@@ -13,6 +13,7 @@ import { useRouter } from 'next/navigation';
 import { MdPhotoCamera } from 'react-icons/md';
 import { IoIosLogOut } from 'react-icons/io';
 import { BsSend } from 'react-icons/bs';
+import { TbArrowBack } from 'react-icons/tb';
 
 export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
   const [imageModal, setImageModal] = useState(false);
@@ -57,6 +58,10 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
     setImageModal(true);
   };
 
+  const handleBack = () => {
+    router.replace('/messages');
+  };
+
   const studentName = MakeClassUserInfo?.nickname;
 
   if (!chatId) {
@@ -75,6 +80,10 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
           <IoIosLogOut className="text-2xl text-button-default-color hover:text-button-hover-color" />
         </button>
       </div>
+      <button onClick={handleBack} className="flex flex-row pt-2 pl-2 md:hidden items-center text-sm">
+        뒤로가기
+        <TbArrowBack className="text-xl" />
+      </button>
       <MessageBoxs
         toClassId={toClassId}
         title={title}
@@ -94,13 +103,15 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
               placeholder="메시지를 입력하세요"
               className="outline-0 bg-transparent flex-1 px-3"
             />
-            <button
-              type="submit"
-              className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-6"
-              style={{ top: '50%', transform: 'translateY(-50%)' }}
-            >
-              <BsSend className="text-xl text-main-color" />
-            </button>
+            <div className="w-1/4">
+              <button
+                type="submit"
+                className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-6"
+                style={{ top: '50%', transform: 'translateY(-50%)' }}
+              >
+                <BsSend className="text-xl text-main-color" />
+              </button>
+            </div>
           </form>
           <button
             className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-16"
