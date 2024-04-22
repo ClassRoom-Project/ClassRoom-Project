@@ -7,8 +7,7 @@ import {
   GetLastMessageType,
   MakeClassUserInfoType,
   PushImageType,
-  SendNewMessageType,
-  SendNewPhotoMessageType
+  SendNewMessageType
 } from '@/types/chat/chatTypes';
 import { supabase } from '../supabase/supabase';
 
@@ -67,7 +66,6 @@ export const getChatRooms = async (loginUserId: string): Promise<ChatRoom[]> => 
     throw error;
   }
 
-  // console.log(data);
   const transformedData = data!.map((test) => {
     //타입추론 우회하기
     const chatRoom = test as any as ChatRoomFromDB;
@@ -127,7 +125,6 @@ export const createNewMessages = async ({
     console.error('삽입 중 에러 발생:', error);
     throw error;
   }
-  console.log('삽입 성공:', newChat);
   return newChat;
 };
 
@@ -146,7 +143,6 @@ export const uploadPhotosToSupabase = async (files: File[]) => {
     const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/chatImages/${data.path}`;
     urls.push(url);
   }
-  console.log('urls', urls);
   return urls;
 };
 
@@ -170,7 +166,7 @@ export const createNewMessagesPhoto = async ({ chatId, photos, loginUserId }: Pu
       console.error('삽입 중 에러 발생:', error);
       continue;
     }
-    console.log('삽입 성공:', newChat);
+
     results.push(newChat);
   }
   return results;
