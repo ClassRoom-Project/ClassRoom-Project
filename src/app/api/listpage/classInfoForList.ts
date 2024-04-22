@@ -24,39 +24,61 @@ export const getClassForList = async (
   const PageNumber = (page - 1) * limit;
 
   //필터링하기위해 query를 let으로 바꿔 유연하게 데이터를 필터링할수있도록 지정
-  let query = supabase
-    .from('class')
-    .select(`*, wish(user_id), date(day)`, { count: 'exact' })
-    .range(PageNumber, PageNumber + limit - 1); // range란? (a,b) a번째부터 b번째까지의 데이터만 가져오는 메서드 ex 1페이지 0~9 2페이지 10~19
+  let query; // range란? (a,b) a번째부터 b번째까지의 데이터만 가져오는 메서드 ex 1페이지 0~9 2페이지 10~19
 
   //검색기능
   if (searchQuery) {
-    query = query.ilike('title', `%${searchQuery}%`);
+    query = supabase
+      .from('class')
+      .select(`*, wish(user_id), date(day)`, { count: 'exact' })
+      .range(PageNumber, PageNumber + limit - 1)
+      .ilike('title', `%${searchQuery}%`);
   }
 
   if (selectedCategory) {
-    query = query.eq('category', selectedCategory);
+    query = supabase
+      .from('class')
+      .select(`*, wish(user_id), date(day)`, { count: 'exact' })
+      .range(PageNumber, PageNumber + limit - 1)
+      .eq('category', selectedCategory);
   }
   if (filters.selectedClassType) {
-    query = query.eq('class_type', filters.selectedClassType);
+    query = supabase
+      .from('class')
+      .select(`*, wish(user_id), date(day)`, { count: 'exact' })
+      .range(PageNumber, PageNumber + limit - 1)
+      .eq('class_type', filters.selectedClassType);
   }
 
   if (filters.selectedLocation) {
-    query = query.textSearch('location', filters.selectedLocation);
+    query = supabase
+      .from('class')
+      .select(`*, wish(user_id), date(day)`, { count: 'exact' })
+      .range(PageNumber, PageNumber + limit - 1)
+      .textSearch('location', filters.selectedLocation);
   }
   if (filters.selectedDifficulty) {
-    query = query.eq('difficulty', filters.selectedDifficulty);
+    query = supabase
+      .from('class')
+      .select(`*, wish(user_id), date(day)`, { count: 'exact' })
+      .range(PageNumber, PageNumber + limit - 1)
+      .eq('difficulty', filters.selectedDifficulty);
   }
   if (filters.selectedPrice) {
     if (filters.selectedPrice.min !== undefined && filters.selectedPrice.max !== undefined) {
-      query = query.gte('price', filters.selectedPrice.min).lte('price', filters.selectedPrice.max);
+      query = supabase
+        .from('class')
+        .select(`*, wish(user_id), date(day)`, { count: 'exact' })
+        .range(PageNumber, PageNumber + limit - 1)
+        .gte('price', filters.selectedPrice.min)
+        .lte('price', filters.selectedPrice.max);
     }
   }
 
   if (filters.selectedDayType) {
     // query = query.eq('')
-    let dayArray;
-    filters.selectedDayType === '주말' ? (dayArray = ['토', '일']) : (dayArray = ['월', '화', '수', '목', '금']);
+    let dayArray = filters.selectedDayType === '주말' ? [0, 6] : [1, 2, 3, 4, 5];
+
     console.log(filters.selectedDayType);
     console.log(dayArray);
   }
@@ -65,7 +87,14 @@ export const getClassForList = async (
   //   query = query.filter('wish.user_id', 'eq', `${userId}`); // wish테이블에서 user_id가 같은 행을 filter해서 클래스 데이터에 추가
   // }
 
-  const { data: classInfos, error, count }: PostgrestResponse<ClassAllType[]> = await query;
+  const {
+    data: classInfos,
+    error,
+    count
+  }: PostgrestResponse<ClassAllType[]> = await supabase
+    .from('class')
+    .select(`*, wish(user_id), date(day)`, { count: 'exact' })
+    .range(PageNumber, PageNumber + limit - 1);
   if (error) {
     console.error('클래스 정보들 불러오기 오류 => ', error);
     throw new Error(error.message);
