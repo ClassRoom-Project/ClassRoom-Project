@@ -12,7 +12,7 @@ export interface ClassAllType {
   min_people: number;
   location: string;
   price: number;
-  date: string[];
+  date: { day: string }[];
   time: string[];
   quantity: number;
   detail_location: string;
