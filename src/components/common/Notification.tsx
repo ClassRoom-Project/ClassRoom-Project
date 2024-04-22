@@ -3,7 +3,7 @@ import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 import { Notification } from '@/types/notice';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { LuBell } from 'react-icons/lu';
 import { GoBellFill } from 'react-icons/go';
 
@@ -34,13 +34,6 @@ const NotificationComponent = () => {
   });
 
   const unreadNotificationsCount = notifications.filter((notification) => !notification.isread).length;
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('notification') === 'true') {
-      refetch();
-    }
-  }, [refetch]);
 
   const toggleBellIcon = () => {
     setIsNotificationOpen((prevState) => !prevState);
@@ -81,8 +74,7 @@ const NotificationComponent = () => {
         .from('notifications')
         .update({ isread: true })
         .eq('notice_id', notification.notice_id);
-
-      refetch(); // 알림을 읽음 처리 후 새로고침
+      refetch();
     }
     router.push(`/list/detail/${notification.class_id}`);
   };

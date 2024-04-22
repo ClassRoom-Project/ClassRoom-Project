@@ -13,7 +13,7 @@ interface HashTagProps {
 }
 
 const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
-  const { subCategory, setSubCategory } = useRegisterStore();
+  const { setSubCategory } = useRegisterStore();
   const [isLimitNotified, setIsLimitNotified] = useState(false);
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
         LimitHashTagNotify(); // 알림 표시
         setIsLimitNotified(true);
       }
-      // #의 개수가 5개를 초과하면 더 이상 입력을 받지 않음
+      // #의 개수가 5개를 초과하면 더 이상 입력 받지 않음
       event.target.value = inputValue.slice(0, inputValue.lastIndexOf("#"));
       return;
     } else {
@@ -50,10 +50,10 @@ const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
 
   return (
     <div className="my-4">
-      <div className="flex items-center space-x-4 my-2">
+      <div className="flex flex-col sm:flex-row items-start space-x-0 sm:space-x-4 space-y-4 sm:space-y-0 my-2 text-left">
         <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 소분류</p>
         <input
-          className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0"
+          className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0 w-full"
           type="text"
           onChange={handleSubCategoryChange}
           placeholder="해시태그 최대 5개까지 입력가능합니다(ex.#태그1 #태그2 #태그3)"

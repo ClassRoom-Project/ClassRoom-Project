@@ -14,22 +14,7 @@ import MinMaxNumber from '@/components/register/MinMaxNumber';
 import ClassDiff from '@/components/register/ClassDiff';
 import ImageUpload from '@/components/register/ImageUpload';
 import TotalTime from '@/components/register/TotalTime';
-
-interface ClassData {
-  category: string;
-  hashtag: string[];
-  title: string;
-  class_type: string;
-  description: string;
-  difficulty: string;
-  min_people: number;
-  quantity: number;
-  total_time: number;
-  location: string;
-  detail_location: string;
-  price: number;
-  image: string[];
-}
+import { ClassData } from '@/types/editClass';
 
 const RegisterEditPage = () => {
   const [classData, setClassData] = useState<ClassData>({
@@ -56,6 +41,9 @@ const RegisterEditPage = () => {
 
   useEffect(() => {
     const fetchClassData = async () => {
+      const classRes = await supabase.from('class').select('*').eq('class_id', classId).single();
+      const dateRes = await supabase.from('date').select('day').eq('class_id', classId);
+      const timeRes = await supabase.from('time').select('times').eq('class_id', classId);
       const { data, error } = await supabase
         .from('class')
         .select('*')
@@ -66,8 +54,21 @@ const RegisterEditPage = () => {
         console.error('Error: ', error);
         return;
       }
-      console.log("Fetched class data:", data);
+      console.log("Fetched data:", data);
       setClassData(data);
+    };
+
+    const fetchImages = async () => {
+      const { data, error } = await supabase
+        .from('class')
+        .select('image')
+        .eq('class_id', classId)
+        .single();
+      if (error) {
+        console.error('Error:', error.message);
+      } else {
+        setClassData(data?.image || []);
+      }
     };
 
     const fetchDateAndTimeData = async () => {
@@ -102,6 +103,7 @@ const RegisterEditPage = () => {
     };
 
     fetchClassData();
+    fetchImages();
     fetchDateAndTimeData();
   }, [classId]);
 
