@@ -41,7 +41,12 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, user
     if (!file) {
       return;
     }
-    console.log('file', file);
+
+    const maxFileSize = 5 * 1024 * 1024;
+    if (file.size > maxFileSize) {
+      alert('파일첨부 사이즈는 5MB 이내로 가능합니다.');
+      return;
+    }
     uploadProfileImage(file);
   };
 

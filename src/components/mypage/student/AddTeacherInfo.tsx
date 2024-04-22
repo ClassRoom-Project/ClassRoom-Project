@@ -160,7 +160,7 @@ const AddTeacherInfo = () => {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
-    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple p-4 md:w-4/5 md:justify-items-center w-full">
+    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple p-4 sm:w-[500px] md:w-4/5 md:justify-items-center w-full">
       <p className="flex items-start text-xl text-dark-purple-color font-bold">선생님 정보 등록하기</p>
       {isHaveTeacherInfo ? (
         <p className=" text-center text-text-dark-gray">
@@ -171,7 +171,7 @@ const AddTeacherInfo = () => {
         <p className=" text-center text-text-dark-gray">아래의 해당 정보를 입력하여 강사로 등록해보세요!</p>
       )}
 
-      <div className="flex gap-10 justify-center flex-col w-2/3 md:flex-row">
+      <div className="flex gap-10 justify-center items-start flex-col w-full md:flex-row">
         <div className="flex flex-col">
           <div className="p-4 flex flex-col gap-4">
             <p className="text-text-dark-gray font-bold">강사 이름</p>

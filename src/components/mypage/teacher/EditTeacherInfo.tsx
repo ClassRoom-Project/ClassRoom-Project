@@ -279,17 +279,17 @@ const EditTeacherInfo = () => {
         </div>
       </div>
       <div className="p-4 flex gap-4">
-        <button onClick={handleOnClickCancleBtn} className="btn w-[100px] ">
+        <button onClick={handleOnClickCancleBtn} className="btn w-24 ">
           취소하기
         </button>
         {isEditing ? (
           <div>
-            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-[100px] bg-dark-purple-color text-white">
+            <button onClick={handleOnClickEditTeacherInfoBtn} className="btn w-24 bg-dark-purple-color text-white">
               수정 완료
             </button>
           </div>
         ) : (
-          <button onClick={() => setIsEditing(true)} className="btn w-[100px] bg-dark-purple-color text-white">
+          <button onClick={() => setIsEditing(true)} className="btn w-24 bg-dark-purple-color text-white">
             수정하기
           </button>
         )}
