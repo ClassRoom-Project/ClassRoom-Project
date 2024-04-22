@@ -88,6 +88,7 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
 
   const handleDeletePhoto = (index: number) => {
     setIsLoading(true);
+    setPhotos((prevPhotos) => prevPhotos.filter((_, i) => i !== index));
     setShowImage((prevPhotos) => prevPhotos.filter((_, i) => i !== index));
     setIsLoading(false);
   };

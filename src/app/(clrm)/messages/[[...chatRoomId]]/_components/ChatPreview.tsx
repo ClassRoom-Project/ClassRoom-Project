@@ -32,7 +32,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
         {readleftChekcMessages === 0 ? (
           ''
         ) : (
-          <div className="flex items-center justify-center bg-main-color rounded-full h-7 w-7 absolute right-6 bottom-12">
+          <div className="flex items-center justify-center bg-main-color rounded-full h-5 w-5 absolute right-6 bottom-12">
             <div className="text-white">{readleftChekcMessages}</div>
           </div>
         )}
