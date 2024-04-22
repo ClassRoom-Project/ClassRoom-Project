@@ -12,7 +12,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
 
   return (
     <div className="min-w-100vw flex flex-col">
-      <div className="m-0   bg-white px-2 py-2 flex items-center text-text-dark-gray ">
+      <div className="m-0 p-2  flex items-center bg-white text-text-dark-gray">
         <Link href={`/list/detail/${classInfo.classId}`} className="flex justify-center items-center">
           <IoIosArrowBack size={18} />
           상세보기
@@ -20,13 +20,13 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
       </div>
 
       {classInfo ? (
-        <div className="min-h-100vh-header-reserve m-0  box-border py-6 lg:min-w-fit  md:px-4 bg-light-purple  flex justify-center items-center flex-col text-gray-600 lg:flex-row ">
-          <div className="flex w-11/12 min-w-[350px] sm:w-2/3 lg:w-1/3 lg:min-w-[400px] box-border flex-col h-[780px]  justify-between">
+        <div className="min-h-100vh-header-reserve m-0 py-6 md:px-4 lg:min-w-fit  lg:flex-row bg-light-purple  flex flex-col justify-center items-center  text-gray-600 ">
+          <div className="flex flex-col justify-between w-11/12 min-w-[350px] h-[780px] sm:w-2/3 lg:w-1/3 lg:min-w-[400px]   ">
             <ClassInfo classInfo={classInfo} />
             <ReserveUserInfo />
           </div>
           <div className="lg:divider-horizontal" />
-          <div className="mt-4 w-11/12 min-w-[350px] h-[780px] sm:mt-4 sm:w-2/3 sm:px-9  lg:mt-0 py-4  lg:w-1/3 lg:min-w-[400px] flex flex-col justify-between bg-white rounded-md shadow px-7">
+          <div className="mt-4 w-11/12 min-w-[350px] h-[780px] py-4 sm:mt-4 sm:w-2/3 sm:px-9 lg:mt-0 lg:w-1/3 lg:min-w-[400px] flex flex-col justify-between bg-white rounded-md shadow px-7">
             <ReservationScheduler classInfo={classInfo} />
             <SetQuantityAndPay classInfo={classInfo} />
           </div>
