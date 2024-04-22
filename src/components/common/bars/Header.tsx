@@ -67,7 +67,7 @@ const Header = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="fixed top-0 left-0 right-0 z-40 bg-white flex p-[15px] w-full justify-between items-center h-20 border-b-[1px] border-solid border-gray-300 ml-0 md:ml-[100px]">
-        <div className="flex items-center h-full ml-0 w-full justify-start xl:ml-20">
+        <div className="flex items-center h-full ml-0 w-full justify-start xl:ml-16">
           <div className="rounded-full relative w-16 h-16">
             <Link href="/">
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
