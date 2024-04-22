@@ -11,15 +11,15 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
         type="radio"
         name={comment.comment_id}
         className="mask bg-[#6C5FF7] mask-star-2"
-        readOnly
+        disabled
         checked={comment.star >= star}
       />
     ));
   };
   return (
-    <div className="bg-white flex mb-10 rounded-lg p-4 max-w-[1000px] w-full mt-5  mx-auto">
-      <div>
-        <div className="w-64 h-64 items-center justify-center flex relative mr-5">
+    <div className="bg-white flex mb-10 rounded-lg h-[300px] p-4 max-w-[1000px] w-full mt-5  mx-auto">
+      <div className="flex items-center justify-center">
+        <div className="w-28 h-28 items-center justify-center flex relative mr-5 xl:h-64 xl:w-64">
           {comment.comment_image ? (
             <Image
               src={comment.comment_image}
@@ -46,7 +46,6 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
                   unoptimized={true}
                 />
                 <h5 className="text-lg font-bold ml-2 text-text-color">{comment.nickname}</h5>
-                <p className="text-sm ml-2 text-gray-500">{comment.job}</p>
               </div>
               <div className="rating rating-sm">{Stars()}</div>
             </div>

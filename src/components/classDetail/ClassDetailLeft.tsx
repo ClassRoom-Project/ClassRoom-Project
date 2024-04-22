@@ -26,7 +26,7 @@ const ClassDetailLeft = ({
     setMainImageSrc(imageSrc);
   };
   return (
-    <div className="flex flex-col p-5 mr-4 shadow-md justify-start items-center w-[600px] rounded-lg h-[1000px] bg-light-purple ">
+    <div className="flex flex-col p-5 mb-3 shadow-md justify-start items-center w-[600px] rounded-lg h-[1000px] bg-light-purple xl:mr-4 xl:mb-0 ">
       <div className="flex items-center justify-between w-[400px]">
         <div className="flex justify-center items-center mr-2 h-8 gap-2">
           <Image

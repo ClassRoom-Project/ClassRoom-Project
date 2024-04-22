@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Props) {
         <QueryProvider>
           <ReactQueryDevtools initialIsOpen={true} />
           <ToastContainer />
-          <div className="md:px-20">{children}</div>
+          {children}
           <Script src={mapScriptSrc} strategy="beforeInteractive" />
         </QueryProvider>
       </body>

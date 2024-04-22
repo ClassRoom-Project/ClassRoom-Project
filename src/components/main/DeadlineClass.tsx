@@ -27,9 +27,9 @@ const DeadlineClass = () => {
   }, [setClassInfos]);
 
   return (
-    <div className="mr-auto ml-auto">
+    <div className="w-full mr-auto ml-auto">
       <p className="text-text-color">마감임박</p>
-      <div className="slider-container w-[85vw]">
+      <div className="slider-container w-full">
         <Slider {...settings}>
           {classInfos.map((info) => (
             <ClassCard key={info.class_id} classInfos={info} />
