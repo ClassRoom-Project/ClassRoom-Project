@@ -174,9 +174,9 @@ const SearchFilter = () => {
                       20,000원 미만
                     </button>
                     <button
-                      onClick={() => handlePriceFilter(20000, 49999)}
+                      onClick={() => handlePriceFilter(0, 49999)}
                       className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-30 ${
-                        isPriceSelected(20000, 49999) ? 'bg-button-focus-color' : 'bg-white'
+                        isPriceSelected(0, 49999) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       50,000원 미만
@@ -184,9 +184,9 @@ const SearchFilter = () => {
                   </div>
                   <div className="flex items-center mt-4 justify-center">
                     <button
-                      onClick={() => handlePriceFilter(50000, 99999)}
+                      onClick={() => handlePriceFilter(0, 99999)}
                       className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-2 w-30 ${
-                        isPriceSelected(50000, 99999) ? 'bg-button-focus-color' : 'bg-white'
+                        isPriceSelected(0, 99999) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       100,000원 미만

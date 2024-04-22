@@ -17,9 +17,9 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
     ));
   };
   return (
-    <div className="bg-white flex mb-10 rounded-lg p-4 max-w-[1000px] w-full mt-5  mx-auto">
-      <div>
-        <div className="w-64 h-64 items-center justify-center flex relative mr-5">
+    <div className="bg-white flex mb-10 rounded-lg h-[300px] p-4 max-w-[1000px] w-full mt-5  mx-auto">
+      <div className="flex items-center justify-center">
+        <div className="w-28 h-28 items-center justify-center flex relative mr-5 xl:h-64 xl:w-64">
           {comment.comment_image ? (
             <Image
               src={comment.comment_image}
