@@ -12,7 +12,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   const hashtagString = classInfos.hashtag.map((tag) => `#${tag}`).join(' ');
 
   return classInfos ? (
-    <div className="card w-[250px] h-[350px] bg-base-100 m-1 rounded-xl overflow-hidden">
+    <div className="card w-[250px] h-[320px] bg-base-100 m-1 rounded-xl overflow-hidden">
       <Link href={`/list/detail/${classInfos.class_id}`} className="">
         <figure className="w-full h-40 rounded-xl bg-gray-200 relative">
           <Image
@@ -26,7 +26,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
             unoptimized={true}
           />
         </figure>
-        <div className="py-4 flex flex-col justify-between">
+        <div className="py-1 flex flex-col justify-between">
           {classInfos.location ? (
             <div className="flex justify-start items-center">
               <FaLocationDot color="#6C5FF7" size="25" />
@@ -40,8 +40,8 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
               </p>
             </div>
           )}
-          <p className="py-2 text-md h-16 overflow-hidden font-semibold">{classInfos.title}</p>
-          <p className="py-2 text-sm h-6 overflow-hidden text-dark-purple-color">{hashtagString}</p>{' '}
+          <p className="py-1 text-md h-16 overflow-hidden font-semibold">{classInfos.title}</p>
+          <p className="py-1 text-sm h-7 overflow-hidden text-dark-purple-color">{hashtagString}</p>
         </div>
       </Link>
       <div className="flex justify-between pb-4">

@@ -30,7 +30,11 @@ export default function LoginState() {
   }
 
   if (status === 'loading') {
-    return <div className="btn mr-3 bg-main-color text-white ">로그인</div>;
+    return (
+      <div className="btn bg-transparent border border-main-color text-main-color hover:bg-main-color hover:text-white">
+        로그인
+      </div>
+    );
   }
   return (
     <div className="w-full flex relative justify-end items-end">
@@ -38,7 +42,10 @@ export default function LoginState() {
         <button onClick={handleLogout}>로그아웃</button>
       ) : (
         <div className="w-full flex justify-end">
-          <Link className="btn mr-3 bg-main-color text-white" href="/hello">
+          <Link
+            className="btn bg-transparent border-main-color text-main-color hover:bg-main-color hover:text-white"
+            href="/hello"
+          >
             로그인
           </Link>
         </div>
