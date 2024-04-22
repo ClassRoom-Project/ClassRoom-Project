@@ -1,6 +1,6 @@
 'use client';
 
-import { useCategoryFilterStore } from '@/store/classFilterStore';
+import { useCategoryFilterStore, useSearchStore } from '@/store/classFilterStore';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { IoIosSearch } from 'react-icons/io';
 import _ from 'lodash';
@@ -13,7 +13,7 @@ export const SearchClass = () => {
   const pathName = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedTitle, setSelectedTitle] = useState('');
+  const { selectedTitle, setSelectedTitle } = useSearchStore();
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedTitle(e.target.value);
   };

@@ -16,7 +16,6 @@ function ClassList() {
   const { ClassFilters } = useListFilterStore();
   const targetRef = useRef<HTMLDivElement>(null);
 
-  // queryClient.invalidateQueries({ queryKey: ['todos'] })
   const {
     data: classInfos,
     error,
