@@ -66,6 +66,7 @@ const RegisterEditPage = () => {
         console.error('Error: ', error);
         return;
       }
+      console.log("Fetched class data:", data);
       setClassData(data);
     };
 
