@@ -6,9 +6,7 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ChatMessagesType } from '@/types/chat/chatTypes';
 import ChatImageModal from './ChatImageModal';
 import MessageBoxs from './MessageBoxs';
-import { useEffect, useState } from 'react';
-import { supabase } from '@/app/api/supabase/supabase';
-import { useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 import { deleteRoom } from '@/components/common/Toastify';
 import { useRouter } from 'next/navigation';
 //아이콘
@@ -72,7 +70,7 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
   return (
     <div className="flex h-full flex-col w-full">
       <div className="flex justify-between border-b border-grey-100 p-4 sticky top-0 w-full bg-[#EFEFFF]">
-        <p className="sm:text-sm md:text-lg font-bold ">클래스명: {title}</p>
+        <p className="text-sm md:text-lg font-bold ">클래스명: {title}</p>
         <button onClick={handleDelete}>
           <IoIosLogOut className="text-2xl text-button-default-color hover:text-button-hover-color" />
         </button>
@@ -87,7 +85,7 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
         mainImage={mainImage}
       />
       <div className="w-full flex justify-center items-center bg-white py-8 border-t border-gray-300">
-        <div className="px-4 py-2 w-4/5 h-16 flex relative ">
+        <div className=" px-4 w-4/5 h-14 flex relative lg:py-2 lg:h-16">
           <form onSubmit={handleSubmitMessage} className="rounded-md border w-full h-full items-center px-2  flex ">
             <input
               type="text"
@@ -96,7 +94,10 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
               placeholder="메시지를 입력하세요"
               className="outline-0 bg-transparent flex-1 px-3"
             />
-            <button type="submit" className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center">
+            <button
+              type="submit"
+              className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-6 bottom-4"
+            >
               <BsSend className="text-xl text-main-color" />
             </button>
           </form>

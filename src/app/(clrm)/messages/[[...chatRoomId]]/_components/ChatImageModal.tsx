@@ -7,30 +7,54 @@ import Image from 'next/image';
 import { uploadPhotosToSupabase } from '@/app/api/chatRooms/getChatRooms';
 import { BsSend } from 'react-icons/bs';
 import { ChatImageeModalType } from '@/types/chat/chatTypes';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalType) {
   const [photos, setPhotos] = useState<File[]>([]);
   const [showImage, setShowImage] = useState<string[]>([]);
   const [countError, setCountError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const { createNewPhotoMessageMutate } = useCreateNewPhotoMessage();
   const { loginUserId } = useLoginStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (e.target.files && e.target.files[0]) {
-      if (photos.length > 4) {
+    const files = e.target.files;
+    const maxFileSize = 5 * 1024 * 1024; // 5MB
+
+    if (files && files.length > 0) {
+      if (photos.length >= 5) {
         setCountError('사진은 최대 5개까지 업로드 가능합니다.');
         return;
       }
-      const selectedFiles = Array.from(e.target.files).slice(0, 5);
-      setPhotos((prevPhotos) => [...prevPhotos, ...selectedFiles]);
 
-      const newPhotosArray = selectedFiles.map((file) => URL.createObjectURL(file));
-      setShowImage((prevPhotos) => [...prevPhotos, ...newPhotosArray]);
-      setCountError('');
+      const validFiles: File[] = [];
+      const fileURLs: string[] = [];
+
+      Array.from(files).forEach((file) => {
+        if (file.size > maxFileSize) {
+          setCountError('파일 크기가 5MB를 초과할 수 없습니다.');
+          return;
+        }
+
+        if (validFiles.length < 5 - photos.length) {
+          validFiles.push(file);
+          fileURLs.push(URL.createObjectURL(file));
+        } else {
+          setCountError('사진은 최대 5개까지 업로드 가능합니다.');
+          return;
+        }
+      });
+
+      setPhotos((prevPhotos) => [...prevPhotos, ...validFiles]);
+      setShowImage((prevPhotos) => [...prevPhotos, ...fileURLs]);
+      if (validFiles.length > 0) {
+        setCountError('');
+      }
     }
   };
+
   //드래그앤 드롭 참고 블로그 https://medium.com/@iamkjw/react-drag-drop%EC%9C%BC%EB%A1%9C-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%88%9C%EC%84%9C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B8%B0-415e348e2855
   //드래그 시작 이벤트
   //드래그 시작 시 드래그한 이미지의 인덱스를 dataTransfer객체에 저장
@@ -63,7 +87,9 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
   };
 
   const handleDeletePhoto = (index: number) => {
+    setIsLoading(true);
     setShowImage((prevPhotos) => prevPhotos.filter((_, i) => i !== index));
+    setIsLoading(false);
   };
 
   const handleAddClick = (index: number) => {
@@ -73,8 +99,10 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
   };
 
   const handleSendButton = async () => {
+    setIsLoading(true);
     if (!loginUserId) {
       console.error('loginUserId is null');
+      setIsLoading(false);
       return;
     }
 
@@ -96,6 +124,11 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
 
   return (
     <div className="fixed inset-0 bg-gray-300 bg-opacity-50 flex justify-center items-center h-full w-full ">
+      {isLoading && (
+        <div className="fixed z-50 inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+          <LoadingSpinner />
+        </div>
+      )}
       <div className=" px-1 flex flex-col md:w-auto sm:1/3 md:1/5 h-2/8 items-center justify-center bg-white rounded-xl">
         <label htmlFor="photo" className=" cursor-pointer">
           <MdPhotoCamera className="text-main-color text-2xl right-12 bottom-2 hover:text-button-hover-color" />

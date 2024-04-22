@@ -33,6 +33,16 @@ html::-webkit-scrollbar {
   }
 } */
 
+.responsiveHeight {
+  height: calc(100vh - 144px);
+}
+
+@media (min-width: 768px) {
+  .responsiveHeight {
+    height: calc(100vh - 80px);
+  }
+}
+
 .label-field {
   @apply mt-3 block text-lg font-medium text-gray-700;
 }
