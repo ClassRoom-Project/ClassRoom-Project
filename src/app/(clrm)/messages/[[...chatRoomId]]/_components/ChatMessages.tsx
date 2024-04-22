@@ -70,7 +70,7 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
   return (
     <div className="flex h-full flex-col w-full">
       <div className="flex justify-between border-b border-grey-100 p-4 sticky top-0 w-full bg-[#EFEFFF]">
-        <p className="text-sm md:text-lg font-bold ">클래스명: {title}</p>
+        <p className="text-sm md:text-lg font-bold">클래스명: {title}</p>
         <button onClick={handleDelete}>
           <IoIosLogOut className="text-2xl text-button-default-color hover:text-button-hover-color" />
         </button>
@@ -85,8 +85,8 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
         mainImage={mainImage}
       />
       <div className="w-full flex justify-center items-center bg-white py-8 border-t border-gray-300">
-        <div className=" px-4 w-4/5 h-14 flex relative lg:py-2 lg:h-16">
-          <form onSubmit={handleSubmitMessage} className="rounded-md border w-full h-full items-center px-2  flex ">
+        <div className="px-4 w-full md:w-4/5 h-14 flex relative lg:py-2 lg:h-16">
+          <form onSubmit={handleSubmitMessage} className="rounded-md border w-full h-full items-center px-2 flex">
             <input
               type="text"
               name="message"
@@ -96,13 +96,18 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
             />
             <button
               type="submit"
-              className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-6 bottom-4"
+              className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-6"
+              style={{ top: '50%', transform: 'translateY(-50%)' }}
             >
               <BsSend className="text-xl text-main-color" />
             </button>
           </form>
-          <button className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center mr-1 absolute right-16 bottom-4">
-            <MdPhotoCamera className="text-xl text-main-color" onClick={handleOpenModal} />
+          <button
+            className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-16"
+            style={{ top: '50%', transform: 'translateY(-50%)' }}
+            onClick={handleOpenModal}
+          >
+            <MdPhotoCamera className="text-xl text-main-color" />
           </button>
         </div>
       </div>
