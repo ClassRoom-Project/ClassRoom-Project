@@ -78,7 +78,10 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, user
         />
       </div>
       {isEditing ? (
-        <button className="btn p-4 bg-point-purple text-white rounded-full" onClick={handleOnClickEditImageBtn}>
+        <button
+          className="btn p-4 bg-point-purple text-white rounded-full hover:bg-white hover:text-dark-purple-color"
+          onClick={handleOnClickEditImageBtn}
+        >
           프로필 이미지 변경
         </button>
       ) : (

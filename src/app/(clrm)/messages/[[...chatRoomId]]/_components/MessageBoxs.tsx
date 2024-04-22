@@ -47,15 +47,11 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
         },
         (payload) => {
           queryClient.setQueryData<ChatMessage[]>(['chatMessage', chatId], (oldMessages = []) => {
-            console.log('oldMessages', oldMessages);
             const newMessage = payload.new as ChatMessage;
-            console.log('newMessage', newMessage);
             const isMessageExist = oldMessages.some((message) => message.messages_id === newMessage.messages_id);
             if (!isMessageExist) {
-              console.log('얍');
               return [...oldMessages, newMessage];
             } else {
-              console.log('메롱');
               return oldMessages.map((msg) => (msg.messages_id === newMessage.messages_id ? newMessage : msg));
             }
           });

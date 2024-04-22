@@ -75,59 +75,59 @@ const StudentMyPageTab = () => {
   };
 
   return (
-    <div className="w-full h-screen">
+    <div className="w-full h-screen md:m-4 md:p-4 m-0 p-0">
       {/* md 이상 일 때, 가로 탭 */}
-      <div className="hidden md:flex flex-row md:justify-start gap-20 md:items-center sm:items-start border-y-2 w-full">
-        <p
+      <div className="hidden md:flex flex-row md:justify-between md:items-center sm:items-start w-full border-y-2">
+        <button
           onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4 text-lg ${
+          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm ${
             activePage === 'editProfile'
-              ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color  '
+              ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color'
               : ''
           }`}
         >
           프로필 수정하기
-        </p>
-        <p
+        </button>
+        <button
           onClick={() => handleOnClickTabBtn('reservedClass')}
-          className={`p-4 text-lg  ${
+          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm ${
             activePage === 'reservedClass'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
           }`}
         >
           내가 예약한 클래스 보기
-        </p>
-        <p
+        </button>
+        <button
           onClick={() => handleOnClickTabBtn('myComments')}
-          className={`p-4 text-lg ${
+          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm  ${
             activePage === 'myComments'
               ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
           }`}
         >
           내가 쓴 후기 보기
-        </p>
-        <p
+        </button>
+        <button
           onClick={() => handleOnClickTabBtn('myWishClass')}
-          className={`p-4 text-lg ${
+          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm  ${
             activePage === 'myWishClass'
               ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
           }`}
         >
           클래스 위시리스트
-        </p>
-        <p
+        </button>
+        <button
           onClick={() => handleOnClickTabBtn('addTeacherInfo')}
-          className={`p-4 text-lg ${
+          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm  ${
             activePage === 'addTeacherInfo'
               ? 'font-bold cursor-pointer  text-dark-purple-color border-b-2 border-dark-purple-color '
               : ''
           }`}
         >
           선생님 정보 등록하기
-        </p>
+        </button>
       </div>
       {/* md 미만 일 때, 드롭다운 */}
       <div className="my-4 py-4 flex w-full justify-start md:hidden">
@@ -147,40 +147,40 @@ const StudentMyPageTab = () => {
               isOpen ? 'block' : 'hidden'
             }`}
           >
-            <p
+            <button
               onClick={() => handleDropdownItemClick('editProfile')}
               className={`text-lg cursor-pointer ${activePage === 'editProfile' ? 'font-bold' : ''}`}
             >
               프로필 수정하기
-            </p>
-            <p
+            </button>
+            <button
               onClick={() => handleDropdownItemClick('reservedClass')}
               className={`text-lg cursor-pointer ${activePage === 'reservedClass' ? 'font-bold' : ''}`}
             >
               내가 예약한 클래스 보기
-            </p>
-            <p
+            </button>
+            <button
               onClick={() => handleDropdownItemClick('myComments')}
               className={`text-lg cursor-pointer ${activePage === 'myComments' ? 'font-bold' : ''}`}
             >
               내가 쓴 후기 보기
-            </p>
-            <p
+            </button>
+            <button
               onClick={() => handleDropdownItemClick('myWishClass')}
               className={`text-lg cursor-pointer ${activePage === 'myWishClass' ? 'font-bold' : ''}`}
             >
               클래스 위시리스트
-            </p>
-            <p
+            </button>
+            <button
               onClick={() => handleDropdownItemClick('addTeacherInfo')}
               className={`text-lg cursor-pointer ${activePage === 'addTeacherInfo' ? 'font-bold' : ''}`}
             >
               선생님 정보 등록하기
-            </p>
+            </button>
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center w-full p-4 md:py-4 md:p-0">
+      <div className="flex justify-center items-center w-full p-4 md:py-8 md:p-0">
         {activeStudentMyPageTab[activePage]}
       </div>
     </div>

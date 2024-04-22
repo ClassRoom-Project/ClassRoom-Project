@@ -161,7 +161,7 @@ const AddTeacherInfo = () => {
   }
   return (
     <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 sm:w-[500px] lg:w-full md:w-full md:min-w-[1080px] md:justify-items-center w-full">
-      <p className="flex items-start text-xl text-dark-purple-color font-bold">선생님 정보 등록하기</p>
+      <p className="flex items-start text-xl text-dark-purple-color font-bold pt-4">선생님 정보 등록하기</p>
       {isHaveTeacherInfo ? (
         <p className=" text-center text-text-dark-gray">
           선생님 정보가 이미 등록되었습니다. <br />
@@ -258,12 +258,18 @@ const AddTeacherInfo = () => {
       </div>
       <div className="p-4 flex gap-4">
         {isHaveTeacherInfo ? (
-          <button onClick={handleOnClickMoveToEditTeacherInfoBtn} className="btn bg-dark-purple-color text-white">
+          <button
+            onClick={handleOnClickMoveToEditTeacherInfoBtn}
+            className="btn bg-dark-purple-color text-white hover:bg-white hover:text-dark-purple-color"
+          >
             선생님 정보 수정하기
           </button>
         ) : (
           <div>
-            <button onClick={handleOnClickAddTeacherInfoBtn} className="btn bg-dark-purple-color text-white">
+            <button
+              onClick={handleOnClickAddTeacherInfoBtn}
+              className="btn bg-dark-purple-color text-white hover:bg-white hover:text-dark-purple-color"
+            >
               선생님 정보 등록하기
             </button>
           </div>
