@@ -9,6 +9,7 @@ const SearchFilter = () => {
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+
   const { setSelectedTitle } = useSearchStore();
   const handleDropdown = () => {
     setIsOpenCategory(!isOpenCategory);
@@ -20,7 +21,8 @@ const SearchFilter = () => {
       selectedClassType: '',
       selectedLocation: null,
       selectedDifficulty: null,
-      selectedPrice: null
+      selectedPrice: null,
+      selectedDayType: null
     });
     setMinPrice('');
     setMaxPrice('');
@@ -47,6 +49,11 @@ const SearchFilter = () => {
   //클래스 가격 핸들러
   const handlePriceFilter = (min: number, max: number) => {
     setClassFilters({ ...ClassFilters, selectedPrice: { min, max } });
+  };
+
+  // 클래스 요일 핸들러
+  const handleClassDayClick = (dayType: string) => {
+    setClassFilters({ ...ClassFilters, selectedDayType: dayType });
   };
 
   return (
@@ -112,6 +119,27 @@ const SearchFilter = () => {
                   <option value={'제주특별자치도'}>제주</option>
                 </select>
               </div>
+            </div>
+            <div className="border-b-[1px] flex flex-col items-center justify-center w-80 h-[125px] border-solid border-gray-400">
+              <div className="flex mb-3 items-start w-72 justify-start">
+                <p className="text-text-color">요일</p>
+              </div>
+              <button
+                onClick={() => handleClassDayClick('평일')}
+                className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
+                  ClassFilters.selectedDayType === '평일' ? 'bg-button-focus-color' : 'bg-white'
+                }`}
+              >
+                평일
+              </button>
+              <button
+                onClick={() => handleClassDayClick('주말')}
+                className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
+                  ClassFilters.selectedDayType === '주말' ? 'bg-button-focus-color' : 'bg-white'
+                }`}
+              >
+                주말
+              </button>
             </div>
             <div className="flex flex-col w-80 mt-9 h-[125px] border-b-[1px] border-solid border-gray-400 justify-center items-center">
               <div className="flex items-start w-72 justify-start">
