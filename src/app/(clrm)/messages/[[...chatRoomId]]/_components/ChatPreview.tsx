@@ -28,7 +28,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
       prefetch={false}
       shallow
     >
-      <div className="flex py-4 mt-2 mb-2 px-2 relative">
+      <div className="flex py-4 mt-2 mb-2 relative">
         {readleftChekcMessages === 0 ? (
           ''
         ) : (
@@ -36,7 +36,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
             <div className="text-white">{readleftChekcMessages}</div>
           </div>
         )}
-        <div className="w-8 h-8 mx-3 lg:w-12 lg:h-12">
+        <div className="w-8 h-8 mr-3 lg:w-12 lg:h-12">
           <Image
             unoptimized
             src={MakeClassUserInfo?.profile_image ?? ProfileImage}
@@ -71,7 +71,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="w-11/12 border-b-2" />
+        <div className="w-full border-b-2 mr-1" />
       </div>
     </Link>
   );
