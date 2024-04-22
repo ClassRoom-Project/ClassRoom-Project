@@ -17,9 +17,10 @@ interface InitialDataType {
 interface ImageUploadProps {
   isEditMode: boolean;
   initialData?: InitialDataType; 
+  class_Id?: string;
 }
 
-const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData }) => {
+const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class_Id }) => {
   const {
     category,
     subCategory,
@@ -40,11 +41,10 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData }) => 
   const { loginUserId } = useLoginStore();
   const [images, setImages] = useState<ImageFileWithPreview[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const classId = crypto.randomUUID();
+  const classId = isEditMode ? class_Id : crypto.randomUUID();
   const noticeId = crypto.randomUUID();
   const router = useRouter();
   
-
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
     return fileName.replace(/[^a-zA-Z0-9.]/g, '_');

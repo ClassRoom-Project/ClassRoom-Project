@@ -134,7 +134,7 @@ const RegisterEditPage = () => {
           <p className='text-base'>클래스를 대표할 이미지를 등록해 주세요. (최대 5개 등록 가능) </p>
           <p className='text-sm mt-1 text-[#7E7E7E]'>*첫번째 이미지가 대표이미지로 업로드 됩니다. 드래그하여 순서 변경이 가능합니다*</p>
           <div className="flex justify-between items-center pt-2">
-            <ImageUpload isEditMode={true} initialData={{ image: classData.image }}/>
+            <ImageUpload isEditMode={true} initialData={{ image: classData.image }} class_Id={classId as string} />
           </div>
         </div>
       </div>
