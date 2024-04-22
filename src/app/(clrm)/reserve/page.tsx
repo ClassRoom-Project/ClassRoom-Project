@@ -11,8 +11,8 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   const classInfo = await fetchReserveClassInfo(classId);
 
   return (
-    <div className="min-w-100vw flex flex-col">
-      <div className="m-0 p-2  flex items-center bg-white text-text-dark-gray">
+    <div className="min-w-100vw flex flex-col relative">
+      <div className="m-0 p-2  flex items-center bg-white text-text-dark-gray fixed z-30 w-full">
         <Link href={`/list/detail/${classInfo.classId}`} className="flex justify-center items-center">
           <IoIosArrowBack size={18} />
           상세보기
@@ -20,7 +20,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
       </div>
 
       {classInfo ? (
-        <div className="min-h-100vh-header-reserve m-0 py-6 md:px-4 lg:min-w-fit  lg:flex-row bg-light-purple  flex flex-col justify-center items-center  text-gray-600 ">
+        <div className="min-h-100vh-header-reserve py-20  m-0  md:py-6 md:px-4 lg:min-w-fit  lg:flex-row bg-light-purple  flex flex-col justify-center items-center  text-gray-600 ">
           <div className="flex flex-col justify-between w-11/12 min-w-[350px] h-[780px] sm:w-2/3 lg:w-1/3 lg:min-w-[400px]   ">
             <ClassInfo classInfo={classInfo} />
             <ReserveUserInfo />
