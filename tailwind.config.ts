@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       minHeight: {
         '100vh-header-default': 'calc(100dvh - 80px)',
-        '100vh-header-reserve': 'calc(100dvh - 110px)'
+        '100vh-header-reserve': 'calc(100dvh - 120px)'
         // other properties...
       },
       backgroundImage: {

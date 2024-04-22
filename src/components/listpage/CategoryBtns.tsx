@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useCategoryFilterStore } from '@/store/classFilterStore';
 import { useRouter } from 'next/navigation';
 
@@ -21,17 +21,19 @@ const CategoryBtns = () => {
   );
   return (
     <div className="min-w-[85vw] bg-disable-color h-16 flex justify-center items-center">
-      {categories.map((category) => (
-        <button
-          key={category}
-          onClick={() => handleOnClickListBtn(category)}
-          className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-            selectedCategory === category ? 'bg-button-press-color' : 'bg-white'
-          }`}
-        >
-          {category}
-        </button>
-      ))}
+      <div className="w-full px-8 flex flex-row justify-between font-medium">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => handleOnClickListBtn(category)}
+            className={`w-24 rounded-full px-2.5 py-[5px] ${
+              selectedCategory === category ? 'bg-button-press-color' : 'bg-white'
+            }`}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };
