@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
 import { useCurrentReservedCountStore, useReserveStore } from '@/store/reserveClassStore';
+import { DateList } from '@/types/date';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { CaptionProps, DayPicker } from 'react-day-picker';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { DateList } from '@/types/date';
-import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
+import { useEffect, useState } from 'react';
+import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import './day-picker.css'; // dist css 밑에 둬야 적용됨
+import '../common/day-picker.css';
+import CustomCaption from '../common/CustomCaption';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const { setReserveInfo } = useReserveStore();
@@ -59,28 +60,8 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     }
   };
 
-  /* 비활성화할 날짜 배열 생성 */
-  // 1~31일 배열 생성
-  const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
-
-  // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
-  const availableDays = classDates.map(({ day }) => new Date(day).getDate());
-
-  // 1~31 일중 DB에 있는 날짜를 삭제한 date 배열 생성
-  const nonAvailableDays = dayList
-    .filter((day) => {
-      return !availableDays.includes(day);
-    })
-    .map((day) => {
-      return new Date(2024, today.getMonth(), day);
-    });
-
-  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
-  function CustomCaption(props: CaptionProps) {
-    return (
-      <div className="flex justify-center font-bold">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>
-    );
-  }
+  // DB에서 받아온 day 배열 생성
+  const availableDays = classDates.map((dateInfo) => dateInfo.day);
 
   const GridCols = {
     2: 'grid-cols-2',
@@ -91,15 +72,16 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   return (
     <div className="w-full mb-2 flex flex-col justify-center items-center">
       <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
-      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md p-2 min-w-2/3 mb-4  px-4">
+      <div className="shadow rounded-md p-2 min-w-2/3 mb-4  px-4">
         <DayPicker
           mode="single"
           required
-          disableNavigation
           selected={new Date(selectedDate)}
           onSelect={handleDateChange}
-          disabled={nonAvailableDays}
+          disabled={(day) => !availableDays.includes(format(day, 'yyyy-MM-dd'))}
           locale={ko}
+          fromYear={new Date().getFullYear()}
+          toYear={new Date().getFullYear() + 1}
           components={{
             Caption: CustomCaption
           }}
