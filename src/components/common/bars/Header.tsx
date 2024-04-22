@@ -102,7 +102,6 @@ const Header = ({ children }: PropsWithChildren) => {
                     alt="Profile image"
                     className="w-full h-full rounded-full object-cover"
                     fill
-                    unoptimized={true}
                   />
                 </div>
                 <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">

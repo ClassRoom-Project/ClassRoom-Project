@@ -93,7 +93,6 @@ const MyClass = () => {
                   height={200}
                   className="w-full h-full p-4"
                   style={{ objectFit: 'contain' }}
-                  unoptimized={true}
                 />
               </div>
               <div className="flex flex-col gap-4 m-4">

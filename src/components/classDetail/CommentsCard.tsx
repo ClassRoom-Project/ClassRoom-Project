@@ -43,7 +43,6 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
                   width={40}
                   height={40}
                   className="rounded-full border"
-                  unoptimized={true}
                 />
                 <h5 className="text-lg font-bold ml-2 text-text-color">{comment.nickname}</h5>
               </div>
