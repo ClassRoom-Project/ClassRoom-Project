@@ -11,7 +11,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
         type="radio"
         name={comment.comment_id}
         className="mask bg-[#6C5FF7] mask-star-2"
-        readOnly
+        disabled
         checked={comment.star >= star}
       />
     ));
@@ -46,7 +46,6 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
                   unoptimized={true}
                 />
                 <h5 className="text-lg font-bold ml-2 text-text-color">{comment.nickname}</h5>
-                <p className="text-sm ml-2 text-gray-500">{comment.job}</p>
               </div>
               <div className="rating rating-sm">{Stars()}</div>
             </div>

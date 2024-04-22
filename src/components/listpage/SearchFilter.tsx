@@ -54,7 +54,7 @@ const SearchFilter = () => {
   };
 
   return (
-    <div className="flex min-w-[80vw] items-start justify-start p-5">
+    <div className="flex w-full items-start justify-start p-5">
       <div className="dropdown dropdown-bottom w-12 h-12">
         <div tabIndex={0} onClick={handleDropdown} role="button" className="btn ">
           <FiAlignJustify size={30} color="#6C5FF7">

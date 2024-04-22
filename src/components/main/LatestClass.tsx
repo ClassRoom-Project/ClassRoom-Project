@@ -26,9 +26,9 @@ const LatestClass = () => {
   }, [setClassInfos]);
 
   return (
-    <div className="mr-auto ml-auto p-5">
+    <div className="w-full mr-auto ml-auto">
       <p className="text-text-color">최신순</p>
-      <div className="slider-container w-[85vw]">
+      <div className="slider-container w-full">
         <Slider {...settings}>
           {classInfos.map((info) => (
             <ClassCard key={info.class_id} classInfos={info} />

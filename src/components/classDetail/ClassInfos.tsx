@@ -37,13 +37,13 @@ const ClassInfos = ({ classId }: { classId: string }) => {
   });
 
   return (
-    <div className="w-[400px] py-4 flex flex-col px-2  border-gray-400 border-solid border-b-[1px] justify-center items-center">
+    <div className="w-[400px] relative py-4 flex flex-col px-2  border-gray-400 border-solid border-b-[1px] justify-center items-center">
       <div className="flex items-center w-full justify-between ">
-        <div className="rounded-2xl flex-wrap bg-white border-main-color border-solid border-[1px] py-1 px-2 flex justify-center items-center">
+        <div className="rounded-2xl max-w-full flex-wrap bg-white border-main-color border-solid border-[1px] py-1 px-2 flex justify-center items-center">
           {hashtagString}
         </div>
         <div>
-          <div className="rounded-2xl bg-white border-main-color border-solid border-[1px] py-1 px-2  flex justify-center items-center">
+          <div className="rounded-2xl max-w-full bg-white border-main-color border-solid border-[1px] py-1 px-2  flex justify-center items-center">
             <BiSolidCategory className="text-main-color" />
             <p>{classInfo?.category}</p>
           </div>

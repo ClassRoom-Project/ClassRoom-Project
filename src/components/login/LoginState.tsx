@@ -25,7 +25,15 @@ export default function LoginState() {
 
   if (status === 'authenticated') {
     return (
-      <div>{userEmail ? <button onClick={handleLogout}>로그아웃</button> : <Link href="/hello">로그인</Link>}</div>
+      <div>
+        {userEmail ? (
+          <button className="hover:text-button-hover-color" onClick={handleLogout}>
+            로그아웃
+          </button>
+        ) : (
+          <Link href="/hello">로그인</Link>
+        )}
+      </div>
     );
   }
 
@@ -35,10 +43,12 @@ export default function LoginState() {
   return (
     <div className="w-full flex relative justify-end items-end">
       {userEmail ? (
-        <button onClick={handleLogout}>로그아웃</button>
+        <button className="hover:text-button-hover-color" onClick={handleLogout}>
+          로그아웃
+        </button>
       ) : (
         <div className="w-full flex justify-end">
-          <Link className="btn mr-3 bg-main-color text-white" href="/hello">
+          <Link className="btn mr-3 hover:bg-button-hover-color bg-main-color text-white" href="/hello">
             로그인
           </Link>
         </div>

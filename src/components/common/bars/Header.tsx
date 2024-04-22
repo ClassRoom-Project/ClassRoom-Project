@@ -66,18 +66,20 @@ const Header = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 z-40 bg-white flex p-[15px] w-full justify-between  items-center h-20 border-b-[1px] border-solid border-gray-300 ml-0 md:ml-[100px]">
-        <div className="flex items-center ml-0 w-full justify-start xl:ml-20">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white flex p-[15px] w-full justify-between items-center h-20 border-b-[1px] border-solid border-gray-300 ml-0 md:ml-[100px]">
+        <div className="flex items-center h-full ml-0 w-full justify-start xl:ml-20">
           <div className="rounded-full relative w-16 h-16">
             <Link href="/">
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
           </div>
           <div className="w-3/5  xs:w-1/3">
-            <SearchClass />
+            <Suspense>
+              <SearchClass />
+            </Suspense>
           </div>
         </div>
-        <div className="w-2/5 relative flex items-end justify-end xl:mr-48 md:mr-24 lg:w-4/5">
+        <div className="w-2/5 relative flex items-end justify-end xl:mr-40 md:mr-24 lg:w-4/5">
           <div className="flex w-full justify-end items-center">
             {userEmail ? (
               <div className="flex justify-end items-en">
@@ -104,7 +106,7 @@ const Header = ({ children }: PropsWithChildren) => {
                   />
                 </div>
                 <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                  <div className="border-gray-400 borderb-[1px] border-solid w-52 mb-2">
+                  <div className="border-border-color borderb-[1px] border-solid w-52 mb-2 hover:text-button-hover-color">
                     <button onClick={handleMoveToMypage}>마이페이지</button>
                   </div>
                   <div>

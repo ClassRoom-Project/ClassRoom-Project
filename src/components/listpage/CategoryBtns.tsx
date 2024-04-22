@@ -39,7 +39,7 @@ const CategoryBtns = () => {
   }, [pathName, setSelectedCategory]);
 
   return (
-    <div className="min-w-[85vw] bg-disable-color h-16 flex justify-center items-center">
+    <div className="w-full bg-disable-color h-16 flex justify-center items-center">
       <div className="w-full px-8 flex flex-row justify-between font-medium">
         {categories.map((category) => (
           <button
