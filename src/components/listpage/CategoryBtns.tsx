@@ -1,9 +1,10 @@
 'use client';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useCategoryFilterStore } from '@/store/classFilterStore';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const CategoryBtns = () => {
+  const pathName = usePathname();
   const router = useRouter();
   const { selectedCategory, setSelectedCategory } = useCategoryFilterStore((state) => ({
     selectedCategory: state.selectedCategory,
@@ -19,6 +20,18 @@ const CategoryBtns = () => {
     },
     [setSelectedCategory, router]
   );
+
+  //List페이지가 떠날 때 카테고리 초기화
+  useEffect(() => {
+    const handleLeavePage = () => {
+      if (pathName !== '/list') {
+        setSelectedCategory('');
+      }
+    };
+
+    handleLeavePage();
+  }, [pathName, setSelectedCategory]);
+
   return (
     <div className="min-w-[85vw] bg-disable-color h-16 flex justify-center items-center">
       {categories.map((category) => (

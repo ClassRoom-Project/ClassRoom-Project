@@ -1,11 +1,16 @@
+'use client';
+
 import { useSearchStore } from '@/store/classFilterStore';
 import { useRouter } from 'next/navigation';
 import { IoIosSearch } from 'react-icons/io';
 import _ from 'lodash';
+import { useSearchParams } from 'next/navigation';
 //yarn add --dev @types/lodash
 //yarn add lodash
 
 export const SearchClass = () => {
+  const searchParams = useSearchParams();
+  const search = searchParams.get('search');
   const router = useRouter();
   const { selectedTitle, setSelectedTitle } = useSearchStore();
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -13,10 +18,9 @@ export const SearchClass = () => {
   };
 
   //TODO - 쓰로틀링 잘 적용안되는 에러 해결
-  // const debouncing = _.debounce(handleSearchChange, 300);
+
   const handleSearchBtn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // setSelectedTitle('');
     router.push('/list');
   };
   console.log(selectedTitle, '데이터입니다!!!!!!!!!!!');
