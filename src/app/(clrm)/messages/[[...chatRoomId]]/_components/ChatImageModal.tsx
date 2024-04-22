@@ -93,11 +93,12 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
     setIsLoading(false);
   };
 
-  const handleAddClick = (index: number) => {
-    if (index === showImage.length && photos.length < 5) {
-      fileInputRef.current?.click();
-    }
-  };
+  //테스트중
+  // const handleAddClick = (index: number) => {
+  //   if (index === showImage.length && photos.length < 5) {
+  //     fileInputRef.current?.click();
+  //   }
+  // };
 
   const handleSendButton = async () => {
     setIsLoading(true);
@@ -174,7 +175,7 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
                 <div
                   key={index}
                   className="h-[142px] w-[142px] ml-2 mt-2 border-2 border-dashed border-gray-300 rounded-[20px]"
-                  onClick={() => handleAddClick(index)}
+                  // onClick={() => handleAddClick(index)}
                 ></div>
               );
             }
