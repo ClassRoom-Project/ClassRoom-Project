@@ -1,17 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
 import { useCurrentReservedCountStore, useReserveStore } from '@/store/reserveClassStore';
+import { DateList } from '@/types/date';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { CaptionProps, DayPicker, useNavigation } from 'react-day-picker';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { DateList } from '@/types/date';
-import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
+import { useEffect, useState } from 'react';
+import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import './day-picker.css'; // dist css 밑에 둬야 적용됨
-import { IoIosArrowForward } from 'react-icons/io';
-import { IoIosArrowBack } from 'react-icons/io';
+import '../common/day-picker.css';
+import CustomCaption from '../common/CustomCaption';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const { setReserveInfo } = useReserveStore();
@@ -64,36 +63,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   // DB에서 받아온 day 배열 생성
   const availableDays = classDates.map((dateInfo) => dateInfo.day);
 
-  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
-  function CustomCaption(props: CaptionProps) {
-    const { goToMonth, nextMonth, previousMonth } = useNavigation();
-    return (
-      <h2 className="flex justify-between">
-        <button
-          disabled={!previousMonth}
-          onClick={() => previousMonth && goToMonth(previousMonth)}
-          className="bg-point-purple rounded-full text-white w-6  flex justify-center items-center"
-        >
-          <IoIosArrowBack size={18} className=" mr-[2px]" />
-        </button>
-        <div className="flex justify-center font-bold">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>
-        <button
-          disabled={!nextMonth}
-          onClick={() => nextMonth && goToMonth(nextMonth)}
-          className="bg-point-purple rounded-full text-white w-6  flex justify-center items-center"
-        >
-          <IoIosArrowForward size={18} className=" ml-[2px]" />
-        </button>
-      </h2>
-    );
-  }
-
   const GridCols = {
-    2: 'grid-cols-2',
-    3: 'grid-cols-3',
-    4: 'grid-cols-4'
-  };
-  const GridCols2 = {
     2: 'grid-cols-2',
     3: 'grid-cols-3',
     4: 'grid-cols-4'
