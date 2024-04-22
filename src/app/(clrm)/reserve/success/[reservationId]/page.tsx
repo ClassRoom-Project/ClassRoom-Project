@@ -12,6 +12,7 @@ import { LuClock } from 'react-icons/lu';
 import { PiCurrencyKrw } from 'react-icons/pi';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { insertNotice } from '@/app/api/reserve/insertNotice';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 type ReserveInfoLabels = {
   icon: React.ReactNode;
@@ -129,7 +130,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
         </div>
       ) : (
         <div className="flex flex-col justify-center  items-center gap-4 responsiveHeight bg-light-purple">
-          <span className="loading loading-spinner loading-lg bg-point-purple"></span>
+          <LoadingSpinner />
           <p>잠시만 기다려주세요..</p>
         </div>
       )}
