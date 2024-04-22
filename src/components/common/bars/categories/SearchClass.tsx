@@ -41,7 +41,7 @@ export const SearchClass = () => {
   //url로 접근할 경우
   useEffect(() => {
     setSelectedTitle(searchQuery ?? '');
-  }, [searchQuery]);
+  }, [searchQuery, setSelectedTitle]);
 
   return (
     <form className="h-[120px] ml-2 relative w-full flex items-center justify-center" onSubmit={handleSearchBtn}>

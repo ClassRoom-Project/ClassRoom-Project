@@ -14,7 +14,7 @@ const MyReservedClass = () => {
   const page = searchParams.get('page');
 
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 2; // 한 페이지당 보여줄 포스트의 개수
+  const postsPerPage = 5; // 한 페이지당 보여줄 포스트의 개수
 
   // 예약한 클래스 정보 불러오기
   const { data: reservedClasses, isPending } = useQuery({
@@ -41,19 +41,20 @@ const MyReservedClass = () => {
   const currentPosts = reservedClasses.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <div className="flex flex-col align-center max-w-screen-xl">
-      <ul>
-        {currentPosts.map((classItem) => (
-          <MyReservedClassItem key={classItem.reserve_id} classItem={classItem} />
-        ))}
-        <Pagination
-          totalItems={reservedClasses.length}
-          itemCountPerPage={postsPerPage}
-          pageCount={5}
-          currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
-        />
-      </ul>
-    </div>
+    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
+      <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center">
+        내가 예약한 클래스 보기
+      </p>
+      {currentPosts.map((classItem) => (
+        <MyReservedClassItem key={classItem.reserve_id} classItem={classItem} />
+      ))}
+      <Pagination
+        totalItems={reservedClasses.length}
+        itemCountPerPage={postsPerPage}
+        pageCount={5}
+        currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
+      />
+    </ul>
   );
 };
 

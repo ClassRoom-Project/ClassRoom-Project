@@ -11,8 +11,8 @@ export const insertNotice = async (userId : string, classId: string, classTitle:
         console.error('Error: ', existingError);
     }
 
-    if (existingData && existingData.length > 0) {
-        return;
+    if (existingError) {
+        console.error('Error: ', existingError);
     }
 
     const noticeId = crypto.randomUUID();
