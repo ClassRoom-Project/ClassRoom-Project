@@ -88,7 +88,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   // #endregion
 
   return (
-    <div className="responsiveHeight overflow-y-auto">
+    <div className="responsiveHeight">
       <div className="h-screen min-w-100vw m-0 lg:bg-400 flex flex-col">
         {!isLoading && !isError ? (
           <>
