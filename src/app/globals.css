@@ -21,6 +21,7 @@ body {
   background: white;
   scrollbar-width: none;
   overflow-y: scroll;
+  margin: none;
 }
 html::-webkit-scrollbar {
   display: none; /* for Chrome, Safari, and Opera */
@@ -31,6 +32,16 @@ html::-webkit-scrollbar {
     text-wrap: balance;
   }
 } */
+
+.responsiveHeight {
+  height: calc(100vh - 144px);
+}
+
+@media (min-width: 768px) {
+  .responsiveHeight {
+    height: calc(100vh - 80px);
+  }
+}
 
 .label-field {
   @apply mt-3 block text-lg font-medium text-gray-700;

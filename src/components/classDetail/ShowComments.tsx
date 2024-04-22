@@ -18,17 +18,16 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
   if (status === 'error') {
     return <div>Error: {error.message}</div>;
   }
-  console.log(data);
   return (
-    <div className="min-w-[1024px] flex flex-col justify-center items-center">
+    <div className="w-[600px] relative flex flex-col justify-center items-center xl:min-w-[980px]">
       {data.length > 0 ? (
-        <div>
+        <div className="w-full">
           {data?.map((comment: DetailCommentType) => (
             <CommentsCard key={comment.comment_id} comment={comment} />
           ))}
         </div>
       ) : (
-        <div className="flex justify-center items-center h-40 min-w-[1000px] rounded-lg bg-disable-color shadow-xl w-full font-bold">
+        <div className="flex justify-center items-center h-40 w-[600px] rounded-lg bg-disable-color shadow-xl font-bold xl:w-[1024px]">
           <p>아직 등록된 후기가 없어요</p>
         </div>
       )}

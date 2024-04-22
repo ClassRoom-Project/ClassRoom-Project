@@ -25,7 +25,7 @@ export default function ClrmRootLayout({ children }: ClrmRootLayoutProps) {
         <Suspense>
           <Header />
         </Suspense>
-        {children}
+        <div className="md:px-20">{children}</div>
       </SideBar>
     </div>
   );

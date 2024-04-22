@@ -1,15 +1,16 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
 import { useCurrentReservedCountStore, useReserveStore } from '@/store/reserveClassStore';
+import { DateList } from '@/types/date';
+import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import { CaptionProps, DayPicker } from 'react-day-picker';
-import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
-import { DateList } from '@/types/date';
-import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
+import { useEffect, useState } from 'react';
+import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
-import './day-picker.css'; // dist css 밑에 둬야 적용됨
+import '../common/day-picker.css';
+import CustomCaption from '../common/CustomCaption';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const { setReserveInfo } = useReserveStore();
@@ -59,69 +60,58 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     }
   };
 
-  /* 비활성화할 날짜 배열 생성 */
-  // 1~31일 배열 생성
-  const dayList: number[] = Array.from({ length: 31 }, (_, index) => index + 1);
+  // DB에서 받아온 day 배열 생성
+  const availableDays = classDates.map((dateInfo) => dateInfo.day);
 
-  // DB에 있는 날짜에서 일자만 따로 생성한 배열 [1, 3, 6]..
-  const availableDays = classDates.map(({ day }) => new Date(day).getDate());
-
-  // 1~31 일중 DB에 있는 날짜를 삭제한 date 배열 생성
-  const nonAvailableDays = dayList
-    .filter((day) => {
-      return !availableDays.includes(day);
-    })
-    .map((day) => {
-      return new Date(2024, today.getMonth(), day);
-    });
-
-  // 상단의 날짜 레이블 포맷팅 ex) 2024년 4월
-  function CustomCaption(props: CaptionProps) {
-    return (
-      <div className="flex justify-center font-bold">{format(props.displayMonth, 'uuuu년 LLLL', { locale: ko })}</div>
-    );
-  }
+  const GridCols = {
+    2: 'grid-cols-2',
+    3: 'grid-cols-3',
+    4: 'grid-cols-4'
+  };
 
   return (
-    <div className="w-full mb-2">
+    <div className="w-full mb-2 flex flex-col justify-center items-center">
       <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
-      <div className="shadow-[0_4px_4px_0_rgba(0,0,0,0.2)] rounded-md py-2 mb-4 ">
+      <div className="shadow rounded-md p-2 min-w-2/3 mb-4  px-4">
         <DayPicker
           mode="single"
           required
-          disableNavigation
           selected={new Date(selectedDate)}
           onSelect={handleDateChange}
-          disabled={nonAvailableDays}
+          disabled={(day) => !availableDays.includes(format(day, 'yyyy-MM-dd'))}
           locale={ko}
+          fromYear={new Date().getFullYear()}
+          toYear={new Date().getFullYear() + 1}
           components={{
             Caption: CustomCaption
           }}
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-2 w-full mb-3">
-        {classDates
-          .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 시간만 filter
-          /* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */
-          .map(({ times }) =>
-            /* 각 시간의 정보 렌더링 */
-            times.map((timeInfo) => (
-              // TODO: 시간 개수에 따라 grid 개수 조건부렌더링
-              <button
-                key={timeInfo.timeId}
-                onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
-                className={`btn btn-sm font-normal ${
-                  timeInfo.times === selectedTime
-                    ? 'bg-point-purple text-white hover:bg-button-hover-color'
-                    : 'bg-white hover:bg-background-color hover:border-button-focus-color'
-                } tracking-wide rounded-md h-[48px] border-solid border border-gray-300 `}
-              >
-                {convertTimeTo12HourClock(timeInfo.times)}
-              </button>
-            ))
-          )}
-      </div>
+      {classDates
+        .filter((dateInfo) => dateInfo.day === selectedDate) // 선택한 날짜의 시간만 filter
+        .map((dateInfo) => {
+          const gridColNum =
+            dateInfo.times.length <= 4 ? '2' : dateInfo.times.length > 4 && dateInfo.times.length <= 6 ? '3' : '4'; // 등록된 시간 개수에 따라 grid 숫자 조절
+          return (
+            <div key={dateInfo.dateId} className={`grid ${GridCols[gridColNum]} gap-2 w-full mb-3`}>
+              {/* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */}
+              {dateInfo.times.map((timeInfo) => (
+                <button
+                  key={timeInfo.timeId}
+                  onClick={() => handleTimeClick(timeInfo.times, timeInfo.timeId)}
+                  className={`btn btn-sm font-normal ${
+                    timeInfo.times === selectedTime
+                      ? 'bg-point-purple text-white hover:bg-button-hover-color'
+                      : 'bg-white hover:bg-background-color hover:border-button-focus-color'
+                  } tracking-wide rounded-md h-[48px] border-solid border border-gray-300 `}
+                >
+                  {convertTimeTo12HourClock(timeInfo.times)}
+                </button>
+              ))}
+            </div>
+          );
+        })}
       <div className="flex flex-row justify-between items-center w-full bg-base-200 rounded-md  text-sm py-2 px-3">
         <div className="mb-1 font-bold">선택하신 수강일</div>
         <p>{`${selectedDate} ${convertTimeTo12HourClock(selectedTime)} `}</p>

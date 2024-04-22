@@ -41,10 +41,7 @@ const handler = NextAuth({
 
       const getSession = async () => {
         const session = await supabase.auth.getSession();
-        // console.log('session log');
-        // console.log(session);
       };
-      // console.log(getSession);
       return true;
     },
     async session({ session, token, user }) {

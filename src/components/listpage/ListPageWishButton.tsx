@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { addWish, cancelWish, defaultWarning } from '../common/Toastify';
 import WishIcon from '../common/WishIcon';
+import ClassInfo from '../reserve/ClassInfo';
 
 const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: ClassAllType['wish'] }) => {
   const router = useRouter();
@@ -19,7 +20,8 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: 
 
   useEffect(() => {
     setIsWishedState(isWishedClass);
-  }, [isWishedClass]);
+    setWishCountState(wishInfo.length);
+  }, [isWishedClass, wishInfo.length]);
 
   const handleWishClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
@@ -46,7 +48,7 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: 
         try {
           cancelWishMutation.mutate({ userId: loginUserId, classId });
           setIsWishedState(false);
-          setWishCountState((prev) => prev - 1);
+          setWishCountState((prev) => (prev !== 0 ? prev - 1 : 0));
           cancelWish();
         } catch (error) {
           defaultWarning();
@@ -54,8 +56,6 @@ const ListPageWishButton = ({ classId, wishInfo }: { classId: string; wishInfo: 
       }
     }
   };
-
-  console.log(wishCountState);
 
   return <WishIcon handleWishClick={handleWishClick} isWished={isWishedState} wishCount={wishCountState} />;
 };

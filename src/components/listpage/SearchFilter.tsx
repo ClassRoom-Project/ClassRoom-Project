@@ -2,13 +2,16 @@
 import { FiAlignJustify } from 'react-icons/fi';
 import React, { useState } from 'react';
 import { useCategoryFilterStore, useListFilterStore } from '@/store/classFilterStore';
-
+import { useSearchStore } from '@/store/classFilterStore';
+import { useRouter, useSearchParams } from 'next/navigation';
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
   const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+  const { setSelectedTitle } = useSearchStore();
+  const router = useRouter();
 
   const handleDropdown = () => {
     setIsOpenCategory(!isOpenCategory);
@@ -24,6 +27,8 @@ const SearchFilter = () => {
     });
     setMinPrice('');
     setMaxPrice('');
+    setSelectedTitle('');
+    router.push('/list');
   };
 
   //가격 버튼 색상 스테이트 함수
@@ -49,7 +54,7 @@ const SearchFilter = () => {
   };
 
   return (
-    <div className="flex min-w-[80vw] items-start justify-start p-5">
+    <div className="flex w-full items-start justify-start p-5">
       <div className="dropdown dropdown-bottom w-12 h-12">
         <div tabIndex={0} onClick={handleDropdown} role="button" className="btn ">
           <FiAlignJustify size={30} color="#6C5FF7">
@@ -60,7 +65,7 @@ const SearchFilter = () => {
         {isOpenCategory ? (
           <ul
             tabIndex={0}
-            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-disable-color border-main-color border-solid border-[1px] w-[400px] h-[650px]"
+            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-disable-color border-border-color border-solid border-[1px] w-[400px] h-[650px]"
           >
             <div className="border-b-[1px] flex flex-col items-center justify-center w-80 h-[125px] border-solid border-gray-400">
               <div className="flex mb-3 items-start w-72 justify-start">
@@ -161,17 +166,17 @@ const SearchFilter = () => {
                 <div className="flex flex-col items-center w-72 justify-start">
                   <div className="flex items-center justify-center">
                     <button
-                      onClick={() => handlePriceFilter(0, 20000)}
+                      onClick={() => handlePriceFilter(0, 19999)}
                       className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-30 ${
-                        isPriceSelected(0, 20000) ? 'bg-button-focus-color' : 'bg-white'
+                        isPriceSelected(0, 19999) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       20,000원 미만
                     </button>
                     <button
-                      onClick={() => handlePriceFilter(20001, 50000)}
+                      onClick={() => handlePriceFilter(0, 49999)}
                       className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-30 ${
-                        isPriceSelected(20001, 50000) ? 'bg-button-focus-color' : 'bg-white'
+                        isPriceSelected(0, 49999) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       50,000원 미만
@@ -179,17 +184,17 @@ const SearchFilter = () => {
                   </div>
                   <div className="flex items-center mt-4 justify-center">
                     <button
-                      onClick={() => handlePriceFilter(50001, 100000)}
+                      onClick={() => handlePriceFilter(0, 99999)}
                       className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-2 w-30 ${
-                        isPriceSelected(50001, 100000) ? 'bg-button-focus-color' : 'bg-white'
+                        isPriceSelected(0, 99999) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       100,000원 미만
                     </button>
                     <button
-                      onClick={() => handlePriceFilter(100001, 1000000000000000)}
+                      onClick={() => handlePriceFilter(100000, 1000000000000000)}
                       className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-2 w-30 ${
-                        isPriceSelected(100001, 1000000000000000) ? 'bg-button-focus-color' : 'bg-white'
+                        isPriceSelected(100000, 1000000000000000) ? 'bg-button-focus-color' : 'bg-white'
                       }`}
                     >
                       100,000원 이상

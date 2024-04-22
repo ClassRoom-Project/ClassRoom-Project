@@ -1,37 +1,58 @@
 'use client';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useCategoryFilterStore } from '@/store/classFilterStore';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchStore } from '@/store/classFilterStore';
 
 const CategoryBtns = () => {
+  const pathName = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const { selectedCategory, setSelectedCategory } = useCategoryFilterStore((state) => ({
     selectedCategory: state.selectedCategory,
     setSelectedCategory: state.setSelectedCategory
   }));
+  const searchQuery = searchParams?.get('query');
 
-  const categories = ['악기&음악', '미술', '운동', '공예&공방', '요리', '뷰티', '교육', '기타'];
+  const categories = ['요리', '공예&공방', '운동', '교육', '악기&음악', '뷰티', '예술', '기타'];
   //useCallback을 이용해 함수 재생성을 막아서 메모리 사용 줄이기
   const handleOnClickListBtn = useCallback(
     (category: string) => {
       setSelectedCategory(category);
-      router.push('/list');
+      if (!searchQuery) {
+        router.push('list');
+      } else {
+        router.push(`/list?query=${searchQuery}`);
+      }
     },
-    [setSelectedCategory, router]
+    [setSelectedCategory, router, searchQuery]
   );
+  //List페이지가 떠날 때 카테고리 초기화
+  useEffect(() => {
+    const handleLeavePage = () => {
+      if (pathName !== `/list`) {
+        setSelectedCategory('');
+      }
+    };
+
+    handleLeavePage();
+  }, [pathName, setSelectedCategory]);
+
   return (
-    <div className="min-w-[85vw] bg-disable-color h-16 flex justify-center items-center">
-      {categories.map((category) => (
-        <button
-          key={category}
-          onClick={() => handleOnClickListBtn(category)}
-          className={`p-2 font-bold rounded-2xl mx-3 w-24 ${
-            selectedCategory === category ? 'bg-button-press-color' : 'bg-white'
-          }`}
-        >
-          {category}
-        </button>
-      ))}
+    <div className="w-full bg-disable-color h-16 flex justify-center items-center">
+      <div className="w-full px-8 flex flex-row justify-between font-medium">
+        {categories.map((category) => (
+          <button
+            key={category}
+            onClick={() => handleOnClickListBtn(category)}
+            className={`w-24 rounded-full px-2.5 py-[5px] ${
+              selectedCategory === category ? 'bg-button-press-color' : 'bg-white'
+            }`}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

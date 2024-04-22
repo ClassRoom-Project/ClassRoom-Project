@@ -197,6 +197,19 @@ export const deleteRoom = () =>
     theme: 'light'
   });
 
+export const deleteMessage = () =>
+  toast('메시지가 삭제되었습니다.', {
+    position: 'top-right',
+    autoClose: 2000,
+    hideProgressBar: true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    pauseOnFocusLoss: false,
+    theme: 'light'
+  });
+
 export const noDateTimeNotify = () =>
   toast.error('일정과 시간을 선택해주세요.', {
     position: 'top-right',
@@ -211,6 +224,30 @@ export const noDateTimeNotify = () =>
 
 export const noLimitImageNotify = () =>
   toast.error('최대 5개의 이미지만 추가할 수 있습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const LimitHashTagNotify = () =>
+  toast.error('최대 5개의 해시태그만 추가할 수 있습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+  
+export const LimitHashTagSizeNotify = () =>
+  toast.error('이미지는 5MB 이하만 업로드할 수 있습니다.', {
     position: 'top-right',
     autoClose: 3000,
     hideProgressBar: false,

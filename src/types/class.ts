@@ -5,7 +5,7 @@ export interface ClassAllType {
   class_id: string;
   user_id: string;
   category: string;
-  hashtag: string;
+  hashtag: string[];
   title: string;
   description: string;
   max_people: number;
@@ -39,7 +39,7 @@ export interface MyRegisteredClassType {
   location: string;
   detail_location: string;
   image: string;
-  active: boolean;
+  isActive: boolean;
   quantity: number;
   class_type: string;
   category: string;
@@ -86,19 +86,6 @@ export type ReserveClassType = {
   dates: DateList[];
 };
 
-/* TODO: 예약 카운트 로직 구현 후 삭제 예정 */
-// DB에 저장된 클래스 정보 타입
-export type DBReserveClassType = {
-  class_id: string;
-  category: string;
-  title: string;
-  location: string;
-  image: string;
-  price: number;
-  max_people: number;
-  dates: [{ date_id: string; day: string; times: [{ time_id: string; times: string }] }];
-};
-
 // 마이페이지 클래시 위시리스트
 export type MyWishClassType = {
   wish_id: string;
@@ -119,7 +106,7 @@ export interface ListDetailClassInfo {
   class_id: string;
   user_id: string;
   category: string;
-  hashtag: string;
+  hashtag: string[];
   title: string;
   description: string;
   max_people: number;

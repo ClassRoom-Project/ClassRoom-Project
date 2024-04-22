@@ -1,6 +1,7 @@
-'use client';
+"use client";
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { supabase } from '@/app/api/supabase/supabase';
 import { FaCheck } from 'react-icons/fa';
 import Link from 'next/link';
@@ -9,6 +10,7 @@ const RegistCompletedPage = () => {
   const [title, setTitle] = useState('');
   const path = usePathname();
   const id = path.split('/').pop();
+  const router = useRouter();
 
   useEffect(() => {
     const fetchClassTitle = async () => {
@@ -22,7 +24,18 @@ const RegistCompletedPage = () => {
       }
     };
     fetchClassTitle();
-  }, [id]);
+
+    // 뒤로가기 감지
+    window.history.pushState(null, '', window.location.pathname);
+
+    const handleBack = (e: PopStateEvent) => {
+      e.preventDefault();
+      alert('잘못된 요청입니다.');
+      router.push('/');
+    };
+    window.addEventListener('popstate', handleBack);
+    return () => window.removeEventListener('popstate', handleBack);
+  }, [id, router]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">

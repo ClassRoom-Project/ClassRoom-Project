@@ -11,23 +11,22 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   const classInfo = await fetchReserveClassInfo(classId);
 
   return (
-    <div className="min-h-100vh-header bg-light-purple min-w-100vw flex pb-6 flex-col">
-      <Link
-        href={`/list/detail/${classInfo.classId}`}
-        className="bg-white px-2 py-2 flex items-center text-text-dark-gray"
-      >
-        <IoIosArrowBack size={18} />
-        상세보기
-      </Link>
+    <div className="min-w-100vw flex flex-col">
+      <div className="m-0 p-2  flex items-center bg-white text-text-dark-gray">
+        <Link href={`/list/detail/${classInfo.classId}`} className="flex justify-center items-center">
+          <IoIosArrowBack size={18} />
+          상세보기
+        </Link>
+      </div>
 
       {classInfo ? (
-        <div className="w-ful   box-border  bg-light-purple flex justify-center items-center flex-col text-gray-600 lg:flex-row ">
-          <div className="flex box-border flex-col h-[800px] min-w-[400px] max-w-[400px] justify-between">
+        <div className="min-h-100vh-header-reserve m-0 py-6 md:px-4 lg:min-w-fit  lg:flex-row bg-light-purple  flex flex-col justify-center items-center  text-gray-600 ">
+          <div className="flex flex-col justify-between w-11/12 min-w-[350px] h-[780px] sm:w-2/3 lg:w-1/3 lg:min-w-[400px]   ">
             <ClassInfo classInfo={classInfo} />
             <ReserveUserInfo />
           </div>
           <div className="lg:divider-horizontal" />
-          <div className=" py-6  px-12 min-w-[400px] max-w-[400px] h-[800px] justify-between bg-white rounded-md  flex flex-col shadow">
+          <div className="mt-4 w-11/12 min-w-[350px] h-[780px] py-4 sm:mt-4 sm:w-2/3 sm:px-9 lg:mt-0 lg:w-1/3 lg:min-w-[400px] flex flex-col justify-between bg-white rounded-md shadow px-7">
             <ReservationScheduler classInfo={classInfo} />
             <SetQuantityAndPay classInfo={classInfo} />
           </div>

@@ -27,42 +27,53 @@ const ClassInfos = ({ classId }: { classId: string }) => {
     };
     getClassInfos();
   }, [setClassInfo, classId]);
+  const hashtagString = classInfo?.hashtag.map((tag) => {
+    return (
+      <div key={classInfo.class_id} className="flex justify-center items-center">
+        <RiHashtag className="text-main-color" />
+        <p>{tag}</p>
+      </div>
+    );
+  });
 
   return (
-    <div className="w-[350px] p-4 flex flex-col border-gray-400 border-solid border-b-[1px] justify-center items-center">
-      <div className="w-[350px] flex justify-between">
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
-          <IoMdTime className="text-main-color" /> 총 {classInfo?.total_time}시간
+    <div className="w-[400px] relative py-4 flex flex-col px-2  border-gray-400 border-solid border-b-[1px] justify-center items-center">
+      <div className="flex items-center w-full justify-between ">
+        <div className="rounded-2xl max-w-full flex-wrap bg-white border-main-color border-solid border-[1px] py-1 px-2 flex justify-center items-center">
+          {hashtagString}
         </div>
         <div>
-          <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+          <div className="rounded-2xl max-w-full bg-white border-main-color border-solid border-[1px] py-1 px-2  flex justify-center items-center">
             <BiSolidCategory className="text-main-color" />
-            {classInfo?.category}
+            <p>{classInfo?.category}</p>
           </div>
         </div>
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+      </div>
+      <div className="flex py-2 items-center w-full justify-between">
+        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2  flex justify-center items-center">
+          <IoMdTime className="text-main-color" />
+          <p>총 {classInfo?.total_time}시간</p>
+        </div>
+        <div className="rounded-2xl border-main-color mx-auto bg-white border-solid border-[1px] py-1  px-2 flex justify-center items-center">
           <GiLevelEndFlag className="text-main-color" />
-          {classInfo?.difficulty}
+          <p>{classInfo?.difficulty}</p>
         </div>
-      </div>
-      <div className="w-[350px] flex justify-between py-4">
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
-          <RiHashtag className="text-main-color" />
-          {classInfo?.hashtag}
-        </div>
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
-          <FaWonSign className="text-main-color" />
-          {classInfo?.price}원
-        </div>
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+
+        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
           <BiBookAlt className="text-main-color" />
-          {classInfo?.class_type}
+          <p>{classInfo?.class_type}</p>
         </div>
       </div>
-      <div className="w-[250px] justify-start">
-        <div className="rounded-2xl border-main-color border-solid border-[1px] p-1 flex justify-center items-center">
+      <div className="flex items-center w-full justify-between">
+        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
           <MdOutlinePersonAddAlt1 className="text-main-color" />
-          수용가능인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.quantity} 명
+          <p>
+            인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.quantity} 명
+          </p>
+        </div>
+        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
+          <FaWonSign className="text-main-color" />
+          <p>{classInfo?.price.toLocaleString()}원</p>
         </div>
       </div>
     </div>

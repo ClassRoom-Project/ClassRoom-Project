@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       minHeight: {
-        '100vh-header': 'calc(100dvh - 60px)'
+        '100vh-header-default': 'calc(100dvh - 80px)',
+        '100vh-header-reserve': 'calc(100dvh - 120px)'
         // other properties...
       },
       backgroundImage: {
@@ -27,8 +28,8 @@ const config: Config = {
         'point-purple': '#6C5FF7',
         'light-purple': '#F6F6FF',
         'disable-color': '#E3E1FC',
-
         'background-color': '#EFEFFF',
+
         //button
         'button-default-color': '#6C5FF7',
         'button-hover-color': '#4D43B8',
@@ -41,9 +42,18 @@ const config: Config = {
         'text-dark-gray': '#515B60',
         'icon-color': '#3f3f3f'
       }
+    },
+    screens: {
+      mobile: '425px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px'
     }
   },
-  plugins: [require('daisyui')],
+
+  plugins: [require('daisyui'), require('tailwind-scrollbar-hide')],
   daisyui: {
     themes: true,
     darkTheme: 'light',

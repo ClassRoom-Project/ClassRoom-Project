@@ -12,7 +12,7 @@ const MyClassStudentList = () => {
   // 페이지네이션
   const page = param.get('page');
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 5; // 한 페이지당 보여줄 포스트의 개수
+  const postsPerPage = 10; // 한 페이지당 보여줄 포스트의 개수
 
   const { data: myClassStudentInfo, isPending } = useQuery({
     queryKey: ['reserve', timeId],
@@ -59,7 +59,6 @@ const MyClassStudentList = () => {
                     width={50}
                     height={50}
                     className="rounded-full w-full h-full object-cover"
-                    unoptimized={true}
                   />
                 </div>
                 {student.nickname}

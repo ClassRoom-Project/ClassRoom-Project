@@ -1,13 +1,28 @@
 'use client';
 import useRegisterStore from '@/store/registerStore';
-import React from 'react';
+import React, {useEffect} from 'react';
 
-const ClassDiff = () => {
+interface InitialDataType {
+  difficulty: string;
+}
+
+interface ClassDiffProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const ClassDiff:React.FC<ClassDiffProps> = ({ isEditMode, initialData }) => {
   const { difficulty, setDifficulty } = useRegisterStore();
 
   const handleDifficultyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setDifficulty(event.target.value);
   };
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setDifficulty(initialData.difficulty);
+    }
+  }, [isEditMode, initialData, setDifficulty]);
   return (
     <div className="my-4">
       <div className="flex items-center space-x-4">

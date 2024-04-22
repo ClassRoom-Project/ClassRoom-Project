@@ -2,7 +2,7 @@ import React from 'react';
 import { DetailCommentType } from '@/types/detailComment';
 import Image from 'next/image';
 import defaultProfile from '../../assets/images/profile-image.png';
-
+import noImage from '@/assets/images/no_img.jpg';
 const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
   const Stars = () => {
     return [1, 2, 3, 4, 5].map((star) => (
@@ -11,38 +11,50 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
         type="radio"
         name={comment.comment_id}
         className="mask bg-[#6C5FF7] mask-star-2"
-        readOnly
+        disabled
         checked={comment.star >= star}
       />
     ));
   };
   return (
-    <div className="bg-disable-color mb-5 rounded-lg p-4 shadow-xl min-w-[1000px] w-full mt-5 mx-auto">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center">
-          <div className="flex justify-center items-center">
-            <div className="w-10 h-10 rounded-full  mr-3">
-              <Image
-                src={comment.profile_image || defaultProfile}
-                alt="Profile"
-                className="rounded-full"
-                unoptimized={true}
-                width={30}
-                height={30}
-              />
+    <div className="bg-white flex mb-10 rounded-lg h-[300px] p-4 max-w-[1000px] w-full mt-5  mx-auto">
+      <div className="flex items-center justify-center">
+        <div className="w-28 h-28 items-center justify-center flex relative mr-5 xl:h-64 xl:w-64">
+          {comment.comment_image ? (
+            <Image
+              src={comment.comment_image}
+              alt="uploaded image preview"
+              fill
+              className="h-full w-full object-cover rounded-[20px] border"
+            />
+          ) : (
+            <Image src={noImage} alt="no image" fill className="h-full w-full object-cover rounded-[20px] border" />
+          )}
+        </div>
+      </div>
+      <div className="flex flex-col justify-between py-5 flex-grow">
+        <div>
+          <div>
+            <div className="flex justify-between">
+              <div className="flex items-center justify-center mb-4">
+                <Image
+                  src={comment.profile_image || defaultProfile}
+                  alt="Profile"
+                  width={40}
+                  height={40}
+                  className="rounded-full border"
+                />
+                <h5 className="text-lg font-bold ml-2 text-text-color">{comment.nickname}</h5>
+              </div>
+              <div className="rating rating-sm">{Stars()}</div>
             </div>
-            <h5 className="text-lg text-text-color font-bold">{comment.nickname}</h5>
-            <p className="text-sm ml-2 text-white">{comment.job}</p>
           </div>
+          <p className="text-gray-800 ml-5 mt-1 text-sm">{comment.content}</p>
         </div>
-        <div className="flex">
-          <div className="rating rating-sm">{Stars()}</div>
+        <div className="flex justify-end items-center mt-4">
+          <div className="text-right text-gray-500 text-xs">{new Date(comment.create_at).toLocaleDateString()}</div>
         </div>
       </div>
-      <div>
-        <p className="text-gray-800 overflow-hidden w-[800px] h-28 text-sm">{comment.content}</p>
-      </div>
-      <div className="text-right text-gray-500 text-xs">{new Date(comment.create_at).toLocaleDateString()}</div>
     </div>
   );
 };
