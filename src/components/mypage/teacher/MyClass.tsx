@@ -74,7 +74,7 @@ const MyClass = () => {
   const currentPosts = myClassInfo?.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col gap-4 justify-center items-center p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
+    <ul className="flex flex-col gap-4 justify-center items-center p-4 md:w-full md:justify-items-center w-full md:min-w-[1080px]">
       <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden ">내가 등록한 클래스</p>
       <p className="flex items-start text-lg text-text-dark-gray text-center p-4 md:hidden">
         자세한 날짜 및 시간, 예약한 수강생 정보는 PC 버전에서 확인해주세요.
@@ -82,7 +82,7 @@ const MyClass = () => {
       {currentPosts?.map((classInfo, classIndex) => (
         <li key={classIndex} className="flex flex-col align-center gap-4 my-4 py-4 w-full md:flex-row">
           {/* 클래스 기본 정보 부분 */}
-          <div className="collapse collapse-arrow cursor-pointer">
+          <div className="collapse collapse-arrow cursor-pointer justify-center">
             <input type="checkbox" className="md:flex hidden" />
             <div className="flex md:collapse-title w-full flex-col md:flex-row gap-4 items-center">
               <div className="md:w-[300px] md:h-[200px] w-4/5">

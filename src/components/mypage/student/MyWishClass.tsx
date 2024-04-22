@@ -39,19 +39,20 @@ const MyWishClass = () => {
   const currentPosts = myWishClassList.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <div>
-      <ul className="flex flex-col align-center max-w-screen-xl">
-        {currentPosts.map((classItem) => (
-          <MyWishClassItem key={classItem.class_id} classItem={classItem} />
-        ))}
-        <Pagination
-          totalItems={myWishClassList.length}
-          itemCountPerPage={postsPerPage}
-          pageCount={5}
-          currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
-        />
-      </ul>
-    </div>
+    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
+      <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center">
+        클래스 위시리스트
+      </p>
+      {currentPosts.map((classItem) => (
+        <MyWishClassItem key={classItem.class_id} classItem={classItem} />
+      ))}
+      <Pagination
+        totalItems={myWishClassList.length}
+        itemCountPerPage={postsPerPage}
+        pageCount={5}
+        currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
+      />
+    </ul>
   );
 };
 

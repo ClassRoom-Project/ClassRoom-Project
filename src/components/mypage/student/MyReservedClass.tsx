@@ -41,22 +41,20 @@ const MyReservedClass = () => {
   const currentPosts = reservedClasses.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <div className="flex flex-col gap-4 justify-center items-center p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
-      <ul>
-        <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center">
-          내가 예약한 클래스 보기
-        </p>
-        {currentPosts.map((classItem) => (
-          <MyReservedClassItem key={classItem.reserve_id} classItem={classItem} />
-        ))}
-        <Pagination
-          totalItems={reservedClasses.length}
-          itemCountPerPage={postsPerPage}
-          pageCount={5}
-          currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
-        />
-      </ul>
-    </div>
+    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
+      <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center">
+        내가 예약한 클래스 보기
+      </p>
+      {currentPosts.map((classItem) => (
+        <MyReservedClassItem key={classItem.reserve_id} classItem={classItem} />
+      ))}
+      <Pagination
+        totalItems={reservedClasses.length}
+        itemCountPerPage={postsPerPage}
+        pageCount={5}
+        currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
+      />
+    </ul>
   );
 };
 

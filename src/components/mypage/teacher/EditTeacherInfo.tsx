@@ -185,13 +185,13 @@ const EditTeacherInfo = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple p-4 sm:w-[500px] md:w-4/5 md:justify-items-center w-full">
+    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 sm:w-[500px] lg:w-full md:w-full md:min-w-[1080px] md:justify-items-center w-full">
       <p className="md:hidden items-start text-xl text-dark-purple-color font-bold">선생님 정보 수정하기</p>
-      <p className=" text-center text-text-dark-gray">
+      <p className=" text-center text-text-dark-gray p-4">
         회원님이 등록하신 강사 정보입니다. <br />
         수정을 원하시면 아래 정보 수정하기 버튼을 눌러주세요.{' '}
       </p>
-      <div className="flex gap-10 justify-center items-start flex-col w-full md:flex-row">
+      <div className="flex md:gap-10 justify-center items-start flex-col w-full md:flex-row">
         <div className="flex flex-col">
           <div className="p-4 flex flex-col gap-4">
             <p className="text-text-dark-gray font-bold">강사 이름</p>

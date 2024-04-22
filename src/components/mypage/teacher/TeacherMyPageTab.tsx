@@ -62,9 +62,9 @@ const TeacherMyPageTab = () => {
   };
 
   return (
-    <div className="m-4 py-4 gap-4 flex flex-col md:items-center justify-center">
+    <div className="md:m-4 my-4 py-4 gap-4 flex flex-col md:items-center justify-center mb-20 w-full">
       {/* md 이상 일 때, 가로 탭 */}
-      <div className="hidden md:flex flex-row md:justify-center md:items-center sm:items-start border-y-2 w-full">
+      <div className="hidden md:flex flex-row md:justify-start gap-20 md:items-center sm:items-start border-y-2 w-full md:w-full lg:w-full">
         <p
           onClick={() => handleOnClickTabBtn('editProfile')}
           className={`p-4 text-lg  ${
@@ -98,7 +98,7 @@ const TeacherMyPageTab = () => {
       </div>
 
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="m-4 p-4 flex w-full justify-start md:hidden">
+      <div className="my-4 py-4 flex w-full justify-start md:hidden">
         <div className="dropdown-right dropdown">
           <div
             tabIndex={0}
@@ -136,7 +136,7 @@ const TeacherMyPageTab = () => {
           </div>
         </div>
       </div>
-      <div className="md:m-4 md:p-4 px-2 flex justify-center items-center md:w-[1080px]">
+      <div className="md:my-4 md:py-4 flex justify-center items-center md:w-4/5 w-full p-4">
         {activeTeacherMyPageTab[activePage]}
       </div>
     </div>

@@ -47,6 +47,7 @@ const EditProfileImage = ({ newProfileImage, setNewProfileImage, isEditing, user
       alert('파일첨부 사이즈는 5MB 이내로 가능합니다.');
       return;
     }
+
     uploadProfileImage(file);
   };
 
