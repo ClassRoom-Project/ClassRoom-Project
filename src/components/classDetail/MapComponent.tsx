@@ -1,3 +1,5 @@
+'use client';
+
 import { useDetailClassInfoStore } from '@/store/classInfoStore';
 import React, { useEffect, useState } from 'react';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
@@ -43,7 +45,7 @@ const MapComponent = () => {
   }, [placeAddress]);
 
   return (
-    <div className="flex justify-center items-center w-[400px] h-[400px] m-10">
+    <div className="flex justify-center items-center w-full">
       {classLocation ? (
         <div>
           <Map

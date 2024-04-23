@@ -33,7 +33,7 @@ const ClassImageAndSummary = ({
 
   const hashtagString = classData?.hashtag.map((tag) => {
     return (
-      <div key={classData.class_id} className="flex items-center text-gray-400">
+      <div key={tag} className="flex items-center text-gray-400">
         <RiHashtag />
         <p>{tag}</p>
       </div>
@@ -160,7 +160,7 @@ const ClassImageAndSummary = ({
             <div className="text-xl font-bold">{classData?.title}</div>
             <div>
               <div className="mb-2">카테고리 : {classData?.category}</div>
-              <div>{hashtagString}</div>
+              <div className="flex gap-2">{hashtagString}</div>
             </div>
             <div className="flex flex-col gap-5 text-lg">
               {classInfoLabels.map(({ icon, title, description }) => {

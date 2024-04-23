@@ -5,7 +5,7 @@ import { ListDetailClassInfo } from '@/types/class';
 
 const DetailComments = ({ classData }: { classData: ListDetailClassInfo | null }) => {
   return (
-    <div className="w-[1024px] flex flex-col justify-center items-center mt-9">
+    <div className="w-full flex flex-col justify-center items-center mt-9">
       <CreateComments classData={classData} />
       <ShowComments classId={classData?.class_id} />
     </div>

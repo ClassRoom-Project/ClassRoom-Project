@@ -17,12 +17,8 @@ const ClassDetailBtn = ({
   makeClassUserId: string;
   lastClassDay: string;
 }) => {
-  const { loginUserId } = useLoginStore();
-
-  console.log(lastClassDay, format(new Date(), 'yyyy-MM-dd'));
-  console.log(lastClassDay < format(new Date(), 'yyyy-MM-dd'));
-
   const router = useRouter();
+  const { loginUserId } = useLoginStore();
 
   const handleApplyClick = async () => {
     if (!loginUserId) {
@@ -35,6 +31,8 @@ const ClassDetailBtn = ({
       }
 
       const isReserved = await checkIsReserved({ userId: loginUserId, classId });
+      console.log(isReserved);
+
       if (isReserved) {
         alreadyReserved();
         return;

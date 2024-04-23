@@ -3,6 +3,7 @@ import { DetailCommentType } from '@/types/detailComment';
 import Image from 'next/image';
 import defaultProfile from '../../assets/images/profile-image.png';
 import noImage from '@/assets/images/no_img.jpg';
+
 const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
   const Stars = () => {
     return [1, 2, 3, 4, 5].map((star) => (
@@ -16,6 +17,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
       />
     ));
   };
+
   return (
     <div className="bg-white flex mb-10 rounded-lg h-[300px] p-4 max-w-[1000px] w-full mt-5  mx-auto">
       <div className="flex items-center justify-center">

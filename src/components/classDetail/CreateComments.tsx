@@ -23,6 +23,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   const [commentImage, setCommentImage] = useState<ImageFileWithPreview[]>([]);
   const [dataBaseImage, setDataBaseImage] = useState<string>('');
   const email: string = session?.user?.email ?? '';
+
   const { data: userData } = useQuery({
     queryKey: ['getUserIdByEmail'],
     queryFn: () => getUserIdByEmail(email),
@@ -117,65 +118,70 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="w-[600px] h-[404px] flex justify-center items-center bg-disable-color rounded-xl shadow-md border-solid p-4 xl:w-[1116px]">
-          <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col">
-            <div className="flex items-center justify-center">
-              <div className="w-32 h-32 items-center justify-center flex relative mr-5 xl:w-64 xl:h-64">
-                {commentImage.length > 0 ? (
-                  <Image
-                    src={commentImage[0].preview}
-                    alt="uploaded image preview"
-                    fill
-                    className="h-full w-full object-cover rounded-[20px] border"
-                  />
-                ) : (
-                  <Image
-                    src={noImage}
-                    alt="no image"
-                    fill
-                    className="h-full w-full object-cover rounded-[20px] border"
-                  />
-                )}
-              </div>
-              <div className="w-[400px] flex flex-col justify-center items-start xl:w-[700px]">
-                <div className="w-full flex justify-between items-center">
-                  <div className="flex items-center mb-4">
-                    <label
-                      htmlFor="image-upload"
-                      className="border flex border-main-color bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-main-color cursor-pointer"
-                    >
-                      <p>사진추가</p>
-                    </label>
-                    <input
-                      id="image-upload"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleCommentImageChange}
-                      style={{ display: 'none' }}
-                    />
+        <div className="w-[600px] flex justify-center items-center bg-disable-color rounded-xl shadow-md border-solid p-4 xl:w-full">
+          <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col w-full">
+            <div className="flex items-center justify-center w-full gap-4">
+              <div className="w-[400px] flex flex-col justify-center items-start xl:w-full">
+                <div className="w-full flex justify-between items-center"></div>
+                <div className="flex w-full items-center justify-between">
+                  <div className="w-1/2">
+                    <div className="rating rating-sm flex justify-end items-center">
+                      {[1, 2, 3, 4, 5].map((num) => (
+                        <input
+                          key={num}
+                          type="radio"
+                          name="rating"
+                          className="mask mask-star-2 mb-1 bg-main-color"
+                          value={num}
+                          onChange={handleStarChange}
+                          checked={star === num}
+                        />
+                      ))}
+                    </div>
+                    <textarea
+                      minLength={10}
+                      maxLength={150}
+                      className="w-full h-52 p-2 border rounded-md"
+                      placeholder="후기를 입력해주세요. (10자 이상)"
+                      value={content}
+                      onChange={handleContentChange}
+                    ></textarea>
                   </div>
-                  <div className="rating mb-2 rating-sm flex justify-end items-center">
-                    {[1, 2, 3, 4, 5].map((num) => (
+                  <div>
+                    <div className="flex items-center">
+                      <label
+                        htmlFor="image-upload"
+                        className="border flex border-main-color bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-main-color cursor-pointer"
+                      >
+                        <p>사진추가</p>
+                      </label>
                       <input
-                        key={num}
-                        type="radio"
-                        name="rating"
-                        className="mask mask-star-2 mb-1 bg-main-color"
-                        value={num}
-                        onChange={handleStarChange}
-                        checked={star === num}
+                        id="image-upload"
+                        type="file"
+                        accept="image/*"
+                        onChange={handleCommentImageChange}
+                        style={{ display: 'none' }}
                       />
-                    ))}
+                    </div>
+                    <div className="w-32 h-32 items-center justify-center flex relative mr-5 xl:w-[320px] xl:h-52">
+                      {commentImage.length > 0 ? (
+                        <Image
+                          src={commentImage[0].preview}
+                          alt="uploaded image preview"
+                          fill
+                          className="h-full w-full object-cover rounded-md border"
+                        />
+                      ) : (
+                        <Image
+                          src={noImage}
+                          alt="no image"
+                          fill
+                          className="h-full w-full object-cover rounded-md border"
+                        />
+                      )}
+                    </div>
                   </div>
                 </div>
-                <textarea
-                  minLength={10}
-                  maxLength={150}
-                  className="w-full h-52 p-2 border rounded-md"
-                  placeholder="후기을 입력해주세요.(10자 이상)"
-                  value={content}
-                  onChange={handleContentChange}
-                ></textarea>
               </div>
             </div>
             <button
@@ -186,7 +192,11 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
             </button>
           </form>
         </div>
-      ) : null}
+      ) : (
+        <div className="flex justify-center items-center h-40 w-[600px] rounded-lg bg-disable-color shadow-xl xl:w-full">
+          클래스를 체험하신 분만 리뷰 등록이 가능합니다.
+        </div>
+      )}
     </>
   );
 };
