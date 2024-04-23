@@ -75,9 +75,9 @@ const MyClass = () => {
   const currentPosts = myClassInfo.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col align-center ">
+    <ul className="flex flex-col align-center">
       {currentPosts?.map((classInfo, classIndex) => (
-        <li key={classIndex} className="flex flex-col align-center gap-4 my-4 w-[1080px] py-4">
+        <li key={classIndex} className="flex flex-col align-center gap-4 my-4 w-full py-4">
           {/* 클래스 기본 정보 부분 */}
           <div className="collapse collapse-arrow">
             <input type="checkbox" />

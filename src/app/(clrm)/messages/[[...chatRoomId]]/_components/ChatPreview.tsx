@@ -28,7 +28,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
       prefetch={false}
       shallow
     >
-      <div className="flex py-4 mt-2 mb-2 relative">
+      <div className="flex py-4 mt-2 mb-2 relative mx-2 ">
         {readleftChekcMessages === 0 ? (
           ''
         ) : (
@@ -71,7 +71,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
         </div>
       </div>
       <div className="flex justify-center">
-        <div className="w-full border-b-2 mr-1" />
+        <div className="w-full border-b-2  md:mr-1" />
       </div>
     </Link>
   );
