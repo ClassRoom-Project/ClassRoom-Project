@@ -12,7 +12,7 @@ import './emblaCarousel.css';
 
 const DeadlineClass = () => {
   const { classInfos, setClassInfos } = useClassInfoStore();
-  const [emblaRef, embla] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 3000 })]);
+  const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 3000 })]);
 
   //카드들이 제대로 나오지 않는 경우가 있는 경우 방지
   useEffect(() => {
@@ -32,7 +32,7 @@ const DeadlineClass = () => {
 
   return (
     <div className="w-full flex flex-col">
-      <p className="text-text-color borderb-[1px] pb-5 border-solid border-border-color">예약순</p>
+      <p className="text-text-color px-2 borderb-[1px] pb-5 border-solid border-border-color">예약순</p>
       <div className="embla w-full overflow-hidden" ref={emblaRef}>
         <div className="embla__container">
           {classInfos.map((infos) => (

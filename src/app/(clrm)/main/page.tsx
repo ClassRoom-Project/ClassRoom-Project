@@ -6,7 +6,7 @@ import { Banner } from '@/components/main/Banner';
 import CategoryBtns from '@/components/listpage/CategoryBtns';
 const MainPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen relative gap-10">
+    <div className="flex flex-col mb-20 items-center justify-center min-h-screen relative gap-10 md:mb-0">
       <Banner />
       <Suspense>
         <CategoryBtns />
