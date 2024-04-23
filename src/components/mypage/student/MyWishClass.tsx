@@ -39,7 +39,7 @@ const MyWishClass = () => {
   const currentPosts = myWishClassList.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
+    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 md:justify-items-center w-full">
       <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center">
         클래스 위시리스트
       </p>

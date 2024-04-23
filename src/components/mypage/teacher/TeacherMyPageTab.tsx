@@ -52,8 +52,13 @@ const TeacherMyPageTab = () => {
     router.push(`/teacherMypage?teacherTab=${tab}`);
   };
 
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+  const checkAndCloseDropDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    let targetEl = e.currentTarget;
+    if (targetEl && targetEl.matches(':focus')) {
+      setTimeout(function () {
+        targetEl.blur();
+      }, 0);
+    }
   };
 
   const handleDropdownItemClick = (tab: string) => {
@@ -100,20 +105,12 @@ const TeacherMyPageTab = () => {
       {/* md 미만 일 때, 드롭다운 */}
       <div className="my-4 py-4 flex w-full justify-start md:hidden">
         <div className="dropdown-right dropdown">
-          <div
-            tabIndex={0}
-            role="button"
-            className="m-1"
-            onClick={toggleDropdown}
-            onKeyDown={(e) => e.key === 'Enter' && toggleDropdown()}
-          >
+          <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
           </div>
           <div
             tabIndex={0}
-            className={`items-start dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
-              isOpen ? 'block' : 'hidden'
-            }`}
+            className={'items-start dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col'}
           >
             <button
               onClick={() => handleDropdownItemClick('editProfile')}

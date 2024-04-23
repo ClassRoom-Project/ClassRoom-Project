@@ -160,7 +160,7 @@ const AddTeacherInfo = () => {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
-    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 sm:w-[500px] lg:w-full md:w-full md:min-w-[1080px] md:justify-items-center w-full">
+    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:justify-items-center w-full">
       <p className="flex items-start text-xl text-dark-purple-color font-bold pt-4">선생님 정보 등록하기</p>
       {isHaveTeacherInfo ? (
         <p className=" text-center text-text-dark-gray">
@@ -180,7 +180,7 @@ const AddTeacherInfo = () => {
                   <input
                     type="text"
                     placeholder="본명을 입력해주세요."
-                    className="input input-bordered w-[250px] border-point-purple shadow-md"
+                    className="input input-bordered lg:w-[250px] md:w-[200px] w-full border-point-purple shadow-md"
                     value={teacherName}
                     onChange={handleOnChangeAddTeacherName}
                   />
@@ -197,7 +197,7 @@ const AddTeacherInfo = () => {
                   <input
                     type="text"
                     placeholder="휴대폰 번호를 입력해주세요."
-                    className="input input-bordered w-[250px] border-point-purple shadow-md"
+                    className="input input-bordered lg:w-[250px] md:w-[200px] w-full border-point-purple shadow-md"
                     value={teacherNumber}
                     onChange={handleOnChangeAddTeacherNumber}
                   />
@@ -244,7 +244,7 @@ const AddTeacherInfo = () => {
                   <input
                     type="text"
                     placeholder="계좌 번호를 입력해주세요."
-                    className="input input-bordered w-[250px] border-point-purple shadow-md"
+                    className="input input-bordered lg:w-[250px] md:w-[200px] w-full border-point-purple shadow-md"
                     value={userAccount}
                     onChange={handleOnChangeAddAccount}
                   />
