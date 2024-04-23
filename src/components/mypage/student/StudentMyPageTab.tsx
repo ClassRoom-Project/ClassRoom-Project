@@ -130,7 +130,7 @@ const StudentMyPageTab = () => {
         </button>
       </div>
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="my-4 py-4 flex w-full justify-start md:hidden">
+      <div className="my-4 py-4 flex w-full md:hidden">
         <div className="dropdown-right dropdown">
           <div
             tabIndex={0}
@@ -143,7 +143,7 @@ const StudentMyPageTab = () => {
           </div>
           <div
             tabIndex={0}
-            className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
+            className={`items-start dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
               isOpen ? 'block' : 'hidden'
             }`}
           >

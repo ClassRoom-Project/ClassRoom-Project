@@ -62,7 +62,7 @@ const TeacherMyPageTab = () => {
   };
 
   return (
-    <div className="w-full h-screen md:m-4 md:p-4 m-0 p-0">
+    <div className="w-full h-screen md:my-4 md:py-4 m-0 p-0">
       {/* md 이상 일 때, 가로 탭 */}
       <div className="hidden md:flex flex-row md:justify-start lg:gap-20 md:gap-10 md:items-center sm:items-start w-full border-y-2">
         <button
@@ -111,7 +111,7 @@ const TeacherMyPageTab = () => {
           </div>
           <div
             tabIndex={0}
-            className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
+            className={`items-start dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
               isOpen ? 'block' : 'hidden'
             }`}
           >
