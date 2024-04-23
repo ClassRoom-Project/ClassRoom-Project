@@ -74,7 +74,7 @@ const TeacherMyPageTab = () => {
           onClick={() => handleOnClickTabBtn('editProfile')}
           className={`p-4 lg:text-lg whitespace-nowrap md:text-sm  ${
             activePage === 'editProfile'
-              ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
+              ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color'
               : ''
           }`}
         >
@@ -103,7 +103,7 @@ const TeacherMyPageTab = () => {
       </div>
 
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="my-4 py-4 flex w-full justify-start md:hidden">
+      <div className="mb-4 py-4 flex w-full justify-start md:hidden">
         <div className="dropdown-right dropdown">
           <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />

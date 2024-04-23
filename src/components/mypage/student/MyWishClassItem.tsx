@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { BiCategoryAlt } from 'react-icons/bi';
 import { GoPersonAdd } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
-import NoImage from '../../../../public/noimage.png';
+import NoImage from '@/assets/images/no_img.jpg';
 import MyPageWishButton from './MyPageWishButton';
 
 const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
@@ -22,6 +22,7 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
             width={300}
             height={200}
             className="w-full h-full p-4 object-contain"
+            unoptimized
           />
         </div>
         <div className="flex flex-col p-4 gap-4 h-full w-full">

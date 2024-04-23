@@ -23,6 +23,9 @@ const SelectOption = ({ id, label, value, onChange, disabled, options }: SelectO
         disabled={disabled}
         className="select select-bordered lg:w-[250px] md:w-[200px] w-full  border-point-purple shadow-md"
       >
+        <option value="" selected disabled>
+          선택해주세요.
+        </option>
         {options.map((option) => {
           return (
             <option value={option} key={option}>

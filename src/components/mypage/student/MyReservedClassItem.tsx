@@ -6,12 +6,11 @@ import { convertTimeTo12HourClock } from '@/utils/convertTimeTo12HourClock';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 import { BiMoneyWithdraw } from 'react-icons/bi';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GoPeople } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
-import NoImage from '../../../../public/noimage.png';
+import NoImage from '@/assets/images/no_img.jpg';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const queryClient = useQueryClient();
@@ -57,6 +56,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
             width={300}
             height={200}
             className="w-full h-full p-4 object-contain"
+            unoptimized
           />
         </div>
         <div className="flex flex-col p-4 gap-4 w-full h-full">

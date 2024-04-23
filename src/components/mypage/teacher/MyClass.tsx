@@ -135,7 +135,7 @@ const MyClass = () => {
             <div className="md:flex flex-col md:collapse-content">
               {/* 클래스 날짜 표시 */}
               {classInfo?.dates?.map((date, dateIndex) => (
-                <div key={dateIndex} className="flex md:gap-20 border-y-2 justify-center items-center">
+                <div key={dateIndex} className="flex md:gap-20 border-y-2 border-collapse justify-center items-center">
                   <div className="flex items-center p-2 gap-2 ">
                     <FaRegCalendarCheck color="#6C5FF7" size="20" />
                     <p className="flex flex-row gap-2 md:text-base sm:text-sm text-xs whitespace-nowrap">

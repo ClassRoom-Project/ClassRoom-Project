@@ -57,8 +57,6 @@ const EditProfile = () => {
     }
   });
 
-  console.log('처음 수정된 blob이 담길 newProfileImage', newProfileImage);
-
   // supabase storage에 프로필 이미지 업로드
   const uploadProfileImage = async (file: File) => {
     const randomUUID = crypto.randomUUID();
@@ -69,7 +67,6 @@ const EditProfile = () => {
       throw error;
     } else {
       const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profileImages/${data.path}`;
-      console.log('url', url);
       return setNewProfileImage(url);
     }
   };
@@ -91,7 +88,6 @@ const EditProfile = () => {
     } else {
       // 수정된 사항이 있는 경우
       try {
-        // console.log('supabase user table 업데이트될 최종 imageUrl', imageUrl);
         changeInfoNotify();
         updateUserInfoMutation({ newNickname, newProfileImage });
         setUserInfo({
@@ -105,7 +101,6 @@ const EditProfile = () => {
         console.error('프로필 이미지 업로드 에러', error);
         return;
       }
-      // 수정된 사항이 있는 경우
     }
   };
 

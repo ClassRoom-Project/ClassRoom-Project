@@ -21,9 +21,9 @@ const AddTeacherInfo = () => {
   // 선생님 정보가 담겨있으면 : true => 정보 보여주기
   // 선생님 정보가 없으면(null) : false => 정보 입력하기
   const [isHaveTeacherInfo, setIsHaveTeacherInfo] = useState(false);
-  const [selectedJob, setNewSelectedJob] = useState('요리사'); // 직업 선택
-  const [selectedField, setSelectedField] = useState('요리/음식'); // 분야 선택
-  const [selectedBank, setSelectedBank] = useState('국민은행'); // 은행 선택
+  const [selectedJob, setNewSelectedJob] = useState(''); // 직업 선택
+  const [selectedField, setSelectedField] = useState(''); // 분야 선택
+  const [selectedBank, setSelectedBank] = useState(''); // 은행 선택
   const [userAccount, setUserAccount] = useState(''); // 계좌 입력
   const [isAvailableAccount, setIsAvailableAccount] = useState(true); // 계좌 숫자만 유효성 검사
   const [teacherName, setTeacherName] = useState(''); // 강사 이름

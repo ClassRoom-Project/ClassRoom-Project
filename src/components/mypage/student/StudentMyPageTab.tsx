@@ -1,13 +1,13 @@
 'use client';
 
-import React, { Suspense, useEffect, useMemo, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import EditProfile from '@/components/mypage/EditProfile';
-import MyReservedClass from '@/components/mypage/student/MyReservedClass';
-import MyComments from '@/components/mypage/student/MyComments';
-import MyWishClass from '@/components/mypage/student/MyWishClass';
 import AddTeacherInfo from '@/components/mypage/student/AddTeacherInfo';
+import MyComments from '@/components/mypage/student/MyComments';
+import MyReservedClass from '@/components/mypage/student/MyReservedClass';
+import MyWishClass from '@/components/mypage/student/MyWishClass';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
 
 type StudentTabComponent = {
@@ -135,7 +135,7 @@ const StudentMyPageTab = () => {
         </button>
       </div>
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="my-4 py-4 flex w-full md:hidden">
+      <div className="mb-4 py-4 flex w-full md:hidden">
         <div className="dropdown-right dropdown">
           <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
