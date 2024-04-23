@@ -38,7 +38,7 @@ export const SearchClass = () => {
     if (!trimedSelectedTitle) return;
     router.push(`/list?query=${trimedSelectedTitle}`);
   };
-  //url로 접근할 경우
+  //url로 접근할 경우 타이틀에 queryString 입력
   useEffect(() => {
     setSelectedTitle(searchQuery ?? '');
   }, [searchQuery, setSelectedTitle]);

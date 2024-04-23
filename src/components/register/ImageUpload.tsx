@@ -9,7 +9,12 @@ import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from 'react-icons/fi';
 import { ImageFileWithPreview } from '@/types/register';
-import { noInfoNotify, noDateTimeNotify, noLimitImageNotify, LimitHashTagSizeNotify } from '@/components/common/Toastify';
+import {
+  noInfoNotify,
+  noDateTimeNotify,
+  noLimitImageNotify,
+  LimitHashTagSizeNotify
+} from '@/components/common/Toastify';
 
 interface InitialDataType {
   image: string[];
@@ -17,11 +22,11 @@ interface InitialDataType {
 
 interface ImageUploadProps {
   isEditMode: boolean;
-  initialData?: InitialDataType; 
+  initialData?: InitialDataType;
   class_Id?: string;
 }
 
-const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class_Id }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, class_Id }) => {
   const {
     category,
     subCategory,
@@ -46,7 +51,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
   const noticeId = crypto.randomUUID();
   const router = useRouter();
   const queryClient = useQueryClient();
-  
+
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
     return fileName.replace(/[^a-zA-Z0-9.]/g, '_');
@@ -90,7 +95,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
       return;
     }
 
-    const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
+    const isAnyTimes = schedules.some((schedule) => schedule.times.length === 0);
 
     if (selectedDates.length === 0 || isAnyTimes) {
       noDateTimeNotify();
@@ -115,35 +120,38 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
 
     // isEditMode가 true일 경우, 기존 데이터 업데이트
     if (isEditMode) {
-      const { data, error } = await supabase.from('class').update({
-        category: category,
-        hashtag: subCategory,
-        class_type: classType,
-        difficulty: difficulty,
-        title: classTitle,
-        description: classContent,
-        quantity: personnel,
-        min_people: minNumber,
-        price: price,
-        location: address,
-        detail_location: detailAddress,
-        total_time: totalTime,
-        image: imageUrls
-      }).eq('class_id', classId);
+      const { data, error } = await supabase
+        .from('class')
+        .update({
+          category: category,
+          hashtag: subCategory,
+          class_type: classType,
+          difficulty: difficulty,
+          title: classTitle,
+          description: classContent,
+          quantity: personnel,
+          min_people: minNumber,
+          price: price,
+          location: address,
+          detail_location: detailAddress,
+          total_time: totalTime,
+          image: imageUrls
+        })
+        .eq('class_id', classId);
 
       if (error) {
         console.error('error:', error);
         setIsLoading(false);
         return;
       }
-    
+
       // 날짜와 시간 데이터 업데이트 로직 추가
       // 기존 날짜와 시간 데이터 삭제
       const deleteDate = await supabase.from('date').delete().match({ class_id: classId });
       if (deleteDate.error) {
         console.error('date db delete error:', deleteDate.error);
       }
-    
+
       // 새로운 날짜와 시간 데이터 삽입
       for (const date of selectedDates) {
         const dateId = crypto.randomUUID();
@@ -158,7 +166,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
           console.error('date db upload error:', dateError);
         } else {
           const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
-    
+
           if (selectedTimes && selectedTimes.length > 0) {
             for (const time of selectedTimes) {
               const timeId = crypto.randomUUID();
@@ -176,7 +184,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
           }
         }
       }
-    
+
       setIsLoading(false);
       router.push(`/register/completedPage/${classId}`);
       return;
@@ -207,24 +215,22 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
     } else {
       // 알림 데이터 저장
       const notice = `"${classTitle}" 클래스 등록이 완료되었습니다.`;
-      const { data: noticeData, error: noticeError } = await supabase
-        .from('notifications')
-        .insert([
-          {
-            notice_id: noticeId,
-            user_id: userId,
-            class_id: classId,
-            notice: notice,
-            isread: false,
-            created_at: new Date()
-          }
-        ]);
+      const { data: noticeData, error: noticeError } = await supabase.from('notifications').insert([
+        {
+          notice_id: noticeId,
+          user_id: userId,
+          class_id: classId,
+          notice: notice,
+          isread: false,
+          created_at: new Date()
+        }
+      ]);
       if (noticeError) {
         console.error('Error: ', noticeError);
       } else {
         queryClient.invalidateQueries({
           queryKey: ['notifications', userId]
-        });        
+        });
       }
 
       // 각 날짜에 대한 데이터 저장
