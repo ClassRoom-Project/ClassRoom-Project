@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
@@ -158,6 +158,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
 
     // isEditMode가 true일 경우, 기존 데이터 업데이트
     if (isEditMode) {
+
       const { data, error } = await supabase.from('class').update({
         category: category,
         hashtag: subCategory,
@@ -182,14 +183,14 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
     
       // 날짜와 시간 데이터 업데이트 로직 추가
       // 기존 날짜와 시간 데이터 삭제
-      const deleteDate = await supabase.from('date').delete().match({ class_id: classId });
-      if (deleteDate.error) {
-        console.error('date db delete error:', deleteDate.error);
-      }
-    
-      // 새로운 날짜와 시간 데이터 삽입
+      // const deleteDate = await supabase.from('date').delete().match({ class_id: classId });
+      // if (deleteDate.error) {
+      //   console.error('date db delete error:', deleteDate.error);
+      // }
+
+      // 각 날짜에 대한 데이터 저장
       for (const date of selectedDates) {
-        const dateId = crypto.randomUUID();
+        const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
         const { data: dateData, error: dateError } = await supabase.from('date').insert([
           {
             date_id: dateId,
@@ -201,10 +202,10 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
           console.error('date db upload error:', dateError);
         } else {
           const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
-    
+
           if (selectedTimes && selectedTimes.length > 0) {
             for (const time of selectedTimes) {
-              const timeId = crypto.randomUUID();
+              const timeId = crypto.randomUUID(); // 시간마다 새로운 ID 생성
               const { data: timeData, error: timeError } = await supabase.from('time').insert([
                 {
                   time_id: timeId,
@@ -219,7 +220,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
           }
         }
       }
-    
+
       setIsLoading(false);
       router.push(`/register/completedPage/${classId}`);
       return;

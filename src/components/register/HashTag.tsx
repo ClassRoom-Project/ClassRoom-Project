@@ -13,7 +13,7 @@ interface HashTagProps {
 }
 
 const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
-  const { subCategory, setSubCategory } = useRegisterStore();
+  const { setSubCategory } = useRegisterStore();
   const [inputValue, setInputValue] = useState('');
   const [isLimitNotified, setIsLimitNotified] = useState(false);
 

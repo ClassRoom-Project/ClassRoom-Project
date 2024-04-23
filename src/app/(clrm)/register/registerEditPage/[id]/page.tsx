@@ -58,7 +58,7 @@ const RegisterEditPage = () => {
     const fetchDateAndTimeData = async () => {
       let { data: fetchedDateData, error: dateError } = await supabase
         .from('date')
-        .select('day')
+        .select('date_id, day')
         .eq('class_id', classId);
   
       if (dateError) {
@@ -69,8 +69,8 @@ const RegisterEditPage = () => {
       // 시간 데이터 가져오기
       let { data: fetchedTimeData, error: timeError } = await supabase
         .from('time')
-        .select('times')
-        .eq('class_id', classId);
+        .select('time_id, times, date_id')
+        .in('date_id', fetchedDateData?.map(item => item.date_id) ?? []); 
   
       if (timeError) {
         console.error('Time Error: ', timeError);

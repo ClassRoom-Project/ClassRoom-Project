@@ -1,11 +1,11 @@
 'use client';
-import RegisterScheduleStore from '@/store/registerScheduleStore';
+import React, { useEffect, useRef, useState } from 'react';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
-import React, { useEffect, useRef, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import CustomCaption from '../common/CustomCaption';
+import RegisterScheduleStore from '@/store/registerScheduleStore';
 import '../common/day-picker.css';
 
 interface ScheduleType {
@@ -47,8 +47,6 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
       setTempTime(initialData.schedules[0].times[0]);
     }
   }, [initialData, isEditMode, setSelectedDates, setTempTime]);
-  
-  
 
   const toggleDatePicker = () => {
     setIsDayPickerOpen(!isDayPickerOpen);
