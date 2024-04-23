@@ -76,14 +76,14 @@ const MyClass = () => {
   return (
     <ul className="flex flex-col gap-4 justify-center items-center p-4 md:w-full md:justify-items-center w-full md:min-w-[1080px]">
       <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden ">내가 등록한 클래스</p>
-      <p className="flex items-start text-lg text-text-dark-gray text-center p-4 md:hidden">
+      {/* <p className="flex items-start text-lg text-text-dark-gray text-center p-4 md:hidden">
         자세한 날짜 및 시간, 예약한 수강생 정보는 PC 버전에서 확인해주세요.
-      </p>
+      </p> */}
       {currentPosts?.map((classInfo, classIndex) => (
-        <li key={classIndex} className="flex flex-col align-center gap-4 my-4 py-4 w-full md:flex-row">
+        <li key={classIndex} className="flex flex-col align-center gap-4 md:my-4 md:py-4 w-full md:flex-row">
           {/* 클래스 기본 정보 부분 */}
           <div className="collapse collapse-arrow cursor-pointer justify-center">
-            <input type="checkbox" className="md:flex hidden" />
+            <input type="checkbox" />
             <div className="flex md:collapse-title w-full flex-col md:flex-row gap-4 items-center">
               <div className="md:w-[300px] md:h-[200px] w-4/5">
                 <Image
@@ -95,26 +95,28 @@ const MyClass = () => {
                   style={{ objectFit: 'contain' }}
                 />
               </div>
-              <div className="flex flex-col gap-4 m-4">
-                <p className="font-bold md:text-xl text-base text-dark-purple-color">{classInfo?.title}</p>
-                <div className="flex gap-4">
-                  <div className="md:flex items-center p-2 gap-2 border border-point-purple rounded-3xl hidden">
-                    <p className="text-sm">난이도 : {classInfo?.difficulty}</p>
+              <div className="flex flex-col md:gap-4 m-4">
+                <p className="font-bold md:text-xl py-4 text-base text-dark-purple-color">{classInfo?.title}</p>
+                <div className="flex md:gap-4 md:flex-row flex-col">
+                  <div className="flex md:gap-4">
+                    <div className="flex items-center p-2 gap-2 md:border md:border-point-purple md:rounded-3xl">
+                      <p className="text-sm">난이도 : {classInfo?.difficulty}</p>
+                    </div>
+                    <div className="flex items-center p-2 gap-2 md:border md:border-point-purple md:rounded-3xl">
+                      <p className=" text-sm">{classInfo?.class_type}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl ">
-                    <p className=" text-sm">{classInfo?.class_type}</p>
-                  </div>
-                  <div className="md:flex items-center p-2 gap-2 border border-point-purple rounded-3xl hidden">
+                  <div className="flex items-center p-2 gap-2 md:border md:border-point-purple md:rounded-3xl">
                     <BiCategoryAlt color="#6C5FF7" size="20" />
                     <p className=" text-sm">카테고리 : {classInfo?.category}</p>
                   </div>
-                  <div className="flex items-center p-2 gap-2 border border-point-purple rounded-3xl">
+                  <div className="flex items-center p-2 gap-2 md:border md:border-point-purple md:rounded-3xl">
                     <GoPersonAdd color="#6C5FF7" size="20" />
                     <p className=" text-sm">수강 인원수 : {classInfo?.quantity}명</p>
                   </div>
                 </div>
-                <div className="flex gap-4">
-                  <div className="inline-flex items-center p-2 gap-2 border border-point-purple rounded-3xl">
+                <div className="flex md:gap-4">
+                  <div className="inline-flex items-center p-2 gap-2 md:border md:border-point-purple md:rounded-3xl">
                     <GrLocation color="#6C5FF7" size="20" />
                     {classInfo?.location ? (
                       <p className="flex-grow  text-sm">
@@ -126,6 +128,39 @@ const MyClass = () => {
                   </div>
                 </div>
               </div>
+            </div>
+            {/* 클래스 날짜 및 시간 정보 */}
+            <div className="md:flex flex-col md:collapse-content">
+              {/* 클래스 날짜 표시 */}
+              {classInfo?.dates?.map((date, dateIndex) => (
+                <div key={dateIndex} className="flex md:gap-20 border-y-2 justify-center items-center">
+                  <div className="flex items-center p-2 gap-2 ">
+                    <FaRegCalendarCheck color="#6C5FF7" size="20" />
+                    <p className="flex flex-row gap-2 md:text-base text-xs whitespace-nowrap">
+                      <span className="hidden md:block">날짜 :</span> {date?.day}
+                    </p>
+                  </div>
+                  <div>
+                    {/* 클래스 시간 표시 */}
+                    {date?.times?.map((time, timeIndex) => (
+                      <div key={timeIndex} className="flex md:gap-20 p-2 justify-between">
+                        <div className="flex items-center p-2 gap-2">
+                          <FaRegClock color="#6C5FF7" size="20" />
+                          <p className="flex flex-row gap-2 md:text-base text-xs whitespace-nowrap">
+                            <span className="hidden md:block">시간 :</span> {convertTimeTo12HourClock(time?.times)}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => handleOnClickGoToReservedStudentList(time.time_id)}
+                          className="btn md:w-36 w-2/5 md:text-base text-xs whitespace-nowrap"
+                        >
+                          수강생 보기
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="flex gap-4 m-4 md:justify-end justify-center">
               <button
@@ -139,32 +174,6 @@ const MyClass = () => {
                   클래스 보러가기
                 </button>
               </Link>
-            </div>
-            {/* 클래스 날짜 및 시간 정보 */}
-            <div className="md:flex flex-col md:collapse-content hidden">
-              {/* 클래스 날짜 표시 */}
-              {classInfo?.dates?.map((date, dateIndex) => (
-                <div key={dateIndex} className="flex gap-20 border-y-2 justify-center">
-                  <div className="flex items-center p-2 gap-2 ">
-                    <FaRegCalendarCheck color="#6C5FF7" size="20" />
-                    <div className="flex flex-row gap-2">날짜 : {date?.day}</div>
-                  </div>
-                  <div>
-                    {/* 클래스 시간 표시 */}
-                    {date?.times?.map((time, timeIndex) => (
-                      <div key={timeIndex} className="flex gap-20 p-2">
-                        <div className="flex items-center p-2 gap-2">
-                          <FaRegClock color="#6C5FF7" size="20" />
-                          <div className="flex flex-row gap-2">시간 : {convertTimeTo12HourClock(time?.times)}</div>
-                        </div>
-                        <button onClick={() => handleOnClickGoToReservedStudentList(time.time_id)} className="btn w-36">
-                          수강생 보기
-                        </button>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </li>

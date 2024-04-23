@@ -11,6 +11,7 @@ import { BiMoneyWithdraw } from 'react-icons/bi';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GoPeople } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
+import NoImage from '../../../../public/noimage.png';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const queryClient = useQueryClient();
@@ -44,7 +45,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const formattedPrice = classItem.reserve_price.toLocaleString();
 
   // 이미지 대표사진
-  const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음';
+  const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : NoImage;
 
   return (
     <li className="border-b-2 flex flex-col align-center gap-4 my-4 py-4 w-full md:flex-row justify-center items-center">

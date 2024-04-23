@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
 import { changeInfoNotify, noChangedNotify, noInfoNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
+import { supabase } from '@/app/api/supabase/supabase';
 
 const EditProfile = () => {
   const { loginUserId } = useLoginStore();
@@ -20,7 +21,7 @@ const EditProfile = () => {
   const { userInfo, setUserInfo } = userInfoStore();
 
   const [newNickname, setNewNickname] = useState('');
-  const [newProfileImage, setNewProfileImage] = useState('');
+  const [newProfileImage, setNewProfileImage] = useState(''); // 이미지 상태
   const [isEditing, setIsEditing] = useState(false); // 수정된 사항 확인 여부
   const [isAvailableNickname, setIsAvailableNickname] = useState(true); // 닉네임 중복 여부 상태 업데이트
   const [isActiveBtn, setIsActiveBtn] = useState(false); // 수정 완료시 버튼 활성화 상태
@@ -56,8 +57,25 @@ const EditProfile = () => {
     }
   });
 
+  console.log('처음 수정된 blob이 담길 newProfileImage', newProfileImage);
+
+  // supabase storage에 프로필 이미지 업로드
+  const uploadProfileImage = async (file: File) => {
+    const randomUUID = crypto.randomUUID();
+    const filePath = `profile/${randomUUID}`;
+    const { data, error } = await supabase.storage.from('profileImages').upload(filePath, file);
+    if (error) {
+      console.error('파일 업로드 실패 :', error);
+      throw error;
+    } else {
+      const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/profileImages/${data.path}`;
+      console.log('url', url);
+      return setNewProfileImage(url);
+    }
+  };
+
   // 수정하기 버튼 -> supabase에 수정한 정보 update
-  const handleOnClickEditProfileBtn = () => {
+  const handleOnClickEditProfileBtn = async () => {
     // 수정된 사항이 없는 경우
     const isNicknameChanged = newNickname !== userInfo?.nickname;
     const isProfileImageChanged = newProfileImage != userInfo?.profile_image;
@@ -72,16 +90,22 @@ const EditProfile = () => {
       return;
     } else {
       // 수정된 사항이 있는 경우
-      changeInfoNotify();
-      updateUserInfoMutation({ newNickname, newProfileImage });
-      setUserInfo({
-        userId: userInfo.userId,
-        nickname: newNickname,
-        email: userInfo.email,
-        profile_image: newProfileImage,
-        isTeacher: userInfo.isTeacher
-      });
-      // alert('프로필 수정이 완료되었습니다.');
+      try {
+        // console.log('supabase user table 업데이트될 최종 imageUrl', imageUrl);
+        changeInfoNotify();
+        updateUserInfoMutation({ newNickname, newProfileImage });
+        setUserInfo({
+          userId: userInfo.userId,
+          nickname: newNickname,
+          email: userInfo.email,
+          profile_image: newProfileImage,
+          isTeacher: userInfo.isTeacher
+        });
+      } catch (error) {
+        console.error('프로필 이미지 업로드 에러', error);
+        return;
+      }
+      // 수정된 사항이 있는 경우
     }
   };
 
@@ -99,10 +123,6 @@ const EditProfile = () => {
     }
   };
 
-  // if (isPending) {
-  //   return <div> 로딩중 ... </div>;
-  // }
-
   if (!userInfo) {
     return <div> 유저 정보가 없습니다.</div>;
   }
@@ -117,6 +137,7 @@ const EditProfile = () => {
             setNewProfileImage={setNewProfileImage}
             isEditing={isEditing}
             userInfo={userInfo}
+            onImageUpload={uploadProfileImage}
           />
         </div>
         <div>
