@@ -5,6 +5,6 @@
   display: flex;
 }
 .embla__slide {
-  flex: 10 0 100%;
+  flex: 1 0 20%;
   min-width: 0;
 }

@@ -1,39 +1,29 @@
 'use client';
-
-import React, { useEffect } from 'react';
+//yarn add embla-carousel
+//yarn add embla-carousel-autoplay
+import React from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import ClassCard from './ClassCard';
+import { EmblaOptionsType } from 'embla-carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import { useClassInfoStore } from '@/store/classInfoStore';
-import { getClassAllInfo } from '@/app/api/mainpage/getClassAllInfo';
-// yarn add --dev @types/react-slick
-// yarn add react-slick
-// yarn add slick-carousel
-// flex 와 slick은 절때 사용금지
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { settings } from './ClassSlick';
+import './emblaCarousel.css';
 
 const BestClass = () => {
-  const { classInfos, setClassInfos } = useClassInfoStore();
-
-  useEffect(() => {
-    const getClassInfos = async () => {
-      const infos = await getClassAllInfo();
-      //todo : 좋아요순
-      setClassInfos(infos);
-    };
-    getClassInfos();
-  }, [setClassInfos]);
+  const { classInfos } = useClassInfoStore();
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 3000 })]);
 
   return (
-    <div className="mr-auto w-full ml-auto">
-      <p className="text-text-color">인기순</p>
-      <div className="slider-container w-full">
-        <Slider {...settings}>
+    <div className="w-full">
+      <p className="text-text-color borderb-[1px] border-solid border-border-color">인기순</p>
+      <div className="embla w-full overflow-hidden" ref={emblaRef}>
+        <div className="embla__container">
           {classInfos.map((info) => (
-            <ClassCard key={info.class_id} classInfos={info} />
+            <div className="embla__slide" key={info.class_id}>
+              <ClassCard classInfos={info} />
+            </div>
           ))}
-        </Slider>
+        </div>
       </div>
     </div>
   );
