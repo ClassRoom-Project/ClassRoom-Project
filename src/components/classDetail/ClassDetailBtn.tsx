@@ -10,17 +10,36 @@ import React from 'react';
 import AskButton from '../chatRooms/AskButton';
 
 import { ToastContainer } from 'react-toastify';
-import { alreadyReserved } from '../common/Toastify';
+import { alreadyReserved, closedClass } from '../common/Toastify';
+import { format } from 'date-fns';
 
 //TODO - href chat ID, 받아서 입력할것
-const ClassDetailBtn = ({ classId, makeClassUserId }: { classId: string; makeClassUserId: string }) => {
+const ClassDetailBtn = ({
+  classId,
+  makeClassUserId,
+  lastClassDay
+}: {
+  classId: string;
+  makeClassUserId: string;
+  lastClassDay: string;
+}) => {
   const { loginUserId } = useLoginStore();
 
+  console.log(lastClassDay, format(new Date(), 'yyyy-MM-dd'));
+  console.log(lastClassDay < format(new Date(), 'yyyy-MM-dd'));
+
   const router = useRouter();
+
   const handleApplyClick = async () => {
     if (!loginUserId) {
       router.push(`/reserve?classId=${classId}`);
     } else {
+      // 마지막 예약 가능 날짜가 현재보다 이전일 때 마감 toast
+      if (lastClassDay < format(new Date(), 'yyyy-MM-dd')) {
+        closedClass();
+        return;
+      }
+
       const isReserved = await checkIsReserved({ userId: loginUserId, classId });
       if (isReserved) {
         alreadyReserved();
