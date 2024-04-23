@@ -9,16 +9,9 @@ import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from 'react-icons/fi';
 import { ImageFileWithPreview } from '@/types/register';
-import { 
-  noDateTimeNotify, noLimitImageNotify, LimitImageSizeNotify, noTotalTimeNotify,
+import { noDateTimeNotify, noLimitImageNotify, LimitImageSizeNotify, noTotalTimeNotify,
   noCategoryNotify, noHashTagNotify,noClassContentNotify, noClassTitleNotify,
-  noClassTypeNotify, noClassDiffNotify, noMinNumberNotify, noPersonnelNotify
- } from '@/components/common/Toastify';
-
-interface FormInputs {
-  classTitle: string;
-  classType: string;
-}
+  noClassTypeNotify, noClassDiffNotify, noMinNumberNotify, noPersonnelNotify} from '@/components/common/Toastify';
 
 interface InitialDataType {
   image: string[];
@@ -145,12 +138,6 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
     if (selectedDates.length === 0 || isAnyTimes) {
       noDateTimeNotify();
       setIsLoading(false);
-      return;
-    }
-
-    // 이미지 등록 하나도 안했을시
-    if (images.length === 0) {
-      alert("Please upload at least one image.");
       return;
     }
 

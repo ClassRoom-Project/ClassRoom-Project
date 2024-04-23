@@ -13,18 +13,27 @@ interface HashTagProps {
 }
 
 const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
-  const { setSubCategory } = useRegisterStore();
+  const { subCategory, setSubCategory } = useRegisterStore();
+  const [inputValue, setInputValue] = useState('');
   const [isLimitNotified, setIsLimitNotified] = useState(false);
 
   useEffect(() => {
-    if (isEditMode && initialData) {
-      setSubCategory(initialData.subCategory);
+    if (isEditMode && initialData && initialData.subCategory) {
+      const hashTagsWithSymbol = initialData.subCategory.map(tag => `#${tag}`).join(' ');
+      setInputValue(hashTagsWithSymbol);
     }
-  }, [isEditMode, initialData, setSubCategory]);
+  }, [isEditMode, initialData]);
+
+  useEffect(() => {
+    const hashTags = inputValue.split('#').slice(1).map(tag => tag.trim()).filter(tag => tag !== '');
+    if (hashTags.length <= 5) {
+      setSubCategory(hashTags);
+    }
+  }, [inputValue, setSubCategory]);
 
   const handleSubCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    let inputValue = event.target.value;
-    const hashCount = (inputValue.match(/#/g) || []).length;
+    let value = event.target.value;
+    const hashCount = (value.match(/#/g) || []).length;
   
     if (hashCount > 5) {
       if (!isLimitNotified) {
@@ -32,20 +41,12 @@ const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
         setIsLimitNotified(true);
       }
       // #의 개수가 5개를 초과하면 더 이상 입력 받지 않음
-      event.target.value = inputValue.slice(0, inputValue.lastIndexOf("#"));
-      return;
-    } else {
-      if (isLimitNotified) {
-        setIsLimitNotified(false); // 알림 상태 초기화
-      }
+      value = value.slice(0, value.lastIndexOf("#"));
+    } else if (isLimitNotified) {
+      setIsLimitNotified(false); // 알림 상태 초기화
     }
-  
-    const rawHashTags = inputValue.split('#').slice(1);
-    const hashTags = rawHashTags.map(tag => tag.trim()).filter(tag => tag !== '');
-  
-    if (hashTags.length <= 5) {
-      setSubCategory(hashTags);
-    }
+
+    setInputValue(value);
   };  
 
   return (
@@ -55,6 +56,7 @@ const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
         <input
           className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0 w-full"
           type="text"
+          value={inputValue}
           onChange={handleSubCategoryChange}
           placeholder="해시태그 최대 5개까지 입력가능합니다(ex.#태그1 #태그2 #태그3)"
         />
