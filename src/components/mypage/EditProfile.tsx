@@ -7,7 +7,7 @@ import { UpdateUserInfoType } from '@/types/user';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-import { changeInfoNotify, noChangedNotify } from '../common/Toastify';
+import { changeInfoNotify, noChangedNotify, noInfoNotify } from '../common/Toastify';
 import EditProfileImage from './EditProfileImage';
 
 const EditProfile = () => {
@@ -34,7 +34,7 @@ const EditProfile = () => {
 
   // 닉네임 수정
   const handleOnChangeNickname = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newNickname = e.target.value;
+    const newNickname = e.target.value.trim();
     setNewNickname(newNickname); // 새로 작성한 닉네임
 
     const isAvailable = !(await checkUserNickname({ newNickname }, userId));
@@ -61,6 +61,11 @@ const EditProfile = () => {
     // 수정된 사항이 없는 경우
     const isNicknameChanged = newNickname !== userInfo?.nickname;
     const isProfileImageChanged = newProfileImage != userInfo?.profile_image;
+
+    if (!newNickname.trim()) {
+      noInfoNotify();
+      return;
+    }
 
     if (!isNicknameChanged && !isProfileImageChanged) {
       noChangedNotify();
@@ -103,9 +108,9 @@ const EditProfile = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center bg-light-purple w-[960px] p-4">
-      <p className="flex items-start text-xl text-dark-purple-color font-bold">프로필 수정하기</p>
-      <div className="flex gap-10 justify-center items-center">
+    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:justify-items-center w-full">
+      <p className="flex items-center justify-center text-xl text-dark-purple-color font-bold p-4">프로필 수정하기</p>
+      <div className="flex gap-10 justify-center items-center flex-col w-full md:flex-row">
         <div className="flex flex-col justify-center items-center">
           <EditProfileImage
             newProfileImage={newProfileImage}
@@ -117,7 +122,7 @@ const EditProfile = () => {
         <div>
           <div className="flex flex-col">
             <div className="m-4 p-4 gap-4">
-              <p className="text-text-dark-gray font-bold">닉네임</p>
+              <p className="text-text-dark-gray font-bold py-2">닉네임</p>
               {isEditing ? (
                 <input
                   type="text"
@@ -137,28 +142,31 @@ const EditProfile = () => {
               )}
             </div>
             <div className="m-4 p-4">
-              <p className="text-text-dark-gray font-bold">이메일</p>
+              <p className="text-text-dark-gray font-bold py-2">이메일</p>
               <p>{userInfo?.email}</p>
             </div>
           </div>
         </div>
       </div>{' '}
-      <div className="m-4 p-4 flex gap-4">
-        <button onClick={handleOnClickCancleBtn} className="btn w-[100px] ">
+      <div className="p-4 flex gap-4 justify-center">
+        <button onClick={handleOnClickCancleBtn} className="btn w-[100px] hover:bg-white hover:text-text-dark-gray">
           취소하기
         </button>
         {isEditing ? (
           <div>
             <button
               onClick={handleOnClickEditProfileBtn}
-              className="btn w-[100px]  bg-dark-purple-color text-white"
+              className="btn w-[100px]  bg-dark-purple-color text-white hover:bg-white hover:text-dark-purple-color"
               disabled={isActiveBtn}
             >
               수정 완료
             </button>
           </div>
         ) : (
-          <button onClick={() => setIsEditing(true)} className="btn w-[100px]  bg-dark-purple-color text-white">
+          <button
+            onClick={() => setIsEditing(true)}
+            className="btn w-[100px]  bg-dark-purple-color text-white  hover:bg-white hover:text-dark-purple-color"
+          >
             수정하기
           </button>
         )}

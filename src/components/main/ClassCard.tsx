@@ -12,7 +12,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   const hashtagString = classInfos.hashtag.map((tag) => `#${tag}`).join(' ');
 
   return classInfos ? (
-    <div className="card w-[250px] h-[320px] bg-base-100 m-1 rounded-xl overflow-hidden">
+    <div className="card w-[250px] h-[320px] bg-base-100 mx-auto rounded-xl overflow-hidden">
       <Link href={`/list/detail/${classInfos.class_id}`} className="">
         <figure className="w-full h-40 rounded-xl bg-gray-200 relative">
           <Image
@@ -23,7 +23,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
             alt="클래스 이미지"
             // layout="responsive"
             objectFit="cover"
-            unoptimized={true}
+            unoptimized
           />
         </figure>
         <div className="py-1 flex flex-col justify-between">

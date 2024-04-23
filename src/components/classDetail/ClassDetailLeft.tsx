@@ -29,21 +29,21 @@ const ClassDetailLeft = ({
     <div className="flex flex-col p-5 mb-3 shadow-md justify-start items-center w-[600px] rounded-lg h-[1000px] bg-light-purple xl:mr-4 xl:mb-0 ">
       <div className="flex items-center justify-between w-[400px]">
         <div className="flex justify-center items-center mr-2 h-8 gap-2">
-          <Image
-            width={30}
-            height={30}
-            className="rounded-full"
-            src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
-            alt="profileImage"
-            unoptimized={true}
-          ></Image>
-
+          <div className="w-8 h-8">
+            <Image
+              width={30}
+              height={30}
+              className="rounded-full w-full h-full object-cover"
+              src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
+              alt="profileImage"
+            />
+          </div>
           <p>{classData?.users.teacher_name}</p>
         </div>
         <DetailWishButton classId={classData?.class_id} />
       </div>
       <div className="w-[400px] h-[350px] relative mt-2 flex bg-black">
-        <Image fill src={mainImageSrc} alt="classImage 0" unoptimized={true}></Image>
+        <Image fill src={mainImageSrc} alt="classImage 0"></Image>
       </div>
       <div className="w-[400px] mb-5 h-[50px] flex mt-2">
         <div
@@ -55,7 +55,6 @@ const ClassDetailLeft = ({
             height={50}
             src={classData?.image[0] ? classData.image[0] : defaultImageSrc}
             alt="classImage 0"
-            unoptimized={true}
           ></Image>
         </div>
 
@@ -68,7 +67,6 @@ const ClassDetailLeft = ({
             height={50}
             src={classData?.image[1] ? classData.image[1] : defaultImageSrc}
             alt="classImage 1"
-            unoptimized={true}
           ></Image>
         </div>
         <div
@@ -80,7 +78,6 @@ const ClassDetailLeft = ({
             height={50}
             src={classData?.image[2] ? classData.image[2] : defaultImageSrc}
             alt="classImage 2"
-            unoptimized={true}
           ></Image>
         </div>
         <div
@@ -92,7 +89,6 @@ const ClassDetailLeft = ({
             height={50}
             src={classData?.image[3] ? classData.image[3] : defaultImageSrc}
             alt="classImage 3"
-            unoptimized={true}
           ></Image>
         </div>
         <div
@@ -104,7 +100,6 @@ const ClassDetailLeft = ({
             height={50}
             src={classData?.image[4] ? classData.image[4] : defaultImageSrc}
             alt="classImage 4"
-            unoptimized={true}
           ></Image>
         </div>
       </div>

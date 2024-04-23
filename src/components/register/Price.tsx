@@ -1,9 +1,24 @@
 'use client';
-import React from 'react';
+import React, {useEffect} from 'react';
 import useRegisterStore from '@/store/registerStore';
 
-const Price = () => {
+interface InitialDataType {
+  price: number;
+}
+
+interface PriceProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const Price:React.FC<PriceProps> = ({ isEditMode, initialData }) => {
   const { price, setPrice } = useRegisterStore();
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setPrice(initialData.price);
+    }
+  }, [isEditMode, initialData, setPrice]);
 
   const handlePriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let value = parseInt(event.target.value);

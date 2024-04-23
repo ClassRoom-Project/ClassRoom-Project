@@ -28,8 +28,8 @@ const config: Config = {
         'point-purple': '#6C5FF7',
         'light-purple': '#F6F6FF',
         'disable-color': '#E3E1FC',
-
         'background-color': '#EFEFFF',
+
         //button
         'button-default-color': '#6C5FF7',
         'button-hover-color': '#4D43B8',
@@ -41,11 +41,19 @@ const config: Config = {
         'dark-purple-color': '#4D43B8',
         'text-dark-gray': '#515B60',
         'icon-color': '#3f3f3f'
-      },
-      screens: {}
+      }
+    },
+    screens: {
+      mobile: '425px',
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px'
     }
   },
-  plugins: [require('daisyui')],
+
+  plugins: [require('daisyui'), require('tailwind-scrollbar-hide')],
   daisyui: {
     themes: true,
     darkTheme: 'light',

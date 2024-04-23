@@ -8,7 +8,25 @@ import 'react-day-picker/dist/style.css';
 import CustomCaption from '../common/CustomCaption';
 import '../common/day-picker.css';
 
-const SelectTime: React.FC = () => {
+interface ScheduleType {
+  date: string;
+  times: string[];
+}
+
+interface InitialDataType {
+  day?: Date;
+  times?: string;
+  selectedDates: string[];
+  timeData: string[];
+  schedules?: ScheduleType[];
+}
+
+interface SelectTimeProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
   const {
     schedules,
     selectedDates,
@@ -22,6 +40,15 @@ const SelectTime: React.FC = () => {
   const [isDayPickerOpen, setIsDayPickerOpen] = useState(false);
   const [tempTime, setTempTime] = useState<string>(''); // 임시 시간 상태 추가
   const dayPickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isEditMode && initialData && initialData.schedules && initialData.schedules.length > 0 && initialData.schedules[0].times.length > 0) {
+      setSelectedDates(initialData.selectedDates);
+      setTempTime(initialData.schedules[0].times[0]);
+    }
+  }, [initialData, isEditMode, setSelectedDates, setTempTime]);
+  
+  
 
   const toggleDatePicker = () => {
     setIsDayPickerOpen(!isDayPickerOpen);

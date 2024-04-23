@@ -3,6 +3,7 @@
 import {
   useDeleteMessage,
   useReadChatRoomMessages,
+  useReadLastMessages,
   useReadMakeClassUserInfo
 } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -26,6 +27,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
   const { deleteMessageMutate } = useDeleteMessage();
+  const { readLastMessages } = useReadLastMessages(chatId);
   const queryClient = useQueryClient();
   const [stateLoading, setStateLoading] = useState(false);
   //Dom요소나 컴포넌트의 직접적인 접근을 가능하게 해줌Ref
@@ -80,6 +82,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
         endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
       }, 100);
     };
+
     if (readChatRoomMessages && readChatRoomMessages.length > 0) {
       scrollToBottom();
     }
@@ -191,7 +194,6 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                           <Image
                             src={imgUrl}
                             layout="fill"
-                            unoptimized
                             objectFit="cover"
                             alt={`Photo ${imgIndex + 1}`}
                             // 이미지가 완전히 업로드 되고 플레이스홀더가 제거되면 호출되는 콜백함수!!
