@@ -29,6 +29,7 @@ const config: Config = {
         'light-purple': '#F6F6FF',
         'disable-color': '#E3E1FC',
         'background-color': '#EFEFFF',
+        'input-border-color': '#CAC6FC',
 
         //button
         'button-default-color': '#6C5FF7',

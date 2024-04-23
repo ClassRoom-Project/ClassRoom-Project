@@ -45,7 +45,7 @@ export const SearchClass = () => {
 
   return (
     <form className="h-[120px] ml-2 relative w-full flex items-center justify-center" onSubmit={handleSearchBtn}>
-      <div className="flex border-[1px] rounded-xl w-full items-end justify-end border-point-color relative">
+      <div className="flex border-[1px] rounded-xl w-full items-end justify-end border-input-border-color relative">
         <input
           maxLength={20}
           onChange={handleSearchChange}
