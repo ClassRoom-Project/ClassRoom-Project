@@ -57,7 +57,7 @@ const MapComponent = ({
       {location ? (
         <div className="w-full">
           <Map
-            className="w-full h-full p-40 rounded-lg border border-solid border-button-press-color " // 지도 크기
+            className="w-full h-full p-40 rounded-lg border border-solid border-button-disable-color " // 지도 크기
             center={{ lat: latitude ?? 0, lng: longitude ?? 0 }} // 지도의 중심 좌표
             level={3} // 지도 확대 레벨
           >
