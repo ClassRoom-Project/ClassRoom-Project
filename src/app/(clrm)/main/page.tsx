@@ -12,7 +12,7 @@ const MainPage = () => {
         <CategoryBtns />
       </Suspense>
       <BestClass />
-      <DeadlineClass />
+      {/* <DeadlineClass /> */}
       <LatestClass />
     </div>
   );

@@ -14,7 +14,10 @@ export const getLatestClassInfo = async (): Promise<ClassAllType[]> => {
 
 // 인기순
 export const getBestClassInfo = async (): Promise<ClassAllType[]> => {
-  const { data: classInfos, error } = await supabase.from('class').select('*');
+  const { data: classInfos, error } = await supabase
+    .from('class')
+    .select('*')
+    .order('wish_count', { ascending: false });
 
   if (error) {
     console.error('클래스 정보들 불러오기 오류 => ', error);
