@@ -141,7 +141,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                     <textarea
                       minLength={10}
                       maxLength={150}
-                      className="w-full h-52 p-2 border rounded-md"
+                      className="w-full h-52 p-2 border rounded-md resize-none"
                       placeholder="후기를 입력해주세요. (10자 이상)"
                       value={content}
                       onChange={handleContentChange}
@@ -163,7 +163,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                         style={{ display: 'none' }}
                       />
                     </div>
-                    <div className="w-32 h-32 items-center justify-center flex relative mr-5 xl:w-[320px] xl:h-52">
+                    <div className="w-full h-32 items-center justify-center flex relative  xl:w-[320px] xl:h-52">
                       {commentImage.length > 0 ? (
                         <Image
                           src={commentImage[0].preview}

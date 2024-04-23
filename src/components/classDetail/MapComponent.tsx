@@ -2,16 +2,24 @@
 
 import { useDetailClassInfoStore } from '@/store/classInfoStore';
 import React, { useEffect, useState } from 'react';
+import { GrLocation } from 'react-icons/gr';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 
-const MapComponent = () => {
+const MapComponent = ({
+  location,
+  detailLocation
+}: {
+  location: string | undefined;
+  detailLocation: string | undefined;
+}) => {
   const { classInfo } = useDetailClassInfoStore();
+
+  console.log(classInfo);
 
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
 
-  const classLocation = classInfo?.location;
-  const placeAddress = classLocation || null;
+  const placeAddress = location || null;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,18 +54,19 @@ const MapComponent = () => {
 
   return (
     <div className="flex justify-center items-center w-full">
-      {classLocation ? (
-        <div>
+      {location ? (
+        <div className="w-full">
           <Map
-            className="w-[400px] h-[400px] m-4 p-4" // 지도 크기
+            className="w-full h-full p-40 rounded-lg border border-solid border-button-press-color " // 지도 크기
             center={{ lat: latitude ?? 0, lng: longitude ?? 0 }} // 지도의 중심 좌표
             level={3} // 지도 확대 레벨
           >
             <MapMarker position={{ lat: latitude ?? 0, lng: longitude ?? 0 }} />
           </Map>
-          <p className="m-4">
-            주소 : {classLocation} {classInfo?.detail_location}
-          </p>
+          <div className="flex items-center gap-2 m-4">
+            <GrLocation size={20} className="text-main-color" />
+            주소 : {location} {detailLocation}
+          </div>
         </div>
       ) : (
         <p>등록된 주소가 없습니다.</p>

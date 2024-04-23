@@ -34,10 +34,10 @@ const page = async ({ params }: { params: { id: string } }) => {
       <div className="w-full p-6 flex flex-col justify-center items-center">
         <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
         {/* <div className="divider m-4"></div> */}
-        <div className="border border-solid border-black w-3/5 h-[380px]">
-          <MapComponent />
+        <div className=" w-3/5 h-[380px]">
+          <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />
           <div className="flex items-center">
-            <GrLocation className="text-main-color" /> <p>{classData?.location}</p>
+            {/* <GrLocation className="text-main-color" /> <p>{classData?.location}</p> */}
           </div>
         </div>
         <div className="w-full">
