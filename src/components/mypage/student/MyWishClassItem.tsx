@@ -1,17 +1,16 @@
 import AskButton from '@/components/chatRooms/AskButton';
-import DetailWishButton from '@/components/classDetail/DetailWishButton';
-import { ClassAllType, MyWishClassType } from '@/types/class';
+import { MyWishClassType } from '@/types/class';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { BiCategoryAlt } from 'react-icons/bi';
 import { GoPersonAdd } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
+import NoImage from '../../../../public/noimage.png';
 import MyPageWishButton from './MyPageWishButton';
 
 const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
   // 이미지 대표사진
-  const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : '이미지 없음';
+  const mainImage = classItem.image && classItem.image.length > 0 ? classItem.image[0] : NoImage;
 
   return (
     <li className="border-b-2 flex flex-col align-center gap-4 my-4 py-4 w-full md:flex-row justify-center items-center ">
