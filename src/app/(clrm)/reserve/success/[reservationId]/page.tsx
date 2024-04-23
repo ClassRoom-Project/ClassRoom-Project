@@ -90,10 +90,10 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   // #endregion
 
   return (
-    <div className="responsiveHeight min-w-100vw m-0 lg:bg-400 flex flex-col">
+    <div className="min-h-100vh-header-default min-w-100vw m-0 lg:bg-400 flex flex-col">
       {!isLoading && !isError ? (
         <>
-          <div className="w-full responsiveHeight py-2 bg-light-purple flex justify-center items-center flex-col text-gray-700">
+          <div className="w-full min-h-100vh-header-default bg-light-purple flex justify-center items-center flex-col text-gray-700 py-4 pb-20 md:p-0">
             <div className="w-11/12 px-6 pt-12 pb-8 sm:px-12 md:w-4/5 lg:w-1/2 md:min-w-[500px] lg:min-w-[600px] flex flex-col justify-center items-center bg-white shadow rounded-md">
               <FiCheckCircle color="#38c557" className="mb-4 sm:mb-6 " size={70} />
               <h1 className="font-bold text-center text-xl lg:text-2xl">클래스 예약이 정상적으로 처리되었습니다.</h1>
@@ -126,12 +126,12 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
           </div>
         </>
       ) : isError ? (
-        <div className="flex flex-col justify-center  items-center gap-4 responsiveHeight bg-light-purple">
+        <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default bg-light-purple">
           <RiErrorWarningLine size={100} color="#6C5FF7" />
           <p className="font-bold text-lg mt-5">예약을 완료하는 도중 오류가 발생했습니다. </p>
         </div>
       ) : (
-        <div className="flex flex-col justify-center  items-center gap-4 responsiveHeight bg-light-purple">
+        <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default bg-light-purple">
           <LoadingSpinner />
           <p>잠시만 기다려주세요..</p>
         </div>
