@@ -68,18 +68,18 @@ const Header = ({ children }: PropsWithChildren) => {
     <>
       <div className="fixed top-0 left-0 right-0  z-40 bg-white flex w-full justify-between items-center h-20 border-b-[1px] border-solid border-gray-300 ml-0 md:ml-[50px] md:px-32">
         <div className="flex items-center h-full ml-0 w-full justify-start">
-          <div className="rounded-full relative w-16 h-16">
+          <div className="rounded-full mx-2 w-10 h-10 relative md:w-16 md:h-16">
             <Link href="/">
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
           </div>
-          <div className="w-3/5  xs:w-1/3">
+          <div className="w-4/5  xs:w-1/3">
             <Suspense>
               <SearchClass />
             </Suspense>
           </div>
         </div>
-        <div className="w-2/5 relative flex items-end justify-end  lg:w-4/5">
+        <div className="w-1/5 relative flex items-end justify-end  lg:w-4/5">
           <div className="flex w-full justify-end items-center">
             {userEmail ? (
               <div className="flex justify-end items-en">
@@ -96,7 +96,7 @@ const Header = ({ children }: PropsWithChildren) => {
 
             {userEmail ? (
               <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="w-16 h-16 relative rounded-full">
+                <div tabIndex={0} role="button" className="w-10 h-10 mx-2 relative rounded-full md:w-16 md:h-16">
                   <Image
                     src={profileImage}
                     alt="Profile image"

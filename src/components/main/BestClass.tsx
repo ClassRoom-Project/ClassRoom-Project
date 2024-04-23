@@ -6,37 +6,37 @@ import useEmblaCarousel from 'embla-carousel-react';
 import ClassCard from './ClassCard';
 import { EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { useClassInfoStore } from '@/store/classInfoStore';
-import { getClassAllInfo } from '@/app/api/mainpage/getClassAllInfo';
+import { useBestClassInfoStore } from '@/store/classInfoStore';
+import { getBestClassInfo } from '@/app/api/mainpage/getClassAllInfo';
 import './emblaCarousel.css';
 
 const BestClass = () => {
-  const { classInfos, setClassInfos } = useClassInfoStore();
+  const { BestClassInfos, setBestClassInfos } = useBestClassInfoStore();
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 3000 })]);
 
   //카드들이 제대로 나오지 않는 경우가 있는 경우 방지
 
   useEffect(() => {
-    if (embla && classInfos.length > 0) {
+    if (embla && BestClassInfos.length > 0) {
       embla.reInit();
     }
-  }, [embla, classInfos]);
+  }, [embla, BestClassInfos]);
 
   useEffect(() => {
     const fetchClassInfo = async () => {
-      const infos = await getClassAllInfo();
-      setClassInfos(infos);
+      const infos = await getBestClassInfo();
+      setBestClassInfos(infos);
     };
 
     fetchClassInfo();
-  }, [setClassInfos]);
+  }, [setBestClassInfos]);
 
   return (
     <div className="w-full flex flex-col">
       <p className="text-text-color px-2 borderb-[1px] pb-5 border-solid border-border-color">인기순</p>
       <div className="embla w-full overflow-hidden" ref={emblaRef}>
         <div className="embla__container">
-          {classInfos.map((infos) => (
+          {BestClassInfos.map((infos) => (
             <div className="embla__slide" key={infos.class_id}>
               <ClassCard classInfos={infos} />
             </div>

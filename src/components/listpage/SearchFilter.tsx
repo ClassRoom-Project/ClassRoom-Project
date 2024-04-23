@@ -72,7 +72,7 @@ const SearchFilter = () => {
 
   return (
     <div className="flex w-full items-start justify-start p-5">
-      <div className="dropdown dropdown-bottom w-12 h-12 z-30">
+      <div className="dropdown dropdown-bottom w-9 h-9 z-30 md:w-12 md:h-12">
         <div tabIndex={0} onMouseDown={(e) => checkAndCloseDropDown(e)} role="button" className="btn ">
           <FiAlignJustify role="button" className="swap-off fill-current" size={30} color="#6C5FF7"></FiAlignJustify>
         </div>
