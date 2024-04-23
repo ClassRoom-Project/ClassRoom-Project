@@ -101,9 +101,9 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
 
   return (
     <div className="my-4">
-      <h1 className="font-bold text-[#3F3F3F] mt-6">* 클래스 날짜&시간</h1>
+      <h1 className="font-bold text-[#3F3F3F] mt-6"><span className='text-[#d63232] font-bold'>*</span> 클래스 일정&시간</h1>
       <p className="text-sm mt-1 mb-2 text-[#7E7E7E]">
-        *해당 날짜의 시간을 선택한 후 +버튼을 클릭해야 시간 정보가 추가됩니다*
+        해당 날짜의 시간을 선택한 후 +버튼을 클릭해야 시간 정보가 추가됩니다
       </p>
       <div className="relative">
         <button

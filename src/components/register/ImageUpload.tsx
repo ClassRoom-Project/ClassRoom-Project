@@ -9,7 +9,16 @@ import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from 'react-icons/fi';
 import { ImageFileWithPreview } from '@/types/register';
-import { noInfoNotify, noDateTimeNotify, noLimitImageNotify, LimitHashTagSizeNotify } from '@/components/common/Toastify';
+import { 
+  noDateTimeNotify, noLimitImageNotify, LimitImageSizeNotify, noTotalTimeNotify,
+  noCategoryNotify, noHashTagNotify,noClassContentNotify, noClassTitleNotify,
+  noClassTypeNotify, noClassDiffNotify, noMinNumberNotify, noPersonnelNotify
+ } from '@/components/common/Toastify';
+
+interface FormInputs {
+  classTitle: string;
+  classType: string;
+}
 
 interface InitialDataType {
   image: string[];
@@ -67,34 +76,81 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
-    setIsLoading(true);
-    if (
-      !category ||
-      !subCategory ||
-      !classContent ||
-      !classTitle ||
-      !classType ||
-      !difficulty ||
-      !minNumber ||
-      !personnel ||
-      !totalTime
-    ) {
-      noInfoNotify();
+    // 카테고리 입력 안했을시
+    if(!category) {
+      noCategoryNotify();
       setIsLoading(false);
       return;
     }
 
+    // 해시태그 입력 안했을시
     if (subCategory.length === 0) {
-      noInfoNotify();
+      noHashTagNotify();
       setIsLoading(false);
       return;
     }
 
+    // 클래스 설명 입력 안했을시
+    if(!classContent) {
+      noClassContentNotify();
+      setIsLoading(false);
+      return;
+    }
+
+    // 클래스 타입 선택 안했을시
+    if(!classType) {
+      noClassTypeNotify();
+      setIsLoading(false);
+      return;
+    }
+
+    // 클래스 제목 입력 안했을시
+    if(!classTitle) {
+      noClassTitleNotify();
+      setIsLoading(false);
+      return;
+    }
+
+    // 클래스 난이도 선택 안했을시
+    if(!difficulty) {
+      noClassDiffNotify();
+      setIsLoading(false);
+      return;
+    }
+
+    // 최소 모집 인원 입력 안했을시
+    if(!minNumber) {
+      noMinNumberNotify();
+      setIsLoading(false);
+      return;
+    }
+
+    // 정원 입력 안했을시
+    if(!personnel) {
+      noPersonnelNotify();
+      setIsLoading(false);
+      return;
+    }
+
+    // 소요시간 입력 안했을시
+    if(!totalTime) {
+      noTotalTimeNotify();
+      setIsLoading(false);
+      return;
+    }
+
+    // 날짜 및 시간 입력 안했을시
     const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
 
     if (selectedDates.length === 0 || isAnyTimes) {
       noDateTimeNotify();
       setIsLoading(false);
+      return;
+    }
+
+    // 이미지 등록 하나도 안했을시
+    if (images.length === 0) {
+      alert("Please upload at least one image.");
       return;
     }
 
@@ -272,7 +328,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
       // 파일 크기 체크
       const fileSize = file.size / (1024 * 1024);
       if (fileSize > 5) {
-        LimitHashTagSizeNotify();
+        LimitImageSizeNotify();
         return;
       }
 
