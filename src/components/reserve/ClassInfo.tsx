@@ -57,7 +57,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
               <div key={title} className="flex items-center gap-1 text-gray-500">
                 <div className="font-bold ">{icon}</div>
                 <div className={'font-bold mr-1 shrink-0'}>{title}</div>
-                <p className="font-normal">{description}</p>
+                <p className="font-normal truncate">{description}</p>
               </div>
             );
           })}
