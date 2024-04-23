@@ -16,7 +16,7 @@ export const getClassForList = async (
     selectedLocation?: string | null;
     selectedDifficulty?: string | null;
     selectedPrice?: PriceRange | null;
-    selectedDayType: string | null;
+    selectedDayType?: string | null;
   },
   //null 값을 지정해줘야 없을때는 필터링을 안한다
   searchQuery: string | null = ''
@@ -55,9 +55,8 @@ export const getClassForList = async (
   }
 
   if (filters.selectedDayType) {
-    // query = query.eq('')
     const dayArray = filters.selectedDayType === '주말' ? [0, 6] : [1, 2, 3, 4, 5];
-    query = query.overlaps('days_of_week', dayArray);
+    query = query.overlaps('days_of_week', dayArray); // overlaps: 두 배열이 하나 이상의 공통 요소를 가지고 있을 때 true를 반환
   }
 
   // if (userId) {
@@ -71,17 +70,6 @@ export const getClassForList = async (
   }
   const totalCount = count ?? 0;
   const nextPage = PageNumber + limit < totalCount ? page + 1 : undefined;
-
-  // 보낼때 1,2,3,4,5 / 0,6 으로 보내거나
-  // 월화수목금, 토일로 보내고
-  // 일치하는것만 가져오기..
-  const week = ['일', '월', '화', '수', '목', '금', '토'];
-
-  // const days = classInfos.map((item) => item.date.map((item) => new Date(item.day).getDay()));
-  // console.log(days);
-
-  // console.log(classInfos[0].title, classInfos[0].date);
-  // console.log(new Date(classInfos[0].date[0].day).getDay());
 
   return { classInfos, nextPage }; // classinfo랑 다음페이지를 반환값으로 가져야 무한루프 넥스트페이지를 사용가능
 };
