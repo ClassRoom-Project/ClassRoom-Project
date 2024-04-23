@@ -16,7 +16,7 @@ export default function SocialLogin() {
     <section className="flex flex-col text-sm md:text-base w-4/5 md:w-2/3 lg:w-1/2 h-full ">
       <nav className="flex flex-col justify-center items-center w-full ">
         <button
-          className="socialIcon-field hover:bg-[#EBF2FF] w-full h-1/3 flex items-center rounded justify-center"
+          className="socialIcon-field bg-[#EBF2FF] w-full h-1/3 flex items-center hover:border-[#EBF2FF] hover:bg-white rounded justify-center"
           onClick={() => handleSocialSignin('google')}
         >
           <div className="flex flex-row items-center justify-center gap-5">
@@ -27,7 +27,7 @@ export default function SocialLogin() {
           </div>
         </button>
         <button
-          className="socialIcon-field hover:bg-yellow-300 w-full h-1/3 flex items-center rounded justify-center"
+          className="socialIcon-field bg-yellow-300 w-full h-1/3 flex items-center hover:border-yellow-300 hover:bg-white rounded justify-center"
           onClick={() => handleSocialSignin('kakao')}
         >
           <div className="flex flex-row items-center justify-center gap-2">
@@ -38,7 +38,7 @@ export default function SocialLogin() {
           </div>
         </button>
         <button
-          className="socialIcon-field hover:bg-green-500 w-full h-1/3 flex items-center rounded justify-center"
+          className="socialIcon-field bg-green-500 w-full h-1/3 flex items-center hover:border-[#8ED799] hover:bg-white rounded justify-center"
           onClick={() => handleSocialSignin('naver')}
         >
           <div className="flex flex-row items-center justify-center gap-2">

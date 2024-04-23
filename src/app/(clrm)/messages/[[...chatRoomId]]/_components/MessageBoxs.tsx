@@ -25,12 +25,12 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
-  const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
   const queryClient = useQueryClient();
   const [stateLoading, setStateLoading] = useState(false);
   //Dom요소나 컴포넌트의 직접적인 접근을 가능하게 해줌Ref
   const zoom = mediumZoom({ background: '#000' });
+  const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const subscribeChat = supabase
@@ -76,9 +76,13 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   //새로운 메시지 들어오는 경우 자동으로 스크롤 하단으로 이동
   useEffect(() => {
     const scrollToBottom = () => {
-      endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+      setTimeout(() => {
+        endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     };
-    scrollToBottom();
+    if (readChatRoomMessages && readChatRoomMessages.length > 0) {
+      scrollToBottom();
+    }
   }, [readChatRoomMessages]);
 
   //medium-zoom
@@ -87,6 +91,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   };
 
   //무한스크롤
+
   if (isLoading) {
     return (
       <div className="flex flex-col justify-center items-center h-auto px-3">
