@@ -1,16 +1,31 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React from 'react';
+import React, {useEffect} from 'react';
 import useRegisterStore from '@/store/registerStore';
 import 'react-quill/dist/quill.snow.css';
+
+interface InitialDataType {
+  classContent: string;
+}
+
+interface ClassContentProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading...</p>,
 });
 
-const ClassContent = () => {
+const ClassContent: React.FC<ClassContentProps> = ({ isEditMode, initialData }) => {
   const { classContent, setClassContent } = useRegisterStore();
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setClassContent(initialData.classContent);
+    }
+  }, [isEditMode, initialData, setClassContent]);
 
   const handleClassContentChange = (value:string) => {
     setClassContent(value);
@@ -56,7 +71,7 @@ const ClassContent = () => {
   ]
 
   return (
-    <div className="my-4 h-[450px]">
+    <div className="my-4 h-[480px]">
       <div className="flex flex-col md:flex-row items-start space-x-0 md:space-x-4 space-y-4 md:space-y-0 w-full">
         <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 클래스 설명</p>
         <ReactQuill

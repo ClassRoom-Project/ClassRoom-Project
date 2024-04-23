@@ -9,10 +9,11 @@ import { GoBellFill } from 'react-icons/go';
 
 const NotificationComponent = () => {
   const { loginUserId } = useLoginStore();
-  const router = useRouter();
   const [isNotificationOpen, setIsNotificationOpen] = React.useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const lastIconClickTimeRef = useRef<Date | null>(null);
+
+  const router = useRouter();
 
   const { data: notifications = [], refetch } = useQuery({
     queryKey: ['notifications', loginUserId],
@@ -29,8 +30,7 @@ const NotificationComponent = () => {
 
       return data;
     },
-    enabled: !!loginUserId
-    // refetchInterval: 3000,
+    enabled: !!loginUserId,
   });
 
   const unreadNotificationsCount = notifications.filter((notification) => !notification.isread).length;
@@ -38,6 +38,9 @@ const NotificationComponent = () => {
   const toggleBellIcon = () => {
     setIsNotificationOpen((prevState) => !prevState);
     lastIconClickTimeRef.current = new Date();
+    if (!isNotificationOpen) {
+      refetch();
+    }
   };
 
   useEffect(() => {
@@ -67,16 +70,11 @@ const NotificationComponent = () => {
 
   const handleNotificationClick = async (notification: Notification) => {
     if (!notification.isread) {
-      const { error } = await supabase
+      await supabase
         .from('notifications')
         .update({ isread: true })
         .eq('notice_id', notification.notice_id);
-
-      if (error) {
-        console.error('error', error);
-      } else {
-        refetch();
-      }
+      refetch();
     }
     router.push(`/list/detail/${notification.class_id}`);
   };

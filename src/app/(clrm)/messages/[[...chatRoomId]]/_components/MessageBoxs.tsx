@@ -188,7 +188,6 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                           <Image
                             src={imgUrl}
                             layout="fill"
-                            unoptimized
                             objectFit="cover"
                             alt={`Photo ${imgIndex + 1}`}
                             // 이미지가 완전히 업로드 되고 플레이스홀더가 제거되면 호출되는 콜백함수!!

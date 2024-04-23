@@ -1,9 +1,24 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useRegisterStore from '@/store/registerStore';
 
-const Category = () => {
+interface InitialDataType {
+  category: string;
+}
+
+interface CategoryProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const Category: React.FC<CategoryProps> = ({ isEditMode, initialData }) => {
   const { category, setCategory } = useRegisterStore();
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setCategory(initialData.category);
+    }
+  }, [isEditMode, initialData, setCategory]);
 
   const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(event.target.value);

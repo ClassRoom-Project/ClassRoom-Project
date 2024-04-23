@@ -23,7 +23,6 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
             alt="클래스 이미지"
             // layout="responsive"
             objectFit="cover"
-            unoptimized={true}
           />
         </figure>
         <div className="py-1 flex flex-col justify-between">

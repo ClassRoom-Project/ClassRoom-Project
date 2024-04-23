@@ -1,9 +1,26 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useRegisterStore from '@/store/registerStore';
 
-const ClassTitleType = () => {
+interface InitialDataType {
+  title: string;
+  class_type: string;
+}
+
+interface ClassTitleTypeProps {
+  isEditMode: boolean;
+  initialData?: InitialDataType;
+}
+
+const ClassTitleType: React.FC<ClassTitleTypeProps> = ({ isEditMode, initialData }) => {
   const { classTitle, classType, setClassTitle, setClassType } = useRegisterStore();
+
+  useEffect(() => {
+    if (isEditMode && initialData) {
+      setClassTitle(initialData.title);
+      setClassType(initialData.class_type);
+    }
+  }, [isEditMode, initialData, setClassTitle, setClassType]);
 
   const handleClassTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setClassTitle(event.target.value);

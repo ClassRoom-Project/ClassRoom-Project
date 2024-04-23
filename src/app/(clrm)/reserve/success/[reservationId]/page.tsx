@@ -13,6 +13,7 @@ import { PiCurrencyKrw } from 'react-icons/pi';
 import { RiErrorWarningLine } from 'react-icons/ri';
 import { insertNotice } from '@/app/api/reserve/insertNotice';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
+import { useQueryClient } from '@tanstack/react-query';
 
 type ReserveInfoLabels = {
   icon: React.ReactNode;
@@ -24,10 +25,11 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
   const reservationid = params.reservationId;
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
   const [dataSaved, setDataSaved] = useState(false);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (!isLoading && !isError && reservationDetails && !dataSaved) {
-      insertNotice(reservationDetails.userId, reservationDetails.classId, reservationDetails.class.title)
+      insertNotice(reservationDetails.userId, reservationDetails.classId, reservationDetails.class.title, queryClient)
         .then((noticeData) => {
           setDataSaved(true);
         })
@@ -35,7 +37,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
           console.error('Failed to save notification:', error);
         });
     }
-  }, [isLoading, isError, reservationDetails, dataSaved]);
+  }, [isLoading, isError, reservationDetails, dataSaved, queryClient]);
 
   if (isError) {
     invalidReserve();

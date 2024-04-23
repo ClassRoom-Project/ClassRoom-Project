@@ -9,7 +9,7 @@ export const Banner = () => {
     <>
       <div className="carousel z-10 w-full h-[40vh]">
         <div id="slide1" className="carousel-item relative w-full">
-          <Image src={banner1} alt="banner" className="w-full" fill unoptimized={true} />
+          <Image src={banner1} alt="banner" className="w-full" fill/>
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <Link href="#slide4" className="btn btn-circle">
               ❮
@@ -20,7 +20,7 @@ export const Banner = () => {
           </div>
         </div>
         <div id="slide2" className="carousel-item relative w-full">
-          <Image src={banner2} alt="banner" className="w-full" fill unoptimized={true} />
+          <Image src={banner2} alt="banner" className="w-full" fill/>
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <Link href="#slide1" className="btn btn-circle">
               ❮
@@ -31,7 +31,7 @@ export const Banner = () => {
           </div>
         </div>
         <div id="slide3" className="carousel-item relative w-full">
-          <Image src={banner3} alt="banner" className="w-full" fill unoptimized={true} />
+          <Image src={banner3} alt="banner" className="w-full" fill />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
             <Link href="#slide2" className="btn btn-circle">
               ❮
