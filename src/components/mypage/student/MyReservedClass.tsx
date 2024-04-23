@@ -53,6 +53,7 @@ const MyReservedClass = () => {
         itemCountPerPage={postsPerPage}
         pageCount={5}
         currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
+        key={page}
       />
     </ul>
   );

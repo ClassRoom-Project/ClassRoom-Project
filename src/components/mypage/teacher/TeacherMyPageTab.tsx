@@ -72,7 +72,7 @@ const TeacherMyPageTab = () => {
       <div className="hidden md:flex flex-row md:justify-start lg:gap-20 md:gap-10 md:items-center sm:items-start w-full border-y-2">
         <button
           onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm  ${
+          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm relative ${
             activePage === 'editProfile'
               ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color'
               : ''
