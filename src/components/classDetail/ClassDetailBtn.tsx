@@ -2,16 +2,10 @@
 
 import { checkIsReserved } from '@/app/api/reserve/checkIsReserved';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-
-import React from 'react';
-
 import AskButton from '../chatRooms/AskButton';
-
-import { ToastContainer } from 'react-toastify';
-import { alreadyReserved, closedClass } from '../common/Toastify';
 import { format } from 'date-fns';
+import { alreadyReserved, closedClass } from '../common/Toastify';
 
 //TODO - href chat ID, 받아서 입력할것
 const ClassDetailBtn = ({
@@ -49,15 +43,15 @@ const ClassDetailBtn = ({
   };
 
   return (
-    <div className="w-[400px] gap-3 flex justify-center items-center">
+    <div className="w-full gap-3 flex justify-center items-center">
       <AskButton
         classId={classId}
         makeClassUserId={makeClassUserId}
-        buttonStyle="flex justify-center items-center rounded-md w-20 border-[#5373FF] border-solid border-[1px] h-9 ml-3 hover:bg-disable-color"
+        buttonStyle="transition-all flex justify-center items-center rounded-md w-1/2 border-button-default-color border-solid border-[1px] h-12 hover:bg-disable-color"
       />
       <button
         onClick={handleApplyClick}
-        className="flex justify-center items-center rounded-md w-20 h-9 bg-[#6C5FF7] text-white mr-3 hover:bg-button-hover-color"
+        className=" transition-all flex justify-center items-center rounded-md w-1/2 h-12 bg-button-default-color text-white  hover:bg-button-hover-color"
       >
         신청하기
       </button>
