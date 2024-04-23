@@ -17,8 +17,8 @@ const SideBar = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div className="z-30 fixed flex flex-row items-center justify-between inset-x-0 bottom-0 h-16 bg-border-color text-sm md:border-t md:p-3 md:overflow-hidden md:pr-4 md:bottom-0 md:top-0 md:left-0 md:w-[100px] md:flex-col md:z-50 md:mt-none md:h-full md:bg-background-color sm:flex-row sm:w-full sm:justify-between sm:right-0 sm:bottom-0 sm:left-0">
-        <div className="w-full flex justify-around items-center h-10 md:flex-col md:mt-16 md:gap-10 mb:bg-background-color">
+      <div className="z-50 fixed flex flex-row items-center justify-between inset-x-0 bottom-0 h-16 bg-border-color text-sm md:border-t md:p-3 md:overflow-hidden md:pr-4 md:bottom-0 md:top-0 md:left-0 md:w-[100px] md:flex-col md:z-50 md:mt-none md:h-full md:bg-background-color sm:flex-row sm:w-full sm:justify-between sm:right-0 sm:bottom-0 sm:left-0">
+        <div className="w-full flex items-center justify-around h-10 md:flex-col md:mt-16 md:gap-10 mb:bg-background-color md:justify-normal">
           <Link
             href="/"
             className=" flex flex-col items-center text-background-color hover:text-main-color transition ease-in md:text-icon-color"
