@@ -7,7 +7,7 @@ type PriceRange = {
 // 페이지 번호(page)와 각 페이지당 항목 수(limit)를 인자로 받아, 페이지네이션된 데이터와 다음 페이지 정보를 반환
 export const getClassForList = async (
   page = 1,
-  limit = 8,
+  limit = 10,
   selectedCategory = '',
   filters: {
     selectedClassType?: string | null;
