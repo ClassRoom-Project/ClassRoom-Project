@@ -5,7 +5,7 @@ import DefaultProfile from '../../assets/images/profile-image.png';
 import noImage from '@/assets/images/no_img.jpg';
 
 const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
-  console.log(comment);
+  // console.log(comment);
   const Stars = () => {
     return [1, 2, 3, 4, 5].map((star) => (
       <input
@@ -38,9 +38,9 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
         </div>
 
         {/* 내용 */}
-        <div className="flex gap-2 ml-12 min-h-36">
+        <div className="flex gap-2 ml-12 min-h-20">
           <div className="w-full flex flex-col justify-between ">
-            <p className="text-gray-800 ">{comment.content}</p>
+            <p className="text-gray-800 h-full ">{comment.content}</p>
             <div className="text-right text-gray-500 text-sm">{new Date(comment.create_at).toLocaleDateString()}</div>
           </div>
         </div>

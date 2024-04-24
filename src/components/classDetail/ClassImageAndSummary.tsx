@@ -59,7 +59,7 @@ const ClassImageAndSummary = ({
     {
       icon: <GrLocation className="text-main-color" />,
       title: '위치',
-      description: classData?.location
+      description: classData?.location ? classData?.location : '온라인 클래스'
     },
     {
       icon: <GrLocation className="text-main-color" />,

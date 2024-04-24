@@ -84,7 +84,7 @@ export const commentWarning = () =>
   });
 
 export const commentStarWarning = () =>
-  toast.error('별점을 입력해 주세요', {
+  toast.info('별점을 입력해 주세요', {
     position: 'top-right',
     autoClose: 2000,
     hideProgressBar: false,
