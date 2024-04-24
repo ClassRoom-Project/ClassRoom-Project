@@ -20,11 +20,11 @@ interface InitialDataType {
 
 interface ImageUploadProps {
   isEditMode: boolean;
-  initialData?: InitialDataType; 
+  initialData?: InitialDataType;
   class_Id?: string;
 }
 
-const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class_Id }) => {
+const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, class_Id }) => {
   const {
     category,
     subCategory,
@@ -196,7 +196,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
         setIsLoading(false);
         return;
       }
-    
+
       // 날짜와 시간 데이터 업데이트 로직 추가
       // 기존 날짜와 시간 데이터 삭제
       // const deleteDate = await supabase.from('date').delete().match({ class_id: classId });
@@ -267,24 +267,22 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
     } else {
       // 알림 데이터 저장
       const notice = `"${classTitle}" 클래스 등록이 완료되었습니다.`;
-      const { data: noticeData, error: noticeError } = await supabase
-        .from('notifications')
-        .insert([
-          {
-            notice_id: noticeId,
-            user_id: userId,
-            class_id: classId,
-            notice: notice,
-            isread: false,
-            created_at: new Date()
-          }
-        ]);
+      const { data: noticeData, error: noticeError } = await supabase.from('notifications').insert([
+        {
+          notice_id: noticeId,
+          user_id: userId,
+          class_id: classId,
+          notice: notice,
+          isread: false,
+          created_at: new Date()
+        }
+      ]);
       if (noticeError) {
         console.error('Error: ', noticeError);
       } else {
         queryClient.invalidateQueries({
           queryKey: ['notifications', userId]
-        });        
+        });
       }
 
       // 각 날짜에 대한 데이터 저장

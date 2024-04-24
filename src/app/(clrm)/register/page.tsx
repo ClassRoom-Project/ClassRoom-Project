@@ -28,14 +28,14 @@ const RegisterPage = () => {
           <MinMaxNumber isEditMode={false} />
           <TotalTime isEditMode={false} />
 
-          <h1 className="text-lg mt-14">클래스 세부요소 입력란</h1>
-          <hr className="my-4 border-[#4D43B8]" />
-          <Address isEditMode={false} />
-          <SelectTime isEditMode={false}/>
+            <h1 className="mt-14 text-lg">클래스 세부요소 입력란</h1>
+            <hr className="my-4 border-[#4D43B8]" />
+            <Address isEditMode={false} />
+            <SelectTime isEditMode={false} />
 
-          <h1 className="text-lg mt-14">클래스 금액</h1>
-          <hr className="my-4 border-[#4D43B8]" />
-          <Price isEditMode={false}/>
+            <h1 className="mt-14 text-lg">클래스 금액</h1>
+            <hr className="my-4 border-[#4D43B8]" />
+            <Price isEditMode={false} />
 
           <h1 className='text-lg mt-14'>이미지 업로드</h1>
           <hr className='my-4 border-[#4D43B8]' />
