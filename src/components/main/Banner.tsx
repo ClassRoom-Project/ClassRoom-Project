@@ -40,7 +40,7 @@ export const Banner = () => {
 
   return (
     <>
-      <div id="default-carousel" className="relative mt-10 w-full md:ml-0" data-carousel="slide">
+      <div id="default-carousel" className="relative w-full md:ml-0" data-carousel="slide">
         <div className="h-60 overflow-hidden rounded-lg md:h-80">
           <div
             className=" relative flex h-80 flex-row items-center justify-center bg-button-press-color duration-700 ease-in-out"

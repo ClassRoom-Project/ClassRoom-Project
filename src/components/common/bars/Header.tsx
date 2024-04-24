@@ -73,7 +73,7 @@ const Header = ({ children }: PropsWithChildren) => {
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
           </div>
-          <div className="xs:w-1/3  w-4/5">
+          <div className="xs:w-1/3 w-4/5  md:w-3/5">
             <Suspense>
               <SearchClass />
             </Suspense>
@@ -95,11 +95,11 @@ const Header = ({ children }: PropsWithChildren) => {
             ) : null}
 
             {userEmail ? (
-              <div className="dropdown dropdown-end">
+              <div className="dropdown dropdown-end dropdown-bottom">
                 <div
                   tabIndex={0}
                   role="button"
-                  className="relative mr-4 h-10 w-10 rounded-full md:mr-12 md:h-16 md:w-16"
+                  className="relative mr-2 h-10 w-10 rounded-full md:mr-12 md:h-16 md:w-16"
                 >
                   <Image
                     src={profileImage}
@@ -108,13 +108,16 @@ const Header = ({ children }: PropsWithChildren) => {
                     fill
                   />
                 </div>
-                <ul tabIndex={0} className="menu dropdown-content z-[1] w-52 gap-1 rounded-box bg-base-100 p-2 shadow">
-                  <div className="borderb-[1px] relative w-52 border-solid border-black hover:text-button-hover-color">
+                <ul
+                  tabIndex={0}
+                  className="menu dropdown-content relative z-[1] flex w-52 flex-col items-center justify-center bg-white shadow-lg"
+                >
+                  <div className="relative h-10 w-full hover:text-button-hover-color">
                     <button onClick={handleMoveToMypage} className="flex w-full items-center justify-start">
-                      <p> 마이페이지</p>
+                      <p>마이페이지</p>
                     </button>
                   </div>
-                  <div>
+                  <div className="w-full">
                     <Suspense fallback={<div>Logout</div>}>
                       <LoginState />
                     </Suspense>
@@ -123,9 +126,7 @@ const Header = ({ children }: PropsWithChildren) => {
               </div>
             ) : (
               <Suspense fallback={<div>Logout</div>}>
-                <div className="flex w-full justify-end">
-                  <LoginState />
-                </div>
+                <LoginState />
               </Suspense>
             )}
           </div>
