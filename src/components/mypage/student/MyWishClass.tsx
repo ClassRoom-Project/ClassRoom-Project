@@ -6,6 +6,7 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { QueryKeys } from '@/constants/QueryKeys';
 import Pagination from '@/components/common/Pagination';
 import { useSearchParams } from 'next/navigation';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 const MyWishClass = () => {
   const { loginUserId } = useLoginStore();
@@ -27,7 +28,12 @@ const MyWishClass = () => {
   }, [page]);
 
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    return (
+      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+        <LoadingSpinner />
+        <p>잠시만 기다려주세요..</p>
+      </div>
+    );
   }
 
   if (!myWishClassList || myWishClassList.length === 0) {

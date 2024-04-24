@@ -8,6 +8,7 @@ import { UpdateTeacherInfoType } from '@/types/user';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useId, useState } from 'react';
 import SelectOption from '../SelectOption';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 const EditTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
@@ -177,7 +178,12 @@ const EditTeacherInfo = () => {
     newAccount && newAccount.length > 6 ? newAccount.slice(0, 6) + '*'.repeat(newAccount.length - 6) : newAccount;
 
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    return (
+      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+        <LoadingSpinner />
+        <p>잠시만 기다려주세요..</p>
+      </div>
+    );
   }
 
   if (!teacherInfo) {

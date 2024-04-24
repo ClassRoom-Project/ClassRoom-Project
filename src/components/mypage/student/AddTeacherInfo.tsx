@@ -10,6 +10,7 @@ import SelectOption from '../SelectOption';
 import { useRouter } from 'next/navigation';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { InsertTeacherInfo } from '@/types/user';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 const AddTeacherInfo = () => {
   const { loginUserId } = useLoginStore();
@@ -153,7 +154,12 @@ const AddTeacherInfo = () => {
     userAccount && userAccount.length > 6 ? userAccount.slice(0, 6) + '*'.repeat(userAccount.length - 6) : userAccount;
 
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    return (
+      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+        <LoadingSpinner />
+        <p>잠시만 기다려주세요..</p>
+      </div>
+    );
   }
 
   if (!teacherInfo) {

@@ -12,6 +12,7 @@ import { GoPeople } from 'react-icons/go';
 import { IoIosArrowBack } from 'react-icons/io';
 import { LuClipboardEdit } from 'react-icons/lu';
 import MyClassStudentList from './MyClassStudentList';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 const MyClassStudentPage = () => {
   const { isTeacher } = useUserRoleStore();
@@ -30,7 +31,12 @@ const MyClassStudentPage = () => {
   });
 
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    return (
+      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+        <LoadingSpinner />
+        <p>잠시만 기다려주세요..</p>
+      </div>
+    );
   }
 
   if (!classSingleInfo || classSingleInfo.length === 0) {

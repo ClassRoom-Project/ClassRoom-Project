@@ -14,6 +14,7 @@ import { GrLocation } from 'react-icons/gr';
 import NoImage from '@/assets/images/no_img.jpg';
 import Pagination from '@/components/common/Pagination';
 import { useEffect, useState } from 'react';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 const MyClass = () => {
   const { loginUserId } = useLoginStore();
@@ -62,7 +63,12 @@ const MyClass = () => {
   }, [page]);
 
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    return (
+      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+        <LoadingSpinner />
+        <p>잠시만 기다려주세요..</p>
+      </div>
+    );
   }
 
   if (!myClassInfo || myClassInfo.length === 0) {

@@ -7,6 +7,7 @@ import MyReservedClassItem from './MyReservedClassItem';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Pagination from '@/components/common/Pagination';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 
 const MyReservedClass = () => {
   const { loginUserId } = useLoginStore();
@@ -29,7 +30,12 @@ const MyReservedClass = () => {
   }, [page]);
 
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    return (
+      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+        <LoadingSpinner />
+        <p>잠시만 기다려주세요..</p>
+      </div>
+    );
   }
 
   if (!reservedClasses || reservedClasses.length === 0) {
