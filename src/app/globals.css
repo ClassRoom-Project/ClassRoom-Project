@@ -75,5 +75,5 @@ body {
 }
 
 .socialIcon-field {
-  @apply mb-2 mt-2 w-full rounded-lg border border-point-color px-3 py-2 text-center text-white sm:text-sm;
+  @apply mb-2 mt-2 w-full rounded-lg border-2 border-white px-3 py-2 text-center text-white hover:border-2 sm:text-sm;
 }
