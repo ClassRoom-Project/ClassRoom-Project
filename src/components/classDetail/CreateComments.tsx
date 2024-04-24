@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createDetailComment } from '@/app/api/classdetail/detailComment';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { commentWarning, commentLoginWarning, commentStarWarning } from '../common/Toastify';
@@ -21,8 +21,9 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   const queryClient = useQueryClient();
   const { loginUserId } = useLoginStore();
   const [commentImage, setCommentImage] = useState<ImageFileWithPreview[]>([]);
-  const [dataBaseImage, setDataBaseImage] = useState<string>('');
+  const [dataBaseImage, setDataBaseImage] = useState<string | null>(null);
   const email: string = session?.user?.email ?? '';
+
   const { data: userData } = useQuery({
     queryKey: ['getUserIdByEmail'],
     queryFn: () => getUserIdByEmail(email),
@@ -38,10 +39,15 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
 
   // supabase storage에 등록한 이미지 업로드
   const uploadFile = async (file: File) => {
+    console.log(file);
     const cleanName = cleanFileName(file.name);
-    const filePath = `uploads/${classData?.class_id}_${cleanName}`;
+    const filePath = `uploads/${crypto.randomUUID()}_${cleanName}`;
     const { data, error } = await supabase.storage.from('commentsImages').upload(filePath, file);
-    if (error) {
+    if (error?.message === 'The resource already exists') {
+      console.log(error, 'error');
+      return null;
+    } else if (error) {
+      console.log(error, 'error');
       return null;
     } else {
       const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/commentsImages/${data?.path}`;
@@ -53,10 +59,14 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 임시 URL을 생성!
+      const uploadUrl = await uploadFile(file);
+      // const newImages = [...commentImage, { file, preview }];
       const newImages = [{ file, preview }];
       setCommentImage(newImages);
+      setDataBaseImage(uploadUrl);
     }
   };
+
   const { mutate, error, status } = useMutation({
     mutationKey: ['createDetailComment'],
     mutationFn: () => createDetailComment(classData?.class_id, star, userId, content, dataBaseImage),
@@ -94,16 +104,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
       commentLoginWarning();
       return;
     }
-    const imageUrls = [];
-
-    for (const image of commentImage) {
-      const url = await uploadFile(image.file);
-      if (url) {
-        imageUrls.push(url);
-        console.log(imageUrls, 'imageUrls');
-        setDataBaseImage(imageUrls[0]);
-      }
-    }
+    console.log(dataBaseImage, 'dataBaseImage');
     mutate();
   };
 
@@ -118,76 +119,81 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="flex h-[404px] w-[600px] items-center justify-center rounded-xl border-solid bg-disable-color p-4 shadow-md xl:w-[1116px]">
-          <form onSubmit={handleCommentSubmit} className="flex flex-col items-center justify-center">
-            <div className="flex items-center justify-center">
-              <div className="relative mr-5 flex h-32 w-32 items-center justify-center xl:h-64 xl:w-64">
-                {commentImage.length > 0 ? (
-                  <Image
-                    src={commentImage[0].preview}
-                    alt="uploaded image preview"
-                    fill
-                    className="h-full w-full rounded-[20px] border object-cover"
-                  />
-                ) : (
-                  <Image
-                    src={noImage}
-                    alt="no image"
-                    fill
-                    className="h-full w-full rounded-[20px] border object-cover"
-                  />
-                )}
-              </div>
-              <div className="flex w-[400px] flex-col items-start justify-center xl:w-[700px]">
-                <div className="flex w-full items-center justify-between">
-                  <div className="mb-4 flex items-center">
-                    <label
-                      htmlFor="image-upload"
-                      className="flex w-16 cursor-pointer items-center justify-center rounded-full border border-main-color bg-[#E3E1FC] p-1 text-sm text-black hover:border-main-color hover:bg-[#CAC6FC]"
-                    >
-                      <p>사진추가</p>
-                    </label>
+        <div className="mb-8 flex w-[600px] flex-col items-center justify-center rounded-xl border border-solid border-button-focus-color bg-disable-color px-8 pb-4 pt-6 shadow-md xl:w-full">
+          <form onSubmit={handleCommentSubmit} className="flex w-full flex-col items-center justify-center">
+            <div className="flex w-[400px]  items-end justify-between gap-4 xl:w-full">
+              <div className="flex w-[75%] flex-col">
+                <div className="rating rating-sm flex items-center justify-end">
+                  {[1, 2, 3, 4, 5].map((num) => (
                     <input
-                      id="image-upload"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleCommentImageChange}
-                      style={{ display: 'none' }}
+                      key={num}
+                      type="radio"
+                      name="rating"
+                      className={`mask mask-star-2 mb-1 ${star ? 'bg-main-color' : 'bg-button-focus-color'} `}
+                      value={num}
+                      onChange={handleStarChange}
+                      checked={star === num}
                     />
-                  </div>
-                  <div className="rating rating-sm mb-2 flex items-center justify-end">
-                    {[1, 2, 3, 4, 5].map((num) => (
-                      <input
-                        key={num}
-                        type="radio"
-                        name="rating"
-                        className="mask mask-star-2 mb-1 bg-main-color"
-                        value={num}
-                        onChange={handleStarChange}
-                        checked={star === num}
-                      />
-                    ))}
-                  </div>
+                  ))}
                 </div>
                 <textarea
                   minLength={10}
                   maxLength={150}
-                  className="h-52 w-full rounded-md border p-2"
-                  placeholder="후기을 입력해주세요.(10자 이상)"
+                  className="h-52 w-full resize-none rounded-md border border-solid border-button-focus-color p-4 outline-none"
+                  placeholder="후기를 입력해주세요. (10자 이상)"
                   value={content}
                   onChange={handleContentChange}
                 ></textarea>
               </div>
+              <div className="w-[25%]">
+                <div className="mb-1 flex items-center justify-end">
+                  <label
+                    htmlFor="image-upload"
+                    className="flex w-fit cursor-pointer items-center justify-center rounded-md border border-button-press-color bg-[#E3E1FC] p-1 px-2 text-sm text-text-dark-gray transition-all hover:border-main-color hover:bg-[#CAC6FC]"
+                  >
+                    <p>사진 추가</p>
+                  </label>
+                  <input
+                    id="image-upload"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleCommentImageChange}
+                    style={{ display: 'none' }}
+                  />
+                </div>
+                <div className="relative flex h-full  w-full items-center justify-center rounded-md border border-solid border-button-focus-color xl:h-52">
+                  {commentImage.length > 0 ? (
+                    <Image
+                      src={commentImage[0].preview}
+                      alt="uploaded image preview"
+                      fill
+                      className="h-full w-full rounded-md object-cover "
+                    />
+                  ) : (
+                    <Image
+                      src={noImage}
+                      alt="no image"
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="h-full w-full rounded-md object-cover "
+                    />
+                  )}
+                </div>
+              </div>
             </div>
             <button
               type="submit"
-              className="mt-4 rounded-2xl bg-main-color px-4 py-2 font-bold text-white hover:bg-button-hover-color"
+              className="mt-4 rounded-md bg-main-color px-6 py-2 text-white transition-all hover:bg-button-hover-color"
             >
               후기 등록
             </button>
           </form>
         </div>
-      ) : null}
+      ) : (
+        <div className="mb-4 flex h-40 w-[600px] items-center justify-center rounded-lg bg-disable-color shadow-xl xl:w-full">
+          클래스를 예약하신 분만 리뷰 등록이 가능합니다.
+        </div>
+      )}
     </>
   );
 };

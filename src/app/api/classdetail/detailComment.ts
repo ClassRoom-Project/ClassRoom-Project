@@ -25,7 +25,7 @@ export const createDetailComment = async (
   star: number | undefined,
   userId: string | undefined,
   content: string | undefined,
-  comment_image: string | undefined
+  comment_image: string | null
 ) => {
   const { data: comments, error } = await supabase.from('comments').insert([
     {
@@ -37,7 +37,7 @@ export const createDetailComment = async (
       comment_image: comment_image
     }
   ]);
-
+  console.log(comment_image, 'comment_image');
   if (error) {
     console.error('댓글 작성 오류 --> ', error);
     return null;
