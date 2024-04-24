@@ -4,6 +4,7 @@ import ClassDetailContainer from '@/components/classDetail/ClassDetailContainer'
 import ClassImageAndSummary from '@/components/classDetail/ClassImageAndSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
+import Image from 'next/image';
 import Link from 'next/link';
 import { GrLocation } from 'react-icons/gr';
 import { IoIosArrowBack } from 'react-icons/io';
@@ -24,21 +25,22 @@ const page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <div className=" flex flex-col items-center">
-      <div className="m-0 p-2 w-full  flex items-center bg-white text-text-dark-gray">
-        <Link href={`/`} className="flex justify-center items-center">
+      <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
+        <Link href={`/`} className="flex items-center justify-center">
           <IoIosArrowBack size={18} />
           뒤로가기
         </Link>
       </div>
       <ClassImageAndSummary classData={classData} userData={userData} />
-      <div className="w-full p-6  flex flex-col justify-center items-center">
+
+      <div className="flex w-full  flex-col items-center justify-center p-6">
         <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
         {classData?.detail_location && (
-          <div className=" w-3/5 h-[380px">
+          <div className=" h-[380px w-3/5">
             <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />
           </div>
         )}
-        <div className="w-full bg-pale-purple px-4 rounded-md">
+        <div className="w-full rounded-md bg-pale-purple px-4">
           <DetailComments classData={classData} />
         </div>
       </div>

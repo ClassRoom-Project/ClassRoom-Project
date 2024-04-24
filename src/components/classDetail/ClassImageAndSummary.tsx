@@ -2,16 +2,21 @@
 
 import { ListDetailClassInfo } from '@/types/class';
 import { DetailUserInfoType } from '@/types/user';
-import * as DOMPurify from 'dompurify';
+import Autoplay from 'embla-carousel-autoplay';
 import Image from 'next/image';
-import { useState } from 'react';
-import { FiCalendar, FiUserPlus, FiWatch } from 'react-icons/fi';
+import { useCallback, useEffect, useState } from 'react';
 import { GrLocation } from 'react-icons/gr';
 import { HiOutlineCube } from 'react-icons/hi2';
 import { LuClock } from 'react-icons/lu';
 import { PiCurrencyKrw } from 'react-icons/pi';
 import { RiHashtag, RiUserLocationLine } from 'react-icons/ri';
 import ClassDetailBtn from './ClassDetailBtn';
+import { EmblaOptionsType } from 'embla-carousel';
+import useEmblaCarousel from 'embla-carousel-react';
+import './embla.css';
+import { DotButton, useDotButton } from './EmblaCarouselDotButton';
+import { NextButton, PrevButton, usePrevNextButtons } from './EmblaCarouselArrowButtons';
+import noImage from '../../assets/images/clroom_no_img_purple.png';
 
 const ClassImageAndSummary = ({
   classData,
@@ -22,6 +27,9 @@ const ClassImageAndSummary = ({
 }) => {
   const defaultImageSrc = '/noimage.png';
   const defaultProfileImageSrc = '/기본프로필사진.png';
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
+  const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
 
   // 메인 이미지를 스테이트로 변경 -> 메인이미지 바꾸기
   const [mainImageSrc, setMainImageSrc] = useState(classData?.image[0] || defaultImageSrc);
@@ -77,79 +85,71 @@ const ClassImageAndSummary = ({
     }
   ];
 
-  return (
-    <div className="w-full bg-pale-purple flex justify-center">
-      <div className="w-full flex  p-6 gap-12 justify-between">
-        <div className="w-[50%]  border border-solid border-black">
-          <div className="w-full h-[350px] relative mt-2 flex bg-black">
-            <Image fill src={mainImageSrc} alt="classImage 0"></Image>
-          </div>
-          <div className="w-full mb-5 h-[50px] flex mt-2">
-            <div
-              onClick={() => handleThumbnailClick(classData?.image[0] || defaultImageSrc)}
-              className="w-[50px] h-[50px] cursor-pointer flex mr-[20px]"
-            >
-              <Image
-                width={50}
-                height={50}
-                src={classData?.image[0] ? classData.image[0] : defaultImageSrc}
-                alt="classImage 0"
-              ></Image>
-            </div>
+  const scrollPrev = useCallback(() => {
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
 
-            <div
-              onClick={() => handleThumbnailClick(classData?.image[1] || defaultImageSrc)}
-              className="w-[50px] h-[50px] cursor-pointer flex mx-[20px]"
-            >
-              <Image
-                width={50}
-                height={50}
-                src={classData?.image[1] ? classData.image[1] : defaultImageSrc}
-                alt="classImage 1"
-              ></Image>
+  const scrollNext = useCallback(() => {
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
+
+  console.log(classData?.image);
+
+  return (
+    <div className="flex w-full justify-center bg-pale-purple">
+      <div className="flex w-full  justify-between gap-12 p-6">
+        <div className="w-[50%]  ">
+          <section className="embla">
+            <div className="embla__viewport rounded-2xl" ref={emblaRef}>
+              <div className="embla__container">
+                {classData && classData.image.length !== 0 ? (
+                  classData?.image.map((image, index) => (
+                    <div className="embla__slide" key={index}>
+                      <div className="embla__slide__inner">
+                        <Image
+                          fill={true}
+                          className="embla-slide-img h-full w-full rounded-md object-cover"
+                          src={image}
+                          alt={classData.title}
+                        />
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="relative h-full w-full">
+                    <Image
+                      fill
+                      className="embla-slide-img h-full w-full rounded-md object-cover"
+                      src={noImage}
+                      alt="clroom no Image"
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="embla__controls">
+                <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+                <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+              </div>
+
+              <div className="embla__dots">
+                {scrollSnaps.map((_, index) => (
+                  <DotButton
+                    key={index}
+                    onClick={() => onDotButtonClick(index)}
+                    className={'embla__dot'.concat(index === selectedIndex ? ' embla__dot--selected' : '')}
+                  />
+                ))}
+              </div>
             </div>
-            <div
-              onClick={() => handleThumbnailClick(classData?.image[2] || defaultImageSrc)}
-              className="w-[50px] h-[50px] cursor-pointer flex mx-[20px]"
-            >
-              <Image
-                width={50}
-                height={50}
-                src={classData?.image[2] ? classData.image[2] : defaultImageSrc}
-                alt="classImage 2"
-              ></Image>
-            </div>
-            <div
-              onClick={() => handleThumbnailClick(classData?.image[3] || defaultImageSrc)}
-              className="w-[50px] h-[50px] cursor-pointer flex mx-[20px]"
-            >
-              <Image
-                width={50}
-                height={50}
-                src={classData?.image[3] ? classData.image[3] : defaultImageSrc}
-                alt="classImage 3"
-              ></Image>
-            </div>
-            <div
-              onClick={() => handleThumbnailClick(classData?.image[4] || defaultImageSrc)}
-              className="w-[50px] h-[50px] cursor-pointer flex ml-[20px]"
-            >
-              <Image
-                width={50}
-                height={50}
-                src={classData?.image[4] ? classData.image[4] : defaultImageSrc}
-                alt="classImage 4"
-              ></Image>
-            </div>
-          </div>
+          </section>
         </div>
 
-        <div className="w-[45%] mt-4">
-          <div className="flex tems-center mr-2 h-8 gap-2 mb-4">
-            <div className="relative w-8 h-8">
+        <div className="mt-4 w-[45%]">
+          <div className="tems-center mb-4 mr-2 flex h-8 gap-2">
+            <div className="relative h-8 w-8">
               <Image
                 fill={true}
-                className="rounded-full w-full h-full object-cover"
+                className="h-full w-full rounded-full object-cover"
                 src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
                 alt="profileImage"
               />
@@ -167,14 +167,14 @@ const ClassImageAndSummary = ({
                 return (
                   <div key={title} className="flex items-center gap-2 text-text-dark-gray">
                     <div className="font-bold ">{icon}</div>
-                    <div className={'font-bold mr-1 shrink-0'}>{title}</div>
-                    <div className="font-normal truncate">{description}</div>
+                    <div className={'mr-1 shrink-0 font-bold'}>{title}</div>
+                    <div className="truncate font-normal">{description}</div>
                   </div>
                 );
               })}
             </div>
           </div>
-          <div className="w-full mt-10">
+          <div className="mt-10 w-full">
             {classData?.class_id ? (
               <ClassDetailBtn
                 classId={classData.class_id}

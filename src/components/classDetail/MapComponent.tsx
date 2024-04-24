@@ -14,8 +14,6 @@ const MapComponent = ({
 }) => {
   const { classInfo } = useDetailClassInfoStore();
 
-  console.log(classInfo);
-
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
 
@@ -53,17 +51,17 @@ const MapComponent = ({
   }, [placeAddress]);
 
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className="flex w-full items-center justify-center">
       {location ? (
         <div className="w-full">
           <Map
-            className="w-full h-full p-40 rounded-lg border border-solid border-button-disable-color " // 지도 크기
+            className="h-full w-full rounded-lg border border-solid border-button-disable-color p-40 " // 지도 크기
             center={{ lat: latitude ?? 0, lng: longitude ?? 0 }} // 지도의 중심 좌표
             level={3} // 지도 확대 레벨
           >
             <MapMarker position={{ lat: latitude ?? 0, lng: longitude ?? 0 }} />
           </Map>
-          <div className="flex items-center gap-2 m-4">
+          <div className="m-4 flex items-center gap-2">
             <GrLocation size={20} className="text-main-color" />
             주소 : {location} {detailLocation}
           </div>
