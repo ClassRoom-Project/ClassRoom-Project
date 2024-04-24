@@ -57,7 +57,7 @@ export default function LoginState() {
       ) : (
         <div className="flex w-full justify-end">
           <Link
-            className="btn mr-2 border-main-color bg-transparent text-main-color hover:bg-main-color hover:text-white md:mr-[50px]"
+            className="btn mr-2 w-16 whitespace-nowrap border-main-color bg-transparent text-main-color hover:bg-main-color hover:text-white md:mr-[50px] md:w-20"
             href="/hello"
           >
             로그인
