@@ -72,35 +72,35 @@ const SearchFilter = () => {
 
   return (
     <div className="flex w-full items-start justify-start p-5">
-      <div className="dropdown dropdown-bottom w-12 h-12 z-30">
+      <div className="dropdown dropdown-bottom z-30 h-9 w-9 md:h-12 md:w-12">
         <div tabIndex={0} onMouseDown={(e) => checkAndCloseDropDown(e)} role="button" className="btn ">
           <FiAlignJustify role="button" className="swap-off fill-current" size={30} color="#6C5FF7"></FiAlignJustify>
         </div>
         <ul
           tabIndex={0}
-          className="p-8 dropdown-content border border-solid border-button-focus-color rounded-md gap-2.5  justify-center flex flex-col items-center z-[1] menu shadow-xl bg-pale-purple w-fit"
+          className="menu dropdown-content z-[1] flex w-fit flex-col items-center  justify-center gap-2.5 rounded-md border border-solid border-button-focus-color bg-pale-purple p-8 shadow-xl"
         >
-          <div className=" flex flex-col items-center justify-center w-full  ">
-            <div className="flex mb-3 items-start w-64 justify-start">
-              <p className="text-black mb-1">클래스 타입</p>
+          <div className="flex w-full flex-col items-center justify-center">
+            <div className="mb-3 flex w-64 items-start justify-start">
+              <p className="mb-1 text-black">클래스 타입</p>
             </div>
             <div className="flex w-full justify-center gap-4">
               <button
                 onClick={() => handleClassTypeBtn('온라인 클래스')}
-                className={` py-1  border-solid border-point-purple border-[1px] rounded-2xl  w-24 ${
+                className={` w-24  rounded-2xl border-[1px] border-solid border-point-purple  py-1 ${
                   ClassFilters.selectedClassType === '온라인 클래스'
                     ? 'bg-point-purple text-white'
-                    : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                    : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                 }`}
               >
                 온라인
               </button>
               <button
                 onClick={() => handleClassTypeBtn('오프라인 클래스')}
-                className={` py-1  rounded-2xl border-solid border-point-purple border-[1px]  w-24 ${
+                className={` w-24  rounded-2xl border-[1px] border-solid border-point-purple  py-1 ${
                   ClassFilters.selectedClassType === '오프라인 클래스'
                     ? 'bg-point-purple text-white'
-                    : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                    : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                 }`}
               >
                 오프라인
@@ -109,8 +109,8 @@ const SearchFilter = () => {
           </div>
           <div className="divider m-0"></div>
           <div>
-            <div className="w-full  flex flex-col justify-center items-center">
-              <div className="flex flex-col items-start w-64 mb-3 justify-start">
+            <div className="flex  w-full flex-col items-center justify-center">
+              <div className="mb-3 flex w-64 flex-col items-start justify-start">
                 <p className="text-black">지역</p>
               </div>
               <select
@@ -136,74 +136,74 @@ const SearchFilter = () => {
             </div>
           </div>
           <div className="divider m-0"></div>
-          <div className=" flex items-center justify-start gap-4 w-full  ">
+          <div className=" flex w-full items-center justify-start gap-4  ">
             <div className="flex  justify-start">
               <p className="text-black">요일</p>
             </div>
             <button
               onClick={() => handleClassDayClick('평일')}
-              className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]  w-16 ${
+              className={`w-16 rounded-2xl border-[1px] border-solid border-point-purple  py-1 ${
                 ClassFilters.selectedDayType === '평일'
                   ? 'bg-point-purple text-white'
-                  : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                  : 'bg-pale-purple transition-all hover:bg-button-disable-color'
               }`}
             >
               평일
             </button>
             <button
               onClick={() => handleClassDayClick('주말')}
-              className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]  w-16 ${
+              className={`w-16 rounded-2xl border-[1px] border-solid border-point-purple  py-1 ${
                 ClassFilters.selectedDayType === '주말'
                   ? 'bg-point-purple text-white'
-                  : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                  : 'bg-pale-purple transition-all hover:bg-button-disable-color'
               }`}
             >
               주말
             </button>
           </div>
           <div className="divider m-0"></div>
-          <div className="w-full justify-center items-center">
-            <div className="flex items-start w-64 justify-start mb-3">
+          <div className="w-full items-center justify-center">
+            <div className="mb-3 flex w-64 items-start justify-start">
               <p className="text-black">난이도</p>
             </div>
             <div className="flex w-full justify-center">
               <div className="grid w-3/4 grid-cols-2 justify-between gap-3">
                 <button
                   onClick={() => handleClassDifficultyBtn('입문')}
-                  className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]  ${
+                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
                     ClassFilters.selectedDifficulty === '입문'
                       ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                   }`}
                 >
                   입문
                 </button>
                 <button
                   onClick={() => handleClassDifficultyBtn('초급')}
-                  className={`hover:bg-button-disable-color transition-all py-1 rounded-2xl border-solid border-point-purple border-[1px]   ${
+                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1 transition-all hover:bg-button-disable-color   ${
                     ClassFilters.selectedDifficulty === '초급'
                       ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                   }`}
                 >
                   초급
                 </button>
                 <button
                   onClick={() => handleClassDifficultyBtn('중급')}
-                  className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]  ${
+                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
                     ClassFilters.selectedDifficulty === '중급'
                       ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                   }`}
                 >
                   중급
                 </button>
                 <button
                   onClick={() => handleClassDifficultyBtn('고급')}
-                  className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]  ${
+                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
                     ClassFilters.selectedDifficulty === '고급'
                       ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                   }`}
                 >
                   고급
@@ -212,48 +212,48 @@ const SearchFilter = () => {
             </div>
           </div>
           <div className="divider m-0"></div>
-          <div className="w-full justify-center items-center">
-            <div className="flex items-start w-64 justify-start mb-3">
+          <div className="w-full items-center justify-center">
+            <div className="mb-3 flex w-64 items-start justify-start">
               <p className="text-black">금액</p>
             </div>
             <div className="flex w-full justify-center">
               <div className="grid w-full grid-cols-2 justify-between gap-3">
                 <button
                   onClick={() => handlePriceFilter(0, 19999)}
-                  className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]  ${
+                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
                     isPriceSelected(0, 19999)
                       ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                   }`}
                 >
                   20,000원 미만
                 </button>
                 <button
                   onClick={() => handlePriceFilter(0, 49999)}
-                  className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]   ${
+                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1   ${
                     isPriceSelected(0, 49999)
                       ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                   }`}
                 >
                   50,000원 미만
                 </button>
                 <button
                   onClick={() => handlePriceFilter(0, 99999)}
-                  className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]  ${
+                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
                     isPriceSelected(0, 99999)
                       ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                   }`}
                 >
                   100,000원 미만
                 </button>
                 <button
                   onClick={() => handlePriceFilter(100000, 1000000000000000)}
-                  className={`py-1 rounded-2xl border-solid border-point-purple border-[1px]  ${
+                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
                     isPriceSelected(100000, 1000000000000000)
                       ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple hover:bg-button-disable-color transition-all'
+                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
                   }`}
                 >
                   100,000원 이상
@@ -263,7 +263,7 @@ const SearchFilter = () => {
           </div>
         </ul>
       </div>
-      <button onClick={handleResetBtn} className="btn ml-12 w-17 h-12">
+      <button onClick={handleResetBtn} className="w-17 btn ml-12 h-12">
         초기화
       </button>
     </div>

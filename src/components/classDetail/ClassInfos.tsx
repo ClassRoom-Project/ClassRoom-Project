@@ -9,7 +9,6 @@ import { IoMdTime } from 'react-icons/io';
 import { useEffect } from 'react';
 import { useDetailClassInfoStore } from '@/store/classInfoStore';
 import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
-import { ClassInfoBox } from './ClassInfoBox';
 import { RiHashtag } from 'react-icons/ri';
 
 //태그들 모아놓은 컴포넌트
