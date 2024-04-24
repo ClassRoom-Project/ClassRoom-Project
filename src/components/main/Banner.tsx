@@ -40,110 +40,75 @@ export const Banner = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      <div className="carousel z-10 w-full h-[40vh]">
-        <div id="slide1" className="carousel-item relative w-full">
-          <Image src={banner1} alt="banner" className="w-full" fill />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <Link href="#slide4" className="btn btn-circle">
-              ❮
-            </Link>
-            <Link href="#slide2" className="btn btn-circle">
-              ❯
-            </Link>
-          </div>
-        </div>
-        <div id="slide2" className="carousel-item relative w-full">
-          <Image src={banner2} alt="banner" className="w-full" fill />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <Link href="#slide1" className="btn btn-circle">
-              ❮
-            </Link>
-            <Link href="#slide3" className="btn btn-circle">
-              ❯
-            </Link>
-          </div>
-        </div>
-        <div id="slide3" className="carousel-item relative w-full">
-          <Image src={banner3} alt="banner" className="w-full" fill />
-          <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-            <Link href="#slide2" className="btn btn-circle">
-              ❮
-            </Link>
-            <Link href="#slide4" className="btn btn-circle">
-              ❯
-            </Link>
-=======
-      <div id="default-carousel" className="relative w-full ml-6 md:ml-0 mt-10" data-carousel="slide">
+      <div id="default-carousel" className="relative mt-10 w-full md:ml-0" data-carousel="slide">
         <div className="h-60 overflow-hidden rounded-lg md:h-80">
           <div
-            className=" relative flex flex-row h-80 items-center justify-center duration-700 ease-in-out bg-button-press-color"
+            className=" relative flex h-80 flex-row items-center justify-center bg-button-press-color duration-700 ease-in-out"
             data-carousel-item
           >
-            <div className="flex m-auto absolute left-0 top-0 md:left-28 md:top-0 2xl:left-80">
+            <div className="absolute left-0 top-0 m-auto flex md:left-28 md:top-0 2xl:left-80">
               <Image width={350} height={350} src={banner1} alt="..." />
             </div>
-            <div className="z-20 flex flex-col lg:ml-auto lg:mr-20 2xl:mr-96 items-center">
+            <div className="z-20 flex flex-col items-center lg:ml-auto lg:mr-20 2xl:mr-96">
               <Link
                 href="/register"
-                className="absolute right-50 bottom-24 bg-button-hover-color border-4 border-white text-white rounded-full px-4 py-2 2xl:px-8 2xl:py-4 text-base 2xl:text-4xl lg:text-xl md:relative md:right-auto md:bottom-auto"
+                className="right-50 absolute bottom-24 rounded-full border-4 border-white bg-button-hover-color px-4 py-2 text-base text-white md:relative md:bottom-auto md:right-auto lg:text-xl 2xl:px-8 2xl:py-4 2xl:text-4xl"
               >
                 나만의 클래스 등록하기
               </Link>
-              <p className="text-white hidden md:flex mt-4 lg:text-lg 2xl:text-2xl">
+              <p className="mt-4 hidden text-white md:flex lg:text-lg 2xl:text-2xl">
                 강사로 등록하여 나만의 클래스를 오픈해보세요!
               </p>
-              <p className="text-white hidden md:flex mt-2 lg:text-lg 2xl:text-2xl">
+              <p className="mt-2 hidden text-white md:flex lg:text-lg 2xl:text-2xl">
                 클래스를 개설하고 관심있는 분야에서 전문가로 활동해보세요.
               </p>
             </div>
           </div>
           <div
-            className=" flex flex-row h-80 items-center justify-center duration-700 ease-in-out bg-button-press-color"
+            className=" flex h-80 flex-row items-center justify-center bg-button-press-color duration-700 ease-in-out"
             data-carousel-item
           >
-            <div className="flex m-auto ">
+            <div className="m-auto flex ">
               <Image width={250} height={250} src={banner1} alt="..." />
             </div>
-            <div className="flex flex-col m-auto items-center">
+            <div className="m-auto flex flex-col items-center">
               <Link
                 href="/register"
-                className="bg-button-hover-color border-4 border-white text-white rounded-full px-8 py-4 text-4xl"
+                className="rounded-full border-4 border-white bg-button-hover-color px-8 py-4 text-4xl text-white"
               >
                 배너2
               </Link>
-              <p className="text-white mt-4 text-2xl">강사로 등록하여 나만의 클래스를 오픈해보세요!</p>
-              <p className="text-white mt-2 text-2xl">클래스를 개설하고 관심있는 분야에서 전문가로 활동해보세요.</p>
+              <p className="mt-4 text-2xl text-white">강사로 등록하여 나만의 클래스를 오픈해보세요!</p>
+              <p className="mt-2 text-2xl text-white">클래스를 개설하고 관심있는 분야에서 전문가로 활동해보세요.</p>
             </div>
           </div>
           <div
-            className=" flex flex-row h-80 items-center justify-center duration-700 ease-in-out bg-button-press-color"
+            className=" flex h-80 flex-row items-center justify-center bg-button-press-color duration-700 ease-in-out"
             data-carousel-item
           >
-            <div className="flex m-auto ">
+            <div className="m-auto flex ">
               <Image width={250} height={250} src={banner1} alt="..." />
             </div>
-            <div className="flex flex-col m-auto items-center">
+            <div className="m-auto flex flex-col items-center">
               <Link
                 href="/register"
-                className="bg-button-hover-color border-4 border-white text-white rounded-full px-8 py-4 text-4xl"
+                className="rounded-full border-4 border-white bg-button-hover-color px-8 py-4 text-4xl text-white"
               >
                 배너3
               </Link>
-              <p className="text-white mt-4 text-2xl">강사로 등록하여 나만의 클래스를 오픈해보세요!</p>
-              <p className="text-white mt-2 text-2xl">클래스를 개설하고 관심있는 분야에서 전문가로 활동해보세요.</p>
+              <p className="mt-4 text-2xl text-white">강사로 등록하여 나만의 클래스를 오픈해보세요!</p>
+              <p className="mt-2 text-2xl text-white">클래스를 개설하고 관심있는 분야에서 전문가로 활동해보세요.</p>
             </div>
->>>>>>> 7e7ca01f5a42ef373f732f2221a55566d6a0dbd3
           </div>
         </div>
         <button
           type="button"
-          className="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          className="group absolute start-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
           data-carousel-prev
         >
-          <span className="inline-flex items-center text-white justify-center w-10 h-10 rounded-full bg-main-color dark:bg-main-color group-hover:bg-main-color dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-main-color text-white group-hover:bg-main-color group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-main-color dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70">
             <svg
-              className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+              className="h-4 w-4 text-white rtl:rotate-180 dark:text-gray-800"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -162,12 +127,12 @@ export const Banner = () => {
         </button>
         <button
           type="button"
-          className="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+          className="group absolute end-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
           data-carousel-next
         >
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+          <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/30 group-hover:bg-white/50 group-focus:outline-none group-focus:ring-4 group-focus:ring-white dark:bg-gray-800/30 dark:group-hover:bg-gray-800/60 dark:group-focus:ring-gray-800/70">
             <svg
-              className="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+              className="h-4 w-4 text-white rtl:rotate-180 dark:text-gray-800"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

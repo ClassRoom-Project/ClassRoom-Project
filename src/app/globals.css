@@ -28,17 +28,21 @@ body {
     text-wrap: balance;
   }
 } */
-html {
-  overflow-y: scroll;
-  scrollbar-width: none;
-}
+@media (max-width: 767px) {
+  html {
+    overflow-y: hidden;
+    scrollbar-width: none;
+  }
 
-html::-webkit-scrollbar {
-  display: none;
-}
+  html::-webkit-scrollbar {
+    display: none;
+  }
 
-.responsiveHeight {
-  height: calc(100vh - 144px);
+  .responsiveHeight {
+    height: calc(100vh - 144px);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
 }
 
 @media (min-width: 768px) {

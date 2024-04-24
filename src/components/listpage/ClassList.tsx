@@ -7,7 +7,7 @@ import { ClassAllType } from '@/types/class';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
-
+import LoadingSpinner from '../common/LoadingSpinner';
 //무한 스크롤
 function ClassList() {
   const searchParams = useSearchParams();
@@ -50,16 +50,16 @@ function ClassList() {
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
   return status === 'pending' ? (
-    <div className="w-full h-screen text-[#5373FF] flex justify-center items-center">
-      <p>로딩중입니다!</p>
+    <div className="flex h-screen  w-full items-center justify-center">
+      <LoadingSpinner />
     </div>
   ) : status === 'error' ? (
-    <div className="w-full h-screen text-[#5373FF] flex justify-center items-center">
+    <div className="flex h-screen w-full items-center justify-center text-[#5373FF]">
       <p>Error: {error.message}</p>
     </div>
   ) : (
-    <div className="flex justify-center min-w-full">
-      <div className="grid grid-cols-4 w-full">
+    <div className="flex min-w-full items-center justify-center">
+      <div className="grid w-full grid-cols-4">
         {classInfos?.pages.map((page, i) => (
           <React.Fragment key={i}>
             {page.classInfos.map((classInfos: ClassAllType) => (

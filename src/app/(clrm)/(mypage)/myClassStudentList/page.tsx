@@ -3,8 +3,8 @@ import { Suspense } from 'react';
 
 const MyClassStudentListPage = () => {
   return (
-    <div className=" responsiveHeight overflow-y-auto h-screen scrollbar-hide">
-      <div className="flex justify-center items-center align-middle ">
+    <div className=" responsiveHeight h-screen">
+      <div className="flex items-center justify-center align-middle ">
         <Suspense>
           <MyClassStudentPage />
         </Suspense>
