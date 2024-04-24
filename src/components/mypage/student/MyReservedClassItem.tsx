@@ -57,7 +57,7 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
             <div className="flex gap-4 items-center">
               <p className="font-bold sm:text-xl text-base text-dark-purple-color pb-4">{classItem.title}</p>
             </div>
-            <div className="flex md:flex-row md:gap-4 flex-col whitespace-nowrap overflow-x-auto">
+            <div className="flex md:flex-row md:gap-4 flex-col whitespace-nowrap">
               <div className="flex md:gap-4 md:py-1 md:flex-row flex-col">
                 <div className="flex items-center p-2 gap-2 md:border md:border-point-purple md:rounded-3xl">
                   <FaRegCalendarCheck color="#6C5FF7" className="md:size-5 size-4" />
