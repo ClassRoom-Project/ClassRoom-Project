@@ -1,13 +1,13 @@
 'use client';
 
-import React, { Suspense, useEffect, useMemo, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import EditProfile from '@/components/mypage/EditProfile';
-import MyReservedClass from '@/components/mypage/student/MyReservedClass';
-import MyComments from '@/components/mypage/student/MyComments';
-import MyWishClass from '@/components/mypage/student/MyWishClass';
 import AddTeacherInfo from '@/components/mypage/student/AddTeacherInfo';
+import MyComments from '@/components/mypage/student/MyComments';
+import MyReservedClass from '@/components/mypage/student/MyReservedClass';
+import MyWishClass from '@/components/mypage/student/MyWishClass';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
 
 type StudentTabComponent = {
@@ -65,8 +65,13 @@ const StudentMyPageTab = () => {
     router.push(`/studentMypage?studentTab=${tab}`);
   };
 
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+  const checkAndCloseDropDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    let targetEl = e.currentTarget;
+    if (targetEl && targetEl.matches(':focus')) {
+      setTimeout(function () {
+        targetEl.blur();
+      }, 0);
+    }
   };
 
   const handleDropdownItemClick = (tab: string) => {
@@ -75,9 +80,9 @@ const StudentMyPageTab = () => {
   };
 
   return (
-    <div className="w-full h-screen md:m-4 md:p-4 m-0 p-0">
+    <div className="w-full h-screen md:my-4 md:py-4 m-0 p-0">
       {/* md 이상 일 때, 가로 탭 */}
-      <div className="hidden md:flex flex-row md:justify-between md:items-center sm:items-start w-full border-y-2">
+      <div className="hidden md:flex flex-row 2xl:gap-20 justify-between 2xl:justify-start md:items-center sm:items-start w-full border-y-2">
         <button
           onClick={() => handleOnClickTabBtn('editProfile')}
           className={`p-4 lg:text-lg whitespace-nowrap md:text-sm ${
@@ -130,22 +135,14 @@ const StudentMyPageTab = () => {
         </button>
       </div>
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="my-4 py-4 flex w-full justify-start md:hidden">
+      <div className="mb-4 py-4 flex w-full md:hidden">
         <div className="dropdown-right dropdown">
-          <div
-            tabIndex={0}
-            role="button"
-            className="m-1"
-            onClick={toggleDropdown}
-            onKeyDown={(e) => e.key === 'Enter' && toggleDropdown()}
-          >
+          <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
           </div>
           <div
             tabIndex={0}
-            className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
-              isOpen ? 'block' : 'hidden'
-            }`}
+            className={`items-start dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col `}
           >
             <button
               onClick={() => handleDropdownItemClick('editProfile')}

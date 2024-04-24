@@ -6,13 +6,16 @@ import { Banner } from '@/components/main/Banner';
 import CategoryBtns from '@/components/listpage/CategoryBtns';
 const MainPage = () => {
   return (
-    <div className="flex flex-col mb-20 items-center justify-center min-h-screen relative gap-10 md:mb-0">
-      <Banner />
-      <Suspense>
-        <CategoryBtns />
-      </Suspense>
-      <BestClass />
-      <LatestClass />
+    <div className=" flex items-center justify-center">
+      <div className="relative flex min-h-screen w-full max-w-[1440px] flex-col items-center justify-center gap-10">
+        <Banner />
+        <Suspense>
+          <CategoryBtns />
+        </Suspense>
+        <BestClass />
+        <DeadlineClass />
+        <LatestClass />
+      </div>
     </div>
   );
 };

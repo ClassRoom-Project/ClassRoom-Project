@@ -46,14 +46,14 @@ const MyClassStudentPage = () => {
         <p className="p-4 font-bold text-text-dark-gray text-xl"> 예약한 수강생 리스트</p>
       </div>
       <div className="flex flex-col text-text-dark-gray">
-        <div className="inline-flex items-center p-2 gap-2 ">
-          <LuClipboardEdit color="#6C5FF7" size="20" />
+        <div className="flex items-center p-2 gap-2 ">
+          <LuClipboardEdit color="#6C5FF7" size={20} className="hidden md:block" />
           <p className="flex gap-4 text-lg font-semibold">{classSingleInfo?.[0].title}</p>
         </div>
-        <div className="flex gap-8">
+        <div className="flex lg:flex-row flex-col lg:gap-8 gap-1">
           <div className="flex items-center p-2 gap-2">
             <FaRegCalendarCheck color="#6C5FF7" size="20" />
-            <p className="flex gap-4">
+            <p className="flex gap-4 md:text-lg text-base">
               <span className="font-bold ">날짜</span> {classSingleInfo?.[0].day}
             </p>
           </div>
@@ -65,7 +65,7 @@ const MyClassStudentPage = () => {
           </div>
           <div className="flex items-center p-2 gap-2">
             <GoPeople color="#6C5FF7" size="20" />
-            <div className="flex gap-10">
+            <div className="flex mobile:gap-10 mobile:flex-row flex-col">
               <p className="flex gap-4">
                 <span className="font-bold ">최소 인원</span> {String(classSingleInfo?.[0].min_people)}명
               </p>

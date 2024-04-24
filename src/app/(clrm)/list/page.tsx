@@ -5,13 +5,15 @@ import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import { Suspense } from 'react';
 export default function ListPage() {
   return (
-    <div className="flex flex-col w-full items-center  justify-center mb-20 md:mb-0">
-      <Suspense>
-        <CategoryBtns />
-        <SearchFilter />
-        <ClassList />
-      </Suspense>
-      <MoveToTopBtn />
+    <div className=" flex items-center justify-center">
+      <div className="flex w-full max-w-[1440px] flex-col items-center justify-center">
+        <Suspense>
+          <CategoryBtns />
+          <SearchFilter />
+          <ClassList />
+        </Suspense>
+        <MoveToTopBtn />
+      </div>
     </div>
   );
 }
