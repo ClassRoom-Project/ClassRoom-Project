@@ -84,30 +84,24 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
 
   return (
     <li
-      className="border-b-2 flex flex-col align-center gap-4 my-4 py-4 w-full md:flex-row justify-center items-center"
+      className="border-b-2 flex flex-col align-center md:gap-4 md:my-4 md:py-4 w-full md:flex-row justify-center items-center lg:max-w-[1280px]"
       key={comment.comment_id}
     >
-      <div className="flex gap-4 bg-pale-purple w-full flex-col md:flex-row justify-center items-center">
-        <div className="md:w-[300px] md:h-[200px] w-3/5">
-          <Image
-            src={comment.image[0]}
-            alt="클래스 대표 사진"
-            width={300}
-            height={200}
-            className="w-full h-full p-4 object-contain"
-          />
+      <div className="flex md:gap-4 bg-pale-purple w-full flex-col lg:flex-row justify-center items-center">
+        <div className="lg:w-1/3 w-2/3 h-60 relative ">
+          <Image src={comment.image[0]} alt="클래스 대표 사진" fill className="w-full h-full p-4 object-cover" />
         </div>
         <div className="flex flex-col p-4 gap-4 w-full h-full">
-          <section className="flex md:gap-10 md:flex-row flex-col gap-4">
-            <p className="font-bold text-xl text-dark-purple-color">{comment.title}</p>
-            <p className="flex gap-4">
+          <section className="flex lg:gap-10 lg:flex-row flex-col gap-4">
+            <p className="font-bold sm:text-xl text-lg whitespace-nowrap text-dark-purple-color">{comment.title}</p>
+            <p className="flex gap-4 text-sm sm:text-base whitespace-nowrap">
               <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
             </p>
           </section>
           <div>
             <Stars rating={rating} />
           </div>
-          <section className="pb-4 flex flex-col items-center md:items-start w-full">
+          <section className="pb-4 flex flex-col items-center md:items-start w-full sm:text-base text-sm">
             {isEditing ? (
               <textarea
                 name=""
@@ -121,7 +115,7 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
               <p className="w-full md:w-4/5 h-full">{comment.content}</p>
             )}
           </section>
-          <section className="flex md:justify-end justify-center gap-4 md:gap-4 p-2 md:right-4 items-center w-full">
+          <section className="flex lg:justify-end justify-center gap-4 md:gap-4 p-2 lg:right-4 items-center w-full">
             <button
               onClick={() => handleOnClickEditBtn(commentId)}
               className="btn  md:w-36 w-1/3 hover:bg-transparent text-xs md:text-sm hover:text-text-dark-gray"
