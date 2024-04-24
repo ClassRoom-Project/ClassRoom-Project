@@ -1,7 +1,8 @@
 import { detailClassIdOnly, detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
 import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
 import ClassDetailContainer from '@/components/classDetail/ClassDetailContainer';
-import ClassImageAndSummary from '@/components/classDetail/ClassImageAndSummary';
+import ClassImageAndSummary from '@/components/classDetail/ClassImageCarousel';
+import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
 import Image from 'next/image';
@@ -31,7 +32,10 @@ const page = async ({ params }: { params: { id: string } }) => {
           뒤로가기
         </Link>
       </div>
-      <ClassImageAndSummary classData={classData} userData={userData} />
+      <div className="flex w-full justify-between gap-12 bg-pale-purple p-6">
+        <ClassImageAndSummary classData={classData} />
+        <ClassSummary classData={classData} userData={userData} />
+      </div>
 
       <div className="flex w-full  flex-col items-center justify-center p-6">
         <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
