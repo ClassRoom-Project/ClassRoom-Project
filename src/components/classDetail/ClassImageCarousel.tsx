@@ -8,14 +8,22 @@ import noImage from '../../assets/images/clroom_no_img_purple.png';
 import { NextButton, PrevButton, usePrevNextButtons } from './EmblaCarouselArrowButtons';
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import './embla.css';
+import { useEffect } from 'react';
 
 const ClassImageAndSummary = ({ classData }: { classData: ListDetailClassInfo | null }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
 
+  // 로딩 후 emblaApi 초기화
+  useEffect(() => {
+    if (emblaApi && classData?.image) {
+      emblaApi.reInit();
+    }
+  }, [emblaApi, classData?.image]);
+
   return (
-    <div className="w-[50%]  ">
+    <div className="w-[50%]">
       <section className="embla">
         <div className="embla__viewport rounded-2xl" ref={emblaRef}>
           <div className="embla__container">
