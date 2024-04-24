@@ -59,11 +59,8 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 임시 URL을 생성!
-      const uploadUrl = await uploadFile(file);
-      // const newImages = [...commentImage, { file, preview }];
       const newImages = [{ file, preview }];
       setCommentImage(newImages);
-      setDataBaseImage(uploadUrl);
     }
   };
 
@@ -104,9 +101,14 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
       commentLoginWarning();
       return;
     }
-    console.log(dataBaseImage, 'dataBaseImage');
-    mutate();
+    const uploadUrl = await uploadFile(commentImage[0].file);
+    setDataBaseImage(uploadUrl);
   };
+  useEffect(() => {
+    if (dataBaseImage) {
+      mutate();
+    }
+  }, [dataBaseImage]);
 
   if (status == 'pending') {
     return <div>Loading...</div>;
