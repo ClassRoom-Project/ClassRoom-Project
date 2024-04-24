@@ -10,6 +10,7 @@ interface PaginationProps {
   itemCountPerPage: number; // 페이지 당 보여줄 데이터 개수
   pageCount: number; // 보여줄 페이지 개수
   currentPage: number; // 현재 페이지
+  // onClickPageBtn : () => void
 }
 
 const Pagination = ({ totalItems, itemCountPerPage, pageCount, currentPage }: PaginationProps) => {
@@ -50,7 +51,7 @@ const Pagination = ({ totalItems, itemCountPerPage, pageCount, currentPage }: Pa
         {[...Array(pageCount)].map((_, i) => (
           <li key={start + i}>
             {start + i <= totalPages && (
-              <Link key={start + i} href={pathname + '?' + createQueryString('page', `${start + i}`)}>
+              <Link key={start + i} href={pathname + '?' + createQueryString('page', `${start + i}`)} >
                 <p
                   className={`px-3 py-1 m-2 rounded-full ${
                     currentPage === start + i

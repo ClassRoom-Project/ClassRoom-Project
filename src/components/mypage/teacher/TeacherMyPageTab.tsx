@@ -67,7 +67,7 @@ const TeacherMyPageTab = () => {
   };
 
   return (
-    <div className="w-full h-screen md:my-4 md:py-4 m-0 p-0">
+    <div className="w-full h-screen md:my-4 md:py-4 m-0 p-0 ">
       {/* md 이상 일 때, 가로 탭 */}
       <div className="hidden md:flex flex-row md:justify-start lg:gap-20 md:gap-10 md:items-center sm:items-start w-full border-y-2 whitespace-nowrap">
         <div className="overflow-x-scroll scrollbar-hide">

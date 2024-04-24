@@ -29,10 +29,11 @@ const MyClassStudentPage = () => {
     queryKey: ['singleClass', timeId],
     queryFn: () => getClassSingleInfo(timeId)
   });
+  console.log('classSingleInfo', classSingleInfo);
 
   if (isPending) {
     return (
-      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+      <div className="flex min-h-100vh-header-default flex-col  items-center justify-center gap-4">
         <LoadingSpinner />
         <p>잠시만 기다려주세요..</p>
       </div>
@@ -44,34 +45,34 @@ const MyClassStudentPage = () => {
   }
 
   return (
-    <div className="m-4 p-4 flex flex-col gap-4 w-full">
-      <div className="border-y-2 w-full flex items-center">
+    <div className="m-4 mb-24 flex w-full flex-col items-center justify-center gap-4 p-4 md:mb-0">
+      <div className="flex w-full items-center border-y-2">
         <button className="flex  items-center text-gray-500" onClick={() => router.back()}>
           <IoIosArrowBack size={20} />
         </button>
-        <p className="p-4 font-bold text-text-dark-gray text-xl"> 예약한 수강생 리스트</p>
+        <p className="p-4 text-xl font-bold text-text-dark-gray"> 예약한 수강생 리스트</p>
       </div>
       <div className="flex flex-col text-text-dark-gray">
-        <div className="flex items-center p-2 gap-2 ">
+        <div className="flex items-center gap-2 p-2 ">
           <LuClipboardEdit color="#6C5FF7" size={20} className="hidden md:block" />
           <p className="flex gap-4 text-lg font-semibold">{classSingleInfo?.[0].title}</p>
         </div>
-        <div className="flex lg:flex-row flex-col lg:gap-8 gap-1">
-          <div className="flex items-center p-2 gap-2">
+        <div className="flex flex-col gap-1 lg:flex-row lg:gap-8">
+          <div className="flex items-center gap-2 p-2">
             <FaRegCalendarCheck color="#6C5FF7" size="20" />
-            <p className="flex gap-4 md:text-lg text-base">
+            <p className="flex gap-4 text-base md:text-lg">
               <span className="font-bold ">날짜</span> {classSingleInfo?.[0].day}
             </p>
           </div>
-          <div className="flex items-center p-2 gap-2">
+          <div className="flex items-center gap-2 p-2">
             <FaRegClock color="#6C5FF7" size="20" />
             <p className="flex gap-4">
               <span className="font-bold ">시간</span> {convertTimeTo12HourClock(classSingleInfo?.[0].times)}
             </p>
           </div>
-          <div className="flex items-center p-2 gap-2">
+          <div className="flex items-center gap-2 p-2">
             <GoPeople color="#6C5FF7" size="20" />
-            <div className="flex mobile:gap-10 mobile:flex-row flex-col">
+            <div className="flex flex-col mobile:flex-row mobile:gap-10">
               <p className="flex gap-4">
                 <span className="font-bold ">최소 인원</span> {String(classSingleInfo?.[0].min_people)}명
               </p>
@@ -80,7 +81,7 @@ const MyClassStudentPage = () => {
               </p>
             </div>
           </div>
-          <div className="flex items-center p-2 gap-2">
+          <div className="flex items-center gap-2 p-2">
             <BiMoneyWithdraw color="#6C5FF7" size="20" />
             <p className="flex gap-4">
               <span className="font-bold ">1인 금액</span> {String(classSingleInfo?.[0].price.toLocaleString())}원
@@ -88,6 +89,7 @@ const MyClassStudentPage = () => {
           </div>
         </div>
       </div>
+      <div className="mt-4 text-xs sm:hidden md:mt-0">*옆으로 넘겨주세요.</div>
       <Suspense>
         <MyClassStudentList />
       </Suspense>

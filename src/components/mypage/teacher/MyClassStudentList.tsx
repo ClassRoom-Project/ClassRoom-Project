@@ -43,7 +43,7 @@ const MyClassStudentList = () => {
   const currentPosts = myClassStudentInfo.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto scrollbar-hide">
       <table className="table ">
         <thead>
           <tr className=" bg-light-purple text-point-purple">

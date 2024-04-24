@@ -191,7 +191,7 @@ const EditTeacherInfo = () => {
   }
 
   return (
-    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:justify-items-center w-full">
+    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:justify-items-center w-full mb-16 md:mb-0">
       <p className="md:hidden items-start text-xl text-dark-purple-color font-bold pt-4">선생님 정보 수정하기</p>
       <p className=" text-center text-text-dark-gray py-4">
         회원님이 등록하신 강사 정보입니다. <br />

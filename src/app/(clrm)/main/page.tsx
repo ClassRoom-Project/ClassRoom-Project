@@ -5,7 +5,7 @@ import { Banner } from '@/components/main/Banner';
 import CategoryBtns from '@/components/listpage/CategoryBtns';
 const MainPage = () => {
   return (
-    <div className="responsiveHeight h-screen">
+    <div className="responsiveHeight h-screen overflow-y-auto">
       <div className="flex items-center justify-center">
         <div className="relative flex min-h-screen w-full max-w-[1440px] flex-col items-center justify-center gap-10">
           <Banner />

@@ -80,7 +80,7 @@ const MyClass = () => {
   const currentPosts = myClassInfo?.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 lg:w-full md:justify-items-center w-full">
+    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 lg:w-full md:justify-items-center w-full mb-24 md:mb-0">
       <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden ">내가 등록한 클래스</p>
       {currentPosts?.map((classInfo, classIndex) => (
         <li
