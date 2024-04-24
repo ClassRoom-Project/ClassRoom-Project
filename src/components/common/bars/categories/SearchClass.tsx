@@ -38,14 +38,14 @@ export const SearchClass = () => {
     if (!trimedSelectedTitle) return;
     router.push(`/list?query=${trimedSelectedTitle}`);
   };
-  //url로 접근할 경우
+  //url로 접근할 경우 타이틀에 queryString 입력
   useEffect(() => {
     setSelectedTitle(searchQuery ?? '');
   }, [searchQuery, setSelectedTitle]);
 
   return (
     <form className="h-[120px] ml-2 relative w-full flex items-center justify-center" onSubmit={handleSearchBtn}>
-      <div className="flex border-[1px] rounded-xl w-full items-end justify-end border-point-color relative">
+      <div className="flex border-[1px] rounded-xl w-full items-end justify-end border-input-border-color relative">
         <input
           maxLength={20}
           onChange={handleSearchChange}

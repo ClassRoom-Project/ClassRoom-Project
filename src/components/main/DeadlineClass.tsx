@@ -1,40 +1,47 @@
 'use client';
-
-import React, { PropsWithChildren, useEffect } from 'react';
+//yarn add embla-carousel
+//yarn add embla-carousel-autoplay
+import React, { useEffect } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import ClassCard from './ClassCard';
-import { useClassInfoStore } from '@/store/classInfoStore';
-import { getClassAllInfo } from '@/app/api/mainpage/getClassAllInfo';
-// yarn add --dev @types/react-slick
-// yarn add react-slick
-// yarn add slick-carousel
-// flex 와 slick은 절때 사용금지
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import { settings } from './ClassSlick';
+import { EmblaOptionsType } from 'embla-carousel';
+import Autoplay from 'embla-carousel-autoplay';
+import { useLatestClassInfoStore } from '@/store/classInfoStore';
+import { getLatestClassInfo } from '@/app/api/mainpage/getClassAllInfo';
+import './emblaCarousel.css';
 
 const DeadlineClass = () => {
-  const { classInfos, setClassInfos } = useClassInfoStore();
+  const { LatestClassInfos, setLatestClassInfos } = useLatestClassInfoStore();
+  const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 3000 })]);
+
+  //카드들이 제대로 나오지 않는 경우가 있는 경우 방지
+  useEffect(() => {
+    if (embla && LatestClassInfos.length > 0) {
+      embla.reInit();
+    }
+  }, [embla, LatestClassInfos]);
 
   useEffect(() => {
-    const getClassInfos = async () => {
-      const infos = await getClassAllInfo();
-      //남은수량순
-      [...infos].sort((a, b) => a.quantity - b.quantity);
-      setClassInfos(infos);
+    const fetchClassInfo = async () => {
+      const infos = await getLatestClassInfo();
+      setLatestClassInfos(infos);
     };
-    getClassInfos();
-  }, [setClassInfos]);
 
+    fetchClassInfo();
+  }, [setLatestClassInfos]);
+
+  console.log(LatestClassInfos);
   return (
-    <div className="w-full mr-auto ml-auto">
-      <p className="text-text-color">마감임박</p>
-      <div className="slider-container w-full">
-        <Slider {...settings}>
-          {classInfos.map((info) => (
-            <ClassCard key={info.class_id} classInfos={info} />
+    <div className="w-full flex flex-col">
+      <p className="text-text-color px-2 borderb-[1px] pb-5 border-solid border-border-color">예약순</p>
+      <div className="embla w-full overflow-hidden" ref={emblaRef}>
+        <div className="embla__container">
+          {LatestClassInfos.map((infos) => (
+            <div className="embla__slide" key={infos.class_id}>
+              <ClassCard classInfos={infos} />
+            </div>
           ))}
-        </Slider>
+        </div>
       </div>
     </div>
   );

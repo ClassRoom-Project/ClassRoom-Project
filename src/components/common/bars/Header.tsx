@@ -66,25 +66,25 @@ const Header = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0  z-40 bg-white flex w-full justify-between items-center h-20 border-b-[1px] border-solid border-gray-300 ml-0 md:ml-[50px] md:px-32">
-        <div className="flex items-center h-full ml-0 w-full justify-start">
-          <div className="rounded-full relative w-16 h-16">
+      <div className="fixed left-0 right-0 top-0  z-40 ml-0 flex h-20 w-full items-center justify-between  bg-white md:ml-[50px] md:px-20">
+        <div className="ml-0 flex h-full w-full items-center justify-start">
+          <div className="relative ml-2  h-10 w-10 rounded-full md:ml-12 md:h-16 md:w-16">
             <Link href="/">
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
           </div>
-          <div className="w-3/5  xs:w-1/3">
+          <div className="xs:w-1/3 w-4/5  md:w-3/5">
             <Suspense>
               <SearchClass />
             </Suspense>
           </div>
         </div>
-        <div className="w-2/5 relative flex items-end justify-end  lg:w-4/5">
-          <div className="flex w-full justify-end items-center">
+        <div className="relative flex w-1/5 items-end justify-end  lg:w-4/5">
+          <div className="flex w-full items-center justify-end">
             {userEmail ? (
-              <div className="flex justify-end items-en">
-                <p className="p-4 hidden w-full whitespace-nowrap lg:block">
-                  {userInfo?.nickname} <span className="text-main-color font-bold">{roleName}님</span>
+              <div className="items-en flex justify-end">
+                <p className="hidden w-full whitespace-nowrap p-4 lg:block">
+                  {userInfo?.nickname} <span className="font-bold text-main-color">{roleName}님</span>
                 </p>
               </div>
             ) : null}
@@ -95,20 +95,29 @@ const Header = ({ children }: PropsWithChildren) => {
             ) : null}
 
             {userEmail ? (
-              <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="w-16 h-16 relative rounded-full">
+              <div className="dropdown dropdown-end dropdown-bottom">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="relative mr-2 h-10 w-10 rounded-full md:mr-12 md:h-16 md:w-16"
+                >
                   <Image
                     src={profileImage}
                     alt="Profile image"
-                    className="w-full h-full rounded-full object-cover"
+                    className="h-full w-full rounded-full object-cover"
                     fill
                   />
                 </div>
-                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                  <div className="border-border-color borderb-[1px] border-solid w-52 mb-2 hover:text-button-hover-color">
-                    <button onClick={handleMoveToMypage}>마이페이지</button>
+                <ul
+                  tabIndex={0}
+                  className="menu dropdown-content relative z-[1] flex w-52 flex-col items-center justify-center bg-white shadow-lg"
+                >
+                  <div className="relative h-10 w-full hover:text-button-hover-color">
+                    <button onClick={handleMoveToMypage} className="flex w-full items-center justify-start">
+                      <p>마이페이지</p>
+                    </button>
                   </div>
-                  <div>
+                  <div className="w-full">
                     <Suspense fallback={<div>Logout</div>}>
                       <LoginState />
                     </Suspense>
@@ -117,9 +126,7 @@ const Header = ({ children }: PropsWithChildren) => {
               </div>
             ) : (
               <Suspense fallback={<div>Logout</div>}>
-                <div className="w-full flex justify-end">
-                  <LoginState />
-                </div>
+                <LoginState />
               </Suspense>
             )}
           </div>

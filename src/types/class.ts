@@ -12,7 +12,7 @@ export interface ClassAllType {
   min_people: number;
   location: string;
   price: number;
-  date: string[];
+  date: { day: string }[];
   time: string[];
   quantity: number;
   detail_location: string;
@@ -25,6 +25,7 @@ export interface ClassAllType {
   reserved_user_id: string[];
   wish: { user_id: string }[];
   wishCount: { user_id: string }[];
+  create_at: string;
 }
 
 export interface ClassItem {

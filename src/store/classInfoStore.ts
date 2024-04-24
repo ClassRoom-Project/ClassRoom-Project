@@ -2,20 +2,35 @@ import { ClassAllType, ListDetailClassInfo } from '@/types/class';
 import { create } from 'zustand';
 
 //class 정보들 각각 배열에 담는 로직임다
-export type ClassStoreType = {
-  classInfos: ClassAllType[];
-  setClassInfos: (classInfos: ClassAllType[]) => void;
+export type LatestClassInfoType = {
+  LatestClassInfos: ClassAllType[];
+  setLatestClassInfos: (classInfos: ClassAllType[]) => void;
 };
+export type BestClassInfoType = {
+  BestClassInfos: ClassAllType[];
+  setBestClassInfos: (classInfos: ClassAllType[]) => void;
+};
+
 export type DetailClassStoreType = {
   classInfo: ListDetailClassInfo | null;
   setClassInfo: (classInfo: ListDetailClassInfo | null) => void;
 };
-export const useClassInfoStore = create<ClassStoreType>((set) => ({
-  classInfos: [],
+export const useLatestClassInfoStore = create<LatestClassInfoType>((set) => ({
+  LatestClassInfos: [],
 
-  setClassInfos: (getclassInfos) => {
+  setLatestClassInfos: (getClassInfos) => {
     set(() => ({
-      classInfos: getclassInfos
+      LatestClassInfos: getClassInfos
+    }));
+  }
+}));
+
+export const useBestClassInfoStore = create<BestClassInfoType>((set) => ({
+  BestClassInfos: [],
+
+  setBestClassInfos: (getClassInfos) => {
+    set(() => ({
+      BestClassInfos: getClassInfos
     }));
   }
 }));

@@ -78,7 +78,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
           required
           selected={new Date(selectedDate)}
           onSelect={handleDateChange}
-          disabled={(day) => !availableDays.includes(format(day, 'yyyy-MM-dd'))}
+          disabled={[{ before: new Date() }, (day) => !availableDays.includes(format(day, 'yyyy-MM-dd'))]}
           locale={ko}
           fromYear={new Date().getFullYear()}
           toYear={new Date().getFullYear() + 1}

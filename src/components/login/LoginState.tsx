@@ -25,25 +25,39 @@ export default function LoginState() {
 
   if (status === 'authenticated') {
     return (
-      <div>{userEmail ? <button onClick={handleLogout}>로그아웃</button> : <Link href="/hello">로그인</Link>}</div>
+      <div className="relative w-full">
+        {userEmail ? (
+          <div className="relative h-10 w-full hover:text-button-hover-color">
+            <button className="flex w-full items-center justify-start" onClick={handleLogout}>
+              <p className="pt-3">로그아웃</p>
+            </button>
+          </div>
+        ) : (
+          <Link href="/hello">로그인</Link>
+        )}
+      </div>
     );
   }
 
   if (status === 'loading') {
     return (
-      <div className="btn bg-transparent border border-main-color text-main-color hover:bg-main-color hover:text-white">
+      <div className="btn border border-main-color bg-transparent text-main-color hover:bg-main-color hover:text-white">
         로그인
       </div>
     );
   }
   return (
-    <div className="w-full flex relative justify-end items-end">
+    <div className="relative w-full">
       {userEmail ? (
-        <button onClick={handleLogout}>로그아웃</button>
+        <div className="relative h-10 w-full hover:text-button-hover-color">
+          <button className="flex w-full items-center justify-start" onClick={handleLogout}>
+            <p className="pt-3">로그아웃</p>
+          </button>
+        </div>
       ) : (
-        <div className="w-full flex justify-end">
+        <div className="flex w-full justify-end">
           <Link
-            className="btn bg-transparent border-main-color text-main-color hover:bg-main-color hover:text-white"
+            className="btn mr-2 w-16 whitespace-nowrap border-main-color bg-transparent text-main-color hover:bg-main-color hover:text-white md:mr-[50px] md:w-20"
             href="/hello"
           >
             로그인

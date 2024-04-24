@@ -48,23 +48,21 @@ const Pagination = ({ totalItems, itemCountPerPage, pageCount, currentPage }: Pa
           </Link>
         </li>
         {[...Array(pageCount)].map((_, i) => (
-          <>
+          <li key={start + i}>
             {start + i <= totalPages && (
-              <li key={start + i}>
-                <Link key={start + i} href={pathname + '?' + createQueryString('page', `${start + i}`)}>
-                  <p
-                    className={`px-3 py-1 m-2 rounded-full ${
-                      currentPage === start + i
-                        ? 'bg-dark-purple-color text-white'
-                        : 'border border-dark-purple-color text-dark-purple-color'
-                    }`}
-                  >
-                    {start + i}
-                  </p>
-                </Link>
-              </li>
+              <Link key={start + i} href={pathname + '?' + createQueryString('page', `${start + i}`)}>
+                <p
+                  className={`px-3 py-1 m-2 rounded-full ${
+                    currentPage === start + i
+                      ? 'bg-dark-purple-color text-white'
+                      : 'border border-dark-purple-color text-dark-purple-color'
+                  }`}
+                >
+                  {start + i}
+                </p>
+              </Link>
             )}
-          </>
+          </li>
         ))}
         <li className={`${noNext && 'invisible'}`}>
           <Link href={pathname + '?' + createQueryString('page', `${start + pageCount}`)}>
