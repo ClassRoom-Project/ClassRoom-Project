@@ -52,8 +52,10 @@ const SearchFilter = () => {
     setClassFilters({ ...ClassFilters, selectedDifficulty: classDifficulty });
   };
   //클래스 가격 핸들러
-  const handlePriceFilter = (min: number, max: number) => {
-    setClassFilters({ ...ClassFilters, selectedPrice: { min, max } });
+  const handlePriceFilter = (min: number, max: number): (() => void) => {
+    return () => {
+      setClassFilters({ ...ClassFilters, selectedPrice: { min, max } });
+    };
   };
 
   // 클래스 요일 핸들러
@@ -110,18 +112,20 @@ const SearchFilter = () => {
           <div className="divider m-0"></div>
           <div>
             <div className="flex  w-full flex-col items-center justify-center">
-              <div className="mb-3 flex w-64 flex-col items-start justify-start">
+              <div className="mb-3 flex w-12 items-center justify-center md:w-64 md:items-start md:justify-start">
                 <p className="text-black">지역</p>
               </div>
               <select
-                className="select select-primary w-1/2 md:w-full"
+                className="select select-primary w-1/2  md:w-full"
                 value={ClassFilters.selectedLocation || ''}
                 onChange={handleLocationChange}
               >
-                <option value="" disabled>
+                <option value="" className="bg-disable-color text-sm md:text-base" disabled>
                   지역을 선택하세요
                 </option>
-                <option value={'서울'}>서울</option>
+                <option className="bg-disable-color" value={'서울'}>
+                  서울
+                </option>
                 <option value={'경기'}>경기</option>
                 <option value={'인천'}>인천</option>
                 <option value={'충남'}>충남</option>
@@ -212,16 +216,35 @@ const SearchFilter = () => {
             </div>
           </div>
           <div className="divider m-0"></div>
-          <div className="w-full items-center justify-center">
-            <div className="mb-3 flex w-64 items-start justify-start">
+          <div className="flex w-full flex-col items-center justify-center">
+            <div className="mb-3 flex w-12 items-center justify-center md:w-64 md:items-start md:justify-start">
               <p className="text-black">금액</p>
             </div>
             <div className="flex w-full justify-center">
-              <div className="grid w-full grid-cols-2 justify-between gap-3">
-                <PriceBtn classFilters={ClassFilters} minPrice={0} maxPrice={19999} filterText={'20,000원 미만'} />
-                <PriceBtn classFilters={ClassFilters} minPrice={0} maxPrice={49999} filterText={'50,000원 미만'} />
-                <PriceBtn classFilters={ClassFilters} minPrice={0} maxPrice={99999} filterText={'100,000원 미만'} />
+              <div className="grid grid-cols-1 justify-between gap-3 md:w-full md:grid-cols-2">
                 <PriceBtn
+                  handlePriceFilter={handlePriceFilter(0, 19999)}
+                  classFilters={ClassFilters}
+                  minPrice={0}
+                  maxPrice={19999}
+                  filterText={'20,000원 미만'}
+                />
+                <PriceBtn
+                  handlePriceFilter={handlePriceFilter(0, 49999)}
+                  classFilters={ClassFilters}
+                  minPrice={0}
+                  maxPrice={49999}
+                  filterText={'50,000원 미만'}
+                />
+                <PriceBtn
+                  handlePriceFilter={handlePriceFilter(0, 99999)}
+                  classFilters={ClassFilters}
+                  minPrice={0}
+                  maxPrice={99999}
+                  filterText={'100,000원 미만'}
+                />
+                <PriceBtn
+                  handlePriceFilter={handlePriceFilter(100000, 1000000000000000)}
                   classFilters={ClassFilters}
                   minPrice={100000}
                   maxPrice={1000000000000000}

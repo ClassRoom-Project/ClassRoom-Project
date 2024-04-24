@@ -5,15 +5,23 @@ interface PriceBtnProps {
   minPrice: number;
   maxPrice: number;
   filterText: string;
+  handlePriceFilter: () => void;
 }
-export const PriceBtn: React.FC<PriceBtnProps> = ({ classFilters, minPrice, maxPrice, filterText }) => {
+export const PriceBtn: React.FC<PriceBtnProps> = ({
+  classFilters,
+  minPrice,
+  maxPrice,
+  filterText,
+  handlePriceFilter
+}) => {
   const isPriceSelected = (min: number, max: number) => {
     return classFilters.selectedPrice?.min === min && classFilters.selectedPrice?.max === max;
   };
 
   return (
     <button
-      className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
+      onClick={handlePriceFilter}
+      className={`rounded-2xl border-[1px] border-solid border-point-purple p-2 text-sm md:px-0 md:py-1 md:text-base  ${
         isPriceSelected(minPrice, maxPrice)
           ? 'bg-point-purple text-white'
           : 'bg-pale-purple transition-all hover:bg-button-disable-color'
