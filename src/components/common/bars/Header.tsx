@@ -113,7 +113,7 @@ const Header = ({ children }: PropsWithChildren) => {
                 >
                   <div className="relative h-10 w-full hover:text-button-hover-color">
                     <button onClick={handleMoveToMypage} className="flex w-full items-center justify-start">
-                      <p>마이페이지</p>
+                      <p className="mt-2">마이페이지</p>
                     </button>
                   </div>
                   <div className="w-full">

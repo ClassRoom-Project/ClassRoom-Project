@@ -53,7 +53,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 임시 URL을 생성!
-      const newImages = [...commentImage, { file, preview }];
+      const newImages = [{ file, preview }];
       setCommentImage(newImages);
     }
   };
@@ -100,9 +100,10 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
       const url = await uploadFile(image.file);
       if (url) {
         imageUrls.push(url);
+        console.log(imageUrls, 'imageUrls');
+        setDataBaseImage(imageUrls[0]);
       }
     }
-    setDataBaseImage(imageUrls[0]);
     mutate();
   };
 
@@ -117,32 +118,32 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="w-[600px] h-[404px] flex justify-center items-center bg-disable-color rounded-xl shadow-md border-solid p-4 xl:w-[1116px]">
-          <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col">
+        <div className="flex h-[404px] w-[600px] items-center justify-center rounded-xl border-solid bg-disable-color p-4 shadow-md xl:w-[1116px]">
+          <form onSubmit={handleCommentSubmit} className="flex flex-col items-center justify-center">
             <div className="flex items-center justify-center">
-              <div className="w-32 h-32 items-center justify-center flex relative mr-5 xl:w-64 xl:h-64">
+              <div className="relative mr-5 flex h-32 w-32 items-center justify-center xl:h-64 xl:w-64">
                 {commentImage.length > 0 ? (
                   <Image
                     src={commentImage[0].preview}
                     alt="uploaded image preview"
                     fill
-                    className="h-full w-full object-cover rounded-[20px] border"
+                    className="h-full w-full rounded-[20px] border object-cover"
                   />
                 ) : (
                   <Image
                     src={noImage}
                     alt="no image"
                     fill
-                    className="h-full w-full object-cover rounded-[20px] border"
+                    className="h-full w-full rounded-[20px] border object-cover"
                   />
                 )}
               </div>
-              <div className="w-[400px] flex flex-col justify-center items-start xl:w-[700px]">
-                <div className="w-full flex justify-between items-center">
-                  <div className="flex items-center mb-4">
+              <div className="flex w-[400px] flex-col items-start justify-center xl:w-[700px]">
+                <div className="flex w-full items-center justify-between">
+                  <div className="mb-4 flex items-center">
                     <label
                       htmlFor="image-upload"
-                      className="border flex border-main-color bg-[#E3E1FC] text-black text-sm p-1 rounded-full w-16 justify-center items-center hover:bg-[#CAC6FC] hover:border-main-color cursor-pointer"
+                      className="flex w-16 cursor-pointer items-center justify-center rounded-full border border-main-color bg-[#E3E1FC] p-1 text-sm text-black hover:border-main-color hover:bg-[#CAC6FC]"
                     >
                       <p>사진추가</p>
                     </label>
@@ -154,7 +155,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                       style={{ display: 'none' }}
                     />
                   </div>
-                  <div className="rating mb-2 rating-sm flex justify-end items-center">
+                  <div className="rating rating-sm mb-2 flex items-center justify-end">
                     {[1, 2, 3, 4, 5].map((num) => (
                       <input
                         key={num}
@@ -171,7 +172,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 <textarea
                   minLength={10}
                   maxLength={150}
-                  className="w-full h-52 p-2 border rounded-md"
+                  className="h-52 w-full rounded-md border p-2"
                   placeholder="후기을 입력해주세요.(10자 이상)"
                   value={content}
                   onChange={handleContentChange}
@@ -180,7 +181,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
             </div>
             <button
               type="submit"
-              className="mt-4 bg-main-color hover:bg-button-hover-color text-white font-bold py-2 px-4 rounded-2xl"
+              className="mt-4 rounded-2xl bg-main-color px-4 py-2 font-bold text-white hover:bg-button-hover-color"
             >
               후기 등록
             </button>
