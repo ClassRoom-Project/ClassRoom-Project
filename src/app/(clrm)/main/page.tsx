@@ -12,7 +12,6 @@ const MainPage = () => {
         <CategoryBtns />
       </Suspense>
       <BestClass />
-      {/* <DeadlineClass /> */}
       <LatestClass />
     </div>
   );

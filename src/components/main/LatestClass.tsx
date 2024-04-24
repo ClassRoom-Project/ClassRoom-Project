@@ -33,8 +33,10 @@ const LatestClass = () => {
 
   return (
     <div className="w-full flex flex-col">
-      <p className="text-text-color borderb-[1px] px-2 pb-5 border-solid border-border-color">최신순</p>
-      <div className="embla w-full overflow-hidden" ref={emblaRef}>
+      <div className="ml-2 w-full">
+        <p className="px-2 text-xl pb-1">클룸 신규 클래스 🎉</p>
+      </div>
+      <div className="embla mt-2 w-full overflow-hidden" ref={emblaRef}>
         <div className="embla__container">
           {LatestClassInfos.map((infos) => (
             <div className="embla__slide" key={infos.class_id}>

@@ -66,9 +66,9 @@ const Header = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div className="fixed top-0 left-0 right-0  z-40 bg-white flex w-full justify-between items-center h-20  ml-0 md:ml-[50px] md:px-32">
+      <div className="fixed top-0 left-0 right-0  z-40 bg-white flex w-full justify-between items-center h-20  ml-0 md:ml-[50px] md:px-20">
         <div className="flex items-center h-full ml-0 w-full justify-start">
-          <div className="rounded-full mx-2 w-10 h-10 relative md:w-16 md:h-16">
+          <div className="rounded-full ml-2  w-10 h-10 relative md:w-16 md:h-16 md:ml-12">
             <Link href="/">
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
@@ -96,7 +96,11 @@ const Header = ({ children }: PropsWithChildren) => {
 
             {userEmail ? (
               <div className="dropdown dropdown-end">
-                <div tabIndex={0} role="button" className="w-10 h-10 mx-2 relative rounded-full md:w-16 md:h-16">
+                <div
+                  tabIndex={0}
+                  role="button"
+                  className="w-10 h-10 mr-4 relative rounded-full md:w-16 md:h-16 md:mr-12"
+                >
                   <Image
                     src={profileImage}
                     alt="Profile image"
@@ -104,9 +108,11 @@ const Header = ({ children }: PropsWithChildren) => {
                     fill
                   />
                 </div>
-                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                  <div className="border-border-color borderb-[1px] border-solid w-52 mb-2 hover:text-button-hover-color">
-                    <button onClick={handleMoveToMypage}>마이페이지</button>
+                <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 gap-1 shadow bg-base-100 rounded-box w-52">
+                  <div className="border-black relative borderb-[1px] border-solid w-52 hover:text-button-hover-color">
+                    <button onClick={handleMoveToMypage} className="w-full flex justify-start items-center">
+                      <p> 마이페이지</p>
+                    </button>
                   </div>
                   <div>
                     <Suspense fallback={<div>Logout</div>}>

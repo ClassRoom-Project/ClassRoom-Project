@@ -32,9 +32,11 @@ const BestClass = () => {
   }, [setBestClassInfos]);
 
   return (
-    <div className="w-full flex flex-col">
-      <p className="text-text-color px-2 borderb-[1px] pb-5 border-solid border-border-color">인기순</p>
-      <div className="embla w-full overflow-hidden" ref={emblaRef}>
+    <div className="w-full flex relative flex-col">
+      <div className="ml-2 w-full ">
+        <p className="px-2 text-xl pb-1">클룸 인기 클래스 🏆</p>
+      </div>
+      <div className="embla w-full mt-2 overflow-hidden" ref={emblaRef}>
         <div className="embla__container">
           {BestClassInfos.map((infos) => (
             <div className="embla__slide" key={infos.class_id}>

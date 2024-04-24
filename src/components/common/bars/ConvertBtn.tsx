@@ -58,7 +58,7 @@ const ConvertBtn = () => {
     return (
       <div className="p-4">
         <button onClick={handler} className="border-4 rounded-full">
-          <div className="flex flex-col items-center hover:text-main-color transition ease-in ">
+          <div className="flex flex-col items-center text-white hover:text-main-color transition ease-in ">
             <TbArrowsExchange size={30} />
             <p className="text-xs ">선생님 전환</p>
           </div>
