@@ -11,7 +11,7 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ImageFileWithPreview } from '@/types/register';
 import { supabase } from '@/app/api/supabase/supabase';
 import Image from 'next/image';
-import noImage from '@/assets/images/no_img.jpg';
+import noImage from '@/assets/images/clroom_no_img_purple.png';
 
 //Todo : 예약한 사람만 댓글 입력가능하게 하기 , 댓글 수정삭제 구현 ,사진 기능
 const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }) => {
@@ -152,7 +152,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 <div className="mb-1 flex items-center justify-end">
                   <label
                     htmlFor="image-upload"
-                    className="flex w-fit cursor-pointer items-center justify-center rounded-md border border-button-press-color bg-[#E3E1FC] p-1 px-2 text-sm text-text-dark-gray transition-all hover:border-main-color hover:bg-[#CAC6FC]"
+                    className="flex w-fit cursor-pointer items-center justify-center rounded-md border border-button-default-color bg-[#E3E1FC] p-1 px-2 text-sm text-text-dark-gray transition-all hover:border-main-color hover:bg-[#CAC6FC]"
                   >
                     <p>사진 추가</p>
                   </label>
@@ -193,8 +193,8 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
           </form>
         </div>
       ) : (
-        <div className="mb-4 flex h-40 w-[600px] items-center justify-center rounded-lg bg-disable-color shadow-xl xl:w-full">
-          클래스를 예약하신 분만 리뷰 등록이 가능합니다.
+        <div className="mb-4 mt-2 flex h-36 w-[600px] items-center justify-center rounded-lg bg-disable-color text-lg text-text-dark-gray shadow-md xl:w-full">
+          클래스를 예약하신 분만 후기를 작성할 수 있습니다
         </div>
       )}
     </>

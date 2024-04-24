@@ -95,6 +95,11 @@
   opacity: 0.3;
 }
 
+.embla__button__svg:hover {
+  color: #6c5ff7;
+  transition: all 0.2s;
+}
+
 .embla__button__svg {
   width: 100%;
   height: 100%;

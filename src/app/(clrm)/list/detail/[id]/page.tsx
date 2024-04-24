@@ -5,9 +5,7 @@ import ClassImageAndSummary from '@/components/classDetail/ClassImageCarousel';
 import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
-import Image from 'next/image';
 import Link from 'next/link';
-import { GrLocation } from 'react-icons/gr';
 import { IoIosArrowBack } from 'react-icons/io';
 
 export const revalidate = 600;
@@ -49,12 +47,6 @@ const page = async ({ params }: { params: { id: string } }) => {
         </div>
       </div>
     </div>
-    // <div className="flex flex-col justify-center items-center">
-    //   <div className="flex flex-col justify-center items-center p-5 xl:flex xl:flex-row">
-    //     <ClassDetailRight classData={classData} />
-    //   </div>
-    //   <DetailComments classData={classData} />
-    // </div>
   );
 };
 export default page;

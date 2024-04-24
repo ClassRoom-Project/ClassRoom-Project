@@ -8,6 +8,8 @@ import { HiOutlineCube } from 'react-icons/hi2';
 import { LuClock } from 'react-icons/lu';
 import { GrLocation } from 'react-icons/gr';
 import { PiCurrencyKrw } from 'react-icons/pi';
+import { FiUsers } from 'react-icons/fi';
+import { FiCalendar, FiCheckCircle, FiUserPlus, FiWatch } from 'react-icons/fi';
 
 const ClassSummary = ({
   classData,
@@ -25,6 +27,12 @@ const ClassSummary = ({
       </div>
     );
   });
+
+  const classDaysElements = classData?.date.map((item) => {
+    const day = item.day.slice(5); // '2024-01-01' 형태의 문자열에서 원하는 부분을 추출
+    return <div key={day}>{day}</div>; // 바로 반환
+  });
+
   const classInfoLabels = [
     {
       icon: <RiUserLocationLine className="text-main-color" />,
@@ -47,7 +55,12 @@ const ClassSummary = ({
       description: classData?.location ? classData?.location : '온라인 클래스'
     },
     {
-      icon: <GrLocation className="text-main-color" />,
+      icon: <FiCalendar className="text-main-color" />,
+      title: '예약 가능 날짜',
+      description: classDaysElements
+    },
+    {
+      icon: <FiUsers className="text-main-color" />,
       title: '정원',
       description: (
         <div>
@@ -87,7 +100,7 @@ const ClassSummary = ({
               <div key={title} className="flex items-center gap-2 text-text-dark-gray">
                 <div className="font-bold ">{icon}</div>
                 <div className={'mr-1 shrink-0 font-bold'}>{title}</div>
-                <div className="truncate font-normal">{description}</div>
+                <div className="flex gap-2 font-normal">{description}</div>
               </div>
             );
           })}
