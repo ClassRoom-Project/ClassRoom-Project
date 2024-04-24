@@ -125,8 +125,8 @@ const EditProfile = () => {
   return (
     <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:justify-items-center w-full">
       <p className="flex items-center justify-center text-xl text-dark-purple-color font-bold p-4">프로필 수정하기</p>
-      <div className="flex gap-10 justify-center items-center flex-col w-full md:flex-row">
-        <div className="flex flex-col justify-center items-center">
+      <div className="flex justify-center items-center flex-col w-full md:flex-row">
+        <div className="flex flex-col justify-center items-center  md:items-end w-[350px] m-4 p-4 gap-10">
           <EditProfileImage
             newProfileImage={newProfileImage}
             setNewProfileImage={setNewProfileImage}
@@ -135,7 +135,7 @@ const EditProfile = () => {
             onImageUpload={uploadProfileImage}
           />
         </div>
-        <div>
+        <div className="w-[350px] flex items-center justify-center md:justify-start">
           <div className="flex flex-col">
             <div className="m-4 p-4 gap-4">
               <p className="text-text-dark-gray font-bold py-2">닉네임</p>
@@ -165,9 +165,6 @@ const EditProfile = () => {
         </div>
       </div>{' '}
       <div className="p-4 flex gap-4 justify-center">
-        <button onClick={handleOnClickCancleBtn} className="btn w-[100px] hover:bg-white hover:text-text-dark-gray">
-          취소하기
-        </button>
         {isEditing ? (
           <div>
             <button
@@ -185,6 +182,13 @@ const EditProfile = () => {
           >
             수정하기
           </button>
+        )}
+        {isEditing ? (
+          <button onClick={handleOnClickCancleBtn} className="btn w-[100px] hover:bg-white hover:text-text-dark-gray">
+            취소하기
+          </button>
+        ) : (
+          ''
         )}
       </div>
     </div>

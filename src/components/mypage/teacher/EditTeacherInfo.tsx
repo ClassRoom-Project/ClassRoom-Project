@@ -88,7 +88,7 @@ const EditTeacherInfo = () => {
     setNewTeacherNumber(value);
 
     // 휴대폰 번호 숫자만 입력 가능하게 하기 : 정규 표현식 사용 (유효성 검사)
-    const phoneNumRegExp = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})[0-9]{3,4}[0-9]{5}$/;
+    const phoneNumRegExp = /^(01[016789]{1})?[0-9]{3,4}?[0-9]{4}$/;
 
     if (phoneNumRegExp.test(value)) {
       setIsAvailableNumber(true);
@@ -193,96 +193,100 @@ const EditTeacherInfo = () => {
   return (
     <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:justify-items-center w-full">
       <p className="md:hidden items-start text-xl text-dark-purple-color font-bold pt-4">선생님 정보 수정하기</p>
-      <p className=" text-center text-text-dark-gray p-4">
+      <p className=" text-center text-text-dark-gray py-4">
         회원님이 등록하신 강사 정보입니다. <br />
         수정을 원하시면 아래 정보 수정하기 버튼을 눌러주세요.
       </p>
       <div className="flex justify-center">
-        <div className="flex md:gap-10 justify-center items-start flex-col w-full md:flex-row">
-          <div className="flex flex-col">
-            <div className="p-4 flex flex-col gap-4">
-              <p className="text-text-dark-gray font-bold">강사 이름</p>
-              <div className="flex flex-col">
-                {isEditing ? (
-                  <input
-                    type="text"
-                    placeholder="본명을 입력해주세요."
-                    className="input input-bordered lg:w-[250px] md:w-[200px] w-full  border-point-purple shadow-md"
-                    value={newTeacherName}
-                    onChange={handleOnChangeAddTeacherName}
-                  />
-                ) : (
-                  <p>{newTeacherName}</p>
-                )}
-                {isAvailableName ? '' : <p className="font-thin p-2">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>}
-              </div>
-            </div>
-            <div className="p-4 flex flex-col gap-4">
-              <p className="text-text-dark-gray font-bold">휴대폰 번호</p>
-              <div className="flex flex-col">
-                {isEditing ? (
-                  <input
-                    type="text"
-                    placeholder="휴대폰 번호를 입력해주세요."
-                    className="input input-bordered lg:w-[250px] md:w-[200px] w-full  border-point-purple shadow-md"
-                    value={newTeacherNumber}
-                    onChange={handleOnChangeAddTeacherNumber}
-                  />
-                ) : (
-                  <p>{newTeacherNumber}</p>
-                )}
-                {isAvailableNumber ? '' : <p className="font-thin p-2">휴대폰 번호의 양식에 맞게 입력해주세요.</p>}
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col">
+        <div className="flex justify-center items-start flex-col md:flex-row md:gap-10">
+          <div className="flex flex-col w-[350px] items-start justify-center md:items-end">
             <div className="flex flex-col">
-              <SelectOption
-                id={jobId}
-                label="직업"
-                value={newSelectedJob}
-                onChange={handleOnChangeJob}
-                disabled={!isEditing}
-                options={jobs}
-              />
-              <SelectOption
-                id={fieldId}
-                label="비지니스 분야"
-                value={newSelectedField}
-                onChange={handleOnChangeField}
-                disabled={!isEditing}
-                options={fields}
-              />
-              <SelectOption
-                id={bankId}
-                label="은행"
-                value={newSelectedBank}
-                onChange={handleOnChangeSelectedBank}
-                disabled={!isEditing}
-                options={koreanBanks}
-              />
-              <div className="p-4 flex gap-4 flex-col">
-                <span className="text-text-dark-gray font-bold">계좌 정보</span>
+              <div className="p-4 flex flex-col gap-4">
+                <p className="text-text-dark-gray font-bold">강사 이름</p>
                 <div className="flex flex-col">
                   {isEditing ? (
                     <input
                       type="text"
-                      placeholder="계좌 번호를 입력해주세요."
-                      className="input input-bordered lg:w-[250px] md:w-[200px] w-full  border-point-purple shadow-md"
-                      value={newAccount}
-                      onChange={handleOnChangeAddAccount}
+                      placeholder="본명을 입력해주세요."
+                      className="input input-bordered lg:w-[250px] md:w-[200px] w-[318px] border-point-purple shadow-md"
+                      value={newTeacherName}
+                      onChange={handleOnChangeAddTeacherName}
                     />
                   ) : (
-                    <p>{secretAccount}</p>
+                    <p>{newTeacherName}</p>
                   )}
-                  {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
+                  {isAvailableName ? (
+                    ''
+                  ) : (
+                    <p className="font-thin p-2">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>
+                  )}
                 </div>
-              </div>{' '}
-              {/* <span>어떤 값이 들어 가야 할까요?</span> */}
-              {/* <div className="m-4 p-4 flex gap-4">
+              </div>
+              <div className="p-4 flex flex-col gap-4">
+                <p className="text-text-dark-gray font-bold">휴대폰 번호</p>
+                <div className="flex flex-col">
+                  {isEditing ? (
+                    <input
+                      type="text"
+                      placeholder="휴대폰 번호를 입력해주세요."
+                      className="input input-bordered lg:w-[250px] md:w-[200px] w-[318px]  border-point-purple shadow-md"
+                      value={newTeacherNumber}
+                      onChange={handleOnChangeAddTeacherNumber}
+                    />
+                  ) : (
+                    <p>{newTeacherNumber}</p>
+                  )}
+                  {isAvailableNumber ? '' : <p className="font-thin p-2">휴대폰 번호의 양식에 맞게 입력해주세요.</p>}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col w-[350px]">
+            <SelectOption
+              id={jobId}
+              label="직업"
+              value={newSelectedJob}
+              onChange={handleOnChangeJob}
+              disabled={!isEditing}
+              options={jobs}
+            />
+            <SelectOption
+              id={fieldId}
+              label="비지니스 분야"
+              value={newSelectedField}
+              onChange={handleOnChangeField}
+              disabled={!isEditing}
+              options={fields}
+            />
+            <SelectOption
+              id={bankId}
+              label="은행"
+              value={newSelectedBank}
+              onChange={handleOnChangeSelectedBank}
+              disabled={!isEditing}
+              options={koreanBanks}
+            />
+            <div className="p-4 flex gap-4 flex-col">
+              <span className="text-text-dark-gray font-bold">계좌 정보</span>
+              <div className="flex flex-col">
+                {isEditing ? (
+                  <input
+                    type="text"
+                    placeholder="계좌 번호를 입력해주세요."
+                    className="input input-bordered lg:w-[250px] md:w-[200px] w-full  border-point-purple shadow-md"
+                    value={newAccount}
+                    onChange={handleOnChangeAddAccount}
+                  />
+                ) : (
+                  <p>{secretAccount}</p>
+                )}
+                {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
+              </div>
+            </div>{' '}
+            {/* <span>어떤 값이 들어 가야 할까요?</span> */}
+            {/* <div className="m-4 p-4 flex gap-4">
               <span>총 수익</span>
             </div> */}
-            </div>
           </div>
         </div>
       </div>
