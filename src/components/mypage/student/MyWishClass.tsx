@@ -24,7 +24,7 @@ const MyWishClass = () => {
   const postsPerPage = 5; // 한 페이지당 보여줄 포스트의 개수
 
   useEffect(() => {
-    window.scrollTo({ top: 30, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
   }, [page, currentPage]);
 

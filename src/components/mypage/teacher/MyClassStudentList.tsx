@@ -21,7 +21,7 @@ const MyClassStudentList = () => {
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 이동 시 스크롤 위치 맨 위로 초기화
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); // 페이지 이동 시 스크롤 위치 맨 위로 초기화
     setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
   }, [page]);
 
