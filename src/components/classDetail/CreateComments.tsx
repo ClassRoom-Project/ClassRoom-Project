@@ -21,7 +21,6 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   const queryClient = useQueryClient();
   const { loginUserId } = useLoginStore();
   const [commentImage, setCommentImage] = useState<ImageFileWithPreview[]>([]);
-  const [dataBaseImage, setDataBaseImage] = useState<string | null>(null);
   const email: string = session?.user?.email ?? '';
 
   const { data: userData } = useQuery({
@@ -39,14 +38,10 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
 
   // supabase storage에 등록한 이미지 업로드
   const uploadFile = async (file: File) => {
-    console.log(file);
     const cleanName = cleanFileName(file.name);
     const filePath = `uploads/${crypto.randomUUID()}_${cleanName}`;
     const { data, error } = await supabase.storage.from('commentsImages').upload(filePath, file);
-    if (error?.message === 'The resource already exists') {
-      console.log(error, 'error');
-      return null;
-    } else if (error) {
+    if (error) {
       console.log(error, 'error');
       return null;
     } else {
@@ -66,7 +61,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
 
   const { mutate, error, status } = useMutation({
     mutationKey: ['createDetailComment'],
-    mutationFn: () => createDetailComment(classData?.class_id, star, userId, content, dataBaseImage),
+    mutationFn: createDetailComment,
     retry: 1,
     onSuccess: () => {
       queryClient.invalidateQueries();
@@ -101,14 +96,19 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
       commentLoginWarning();
       return;
     }
-    const uploadUrl = await uploadFile(commentImage[0].file);
-    setDataBaseImage(uploadUrl);
-  };
-  useEffect(() => {
-    if (dataBaseImage) {
-      mutate();
+    let imageUploadUrl = null;
+    if (commentImage && commentImage.length > 0) {
+      const newImage = await uploadFile(commentImage[0].file);
+      imageUploadUrl = newImage;
     }
-  }, [dataBaseImage]);
+    mutate({
+      classId: classData?.class_id,
+      star: star,
+      userId: userId,
+      content: content,
+      comment_image: imageUploadUrl
+    });
+  };
 
   if (status == 'pending') {
     return <div>Loading...</div>;
