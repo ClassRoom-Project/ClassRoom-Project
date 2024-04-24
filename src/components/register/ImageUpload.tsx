@@ -8,7 +8,8 @@ import Image from 'next/image';
 import useRegisterStore from '@/store/registerStore';
 import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from 'react-icons/fi';
-import { ImageFileWithPreview } from '@/types/register';
+import { ImageFileWithPreviews } from '@/types/register';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import { noDateTimeNotify, noLimitImageNotify, LimitImageSizeNotify, noTotalTimeNotify,
   noCategoryNotify, noHashTagNotify,noClassContentNotify, noClassTitleNotify,
   noClassTypeNotify, noClassDiffNotify, noMinNumberNotify, noPersonnelNotify} from '@/components/common/Toastify';
@@ -42,12 +43,19 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
   const { selectedDates, schedules } = RegisterScheduleStore();
 
   const { loginUserId } = useLoginStore();
-  const [images, setImages] = useState<ImageFileWithPreview[]>([]);
+  const [images, setImages] = useState<ImageFileWithPreviews[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const classId = isEditMode ? class_Id : crypto.randomUUID();
   const noticeId = crypto.randomUUID();
   const router = useRouter();
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (initialData && initialData.image && initialData.image.length > 0) {
+      const initialImages = initialData.image.map(url => ({ file: null, preview: url }));
+      setImages(initialImages);
+    }
+  }, [initialData]);
   
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
@@ -150,14 +158,22 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
 
     // 업로드된 이미지 URL 확인
     for (const image of images) {
-      const url = await uploadFile(image.file);
-      if (url) {
-        imageUrls.push(url);
+      if (image.file) {
+        const url = await uploadFile(image.file);
+        if (url) {
+          imageUrls.push(url);
+        }
+      } else if (image.preview) {
+        // 파일이 업로드되지 않은 경우 이미지 URL을 그대로 사용
+        imageUrls.push(image.preview);
       }
     }
 
     // isEditMode가 true일 경우, 기존 데이터 업데이트
     if (isEditMode) {
+      const existingImages = initialData ? initialData.image : [];
+      const updatedImageUrls = [...existingImages, ...imageUrls];
+      const updatedImages = updatedImageUrls.slice(0, 5);
 
       const { data, error } = await supabase.from('class').update({
         category: category,
@@ -172,7 +188,7 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
         location: address,
         detail_location: detailAddress,
         total_time: totalTime,
-        image: imageUrls
+        image: updatedImages
       }).eq('class_id', classId);
 
       if (error) {
@@ -363,7 +379,8 @@ const ImageUpload:React.FC<ImageUploadProps> = ({ isEditMode, initialData, class
     <>
       {isLoading && (
         <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
-          <span className="loading loading-infinity loading-lg bg-[#CAC6FC]"></span>
+          {/* <span className="loading loading-infinity loading-lg bg-[#CAC6FC]"></span> */}
+          <LoadingSpinner />
         </div>
       )}
       <div className="my-4 w-full">

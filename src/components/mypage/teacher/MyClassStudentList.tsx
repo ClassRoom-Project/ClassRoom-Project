@@ -51,8 +51,8 @@ const MyClassStudentList = () => {
         <tbody>
           {currentPosts.map((student) => (
             <tr key={student.user_id}>
-              <th className="flex gap-4 items-center">
-                <div className=" w-12 h-12">
+              <th className="flex gap-4 items-center whitespace-nowrap">
+                <div className="w-12 h-12">
                   <Image
                     src={student.profile_image}
                     alt="프로필 이미지"
@@ -65,7 +65,7 @@ const MyClassStudentList = () => {
               </th>
               <td>{student.email}</td>
               <td>{student.reserve_quantity.toLocaleString()}명</td>
-              <td>{student.reserve_price.toLocaleString()}원</td>
+              <td className="whitespace-nowrap">{student.reserve_price.toLocaleString()}원</td>
               {/* <td>
                 <button className="btn">1:1 채팅</button>
               </td> */}
