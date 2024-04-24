@@ -11,7 +11,7 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ImageFileWithPreview } from '@/types/register';
 import { supabase } from '@/app/api/supabase/supabase';
 import Image from 'next/image';
-import noImage from '@/assets/images/no_img.jpg';
+import noImage from '@/assets/images/clroom_no_img_purple.png';
 
 //Todo : 예약한 사람만 댓글 입력가능하게 하기 , 댓글 수정삭제 구현 ,사진 기능
 const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }) => {
@@ -39,6 +39,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
 
   // supabase storage에 등록한 이미지 업로드
   const uploadFile = async (file: File) => {
+    console.log(file);
     const cleanName = cleanFileName(file.name);
     const filePath = `uploads/${classData?.class_id}_${cleanName}`;
     const { data, error } = await supabase.storage.from('commentsImages').upload(filePath, file);
@@ -118,10 +119,10 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="w-[600px] flex-col flex justify-center items-center bg-disable-color rounded-xl shadow-md border-solid px-8 pt-8 pb-4 xl:w-full">
+        <div className="w-[600px] mb-8 flex-col border border-solid border-button-focus-color flex justify-center items-center bg-disable-color rounded-xl shadow-md px-8 pt-6 pb-4 xl:w-full">
           <form onSubmit={handleCommentSubmit} className="flex justify-center items-center flex-col w-full">
             <div className="w-[400px] xl:w-full  flex items-end justify-between gap-4">
-              <div className="w-[70%] flex flex-col">
+              <div className="w-[75%] flex flex-col">
                 <div className="rating rating-sm flex justify-end items-center">
                   {[1, 2, 3, 4, 5].map((num) => (
                     <input
@@ -148,7 +149,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 <div className="flex items-center justify-end mb-1">
                   <label
                     htmlFor="image-upload"
-                    className="flex border border-main-color bg-[#E3E1FC] transition-all text-black text-sm p-1 rounded-md w-fit px-2 justify-center items-center hover:bg-[#CAC6FC] hover:border-main-color cursor-pointer"
+                    className="text-text-dark-gray flex border border-button-press-color bg-[#E3E1FC] transition-all text-sm p-1 rounded-md w-fit px-2 justify-center items-center hover:bg-[#CAC6FC] hover:border-main-color cursor-pointer"
                   >
                     <p>사진 추가</p>
                   </label>
@@ -160,7 +161,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                     style={{ display: 'none' }}
                   />
                 </div>
-                <div className="w-full h-full items-center justify-center flex relative xl:h-52 ">
+                <div className="w-full h-full rounded-md  items-center justify-center flex relative xl:h-52 border border-solid border-button-focus-color">
                   {commentImage.length > 0 ? (
                     <Image
                       src={commentImage[0].preview}
@@ -169,14 +170,20 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                       className="h-full w-full object-cover rounded-md "
                     />
                   ) : (
-                    <Image src={noImage} alt="no image" fill className="h-full w-full object-cover rounded-md " />
+                    <Image
+                      src={noImage}
+                      alt="no image"
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      className="h-full w-full object-cover rounded-md "
+                    />
                   )}
                 </div>
               </div>
             </div>
             <button
               type="submit"
-              className="mt-4 bg-main-color hover:bg-button-hover-color text-white py-2 px-4 rounded-2xl"
+              className="mt-4 transition-all bg-main-color hover:bg-button-hover-color text-white py-2 px-6 rounded-md"
             >
               후기 등록
             </button>

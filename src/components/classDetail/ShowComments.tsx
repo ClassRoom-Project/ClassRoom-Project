@@ -19,9 +19,9 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <div className="w-[600px] relative flex flex-col justify-center items-center xl:min-w-[980px] xl:w-full">
+    <div className="w-[600px]  relative flex flex-col justify-center items-center xl:min-w-[980px] xl:w-full">
       {data.length > 0 ? (
-        <div className="w-full">
+        <div className="w-full flex flex-col">
           {data?.map((comment: DetailCommentType) => (
             <CommentsCard key={comment.comment_id} comment={comment} />
           ))}

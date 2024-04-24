@@ -12,8 +12,9 @@ const ClassDetailContainer = ({
     typeof window !== 'undefined' ? DOMPurify.sanitize(classDescription || '') : classDescription || '';
 
   return (
-    <div className="w-full px-8 py-4 mb-16">
-      <p className="text-2xl mb-4">{classTitle}</p>
+    <div className="w-full  py-4 mb-16">
+      <p className="text-2xl ">{classTitle}</p>
+      <div className="divider my-2"></div>
       <div dangerouslySetInnerHTML={{ __html: safeDescription }}></div>
     </div>
   );

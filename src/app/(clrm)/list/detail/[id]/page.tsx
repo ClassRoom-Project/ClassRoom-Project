@@ -31,16 +31,14 @@ const page = async ({ params }: { params: { id: string } }) => {
         </Link>
       </div>
       <ClassImageAndSummary classData={classData} userData={userData} />
-      <div className="w-full p-6 flex flex-col justify-center items-center">
+      <div className="w-full p-6 px-40 flex flex-col justify-center items-center">
         <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
-        {/* <div className="divider m-4"></div> */}
-        <div className=" w-3/5 h-[380px]">
-          <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />
-          <div className="flex items-center">
-            {/* <GrLocation className="text-main-color" /> <p>{classData?.location}</p> */}
+        {classData?.detail_location && (
+          <div className=" w-3/5 h-[380px">
+            <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />
           </div>
-        </div>
-        <div className="w-full">
+        )}
+        <div className="w-full bg-pale-purple">
           <DetailComments classData={classData} />
         </div>
       </div>
