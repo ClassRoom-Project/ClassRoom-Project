@@ -52,8 +52,13 @@ const TeacherMyPageTab = () => {
     router.push(`/teacherMypage?teacherTab=${tab}`);
   };
 
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+  const checkAndCloseDropDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    let targetEl = e.currentTarget;
+    if (targetEl && targetEl.matches(':focus')) {
+      setTimeout(function () {
+        targetEl.blur();
+      }, 0);
+    }
   };
 
   const handleDropdownItemClick = (tab: string) => {
@@ -62,14 +67,14 @@ const TeacherMyPageTab = () => {
   };
 
   return (
-    <div className="w-full h-screen md:m-4 md:p-4 m-0 p-0">
+    <div className="w-full h-screen md:my-4 md:py-4 m-0 p-0">
       {/* md 이상 일 때, 가로 탭 */}
       <div className="hidden md:flex flex-row md:justify-start lg:gap-20 md:gap-10 md:items-center sm:items-start w-full border-y-2">
         <button
           onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm  ${
+          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm relative ${
             activePage === 'editProfile'
-              ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
+              ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color'
               : ''
           }`}
         >
@@ -98,22 +103,14 @@ const TeacherMyPageTab = () => {
       </div>
 
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="my-4 py-4 flex w-full justify-start md:hidden">
+      <div className="mb-4 py-4 flex w-full justify-start md:hidden">
         <div className="dropdown-right dropdown">
-          <div
-            tabIndex={0}
-            role="button"
-            className="m-1"
-            onClick={toggleDropdown}
-            onKeyDown={(e) => e.key === 'Enter' && toggleDropdown()}
-          >
+          <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
           </div>
           <div
             tabIndex={0}
-            className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
-              isOpen ? 'block' : 'hidden'
-            }`}
+            className={'items-start dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col'}
           >
             <button
               onClick={() => handleDropdownItemClick('editProfile')}
