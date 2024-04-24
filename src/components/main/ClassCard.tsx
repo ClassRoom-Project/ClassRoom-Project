@@ -15,7 +15,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   return classInfos ? (
     <div className="card w-32  rounded-xl bg-base-100 md:mx-0 md:w-64">
       <Link href={`/list/detail/${classInfos.class_id}`} className="">
-        <figure className="relative h-28 w-full rounded-xl bg-gray-200 md:h-40">
+        <figure className="relative h-28 w-full rounded-xl bg-gray-200 duration-300 ease-in-out hover:scale-105 md:h-40">
           <Image
             // width={250}
             // height={200}
