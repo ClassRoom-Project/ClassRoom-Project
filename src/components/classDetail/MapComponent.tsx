@@ -51,24 +51,26 @@ const MapComponent = ({
   }, [placeAddress]);
 
   return (
-    <div className="flex w-full items-center justify-center">
-      {location ? (
-        <div className="w-full">
-          <Map
-            className="h-full w-full rounded-lg border border-solid border-button-disable-color p-40 " // 지도 크기
-            center={{ lat: latitude ?? 0, lng: longitude ?? 0 }} // 지도의 중심 좌표
-            level={3} // 지도 확대 레벨
-          >
-            <MapMarker position={{ lat: latitude ?? 0, lng: longitude ?? 0 }} />
-          </Map>
-          <div className="m-4 flex items-center gap-2">
-            <GrLocation size={20} className="text-main-color" />
-            주소 : {location} {detailLocation}
+    <div className=" h-[380px] w-3/5">
+      <div className="flex w-full items-center justify-center">
+        {location ? (
+          <div className="w-full">
+            <Map
+              className="h-full w-full rounded-lg border border-solid border-button-disable-color p-40 " // 지도 크기
+              center={{ lat: latitude ?? 0, lng: longitude ?? 0 }} // 지도의 중심 좌표
+              level={3} // 지도 확대 레벨
+            >
+              <MapMarker position={{ lat: latitude ?? 0, lng: longitude ?? 0 }} />
+            </Map>
+            <div className="m-4 flex items-center gap-1">
+              <GrLocation size={20} className="text-main-color" />
+              주소 : {location} {detailLocation}
+            </div>
           </div>
-        </div>
-      ) : (
-        <p>등록된 주소가 없습니다.</p>
-      )}
+        ) : (
+          <p>등록된 주소가 없습니다.</p>
+        )}
+      </div>
     </div>
   );
 };
