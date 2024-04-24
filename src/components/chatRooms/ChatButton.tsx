@@ -21,16 +21,16 @@ export default function ChatButton() {
   };
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <button
         onClick={handleClick}
-        className="flex flex-col items-center text-background-color hover:text-main-color transition ease-in md:text-icon-color"
+        className="flex w-full flex-col items-center text-background-color transition ease-in hover:text-main-color md:text-icon-color"
       >
         <IoChatbubbleEllipsesOutline className="text-4xl sm:text-4xl md:text-4xl" />
         <div className=" hidden sm:flex md:sm:flex">채팅</div>
       </button>
       {readLeftChekcMessageAll ? (
-        <div className="flex items-center justify-center bg-button-focus-color md:bg-main-color rounded-full h-5 w-5 absolute -right-1 bottom-5 md:-right-1 md:bottom-10">
+        <div className="absolute -right-1 bottom-5 flex h-5 w-5 items-center justify-center rounded-full bg-button-focus-color md:-right-1 md:bottom-10 md:bg-main-color">
           <div className="text-white">{readLeftChekcMessageAll}</div>
         </div>
       ) : (

@@ -34,7 +34,7 @@ export default function MessagesPage() {
           <p className="text-2xl py-10">채팅 목록이 없습니다.</p>
           <Link
             href="/list"
-            className="bg-button-default-color px-4 py-2 rounded-full text-white text-xl hover:bg-button-hover-color"
+            className="bg-button-default-color px-4 py-2 rounded-lg text-white text-xl hover:bg-button-hover-color"
           >
             클래스 둘러보기
           </Link>

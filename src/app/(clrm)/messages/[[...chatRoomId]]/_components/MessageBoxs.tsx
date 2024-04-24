@@ -3,7 +3,6 @@
 import {
   useDeleteMessage,
   useReadChatRoomMessages,
-  useReadLastMessages,
   useReadMakeClassUserInfo
 } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
@@ -26,13 +25,12 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   const { loginUserId } = useLoginStore();
   const { MakeClassUserInfo } = useReadMakeClassUserInfo(otherId);
   const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
-  const endOfMessagesRef = useRef<HTMLDivElement>(null);
   const { deleteMessageMutate } = useDeleteMessage();
-  const { readLastMessages } = useReadLastMessages(chatId);
   const queryClient = useQueryClient();
   const [stateLoading, setStateLoading] = useState(false);
   //Dom요소나 컴포넌트의 직접적인 접근을 가능하게 해줌Ref
   const zoom = mediumZoom({ background: '#000' });
+  const endOfMessagesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const subscribeChat = supabase
@@ -77,11 +75,22 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
 
   //새로운 메시지 들어오는 경우 자동으로 스크롤 하단으로 이동
   useEffect(() => {
+    let timerId: NodeJS.Timeout | number | undefined;
+
     const scrollToBottom = () => {
-      endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+      timerId = setTimeout(() => {
+        endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
     };
-    scrollToBottom();
-  }, [readLastMessages]);
+
+    if (readChatRoomMessages && readChatRoomMessages.length > 0) {
+      scrollToBottom();
+    }
+
+    //언마운트 시 타이머 취소
+    //setTimeout 사용하는 경우 clearTimeout을 이용해 꼭 초기화 해주어야함
+    return () => clearTimeout(timerId);
+  }, [readChatRoomMessages]);
 
   //medium-zoom
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -89,6 +98,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   };
 
   //무한스크롤
+
   if (isLoading) {
     return (
       <div className="flex flex-col justify-center items-center h-auto px-3">
@@ -188,6 +198,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                           <Image
                             src={imgUrl}
                             layout="fill"
+                            unoptimized
                             objectFit="cover"
                             alt={`Photo ${imgIndex + 1}`}
                             // 이미지가 완전히 업로드 되고 플레이스홀더가 제거되면 호출되는 콜백함수!!
