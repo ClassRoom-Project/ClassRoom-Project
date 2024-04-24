@@ -33,7 +33,7 @@ const MyClassStudentPage = () => {
 
   if (isPending) {
     return (
-      <div className="flex min-h-100vh-header-default flex-col  items-center justify-center gap-4">
+      <div className="flex h-auto flex-col items-center justify-center gap-4">
         <LoadingSpinner />
         <p>잠시만 기다려주세요..</p>
       </div>
@@ -45,7 +45,7 @@ const MyClassStudentPage = () => {
   }
 
   return (
-    <div className="m-4 mb-24 flex w-full flex-col items-center justify-center gap-4 p-4 md:mb-0">
+    <div className="m-4 mb-24 flex w-full max-w-[1280px] flex-col gap-4 p-4 md:mb-0">
       <div className="flex w-full items-center border-y-2">
         <button className="flex  items-center text-gray-500" onClick={() => router.back()}>
           <IoIosArrowBack size={20} />

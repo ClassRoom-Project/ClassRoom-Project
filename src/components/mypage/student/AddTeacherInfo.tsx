@@ -155,7 +155,7 @@ const AddTeacherInfo = () => {
 
   if (isPending) {
     return (
-      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+      <div className="flex h-auto flex-col items-center justify-center gap-4">
         <LoadingSpinner />
         <p>잠시만 기다려주세요..</p>
       </div>
@@ -166,28 +166,28 @@ const AddTeacherInfo = () => {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
-    <div className="flex flex-col gap-6 justify-center items-center bg-light-purple py-4 md:p-4 lg:w-full md:w-full md:justify-items-center w-full mb-16 md:mb-0">
-      <p className="flex items-start text-xl text-dark-purple-color font-bold pt-4">선생님 정보 등록하기</p>
+    <div className="mb-16 flex w-full flex-col items-center justify-center gap-6 bg-light-purple py-4 md:mb-0 md:w-full md:justify-items-center md:p-4 lg:w-full">
+      <p className="flex items-start pt-4 text-xl font-bold text-dark-purple-color">선생님 정보 등록하기</p>
       {isHaveTeacherInfo ? (
-        <p className=" text-center text-text-dark-gray py-4">
+        <p className=" py-4 text-center text-text-dark-gray">
           선생님 정보가 이미 등록되었습니다. <br />
           선생님 마이페이지에서 정보를 수정해주세요.
         </p>
       ) : (
-        <p className=" text-center text-text-dark-gray py-4">아래의 해당 정보를 입력하여 강사로 등록해보세요!</p>
+        <p className=" py-4 text-center text-text-dark-gray">아래의 해당 정보를 입력하여 강사로 등록해보세요!</p>
       )}
       <div className="flex justify-center">
-        <div className="flex justify-center gap-4 items-start flex-col w-full md:flex-row md:gap-10">
-          <div className="flex flex-col w-[350px] items-start justify-center md:items-end">
+        <div className="flex w-full flex-col items-start justify-center gap-4 md:flex-row md:gap-10">
+          <div className="flex w-[350px] flex-col items-start justify-center md:items-end">
             <div className="flex flex-col">
-              <div className="p-4 flex flex-col gap-4">
-                <p className="text-text-dark-gray font-bold">강사 이름</p>
+              <div className="flex flex-col gap-4 p-4">
+                <p className="font-bold text-text-dark-gray">강사 이름</p>
                 <div className="flex flex-col">
                   {!isHaveTeacherInfo ? (
                     <input
                       type="text"
                       placeholder="본명을 입력해주세요."
-                      className="input input-bordered lg:w-[250px] md:w-[200px] w-[318px] border-point-purple shadow-md"
+                      className="input input-bordered w-[318px] border-point-purple shadow-md md:w-[200px] lg:w-[250px]"
                       value={teacherName}
                       onChange={handleOnChangeAddTeacherName}
                     />
@@ -197,18 +197,18 @@ const AddTeacherInfo = () => {
                   {isAvailableName ? (
                     ''
                   ) : (
-                    <p className="font-thin p-2">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>
+                    <p className="p-2 font-thin">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>
                   )}
                 </div>
               </div>
-              <div className=" p-4 flex flex-col gap-4">
-                <p className="text-text-dark-gray font-bold">휴대폰 번호</p>
+              <div className=" flex flex-col gap-4 p-4">
+                <p className="font-bold text-text-dark-gray">휴대폰 번호</p>
                 <div className="flex flex-col">
                   {!isHaveTeacherInfo ? (
                     <input
                       type="text"
                       placeholder="휴대폰 번호를 입력해주세요."
-                      className="input input-bordered lg:w-[250px] md:w-[200px] w-[318px] border-point-purple shadow-md"
+                      className="input input-bordered w-[318px] border-point-purple shadow-md md:w-[200px] lg:w-[250px]"
                       value={teacherNumber}
                       onChange={handleOnChangeAddTeacherNumber}
                     />
@@ -218,13 +218,13 @@ const AddTeacherInfo = () => {
                   {isAvailableNumber ? (
                     ''
                   ) : (
-                    <p className="font-thin p-2">휴대폰 번호의 양식에 맞게 입력해주세요(- 제외).</p>
+                    <p className="p-2 font-thin">휴대폰 번호의 양식에 맞게 입력해주세요(- 제외).</p>
                   )}
                 </div>
               </div>
             </div>
           </div>
-          <div className="flex flex-col w-[350px]">
+          <div className="flex w-[350px] flex-col">
             <SelectOption
               id={jobId}
               label="직업"
@@ -249,27 +249,27 @@ const AddTeacherInfo = () => {
               disabled={isHaveTeacherInfo}
               options={koreanBanks}
             />
-            <div className=" p-4 flex flex-col gap-4">
-              <p className="text-text-dark-gray font-bold">계좌 정보</p>
+            <div className=" flex flex-col gap-4 p-4">
+              <p className="font-bold text-text-dark-gray">계좌 정보</p>
               <div className="flex flex-col">
                 {!isHaveTeacherInfo ? (
                   <input
                     type="text"
                     placeholder="계좌 번호를 입력해주세요."
-                    className="input input-bordered lg:w-[250px] md:w-[200px] w-full border-point-purple shadow-md"
+                    className="input input-bordered w-full border-point-purple shadow-md md:w-[200px] lg:w-[250px]"
                     value={userAccount}
                     onChange={handleOnChangeAddAccount}
                   />
                 ) : (
                   <p>{secretAccount}</p>
                 )}{' '}
-                {isAvailableAccount ? '' : <p className="font-thin p-2">계좌번호는 숫자만 입력 가능합니다.</p>}
+                {isAvailableAccount ? '' : <p className="p-2 font-thin">계좌번호는 숫자만 입력 가능합니다.</p>}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="p-4 flex gap-4">
+      <div className="flex gap-4 p-4">
         {isHaveTeacherInfo ? (
           <button
             onClick={handleOnClickMoveToEditTeacherInfoBtn}

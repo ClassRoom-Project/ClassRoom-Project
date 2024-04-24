@@ -27,7 +27,7 @@ const MyClassStudentList = () => {
 
   if (isPending) {
     return (
-      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+      <div className="flex h-auto flex-col  items-center justify-center gap-4">
         <LoadingSpinner />
         <p>잠시만 기다려주세요..</p>
       </div>
@@ -57,14 +57,14 @@ const MyClassStudentList = () => {
         <tbody>
           {currentPosts.map((student) => (
             <tr key={student.user_id}>
-              <th className="flex gap-4 items-center whitespace-nowrap">
-                <div className="w-12 h-12">
+              <th className="flex items-center gap-4 whitespace-nowrap">
+                <div className="h-12 w-12">
                   <Image
                     src={student.profile_image}
                     alt="프로필 이미지"
                     width={50}
                     height={50}
-                    className="rounded-full w-full h-full object-cover"
+                    className="h-full w-full rounded-full object-cover"
                   />
                 </div>
                 {student.nickname}

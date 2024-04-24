@@ -7,6 +7,7 @@ import { QueryKeys } from '@/constants/QueryKeys';
 import Pagination from '@/components/common/Pagination';
 import { useSearchParams } from 'next/navigation';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
+import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 
 const MyWishClass = () => {
   const { loginUserId } = useLoginStore();
@@ -25,19 +26,19 @@ const MyWishClass = () => {
   // const responsiveHeightRef = useRef(null)
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior:'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
   }, [page]);
 
   // const handleMoveToTop= ()=>{
   //   if(responsiveHeightRef.current){
-  //     responsiveHeightRef.current.scrollTop = 0 
+  //     responsiveHeightRef.current.scrollTop = 0
   //   }
   // }
 
   if (isPending) {
     return (
-      <div className="flex flex-col justify-center  items-center gap-4 min-h-100vh-header-default">
+      <div className="flex h-auto flex-col  items-center justify-center gap-4">
         <LoadingSpinner />
         <p>잠시만 기다려주세요..</p>
       </div>
@@ -53,20 +54,21 @@ const MyWishClass = () => {
   const currentPosts = myWishClassList.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 md:justify-items-center w-full mb-24 md:mb-0">
-      <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center">
+    <ul className="mb-24 flex w-full flex-col items-center justify-center gap-4 md:mb-0 md:justify-items-center md:p-4">
+      <p className="flex items-start justify-center text-xl font-bold text-dark-purple-color md:hidden">
         클래스 위시리스트
       </p>
       {currentPosts.map((classItem) => (
         <MyWishClassItem key={classItem.class_id} classItem={classItem} />
       ))}
+
+      <MoveToTopBtn />
       <Pagination
         totalItems={myWishClassList.length}
         itemCountPerPage={postsPerPage}
         pageCount={5}
         currentPage={currentPage}
         key={page}
-       
       />
     </ul>
   );

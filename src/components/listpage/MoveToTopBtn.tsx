@@ -11,7 +11,7 @@ const MoveToTopBtn = () => {
     <>
       <button
         onClick={handleMoveToTop}
-        className="fixed rounded-full w-10 h-10 bg-disable-color right-4 sm:right-16 bottom-20 md:bottom-4 cursor-pointer flex justify-center items-center z-[100]"
+        className="fixed bottom-20 right-4 z-[100] flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-disable-color opacity-80 sm:right-16 md:bottom-4"
       >
         <GoMoveToTop className="text-main-color" />
       </button>
