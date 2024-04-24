@@ -88,14 +88,8 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
       key={comment.comment_id}
     >
       <div className="flex md:gap-4 bg-pale-purple w-full flex-col lg:flex-row justify-center items-center">
-        <div className="lg:w-[300px] lg:h-[200px] md:w-2/3 h-72">
-          <Image
-            src={comment.image[0]}
-            alt="클래스 대표 사진"
-            width={300}
-            height={200}
-            className="w-full h-full p-4 object-contain"
-          />
+        <div className="lg:w-1/3 w-2/3 h-60 relative ">
+          <Image src={comment.image[0]} alt="클래스 대표 사진" fill className="w-full h-full p-4 object-cover" />
         </div>
         <div className="flex flex-col p-4 gap-4 w-full h-full">
           <section className="flex lg:gap-10 lg:flex-row flex-col gap-4">

@@ -15,15 +15,8 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
   return (
     <li className="border-b-2 flex flex-col align-center md:gap-4 md:my-4 md:py-4 w-full md:flex-row justify-center items-center lg:max-w-[1280px]">
       <div className="flex md:gap-4 bg-pale-purple w-full flex-col lg:flex-row items-center">
-        <div className="lg:w-[300px] lg:h-[200px] md:w-2/3 h-72">
-          <Image
-            src={mainImage}
-            alt="클래스 대표 사진"
-            width={300}
-            height={200}
-            className="w-full h-full p-4 object-contain"
-            unoptimized
-          />
+        <div className="lg:w-1/3 w-2/3 h-60 relative ">
+          <Image src={mainImage} alt="클래스 대표 사진" fill className="w-full h-full p-4 object-cover" unoptimized />
         </div>
         <div className="flex flex-col p-4 gap-4 h-full w-full">
           <section className="flex flex-col md:items-start">

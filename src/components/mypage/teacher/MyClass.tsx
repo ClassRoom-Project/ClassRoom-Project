@@ -74,25 +74,26 @@ const MyClass = () => {
   const currentPosts = myClassInfo?.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col gap-4 justify-center items-center p-4 lg:w-full md:justify-items-center w-full">
+    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 lg:w-full md:justify-items-center w-full">
       <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden ">내가 등록한 클래스</p>
       {/* <p className="flex items-start text-lg text-text-dark-gray text-center p-4 md:hidden">
         자세한 날짜 및 시간, 예약한 수강생 정보는 PC 버전에서 확인해주세요.
       </p> */}
       {currentPosts?.map((classInfo, classIndex) => (
-        <li key={classIndex} className="flex flex-col align-center gap-4 md:my-4 md:py-4 w-full md:flex-row">
+        <li
+          key={classIndex}
+          className="flex flex-col align-center gap-4 md:my-4 md:py-4 w-full md:flex-row lg:max-w-[1280px]"
+        >
           {/* 클래스 기본 정보 부분 */}
           <div className="collapse collapse-arrow cursor-pointer justify-center">
             <input type="checkbox" />
             <div className="flex md:collapse-title lg:w-full sm:w-full  flex-col lg:flex-row gap-4 items-center">
-              <div className="md:w-[300px] md:h-[200px] w-4/5">
+              <div className="lg:w-80 w-2/3 h-60 relative">
                 <Image
                   src={classInfo?.image ? classInfo?.image : NoImage}
                   alt="클래스 대표 사진"
-                  width={300}
-                  height={200}
-                  className="w-full h-full p-4"
-                  style={{ objectFit: 'contain' }}
+                  fill
+                  className="w-full h-full p-4 object-cover"
                 />
               </div>
               <div className="flex flex-col md:gap-4 m-4">
