@@ -76,9 +76,6 @@ const MyClass = () => {
   return (
     <ul className="flex flex-col gap-4 justify-center items-center md:p-4 lg:w-full md:justify-items-center w-full">
       <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden ">내가 등록한 클래스</p>
-      {/* <p className="flex items-start text-lg text-text-dark-gray text-center p-4 md:hidden">
-        자세한 날짜 및 시간, 예약한 수강생 정보는 PC 버전에서 확인해주세요.
-      </p> */}
       {currentPosts?.map((classInfo, classIndex) => (
         <li
           key={classIndex}
