@@ -14,6 +14,9 @@ const config: Config = {
         // other properties...
       },
       backgroundImage: {
+        'gradient-gra1': 'linear-gradient(135deg, #8d66e6 5%,  #9a90e6 49%, #e2a4d6 100%)',
+        'gradient-gra2': 'linear-gradient(62deg, #6c5ff7 0%, #95ffd9 93%)',
+        'gradient-gra3': 'linear-gradient(62deg, #6c5ff7 0%, #95ffd9 93%)',
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'login-background':
