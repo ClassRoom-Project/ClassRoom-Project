@@ -3,7 +3,7 @@ import { useCategoryFilterStore, useListFilterStore, useSearchStore } from '@/st
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FiAlignJustify } from 'react-icons/fi';
-
+import { PriceBtn } from './listpageBtns';
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
@@ -71,14 +71,14 @@ const SearchFilter = () => {
   };
 
   return (
-    <div className="flex w-full items-start justify-start p-5">
+    <div className="flex w-full items-start justify-start pt-5">
       <div className="dropdown dropdown-bottom z-30 h-9 w-9 md:h-12 md:w-12">
         <div tabIndex={0} onMouseDown={(e) => checkAndCloseDropDown(e)} role="button" className="btn ">
           <FiAlignJustify role="button" className="swap-off fill-current" size={30} color="#6C5FF7"></FiAlignJustify>
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content z-[1] flex w-fit flex-col items-center  justify-center gap-2.5 rounded-md border border-solid border-button-focus-color bg-pale-purple p-8 shadow-xl"
+          className="menu dropdown-content z-[1] flex w-fit flex-col items-center justify-center  gap-2.5 rounded-md border border-solid border-button-focus-color bg-pale-purple p-1 shadow-xl md:p-8"
         >
           <div className="flex w-full flex-col items-center justify-center">
             <div className="mb-3 flex w-64 items-start justify-start">
@@ -114,7 +114,7 @@ const SearchFilter = () => {
                 <p className="text-black">지역</p>
               </div>
               <select
-                className="select select-primary w-full"
+                className="select select-primary w-1/2 md:w-full"
                 value={ClassFilters.selectedLocation || ''}
                 onChange={handleLocationChange}
               >
@@ -218,46 +218,15 @@ const SearchFilter = () => {
             </div>
             <div className="flex w-full justify-center">
               <div className="grid w-full grid-cols-2 justify-between gap-3">
-                <button
-                  onClick={() => handlePriceFilter(0, 19999)}
-                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
-                    isPriceSelected(0, 19999)
-                      ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-                  }`}
-                >
-                  20,000원 미만
-                </button>
-                <button
-                  onClick={() => handlePriceFilter(0, 49999)}
-                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1   ${
-                    isPriceSelected(0, 49999)
-                      ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-                  }`}
-                >
-                  50,000원 미만
-                </button>
-                <button
-                  onClick={() => handlePriceFilter(0, 99999)}
-                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
-                    isPriceSelected(0, 99999)
-                      ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-                  }`}
-                >
-                  100,000원 미만
-                </button>
-                <button
-                  onClick={() => handlePriceFilter(100000, 1000000000000000)}
-                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
-                    isPriceSelected(100000, 1000000000000000)
-                      ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-                  }`}
-                >
-                  100,000원 이상
-                </button>
+                <PriceBtn classFilters={ClassFilters} minPrice={0} maxPrice={19999} filterText={'20,000원 미만'} />
+                <PriceBtn classFilters={ClassFilters} minPrice={0} maxPrice={49999} filterText={'50,000원 미만'} />
+                <PriceBtn classFilters={ClassFilters} minPrice={0} maxPrice={99999} filterText={'100,000원 미만'} />
+                <PriceBtn
+                  classFilters={ClassFilters}
+                  minPrice={100000}
+                  maxPrice={1000000000000000}
+                  filterText={'100,000원 이상'}
+                />
               </div>
             </div>
           </div>
