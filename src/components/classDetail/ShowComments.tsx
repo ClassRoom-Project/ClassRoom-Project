@@ -19,7 +19,7 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <div className="relative  flex w-[600px] flex-col items-center justify-center xl:w-full">
+    <div className="relative  flex  w-full flex-col items-center justify-center">
       {data.length > 0 ? (
         <div className="flex w-full flex-col">
           {data?.map((comment: DetailCommentType) => (

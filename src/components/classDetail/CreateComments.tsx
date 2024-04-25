@@ -145,7 +145,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 </div>
                 <textarea
                   minLength={10}
-                  maxLength={350}
+                  maxLength={300}
                   className="h-52 w-full resize-none rounded-md border border-solid border-button-focus-color p-4 outline-none"
                   placeholder="후기를 입력해주세요. (10자 이상)"
                   value={content}

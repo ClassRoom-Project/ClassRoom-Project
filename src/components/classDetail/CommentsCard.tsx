@@ -18,8 +18,8 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
   };
 
   return (
-    <div className="flex  w-full justify-between gap-4 rounded-lg p-5">
-      <div className="w-full">
+    <div className="flex  w-full flex-col justify-between gap-4 rounded-lg p-5 lg:flex-row">
+      <div className="flex w-full flex-col">
         {/* 프로필  */}
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center gap-2">
@@ -34,16 +34,16 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
         </div>
 
         {/* 내용 */}
-        <div className="ml-12 flex h-[76%] min-h-20 gap-2">
-          <div className="flex w-full flex-col justify-between ">
-            <p className="text-gray-800 ">{comment.content}</p>
-            <div className="text-right text-sm text-gray-500">{new Date(comment.create_at).toLocaleDateString()}</div>
+        <div className="flex h-full w-full  flex-col  pl-12 ">
+          <p className="mb-2 text-gray-800">{comment.content}</p>
+          <div className="mt-auto text-right text-sm text-gray-500">
+            {new Date(comment.create_at).toLocaleDateString()}
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center pl-12 lg:justify-center lg:pl-0">
         {comment.comment_image ? (
-          <div className="relative flex h-28 w-28 items-center justify-center xl:h-48 xl:w-48">
+          <div className="relative flex h-48 w-48 items-center justify-center">
             <Image
               src={comment.comment_image}
               alt="uploaded image preview"
