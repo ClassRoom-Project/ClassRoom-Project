@@ -30,13 +30,12 @@ const BestClass = () => {
 
     fetchClassInfo();
   }, [setBestClassInfos]);
-
   return (
-    <div className="relative flex w-full flex-col">
-      <div className="ml-2 w-full ">
+    <div className="flex w-full flex-col">
+      <div className="ml-2 w-full">
         <p className="px-2 pb-1 text-xl">클룸 인기 클래스 🏆</p>
       </div>
-      <div className={style.embla + 'mx-auto max-w-sm p-4'} ref={emblaRef}>
+      <div className={`${style.embla} mt-2 w-full overflow-hidden`} ref={emblaRef}>
         <div className={style.embla__container}>
           {BestClassInfos.map((infos) => (
             <div className={style.embla__slide} key={infos.class_id}>
