@@ -86,6 +86,21 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    // isEditMode가 true이고 initialData가 제공되었을 때 초기화 로직 실행
+    if (isEditMode && initialData?.schedules) {
+      initialData.schedules.forEach((schedule) => {
+        addSchedule(schedule.date); // 날짜 추가
+        schedule.times.forEach((time) => {
+          addTimeToSchedule(schedule.date, time); // 해당 날짜에 시간 추가
+        });
+      });
+      // 초기화된 날짜를 selectedDates 상태에 설정
+      const initialDates = initialData.schedules.map((schedule) => schedule.date);
+      setSelectedDates(initialDates);
+    }
+  }, [isEditMode, initialData, addSchedule, addTimeToSchedule, setSelectedDates]);
+
   return (
     <div className="my-4">
       <h1 className="font-bold text-[#3F3F3F] mt-6"><span className='text-[#d63232] font-bold'>*</span> 클래스 일정&시간</h1>
