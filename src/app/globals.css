@@ -40,6 +40,31 @@ body {
   }
 } */
 
+typebot-bubble::part(button) {
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+typebot-bubble::part(bot) {
+  bottom: 140px;
+  height: calc(100% - 140px);
+}
+
+typebot-bubble::part(text) {
+  font-size: 16px;
+}
+
+@media (max-width: 480px) {
+  typebot-bubble::part(button) {
+    display: none;
+  }
+
+  typebot-bubble::part(bot) {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
   html {
     overflow-y: auto;
