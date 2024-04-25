@@ -2,7 +2,6 @@ import { detailClassIdOnly, detailClassInfo } from '@/app/api/classdetail/detail
 import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
 import ClassDetailLeft from '@/components/classDetail/ClassDetailLeft';
 import ClassDetailRight from '@/components/classDetail/ClassDetailRight';
-import ClassImageAndSummary from '@/components/classDetail/ClassImageAndSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 
 export const revalidate = 600;
