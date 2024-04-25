@@ -16,7 +16,6 @@ export const insertNotice = async (userId: string, classId: string, classTitle: 
 
   // 이미 동일한 알림이 존재하는 경우
   if (existingData) {
-    console.log('이미 동일한 알림이 존재합니다.');
     return;
   }
 

@@ -75,6 +75,60 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
     }
   };
 
+  // 이미지 최대 5개까지만 추가할 수 있도록!
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      // 파일 크기 체크
+      const fileSize = file.size / (1024 * 1024);
+      if (fileSize > 5) {
+        LimitImageSizeNotify();
+        return;
+      }
+
+      if (images.length >= 5) {
+        noLimitImageNotify();
+        return;
+      }
+      const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 URL을 생성!
+      const newImages = [...images, { file, preview }];
+      setImages(newImages);
+      console.log(newImages);
+    }
+  };
+
+  // 이미지 순서를 변경하는 함수
+  const handleImageDragStart = (index: number, event: React.DragEvent<HTMLDivElement>) => {
+    event.dataTransfer.setData('index', index.toString());
+  };
+
+  const handleImageDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
+
+  const handleImageDrop = (index: number, event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const draggedIndex = parseInt(event.dataTransfer.getData('index'));
+
+    // 이미지의 순서 변경
+    const updatedImages = [...images];
+    const draggedImage = updatedImages[draggedIndex];
+    updatedImages.splice(draggedIndex, 1);
+    updatedImages.splice(index, 0, draggedImage);
+
+    // 변경된 순서를 배열에 반영
+    setImages(updatedImages);
+    console.log(updatedImages);
+  };
+
+  // 이미지 삭제 함수
+  const handleImageDelete = (index: number) => {
+    const newImage = images.filter((_, i) => i !== index);
+    setImages(newImage);
+    console.log(newImage);
+  };
+
   // supabase에 데이터 저장
   const handleSubmit = async () => {
     // 카테고리 입력 안했을시
@@ -164,17 +218,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
           imageUrls.push(url);
         }
       } else if (image.preview) {
-        // 파일이 업로드되지 않은 경우 이미지 URL을 그대로 사용
         imageUrls.push(image.preview);
       }
     }
 
     // isEditMode가 true일 경우, 기존 데이터 업데이트
     if (isEditMode) {
-      const existingImages = initialData ? initialData.image : [];
-      const updatedImageUrls = [...existingImages, ...imageUrls];
-      const updatedImages = updatedImageUrls.slice(0, 5);
-
       const { data, error } = await supabase.from('class').update({
         category: category,
         hashtag: subCategory,
@@ -188,7 +237,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
         location: address,
         detail_location: detailAddress,
         total_time: totalTime,
-        image: updatedImages
+        image: imageUrls
       }).eq('class_id', classId);
 
       if (error) {
@@ -320,57 +369,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
       setIsLoading(false);
       router.push(`/register/completedPage/${classId}`);
     }
-  };
-
-  // 이미지 최대 5개까지만 추가할 수 있도록!
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-
-      // 파일 크기 체크
-      const fileSize = file.size / (1024 * 1024);
-      if (fileSize > 5) {
-        LimitImageSizeNotify();
-        return;
-      }
-
-      if (images.length >= 5) {
-        noLimitImageNotify();
-        return;
-      }
-      const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 URL을 생성!
-      const newImages = [...images, { file, preview }];
-      setImages(newImages);
-    }
-  };
-
-  // 이미지 순서를 변경하는 함수
-  const handleImageDragStart = (index: number, event: React.DragEvent<HTMLDivElement>) => {
-    event.dataTransfer.setData('index', index.toString());
-  };
-
-  const handleImageDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
-
-  const handleImageDrop = (index: number, event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    const draggedIndex = parseInt(event.dataTransfer.getData('index'));
-
-    // 이미지의 순서 변경
-    const updatedImages = [...images];
-    const draggedImage = updatedImages[draggedIndex];
-    updatedImages.splice(draggedIndex, 1);
-    updatedImages.splice(index, 0, draggedImage);
-
-    // 변경된 순서를 배열에 반영
-    setImages(updatedImages);
-  };
-
-  // 이미지 삭제 함수
-  const handleImageDelete = (index: number) => {
-    const newImage = images.filter((_, i) => i !== index);
-    setImages(newImage);
   };
 
   return (
