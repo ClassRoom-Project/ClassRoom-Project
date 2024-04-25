@@ -26,13 +26,13 @@ const Category: React.FC<CategoryProps> = ({ isEditMode, initialData }) => {
 
   return (
     <div className="my-4">
-      <div className="flex items-center space-x-4 my-2">
+      <div className="my-2 flex items-center space-x-4">
         <div>
           {/* 카테고리 드롭다운 */}
           <select
             value={category}
             onChange={handleCategoryChange}
-            className="border border-[#D5D5D5] rounded-md p-2 w-full text-gray-700"
+            className="w-full rounded-md border border-[#D5D5D5] p-2 text-gray-700"
           >
             <option value="">카테고리</option>
             <option value="요리">요리</option>

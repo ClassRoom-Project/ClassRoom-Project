@@ -31,7 +31,11 @@ const ClassDetailRight = ({ classData }: { classData: ListDetailClassInfo | null
 
       <div className="w-[400px] h-36 mt-4">
         {classData?.class_id ? (
-          <ClassDetailBtn classId={classData.class_id} makeClassUserId={classData.user_id} />
+          <ClassDetailBtn
+            classId={classData.class_id}
+            makeClassUserId={classData.user_id}
+            lastClassDay={classData.date[classData.date.length - 1].day}
+          />
         ) : null}
       </div>
     </div>
