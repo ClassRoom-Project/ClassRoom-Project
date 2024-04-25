@@ -93,14 +93,14 @@ const SearchFilter = () => {
           tabIndex={0}
           className="menu dropdown-content z-[1] flex w-fit flex-col items-center justify-center  gap-2.5 rounded-md border border-solid border-button-focus-color bg-pale-purple p-1 shadow-xl md:p-8"
         >
-          <div className="flex w-full flex-col items-center justify-center">
-            <div className="mb-3 flex w-64 items-start justify-start">
-              <p className="mb-1 text-black">클래스 타입</p>
+          <div className="w-full items-center justify-center">
+            <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className=" text-black">타입</p>
             </div>
-            <div className="flex w-full justify-center gap-4">
+            <div className="flex w-full flex-col items-center justify-center gap-1 text-xs md:flex-row md:gap-3 md:text-base">
               <button
                 onClick={() => handleClassTypeBtn('온라인 클래스')}
-                className={` w-24  rounded-2xl border-[1px] border-solid border-point-purple  py-1 ${
+                className={`w-12 rounded-2xl  border-[1px] border-solid border-point-purple py-1  md:w-24 ${
                   ClassFilters.selectedClassType === '온라인 클래스'
                     ? 'bg-point-purple text-white'
                     : 'bg-pale-purple transition-all hover:bg-button-disable-color'
@@ -110,7 +110,7 @@ const SearchFilter = () => {
               </button>
               <button
                 onClick={() => handleClassTypeBtn('오프라인 클래스')}
-                className={` w-24  rounded-2xl border-[1px] border-solid border-point-purple  py-1 ${
+                className={`w-14 rounded-2xl  border-[1px] border-solid border-point-purple py-1  md:w-24 ${
                   ClassFilters.selectedClassType === '오프라인 클래스'
                     ? 'bg-point-purple text-white'
                     : 'bg-pale-purple transition-all hover:bg-button-disable-color'
@@ -122,12 +122,12 @@ const SearchFilter = () => {
           </div>
           <div className="divider m-0 h-1 md:h-4"></div>
           <div>
-            <div className="flex  w-full flex-col items-center justify-center">
-              <div className="mb-3 flex w-12 items-center justify-center md:w-64 md:items-start md:justify-start">
+            <div className="w-full items-center justify-center">
+              <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
                 <p className="text-black">지역</p>
               </div>
               <select
-                className="w-6/7 select select-primary  md:w-full"
+                className="select select-primary w-28 md:h-12  md:w-full"
                 value={ClassFilters.selectedLocation || ''}
                 onChange={handleLocationChange}
               >
@@ -149,34 +149,36 @@ const SearchFilter = () => {
             </div>
           </div>
           <div className="divider m-0 h-1 md:h-4"></div>
-          <div className=" flex w-full items-center justify-start gap-4  ">
-            <div className="flex  justify-start">
+          <div className="w-full items-center justify-center">
+            <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
               <p className="text-black">요일</p>
             </div>
-            <button
-              onClick={() => handleClassDayClick('평일')}
-              className={`w-16 rounded-2xl border-[1px] border-solid border-point-purple  py-1 ${
-                ClassFilters.selectedDayType === '평일'
-                  ? 'bg-point-purple text-white'
-                  : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-              }`}
-            >
-              평일
-            </button>
-            <button
-              onClick={() => handleClassDayClick('주말')}
-              className={`w-16 rounded-2xl border-[1px] border-solid border-point-purple  py-1 ${
-                ClassFilters.selectedDayType === '주말'
-                  ? 'bg-point-purple text-white'
-                  : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-              }`}
-            >
-              주말
-            </button>
+            <div className="flex w-full items-center justify-center gap-1 text-xs md:gap-3 md:text-base">
+              <button
+                onClick={() => handleClassDayClick('평일')}
+                className={`w-12 rounded-2xl border-[1px] border-solid border-point-purple py-1  md:w-24 ${
+                  ClassFilters.selectedDayType === '평일'
+                    ? 'bg-point-purple text-white'
+                    : 'bg-pale-purple transition-all hover:bg-button-disable-color'
+                }`}
+              >
+                평일
+              </button>
+              <button
+                onClick={() => handleClassDayClick('주말')}
+                className={`w-12 rounded-2xl border-[1px] border-solid border-point-purple py-1  md:w-24 ${
+                  ClassFilters.selectedDayType === '주말'
+                    ? 'bg-point-purple text-white'
+                    : 'bg-pale-purple transition-all hover:bg-button-disable-color'
+                }`}
+              >
+                주말
+              </button>
+            </div>
           </div>
           <div className="divider m-0 h-1 md:h-4"></div>
           <div className="w-full items-center justify-center">
-            <div className="flex w-64 items-start justify-start md:mb-3">
+            <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
               <p className="text-black">난이도</p>
             </div>
             <div className="flex w-full justify-center">
@@ -211,7 +213,7 @@ const SearchFilter = () => {
               <p className="text-black">금액</p>
             </div>
             <div className="flex w-full justify-center">
-              <div className="grid grid-cols-1 justify-between gap-3 md:w-full md:grid-cols-2">
+              <div className="grid grid-cols-1 justify-between gap-1 md:w-full md:grid-cols-2 md:gap-3">
                 <PriceBtn
                   handlePriceFilter={handlePriceFilter(0, 19999)}
                   classFilters={ClassFilters}
