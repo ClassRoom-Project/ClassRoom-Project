@@ -224,6 +224,9 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
 
     // isEditMode가 true일 경우, 기존 데이터 업데이트
     if (isEditMode) {
+      console.log("images: ", images);
+      console.log("imageUrls : ",imageUrls);
+
       const { data, error } = await supabase.from('class').update({
         category: category,
         hashtag: subCategory,
