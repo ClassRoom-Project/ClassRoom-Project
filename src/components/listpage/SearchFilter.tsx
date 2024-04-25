@@ -1,9 +1,14 @@
 'use client';
+
 import { useCategoryFilterStore, useListFilterStore, useSearchStore } from '@/store/classFilterStore';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { FiAlignJustify } from 'react-icons/fi';
 import { PriceBtn, DifficultyBtn } from './listpageBtns';
+import FilterIcon from '@/assets/images/filterIcon.svg';
+import Image from 'next/image';
+import { GrPowerReset } from 'react-icons/gr';
+
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
@@ -76,23 +81,24 @@ const SearchFilter = () => {
           tabIndex={0}
           onMouseDown={(e) => checkAndCloseDropDown(e)}
           role="button"
-          className="btn ml-2 h-11 w-12 p-0 hover:bg-white md:ml-0 md:w-16"
+          className="ml-2 flex h-11 w-12 items-center justify-center p-0 hover:bg-white md:ml-0 md:w-16"
         >
-          <FiAlignJustify
+          {/* <FiAlignJustify
             role="button"
             className="swap-off fill-current text-main-color hover:bg-white"
             size={30}
-          ></FiAlignJustify>
+          ></FiAlignJustify> */}
+          <Image src={FilterIcon} width={40} height={40} alt="filter icon" className="h-6 w-6 md:h-10 md:w-10" />
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content z-[1] ml-2 flex w-48 flex-col items-center justify-center gap-2.5 rounded-md  border border-solid border-button-focus-color bg-pale-purple p-1 shadow-xl md:ml-0 md:w-80 md:p-8"
+          className="menu dropdown-content z-[1] ml-2 flex w-60 flex-col items-center justify-center gap-2.5 rounded-md border  border-solid border-button-focus-color bg-pale-purple px-4 shadow-xl md:ml-0 md:w-[400px] md:p-8 md:py-2"
         >
           <div className="w-full items-center justify-center">
             <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
-              <p className=" text-black">타입</p>
+              <p className=" text-sm text-black md:text-base">타입</p>
             </div>
-            <div className="flex w-full items-center justify-center gap-1 text-xs md:gap-3 md:text-base">
+            <div className="flex w-full items-center justify-center gap-2 text-xs md:gap-3 md:text-base">
               <button
                 onClick={() => handleClassTypeBtn('온라인 클래스')}
                 className={`w-12 rounded-2xl  border-[1px] border-solid border-point-purple py-1  md:w-24 ${
@@ -115,40 +121,39 @@ const SearchFilter = () => {
               </button>
             </div>
           </div>
-          <div className="divider m-0 h-1 md:h-4"></div>
-          <div>
-            <div className="w-full items-center justify-center">
-              <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
-                <p className="text-black">지역</p>
-              </div>
-              <select
-                className="select select-bordered select-primary flex h-8 min-h-8 w-28 items-center justify-center border-main-color text-xs md:min-h-12 md:w-full  md:text-base"
-                value={ClassFilters.selectedLocation || ''}
-                onChange={handleLocationChange}
-              >
-                <option value="" className=" bg-disable-color" disabled>
-                  지역을 선택하세요
-                </option>
-                <option value={'서울'}>서울</option>
-                <option value={'경기'}>경기</option>
-                <option value={'인천'}>인천</option>
-                <option value={'충남'}>충남</option>
-                <option value={'충북'}>충북</option>
-                <option value={'강원특별자치도'}>강원</option>
-                <option value={'경북'}>경북</option>
-                <option value={'경남'}>경남</option>
-                <option value={'전북'}>전북</option>
-                <option value={'전남'}>전남</option>
-                <option value={'제주특별자치도'}>제주</option>
-              </select>
+          <div className="divider m-0 h-0 md:h-4"></div>
+          <div className="w-full items-center justify-center">
+            <div className="mb-2 flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className="text-sm text-black md:text-base">지역</p>
             </div>
+            <select
+              className="select select-bordered select-primary flex h-8 min-h-8 w-full items-center justify-center border-main-color text-xs md:min-h-12 md:w-full  md:text-base"
+              value={ClassFilters.selectedLocation || ''}
+              onChange={handleLocationChange}
+            >
+              <option value="" className=" bg-disable-color" disabled>
+                지역을 선택하세요
+              </option>
+              <option value={'서울'}>서울</option>
+              <option value={'경기'}>경기</option>
+              <option value={'인천'}>인천</option>
+              <option value={'충남'}>충남</option>
+              <option value={'충북'}>충북</option>
+              <option value={'강원특별자치도'}>강원</option>
+              <option value={'경북'}>경북</option>
+              <option value={'경남'}>경남</option>
+              <option value={'전북'}>전북</option>
+              <option value={'전남'}>전남</option>
+              <option value={'제주특별자치도'}>제주</option>
+            </select>
           </div>
-          <div className="divider m-0 h-1 md:h-4"></div>
+
+          <div className="divider m-0 h-0 md:h-4"></div>
           <div className="w-full items-center justify-center">
             <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
-              <p className="text-black">요일</p>
+              <p className="text-sm text-black md:text-base">요일</p>
             </div>
-            <div className="flex w-full items-center justify-center gap-1 text-xs md:gap-3 md:text-base">
+            <div className="flex w-full items-center justify-center gap-2 text-xs md:gap-3 md:text-base">
               <button
                 onClick={() => handleClassDayClick('평일')}
                 className={`w-12 rounded-2xl border-[1px] border-solid border-point-purple py-1  md:w-24 ${
@@ -171,13 +176,13 @@ const SearchFilter = () => {
               </button>
             </div>
           </div>
-          <div className="divider m-0 h-1 md:h-4"></div>
+          <div className="divider m-0 h-0 md:h-4"></div>
           <div className="w-full items-center justify-center">
-            <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
-              <p className="text-black">난이도</p>
+            <div className="mb-2 flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className="text-sm text-black md:text-base">난이도</p>
             </div>
             <div className="flex w-full justify-center">
-              <div className="grid grid-cols-2 justify-between gap-1 md:gap-3">
+              <div className="flex justify-between gap-2  md:grid md:grid-cols-2 md:gap-3">
                 <DifficultyBtn
                   classFilters={ClassFilters}
                   difficulty={'입문'}
@@ -202,13 +207,13 @@ const SearchFilter = () => {
               </div>
             </div>
           </div>
-          <div className="divider m-0 h-1 md:h-4"></div>
+          <div className="divider m-0 h-0 md:h-4"></div>
           <div className="flex w-full flex-col items-center justify-center">
-            <div className="flex w-full items-start justify-start md:mb-3 md:w-64 md:items-start md:justify-start">
-              <p className="text-black">금액</p>
+            <div className="mb-2 flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className="text-sm text-black md:text-base">금액</p>
             </div>
             <div className="flex w-full justify-center">
-              <div className="grid grid-cols-1 justify-between gap-1 md:w-full md:grid-cols-2 md:gap-3">
+              <div className="grid grid-cols-2 justify-between gap-2 md:w-full md:grid-cols-2 md:gap-3">
                 <PriceBtn
                   handlePriceFilter={handlePriceFilter(0, 19999)}
                   classFilters={ClassFilters}
@@ -242,11 +247,11 @@ const SearchFilter = () => {
           </div>
         </ul>
       </div>
-      <button
-        onClick={handleResetBtn}
-        className="btn ml-4 h-11 w-12 p-0 text-sm hover:bg-white hover:text-dark-purple-color md:ml-12 md:w-16 md:text-base"
-      >
-        <p className="text-xs md:text-sm">초기화</p>
+      <button onClick={handleResetBtn} className="mx-4 flex h-11 items-center justify-center p-0 md:ml-8 md:w-16">
+        <div className="flex items-center justify-center font-semibold ">
+          <p className="mr-1 whitespace-nowrap text-xs text-text-dark-gray md:text-lg">초기화</p>
+          <GrPowerReset className="text-sm text-text-dark-gray md:text-lg" />
+        </div>
       </button>
     </div>
   );
