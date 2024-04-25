@@ -59,3 +59,8 @@ export interface ImageFileWithPreview {
   file: File;
   preview: string;
 }
+
+export interface ImageFileWithPreviews {
+  file: File | null;
+  preview: string;
+}

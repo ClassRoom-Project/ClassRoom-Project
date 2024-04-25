@@ -12,7 +12,6 @@ import { IoIosArrowBack } from 'react-icons/io';
 const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
-
   return (
     <div className="flex flex-col items-center">
       <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
@@ -37,5 +36,4 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
-
 export default DetailPage;

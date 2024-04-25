@@ -27,7 +27,7 @@ const TotalTime:React.FC<TotalTimeProps> = ({isEditMode, initialData}) => {
   };
   return (
     <div className="flex items-center space-x-2 my-4">
-      <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold">* 소요시간</p>
+      <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold"><span className='text-[#d63232] font-bold'>*</span> 소요시간</p>
       <div className="w-1/2 md:w-1/3">
         <input
           className="form-input px-3 py-2 border border-[#D5D5D5] rounded w-1/2"
