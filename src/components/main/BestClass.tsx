@@ -31,7 +31,7 @@ const BestClass = () => {
     fetchClassInfo();
   }, [setBestClassInfos]);
   return (
-    <div className="flex w-full flex-col">
+    <div className="mt-3 flex w-full flex-col">
       <div className="ml-2 w-full">
         <p className="px-2 pb-1 text-xl">클룸 인기 클래스 🏆</p>
       </div>

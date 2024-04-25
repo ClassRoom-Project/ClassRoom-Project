@@ -3,7 +3,7 @@ import { useCategoryFilterStore, useListFilterStore, useSearchStore } from '@/st
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FiAlignJustify } from 'react-icons/fi';
-import { PriceBtn } from './listpageBtns';
+import { PriceBtn, DifficultyBtn } from './listpageBtns';
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
@@ -48,8 +48,10 @@ const SearchFilter = () => {
     setClassFilters({ ...ClassFilters, selectedLocation });
   };
   //클래스 난이도 핸들러
-  const handleClassDifficultyBtn = (classDifficulty: string) => {
-    setClassFilters({ ...ClassFilters, selectedDifficulty: classDifficulty });
+  const handleClassDifficultyBtn = (classDifficulty: string): (() => void) => {
+    return () => {
+      setClassFilters({ ...ClassFilters, selectedDifficulty: classDifficulty });
+    };
   };
   //클래스 가격 핸들러
   const handlePriceFilter = (min: number, max: number): (() => void) => {
@@ -116,11 +118,11 @@ const SearchFilter = () => {
                 <p className="text-black">지역</p>
               </div>
               <select
-                className="select select-primary w-1/2  md:w-full"
+                className="w-6/7 select select-primary  md:w-full"
                 value={ClassFilters.selectedLocation || ''}
                 onChange={handleLocationChange}
               >
-                <option value="" className="bg-disable-color text-sm md:text-base" disabled>
+                <option value="" className="bg-disable-color text-xs md:text-base" disabled>
                   지역을 선택하세요
                 </option>
                 <option value={'서울'}>서울</option>
@@ -170,46 +172,27 @@ const SearchFilter = () => {
             </div>
             <div className="flex w-full justify-center">
               <div className="grid w-3/4 grid-cols-2 justify-between gap-3">
-                <button
-                  onClick={() => handleClassDifficultyBtn('입문')}
-                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
-                    ClassFilters.selectedDifficulty === '입문'
-                      ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-                  }`}
-                >
-                  입문
-                </button>
-                <button
-                  onClick={() => handleClassDifficultyBtn('초급')}
-                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1 transition-all hover:bg-button-disable-color   ${
-                    ClassFilters.selectedDifficulty === '초급'
-                      ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-                  }`}
-                >
-                  초급
-                </button>
-                <button
-                  onClick={() => handleClassDifficultyBtn('중급')}
-                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
-                    ClassFilters.selectedDifficulty === '중급'
-                      ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-                  }`}
-                >
-                  중급
-                </button>
-                <button
-                  onClick={() => handleClassDifficultyBtn('고급')}
-                  className={`rounded-2xl border-[1px] border-solid border-point-purple py-1  ${
-                    ClassFilters.selectedDifficulty === '고급'
-                      ? 'bg-point-purple text-white'
-                      : 'bg-pale-purple transition-all hover:bg-button-disable-color'
-                  }`}
-                >
-                  고급
-                </button>
+                <DifficultyBtn
+                  classFilters={ClassFilters}
+                  difficulty={'입문'}
+                  handleClassDifficultyBtn={handleClassDifficultyBtn('입문')}
+                />
+                <DifficultyBtn
+                  classFilters={ClassFilters}
+                  difficulty={'초급'}
+                  handleClassDifficultyBtn={handleClassDifficultyBtn('초급')}
+                />
+                <DifficultyBtn
+                  classFilters={ClassFilters}
+                  difficulty={'중급'}
+                  handleClassDifficultyBtn={handleClassDifficultyBtn('중급')}
+                />
+
+                <DifficultyBtn
+                  classFilters={ClassFilters}
+                  difficulty={'고급'}
+                  handleClassDifficultyBtn={handleClassDifficultyBtn('고급')}
+                />
               </div>
             </div>
           </div>
