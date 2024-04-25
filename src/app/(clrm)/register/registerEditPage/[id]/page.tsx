@@ -16,6 +16,11 @@ import ImageUpload from '@/components/register/ImageUpload';
 import TotalTime from '@/components/register/TotalTime';
 import { ClassData } from '@/types/editClass';
 
+interface DateItem {
+  day: string;
+  times: string[];
+}
+
 const RegisterEditPage = () => {
   const [classData, setClassData] = useState<ClassData>({
     category: '',
@@ -33,7 +38,7 @@ const RegisterEditPage = () => {
     image: [],
   });
 
-  const [dateData, setDateData] = useState<string[]>([]);
+  const [dateData, setDateData] = useState<DateItem[]>([]);
   const [timeData, setTimeData] = useState<string[]>([]);
 
   const path = usePathname();
@@ -67,23 +72,24 @@ const RegisterEditPage = () => {
       }
 
       // 시간 데이터 가져오기
-      let { data: fetchedTimeData, error: timeError } = await supabase
-        .from('time')
-        .select('time_id, times, date_id')
-        .in('date_id', fetchedDateData?.map(item => item.date_id) ?? []); 
-  
-      if (timeError) {
-        console.error('Time Error: ', timeError);
-        return;
-      }
-
-      // 가져온 데이터를 상태에 저장
+      let combinedData = [];
       if (fetchedDateData) {
-        setDateData(fetchedDateData.map(item => item.day));
+        for (let dateItem of fetchedDateData) {
+          let { data: fetchedTimeData, error: timeError } = await supabase
+            .from('time')
+            .select('time_id, times')
+            .eq('date_id', dateItem.date_id);
+          if (timeError) {
+            console.error('Time Error: ', timeError);
+            continue;
+          }
+          combinedData.push({
+            day: dateItem.day,
+            times: fetchedTimeData ? fetchedTimeData.map(item => item.times) : []
+          });
+        }
       }
-      if (fetchedTimeData) {
-        setTimeData(fetchedTimeData.map(item => item.times));
-      }
+      setDateData(combinedData);
     };
 
     fetchClassData();
@@ -108,7 +114,7 @@ const RegisterEditPage = () => {
           <h1 className="text-lg mt-14">클래스 세부요소 입력란</h1>
           <hr className="my-4 border-[#4D43B8]" />
           <Address isEditMode={true} initialData={{ address: classData.location, detailAddress: classData.detail_location }} />
-          <SelectTime isEditMode={true} initialData={{ selectedDates: dateData, timeData: timeData }}/>
+          <SelectTime isEditMode={true} initialData={{ schedules: dateData.map(dateItem => ({ date: dateItem.day, times: dateItem.times })) }}/>
 
           <h1 className="text-lg mt-14">클래스 금액</h1>
           <hr className="my-4 border-[#4D43B8]" />
