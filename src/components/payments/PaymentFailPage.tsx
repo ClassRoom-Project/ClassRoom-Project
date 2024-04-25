@@ -1,16 +1,19 @@
 'use client';
 
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React from 'react';
 import failIcon from '../../assets/images/failIcon.gif';
-
-import { CgCloseO } from 'react-icons/cg';
 import Image from 'next/image';
 
 export default function PaymentFailPage() {
   const searchParams = useSearchParams();
   const classId = searchParams.get('classId') || crypto.randomUUID();
+  const router = useRouter();
+
+  const handleMovePage = () => {
+    router.replace(`/reserve?classId=${classId}`);
+  };
 
   return (
     <main className="flex justify-center items-center w-full h-[calc(100vh-80px)] ">
@@ -29,12 +32,12 @@ export default function PaymentFailPage() {
           >
             홈페이지로 돌아가기
           </Link>
-          <Link
-            href={`/reserve?classId=${classId}`}
+          <button
+            onClick={handleMovePage}
             className="text-xs md:text-base whitespace-nowrap btn bg-gray-200 rounded-md  w-9/12 sm:w-2/3 md:w-2/4 "
           >
             예약페이지로 돌아가기
-          </Link>
+          </button>
         </div>
       </div>
     </main>
