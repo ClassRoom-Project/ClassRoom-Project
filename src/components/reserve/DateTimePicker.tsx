@@ -17,12 +17,13 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const router = useRouter();
   const { setReserveInfo } = useReserveStore();
   const { setCurrentReservedCount } = useCurrentReservedCountStore();
-  const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
-  const [timeId, setTimeId] = useState(classDates[0].times[0].timeId);
-  const today = new Date();
-  // const [selectedDate, setSelectedDate] = useState(classDates[0].day);
-  const firstAvailableDay = classDates.find(({ day }) => day >= format(new Date(), 'yyyy-MM-dd'))?.day;
+
+  const datesAfterToday = classDates.filter(({ day }) => day >= format(new Date(), 'yyyy-MM-dd'));
+  const firstAvailableDay = datesAfterToday[0].day;
   const [selectedDate, setSelectedDate] = useState(firstAvailableDay);
+  const [selectedTime, setSelectedTime] = useState(datesAfterToday[0].times[0].times);
+  const [timeId, setTimeId] = useState(datesAfterToday[0].times[0].timeId);
+  const today = new Date();
 
   useEffect(() => {
     setReserveInfo({ timeId: timeId });
@@ -55,10 +56,10 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   // 날짜 버튼 클릭
   const handleDateChange = async (newDate: Date | undefined) => {
     const formattedDate = format(newDate as Date, 'yyyy-MM-dd');
-    const firstAvailableTime = classDates.find(({ day }) => day === formattedDate)?.times[0];
     setSelectedDate(formattedDate);
 
     // 일자를 선택했을 때 첫 번째 시간으로 state를 set
+    const firstAvailableTime = datesAfterToday.find(({ day }) => day === formattedDate)?.times[0];
     if (firstAvailableTime) {
       const { timeId, times } = firstAvailableTime;
       setSelectedTime(times);

@@ -13,7 +13,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 export const Banner = () => {
   const [current, setCurrent] = useState(0);
-  const totalSlides = 3;
+  // const totalSlides = 3;
+  const totalSlides = 2;
 
   const handlePrev = () => {
     const newIndex = (current - 1 + totalSlides) % totalSlides;
@@ -60,7 +61,7 @@ export const Banner = () => {
                   height={500}
                   src={bannerPersimmon}
                   alt="banner2"
-                  objectFit="contain"
+                  style={{ objectFit: 'contain' }}
                   className="absolute left-12 top-10 w-56 mobile:left-16 mobile:top-10 sm:left-32 sm:top-10 md:left-14 md:top-20 md:w-64 lg:left-32 lg:top-12 xl:left-28 xl:w-96 2xl:-top-10 2xl:left-40 2xl:w-[450px]"
                 />
               </div>
@@ -96,7 +97,7 @@ export const Banner = () => {
                   height={300}
                   src={banner1}
                   alt="banner1"
-                  objectFit="contain"
+                  style={{ objectFit: 'contain' }}
                   className="absolute -top-10 left-6 w-72 mobile:-top-10 mobile:left-16 md:-top-0 md:left-24 xl:-top-10 xl:left-32 xl:w-[450px] 2xl:-top-10  2xl:left-56 2xl:w-[500px]"
                 />
               </div>
@@ -109,7 +110,7 @@ export const Banner = () => {
             </div>
           </article>
           {/* 세번째배너 */}
-          <article data-carousel-item data-index="2">
+          {/* <article data-carousel-item data-index="2">
             <div className="relative flex h-60 flex-row items-center bg-button-focus-color duration-700 ease-in-out md:h-80 md:justify-center lg:justify-end">
               <div className="absolute left-0 flex h-full md:top-0 lg:h-auto">
                 <Image width={900} height={900} src={bannerFlower} alt="banner3" />
@@ -120,7 +121,7 @@ export const Banner = () => {
                 </div>
               </div>
             </div>
-          </article>
+          </article> */}
         </div>
         <button
           type="button"

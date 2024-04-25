@@ -107,7 +107,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
       const preview = URL.createObjectURL(file); // 선택된 파일(file)의 미리보기 URL을 생성!
       const newImages = [...images, { file, preview }];
       setImages(newImages);
-      console.log(newImages);
     }
   };
 
@@ -132,14 +131,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
 
     // 변경된 순서를 배열에 반영
     setImages(updatedImages);
-    console.log(updatedImages);
   };
 
   // 이미지 삭제 함수
   const handleImageDelete = (index: number) => {
     const newImage = images.filter((_, i) => i !== index);
     setImages(newImage);
-    console.log(newImage);
   };
 
   // supabase에 데이터 저장
@@ -237,9 +234,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
 
     // isEditMode가 true일 경우, 기존 데이터 업데이트
     if (isEditMode) {
-      console.log('images: ', images);
-      console.log('imageUrls : ', imageUrls);
-
       const { data, error } = await supabase
         .from('class')
         .update({

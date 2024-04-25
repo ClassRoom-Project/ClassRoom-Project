@@ -12,6 +12,7 @@ import { ImageFileWithPreview } from '@/types/register';
 import { supabase } from '@/app/api/supabase/supabase';
 import Image from 'next/image';
 import noImage from '@/assets/images/clroom_no_img_purple.png';
+import noImageWide from '@/assets/images/clroom_no_img_purple_wide.png';
 
 //Todo : 예약한 사람만 댓글 입력가능하게 하기 , 댓글 수정삭제 구현 ,사진 기능
 const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }) => {
@@ -23,6 +24,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   const [commentImage, setCommentImage] = useState<ImageFileWithPreview[]>([]);
   const email: string = session?.user?.email ?? '';
 
+  // #region
   const { data: userData } = useQuery({
     queryKey: ['getUserIdByEmail'],
     queryFn: () => getUserIdByEmail(email),
@@ -118,13 +120,15 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
     return <div>Error: {error.message}</div>;
   }
 
+  // #endregion
+
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="mb-8 flex w-[600px] flex-col items-center justify-center rounded-xl border border-solid border-button-focus-color bg-disable-color px-8 pb-4 pt-6 shadow-md xl:w-full">
+        <div className="mb-8 flex w-full flex-col items-center justify-center rounded-lg border border-solid border-button-focus-color bg-disable-color px-5 pb-4 pt-6 shadow-md md:px-6 lg:px-8 ">
           <form onSubmit={handleCommentSubmit} className="flex w-full flex-col items-center justify-center">
-            <div className="flex w-[400px]  items-end justify-between gap-4 xl:w-full">
-              <div className="flex w-[75%] flex-col">
+            <div className="flex w-full flex-col-reverse items-end justify-between gap-4 lg:flex-row">
+              <div className="flex w-full flex-col lg:w-[75%]">
                 <div className="rating rating-sm flex items-center justify-end">
                   {[1, 2, 3, 4, 5].map((num) => (
                     <input
@@ -140,14 +144,14 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 </div>
                 <textarea
                   minLength={10}
-                  maxLength={350}
-                  className="h-52 w-full resize-none rounded-md border border-solid border-button-focus-color p-4 outline-none"
+                  maxLength={300}
+                  className="h-32 w-full resize-none rounded-md border border-solid  border-button-focus-color p-4 text-sm outline-none md:h-52 md:text-base"
                   placeholder="후기를 입력해주세요. (10자 이상)"
                   value={content}
                   onChange={handleContentChange}
                 ></textarea>
               </div>
-              <div className="w-[25%]">
+              <div className=" w-full lg:w-[25%]">
                 <div className="mb-1 flex items-center justify-end">
                   <label
                     htmlFor="image-upload"
@@ -163,7 +167,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                     style={{ display: 'none' }}
                   />
                 </div>
-                <div className="relative flex h-full  w-full items-center justify-center rounded-md border border-solid border-button-focus-color xl:h-52">
+                <div className="flexw-full relative h-32 items-center justify-center rounded-md border border-solid border-button-focus-color md:h-52">
                   {commentImage.length > 0 ? (
                     <Image
                       src={commentImage[0].preview}
@@ -185,15 +189,15 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
             </div>
             <button
               type="submit"
-              className="mt-4 rounded-md bg-main-color px-6 py-2 text-white transition-all hover:bg-button-hover-color"
+              className="mt-4 rounded-md bg-main-color px-6 py-2 text-sm text-white transition-all hover:bg-button-hover-color md:text-base"
             >
               후기 등록
             </button>
           </form>
         </div>
       ) : (
-        <div className="mb-4 flex h-40 w-[600px] items-center justify-center rounded-lg bg-disable-color shadow-xl xl:w-full">
-          클래스를 예약하신 분만 리뷰 등록이 가능합니다.
+        <div className="mb-4 flex h-20 w-full items-center justify-center rounded-lg bg-disable-color text-sm shadow-md lg:h-40 lg:text-base">
+          클래스를 예약하신 분만 후기 등록이 가능합니다.
         </div>
       )}
     </>
