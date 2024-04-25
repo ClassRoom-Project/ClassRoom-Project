@@ -11,7 +11,7 @@ import { BiCategoryAlt } from 'react-icons/bi';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GoPersonAdd } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
-import NoImage from '@/assets/images/no_img.jpg';
+import NoImage from '@/assets/images/clroom_no_img_purple.png';
 import Pagination from '@/components/common/Pagination';
 import { useEffect, useState } from 'react';
 import LoadingSpinner from '@/components/common/LoadingSpinner';

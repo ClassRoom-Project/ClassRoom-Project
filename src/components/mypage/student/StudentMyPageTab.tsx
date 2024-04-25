@@ -16,7 +16,6 @@ type StudentTabComponent = {
 
 const StudentMyPageTab = () => {
   const { isTeacher } = useUserRoleStore();
-  console.log('isTeacher', isTeacher);
   const router = useRouter();
   const params = useSearchParams();
   const studentTab = params.get('studentTab');

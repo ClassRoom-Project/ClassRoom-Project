@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { BiCategoryAlt } from 'react-icons/bi';
 import { GoPersonAdd } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
-import NoImage from '@/assets/images/no_img.jpg';
+import NoImage from '@/assets/images/clroom_no_img_purple.png';
 import MyPageWishButton from './MyPageWishButton';
 
 const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {

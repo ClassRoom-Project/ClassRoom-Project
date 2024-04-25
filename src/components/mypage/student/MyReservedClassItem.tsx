@@ -10,7 +10,7 @@ import { BiMoneyWithdraw } from 'react-icons/bi';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GoPeople } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
-import NoImage from '@/assets/images/no_img.jpg';
+import NoImage from '@/assets/images/clroom_no_img_purple.png';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const queryClient = useQueryClient();
