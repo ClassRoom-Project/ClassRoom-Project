@@ -11,7 +11,7 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { ImageFileWithPreview } from '@/types/register';
 import { supabase } from '@/app/api/supabase/supabase';
 import Image from 'next/image';
-import noImage from '@/assets/images/no_img.jpg';
+import noImage from '@/assets/images/clroom_no_img_purple.png';
 
 //Todo : 예약한 사람만 댓글 입력가능하게 하기 , 댓글 수정삭제 구현 ,사진 기능
 const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }) => {
@@ -141,7 +141,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 </div>
                 <textarea
                   minLength={10}
-                  maxLength={150}
+                  maxLength={350}
                   className="h-52 w-full resize-none rounded-md border border-solid border-button-focus-color p-4 outline-none"
                   placeholder="후기를 입력해주세요. (10자 이상)"
                   value={content}

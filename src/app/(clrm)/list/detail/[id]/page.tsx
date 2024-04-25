@@ -1,7 +1,7 @@
 import { detailClassIdOnly, detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
 import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
 import ClassDetailContainer from '@/components/classDetail/ClassDetailContainer';
-import ClassImageAndSummary from '@/components/classDetail/ClassImageCarousel';
+import ClassImageCarousel from '@/components/classDetail/ClassImageCarousel';
 import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
@@ -31,7 +31,7 @@ const page = async ({ params }: { params: { id: string } }) => {
         </Link>
       </div>
       <div className="flex w-full justify-between gap-12 bg-pale-purple p-6">
-        <ClassImageAndSummary classData={classData} />
+        <ClassImageCarousel classData={classData} />
         <ClassSummary classData={classData} userData={userData} />
       </div>
 

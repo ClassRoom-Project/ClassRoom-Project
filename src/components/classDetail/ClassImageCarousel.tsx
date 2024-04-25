@@ -10,7 +10,7 @@ import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import './embla.css';
 import { useEffect } from 'react';
 
-const ClassImageAndSummary = ({ classData }: { classData: ListDetailClassInfo | null }) => {
+const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | null }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
@@ -71,4 +71,4 @@ const ClassImageAndSummary = ({ classData }: { classData: ListDetailClassInfo | 
   );
 };
 
-export default ClassImageAndSummary;
+export default ClassImageCarousel;
