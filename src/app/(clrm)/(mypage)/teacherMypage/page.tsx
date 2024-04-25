@@ -3,8 +3,8 @@ import React, { Suspense } from 'react';
 
 const teacherMypage = () => {
   return (
-    <div className=" responsiveHeight overflow-y-auto h-screen scrollbar-hide">
-      <div className="flex justify-center items-center">
+    <div className=" responsiveHeight h-screen">
+      <div className="flex items-center justify-center">
         <Suspense>
           <TeacherMyPageTab />
         </Suspense>

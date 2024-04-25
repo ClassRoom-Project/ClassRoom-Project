@@ -15,10 +15,6 @@ export const metadata: Metadata = {
 const noto = Noto_Sans_KR({
   subsets: ['latin'] // 또는 preload: false
 });
-// const noto = IBM_Plex_Sans_KR({
-//   subsets: ['latin'],
-//   weight: '400' // 또는 preload: false
-// });
 
 type Props = { children: React.ReactNode };
 

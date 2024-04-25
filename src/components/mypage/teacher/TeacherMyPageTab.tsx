@@ -23,11 +23,11 @@ const TeacherMyPageTab = () => {
 
   const activeTeacherMyPageTab: TeacherTabComponent = useMemo(
     () => ({
-      editProfile: <EditProfile />,
-      editTeacherInfo: <EditTeacherInfo />,
+      editProfile: <EditProfile key="editProfile" />,
+      editTeacherInfo: <EditTeacherInfo key="editTeacherInfo" />,
       myClass: (
         <Suspense>
-          <MyClass />
+          <MyClass key="myClass" />
         </Suspense>
       )
     }),
@@ -35,7 +35,7 @@ const TeacherMyPageTab = () => {
   );
 
   useEffect(() => {
-    if (!isTeacher) {
+    if (isTeacher === false) {
       router.push('/studentMypage');
     }
     if (teacherTab && Object.keys(activeTeacherMyPageTab).includes(teacherTab)) {
@@ -52,8 +52,13 @@ const TeacherMyPageTab = () => {
     router.push(`/teacherMypage?teacherTab=${tab}`);
   };
 
-  const toggleDropdown = () => {
-    setIsOpen((prev) => !prev);
+  const checkAndCloseDropDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    let targetEl = e.currentTarget;
+    if (targetEl && targetEl.matches(':focus')) {
+      setTimeout(function () {
+        targetEl.blur();
+      }, 0);
+    }
   };
 
   const handleDropdownItemClick = (tab: string) => {
@@ -62,81 +67,75 @@ const TeacherMyPageTab = () => {
   };
 
   return (
-    <div className="w-full h-screen md:m-4 md:p-4 m-0 p-0">
+    <div className="m-0 h-screen max-w-[1440px] p-0 md:my-4 md:py-4 lg:w-[1440px]">
       {/* md 이상 일 때, 가로 탭 */}
-      <div className="hidden md:flex flex-row md:justify-start lg:gap-20 md:gap-10 md:items-center sm:items-start w-full border-y-2">
-        <button
-          onClick={() => handleOnClickTabBtn('editProfile')}
-          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm  ${
-            activePage === 'editProfile'
-              ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
-              : ''
-          }`}
-        >
-          프로필 수정하기
-        </button>
-        <button
-          onClick={() => handleOnClickTabBtn('editTeacherInfo')}
-          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm  ${
-            activePage === 'editTeacherInfo'
-              ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
-              : ''
-          }`}
-        >
-          선생님 정보 수정하기
-        </button>
-        <button
-          onClick={() => handleOnClickTabBtn('myClass')}
-          className={`p-4 lg:text-lg whitespace-nowrap md:text-sm ${
-            activePage === 'myClass'
-              ? 'font-bold cursor-pointer text-dark-purple-color border-b-2 border-dark-purple-color '
-              : ''
-          }`}
-        >
-          내가 등록한 클래스
-        </button>
+      <div className="hidden w-full flex-row whitespace-nowrap border-y-2 sm:items-start md:flex md:items-center md:justify-start md:gap-10 lg:gap-20">
+        <div className="overflow-x-scroll scrollbar-hide">
+          <button
+            onClick={() => handleOnClickTabBtn('editProfile')}
+            className={`relative whitespace-nowrap p-4 md:text-sm lg:text-lg ${
+              activePage === 'editProfile'
+                ? 'cursor-pointer border-b-2 border-dark-purple-color font-bold text-dark-purple-color'
+                : ''
+            }`}
+          >
+            프로필 수정하기
+          </button>
+          <button
+            onClick={() => handleOnClickTabBtn('editTeacherInfo')}
+            className={`whitespace-nowrap p-4 md:text-sm lg:text-lg  ${
+              activePage === 'editTeacherInfo'
+                ? 'cursor-pointer border-b-2 border-dark-purple-color font-bold text-dark-purple-color '
+                : ''
+            }`}
+          >
+            선생님 정보 수정하기
+          </button>
+          <button
+            onClick={() => handleOnClickTabBtn('myClass')}
+            className={`whitespace-nowrap p-4 md:text-sm lg:text-lg ${
+              activePage === 'myClass'
+                ? 'cursor-pointer border-b-2 border-dark-purple-color font-bold text-dark-purple-color '
+                : ''
+            }`}
+          >
+            내가 등록한 클래스
+          </button>
+        </div>
       </div>
 
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="my-4 py-4 flex w-full justify-start md:hidden">
-        <div className="dropdown-right dropdown">
-          <div
-            tabIndex={0}
-            role="button"
-            className="m-1"
-            onClick={toggleDropdown}
-            onKeyDown={(e) => e.key === 'Enter' && toggleDropdown()}
-          >
+      <div className="flex w-full justify-start px-4 md:hidden">
+        <div className="dropdown dropdown-right">
+          <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
           </div>
           <div
             tabIndex={0}
-            className={`dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 flex flex-col ${
-              isOpen ? 'block' : 'hidden'
-            }`}
+            className={'menu dropdown-content z-[1] flex w-52 flex-col items-start rounded-box bg-base-100 p-2 shadow'}
           >
             <button
               onClick={() => handleDropdownItemClick('editProfile')}
-              className={`text-lg cursor-pointer ${activePage === 'editProfile' ? 'font-bold' : ''}`}
+              className={`cursor-pointer text-lg ${activePage === 'editProfile' ? 'font-bold' : ''}`}
             >
               프로필 수정하기
             </button>
             <button
               onClick={() => handleDropdownItemClick('editTeacherInfo')}
-              className={`text-lg cursor-pointer ${activePage === 'editTeacherInfo' ? 'font-bold' : ''}`}
+              className={`cursor-pointer text-lg ${activePage === 'editTeacherInfo' ? 'font-bold' : ''}`}
             >
               선생님 정보 수정하기
             </button>
             <button
               onClick={() => handleDropdownItemClick('myClass')}
-              className={`text-lg cursor-pointer ${activePage === 'myClass' ? 'font-bold' : ''}`}
+              className={`cursor-pointer text-lg ${activePage === 'myClass' ? 'font-bold' : ''}`}
             >
               내가 등록한 클래스
             </button>
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center w-full p-4 md:py-8 md:p-0">
+      <div className="flex w-full items-center justify-center p-4 md:p-0 md:py-8">
         {activeTeacherMyPageTab[activePage]}
       </div>
     </div>

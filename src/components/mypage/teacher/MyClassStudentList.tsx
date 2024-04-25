@@ -1,4 +1,5 @@
 import { getMyClassStudentInfo } from '@/app/api/mypage/my-class-api';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
 import Pagination from '@/components/common/Pagination';
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
@@ -20,12 +21,17 @@ const MyClassStudentList = () => {
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 이동 시 스크롤 위치 맨 위로 초기화
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); // 페이지 이동 시 스크롤 위치 맨 위로 초기화
     setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
   }, [page]);
 
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    return (
+      <div className="flex h-auto flex-col  items-center justify-center gap-4">
+        <LoadingSpinner />
+        <p>잠시만 기다려주세요..</p>
+      </div>
+    );
   }
 
   if (!myClassStudentInfo || myClassStudentInfo.length === 0) {
@@ -37,7 +43,7 @@ const MyClassStudentList = () => {
   const currentPosts = myClassStudentInfo.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto scrollbar-hide">
       <table className="table ">
         <thead>
           <tr className=" bg-light-purple text-point-purple">
@@ -51,21 +57,21 @@ const MyClassStudentList = () => {
         <tbody>
           {currentPosts.map((student) => (
             <tr key={student.user_id}>
-              <th className="flex gap-4 items-center">
-                <div className=" w-12 h-12">
+              <th className="flex items-center gap-4 whitespace-nowrap">
+                <div className="h-12 w-12">
                   <Image
                     src={student.profile_image}
                     alt="프로필 이미지"
                     width={50}
                     height={50}
-                    className="rounded-full w-full h-full object-cover"
+                    className="h-full w-full rounded-full object-cover"
                   />
                 </div>
                 {student.nickname}
               </th>
               <td>{student.email}</td>
               <td>{student.reserve_quantity.toLocaleString()}명</td>
-              <td>{student.reserve_price.toLocaleString()}원</td>
+              <td className="whitespace-nowrap">{student.reserve_price.toLocaleString()}원</td>
               {/* <td>
                 <button className="btn">1:1 채팅</button>
               </td> */}

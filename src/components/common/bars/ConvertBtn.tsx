@@ -56,11 +56,14 @@ const ConvertBtn = () => {
     };
 
     return (
-      <div className="p-4">
-        <button onClick={handler} className="border-4 rounded-full">
-          <div className="flex flex-col items-center hover:text-main-color transition ease-in ">
-            <TbArrowsExchange size={30} />
-            <p className="text-xs ">선생님 전환</p>
+      <div className="relative w-full p-4">
+        <button onClick={handler}>
+          <div className="flex flex-col items-center transition ease-in hover:text-main-color ">
+            <TbArrowsExchange className="text-4xl text-white sm:text-4xl md:text-4xl md:text-black" />
+            <p className={`flex flex-col items-center justify-center  text-xs text-white md:text-xs md:text-black`}>
+              선생님
+              <span className="hidden sm:flex md:sm:flex md:sm:justify-center">전환</span>
+            </p>
           </div>
         </button>
       </div>
@@ -71,11 +74,11 @@ const ConvertBtn = () => {
     return <div> 선생님 정보가 없습니다.</div>;
   }
   return (
-    <div className="p-4">
+    <div className="relative w-full p-4">
       <button onClick={handleOnClickChangedRoleBtn}>
-        <div className="flex flex-col items-center justify-center hover:text-main-color transition ease-in w-full">
-          <TbArrowsExchange className="text-white md:text-black text-4xl sm:text-4xl md:text-4xl" />
-          <p className={`text-xs text-white md:text-xs md:text-black  flex flex-col items-center justify-center`}>
+        <div className="flex w-full flex-col items-center justify-center transition ease-in hover:text-main-color">
+          <TbArrowsExchange className="text-4xl text-white sm:text-4xl md:text-4xl md:text-black" />
+          <p className={`flex flex-col items-center justify-center  text-xs text-white md:text-xs md:text-black`}>
             {isTeacher ? '수강생' : '선생님'}{' '}
             <span className="hidden sm:flex md:sm:flex md:sm:justify-center">전환</span>
           </p>

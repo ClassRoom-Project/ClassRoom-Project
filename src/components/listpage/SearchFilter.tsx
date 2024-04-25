@@ -1,21 +1,23 @@
 'use client';
+
+import { useCategoryFilterStore, useListFilterStore, useSearchStore } from '@/store/classFilterStore';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
 import { FiAlignJustify } from 'react-icons/fi';
-import React, { useState } from 'react';
-import { useCategoryFilterStore, useListFilterStore } from '@/store/classFilterStore';
-import { useSearchStore } from '@/store/classFilterStore';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { PriceBtn, DifficultyBtn } from './listpageBtns';
+import FilterIcon from '@/assets/images/filterIcon.svg';
+import Image from 'next/image';
+import { GrPowerReset } from 'react-icons/gr';
+
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
-  const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
+
   const { setSelectedTitle } = useSearchStore();
   const router = useRouter();
 
-  const handleDropdown = () => {
-    setIsOpenCategory(!isOpenCategory);
-  };
   //초기화 버튼 핸들러
   const handleResetBtn = () => {
     setSelectedCategory('');
@@ -23,7 +25,8 @@ const SearchFilter = () => {
       selectedClassType: '',
       selectedLocation: null,
       selectedDifficulty: null,
-      selectedPrice: null
+      selectedPrice: null,
+      selectedDayType: null
     });
     setMinPrice('');
     setMaxPrice('');
@@ -45,171 +48,210 @@ const SearchFilter = () => {
     setClassFilters({ ...ClassFilters, selectedLocation });
   };
   //클래스 난이도 핸들러
-  const handleClassDifficultyBtn = (classDifficulty: string) => {
-    setClassFilters({ ...ClassFilters, selectedDifficulty: classDifficulty });
+  const handleClassDifficultyBtn = (classDifficulty: string): (() => void) => {
+    return () => {
+      setClassFilters({ ...ClassFilters, selectedDifficulty: classDifficulty });
+    };
   };
   //클래스 가격 핸들러
-  const handlePriceFilter = (min: number, max: number) => {
-    setClassFilters({ ...ClassFilters, selectedPrice: { min, max } });
+  const handlePriceFilter = (min: number, max: number): (() => void) => {
+    return () => {
+      setClassFilters({ ...ClassFilters, selectedPrice: { min, max } });
+    };
+  };
+
+  // 클래스 요일 핸들러
+  const handleClassDayClick = (dayType: string) => {
+    setClassFilters({ ...ClassFilters, selectedDayType: dayType });
+  };
+
+  const checkAndCloseDropDown = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    let targetEl = e.currentTarget;
+    if (targetEl && targetEl.matches(':focus')) {
+      setTimeout(function () {
+        targetEl.blur();
+      }, 0);
+    }
   };
 
   return (
-    <div className="flex w-full items-start justify-start p-5">
-      <div className="dropdown dropdown-bottom w-12 h-12">
-        <div tabIndex={0} onClick={handleDropdown} role="button" className="btn ">
-          <FiAlignJustify size={30} color="#6C5FF7">
-            검색필터
-          </FiAlignJustify>
+    <div className="flex w-full items-start justify-start">
+      <div className="dropdown dropdown-bottom z-30">
+        <div
+          tabIndex={0}
+          onMouseDown={(e) => checkAndCloseDropDown(e)}
+          role="button"
+          className="ml-2 flex h-11 w-12 items-center justify-center p-0 hover:bg-white md:ml-0 md:w-16"
+        >
+          {/* <FiAlignJustify
+            role="button"
+            className="swap-off fill-current text-main-color hover:bg-white"
+            size={30}
+          ></FiAlignJustify> */}
+          <Image src={FilterIcon} width={40} height={40} alt="filter icon" className="h-6 w-6 md:h-10 md:w-10" />
         </div>
+        <ul
+          tabIndex={0}
+          className="menu dropdown-content z-[1] ml-2 flex w-60 flex-col items-center justify-center gap-2.5 rounded-md border  border-solid border-button-focus-color bg-pale-purple px-4 shadow-xl md:ml-0 md:w-[400px] md:p-8 md:py-2"
+        >
+          <div className="w-full items-center justify-center">
+            <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className=" text-sm text-black md:text-base">타입</p>
+            </div>
+            <div className="flex w-full items-center justify-center gap-2 text-xs md:gap-3 md:text-base">
+              <button
+                onClick={() => handleClassTypeBtn('온라인 클래스')}
+                className={`w-12 rounded-2xl  border-[1px] border-solid border-point-purple py-1  md:w-24 ${
+                  ClassFilters.selectedClassType === '온라인 클래스'
+                    ? 'bg-point-purple text-white'
+                    : 'bg-pale-purple transition-all hover:bg-button-disable-color'
+                }`}
+              >
+                온라인
+              </button>
+              <button
+                onClick={() => handleClassTypeBtn('오프라인 클래스')}
+                className={`w-14 rounded-2xl  border-[1px] border-solid border-point-purple py-1  md:w-24 ${
+                  ClassFilters.selectedClassType === '오프라인 클래스'
+                    ? 'bg-point-purple text-white'
+                    : 'bg-pale-purple transition-all hover:bg-button-disable-color'
+                }`}
+              >
+                오프라인
+              </button>
+            </div>
+          </div>
+          <div className="divider m-0 h-0 md:h-4"></div>
+          <div className="w-full items-center justify-center">
+            <div className="mb-2 flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className="text-sm text-black md:text-base">지역</p>
+            </div>
+            <select
+              className="select select-bordered select-primary flex h-8 min-h-8 w-full items-center justify-center border-main-color text-xs md:min-h-12 md:w-full  md:text-base"
+              value={ClassFilters.selectedLocation || ''}
+              onChange={handleLocationChange}
+            >
+              <option value="" className=" bg-disable-color" disabled>
+                지역을 선택하세요
+              </option>
+              <option value={'서울'}>서울</option>
+              <option value={'경기'}>경기</option>
+              <option value={'인천'}>인천</option>
+              <option value={'충남'}>충남</option>
+              <option value={'충북'}>충북</option>
+              <option value={'강원특별자치도'}>강원</option>
+              <option value={'경북'}>경북</option>
+              <option value={'경남'}>경남</option>
+              <option value={'전북'}>전북</option>
+              <option value={'전남'}>전남</option>
+              <option value={'제주특별자치도'}>제주</option>
+            </select>
+          </div>
 
-        {isOpenCategory ? (
-          <ul
-            tabIndex={0}
-            className="dropdown-content justify-center flex flex-col items-center z-[1] menu shadow bg-disable-color border-border-color border-solid border-[1px] w-[400px] h-[650px]"
-          >
-            <div className="border-b-[1px] flex flex-col items-center justify-center w-80 h-[125px] border-solid border-gray-400">
-              <div className="flex mb-3 items-start w-72 justify-start">
-                <p className="text-text-color">클래스 타입</p>
-              </div>
-              <div className="flex">
-                <button
-                  onClick={() => handleClassTypeBtn('온라인 클래스')}
-                  className={`p-2 font-bold border-solid border-main-color border-[1px] rounded-2xl mx-3 w-24 ${
-                    ClassFilters.selectedClassType === '온라인 클래스' ? 'bg-button-focus-color' : 'bg-white'
-                  }`}
-                >
-                  온라인
-                </button>
-                <button
-                  onClick={() => handleClassTypeBtn('오프라인 클래스')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-main-color border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedClassType === '오프라인 클래스' ? 'bg-button-focus-color' : 'bg-white'
-                  }`}
-                >
-                  오프라인
-                </button>
+          <div className="divider m-0 h-0 md:h-4"></div>
+          <div className="w-full items-center justify-center">
+            <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className="text-sm text-black md:text-base">요일</p>
+            </div>
+            <div className="flex w-full items-center justify-center gap-2 text-xs md:gap-3 md:text-base">
+              <button
+                onClick={() => handleClassDayClick('평일')}
+                className={`w-12 rounded-2xl border-[1px] border-solid border-point-purple py-1  md:w-24 ${
+                  ClassFilters.selectedDayType === '평일'
+                    ? 'bg-point-purple text-white'
+                    : 'bg-pale-purple transition-all hover:bg-button-disable-color'
+                }`}
+              >
+                평일
+              </button>
+              <button
+                onClick={() => handleClassDayClick('주말')}
+                className={`w-12 rounded-2xl border-[1px] border-solid border-point-purple py-1  md:w-24 ${
+                  ClassFilters.selectedDayType === '주말'
+                    ? 'bg-point-purple text-white'
+                    : 'bg-pale-purple transition-all hover:bg-button-disable-color'
+                }`}
+              >
+                주말
+              </button>
+            </div>
+          </div>
+          <div className="divider m-0 h-0 md:h-4"></div>
+          <div className="w-full items-center justify-center">
+            <div className="mb-2 flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className="text-sm text-black md:text-base">난이도</p>
+            </div>
+            <div className="flex w-full justify-center">
+              <div className="flex justify-between gap-2  md:grid md:grid-cols-2 md:gap-3">
+                <DifficultyBtn
+                  classFilters={ClassFilters}
+                  difficulty={'입문'}
+                  handleClassDifficultyBtn={handleClassDifficultyBtn('입문')}
+                />
+                <DifficultyBtn
+                  classFilters={ClassFilters}
+                  difficulty={'초급'}
+                  handleClassDifficultyBtn={handleClassDifficultyBtn('초급')}
+                />
+                <DifficultyBtn
+                  classFilters={ClassFilters}
+                  difficulty={'중급'}
+                  handleClassDifficultyBtn={handleClassDifficultyBtn('중급')}
+                />
+
+                <DifficultyBtn
+                  classFilters={ClassFilters}
+                  difficulty={'고급'}
+                  handleClassDifficultyBtn={handleClassDifficultyBtn('고급')}
+                />
               </div>
             </div>
-            <div>
-              <div className="border-b-[1px] border-solid border-gray-400 mt-2 w-80 h-[125px] flex flex-col justify-center items-center">
-                <div className="flex flex-col items-start w-72 mb-3 justify-start">
-                  <p className="text-text-color">지역</p>
-                </div>
-                <select
-                  className="select select-primary w-72"
-                  value={ClassFilters.selectedLocation || ''}
-                  onChange={handleLocationChange}
-                >
-                  <option value="" disabled>
-                    지역을 선택하세요
-                  </option>
-                  <option value={'서울'}>서울</option>
-                  <option value={'경기'}>경기</option>
-                  <option value={'인천'}>인천</option>
-                  <option value={'충남'}>충남</option>
-                  <option value={'충북'}>충북</option>
-                  <option value={'강원특별자치도'}>강원</option>
-                  <option value={'경북'}>경북</option>
-                  <option value={'경남'}>경남</option>
-                  <option value={'전북'}>전북</option>
-                  <option value={'전남'}>전남</option>
-                  <option value={'제주특별자치도'}>제주</option>
-                </select>
+          </div>
+          <div className="divider m-0 h-0 md:h-4"></div>
+          <div className="flex w-full flex-col items-center justify-center">
+            <div className="mb-2 flex w-full items-start justify-start md:mb-3 md:w-64">
+              <p className="text-sm text-black md:text-base">금액</p>
+            </div>
+            <div className="flex w-full justify-center">
+              <div className="grid grid-cols-2 justify-between gap-2 md:w-full md:grid-cols-2 md:gap-3">
+                <PriceBtn
+                  handlePriceFilter={handlePriceFilter(0, 19999)}
+                  classFilters={ClassFilters}
+                  minPrice={0}
+                  maxPrice={19999}
+                  filterText={'20,000원 미만'}
+                />
+                <PriceBtn
+                  handlePriceFilter={handlePriceFilter(0, 49999)}
+                  classFilters={ClassFilters}
+                  minPrice={0}
+                  maxPrice={49999}
+                  filterText={'50,000원 미만'}
+                />
+                <PriceBtn
+                  handlePriceFilter={handlePriceFilter(0, 99999)}
+                  classFilters={ClassFilters}
+                  minPrice={0}
+                  maxPrice={99999}
+                  filterText={'100,000원 미만'}
+                />
+                <PriceBtn
+                  handlePriceFilter={handlePriceFilter(100000, 1000000000000000)}
+                  classFilters={ClassFilters}
+                  minPrice={100000}
+                  maxPrice={1000000000000000}
+                  filterText={'100,000원 이상'}
+                />
               </div>
             </div>
-            <div className="flex flex-col w-80 mt-9 h-[125px] border-b-[1px] border-solid border-gray-400 justify-center items-center">
-              <div className="flex items-start w-72 justify-start">
-                <p className="text-text-color">난이도</p>
-              </div>
-              <div className="p-2">
-                <button
-                  onClick={() => handleClassDifficultyBtn('입문')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedDifficulty === '입문' ? 'bg-button-focus-color' : 'bg-white'
-                  }`}
-                >
-                  입문
-                </button>
-                <button
-                  onClick={() => handleClassDifficultyBtn('초급')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedDifficulty === '초급' ? 'bg-button-focus-color' : 'bg-white'
-                  }`}
-                >
-                  초급
-                </button>
-              </div>
-              <div className="p-2">
-                <button
-                  onClick={() => handleClassDifficultyBtn('중급')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedDifficulty === '중급' ? 'bg-button-focus-color' : 'bg-white'
-                  }`}
-                >
-                  중급
-                </button>
-                <button
-                  onClick={() => handleClassDifficultyBtn('고급')}
-                  className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-24 ${
-                    ClassFilters.selectedDifficulty === '고급' ? 'bg-button-focus-color' : 'bg-white'
-                  }`}
-                >
-                  고급
-                </button>
-              </div>
-            </div>
-            <div>
-              <div className="flex my-9 w-72 h-[125px] flex-col justify-center items-center">
-                <div className="flex items-start mb-3 w-72 justify-start">
-                  <p className="text-text-color">금액</p>
-                </div>
-                <div className="flex flex-col items-center w-72 justify-start">
-                  <div className="flex items-center justify-center">
-                    <button
-                      onClick={() => handlePriceFilter(0, 19999)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-30 ${
-                        isPriceSelected(0, 19999) ? 'bg-button-focus-color' : 'bg-white'
-                      }`}
-                    >
-                      20,000원 미만
-                    </button>
-                    <button
-                      onClick={() => handlePriceFilter(0, 49999)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-3 w-30 ${
-                        isPriceSelected(0, 49999) ? 'bg-button-focus-color' : 'bg-white'
-                      }`}
-                    >
-                      50,000원 미만
-                    </button>
-                  </div>
-                  <div className="flex items-center mt-4 justify-center">
-                    <button
-                      onClick={() => handlePriceFilter(0, 99999)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-2 w-30 ${
-                        isPriceSelected(0, 99999) ? 'bg-button-focus-color' : 'bg-white'
-                      }`}
-                    >
-                      100,000원 미만
-                    </button>
-                    <button
-                      onClick={() => handlePriceFilter(100000, 1000000000000000)}
-                      className={`p-2 font-bold rounded-2xl border-solid border-point-color border-[1px] mx-2 w-30 ${
-                        isPriceSelected(100000, 1000000000000000) ? 'bg-button-focus-color' : 'bg-white'
-                      }`}
-                    >
-                      100,000원 이상
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </ul>
-        ) : (
-          <></>
-        )}
+          </div>
+        </ul>
       </div>
-      <button onClick={handleResetBtn} className="btn ml-12 w-17 h-12">
-        초기화
+      <button onClick={handleResetBtn} className="mx-4 flex h-11 items-center justify-center p-0 md:ml-8 md:w-16">
+        <div className="flex items-center justify-center font-semibold ">
+          <p className="mr-1 whitespace-nowrap text-xs text-text-dark-gray md:text-lg">초기화</p>
+          <GrPowerReset className="text-sm text-text-dark-gray md:text-lg" />
+        </div>
       </button>
     </div>
   );

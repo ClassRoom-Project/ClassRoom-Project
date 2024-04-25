@@ -11,13 +11,18 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import '../common/day-picker.css';
 import CustomCaption from '../common/CustomCaption';
+import { useRouter } from 'next/navigation';
 
 const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
+  const router = useRouter();
   const { setReserveInfo } = useReserveStore();
   const { setCurrentReservedCount } = useCurrentReservedCountStore();
-  const [selectedTime, setSelectedTime] = useState(classDates[0].times[0].times);
-  const [selectedDate, setSelectedDate] = useState(classDates[0].day);
-  const [timeId, setTimeId] = useState(classDates[0].times[0].timeId);
+
+  const datesAfterToday = classDates.filter(({ day }) => day >= format(new Date(), 'yyyy-MM-dd'));
+  const firstAvailableDay = datesAfterToday[0].day;
+  const [selectedDate, setSelectedDate] = useState(firstAvailableDay);
+  const [selectedTime, setSelectedTime] = useState(datesAfterToday[0].times[0].times);
+  const [timeId, setTimeId] = useState(datesAfterToday[0].times[0].timeId);
   const today = new Date();
 
   useEffect(() => {
@@ -33,6 +38,12 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     setInitialReservedCount();
   }, [setCurrentReservedCount, classDates]);
 
+  if (!firstAvailableDay) {
+    alert('마감된 클래스입니다.');
+    router.replace('/');
+    return;
+  }
+
   // 시간 버튼 클릭
   const handleTimeClick = async (times: string, timeId: string) => {
     setSelectedTime(times);
@@ -45,10 +56,10 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   // 날짜 버튼 클릭
   const handleDateChange = async (newDate: Date | undefined) => {
     const formattedDate = format(newDate as Date, 'yyyy-MM-dd');
-    const firstAvailableTime = classDates.find(({ day }) => day === formattedDate)?.times[0];
     setSelectedDate(formattedDate);
 
     // 일자를 선택했을 때 첫 번째 시간으로 state를 set
+    const firstAvailableTime = datesAfterToday.find(({ day }) => day === formattedDate)?.times[0];
     if (firstAvailableTime) {
       const { timeId, times } = firstAvailableTime;
       setSelectedTime(times);
@@ -70,15 +81,15 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   };
 
   return (
-    <div className="w-full mb-2 flex flex-col justify-center items-center">
-      <p className="font-bold text-lg text-left w-full mb-1">수강일 선택하기</p>
-      <div className="shadow rounded-md p-2 min-w-2/3 mb-4  px-4">
+    <div className="mb-2 flex w-full flex-col items-center justify-center">
+      <p className="mb-1 w-full text-left text-lg font-bold">수강일 선택하기</p>
+      <div className="min-w-2/3 mb-4 rounded-md p-2 px-4  shadow">
         <DayPicker
           mode="single"
           required
-          selected={new Date(selectedDate)}
+          selected={new Date(selectedDate as string)}
           onSelect={handleDateChange}
-          disabled={(day) => !availableDays.includes(format(day, 'yyyy-MM-dd'))}
+          disabled={[{ before: new Date() }, (day) => !availableDays.includes(format(day, 'yyyy-MM-dd'))]}
           locale={ko}
           fromYear={new Date().getFullYear()}
           toYear={new Date().getFullYear() + 1}
@@ -94,7 +105,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
           const gridColNum =
             dateInfo.times.length <= 4 ? '2' : dateInfo.times.length > 4 && dateInfo.times.length <= 6 ? '3' : '4'; // 등록된 시간 개수에 따라 grid 숫자 조절
           return (
-            <div key={dateInfo.dateId} className={`grid ${GridCols[gridColNum]} gap-2 w-full mb-3`}>
+            <div key={dateInfo.dateId} className={`grid ${GridCols[gridColNum]} mb-3 w-full gap-2`}>
               {/* times배열:  각 시간의 고유id와 시간string이 한 쌍인 객체의 배열 */}
               {dateInfo.times.map((timeInfo) => (
                 <button
@@ -103,8 +114,8 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
                   className={`btn btn-sm font-normal ${
                     timeInfo.times === selectedTime
                       ? 'bg-point-purple text-white hover:bg-button-hover-color'
-                      : 'bg-white hover:bg-background-color hover:border-button-focus-color'
-                  } tracking-wide rounded-md h-[48px] border-solid border border-gray-300 `}
+                      : 'bg-white hover:border-button-focus-color hover:bg-background-color'
+                  } h-[48px] rounded-md border border-solid border-gray-300 tracking-wide `}
                 >
                   {convertTimeTo12HourClock(timeInfo.times)}
                 </button>
@@ -112,7 +123,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
             </div>
           );
         })}
-      <div className="flex flex-row justify-between items-center w-full bg-base-200 rounded-md  text-sm py-2 px-3">
+      <div className="flex w-full flex-row items-center justify-between rounded-md bg-base-200  px-3 py-2 text-sm">
         <div className="mb-1 font-bold">선택하신 수강일</div>
         <p>{`${selectedDate} ${convertTimeTo12HourClock(selectedTime)} `}</p>
       </div>

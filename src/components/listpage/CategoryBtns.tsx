@@ -39,19 +39,23 @@ const CategoryBtns = () => {
   }, [pathName, setSelectedCategory]);
 
   return (
-    <div className="w-full bg-disable-color h-16 flex justify-center items-center">
-      <div className="w-full px-8 flex flex-row justify-between font-medium">
-        {categories.map((category) => (
-          <button
-            key={category}
-            onClick={() => handleOnClickListBtn(category)}
-            className={`w-24 rounded-full px-2.5 py-[5px] ${
-              selectedCategory === category ? 'bg-button-press-color' : 'bg-white'
-            }`}
-          >
-            {category}
-          </button>
-        ))}
+    <div className=" flex h-12 w-full items-center justify-center bg-transparent md:h-16">
+      <div className="flex w-full flex-row justify-between gap-1 whitespace-nowrap px-2 md:gap-2">
+        <div className="overflow-x-auto scrollbar-hide md:flex md:w-full md:justify-between">
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => handleOnClickListBtn(category)}
+              className={`mx-1 w-20 whitespace-nowrap rounded-full px-1 py-1 text-xs text-gray-700 transition-all md:w-24 md:text-base md:font-semibold 2xl:w-28 ${
+                selectedCategory === category
+                  ? 'bg-button-press-color text-white '
+                  : 'border border-solid border-input-border-color bg-pale-purple hover:border-button-press-color hover:bg-background-color'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   );

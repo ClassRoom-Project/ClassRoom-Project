@@ -11,29 +11,31 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
   const classInfo = await fetchReserveClassInfo(classId);
 
   return (
-    <div className="min-w-100vw flex flex-col">
-      <div className="m-0 p-2  flex items-center bg-white text-text-dark-gray">
-        <Link href={`/list/detail/${classInfo.classId}`} className="flex justify-center items-center">
-          <IoIosArrowBack size={18} />
-          상세보기
-        </Link>
-      </div>
-
-      {classInfo ? (
-        <div className="min-h-100vh-header-reserve m-0 py-6 md:px-4 lg:min-w-fit  lg:flex-row bg-light-purple  flex flex-col justify-center items-center  text-gray-600 ">
-          <div className="flex flex-col justify-between w-11/12 min-w-[350px] h-[780px] sm:w-2/3 lg:w-1/3 lg:min-w-[400px]   ">
-            <ClassInfo classInfo={classInfo} />
-            <ReserveUserInfo />
-          </div>
-          <div className="lg:divider-horizontal" />
-          <div className="mt-4 w-11/12 min-w-[350px] h-[780px] py-4 sm:mt-4 sm:w-2/3 sm:px-9 lg:mt-0 lg:w-1/3 lg:min-w-[400px] flex flex-col justify-between bg-white rounded-md shadow px-7">
-            <ReservationScheduler classInfo={classInfo} />
-            <SetQuantityAndPay classInfo={classInfo} />
-          </div>
+    <div className="responsiveHeight h-screen">
+      <div className="min-w-100vw flex flex-col">
+        <div className="m-0 flex  items-center bg-white p-2 text-text-dark-gray">
+          <Link href={`/list/detail/${classInfo.classId}`} className="flex items-center justify-center">
+            <IoIosArrowBack size={18} />
+            상세보기
+          </Link>
         </div>
-      ) : (
-        <p>클래스 정보를 불러오지 못했어요. 🥲</p>
-      )}
+
+        {classInfo ? (
+          <div className="m-0 mb-16 flex min-h-100vh-header-reserve flex-col items-center justify-center bg-light-purple pb-5 pt-6 text-gray-600  md:mb-0 md:px-4 md:py-6 lg:min-w-fit  lg:flex-row ">
+            <div className="flex h-[780px] w-11/12 min-w-[350px] flex-col justify-between sm:w-2/3 lg:w-1/3 lg:min-w-[400px]   ">
+              <ClassInfo classInfo={classInfo} />
+              <ReserveUserInfo />
+            </div>
+            <div className="lg:divider-horizontal" />
+            <div className="mt-4 flex h-[780px] w-11/12 min-w-[350px] flex-col justify-between rounded-md bg-white px-7 py-4 shadow sm:w-2/3 sm:px-9 lg:mt-0 lg:w-1/3 lg:min-w-[400px]">
+              <ReservationScheduler classInfo={classInfo} />
+              <SetQuantityAndPay classInfo={classInfo} />
+            </div>
+          </div>
+        ) : (
+          <p>클래스 정보를 불러오지 못했어요. 🥲</p>
+        )}
+      </div>
     </div>
   );
 }

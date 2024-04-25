@@ -41,7 +41,7 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
         if (validFiles.length < 5 - photos.length) {
           validFiles.push(file);
           fileURLs.push(URL.createObjectURL(file));
-        } else {
+
           setCountError('사진은 최대 5개까지 업로드 가능합니다.');
           return;
         }

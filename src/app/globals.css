@@ -16,16 +16,23 @@
   }
 }
 
+@font-face {
+  font-family: 'yg-jalnan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.welcome-message {
+  font-family: 'yg-jalnan', sans-serif;
+}
+
 body {
   color: black;
   background: white;
-  scrollbar-width: none;
-  overflow-y: scroll;
   margin: none;
 }
-html::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
-}
+
 /* 
 @layer utilities {
   .text-balance {
@@ -33,13 +40,58 @@ html::-webkit-scrollbar {
   }
 } */
 
-.responsiveHeight {
-  height: calc(100vh - 144px);
+typebot-bubble::part(button) {
+  bottom: 60px;
+  display: flex;
+  flex-direction: column;
+}
+
+typebot-bubble::part(bot) {
+  bottom: 140px;
+  height: calc(100% - 140px);
+}
+
+typebot-bubble::part(text) {
+  font-size: 16px;
+}
+
+@media (max-width: 480px) {
+  typebot-bubble::part(button) {
+    display: none;
+  }
+
+  typebot-bubble::part(bot) {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  html {
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
+
+  .responsiveHeight {
+    height: calc(100vh - 144px);
+    /* overflow-y: auto; */
+    scrollbar-width: none;
+  }
 }
 
 @media (min-width: 768px) {
   .responsiveHeight {
     height: calc(100vh - 80px);
+  }
+  html {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  }
+  html::-webkit-scrollbar {
+    display: block;
   }
 }
 
@@ -48,17 +100,17 @@ html::-webkit-scrollbar {
 }
 
 .input-field {
-  @apply mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none  focus:border-black sm:text-sm rounded-md;
+  @apply mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm  focus:border-black focus:outline-none sm:text-sm;
 }
 
 .button-field {
-  @apply mt-5 block w-full border mb-4 bg-point-color py-2 px-3 text-white text-center sm:text-sm rounded-full;
+  @apply mb-4 mt-5 block w-full rounded-full border bg-point-color px-3 py-2 text-center text-white sm:text-sm;
 }
 
 .button__border-field {
-  @apply mt-5 block w-full border border-point-color mb-4 py-2 px-3 text-black text-center sm:text-sm rounded-full;
+  @apply mb-4 mt-5 block w-full rounded-full border border-point-color px-3 py-2 text-center text-black sm:text-sm;
 }
 
 .socialIcon-field {
-  @apply mt-2 w-full border border-point-color mb-2 py-2 px-3 text-white text-center sm:text-sm rounded-lg;
+  @apply mb-2 mt-2 w-full rounded-lg border-2 border-white px-3 py-2 text-center text-white hover:border-2 sm:text-sm;
 }

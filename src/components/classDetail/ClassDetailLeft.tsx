@@ -103,7 +103,7 @@ const ClassDetailLeft = ({
           ></Image>
         </div>
       </div>
-      <MapComponent />
+      {/* <MapComponent /> */}
     </div>
   );
 };

@@ -18,10 +18,10 @@ const CreateBtn = () => {
     }
   };
   return (
-    <div>
+    <div className="relative w-full">
       <button
         onClick={handleCreateIconOnClick}
-        className="flex flex-col items-center text-background-color hover:text-main-color transition ease-in md:text-icon-color whitespace-nowrap"
+        className="flex w-full flex-col items-center whitespace-nowrap text-background-color transition ease-in hover:text-main-color md:text-icon-color"
       >
         <SlNote className="text-4xl sm:text-4xl md:text-4xl" />
         <div className=" hidden sm:flex md:sm:flex">클래스 등록</div>

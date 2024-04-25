@@ -5,7 +5,7 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import { quantityWarning } from '../common/Toastify';
+import { quantityWarning, selectDayWarning } from '../common/Toastify';
 
 type ReserveButtonParams = {
   classId: string;
@@ -35,6 +35,11 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
       return;
     }
 
+    if (!reserveInfo.timeId) {
+      selectDayWarning();
+      return;
+    }
+
     // 예약 버튼을 눌렀을 때 count만 fetch해서 한번 더 체크
     const currentReservedQuantity = await sumReserveQuantityByTimeId(reserveInfo.timeId);
     const currentRemainingQuantity = maxPeople - currentReservedQuantity;
@@ -54,7 +59,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
   return (
     <>
       <button
-        className="btn bg-point-purple text-white tracking-wide w-full hover:bg-button-hover-color"
+        className="btn w-full bg-point-purple tracking-wide text-white hover:bg-button-hover-color"
         onClick={handleReserveButtonClick}
       >
         결제하기

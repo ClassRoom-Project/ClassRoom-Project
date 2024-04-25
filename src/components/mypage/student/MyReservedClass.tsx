@@ -7,6 +7,8 @@ import MyReservedClassItem from './MyReservedClassItem';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Pagination from '@/components/common/Pagination';
+import LoadingSpinner from '@/components/common/LoadingSpinner';
+import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 
 const MyReservedClass = () => {
   const { loginUserId } = useLoginStore();
@@ -24,12 +26,17 @@ const MyReservedClass = () => {
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0); // 페이지 이동 시 스크롤 위치 맨 위로 초기화
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); // 페이지 이동 시 스크롤 위치 맨 위로 초기화
     setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
   }, [page]);
 
   if (isPending) {
-    return <div> 로딩중 ... </div>;
+    return (
+      <div className="flex h-auto flex-col  items-center justify-center gap-4">
+        <LoadingSpinner />
+        <p>잠시만 기다려주세요..</p>
+      </div>
+    );
   }
 
   if (!reservedClasses || reservedClasses.length === 0) {
@@ -41,18 +48,20 @@ const MyReservedClass = () => {
   const currentPosts = reservedClasses.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="flex flex-col gap-4 justify-center items-center md:p-4 md:w-4/5 md:justify-items-center w-full md:min-w-[1080px]">
-      <p className="flex items-start text-xl text-dark-purple-color font-bold md:hidden justify-center">
+    <ul className="mb-24 flex w-full flex-col items-center justify-center gap-4 md:mb-0 md:justify-items-center md:p-4">
+      <p className="flex items-start justify-center text-xl font-bold text-dark-purple-color md:hidden">
         내가 예약한 클래스 보기
       </p>
       {currentPosts.map((classItem) => (
         <MyReservedClassItem key={classItem.reserve_id} classItem={classItem} />
       ))}
+      <MoveToTopBtn />
       <Pagination
         totalItems={reservedClasses.length}
         itemCountPerPage={postsPerPage}
         pageCount={5}
         currentPage={page && parseInt(page) > 0 ? parseInt(page) : 1}
+        key={page}
       />
     </ul>
   );
