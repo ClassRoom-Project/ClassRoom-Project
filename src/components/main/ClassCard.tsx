@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ListPageWishButton from '../listpage/ListPageWishButton';
 import { FaLocationDot } from 'react-icons/fa6';
-import noImage from '@/assets/images/no_img.jpg';
+import noImage from '@/assets/images/clroom_no_img_purple.png';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 //TODO - 주소 글자 넘칠 경우 해결 , 온라인일 경우 주소가 필요없으므로 주소 대체할 것 구현 필요
 const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {

@@ -84,7 +84,7 @@ export const commentWarning = () =>
   });
 
 export const commentStarWarning = () =>
-  toast.error('별점을 입력해 주세요', {
+  toast.info('별점을 입력해 주세요', {
     position: 'top-right',
     autoClose: 2000,
     hideProgressBar: false,
@@ -258,8 +258,8 @@ export const LimitImageSizeNotify = () =>
     theme: 'light'
   });
 
-export const noCategoryNotify = () =>
-  toast.error('카테고리를 선택해주세요.', {
+export const closedClass = () =>
+  toast.info('마감된 클래스입니다.', {
     position: 'top-right',
     autoClose: 3000,
     hideProgressBar: false,
@@ -269,6 +269,18 @@ export const noCategoryNotify = () =>
     progress: undefined,
     theme: 'light'
   });
+
+  export const noCategoryNotify = () =>
+    toast.error('카테고리를 선택해주세요.', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light'
+    });
 
 export const noHashTagNotify = () =>
   toast.error('해시태그를 입력해주세요.', {
