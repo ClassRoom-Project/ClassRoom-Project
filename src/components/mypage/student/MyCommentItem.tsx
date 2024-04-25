@@ -84,52 +84,52 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
 
   return (
     <li
-      className="border-b-2 flex flex-col align-center md:gap-4 md:my-4 md:py-4 w-full md:flex-row justify-center items-center lg:max-w-[1280px]"
+      className="align-center flex w-full flex-col items-center justify-center border-b-2 md:my-4 md:flex-row md:gap-4 md:py-4 lg:max-w-[1280px]"
       key={comment.comment_id}
     >
-      <div className="flex md:gap-4 bg-pale-purple w-full flex-col lg:flex-row justify-center items-center">
-        <div className="lg:w-1/3 w-2/3 h-60 relative ">
-          <Image src={comment.image[0]} alt="클래스 대표 사진" fill className="w-full h-full p-4 object-cover" />
+      <div className="flex w-full flex-col items-center justify-center bg-pale-purple md:gap-4 lg:flex-row">
+        <div className="relative h-52 w-72 lg:w-1/3 ">
+          <Image src={comment.image[0]} alt="클래스 대표 사진" fill className="h-full w-full object-cover p-4" />
         </div>
-        <div className="flex flex-col p-4 gap-4 w-full h-full">
-          <section className="flex lg:gap-10 lg:flex-row flex-col gap-4">
-            <p className="font-bold sm:text-xl text-lg whitespace-nowrap text-dark-purple-color">{comment.title}</p>
-            <p className="flex gap-4 text-sm sm:text-base whitespace-nowrap">
+        <div className="flex h-full w-full flex-col gap-4 p-4">
+          <section className="flex flex-col gap-4 lg:flex-row lg:gap-10">
+            <p className="whitespace-nowrap text-lg font-bold text-dark-purple-color sm:text-xl">{comment.title}</p>
+            <p className="flex gap-4 whitespace-nowrap text-sm sm:text-base">
               <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
             </p>
           </section>
           <div>
             <Stars rating={rating} />
           </div>
-          <section className="pb-4 flex flex-col items-center md:items-start w-full sm:text-base text-sm">
+          <section className="flex w-full flex-col items-center pb-4 text-sm sm:text-base md:items-start">
             {isEditing ? (
               <textarea
                 name=""
                 placeholder="후기를 작성해봅시다"
                 id=""
-                className="w-full md:w-4/5 h-full textarea textarea-bordered"
+                className="textarea textarea-bordered h-full w-full md:w-4/5"
                 value={newContent}
                 onChange={handleOnChangeComment}
               />
             ) : (
-              <p className="w-full md:w-4/5 h-full">{comment.content}</p>
+              <p className="h-full w-full md:w-4/5">{comment.content}</p>
             )}
           </section>
-          <section className="flex lg:justify-end justify-center gap-4 md:gap-4 p-2 lg:right-4 items-center w-full">
+          <section className="flex w-full items-center justify-center gap-4 p-2 md:gap-4 lg:right-4 lg:justify-end">
             <button
               onClick={() => handleOnClickEditBtn(commentId)}
-              className="btn  md:w-36 w-1/3 hover:bg-transparent text-xs md:text-sm hover:text-text-dark-gray"
+              className="btn  w-1/3 text-xs hover:bg-transparent hover:text-text-dark-gray md:w-36 md:text-sm"
             >
               {isEditing ? '완료하기' : '수정하기'}
             </button>
             <button
               onClick={() => handleOnClickDeleteCancleBtn(commentId)}
-              className="btn  bg-dark-purple-color text-white  md:w-36 w-1/3 hover:bg-transparent text-xs md:text-sm hover:text-dark-purple-color"
+              className="btn  w-1/3 bg-dark-purple-color  text-xs text-white hover:bg-transparent hover:text-dark-purple-color md:w-36 md:text-sm"
             >
               {isEditing ? '취소하기' : '삭제하기'}
             </button>
 
-            <button className="btn bg-point-purple text-white  md:w-36 w-1/3 whitespace-nowrap hover:bg-transparent text-xs md:text-sm hover:text-point-purple">
+            <button className="btn w-1/3 whitespace-nowrap  bg-point-purple text-xs text-white hover:bg-transparent hover:text-point-purple md:w-36 md:text-sm">
               <Link href={`list/detail/${comment.class_id}`}>클래스 보러가기 </Link>
             </button>
           </section>

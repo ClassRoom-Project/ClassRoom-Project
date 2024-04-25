@@ -49,20 +49,22 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   return (
     <li className="align-center flex w-full flex-col items-center justify-center border-b-2 md:my-4 md:flex-row md:gap-4 md:py-4 lg:max-w-[1280px]">
       <div className="flex w-full flex-col items-center bg-pale-purple md:gap-4 lg:flex-row">
-        <div className="relative h-60 w-2/3 lg:w-1/3">
-          <Image src={mainImage} alt="클래스 대표 사진" fill className="h-full w-full object-cover p-4" unoptimized />
+        <div className="relative h-52 w-72 overflow-hidden lg:w-1/3">
+          <Image src={mainImage} alt="클래스 대표 사진" fill className=" h-full w-full object-cover p-4" unoptimized />
         </div>
         <div className="flex h-full w-full flex-col gap-4 p-4">
-          
-          <section className="flex flex-col md:items-start ">
-            <div className="flex items-center gap-4">
+          <div className="flex w-full items-center justify-center gap-4 md:hidden">
+            <p className="pb-4 text-base font-bold text-dark-purple-color sm:text-xl">{classItem.title}</p>
+          </div>
+          <section className="flex flex-col md:items-start  ">
+            <div className="flex w-full items-center justify-center gap-4 lg:hidden">
               <p className="pb-4 text-base font-bold text-dark-purple-color sm:text-xl">{classItem.title}</p>
             </div>
-            <div className="flex md:flex-row md:gap-4 flex-col overflow-hidden w-full">
-              <div className="flex md:gap-4 md:py-1 md:flex-row flex-col">
-                <div className="flex items-center p-2 gap-2 md:border md:border-point-purple md:rounded-3xl">
-                  <FaRegCalendarCheck color="#6C5FF7" className="md:size-5 size-4" />
-                  <p className="md:text-base sm:text-sm text-xs whitespace-nowrap">날짜 : {classItem.day}</p>
+            <div className="flex w-full flex-col overflow-hidden md:flex-row md:gap-4">
+              <div className="flex flex-col md:flex-row md:gap-4 md:py-1">
+                <div className="flex items-center gap-2 p-2 md:rounded-3xl md:border md:border-point-purple">
+                  <FaRegCalendarCheck color="#6C5FF7" className="size-4 md:size-5" />
+                  <p className="whitespace-nowrap text-xs sm:text-sm md:text-base">날짜 : {classItem.day}</p>
                 </div>
                 <div className="flex items-center gap-2 p-2 md:rounded-3xl md:border md:border-point-purple ">
                   <FaRegClock color="#6C5FF7" className="size-4 md:size-5" />

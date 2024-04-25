@@ -29,7 +29,7 @@ const MyClassStudentPage = () => {
     queryKey: ['singleClass', timeId],
     queryFn: () => getClassSingleInfo(timeId)
   });
-  console.log('classSingleInfo', classSingleInfo);
+  // console.log('classSingleInfo', classSingleInfo);
 
   if (isPending) {
     return (

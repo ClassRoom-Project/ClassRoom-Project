@@ -105,7 +105,7 @@ const TeacherMyPageTab = () => {
       </div>
 
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="mb-4 flex w-full justify-start py-4 md:hidden">
+      <div className="mx-4 flex w-full justify-start md:hidden">
         <div className="dropdown dropdown-right">
           <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />

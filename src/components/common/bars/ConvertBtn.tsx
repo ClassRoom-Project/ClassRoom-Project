@@ -59,8 +59,11 @@ const ConvertBtn = () => {
       <div className="p-4">
         <button onClick={handler}>
           <div className="flex flex-col items-center transition ease-in hover:text-main-color ">
-            <TbArrowsExchange size={30} />
-            <p className="text-xs ">선생님 전환</p>
+            <TbArrowsExchange className="text-4xl text-white sm:text-4xl md:text-4xl md:text-black" />
+            <p className={`flex flex-col items-center justify-center  text-xs text-white md:text-xs md:text-black`}>
+              선생님
+              <span className="hidden sm:flex md:sm:flex md:sm:justify-center">전환</span>
+            </p>
           </div>
         </button>
       </div>

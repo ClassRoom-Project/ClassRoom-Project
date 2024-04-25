@@ -324,16 +324,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   return (
     <>
       {isLoading && (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
+        <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
           <span className="loading loading-infinity loading-lg bg-[#CAC6FC]"></span>
         </div>
       )}
       <div className="my-4 w-full">
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <div className="mb-4">
             <label
               htmlFor="image-upload"
-              className="border border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
+              className="cursor-pointer rounded-full border border-[#6C5FF7] bg-[#E3E1FC] p-1 text-sm text-black hover:border-[#6C5FF7] hover:bg-[#CAC6FC]"
             >
               사진추가
             </label>
@@ -351,7 +351,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
               index < images.length ? (
                 <div
                   key={index}
-                  className="h-[142px] w-[142px] relative ml-2 mt-2"
+                  className="relative ml-2 mt-2 h-[142px] w-[142px]"
                   draggable={true}
                   onDragStart={(event) => handleImageDragStart(index, event)}
                   onDragOver={handleImageDragOver}
@@ -361,10 +361,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
                     src={images[index].preview}
                     alt="uploaded"
                     fill
-                    className="h-full w-full object-cover rounded-[20px] border"
+                    className="h-full w-full rounded-[20px] border object-cover"
                   />
                   <button
-                    className="btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 bg-red-500 text-white"
+                    className="btn btn-circle btn-xs absolute right-0 top-0 mr-1 mt-1 bg-red-500 text-white"
                     onClick={() => handleImageDelete(index)}
                   >
                     -
@@ -373,16 +373,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
               ) : (
                 <div
                   key={index}
-                  className="h-[142px] w-[142px] ml-2 mt-2 border-2 border-dashed border-gray-300 rounded-[20px]"
+                  className="ml-2 mt-2 h-[142px] w-[142px] rounded-[20px] border-2 border-dashed border-gray-300"
                 ></div>
               )
             )}
           </div>
-          <div className="mt-12 w-full flex justify-center">
+          <div className="mt-12 flex w-full justify-center">
             <div>
               <button
                 onClick={handleSubmit}
-                className="btn px-4 py-2 bg-[#6C5FF7] text-white text-lg rounded hover:bg-[#4D43B8]"
+                className="btn rounded bg-[#6C5FF7] px-4 py-2 text-lg text-white hover:bg-[#4D43B8]"
               >
                 <FiPlusCircle size={20} />
                 클래스 등록하기
