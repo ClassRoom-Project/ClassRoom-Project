@@ -10,7 +10,7 @@ const Stars = ({ rating, newStar, setNewStar }: StarsProps) => {
   const handleOnChangeStar = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewStar(parseInt(e.target.value));
   };
-  console.log('newStar', newStar);
+
   return (
     <div className="rating">
       {Array.from({ length: rating }).map((_, index) => (

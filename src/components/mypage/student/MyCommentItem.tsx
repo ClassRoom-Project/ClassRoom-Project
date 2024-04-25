@@ -56,8 +56,8 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
       // console.log('newContent', newContent);
       // console.log(comment.content);
       const isStarChanged = newStar !== comment?.star;
-      console.log('newStar', newStar);
-      console.log(comment.star);
+      // console.log('newStar', newStar);
+      // console.log(comment.star);
 
       if (!newContent.trim()) {
         noInfoNotify();
