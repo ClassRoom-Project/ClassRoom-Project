@@ -43,7 +43,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
               </p>
             </div>
           )}
-          <p className="h-16 overflow-hidden py-1 text-xs font-semibold md:text-base">{classInfos.title}</p>
+          <p className="h-9 overflow-hidden py-1 text-xs font-semibold md:h-14 md:text-base">{classInfos.title}</p>
           <p className="h-5 overflow-hidden py-1 text-xs text-dark-purple-color md:h-7 md:text-sm">{hashtagString}</p>
         </div>
       </Link>
