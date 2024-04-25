@@ -74,7 +74,7 @@ const ClassSummary = ({
   ];
 
   return (
-    <div className="mt-4 w-[45%]">
+    <div className="mt-4 w-full lg:w-[40%] lg:min-w-[400px]">
       <div className="tems-center mb-4 mr-2 flex h-8 gap-2">
         <div className="relative h-8 w-8">
           {userData?.profile_image ? (
@@ -93,7 +93,9 @@ const ClassSummary = ({
             />
           )}
         </div>
-        <p>{classData?.users.teacher_name}</p>
+        <p>
+          <span className="font-bold">{classData?.users.teacher_name}</span> 강사님
+        </p>
       </div>
       <div className="flex flex-col gap-4 text-text-dark-gray">
         <div className="text-xl font-bold">{classData?.title}</div>
