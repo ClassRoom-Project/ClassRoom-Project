@@ -109,7 +109,7 @@ export const Banner = () => {
             </div>
           </article>
           {/* 세번째배너 */}
-          <article data-carousel-item data-index="2">
+          {/* <article data-carousel-item data-index="2">
             <div className="relative flex h-60 flex-row items-center bg-button-focus-color duration-700 ease-in-out md:h-80 md:justify-center lg:justify-end">
               <div className="absolute left-0 flex h-full md:top-0 lg:h-auto">
                 <Image width={900} height={900} src={bannerFlower} alt="banner3" />
@@ -120,7 +120,7 @@ export const Banner = () => {
                 </div>
               </div>
             </div>
-          </article>
+          </article> */}
         </div>
         <button
           type="button"

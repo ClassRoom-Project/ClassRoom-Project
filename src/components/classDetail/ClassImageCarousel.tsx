@@ -22,7 +22,7 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
       emblaApi.reInit();
     }
   }, [emblaApi, classData?.image]);
-  console.log(style, 'console.log(style);');
+
   return (
     <div className="h-[300px] sm:h-[500px] lg:h-auto lg:w-[40%] lg:min-w-[400px]">
       <section className={`${style.embla}`}>
