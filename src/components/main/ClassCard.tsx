@@ -17,14 +17,12 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
       <Link href={`/list/detail/${classInfos.class_id}`} className="">
         <figure className="relative h-28 w-full rounded-xl bg-gray-200 duration-300 ease-in-out hover:scale-105 md:h-40">
           <Image
-            // width={250}
-            // height={200}
+            sizes="(max-width: 768px) 128px, 256px"
+            placeholder="empty"
             fill={true}
             src={classInfos.image && classInfos.image.length > 0 ? classInfos.image[0] : noImage}
             alt="클래스 이미지"
-            // layout="responsive"
-            objectFit="cover"
-            unoptimized
+            style={{ objectFit: 'cover' }}
           />
         </figure>
         <div className="flex flex-col justify-between py-1">

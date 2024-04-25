@@ -51,7 +51,7 @@ const MapComponent = ({
   }, [placeAddress]);
 
   return (
-    <div className=" h-[380px] w-3/5">
+    <div className=" h-[380px] w-full lg:w-3/5">
       <div className="flex w-full items-center justify-center">
         {location ? (
           <div className="w-full">
