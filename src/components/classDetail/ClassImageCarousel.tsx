@@ -7,7 +7,7 @@ import Image from 'next/image';
 import noImage from '../../assets/images/clroom_no_img_purple.png';
 import { NextButton, PrevButton, usePrevNextButtons } from './EmblaCarouselArrowButtons';
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
-import './embla.css';
+import style from './embla.module.css';
 import { useEffect } from 'react';
 
 const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | null }) => {
@@ -21,19 +21,19 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
       emblaApi.reInit();
     }
   }, [emblaApi, classData?.image]);
-
+  console.log(style, 'console.log(style);');
   return (
     <div className=" min-w-[50%]">
-      <section className="embla">
-        <div className="embla__viewport rounded-2xl" ref={emblaRef}>
-          <div className="embla__container">
+      <section className={`${style.embla}`}>
+        <div className={`${style.embla__viewport} rounded-2xl`} ref={emblaRef}>
+          <div className={style.embla__container}>
             {classData && classData.image.length !== 0 ? (
               classData?.image.map((image) => (
-                <div className="embla__slide" key={image}>
-                  <div className="embla__slide__inner">
+                <div className={style.embla__slide} key={image}>
+                  <div className={style.embla__slide__inner}>
                     <Image
                       fill={true}
-                      className="embla-slide-img h-full w-full rounded-md object-cover"
+                      className={`h-full w-full rounded-md object-cover`}
                       src={image}
                       alt={classData.title}
                     />
@@ -42,26 +42,21 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
               ))
             ) : (
               <div className="relative h-full w-full">
-                <Image
-                  fill
-                  className="embla-slide-img h-full w-full rounded-md object-cover"
-                  src={noImage}
-                  alt="clroom no Image"
-                />
+                <Image fill className={`h-full w-full rounded-md object-cover`} src={noImage} alt="clroom no Image" />
               </div>
             )}
           </div>
-          <div className="embla__controls">
+          <div className={style.embla__controls}>
             <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
             <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
           </div>
 
-          <div className="embla__dots">
+          <div className={style.embla__dots}>
             {scrollSnaps.map((_, index) => (
               <DotButton
                 key={index}
                 onClick={() => onDotButtonClick(index)}
-                className={'embla__dot'.concat(index === selectedIndex ? ' embla__dot--selected' : '')}
+                className={`${style.embla__dot} ${index === selectedIndex ? style.embla__dotSelected : ''}`}
               />
             ))}
           </div>

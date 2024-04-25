@@ -52,7 +52,7 @@ function ClassList() {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return status === 'pending' ? (
-    <div className="flex flex-col gap-4 w-full items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center gap-4">
       <LoadingSpinner />
       <p>잠시만 기다려주세요..</p>
     </div>
@@ -61,26 +61,24 @@ function ClassList() {
       <p>Error: {error.message}</p>
     </div>
   ) : (
-   
-      <div className="responsive flex w-full items-center justify-center">
-        <div className="flex w-full items-center justify-center">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5  mb-16 md:mb-0">
-            {classInfos?.pages.map((page, i) => (
-              <React.Fragment key={i}>
-                {page.classInfos.map((classInfos: ClassAllType) => (
-                  <div key={classInfos.class_id} className="px-2 py-4 md:py-8">
-                    <ClassCard key={classInfos.class_id} classInfos={classInfos} />
-                  </div>
-                ))}
-              </React.Fragment>
-            ))}
-            {/*여기서 ref값 적용*/}
-            <div ref={targetRef} className="h-5"></div>
-            {isFetching && !isFetchingNextPage && <p>로딩중입니다!</p>}
-          </div>
+    <div className="responsive flex w-full items-center justify-center">
+      <div className="flex w-full items-center justify-center">
+        <div className="mb-16 grid grid-cols-2 sm:grid-cols-3 md:mb-0 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
+          {classInfos?.pages.map((page, i) => (
+            <React.Fragment key={i}>
+              {page.classInfos.map((classInfos: ClassAllType) => (
+                <div key={classInfos.class_id} className="p-2 md:py-6">
+                  <ClassCard key={classInfos.class_id} classInfos={classInfos} />
+                </div>
+              ))}
+            </React.Fragment>
+          ))}
+          {/*여기서 ref값 적용*/}
+          <div ref={targetRef} className="h-5"></div>
+          {isFetching && !isFetchingNextPage && <p>로딩중입니다!</p>}
         </div>
       </div>
-    
+    </div>
   );
 }
 

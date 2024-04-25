@@ -8,7 +8,7 @@ const MainPage = () => {
   return (
     <div className="responsiveHeight h-screen">
       <div className="flex items-center justify-center overflow-y-auto">
-        <div className="relative mb-16 flex min-h-screen w-full max-w-[1440px] flex-col items-center gap-10 md:mb-0">
+        <div className="relative mb-16 flex min-h-screen w-full max-w-[1440px] flex-col items-center gap-2 md:mb-0">
           <Banner />
           <Suspense>
             <CategoryBtns />
