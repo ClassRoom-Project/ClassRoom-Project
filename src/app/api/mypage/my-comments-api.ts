@@ -4,7 +4,7 @@ import { supabase } from '../supabase/supabase';
 
 // 후기를 작성한 클래스 정보 불러오기 : db join
 export const fetchClassInfoOnComment = async (loginUserId: string | null) => {
-  const { data, error }: PostgrestResponse<MyCommentType> = await supabase.rpc('fetch_class_info_on_comment_new_new', {
+  const { data, error }: PostgrestResponse<MyCommentType> = await supabase.rpc('class_info_with_comment_info', {
     p_user_id: loginUserId as string
   });
 
@@ -33,12 +33,16 @@ export const deleteMyComment = async (commentId: string, loginUserId: string | n
 };
 
 // 후기 수정하기 : update
-export const updateMyComment = async ({ newContent, commentId }: NewCommentType, loginUserId: string | null) => {
+export const updateMyComment = async (
+  { newContent, newStar, commentId }: NewCommentType,
+  loginUserId: string | null
+) => {
   const { data, error }: PostgrestSingleResponse<null> = await supabase
     .from('comments')
-    .update({ content: newContent })
+    .update({ content: newContent, star: newStar })
     .eq('user_id', loginUserId as string)
-    .eq('comment_id', commentId);
+    .eq('comment_id', commentId)
+    .order('create_at', { ascending: true });
 
   if (error) {
     console.error(error);

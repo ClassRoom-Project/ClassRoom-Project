@@ -8,6 +8,7 @@ import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import React, { useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import LoadingSpinner from '../common/LoadingSpinner';
+import MoveToTopBtn from './MoveToTopBtn';
 //무한 스크롤
 function ClassList() {
   const searchParams = useSearchParams();
@@ -49,9 +50,11 @@ function ClassList() {
     // 컴포넌트가 언마운트될 때 observer를 정리합니다.
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
+
   return status === 'pending' ? (
-    <div className="flex h-screen  w-full items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center gap-4">
       <LoadingSpinner />
+      <p>잠시만 기다려주세요..</p>
     </div>
   ) : status === 'error' ? (
     <div className="flex h-screen w-full items-center justify-center text-[#5373FF]">
@@ -60,12 +63,12 @@ function ClassList() {
   ) : (
     <div className="responsive flex w-full items-center justify-center">
       <div className="flex w-full items-center justify-center">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="mb-16 grid grid-cols-2 sm:grid-cols-3 md:mb-0 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
           {classInfos?.pages.map((page, i) => (
             <React.Fragment key={i}>
               {page.classInfos.map((classInfos: ClassAllType) => (
                 <div key={classInfos.class_id} className="p-2 md:py-6">
-                  <ClassCard classInfos={classInfos} />
+                  <ClassCard key={classInfos.class_id} classInfos={classInfos} />
                 </div>
               ))}
             </React.Fragment>

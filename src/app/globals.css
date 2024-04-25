@@ -28,6 +28,7 @@ body {
     text-wrap: balance;
   }
 } */
+
 @media (max-width: 767px) {
   html {
     overflow-y: auto;

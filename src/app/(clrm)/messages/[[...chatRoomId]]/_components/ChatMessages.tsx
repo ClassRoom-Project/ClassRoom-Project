@@ -66,21 +66,21 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
 
   if (!chatId) {
     return (
-      <div className="h-full flex justify-center items-center">
+      <div className="flex h-full items-center justify-center">
         <LoadingSpinner />
       </div>
     );
   }
 
   return (
-    <div className="flex h-full flex-col w-full">
-      <div className="flex justify-between border-b border-grey-100 p-4 sticky top-0 w-full bg-[#EFEFFF]">
-        <p className="text-sm md:text-lg font-bold">클래스명: {title}</p>
+    <div className="flex h-full w-full flex-col">
+      <div className="border-grey-100 sticky top-0 flex w-full justify-between border-b bg-[#EFEFFF] p-4">
+        <p className="text-sm font-bold md:text-lg">클래스명: {title}</p>
         <button onClick={handleDelete}>
           <IoIosLogOut className="text-2xl text-button-default-color hover:text-button-hover-color" />
         </button>
       </div>
-      <button onClick={handleBack} className="flex flex-row pt-2 pl-2 md:hidden items-center text-sm">
+      <button onClick={handleBack} className="flex flex-row items-center pl-2 pt-2 text-sm md:hidden">
         뒤로가기
         <TbArrowBack className="text-xl" />
       </button>
@@ -93,20 +93,20 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
         studentName={studentName!}
         mainImage={mainImage}
       />
-      <div className="w-full flex justify-center items-center bg-white py-8 border-t border-gray-300">
-        <div className="px-4 w-full md:w-4/5 h-14 flex relative lg:py-2 lg:h-16">
-          <form onSubmit={handleSubmitMessage} className="rounded-md border w-full h-full items-center px-2 flex">
+      <div className="flex w-full items-center justify-center border-t border-gray-300 bg-white py-8">
+        <div className="relative flex h-14 w-full px-4 md:w-4/5 lg:h-16 lg:py-2">
+          <form onSubmit={handleSubmitMessage} className="flex h-full w-full items-center rounded-md border px-2">
             <input
               type="text"
               name="message"
               autoComplete="off"
               placeholder="메시지를 입력하세요"
-              className="outline-0 bg-transparent flex-1 px-3"
+              className="flex-1 bg-transparent px-3 outline-0"
             />
             <div className="w-1/4">
               <button
                 type="submit"
-                className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-6"
+                className="absolute right-6 flex h-8 w-8 items-center justify-center rounded-lg bg-[#CAC6FC]"
                 style={{ top: '50%', transform: 'translateY(-50%)' }}
               >
                 <BsSend className="text-xl text-main-color" />
@@ -114,7 +114,7 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
             </div>
           </form>
           <button
-            className="bg-[#CAC6FC] rounded-lg w-8 h-8 flex items-center justify-center absolute right-16"
+            className="absolute right-16 flex h-8 w-8 items-center justify-center rounded-lg bg-[#CAC6FC]"
             style={{ top: '50%', transform: 'translateY(-50%)' }}
             onClick={handleOpenModal}
           >

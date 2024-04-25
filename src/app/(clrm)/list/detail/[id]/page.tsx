@@ -5,6 +5,7 @@ import ClassImageCarousel from '@/components/classDetail/ClassImageCarousel';
 import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
+import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import Link from 'next/link';
 import { IoIosArrowBack } from 'react-icons/io';
 
@@ -12,7 +13,7 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
   return (
-    <div className=" flex flex-col items-center">
+    <div className="flex flex-col items-center">
       <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
         <Link href={`/`} className="flex items-center justify-center">
           <IoIosArrowBack size={18} />
@@ -31,6 +32,7 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
         )}
         <DetailComments classData={classData} />
       </div>
+      <MoveToTopBtn />
     </div>
   );
 };

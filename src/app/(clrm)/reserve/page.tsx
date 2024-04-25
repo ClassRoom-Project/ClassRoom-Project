@@ -21,7 +21,7 @@ export default async function ReservePage({ searchParams }: { searchParams: { cl
         </div>
 
         {classInfo ? (
-          <div className="m-0 flex flex-col items-center justify-center bg-light-purple pb-5 pt-6  text-gray-600 md:px-4 md:py-6 lg:min-w-fit  lg:flex-row ">
+          <div className="m-0 mb-16 flex flex-col items-center justify-center bg-light-purple pb-5 pt-6 text-gray-600  md:mb-0 md:px-4 md:py-6 lg:min-w-fit  lg:flex-row ">
             <div className="flex h-[780px] w-11/12 min-w-[350px] flex-col justify-between sm:w-2/3 lg:w-1/3 lg:min-w-[400px]   ">
               <ClassInfo classInfo={classInfo} />
               <ReserveUserInfo />
