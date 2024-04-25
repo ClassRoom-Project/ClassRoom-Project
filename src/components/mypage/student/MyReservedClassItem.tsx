@@ -10,7 +10,7 @@ import { BiMoneyWithdraw } from 'react-icons/bi';
 import { FaRegCalendarCheck, FaRegClock } from 'react-icons/fa';
 import { GoPeople } from 'react-icons/go';
 import { GrLocation } from 'react-icons/gr';
-import NoImage from '@/assets/images/no_img.jpg';
+import NoImage from '@/assets/images/clroom_no_img_purple.png';
 
 const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   const queryClient = useQueryClient();
@@ -49,15 +49,15 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
   return (
     <li className="align-center flex w-full flex-col items-center justify-center border-b-2 md:my-4 md:flex-row md:gap-4 md:py-4 lg:max-w-[1280px]">
       <div className="flex w-full flex-col items-center bg-pale-purple md:gap-4 lg:flex-row">
-        <div className="relative h-60 w-2/3 lg:w-1/3">
-          <Image src={mainImage} alt="클래스 대표 사진" fill className="h-full w-full object-cover p-4" unoptimized />
+        <div className="relative h-52 w-72 overflow-hidden lg:w-1/3">
+          <Image src={mainImage} alt="클래스 대표 사진" fill className=" h-full w-full object-cover p-4" unoptimized />
         </div>
         <div className="flex h-full w-full flex-col gap-4 p-4">
-          <section className="flex flex-col md:items-start ">
-            <div className="flex items-center gap-4">
-              <p className="pb-4 text-base font-bold text-dark-purple-color sm:text-xl">{classItem.title}</p>
-            </div>
-            <div className="flex flex-col overflow-x-auto whitespace-nowrap md:flex-row md:gap-4">
+          <div className="flex w-full justify-center gap-4 lg:justify-start">
+            <p className="text-base font-bold text-dark-purple-color sm:text-xl md:pb-4">{classItem.title}</p>
+          </div>
+          <section className="flex flex-col">
+            <div className="flex w-full flex-col overflow-hidden md:flex-row md:gap-4">
               <div className="flex flex-col md:flex-row md:gap-4 md:py-1">
                 <div className="flex items-center gap-2 p-2 md:rounded-3xl md:border md:border-point-purple">
                   <FaRegCalendarCheck color="#6C5FF7" className="size-4 md:size-5" />

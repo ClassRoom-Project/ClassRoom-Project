@@ -30,10 +30,10 @@ const DeadlineClass = () => {
     fetchClassInfo();
   }, [setLatestClassInfos]);
 
-  console.log(LatestClassInfos);
+  // console.log(LatestClassInfos);
   return (
-    <div className="w-full flex flex-col">
-      <p className="text-text-color px-2 borderb-[1px] pb-5 border-solid border-border-color">예약순</p>
+    <div className="flex w-full flex-col">
+      <p className="borderb-[1px] border-solid border-border-color px-2 pb-5 text-text-color">예약순</p>
       <div className="embla w-full overflow-hidden" ref={emblaRef}>
         <div className="embla__container">
           {LatestClassInfos.map((infos) => (

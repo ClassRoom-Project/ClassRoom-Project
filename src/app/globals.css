@@ -28,9 +28,10 @@ body {
     text-wrap: balance;
   }
 } */
+
 @media (max-width: 767px) {
   html {
-    overflow-y: hidden;
+    overflow-y: auto;
     scrollbar-width: none;
   }
 
@@ -40,7 +41,7 @@ body {
 
   .responsiveHeight {
     height: calc(100vh - 144px);
-    overflow-y: auto;
+    /* overflow-y: auto; */
     scrollbar-width: none;
   }
 }

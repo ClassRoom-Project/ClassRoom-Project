@@ -43,7 +43,7 @@ export const createDetailComment = async ({
       comment_image: comment_image
     }
   ]);
-  console.log(comment_image, 'comment_image');
+
   if (error) {
     console.error('댓글 작성 오류 --> ', error);
     return null;

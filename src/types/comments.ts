@@ -6,9 +6,11 @@ export interface MyCommentType {
   title: string;
   image: string[];
   star: number;
+  comment_image: string;
 }
 
 export interface NewCommentType {
   newContent: string;
+  newStar: number;
   commentId: string;
 }
