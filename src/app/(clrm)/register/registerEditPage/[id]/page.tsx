@@ -41,9 +41,6 @@ const RegisterEditPage = () => {
 
   useEffect(() => {
     const fetchClassData = async () => {
-      const classRes = await supabase.from('class').select('*').eq('class_id', classId).single();
-      const dateRes = await supabase.from('date').select('day').eq('class_id', classId);
-      const timeRes = await supabase.from('time').select('times').eq('class_id', classId);
       const { data, error } = await supabase
         .from('class')
         .select('*')
@@ -58,23 +55,10 @@ const RegisterEditPage = () => {
       setClassData(data);
     };
 
-    const fetchImages = async () => {
-      const { data, error } = await supabase
-        .from('class')
-        .select('image')
-        .eq('class_id', classId)
-        .single();
-      if (error) {
-        console.error('Error:', error.message);
-      } else {
-        setClassData(data?.image || []);
-      }
-    };
-
     const fetchDateAndTimeData = async () => {
       let { data: fetchedDateData, error: dateError } = await supabase
         .from('date')
-        .select('day')
+        .select('date_id, day')
         .eq('class_id', classId);
   
       if (dateError) {
@@ -85,8 +69,8 @@ const RegisterEditPage = () => {
       // 시간 데이터 가져오기
       let { data: fetchedTimeData, error: timeError } = await supabase
         .from('time')
-        .select('times')
-        .eq('class_id', classId);
+        .select('time_id, times, date_id')
+        .in('date_id', fetchedDateData?.map(item => item.date_id) ?? []); 
   
       if (timeError) {
         console.error('Time Error: ', timeError);
@@ -103,7 +87,6 @@ const RegisterEditPage = () => {
     };
 
     fetchClassData();
-    fetchImages();
     fetchDateAndTimeData();
   }, [classId]);
 
@@ -133,8 +116,8 @@ const RegisterEditPage = () => {
 
           <h1 className='text-lg mt-14'>이미지 업로드</h1>
           <hr className='my-4 border-[#4D43B8]' />
-          <p className='text-base'>클래스를 대표할 이미지를 등록해 주세요. (최대 5개 등록 가능) </p>
-          <p className='text-sm mt-1 text-[#7E7E7E]'>*첫번째 이미지가 대표이미지로 업로드 됩니다. 드래그하여 순서 변경이 가능합니다*</p>
+          <p className='text-base text-[#7E7E7E]'>클래스를 대표할 이미지를 등록해 주세요. (최소 1개 이상 등록, 최대 5개 등록 가능) </p>
+          <p className='text-sm mt-1 text-[#7E7E7E]'>첫번째 이미지가 대표이미지로 업로드 됩니다. 드래그하여 순서 변경이 가능합니다</p>
           <div className="flex justify-between items-center pt-2">
             <ImageUpload isEditMode={true} initialData={{ image: classData.image }} class_Id={classId as string} />
           </div>
