@@ -7,7 +7,7 @@ export default function ListPage() {
   return (
     <div className="responsiveHeight h-screen">
       <div className="flex items-center justify-center">
-        <div className="flex w-full max-w-[1440px] flex-col items-center justify-center">
+        <div className="flex w-full max-w-[1440px] flex-col items-center justify-center gap-2 md:gap-5">
           <Suspense>
             <CategoryBtns />
             <SearchFilter />

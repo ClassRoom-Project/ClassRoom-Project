@@ -33,7 +33,12 @@ export default function LoginState() {
             </button>
           </div>
         ) : (
-          <Link href="/hello">로그인</Link>
+          <Link
+            className="btn mr-2 w-16 whitespace-nowrap border-main-color bg-transparent text-main-color hover:bg-main-color hover:text-white md:mr-[50px] md:w-20"
+            href="/hello"
+          >
+            로그인
+          </Link>
         )}
       </div>
     );

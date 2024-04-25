@@ -8,7 +8,7 @@ import { EmblaOptionsType } from 'embla-carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useBestClassInfoStore } from '@/store/classInfoStore';
 import { getBestClassInfo } from '@/app/api/mainpage/getClassAllInfo';
-import './emblaCarousel.css';
+import style from './emblaCarousel.module.css';
 
 const BestClass = () => {
   const { BestClassInfos, setBestClassInfos } = useBestClassInfoStore();
@@ -30,16 +30,15 @@ const BestClass = () => {
 
     fetchClassInfo();
   }, [setBestClassInfos]);
-
   return (
-    <div className="relative mb-12 flex w-full flex-col">
-      <div className="ml-2 w-full ">
+    <div className="mt-3 flex w-full flex-col">
+      <div className="ml-2 w-full">
         <p className="px-2 pb-1 text-xl">클룸 인기 클래스 🏆</p>
       </div>
-      <div className="embla mt-2 w-full overflow-hidden" ref={emblaRef}>
-        <div className="embla__container">
+      <div className={`${style.embla} mt-2 w-full overflow-hidden`} ref={emblaRef}>
+        <div className={style.embla__container}>
           {BestClassInfos.map((infos) => (
-            <div className="embla__slide" key={infos.class_id}>
+            <div className={style.embla__slide} key={infos.class_id}>
               <ClassCard classInfos={infos} />
             </div>
           ))}

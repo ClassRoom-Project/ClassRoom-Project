@@ -5,6 +5,7 @@ import ClassImageCarousel from '@/components/classDetail/ClassImageCarousel';
 import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
+import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import Link from 'next/link';
 import { IoIosArrowBack } from 'react-icons/io';
 
@@ -31,6 +32,7 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
         )}
         <DetailComments classData={classData} />
       </div>
+      <MoveToTopBtn />
     </div>
   );
 };

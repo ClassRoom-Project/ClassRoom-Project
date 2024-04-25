@@ -17,11 +17,11 @@ const SideBar = ({ children }: PropsWithChildren) => {
 
   return (
     <>
-      <div className="z-50 fixed flex flex-row items-center justify-between inset-x-0 bottom-0 h-16 bg-border-color text-sm md:border-t md:p-3 md:overflow-hidden md:pr-4 md:bottom-0 md:top-0 md:left-0 md:w-[100px] md:flex-col md:z-50 md:mt-none md:h-full md:bg-background-color sm:flex-row sm:w-full sm:justify-between sm:right-0 sm:bottom-0 sm:left-0">
-        <div className="w-full flex items-center justify-around h-10 md:flex-col md:mt-16 md:gap-10 mb:bg-background-color md:justify-normal">
+      <div className="md:mt-none fixed inset-x-0 bottom-0 z-50 flex h-16 flex-row items-center justify-between bg-border-color text-sm sm:bottom-0 sm:left-0 sm:right-0 sm:w-full sm:flex-row sm:justify-between md:bottom-0 md:left-0 md:top-0 md:z-50 md:h-full md:w-[100px] md:flex-col md:overflow-hidden md:border-t md:bg-background-color md:p-3 md:pr-4">
+        <div className="mb:bg-background-color flex h-10 w-full items-center justify-around md:mt-16 md:flex-col md:justify-normal md:gap-10">
           <Link
             href="/"
-            className=" flex flex-col items-center text-background-color hover:text-main-color transition ease-in md:text-icon-color"
+            className=" flex w-full flex-col items-center text-background-color transition ease-in hover:text-main-color md:text-icon-color"
           >
             <HiOutlineHome className="text-4xl sm:text-4xl md:text-4xl" />
             <p className="hidden sm:flex md:sm:flex">홈</p>
@@ -36,7 +36,7 @@ const SideBar = ({ children }: PropsWithChildren) => {
           <ConvertBtn />
         </div>
       </div>
-      <div className="md:flex-1 md:ml-[100px] md:pb-0">{children}</div>
+      <div className="md:ml-[100px] md:flex-1 md:pb-0">{children}</div>
       {/* <AlertModal />
       <button className="bg-red-500 ml-52 w-40 h-40" onClick={toggleModal}>
         모달 버튼

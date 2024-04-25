@@ -9,7 +9,7 @@ interface UserRoleState {
 export const useUserRoleStore = create(
   persist<UserRoleState>(
     (set) => ({
-      isTeacher: false,
+      isTeacher: null,
       setIsTeacher: (value: boolean) => {
         set({ isTeacher: value });
       }

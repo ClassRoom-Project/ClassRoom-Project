@@ -103,7 +103,6 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
       const newImage = await uploadFile(commentImage[0].file);
       imageUploadUrl = newImage;
     }
-
     mutate({
       classId: classData?.class_id,
       star: star,

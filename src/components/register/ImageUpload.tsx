@@ -10,9 +10,20 @@ import RegisterScheduleStore from '@/store/registerScheduleStore';
 import { FiPlusCircle } from 'react-icons/fi';
 import { ImageFileWithPreviews } from '@/types/register';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
-import { noDateTimeNotify, noLimitImageNotify, LimitImageSizeNotify, noTotalTimeNotify,
-  noCategoryNotify, noHashTagNotify,noClassContentNotify, noClassTitleNotify,
-  noClassTypeNotify, noClassDiffNotify, noMinNumberNotify, noPersonnelNotify} from '@/components/common/Toastify';
+import {
+  noDateTimeNotify,
+  noLimitImageNotify,
+  LimitImageSizeNotify,
+  noTotalTimeNotify,
+  noCategoryNotify,
+  noHashTagNotify,
+  noClassContentNotify,
+  noClassTitleNotify,
+  noClassTypeNotify,
+  noClassDiffNotify,
+  noMinNumberNotify,
+  noPersonnelNotify
+} from '@/components/common/Toastify';
 
 interface InitialDataType {
   image: string[];
@@ -52,11 +63,11 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
 
   useEffect(() => {
     if (initialData && initialData.image && initialData.image.length > 0) {
-      const initialImages = initialData.image.map(url => ({ file: null, preview: url }));
+      const initialImages = initialData.image.map((url) => ({ file: null, preview: url }));
       setImages(initialImages);
     }
   }, [initialData]);
-  
+
   // 파일 업로드시 업로드 형식에 맞지 않는 이름 변경!
   function cleanFileName(fileName: string) {
     return fileName.replace(/[^a-zA-Z0-9.]/g, '_');
@@ -65,7 +76,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   // supabase storage에 등록한 이미지 업로드
   const uploadFile = async (file: File) => {
     const cleanName = cleanFileName(file.name);
-    const filePath = `uploads/${crypto.randomUUID}_${cleanName}`;
+    const filePath = `uploads/${crypto.randomUUID()}_${cleanName}`;
     const { data, error } = await supabase.storage.from('classImages').upload(filePath, file);
     if (error) {
       return null;
@@ -132,7 +143,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   // supabase에 데이터 저장
   const handleSubmit = async () => {
     // 카테고리 입력 안했을시
-    if(!category) {
+    if (!category) {
       noCategoryNotify();
       setIsLoading(false);
       return;
@@ -146,56 +157,56 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
     }
 
     // 클래스 설명 입력 안했을시
-    if(!classContent) {
+    if (!classContent) {
       noClassContentNotify();
       setIsLoading(false);
       return;
     }
 
     // 클래스 타입 선택 안했을시
-    if(!classType) {
+    if (!classType) {
       noClassTypeNotify();
       setIsLoading(false);
       return;
     }
 
     // 클래스 제목 입력 안했을시
-    if(!classTitle) {
+    if (!classTitle) {
       noClassTitleNotify();
       setIsLoading(false);
       return;
     }
 
     // 클래스 난이도 선택 안했을시
-    if(!difficulty) {
+    if (!difficulty) {
       noClassDiffNotify();
       setIsLoading(false);
       return;
     }
 
     // 최소 모집 인원 입력 안했을시
-    if(!minNumber) {
+    if (!minNumber) {
       noMinNumberNotify();
       setIsLoading(false);
       return;
     }
 
     // 정원 입력 안했을시
-    if(!personnel) {
+    if (!personnel) {
       noPersonnelNotify();
       setIsLoading(false);
       return;
     }
 
     // 소요시간 입력 안했을시
-    if(!totalTime) {
+    if (!totalTime) {
       noTotalTimeNotify();
       setIsLoading(false);
       return;
     }
 
     // 날짜 및 시간 입력 안했을시
-    const isAnyTimes = schedules.some(schedule => schedule.times.length === 0);
+    const isAnyTimes = schedules.some((schedule) => schedule.times.length === 0);
 
     if (selectedDates.length === 0 || isAnyTimes) {
       noDateTimeNotify();
@@ -224,24 +235,27 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
 
     // isEditMode가 true일 경우, 기존 데이터 업데이트
     if (isEditMode) {
-      console.log("images: ", images);
-      console.log("imageUrls : ",imageUrls);
+      console.log('images: ', images);
+      console.log('imageUrls : ', imageUrls);
 
-      const { data, error } = await supabase.from('class').update({
-        category: category,
-        hashtag: subCategory,
-        class_type: classType,
-        difficulty: difficulty,
-        title: classTitle,
-        description: classContent,
-        quantity: personnel,
-        min_people: minNumber,
-        price: price,
-        location: address,
-        detail_location: detailAddress,
-        total_time: totalTime,
-        image: imageUrls
-      }).eq('class_id', classId);
+      const { data, error } = await supabase
+        .from('class')
+        .update({
+          category: category,
+          hashtag: subCategory,
+          class_type: classType,
+          difficulty: difficulty,
+          title: classTitle,
+          description: classContent,
+          quantity: personnel,
+          min_people: minNumber,
+          price: price,
+          location: address,
+          detail_location: detailAddress,
+          total_time: totalTime,
+          image: imageUrls
+        })
+        .eq('class_id', classId);
 
       if (error) {
         console.error('error:', error);
@@ -377,17 +391,17 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   return (
     <>
       {isLoading && (
-        <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black bg-opacity-50 z-50">
+        <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
           {/* <span className="loading loading-infinity loading-lg bg-[#CAC6FC]"></span> */}
           <LoadingSpinner />
         </div>
       )}
       <div className="my-4 w-full">
-        <div className="flex flex-col w-full">
+        <div className="flex w-full flex-col">
           <div className="mb-4">
             <label
               htmlFor="image-upload"
-              className="border border-[#6C5FF7] bg-[#E3E1FC] text-black text-sm p-1 rounded-full hover:bg-[#CAC6FC] hover:border-[#6C5FF7] cursor-pointer"
+              className="cursor-pointer rounded-full border border-[#6C5FF7] bg-[#E3E1FC] p-1 text-sm text-black hover:border-[#6C5FF7] hover:bg-[#CAC6FC]"
             >
               사진추가
             </label>
@@ -405,7 +419,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
               index < images.length ? (
                 <div
                   key={index}
-                  className="h-[142px] w-[142px] relative ml-2 mt-2"
+                  className="relative ml-2 mt-2 h-[142px] w-[142px]"
                   draggable={true}
                   onDragStart={(event) => handleImageDragStart(index, event)}
                   onDragOver={handleImageDragOver}
@@ -415,10 +429,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
                     src={images[index].preview}
                     alt="uploaded"
                     fill
-                    className="h-full w-full object-cover rounded-[20px] border"
+                    className="h-full w-full rounded-[20px] border object-cover"
                   />
                   <button
-                    className="btn btn-circle btn-xs mt-1 mr-1 absolute top-0 right-0 bg-red-500 text-white"
+                    className="btn btn-circle btn-xs absolute right-0 top-0 mr-1 mt-1 bg-red-500 text-white"
                     onClick={() => handleImageDelete(index)}
                   >
                     -
@@ -427,16 +441,16 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
               ) : (
                 <div
                   key={index}
-                  className="h-[142px] w-[142px] ml-2 mt-2 border-2 border-dashed border-gray-300 rounded-[20px]"
+                  className="ml-2 mt-2 h-[142px] w-[142px] rounded-[20px] border-2 border-dashed border-gray-300"
                 ></div>
               )
             )}
           </div>
-          <div className="mt-12 w-full flex justify-center">
+          <div className="mt-12 flex w-full justify-center">
             <div>
               <button
                 onClick={handleSubmit}
-                className="btn px-4 py-2 bg-[#6C5FF7] text-white text-lg rounded hover:bg-[#4D43B8]"
+                className="btn rounded bg-[#6C5FF7] px-4 py-2 text-lg text-white hover:bg-[#4D43B8]"
               >
                 <FiPlusCircle size={20} />
                 클래스 등록하기

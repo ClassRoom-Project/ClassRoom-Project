@@ -67,10 +67,10 @@ export const Banner = () => {
               <div className="z-20 flex w-full flex-col items-center gap-2 pb-20 pr-12 md:h-1/2 md:w-1/2 md:pr-20 lg:w-1/2 lg:pb-52 lg:pr-20 xl:w-1/2 xl:gap-8 xl:pb-0 xl:pr-32 xl:pt-6 2xl:pr-80">
                 <div className="flex flex-col items-end justify-end">
                   <div className="flex flex-col items-end xl:flex-row xl:gap-2">
-                    <p className="whitespace-nowrap text-sm font-bold text-[#522700] md:flex lg:text-2xl xl:text-3xl xl:font-normal 2xl:text-4xl">
+                    <p className="whitespace-nowrap text-sm font-bold text-[#522700] md:flex lg:text-2xl xl:text-3xl xl:font-bold 2xl:text-4xl">
                       강사로 등록하여
                     </p>
-                    <p className="whitespace-nowrap text-sm font-bold text-[#522700] md:flex lg:text-2xl xl:text-3xl xl:font-normal 2xl:text-4xl">
+                    <p className="whitespace-nowrap text-sm font-bold text-[#522700] md:flex lg:text-2xl xl:text-3xl xl:font-bold 2xl:text-4xl">
                       나만의 클래스를 오픈해보세요!
                     </p>
                   </div>
@@ -80,7 +80,7 @@ export const Banner = () => {
                 </div>
                 <Link //
                   href="/register"
-                  className=" whitespace-nowrap rounded-full bg-[#FFE2A9] px-6 py-2 text-xs text-[#7C633E] lg:text-lg xl:text-4xl"
+                  className=" whitespace-nowrap rounded-full bg-[#FFE2A9] px-6 py-2 text-xs font-medium text-[#7C633E] lg:text-lg xl:px-10 xl:py-4 xl:text-4xl"
                 >
                   나만의 클래스 등록하기
                 </Link>
@@ -138,9 +138,9 @@ export const Banner = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M5 1 1 5l4 4"
               />
             </svg>
@@ -163,9 +163,9 @@ export const Banner = () => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m1 9 4-4-4-4"
               />
             </svg>
