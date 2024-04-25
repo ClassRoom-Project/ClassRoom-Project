@@ -126,7 +126,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="mb-8 flex w-full flex-col items-center justify-center rounded-lg border border-solid border-button-focus-color bg-disable-color px-6 pb-4 pt-6 shadow-md lg:px-8 ">
+        <div className="mb-8 flex w-full flex-col items-center justify-center rounded-lg border border-solid border-button-focus-color bg-disable-color px-5 pb-4 pt-6 shadow-md md:px-6 lg:px-8 ">
           <form onSubmit={handleCommentSubmit} className="flex w-full flex-col items-center justify-center">
             <div className="flex w-full flex-col-reverse items-end justify-between gap-4 lg:flex-row">
               <div className="flex w-full flex-col lg:w-[75%]">
@@ -146,7 +146,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                 <textarea
                   minLength={10}
                   maxLength={300}
-                  className="h-52 w-full resize-none rounded-md border border-solid border-button-focus-color p-4 outline-none"
+                  className="h-32 w-full resize-none rounded-md border border-solid  border-button-focus-color p-4 text-sm outline-none md:h-52 md:text-base"
                   placeholder="후기를 입력해주세요. (10자 이상)"
                   value={content}
                   onChange={handleContentChange}
@@ -168,7 +168,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
                     style={{ display: 'none' }}
                   />
                 </div>
-                <div className="flexw-full relative h-52 items-center justify-center rounded-md border border-solid border-button-focus-color">
+                <div className="flexw-full relative h-32 items-center justify-center rounded-md border border-solid border-button-focus-color md:h-52">
                   {commentImage.length > 0 ? (
                     <Image
                       src={commentImage[0].preview}
@@ -190,7 +190,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
             </div>
             <button
               type="submit"
-              className="mt-4 rounded-md bg-main-color px-6 py-2 text-white transition-all hover:bg-button-hover-color"
+              className="mt-4 rounded-md bg-main-color px-6 py-2 text-sm text-white transition-all hover:bg-button-hover-color md:text-base"
             >
               후기 등록
             </button>
