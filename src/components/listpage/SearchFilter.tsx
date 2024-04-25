@@ -1,7 +1,7 @@
 'use client';
 import { useCategoryFilterStore, useListFilterStore, useSearchStore } from '@/store/classFilterStore';
 import { useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiAlignJustify } from 'react-icons/fi';
 import { PriceBtn, DifficultyBtn } from './listpageBtns';
 const SearchFilter = () => {
@@ -13,10 +13,6 @@ const SearchFilter = () => {
 
   const { setSelectedTitle } = useSearchStore();
   const router = useRouter();
-
-  const handleDropdown = () => {
-    setIsOpenCategory(isOpenCategory ? false : true);
-  };
 
   //초기화 버튼 핸들러
   const handleResetBtn = () => {
@@ -127,12 +123,12 @@ const SearchFilter = () => {
                 <p className="text-black">지역</p>
               </div>
               <select
-                className="select select-primary w-28 md:h-12  md:w-full"
+                className="select select-bordered select-primary flex h-8 min-h-8 w-28 items-center justify-center border-main-color text-xs md:min-h-12 md:w-full  md:text-base"
                 value={ClassFilters.selectedLocation || ''}
                 onChange={handleLocationChange}
               >
-                <option value="" className="bg-disable-color text-xs md:text-base" disabled>
-                  지역을 선택하세요
+                <option value="" className=" bg-disable-color" disabled>
+                  <p className="overflow-hidden">지역을 선택하세요</p>
                 </option>
                 <option value={'서울'}>서울</option>
                 <option value={'경기'}>경기</option>
