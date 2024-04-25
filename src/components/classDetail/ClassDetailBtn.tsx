@@ -31,7 +31,7 @@ const ClassDetailBtn = ({
       }
 
       const isReserved = await checkIsReserved({ userId: loginUserId, classId });
-      console.log(isReserved);
+      // console.log(isReserved);
 
       if (isReserved) {
         alreadyReserved();
@@ -41,7 +41,7 @@ const ClassDetailBtn = ({
   };
 
   return (
-    <div className="w-full gap-3 flex justify-center items-center">
+    <div className="flex w-full items-center justify-center gap-3">
       <AskButton
         classId={classId}
         makeClassUserId={makeClassUserId}
@@ -49,7 +49,7 @@ const ClassDetailBtn = ({
       />
       <button
         onClick={handleApplyClick}
-        className=" transition-all flex justify-center items-center rounded-md w-1/2 h-12 bg-button-default-color text-white  hover:bg-button-hover-color"
+        className=" flex h-12 w-1/2 items-center justify-center rounded-md bg-button-default-color text-white transition-all  hover:bg-button-hover-color"
       >
         신청하기
       </button>
