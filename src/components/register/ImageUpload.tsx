@@ -263,41 +263,41 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
         return;
       }
 
-      // 날짜와 시간 데이터 업데이트 로직 추가
-      // 기존 날짜와 시간 데이터 삭제
-      // const deleteDate = await supabase.from('date').delete().match({ class_id: classId });
-      // if (deleteDate.error) {
-      //   console.error('date db delete error:', deleteDate.error);
-      // }
-
-      // 각 날짜에 대한 데이터 저장
       for (const date of selectedDates) {
-        const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
-        const { data: dateData, error: dateError } = await supabase.from('date').update([
-          {
-            date_id: dateId,
-            class_id: classId,
-            day: date
+        const { data: existingDateData, error: existingDateError } = await supabase
+          .from('date')
+          .select('date_id')
+          .eq('day', date)
+          .eq('class_id', classId)
+          .single();
+    
+        let dateId;
+        if (existingDateError || !existingDateData) {
+          // 해당 날짜 데이터가 없는 경우 새로운 데이터를 삽입합니다.
+          dateId = crypto.randomUUID();
+          const { error: dateInsertError } = await supabase.from('date').insert([
+            { date_id: dateId, class_id: classId, day: date }
+          ]);
+          if (dateInsertError) {
+            console.error('date db insert error:', dateInsertError);
           }
-        ]);
-        if (dateError) {
-          console.error('date db upload error:', dateError);
         } else {
-          const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
-
-          if (selectedTimes && selectedTimes.length > 0) {
-            for (const time of selectedTimes) {
-              const timeId = crypto.randomUUID(); // 시간마다 새로운 ID 생성
-              const { data: timeData, error: timeError } = await supabase.from('time').update([
-                {
-                  time_id: timeId,
-                  date_id: dateId,
-                  times: time
-                }
-              ]);
-              if (timeError) {
-                console.error('time db upload error:', timeError);
-              }
+          // 이미 존재하는 날짜의 경우 해당 date_id를 사용합니다.
+          dateId = existingDateData.date_id;
+        }
+    
+        // 선택된 시간들에 대해 처리
+        const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
+        if (selectedTimes && selectedTimes.length > 0) {
+          for (const time of selectedTimes) {
+            // time 데이터는 중복 검사 없이 새로운 ID로 항상 삽입합니다.
+            // 필요에 따라 중복 검사 로직을 추가할 수 있습니다.
+            const timeId = crypto.randomUUID();
+            const { error: timeError } = await supabase.from('time').insert([
+              { time_id: timeId, date_id: dateId, times: time }
+            ]);
+            if (timeError) {
+              console.error('time db upload error:', timeError);
             }
           }
         }
