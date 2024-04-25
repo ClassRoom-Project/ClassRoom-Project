@@ -39,16 +39,16 @@ const CategoryBtns = () => {
   }, [pathName, setSelectedCategory]);
 
   return (
-    <div className="flex h-12 w-full  items-center justify-center bg-disable-color md:h-16">
+    <div className="mb-6 flex h-12  w-full items-center justify-center bg-transparent md:h-16">
       <div className="flex w-full flex-row justify-between gap-1 px-2 md:gap-2">
         {categories.map((category) => (
           <button
             key={category}
             onClick={() => handleOnClickListBtn(category)}
-            className={`w-24 whitespace-nowrap rounded-full px-1 py-1 text-xs transition-all md:text-base md:font-semibold ${
+            className={`w-24 whitespace-nowrap  rounded-full px-1 py-1 text-xs text-gray-700 transition-all md:text-base md:font-semibold ${
               selectedCategory === category
                 ? 'text-dark-purple-color md:bg-button-press-color md:text-white'
-                : 'md:bg-white md:hover:bg-button-press-color'
+                : 'border border-solid border-input-border-color md:bg-pale-purple md:hover:border-border-color md:hover:bg-disable-color'
             }`}
           >
             {category}
