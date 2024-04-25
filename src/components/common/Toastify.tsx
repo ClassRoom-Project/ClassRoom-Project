@@ -84,7 +84,7 @@ export const commentWarning = () =>
   });
 
 export const commentStarWarning = () =>
-  toast.error('별점을 입력해 주세요', {
+  toast.info('별점을 입력해 주세요', {
     position: 'top-right',
     autoClose: 2000,
     hideProgressBar: false,
@@ -211,7 +211,7 @@ export const deleteMessage = () =>
   });
 
 export const noDateTimeNotify = () =>
-  toast.error('일정과 시간을 선택해주세요.', {
+  toast.error('클래스 일정과 시간을 선택해주세요.', {
     position: 'top-right',
     autoClose: 3000,
     hideProgressBar: false,
@@ -246,8 +246,128 @@ export const LimitHashTagNotify = () =>
     theme: 'light'
   });
   
-export const LimitHashTagSizeNotify = () =>
+export const LimitImageSizeNotify = () =>
   toast.error('이미지는 5MB 이하만 업로드할 수 있습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const closedClass = () =>
+  toast.info('마감된 클래스입니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+  export const noCategoryNotify = () =>
+    toast.error('카테고리를 선택해주세요.', {
+      position: 'top-right',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: 'light'
+    });
+
+export const noHashTagNotify = () =>
+  toast.error('해시태그를 입력해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noClassContentNotify = () =>
+  toast.error('클래스 설명을 입력해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noClassTitleNotify = () =>
+  toast.error('클래스 이름을 입력해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noClassTypeNotify = () =>
+  toast.error('클래스 타입을 선택해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noClassDiffNotify = () =>
+  toast.error('클래스 난이도를 선택해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noMinNumberNotify = () =>
+  toast.error('최소 모집 인원을 입력해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noPersonnelNotify = () =>
+  toast.error('모집 정원을 입력해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+
+export const noTotalTimeNotify = () =>
+  toast.error('소요시간을 입력해주세요.', {
     position: 'top-right',
     autoClose: 3000,
     hideProgressBar: false,

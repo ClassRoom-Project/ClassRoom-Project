@@ -20,13 +20,19 @@ export const getDetailComment = async (classId: string | undefined, page = 1, li
 };
 //댓글 작성하기
 
-export const createDetailComment = async (
-  classId: string | undefined,
-  star: number | undefined,
-  userId: string | undefined,
-  content: string | undefined,
-  comment_image: string | undefined
-) => {
+export const createDetailComment = async ({
+  classId,
+  userId,
+  content,
+  star,
+  comment_image
+}: {
+  classId: string | undefined;
+  star: number | undefined;
+  userId: string | undefined;
+  content: string | undefined;
+  comment_image: string | null;
+}) => {
   const { data: comments, error } = await supabase.from('comments').insert([
     {
       class_id: classId,
@@ -37,7 +43,7 @@ export const createDetailComment = async (
       comment_image: comment_image
     }
   ]);
-
+  console.log(comment_image, 'comment_image');
   if (error) {
     console.error('댓글 작성 오류 --> ', error);
     return null;

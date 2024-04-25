@@ -44,13 +44,15 @@ const ReserveUserInfo = () => {
       </div>
       {loginUserId ? (
         <>
-          <div className="flex flex-col  mb-4 h-[52px] ml-2">
-            <p className="font-bold mb-1 text-sm">계정 ID</p>
-            <p className="">{userInfo?.email}</p>
-          </div>
-          <div className="flex flex-col ml-2">
-            <p className="font-bold mb-1 text-sm ">이름 (닉네임)</p>
-            <p className="">{userInfo?.nickname}</p>
+          <div className="flex flex-col justify-center h-32">
+            <div className="flex flex-col  mb-4 h-[52px] ml-2">
+              <p className="font-bold mb-1 text-sm">계정 ID</p>
+              <p className="">{userInfo?.email}</p>
+            </div>
+            <div className="flex flex-col ml-2">
+              <p className="font-bold mb-1 text-sm ">이름 (닉네임)</p>
+              <p className="">{userInfo?.nickname}</p>
+            </div>
           </div>
           <div className="tooltip mt-auto  text-gray-500" data-tip="마이페이지로 이동합니다">
             <button
