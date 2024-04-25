@@ -194,7 +194,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
         </div>
       ) : (
         <div className="mb-4 flex h-40 w-[600px] items-center justify-center rounded-lg bg-disable-color shadow-xl xl:w-full">
-          클래스를 예약하신 분만 리뷰 등록이 가능합니다.
+          클래스를 예약하신 분만 후기 등록이 가능합니다.
         </div>
       )}
     </>

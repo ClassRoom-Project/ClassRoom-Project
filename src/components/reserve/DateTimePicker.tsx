@@ -59,11 +59,10 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   // 날짜 버튼 클릭
   const handleDateChange = async (newDate: Date | undefined) => {
     const formattedDate = format(newDate as Date, 'yyyy-MM-dd');
-    //  classDates.find(({ day }) => day >= format(new Date(), 'yyyy-MM-dd'))?.day;
     setSelectedDate(formattedDate);
-    const firstAvailableTime = datesAfterToday.find(({ day }) => day === formattedDate)?.times[0];
 
     // 일자를 선택했을 때 첫 번째 시간으로 state를 set
+    const firstAvailableTime = datesAfterToday.find(({ day }) => day === formattedDate)?.times[0];
     if (firstAvailableTime) {
       const { timeId, times } = firstAvailableTime;
       setSelectedTime(times);

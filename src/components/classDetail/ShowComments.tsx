@@ -19,9 +19,9 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
     return <div>Error: {error.message}</div>;
   }
   return (
-    <div className="w-[600px]  relative flex flex-col justify-center items-center xl:w-full">
+    <div className="relative  flex w-[600px] flex-col items-center justify-center xl:w-full">
       {data.length > 0 ? (
-        <div className="w-full flex flex-col">
+        <div className="flex w-full flex-col">
           {data?.map((comment: DetailCommentType) => (
             <div key={comment.comment_id}>
               <CommentsCard comment={comment} />
@@ -31,7 +31,7 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
         </div>
       ) : (
         <div className="my-20">
-          <p>아직 등록된 리뷰가 없어요. 첫 번째 리뷰의 주인공이 되어보세요!</p>
+          <p>아직 등록된 후기가 없어요. 첫 번째 후기의 주인공이 되어보세요!</p>
         </div>
       )}
     </div>
