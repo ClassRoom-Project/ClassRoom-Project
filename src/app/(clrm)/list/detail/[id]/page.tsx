@@ -15,7 +15,7 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
   return (
     <div className=" responsiveHeight mx-auto flex h-screen max-w-[1920px] flex-col items-center">
       <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
-        <Link href={`/`} className="flex items-center justify-center">
+        <Link href={`/`} className="md:text-md flex items-center justify-center text-sm">
           <IoIosArrowBack size={18} />
           뒤로가기
         </Link>
