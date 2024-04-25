@@ -7,8 +7,6 @@ export const defaultInitState = {
   userId: '',
   reservePrice: 0,
   reserveQuantity: 0,
-  reserveDate: '',
-  reserveTime: '',
   timeId: ''
 };
 

@@ -74,8 +74,8 @@ const ClassSummary = ({
   ];
 
   return (
-    <div className="mt-4 w-[45%]">
-      <div className="tems-center mb-4 mr-2 flex h-8 gap-2">
+    <div className="mt-4 w-full px-4 md:px-0 lg:w-[40%] lg:min-w-[400px]">
+      <div className=" mb-4 flex h-8 items-center gap-2">
         <div className="relative h-8 w-8">
           {userData?.profile_image ? (
             <Image
@@ -93,11 +93,13 @@ const ClassSummary = ({
             />
           )}
         </div>
-        <p>{classData?.users.teacher_name}</p>
+        <p>
+          <span className="font-bold">{classData?.users.teacher_name}</span> 강사님
+        </p>
       </div>
       <div className="flex flex-col gap-4 text-text-dark-gray">
         <div className="text-xl font-bold">{classData?.title}</div>
-        <div>
+        <div className="text-sm md:text-base">
           <div className="mb-0.5 flex items-center  ">
             카테고리
             <LuDot color="gray" />
@@ -110,8 +112,8 @@ const ClassSummary = ({
             return (
               <div key={title} className="flex items-center gap-2 text-text-dark-gray">
                 <div className="font-bold ">{icon}</div>
-                <div className={'mr-1 shrink-0 font-bold'}>{title}</div>
-                <div className="flex gap-2 font-normal">{description}</div>
+                <div className={'mr-1 hidden shrink-0 font-bold md:block '}>{title}</div>
+                <div className="flex gap-2 text-sm font-normal md:text-base">{description}</div>
               </div>
             );
           })}
