@@ -30,7 +30,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
                   alt="Profile"
                   fill={true}
                   className="rounded-full border"
-                  objectFit="cover"
+                  style={{ objectFit: 'cover' }}
                 />
               ) : (
                 <Image
@@ -38,7 +38,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
                   alt="Profile"
                   fill={true}
                   className="rounded-full border"
-                  objectFit="cover"
+                  style={{ objectFit: 'cover' }}
                 />
               )}
             </div>

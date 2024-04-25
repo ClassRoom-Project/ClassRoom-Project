@@ -20,7 +20,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
             fill={true}
             src={classInfos.image && classInfos.image.length > 0 ? classInfos.image[0] : noImage}
             alt="클래스 이미지"
-            objectFit="cover"
+            style={{ objectFit: 'cover' }}
           />
         </figure>
         <div className="flex flex-col justify-between py-1">

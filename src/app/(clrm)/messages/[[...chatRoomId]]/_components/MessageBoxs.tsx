@@ -101,7 +101,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
 
   if (isLoading) {
     return (
-      <div className="flex flex-col justify-center items-center h-auto px-3">
+      <div className="flex h-auto flex-col items-center justify-center px-3">
         <LoadingSpinner />
       </div>
     );
@@ -110,30 +110,30 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   return (
     <div className="h-screen overflow-y-auto">
       {isLoading && (
-        <div className="fixed z-50 inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-500 bg-opacity-50">
           <LoadingSpinner />
         </div>
       )}
-      <div className="flex flex-col justify-center items-center px-3">
-        <div className="text-xs w-full flex flex-row h-36 mt-5 rounded-md xl:w-3/5 sm:text-xs md:text-sm text-button-hover-color justify-center items-center border border-border-color mb-16 overflow-hidden">
+      <div className="flex flex-col items-center justify-center px-3">
+        <div className="mb-16 mt-5 flex h-36 w-full flex-row items-center justify-center overflow-hidden rounded-md border border-border-color text-xs text-button-hover-color sm:text-xs md:text-sm xl:w-3/5">
           <div className=" relative h-full w-1/3 p-2">
             <Image
               src={mainImage!}
               alt="mainImage"
               layout="fill"
-              objectFit="cover"
-              className=" object-cover w-full h-full"
+              style={{ objectFit: 'cover' }}
+              className=" h-full w-full object-cover"
             />
           </div>
-          <div className="flex h-36 flex-col items-center justify-center w-2/3 p-2">
-            <p className="text-xs flex flex-col items-center justify-center text-center lg:text-sm">
+          <div className="flex h-36 w-2/3 flex-col items-center justify-center p-2">
+            <p className="flex flex-col items-center justify-center text-center text-xs lg:text-sm">
               안녕하세요 {studentName} 수강생님! <br /> &quot;{title}&quot; 원데이 클래스에 궁금하신 사항이 있으시면
               문의 주시길 바랍니다!
             </p>
 
             <Link
               href={`/list/detail/${toClassId}`}
-              className="flex w-3/4 whitespace-nowrap mt-4 rounded-3xl h-8 items-center justify-center text-xs p-2 text-white bg-button-default-color hover:bg-button-hover-color"
+              className="mt-4 flex h-8 w-3/4 items-center justify-center whitespace-nowrap rounded-3xl bg-button-default-color p-2 text-xs text-white hover:bg-button-hover-color"
             >
               클래스 보러가기
             </Link>
@@ -142,32 +142,32 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
         {readChatRoomMessages?.map((message, index) => (
           <div
             key={index}
-            className={`flex w-full text-sm items-start px-4 ${
+            className={`flex w-full items-start px-4 text-sm ${
               message.create_by === loginUserId ? 'justify-end' : 'justify-start'
             }`}
           >
             <div>
               {message.create_by !== loginUserId && (
-                <div className="mr-2 flex flex-row items-center text-xs gap-1">
-                  <div className="w-8 h-8 lg:w-12 lg:h-12">
+                <div className="mr-2 flex flex-row items-center gap-1 text-xs">
+                  <div className="h-8 w-8 lg:h-12 lg:w-12">
                     <Image
                       src={MakeClassUserInfo?.profile_image || defaultimage}
                       height={40}
                       width={40}
                       alt="Profile"
-                      className="w-full h-full border border-black rounded-full object-cover"
+                      className="h-full w-full rounded-full border border-black object-cover"
                     />
                   </div>
                   <p className=" font-semibold">{MakeClassUserInfo?.nickname}</p>
                 </div>
               )}
               <div
-                className={`text-xs flex flex-row items-center py-4 px-4 lg:text-md ${
+                className={`lg:text-md flex flex-row items-center px-4 py-4 text-xs ${
                   message.create_by === loginUserId ? 'flex flex-row' : 'flex-row-reverse'
                 }`}
               >
                 <div>
-                  <p className="text-gray-400 text-xs px-4 whitespace-nowrap">
+                  <p className="whitespace-nowrap px-4 text-xs text-gray-400">
                     {dayjs(message.created_at).format('A hh:mm')}
                   </p>
                 </div>
@@ -182,7 +182,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                   <div className="">
                     {message.messages && (
                       <p
-                        className={`max-w-md p-2 rounded-lg flex items-center ${
+                        className={`flex max-w-md items-center rounded-lg p-2 ${
                           message.create_by === loginUserId ? 'bg-background-color' : ' bg-gray-200 '
                         }`}
                       >
@@ -199,7 +199,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                             src={imgUrl}
                             layout="fill"
                             unoptimized
-                            objectFit="cover"
+                            style={{ objectFit: 'cover' }}
                             alt={`Photo ${imgIndex + 1}`}
                             // 이미지가 완전히 업로드 되고 플레이스홀더가 제거되면 호출되는 콜백함수!!
                             //img 요소를 참조하는 대상을 가진 event라는 하나의 인수로 호출
