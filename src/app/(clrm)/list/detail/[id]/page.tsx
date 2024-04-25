@@ -35,7 +35,7 @@ const page = async ({ params }: { params: { id: string } }) => {
         <ClassSummary classData={classData} userData={userData} />
       </div>
 
-      <div className="flex w-full  flex-col items-center justify-center p-6 ">
+      <div className="flex w-full  flex-col items-center justify-center px-6 pb-6 pt-2 lg:p-6 ">
         <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
         {classData?.location && (
           <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />

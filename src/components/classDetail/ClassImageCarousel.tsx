@@ -9,6 +9,7 @@ import { NextButton, PrevButton, usePrevNextButtons } from './EmblaCarouselArrow
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import './embla.css';
 import { useEffect } from 'react';
+// import style from './embla.module.css';
 
 const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | null }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
@@ -33,7 +34,7 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
                   <div className="embla__slide__inner">
                     <Image
                       fill={true}
-                      className="embla-slide-img h-full w-full rounded-md object-cover"
+                      className=" h-full w-full rounded-md object-cover"
                       src={image}
                       alt={classData.title}
                     />
@@ -42,12 +43,7 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
               ))
             ) : (
               <div className="relative h-full w-full">
-                <Image
-                  fill
-                  className="embla-slide-img h-full w-full rounded-md object-cover"
-                  src={noImage}
-                  alt="clroom no Image"
-                />
+                <Image fill className=" h-full w-full rounded-md object-cover" src={noImage} alt="clroom no Image" />
               </div>
             )}
           </div>

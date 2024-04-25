@@ -48,7 +48,7 @@ const CategoryBtns = () => {
             className={`w-24 whitespace-nowrap  rounded-full px-1 py-1 text-xs text-gray-700 transition-all md:text-base md:font-semibold ${
               selectedCategory === category
                 ? 'text-dark-purple-color md:bg-button-press-color md:text-white'
-                : 'border border-solid border-input-border-color md:bg-pale-purple md:hover:border-border-color md:hover:bg-disable-color'
+                : 'border border-solid border-input-border-color md:bg-pale-purple md:hover:border-button-press-color md:hover:bg-background-color'
             }`}
           >
             {category}
