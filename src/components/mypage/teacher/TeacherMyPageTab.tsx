@@ -67,7 +67,7 @@ const TeacherMyPageTab = () => {
   };
 
   return (
-    <div className="m-0 h-screen w-full p-0 md:my-4 md:py-4 ">
+    <div className="m-0 h-screen max-w-[1440px] p-0 md:my-4 md:py-4 lg:w-[1440px]">
       {/* md 이상 일 때, 가로 탭 */}
       <div className="hidden w-full flex-row whitespace-nowrap border-y-2 sm:items-start md:flex md:items-center md:justify-start md:gap-10 lg:gap-20">
         <div className="overflow-x-scroll scrollbar-hide">
@@ -105,7 +105,7 @@ const TeacherMyPageTab = () => {
       </div>
 
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="mx-4 flex w-full justify-start md:hidden">
+      <div className="flex w-full justify-start px-4 md:hidden">
         <div className="dropdown dropdown-right">
           <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />

@@ -142,7 +142,7 @@ const StudentMyPageTab = () => {
         </div>
       </div>
       {/* md 미만 일 때, 드롭다운 */}
-      <div className="mb-4 flex w-full py-4 md:hidden">
+      <div className="flex w-full px-4 md:hidden">
         <div className="dropdown dropdown-right">
           <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />

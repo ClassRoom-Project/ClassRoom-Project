@@ -89,10 +89,10 @@ const MyClass = () => {
           className="align-center flex w-full flex-col gap-4 md:my-4 md:flex-row md:py-4 lg:max-w-[1280px]"
         >
           {/* 클래스 기본 정보 부분 */}
-          <div className="collapse collapse-arrow cursor-pointer justify-center">
+          <div className="collapse collapse-arrow cursor-pointer justify-center p-4">
             <input type="checkbox" />
             <div className="flex flex-col items-center gap-4  md:collapse-title sm:w-full lg:w-full lg:flex-row">
-              <div className="relative h-60 w-2/3 lg:w-80">
+              <div className="relative h-52 w-72 lg:w-80">
                 <Image
                   src={classInfo?.image ? classInfo?.image : NoImage}
                   alt="클래스 대표 사진"
@@ -100,10 +100,12 @@ const MyClass = () => {
                   className="h-full w-full object-cover p-4"
                 />
               </div>
-              <div className="m-4 flex flex-col md:gap-4">
-                <p className="py-4 text-base font-bold text-dark-purple-color sm:text-lg md:text-xl">
-                  {classInfo?.title}
-                </p>
+              <div className="my-4 flex flex-col md:gap-4 lg:mx-4">
+                <div className="flex justify-center lg:justify-start">
+                  <p className="py-4 text-base font-bold text-dark-purple-color sm:text-lg md:text-xl">
+                    {classInfo?.title}
+                  </p>
+                </div>
                 <div className="flex flex-col md:flex-grow md:flex-row md:gap-4">
                   <div className="flex md:gap-4">
                     <div className="flex items-center gap-2 p-2 md:inline-flex md:rounded-3xl md:border md:border-point-purple">
@@ -174,19 +176,22 @@ const MyClass = () => {
                 </div>
               ))}
             </div>
-            <div className="m-4 flex justify-center gap-4 md:justify-end">
+            <section className="flex w-full items-center justify-center gap-4 p-2 md:gap-4 lg:right-4 lg:justify-end">
               <button
                 onClick={() => handleOnClickDeleteMyClass(classInfo.class_id)}
-                className="btn w-36 bg-dark-purple-color text-white hover:bg-transparent hover:text-dark-purple-color"
+                className="btn  w-1/3 text-xs hover:bg-transparent hover:text-text-dark-gray md:w-36 md:text-sm"
               >
-                클래스 삭제하기
+                삭제하기
               </button>
-              <Link href={`list/detail/${classInfo.class_id}`}>
-                <button className="btn w-36 bg-point-purple text-white hover:bg-transparent hover:text-point-purple">
-                  클래스 보러가기
-                </button>
-              </Link>
-            </div>
+
+              <button className="btn w-1/3 whitespace-nowrap bg-dark-purple-color  text-xs text-white hover:bg-transparent hover:text-dark-purple-color md:w-36 md:text-sm">
+                <Link href={`register/registerEditPage/${classInfo.class_id}`}>클래스 수정하기</Link>
+              </button>
+
+              <button className="btn w-1/3 whitespace-nowrap  bg-point-purple text-xs text-white hover:bg-transparent hover:text-point-purple md:w-36 md:text-sm">
+                <Link href={`list/detail/${classInfo.class_id}`}>클래스 보러가기</Link>
+              </button>
+            </section>
           </div>
         </li>
       ))}

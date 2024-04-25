@@ -53,13 +53,10 @@ const MyReservedClassItem = ({ classItem }: { classItem: ClassItem }) => {
           <Image src={mainImage} alt="클래스 대표 사진" fill className=" h-full w-full object-cover p-4" unoptimized />
         </div>
         <div className="flex h-full w-full flex-col gap-4 p-4">
-          <div className="flex w-full items-center justify-center gap-4 md:hidden">
-            <p className="pb-4 text-base font-bold text-dark-purple-color sm:text-xl">{classItem.title}</p>
+          <div className="flex w-full justify-center gap-4 lg:justify-start">
+            <p className="text-base font-bold text-dark-purple-color sm:text-xl md:pb-4">{classItem.title}</p>
           </div>
-          <section className="flex flex-col md:items-start  ">
-            <div className="flex w-full items-center justify-center gap-4 lg:hidden">
-              <p className="pb-4 text-base font-bold text-dark-purple-color sm:text-xl">{classItem.title}</p>
-            </div>
+          <section className="flex flex-col">
             <div className="flex w-full flex-col overflow-hidden md:flex-row md:gap-4">
               <div className="flex flex-col md:flex-row md:gap-4 md:py-1">
                 <div className="flex items-center gap-2 p-2 md:rounded-3xl md:border md:border-point-purple">

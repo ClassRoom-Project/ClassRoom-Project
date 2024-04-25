@@ -93,12 +93,14 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         </div>
         <div className="flex h-full w-full flex-col gap-4 p-4">
           <section className="flex flex-col gap-4 lg:flex-row lg:gap-10">
-            <p className="whitespace-nowrap text-lg font-bold text-dark-purple-color sm:text-xl">{comment.title}</p>
+            <div className="flex w-full justify-center gap-4 lg:justify-start">
+              <p className="whitespace-nowrap text-lg font-bold text-dark-purple-color sm:text-xl">{comment.title}</p>
+            </div>
             <p className="flex gap-4 whitespace-nowrap text-sm sm:text-base">
               <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
             </p>
           </section>
-          <div>
+          <div className="py-2">
             <Stars rating={rating} />
           </div>
           <section className="flex w-full flex-col items-center pb-4 text-sm sm:text-base md:items-start">
@@ -117,18 +119,17 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
           </section>
           <section className="flex w-full items-center justify-center gap-4 p-2 md:gap-4 lg:right-4 lg:justify-end">
             <button
-              onClick={() => handleOnClickEditBtn(commentId)}
-              className="btn  w-1/3 text-xs hover:bg-transparent hover:text-text-dark-gray md:w-36 md:text-sm"
-            >
-              {isEditing ? '완료하기' : '수정하기'}
-            </button>
-            <button
               onClick={() => handleOnClickDeleteCancleBtn(commentId)}
-              className="btn  w-1/3 bg-dark-purple-color  text-xs text-white hover:bg-transparent hover:text-dark-purple-color md:w-36 md:text-sm"
+              className="btn  w-1/3 text-xs hover:bg-transparent hover:text-text-dark-gray md:w-36 md:text-sm"
             >
               {isEditing ? '취소하기' : '삭제하기'}
             </button>
-
+            <button
+              onClick={() => handleOnClickEditBtn(commentId)}
+              className="btn w-1/3 whitespace-nowrap bg-dark-purple-color text-xs text-white  hover:bg-transparent hover:text-dark-purple-color md:w-36 md:text-sm"
+            >
+              {isEditing ? '완료하기' : '수정하기'}
+            </button>
             <button className="btn w-1/3 whitespace-nowrap  bg-point-purple text-xs text-white hover:bg-transparent hover:text-point-purple md:w-36 md:text-sm">
               <Link href={`list/detail/${comment.class_id}`}>클래스 보러가기 </Link>
             </button>
