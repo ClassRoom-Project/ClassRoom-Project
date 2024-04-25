@@ -3,12 +3,12 @@ import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
 import { FiCalendar, FiUsers } from 'react-icons/fi';
 import { GrLocation } from 'react-icons/gr';
-import { HiOutlineCube } from 'react-icons/hi2';
 import { LuClock } from 'react-icons/lu';
 import { PiCurrencyKrw } from 'react-icons/pi';
 import { RiHashtag, RiUserLocationLine } from 'react-icons/ri';
-import ClassDetailBtn from './ClassDetailBtn';
 import defaultProfileImageSrc from '../../assets/images/profile-image.png';
+import ClassDetailBtn from './ClassDetailBtn';
+import { LuDot } from 'react-icons/lu';
 
 const ClassSummary = ({
   classData,
@@ -17,6 +17,7 @@ const ClassSummary = ({
   classData: ListDetailClassInfo | null;
   userData: DetailUserInfoType | null;
 }) => {
+  // 해시태그 배열 생성
   const hashtagString = classData?.hashtag.map((tag) => {
     return (
       <div key={tag} className="flex items-center text-gray-400">
@@ -29,7 +30,7 @@ const ClassSummary = ({
   // 예약 가능 날짜 배열 생성
   const classDaysElements = classData?.date.map((dateInfo) => {
     const day = dateInfo.day.slice(5);
-    return <div key={dateInfo.date_id}>{day}</div>;
+    return <div key={dateInfo.date_id}>{day} </div>;
   });
 
   const classInfoLabels = [
@@ -76,19 +77,32 @@ const ClassSummary = ({
     <div className="mt-4 w-[45%]">
       <div className="tems-center mb-4 mr-2 flex h-8 gap-2">
         <div className="relative h-8 w-8">
-          <Image
-            fill={true}
-            className="h-full w-full rounded-full object-cover"
-            src={userData?.profile_image ? userData.profile_image : defaultProfileImageSrc}
-            alt="profileImage"
-          />
+          {userData?.profile_image ? (
+            <Image
+              fill={true}
+              className="h-full w-full rounded-full object-cover"
+              src={userData.profile_image}
+              alt="profileImage"
+            />
+          ) : (
+            <Image
+              fill={true}
+              className="h-full w-full rounded-full object-cover"
+              src={defaultProfileImageSrc}
+              alt="profileImage"
+            />
+          )}
         </div>
         <p>{classData?.users.teacher_name}</p>
       </div>
       <div className="flex flex-col gap-4 text-text-dark-gray">
         <div className="text-xl font-bold">{classData?.title}</div>
         <div>
-          <div className="mb-0.5">카테고리 : {classData?.category}</div>
+          <div className="mb-0.5 flex items-center  ">
+            카테고리
+            <LuDot color="gray" />
+            {classData?.category}
+          </div>
           <div className="flex gap-2">{hashtagString}</div>
         </div>
         <div className="flex flex-col gap-5 text-lg">

@@ -17,19 +17,19 @@ const ClassImageAndSummary = ({ classData }: { classData: ListDetailClassInfo | 
 
   // 로딩 후 emblaApi 초기화
   useEffect(() => {
-    if (emblaApi && classData?.image) {
+    if (emblaApi && classData?.image.length !== 0) {
       emblaApi.reInit();
     }
   }, [emblaApi, classData?.image]);
 
   return (
-    <div className="w-[50%]">
+    <div className=" min-w-[50%]">
       <section className="embla">
         <div className="embla__viewport rounded-2xl" ref={emblaRef}>
           <div className="embla__container">
             {classData && classData.image.length !== 0 ? (
-              classData?.image.map((image, index) => (
-                <div className="embla__slide" key={index}>
+              classData?.image.map((image) => (
+                <div className="embla__slide" key={image}>
                   <div className="embla__slide__inner">
                     <Image
                       fill={true}

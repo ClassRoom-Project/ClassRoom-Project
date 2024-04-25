@@ -40,9 +40,7 @@ const page = async ({ params }: { params: { id: string } }) => {
         {classData?.location && (
           <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />
         )}
-        <div className="w-full rounded-md bg-pale-purple px-4">
-          <DetailComments classData={classData} />
-        </div>
+        <DetailComments classData={classData} />
       </div>
     </div>
   );
