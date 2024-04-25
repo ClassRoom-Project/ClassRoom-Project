@@ -45,7 +45,7 @@ const CategoryBtns = () => {
           <button
             key={category}
             onClick={() => handleOnClickListBtn(category)}
-            className={`w-24 whitespace-nowrap rounded-full px-1 py-1 text-xs transition-all md:text-base md:font-semibold ${
+            className={`w-24 whitespace-nowrap rounded-full px-1 py-1 text-xs md:text-base md:font-semibold 2xl:w-28 ${
               selectedCategory === category
                 ? 'text-dark-purple-color md:bg-button-press-color md:text-white'
                 : 'md:bg-white md:hover:bg-button-press-color'

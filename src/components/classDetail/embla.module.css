@@ -106,11 +106,11 @@
   height: 100%;
 }
 
-.embla__button--prev {
+.embla__buttonPrev {
   left: 27px;
 }
 
-.embla__button--next {
+.embla__buttonNext {
   right: 27px;
 }
 
@@ -126,7 +126,7 @@
   border-radius: 10px;
 }
 
-.embla__dot--selected:after {
+.embla__dotSelected:after {
   box-shadow: inset 0 0 0 0.2rem var(--text-body);
   border: 3.5px solid #6c5ff7;
 }
