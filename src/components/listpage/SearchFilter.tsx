@@ -123,9 +123,7 @@ const SearchFilter = () => {
                 <option value="" className="bg-disable-color text-sm md:text-base" disabled>
                   지역을 선택하세요
                 </option>
-                <option className="bg-disable-color" value={'서울'}>
-                  서울
-                </option>
+                <option value={'서울'}>서울</option>
                 <option value={'경기'}>경기</option>
                 <option value={'인천'}>인천</option>
                 <option value={'충남'}>충남</option>

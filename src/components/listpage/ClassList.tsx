@@ -65,7 +65,7 @@ function ClassList() {
             <React.Fragment key={i}>
               {page.classInfos.map((classInfos: ClassAllType) => (
                 <div key={classInfos.class_id} className="px-2 py-8">
-                  <ClassCard key={classInfos.class_id} classInfos={classInfos} />
+                  <ClassCard classInfos={classInfos} />
                 </div>
               ))}
             </React.Fragment>
