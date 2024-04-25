@@ -65,7 +65,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   // supabase storage에 등록한 이미지 업로드
   const uploadFile = async (file: File) => {
     const cleanName = cleanFileName(file.name);
-    const filePath = `uploads/${crypto.randomUUID}/${classId}_${cleanName}`;
+    const filePath = `uploads/${crypto.randomUUID}_${cleanName}`;
     const { data, error } = await supabase.storage.from('classImages').upload(filePath, file);
     if (error) {
       return null;

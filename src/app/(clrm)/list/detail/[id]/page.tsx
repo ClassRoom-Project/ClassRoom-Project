@@ -1,38 +1,16 @@
-import { detailClassIdOnly, detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
+import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
 import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
 import ClassDetailContainer from '@/components/classDetail/ClassDetailContainer';
 import ClassImageCarousel from '@/components/classDetail/ClassImageCarousel';
 import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
-import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { IoIosArrowBack } from 'react-icons/io';
-import { useSearchParam } from 'react-use';
-
-// export const revalidate = 600;
-// export async function generateStaticParams() {
-//   //데이터 불러오는 로직
-// const classId = await detailClassIdOnly();
-//   //params 내려주기
-//   const paths = classId.map((classItem) => ({
-//     params: { id: classItem.class_id }
-//   }));
-//   return paths;
-// }
 
 const DetailPage = async ({ params }: { params: { id: string } }) => {
-  //데이터 불러오는 로직
-  const classId = await detailClassIdOnly();
-  //params 내려주기
-  const paths = classId.map((classItem) => ({
-    params: { id: classItem.class_id }
-  }));
-
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
-
   return (
     <div className=" flex flex-col items-center">
       <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
@@ -53,7 +31,6 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
         )}
         <DetailComments classData={classData} />
       </div>
-      <MoveToTopBtn />
     </div>
   );
 };
