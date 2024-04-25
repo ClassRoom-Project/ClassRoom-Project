@@ -15,7 +15,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
   return classInfos ? (
     <div className="card w-32  rounded-xl bg-base-100 md:mx-0 md:w-64">
       <Link href={`/list/detail/${classInfos.class_id}`} className="">
-        <figure className="relative h-28 w-full rounded-xl bg-gray-200 md:h-40">
+        <figure className="relative h-28 w-full rounded-xl bg-gray-200 duration-300 ease-in-out hover:scale-105 md:h-40">
           <Image
             // width={250}
             // height={200}
@@ -43,7 +43,7 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
               </p>
             </div>
           )}
-          <p className="h-16 overflow-hidden py-1 text-sm md:text-base md:font-semibold">{classInfos.title}</p>
+          <p className="h-9 overflow-hidden py-1 text-xs font-semibold md:h-14 md:text-base">{classInfos.title}</p>
           <p className="h-5 overflow-hidden py-1 text-xs text-dark-purple-color md:h-7 md:text-sm">{hashtagString}</p>
         </div>
       </Link>

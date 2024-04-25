@@ -106,11 +106,11 @@
   height: 100%;
 }
 
-.embla__button--prev {
+.embla__buttonPrev {
   left: 27px;
 }
 
-.embla__button--next {
+.embla__buttonNext {
   right: 27px;
 }
 
@@ -126,21 +126,9 @@
   border-radius: 10px;
 }
 
-.embla__dot--selected:after {
+.embla__dotSelected:after {
   box-shadow: inset 0 0 0 0.2rem var(--text-body);
   border: 3.5px solid #6c5ff7;
-}
-
-.embla__dot:after {
-  background-color: white;
-  width: 100%;
-  height: 6px;
-  border-radius: 6px;
-  content: '';
-}
-
-.embla__button__svg {
-  color: white;
 }
 
 .embla__dot {
@@ -158,48 +146,14 @@
   align-items: center;
 }
 
-@media (max-width: 500px) {
-  .embla__dot {
-    background-color: transparent;
-    cursor: pointer;
-    position: relative;
-    padding: 0;
-    outline: 0;
-    border: 0;
-    width: 10px;
-    height: 10px;
-    margin-right: 7.5px;
-    margin-left: 7.5px;
-    display: flex;
-    align-items: center;
-  }
-}
-/* 
-// sm
-@media (min-width: 500px) {
-  .embla__dot {
-    background-color: transparent;
-    cursor: pointer;
-    position: relative;
-    padding: 0;
-    outline: 0;
-    border: 0;
-    width: 40px;
-    height: 40px;
-    margin-right: 7.5px;
-    margin-left: 7.5px;
-    display: flex;
-    align-items: center;
-  }
+.embla__dot:after {
+  background-color: white;
+  width: 100%;
+  height: 6px;
+  border-radius: 6px;
+  content: '';
 }
 
-// md - 사이드바 아래로
-@media (min-width: 1024px) {
+.embla__button__svg {
+  color: white;
 }
-
-// lg
-@media (min-width: 1280px) {
-}
-
-@media (min-width: 1536px) {
-} */

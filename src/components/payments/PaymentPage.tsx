@@ -57,9 +57,9 @@ export default function PaymentPageasync() {
   }, [price]);
 
   return (
-    <div className="max-w-2xl mx-auto px-4 my-20">
-      <div className="flex flex-col gap-2 mt-4">
-        <h1 className="text-lg md:text-2xl font-semibold text-point-color">확인 및 결제</h1>
+    <div className="mx-auto my-20 max-w-2xl px-4">
+      <div className="mt-4 flex flex-col gap-2">
+        <h1 className="text-button-default-colo text-lg font-semibold md:text-2xl">확인 및 결제</h1>
         <p className="text-grey-600 mb-4">
           결제 수단을 선택하고 결제를 진행해주세요. 환불금은 예약 취소 후 2-3일 내에 결제한 카드로 입금됩니다. 아래
           버튼을 눌러 예약을 결제하세요.
@@ -69,7 +69,7 @@ export default function PaymentPageasync() {
         <div id="agreement" className="w-full" />
         <button
           type="button"
-          className="mt-8 bg-pale-color hover:bg-point-color text-white rounded-md px-5 py-2"
+          className="hover:button-hover-color mt-8 rounded-md bg-button-default-color px-5 py-2 text-white"
           onClick={async () => {
             if (customerKey === 'null' || !customerKey) {
               alert('유저 정보가 존재하지 않습니다. 로그인 상태를 확인해주세요.');
