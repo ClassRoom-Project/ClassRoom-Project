@@ -19,7 +19,7 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
           뒤로가기
         </Link>
       </div>
-      <div className="flex w-full flex-col justify-center gap-2 bg-pale-purple p-6">
+      <div className="flex w-full flex-col justify-center gap-2 bg-pale-purple p-6  lg:min-w-[900px] lg:flex-row lg:gap-12">
         <ClassImageCarousel classData={classData} />
         <ClassSummary classData={classData} userData={userData} />
       </div>
