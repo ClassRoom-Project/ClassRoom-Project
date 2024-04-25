@@ -60,6 +60,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   const noticeId = crypto.randomUUID();
   const router = useRouter();
   const queryClient = useQueryClient();
+  const [deletedDates, setDeletedDates] = useState([]);
+  const [deletedTimes, setDeletedTimes] = useState([]);
 
   useEffect(() => {
     if (initialData && initialData.image && initialData.image.length > 0) {
@@ -263,17 +265,37 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
         return;
       }
 
+      // 날짜 삭제 로직
+      for (const date of deletedDates) {
+        await supabase
+          .from('date')
+          .delete()
+          .eq('day', date)
+          .eq('class_id', classId);
+      }
+
+      // 시간 삭제 로직
+      for (const { date_id, times } of deletedTimes) {
+        await supabase
+          .from('time')
+          .delete()
+          .eq('date_id', date_id)
+          .eq('times', times);
+      }
+
+      // 선택된 날짜 처리
       for (const date of selectedDates) {
+        let dateId;
+        // 이미 존재하는 날짜인지 확인
         const { data: existingDateData, error: existingDateError } = await supabase
           .from('date')
           .select('date_id')
           .eq('day', date)
           .eq('class_id', classId)
           .single();
-    
-        let dateId;
+  
         if (existingDateError || !existingDateData) {
-          // 해당 날짜 데이터가 없는 경우 새로운 데이터를 삽입합니다.
+          // 존재하지 않으면 새로운 날짜 추가
           dateId = crypto.randomUUID();
           const { error: dateInsertError } = await supabase.from('date').insert([
             { date_id: dateId, class_id: classId, day: date }
@@ -282,7 +304,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
             console.error('date db insert error:', dateInsertError);
           }
         } else {
-          // 이미 존재하는 날짜의 경우 해당 date_id를 사용합니다.
+          // 존재하면 dateId 가져오기
           dateId = existingDateData.date_id;
         }
     
@@ -290,14 +312,22 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
         const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
         if (selectedTimes && selectedTimes.length > 0) {
           for (const time of selectedTimes) {
-            // time 데이터는 중복 검사 없이 새로운 ID로 항상 삽입합니다.
-            // 필요에 따라 중복 검사 로직을 추가할 수 있습니다.
-            const timeId = crypto.randomUUID();
-            const { error: timeError } = await supabase.from('time').insert([
-              { time_id: timeId, date_id: dateId, times: time }
-            ]);
-            if (timeError) {
-              console.error('time db upload error:', timeError);
+            const { data: existingTimeData, error: existingTimeError } = await supabase
+            .from('time')
+            .select('time_id')
+            .eq('date_id', dateId)
+            .eq('times', time)
+            .single();
+
+            if (existingTimeError || !existingTimeData) {
+              // 존재하지 않으면 새로운 시간 추가
+              const timeId = crypto.randomUUID();
+              const { error: timeError } = await supabase.from('time').insert([
+                { time_id: timeId, date_id: dateId, times: time }
+              ]);
+              if (timeError) {
+                console.error('time db upload error:', timeError);
+              }
             }
           }
         }
