@@ -24,9 +24,6 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const [selectedTime, setSelectedTime] = useState(datesAfterToday[0].times[0].times);
   const [timeId, setTimeId] = useState(datesAfterToday[0].times[0].timeId);
   const today = new Date();
-  // const [selectedDate, setSelectedDate] = useState(classDates[0].day);
-
-  console.log(datesAfterToday);
 
   useEffect(() => {
     setReserveInfo({ timeId: timeId });

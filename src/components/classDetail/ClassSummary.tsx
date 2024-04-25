@@ -75,7 +75,7 @@ const ClassSummary = ({
 
   return (
     <div className="mt-4 w-full lg:w-[40%] lg:min-w-[400px]">
-      <div className="tems-center mb-4 flex h-8 gap-2">
+      <div className=" mb-4 flex h-8 items-center gap-2">
         <div className="relative h-8 w-8">
           {userData?.profile_image ? (
             <Image

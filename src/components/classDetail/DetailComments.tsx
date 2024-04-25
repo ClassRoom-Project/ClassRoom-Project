@@ -5,7 +5,7 @@ import { ListDetailClassInfo } from '@/types/class';
 
 const DetailComments = ({ classData }: { classData: ListDetailClassInfo | null }) => {
   return (
-    <div className="w-[80%] rounded-md bg-pale-purple px-4">
+    <div className="w-full rounded-md bg-pale-purple px-4 lg:w-[80%]">
       <div className="mt-9 flex w-full flex-col items-center justify-center ">
         <p className="mb-4 w-full text-2xl">후기 작성하기</p>
         <CreateComments classData={classData} />
