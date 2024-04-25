@@ -13,7 +13,7 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
   return (
-    <div className=" responsiveHeight mx-auto flex h-screen max-w-[1920px] flex-col items-center ">
+    <div className=" responsiveHeight mx-auto flex h-screen max-w-[1920px] flex-col items-center">
       <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
         <Link href={`/`} className="flex items-center justify-center">
           <IoIosArrowBack size={18} />
