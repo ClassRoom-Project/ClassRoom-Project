@@ -28,13 +28,13 @@ export default function MessagesPage() {
 
   if (!chatroomsInfo || chatroomsInfo.length === 0) {
     return (
-      <div className="flex flex-col max-h-full  responsiveHeight">
-        <div className="flex flex-col justify-center items-center h-full">
-          <IoLogoSnapchat className=" text-button-focus-color text-9xl " />
-          <p className="text-2xl py-10">채팅 목록이 없습니다.</p>
+      <div className="responsiveHeight flex max-h-full  flex-col">
+        <div className="flex h-full flex-col items-center justify-center">
+          <IoLogoSnapchat className=" text-9xl text-button-focus-color " />
+          <p className="py-10 text-2xl">채팅 목록이 없습니다.</p>
           <Link
             href="/list"
-            className="bg-button-default-color px-4 py-2 rounded-lg text-white text-xl hover:bg-button-hover-color"
+            className="rounded-lg bg-button-default-color px-4 py-2 text-xl text-white hover:bg-button-hover-color"
           >
             클래스 둘러보기
           </Link>
@@ -44,8 +44,8 @@ export default function MessagesPage() {
   }
 
   return (
-    <div className="flex flex-col max-h-full md:flex-row lg:flex-row responsiveHeight">
-      <section className={firstSectionClasses}>
+    <div className="responsiveHeight flex max-h-full flex-col md:flex-row lg:flex-row">
+      <section className={`${firstSectionClasses} md:overflow-scroll md:overflow-x-hidden`}>
         {chatroomsInfo.map(({ chatId, toClassId, fromUserId, image, teacherUserId, title, makeClassUserId }) => (
           <ChatPreview
             key={chatId}
@@ -62,7 +62,7 @@ export default function MessagesPage() {
       </section>
       <section className={secondSectionClasses}>
         {!currentChatRoomId ? (
-          <div className="text-disable-color h-full flex justify-center items-center">
+          <div className="flex h-full items-center justify-center text-disable-color">
             <p>대화를 선택해주세요</p>
           </div>
         ) : (
