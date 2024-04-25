@@ -6,14 +6,17 @@ export const insertNotice = async (userId: string, classId: string, classTitle: 
     .from('notifications')
     .select('*')
     .eq('user_id', userId)
-    .eq('class_id', classId);
+    .eq('class_id', classId)
+    .maybeSingle();
 
   if (existingError) {
     console.error('Error: ', existingError);
+    return;
   }
 
-  if (existingError) {
-    console.error('Error: ', existingError);
+  // 이미 동일한 알림이 존재하는 경우
+  if (existingData) {
+    return;
   }
 
   const noticeId = crypto.randomUUID();
@@ -23,8 +26,10 @@ export const insertNotice = async (userId: string, classId: string, classTitle: 
     .insert([
       { notice_id: noticeId, user_id: userId, class_id: classId, notice: notice, isread: false, created_at: new Date() }
     ]);
+
   if (noticeError) {
     console.error('Error: ', noticeError);
+    return;
   } else {
     queryClient.invalidateQueries({
       queryKey: ['notifications', userId]
