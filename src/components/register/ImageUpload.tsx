@@ -65,7 +65,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   // supabase storage에 등록한 이미지 업로드
   const uploadFile = async (file: File) => {
     const cleanName = cleanFileName(file.name);
-    const filePath = `uploads/${classId}_${cleanName}`;
+    const filePath = `uploads/${crypto.randomUUID}/${classId}_${cleanName}`;
     const { data, error } = await supabase.storage.from('classImages').upload(filePath, file);
     if (error) {
       return null;
@@ -259,7 +259,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
       // 각 날짜에 대한 데이터 저장
       for (const date of selectedDates) {
         const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
-        const { data: dateData, error: dateError } = await supabase.from('date').insert([
+        const { data: dateData, error: dateError } = await supabase.from('date').update([
           {
             date_id: dateId,
             class_id: classId,
@@ -274,7 +274,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
           if (selectedTimes && selectedTimes.length > 0) {
             for (const time of selectedTimes) {
               const timeId = crypto.randomUUID(); // 시간마다 새로운 ID 생성
-              const { data: timeData, error: timeError } = await supabase.from('time').insert([
+              const { data: timeData, error: timeError } = await supabase.from('time').update([
                 {
                   time_id: timeId,
                   date_id: dateId,

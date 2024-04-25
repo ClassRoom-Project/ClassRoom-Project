@@ -5,22 +5,32 @@ import ClassImageCarousel from '@/components/classDetail/ClassImageCarousel';
 import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
+import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { IoIosArrowBack } from 'react-icons/io';
+import { useSearchParam } from 'react-use';
 
-//export const revalidate = 600;
-export async function generateStaticParams() {
+// export const revalidate = 600;
+// export async function generateStaticParams() {
+//   //데이터 불러오는 로직
+// const classId = await detailClassIdOnly();
+//   //params 내려주기
+//   const paths = classId.map((classItem) => ({
+//     params: { id: classItem.class_id }
+//   }));
+//   return paths;
+// }
+
+const DetailPage = async ({ params }: { params: { id: string } }) => {
   //데이터 불러오는 로직
   const classId = await detailClassIdOnly();
   //params 내려주기
   const paths = classId.map((classItem) => ({
     params: { id: classItem.class_id }
   }));
-  return paths;
-}
-const page = async ({ params }: { params: { id: string } }) => {
+
   const classData = await detailClassInfo(params.id);
-  console.log(classData);
   const userData = await getDetailUserInfo(classData?.user_id);
 
   return (
@@ -43,7 +53,8 @@ const page = async ({ params }: { params: { id: string } }) => {
         )}
         <DetailComments classData={classData} />
       </div>
+      <MoveToTopBtn />
     </div>
   );
 };
-export default page;
+export default DetailPage;
