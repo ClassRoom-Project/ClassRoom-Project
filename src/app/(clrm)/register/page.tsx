@@ -14,7 +14,7 @@ import TotalTime from '@/components/register/TotalTime';
 const RegisterPage = () => {
   return (
     <div className="responsiveHeight h-screen">
-      <div className="mx-auto max-w-4xl p-4">
+      <div className="mx-auto max-w-4xl overflow-y-auto p-4">
         <h1 className="my-2 text-xl font-bold text-[#7E7E7E]">클래스 등록하기</h1>
         <div className="border border-[#FCFCFF] bg-[#FCFCFF] p-4 shadow-md">
           <div className="p-8">

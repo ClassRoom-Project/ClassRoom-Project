@@ -31,7 +31,7 @@ body {
 
 @media (max-width: 767px) {
   html {
-    overflow-y: scroll;
+    overflow-y: auto;
     scrollbar-width: none;
   }
 
