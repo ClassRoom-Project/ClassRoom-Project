@@ -7,7 +7,6 @@ import { PriceBtn, DifficultyBtn } from './listpageBtns';
 const SearchFilter = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
   const { ClassFilters, setClassFilters } = useListFilterStore();
-  const [isOpenCategory, setIsOpenCategory] = useState(false);
   const [minPrice, setMinPrice] = useState('');
   const [maxPrice, setMaxPrice] = useState('');
 
@@ -87,13 +86,13 @@ const SearchFilter = () => {
         </div>
         <ul
           tabIndex={0}
-          className="menu dropdown-content z-[1] flex w-fit flex-col items-center justify-center  gap-2.5 rounded-md border border-solid border-button-focus-color bg-pale-purple p-1 shadow-xl md:p-8"
+          className="menu dropdown-content z-[1] ml-2 flex w-48 flex-col items-center justify-center gap-2.5 rounded-md  border border-solid border-button-focus-color bg-pale-purple p-1 shadow-xl md:ml-0 md:w-80 md:p-8"
         >
           <div className="w-full items-center justify-center">
             <div className="flex w-full items-start justify-start md:mb-3 md:w-64">
               <p className=" text-black">타입</p>
             </div>
-            <div className="flex w-full flex-col items-center justify-center gap-1 text-xs md:flex-row md:gap-3 md:text-base">
+            <div className="flex w-full items-center justify-center gap-1 text-xs md:gap-3 md:text-base">
               <button
                 onClick={() => handleClassTypeBtn('온라인 클래스')}
                 className={`w-12 rounded-2xl  border-[1px] border-solid border-point-purple py-1  md:w-24 ${
@@ -128,7 +127,7 @@ const SearchFilter = () => {
                 onChange={handleLocationChange}
               >
                 <option value="" className=" bg-disable-color" disabled>
-                  <p className="overflow-hidden">지역을 선택하세요</p>
+                  지역을 선택하세요
                 </option>
                 <option value={'서울'}>서울</option>
                 <option value={'경기'}>경기</option>
