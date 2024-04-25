@@ -88,7 +88,7 @@ const SearchFilter = () => {
             className="swap-off fill-current text-main-color hover:bg-white"
             size={30}
           ></FiAlignJustify> */}
-          <Image src={FilterIcon} width={40} height={40} alt="filter icon" className="h-8 w-8 md:h-10 md:w-10" />
+          <Image src={FilterIcon} width={40} height={40} alt="filter icon" className="h-6 w-6 md:h-10 md:w-10" />
         </div>
         <ul
           tabIndex={0}
