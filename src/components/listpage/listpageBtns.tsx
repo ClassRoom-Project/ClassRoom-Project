@@ -42,7 +42,7 @@ export const DifficultyBtn: React.FC<DifficultyBtnProps> = ({ handleClassDifficu
   return (
     <button
       onClick={handleClassDifficultyBtn}
-      className={`rounded-2xl border-[1px] border-solid border-point-purple py-1 text-xs md:text-base  ${
+      className={`w-12 rounded-2xl border-[1px] border-solid border-point-purple py-1 text-xs md:text-base  ${
         classFilters.selectedDifficulty == difficulty
           ? 'bg-point-purple text-white'
           : 'bg-pale-purple transition-all hover:bg-button-disable-color'

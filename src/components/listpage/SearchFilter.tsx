@@ -75,10 +75,19 @@ const SearchFilter = () => {
   };
 
   return (
-    <div className="flex w-full items-start justify-start pt-5">
-      <div className="dropdown dropdown-bottom z-30 h-9 w-9 md:h-12 md:w-12">
-        <div tabIndex={0} onMouseDown={(e) => checkAndCloseDropDown(e)} role="button" className="btn ">
-          <FiAlignJustify role="button" className="swap-off fill-current" size={30} color="#6C5FF7"></FiAlignJustify>
+    <div className="flex w-full items-start justify-start">
+      <div className="dropdown dropdown-bottom z-30">
+        <div
+          tabIndex={0}
+          onMouseDown={(e) => checkAndCloseDropDown(e)}
+          role="button"
+          className="btn ml-2 h-11 w-12 p-0 hover:bg-white md:ml-0 md:w-16"
+        >
+          <FiAlignJustify
+            role="button"
+            className="swap-off fill-current text-main-color hover:bg-white"
+            size={30}
+          ></FiAlignJustify>
         </div>
         <ul
           tabIndex={0}
@@ -111,7 +120,7 @@ const SearchFilter = () => {
               </button>
             </div>
           </div>
-          <div className="divider m-0"></div>
+          <div className="divider m-0 h-1 md:h-4"></div>
           <div>
             <div className="flex  w-full flex-col items-center justify-center">
               <div className="mb-3 flex w-12 items-center justify-center md:w-64 md:items-start md:justify-start">
@@ -139,7 +148,7 @@ const SearchFilter = () => {
               </select>
             </div>
           </div>
-          <div className="divider m-0"></div>
+          <div className="divider m-0 h-1 md:h-4"></div>
           <div className=" flex w-full items-center justify-start gap-4  ">
             <div className="flex  justify-start">
               <p className="text-black">요일</p>
@@ -165,13 +174,13 @@ const SearchFilter = () => {
               주말
             </button>
           </div>
-          <div className="divider m-0"></div>
+          <div className="divider m-0 h-1 md:h-4"></div>
           <div className="w-full items-center justify-center">
-            <div className="mb-3 flex w-64 items-start justify-start">
+            <div className="flex w-64 items-start justify-start md:mb-3">
               <p className="text-black">난이도</p>
             </div>
             <div className="flex w-full justify-center">
-              <div className="grid w-3/4 grid-cols-2 justify-between gap-3">
+              <div className="grid grid-cols-2 justify-between gap-1 md:gap-3">
                 <DifficultyBtn
                   classFilters={ClassFilters}
                   difficulty={'입문'}
@@ -196,9 +205,9 @@ const SearchFilter = () => {
               </div>
             </div>
           </div>
-          <div className="divider m-0"></div>
+          <div className="divider m-0 h-1 md:h-4"></div>
           <div className="flex w-full flex-col items-center justify-center">
-            <div className="mb-3 flex w-12 items-center justify-center md:w-64 md:items-start md:justify-start">
+            <div className="flex w-full items-start justify-start md:mb-3 md:w-64 md:items-start md:justify-start">
               <p className="text-black">금액</p>
             </div>
             <div className="flex w-full justify-center">
@@ -236,8 +245,11 @@ const SearchFilter = () => {
           </div>
         </ul>
       </div>
-      <button onClick={handleResetBtn} className="w-17 btn ml-12 h-12">
-        초기화
+      <button
+        onClick={handleResetBtn}
+        className="btn ml-4 h-11 w-12 p-0 text-sm hover:bg-white hover:text-dark-purple-color md:ml-12 md:w-16 md:text-base"
+      >
+        <p className="text-xs md:text-sm">초기화</p>
       </button>
     </div>
   );
