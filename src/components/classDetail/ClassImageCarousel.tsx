@@ -8,9 +8,10 @@ import noImage from '../../assets/images/clroom_no_img_purple.png';
 import { NextButton, PrevButton, usePrevNextButtons } from './EmblaCarouselArrowButtons';
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import style from './embla.module.css';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import DetailWishButton from './DetailWishButton';
-// import style from './embla.module.css';
+import { LazyLoadImage } from './EmblaCarouselLazyLoadImage';
+import { EmblaCarouselType } from 'embla-carousel';
 
 const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | null }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
@@ -24,6 +25,26 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
     }
   }, [emblaApi, classData?.image]);
 
+  const [slidesInView, setSlidesInView] = useState<number[]>([]);
+
+  const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
+    setSlidesInView((slidesInView) => {
+      if (slidesInView.length === emblaApi.slideNodes().length) {
+        emblaApi.off('slidesInView', updateSlidesInView);
+      }
+      const inView = emblaApi.slidesInView().filter((index) => !slidesInView.includes(index));
+      return slidesInView.concat(inView);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    updateSlidesInView(emblaApi);
+    emblaApi.on('slidesInView', updateSlidesInView);
+    emblaApi.on('reInit', updateSlidesInView);
+  }, [emblaApi, updateSlidesInView]);
+
   return (
     <div className="relative h-[300px] sm:h-[500px] lg:h-auto lg:w-[40%] lg:min-w-[400px]">
       <div className=" badge absolute right-2 top-3 z-30 h-6 scale-90 opacity-90 md:right-4 md:top-4 md:scale-100">
@@ -33,17 +54,8 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
         <div className={`${style.embla__viewport} rounded-2xl`} ref={emblaRef}>
           <div className={style.embla__container}>
             {classData && classData.image.length !== 0 ? (
-              classData?.image.map((image) => (
-                <div className={style.embla__slide} key={image}>
-                  <div className={style.embla__slide__inner}>
-                    <Image
-                      fill={true}
-                      className=" h-full w-full rounded-md object-cover"
-                      src={image}
-                      alt={classData.title}
-                    />
-                  </div>
-                </div>
+              classData?.image.map((image, index) => (
+                <LazyLoadImage key={image} index={index} imgSrc={image} inView={slidesInView.indexOf(index) > -1} />
               ))
             ) : (
               <div className="relative h-full w-full">
