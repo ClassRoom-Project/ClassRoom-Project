@@ -6,6 +6,7 @@ import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
 import DetailWishButton from '@/components/classDetail/DetailWishButton';
 import MapComponent from '@/components/classDetail/MapComponent';
+import BackButton from '@/components/common/BackButton';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import Link from 'next/link';
 import { IoIosArrowBack } from 'react-icons/io';
@@ -14,14 +15,11 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
   return (
-    <div className=" responsiveHeight mx-auto flex h-screen max-w-[1920px] flex-col items-center">
-      <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
-        <Link href={`/`} className="md:text-md flex items-center justify-center text-sm">
-          <IoIosArrowBack size={18} />
-          뒤로가기
-        </Link>
+    <div className=" responsiveHeight relative mx-auto flex h-screen max-w-[1920px] flex-col items-center">
+      <div className=" m-0 flex w-full   items-center bg-white p-2 text-text-dark-gray ">
+        <BackButton />
       </div>
-      <div className="relative flex w-full flex-col justify-center gap-2 bg-pale-purple  p-6 lg:min-w-[900px] lg:flex-row lg:gap-12">
+      <div className=" relative flex w-full flex-col justify-center gap-2 bg-pale-purple  p-6 lg:min-w-[900px] lg:flex-row lg:gap-12">
         <ClassImageCarousel classData={classData} />
         <ClassSummary classData={classData} userData={userData} />
       </div>
