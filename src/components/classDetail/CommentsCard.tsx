@@ -23,7 +23,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
         {/* 프로필  */}
         <div className="mb-2 flex items-center gap-2 md:mb-1 ">
           <div className=" flex items-center justify-center gap-2">
-            <div className="relative h-9 w-9 sm:h-12 sm:w-12 ">
+            <div className="relative h-9 w-9 flex-shrink-0 sm:h-12 sm:w-12">
               {comment.profile_image ? (
                 <Image
                   src={comment.profile_image}
@@ -42,7 +42,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
                 />
               )}
             </div>
-            <h5 className="text-text-dart-gray text-base font-semibold sm:text-lg">{comment.nickname}</h5>
+            <h5 className="text-text-dart-gray text-sm font-semibold md:text-lg">{comment.nickname}</h5>
           </div>
           <div className="rating rating-sm">{Stars()}</div>
         </div>
