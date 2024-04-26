@@ -16,7 +16,6 @@ import Pagination from '@/components/common/Pagination';
 import { useEffect, useState } from 'react';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
-import { AlertModal } from '@/components/common/AlertModal';
 
 const MyClass = () => {
   const { loginUserId } = useLoginStore();

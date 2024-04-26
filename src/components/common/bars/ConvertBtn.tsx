@@ -6,7 +6,6 @@ import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
 import { useRouter } from 'next/navigation';
 import { TbArrowsExchange } from 'react-icons/tb';
-import { AlertModal } from '../AlertModal';
 
 const ConvertBtn = () => {
   const { loginUserId } = useLoginStore();
@@ -25,16 +24,9 @@ const ConvertBtn = () => {
   // 전환 버튼
   const handleOnClickChangedRoleBtn = async () => {
     if (job === null && field === null && bank === null && account === null && name === null && number === null) {
-      const confirm = (
-        <AlertModal
-          text="입력된 선생님 정보가 없습니다. 마이페이지에서 선생님 정보를 입력해주세요. 마이페이지로 이동 하시겠습니까?"
-          btn1="취소"
-          btn2="확인"
-        />
+      const confirm = window.confirm(
+        '입력된 선생님 정보가 없습니다. 마이페이지에서 선생님 정보를 입력해주세요. 마이페이지로 이동 하시겠습니까?'
       );
-      // const confirm = window.confirm(
-      //   '입력된 선생님 정보가 없습니다. 마이페이지에서 선생님 정보를 입력해주세요. 마이페이지로 이동 하시겠습니까?'
-      // );
       if (confirm) {
         router.push(`/studentMypage?studentTab=addTeacherInfo`);
       }
