@@ -44,19 +44,19 @@ export const SearchClass = () => {
   }, [searchQuery, setSelectedTitle]);
 
   return (
-    <form className="h-[120px] ml-2 relative w-full flex items-center justify-center" onSubmit={handleSearchBtn}>
-      <div className="flex border-[1px] rounded-xl w-full items-end justify-end border-input-border-color relative">
+    <form className="mx-2 flex h-[120px] w-full items-center justify-start" onSubmit={handleSearchBtn}>
+      <div className="relative flex w-3/5 items-end justify-end rounded-xl border-[1px] border-input-border-color lg:w-4/5">
         <input
           maxLength={20}
           onChange={handleSearchChange}
           value={selectedTitle}
-          className="h-12 ml-16 outline-none flex-grow rounded-xl"
+          className="h-12 flex-grow rounded-xl px-2 outline-none"
           type="text"
           placeholder="검색하기"
         />
         <button
           type="submit"
-          className="btn border-[1px] border-transparent shadow-none hover:bg-transparent hover:border-transparent flex-shrink-0 rounded-xl absolute left-0 bottom-0 bg-transparent"
+          className="btn rounded-xl border-[1px] border-transparent bg-white  shadow-none  hover:bg-disable-color"
         >
           <IoIosSearch className="text-2xl text-icon-color" />
         </button>

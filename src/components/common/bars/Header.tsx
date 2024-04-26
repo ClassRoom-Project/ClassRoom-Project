@@ -66,19 +66,19 @@ const Header = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="fixed left-0 right-0 top-0  z-40 ml-0 flex h-20 w-full items-center justify-between  bg-white md:ml-[50px] md:px-20">
-        <div className="ml-0 flex h-full w-full items-center justify-start">
-          <div className="relative ml-2  h-10 w-10 rounded-full md:ml-12 md:h-16 md:w-16">
+        <div className="flex h-full w-full items-center justify-start">
+          <div className="relative ml-2 h-10 w-10 rounded-full md:ml-12 md:h-16 md:w-16">
             <Link href="/">
               <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
             </Link>
           </div>
-          <div className="xs:w-1/3 w-4/5  md:w-3/5">
+          <div className="flex flex-grow items-center justify-start">
             <Suspense>
               <SearchClass />
             </Suspense>
           </div>
         </div>
-        <div className="relative flex w-1/5 items-end justify-end  lg:w-4/5">
+        <div className="relative flex items-end justify-end">
           <div className="flex w-full items-center justify-end">
             {userEmail ? (
               <div className="items-en flex justify-end">
