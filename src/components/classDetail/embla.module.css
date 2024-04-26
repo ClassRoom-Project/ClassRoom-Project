@@ -84,8 +84,8 @@
   top: 50%;
   transform: translateY(-50%);
   border: 0;
-  width: 45px;
-  height: 45px;
+  width: 35px;
+  height: 35px;
   justify-content: center;
   align-items: center;
   padding: 0;
@@ -107,11 +107,13 @@
 }
 
 .embla__buttonPrev {
-  left: 27px;
+  left: 12px;
+  opacity: 0.9;
 }
 
 .embla__buttonNext {
-  right: 27px;
+  right: 12px;
+  opacity: 0.9;
 }
 
 .embla__dots {
@@ -124,6 +126,7 @@
   left: 50%;
   transform: translateX(-50%);
   border-radius: 10px;
+  opacity: 0.8;
 }
 
 .embla__dotSelected:after {
@@ -138,8 +141,8 @@
   padding: 0;
   outline: 0;
   border: 0;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin-right: 7.5px;
   margin-left: 7.5px;
   display: flex;
@@ -166,21 +169,21 @@
     padding: 0;
     outline: 0;
     border: 0;
-    width: 20px;
-    height: 20px;
+    width: 14px;
+    height: 14px;
     margin-right: 7.5px;
     margin-left: 7.5px;
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
-  .embla__button--prev {
-    left: 17px;
+  .embla__buttonPrev {
+    left: 7px;
   }
 
-  .embla__button--next {
-    right: 17px;
+  .embla__buttonNext {
+    right: 7px;
   }
 
   .embla__button {
@@ -193,8 +196,8 @@
     top: 50%;
     transform: translateY(-50%);
     border: 0;
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     justify-content: center;
     align-items: center;
     padding: 0;

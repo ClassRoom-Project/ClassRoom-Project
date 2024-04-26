@@ -4,6 +4,7 @@ import ClassDetailContainer from '@/components/classDetail/ClassDetailContainer'
 import ClassImageCarousel from '@/components/classDetail/ClassImageCarousel';
 import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
+import DetailWishButton from '@/components/classDetail/DetailWishButton';
 import MapComponent from '@/components/classDetail/MapComponent';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import Link from 'next/link';
@@ -20,12 +21,12 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
           뒤로가기
         </Link>
       </div>
-      <div className="flex w-full flex-col justify-center gap-2 bg-pale-purple p-6  lg:min-w-[900px] lg:flex-row lg:gap-12">
+      <div className="relative flex w-full flex-col justify-center gap-2 bg-pale-purple  p-6 lg:min-w-[900px] lg:flex-row lg:gap-12">
         <ClassImageCarousel classData={classData} />
         <ClassSummary classData={classData} userData={userData} />
       </div>
 
-      <div className="flex w-full  flex-col items-center justify-center px-6 pb-24 pt-2 lg:p-6 ">
+      <div className="flex w-full  flex-col items-center justify-center px-7 pb-24 pt-2 lg:p-6 ">
         <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
         {classData?.location && (
           <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />

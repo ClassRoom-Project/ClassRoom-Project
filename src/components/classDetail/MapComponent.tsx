@@ -62,9 +62,9 @@ const MapComponent = ({
             >
               <MapMarker position={{ lat: latitude ?? 0, lng: longitude ?? 0 }} />
             </Map>
-            <div className="m-4 flex items-center gap-1">
-              <GrLocation size={20} className="text-main-color" />
-              주소 : {location} {detailLocation}
+            <div className="mt-2 flex items-center gap-1 text-sm md:text-base">
+              <GrLocation size={20} className="mr-0.5 text-main-color" />
+              {location} {detailLocation}
             </div>
           </div>
         ) : (

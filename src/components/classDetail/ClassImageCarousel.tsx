@@ -9,6 +9,7 @@ import { NextButton, PrevButton, usePrevNextButtons } from './EmblaCarouselArrow
 import { DotButton, useDotButton } from './EmblaCarouselDotButton';
 import style from './embla.module.css';
 import { useEffect } from 'react';
+import DetailWishButton from './DetailWishButton';
 // import style from './embla.module.css';
 
 const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | null }) => {
@@ -24,7 +25,10 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
   }, [emblaApi, classData?.image]);
 
   return (
-    <div className="h-[300px] sm:h-[500px] lg:h-auto lg:w-[40%] lg:min-w-[400px]">
+    <div className="relative h-[300px] sm:h-[500px] lg:h-auto lg:w-[40%] lg:min-w-[400px]">
+      <div className=" badge absolute right-2 top-3 z-30 h-6 scale-90 opacity-90 md:right-4 md:top-4 md:scale-100">
+        <DetailWishButton classId={classData?.class_id} />
+      </div>
       <section className={`${style.embla}`}>
         <div className={`${style.embla__viewport} rounded-2xl`} ref={emblaRef}>
           <div className={style.embla__container}>
