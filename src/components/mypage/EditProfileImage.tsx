@@ -50,12 +50,12 @@ const EditProfileImage = ({
 
   return (
     <div>
-      <div className="flex h-[125px] w-[125px] flex-col items-center gap-4 rounded-full p-4 md:h-[150px] md:w-[150px]">
+      <div className="flex flex-col items-center p-4 gap-4 w-[150px] h-[150px] rounded-full">
         <Image
           src={profileImage}
           width={100}
           height={100}
-          className="h-full w-full rounded-full object-cover"
+          className="w-full h-full rounded-full object-cover"
           alt="프로필 이미지"
         />
         <input
@@ -72,7 +72,7 @@ const EditProfileImage = ({
       </div>
       {isEditing ? (
         <button
-          className="btn rounded-full bg-point-purple p-4 text-white hover:bg-white hover:text-dark-purple-color"
+          className="btn p-4 bg-point-purple text-white rounded-full hover:bg-white hover:text-dark-purple-color"
           onClick={handleOnClickEditImageBtn}
         >
           프로필 이미지 변경
