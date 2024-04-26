@@ -81,8 +81,7 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
         </button>
       </div>
       <button onClick={handleBack} className="flex flex-row items-center pl-2 pt-2 text-sm md:hidden">
-        뒤로가기
-        <TbArrowBack className="text-xl" />
+        &lt; 뒤로가기
       </button>
       <MessageBoxs
         toClassId={toClassId}

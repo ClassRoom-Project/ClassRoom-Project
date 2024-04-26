@@ -45,7 +45,7 @@ export default function MessagesPage() {
 
   return (
     <div className="responsiveHeight flex max-h-full flex-col md:flex-row lg:flex-row">
-      <section className={`${firstSectionClasses} md:overflow-scroll md:overflow-x-hidden`}>
+      <section className={`${firstSectionClasses} mb-16 md:mb-0 md:overflow-scroll md:overflow-x-hidden `}>
         {chatroomsInfo.map(({ chatId, toClassId, fromUserId, image, teacherUserId, title, makeClassUserId }) => (
           <ChatPreview
             key={chatId}

@@ -28,11 +28,11 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
       prefetch={false}
       shallow
     >
-      <div className="relative mx-2 mb-2 mt-2 flex py-4">
+      <div className="relative mx-2 mb-2 mt-2 flex py-4 ">
         {readleftChekcMessages === 0 ? (
           ''
         ) : (
-          <div className="absolute bottom-12 right-6 flex h-5 w-5 items-center justify-center rounded-full bg-main-color">
+          <div className="absolute bottom-10 right-6 flex h-5 w-5 items-center justify-center rounded-full bg-main-color md:bottom-14">
             <div className="text-white">{readleftChekcMessages}</div>
           </div>
         )}
