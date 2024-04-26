@@ -4,12 +4,9 @@ import ClassDetailContainer from '@/components/classDetail/ClassDetailContainer'
 import ClassImageCarousel from '@/components/classDetail/ClassImageCarousel';
 import ClassSummary from '@/components/classDetail/ClassSummary';
 import DetailComments from '@/components/classDetail/DetailComments';
-import DetailWishButton from '@/components/classDetail/DetailWishButton';
 import MapComponent from '@/components/classDetail/MapComponent';
 import BackButton from '@/components/common/BackButton';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
-import Link from 'next/link';
-import { IoIosArrowBack } from 'react-icons/io';
 
 const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
@@ -24,7 +21,7 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
         <ClassSummary classData={classData} userData={userData} />
       </div>
 
-      <div className="flex w-full  flex-col items-center justify-center px-7 pb-24 pt-2 lg:p-6 ">
+      <div className="flex w-full  flex-col items-center justify-center px-7 pb-24 pt-2  ">
         <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
         {classData?.location && (
           <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />

@@ -69,7 +69,7 @@ const ClassSummary = ({
     {
       icon: <PiCurrencyKrw className="text-main-color" />,
       title: '수강 금액',
-      description: `${classData?.price.toLocaleString()}원`
+      description: classData?.price === 0 ? '무료' : `${classData?.price.toLocaleString()}원`
     }
   ];
 

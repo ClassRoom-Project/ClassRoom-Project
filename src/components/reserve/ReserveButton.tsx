@@ -53,9 +53,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
       return;
     }
 
-    console.log(reserveInfo);
-
-    // 무료 클래스 바로 예약 처리
+    // 무료 클래스 결제 없이 바로 예약 처리
     if (
       reserveInfo.reservePrice === 0 &&
       reserveInfo.classId &&
@@ -63,10 +61,6 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
       reserveInfo.timeId &&
       reserveInfo.userId
     ) {
-      console.log(isFreeClassReserveLoading);
-      console.log(reserveInfo);
-      console.log('무료클래스 예약할게요??');
-
       if (
         window.confirm(
           '해당 클래스는 무료 클래스로 결제 과정 없이 예약됩니다. 예약 정보를 확인하신 후 확인 버튼을 눌러 예약을 완료해 주세요. '

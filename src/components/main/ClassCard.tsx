@@ -46,7 +46,9 @@ const ClassCard = ({ classInfos }: { classInfos: ClassAllType }) => {
         </div>
       </Link>
       <div className="flex justify-between pb-4">
-        <div className="overflow-hidden text-sm font-bold md:text-base">{`${classInfos.price.toLocaleString()}원`}</div>
+        <div className="overflow-hidden text-sm font-bold md:text-base">
+          {classInfos?.price === 0 ? '무료' : `${classInfos?.price.toLocaleString()}원`}
+        </div>
         {classInfos.wish && <ListPageWishButton classId={classInfos.class_id} wishInfo={classInfos.wish} />}
       </div>
     </div>

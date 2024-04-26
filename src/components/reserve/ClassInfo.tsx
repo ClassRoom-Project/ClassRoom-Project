@@ -34,7 +34,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
     {
       icon: <PiCurrencyKrw className="text-gray-400" />,
       title: '1인당 수강 금액',
-      description: `${classInfo.price.toLocaleString()}원`
+      description: classInfo?.price === 0 ? '무료' : `${classInfo?.price.toLocaleString()}원`
     }
   ];
 
