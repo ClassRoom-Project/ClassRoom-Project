@@ -136,7 +136,9 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
         <div className="flex h-full w-full flex-col gap-4 p-4 lg:m-4 lg:w-[960px]">
           <section className="flex flex-col gap-4 lg:flex-row ">
             <div className="flex w-full justify-center gap-4 lg:justify-start">
-              <p className="whitespace-nowrap text-lg font-bold text-dark-purple-color sm:text-xl">{comment.title}</p>
+              <p className="w-full whitespace-nowrap text-lg font-bold text-dark-purple-color sm:text-xl">
+                {comment.title}
+              </p>
             </div>
             <p className="flex gap-4 whitespace-nowrap text-sm sm:text-base">
               <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
