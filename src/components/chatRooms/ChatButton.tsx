@@ -30,7 +30,7 @@ export default function ChatButton() {
         <div className=" hidden sm:flex md:sm:flex">채팅</div>
       </button>
       {readLeftChekcMessageAll ? (
-        <div className="absolute bottom-5 right-5 flex h-5 w-5 items-center justify-center rounded-full bg-button-focus-color md:bottom-10 md:right-3 md:bg-main-color">
+        <div className="absolute bottom-5 right-4 flex h-5 w-5 items-center justify-center rounded-full bg-button-focus-color md:bottom-10 md:right-3 md:bg-main-color">
           <div className="text-white">{readLeftChekcMessageAll}</div>
         </div>
       ) : (
