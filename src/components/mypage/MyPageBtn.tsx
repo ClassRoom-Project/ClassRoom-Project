@@ -31,7 +31,7 @@ const MyPageBtn = () => {
         className="flex w-full flex-col items-center whitespace-nowrap text-background-color transition ease-in hover:text-main-color md:text-icon-color"
       >
         <GoPerson className="text-4xl sm:text-4xl md:text-4xl" />
-        <div className=" hidden sm:flex md:sm:flex">마이페이지</div>
+        <div className="hidden sm:flex md:sm:flex">마이페이지</div>
       </button>
     </div>
   );
