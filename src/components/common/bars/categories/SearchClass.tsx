@@ -45,12 +45,12 @@ export const SearchClass = () => {
 
   return (
     <form className="mx-2 flex h-[120px] w-full items-center justify-start" onSubmit={handleSearchBtn}>
-      <div className="relative flex w-3/5 items-end justify-end rounded-xl border-[1px] border-input-border-color lg:w-4/5">
+      <div className="xl:[350px] relative flex w-[200px] items-end justify-end rounded-xl border-[1px] border-input-border-color md:w-[250px] lg:w-[300px] 2xl:w-[400px]">
         <input
           maxLength={20}
           onChange={handleSearchChange}
           value={selectedTitle}
-          className="h-12 flex-grow rounded-xl px-2 outline-none"
+          className="h-12 flex-grow rounded-xl bg-red-500 pl-2 outline-none"
           type="text"
           placeholder="검색하기"
         />
@@ -58,7 +58,7 @@ export const SearchClass = () => {
           type="submit"
           className="btn rounded-xl border-[1px] border-transparent bg-white  shadow-none  hover:bg-disable-color"
         >
-          <IoIosSearch className="text-2xl text-icon-color" />
+          <IoIosSearch className="bg-slate-500 text-2xl text-icon-color" />
         </button>
       </div>
     </form>
