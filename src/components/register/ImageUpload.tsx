@@ -139,6 +139,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
+    setIsLoading(true);
     // 카테고리 입력 안했을시
     if (!category) {
       noCategoryNotify();

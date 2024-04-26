@@ -4,8 +4,10 @@ import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantity
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { quantityWarning, selectDayWarning } from '../common/Toastify';
+import { useEffect, useState } from 'react';
+import { invalidReserve, quantityWarning, selectDayWarning } from '../common/Toastify';
+import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
+import LoadingSpinner from '../common/LoadingSpinner';
 
 type ReserveButtonParams = {
   classId: string;
@@ -17,6 +19,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
   const router = useRouter();
   const { loginUserId } = useLoginStore();
   const { setReserveInfo, reserveInfo } = useReserveStore();
+  const [isFreeClassReserveLoading, setIsFreeClassReserveLoading] = useState(false);
 
   useEffect(() => {
     setReserveInfo({ classId, userId: loginUserId });
@@ -31,6 +34,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
     }
 
     if (reserveInfo.reserveQuantity === 0) {
+      setIsFreeClassReserveLoading(false);
       quantityWarning();
       return;
     }
@@ -49,6 +53,47 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
       return;
     }
 
+    console.log(reserveInfo);
+
+    // 무료 클래스 바로 예약 처리
+    if (
+      reserveInfo.reservePrice === 0 &&
+      reserveInfo.classId &&
+      reserveInfo.reserveQuantity &&
+      reserveInfo.timeId &&
+      reserveInfo.userId
+    ) {
+      console.log(isFreeClassReserveLoading);
+      console.log(reserveInfo);
+      console.log('무료클래스 예약할게요??');
+
+      if (
+        window.confirm(
+          '해당 클래스는 무료 클래스로 결제 과정 없이 예약됩니다. 예약 정보를 확인하신 후 확인 버튼을 눌러 예약을 완료해 주세요. '
+        )
+      ) {
+        setIsFreeClassReserveLoading(true);
+
+        try {
+          const reserveId = await insertNewReservation({
+            reserveId: crypto.randomUUID(),
+            classId: reserveInfo.classId,
+            reservePrice: reserveInfo.reservePrice,
+            reserveQuantity: reserveInfo.reserveQuantity,
+            timeId: reserveInfo.timeId,
+            userId: reserveInfo.userId
+          });
+
+          setIsFreeClassReserveLoading(false);
+          router.replace(`/reserve/success/${reserveId}`);
+          return;
+        } catch (error) {
+          invalidReserve();
+          console.log('무료 클래스 insertNewReservation 오류', error);
+        }
+      } else return;
+    }
+
     router.replace(
       `/payment?orderId=${crypto.randomUUID()}&price=${reserveInfo.reservePrice}&classId=${
         reserveInfo.classId
@@ -58,8 +103,13 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
 
   return (
     <>
+      {isFreeClassReserveLoading && (
+        <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
+          <LoadingSpinner />
+        </div>
+      )}
       <button
-        className="btn w-full bg-point-purple tracking-wide text-white hover:bg-button-hover-color"
+        className={`btn w-full bg-point-purple tracking-wide text-white hover:bg-button-hover-color ${isFreeClassReserveLoading && 'btn-disabled'}`}
         onClick={handleReserveButtonClick}
       >
         결제하기
