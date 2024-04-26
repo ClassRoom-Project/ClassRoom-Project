@@ -11,7 +11,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { supabase } from '@/app/api/supabase/supabase';
 import { useQueryClient } from '@tanstack/react-query';
 import defaultimage from '../../../../../assets/images/profile-image.png';
@@ -27,7 +27,6 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   const { readChatRoomMessages, isLoading } = useReadChatRoomMessages(chatId, loginUserId!);
   const { deleteMessageMutate } = useDeleteMessage();
   const queryClient = useQueryClient();
-  const [stateLoading, setStateLoading] = useState(false);
   //Dom요소나 컴포넌트의 직접적인 접근을 가능하게 해줌Ref
   const zoom = mediumZoom({ background: '#000' });
   const endOfMessagesRef = useRef<HTMLDivElement>(null);
@@ -67,9 +66,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
   }, [chatId, loginUserId, queryClient]);
 
   const handleMessageDelete = (messageId: number) => {
-    setStateLoading(true);
     deleteMessageMutate(messageId);
-    setStateLoading(false);
     deleteMessage();
   };
 
