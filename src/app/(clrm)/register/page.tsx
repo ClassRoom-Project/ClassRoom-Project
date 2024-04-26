@@ -13,10 +13,9 @@ import TotalTime from '@/components/register/TotalTime';
 
 const RegisterPage = () => {
   return (
-
     <div className="max-w-4xl mx-auto p-4">
       <h1 className="text-xl text-[#7E7E7E] font-bold my-2">클래스 등록하기</h1>
-      <div className="border border-[#FCFCFF] bg-[#FCFCFF] p-4 shadow-md">
+      <div className="border border-[#FCFCFF] bg-[#FCFCFF] py-4 px-2 sm:px-2 shadow-md">
         <div className="p-8">
           <h1 className="text-lg mt-1">클래스 기본정보 입력란</h1>
           <hr className="my-4 border-[#4D43B8]" />

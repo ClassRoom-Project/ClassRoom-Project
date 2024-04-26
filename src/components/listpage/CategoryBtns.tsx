@@ -39,8 +39,8 @@ const CategoryBtns = () => {
   }, [pathName, setSelectedCategory]);
 
   return (
-    <div className="mb-6 flex h-12 w-full items-center justify-center bg-transparent md:h-16">
-      <div className="flex w-full flex-row justify-between gap-1 whitespace-nowrap px-2 md:gap-2 ">
+    <div className=" flex h-12 w-full items-center justify-center bg-transparent md:h-16">
+      <div className="flex w-full flex-row justify-between gap-1 whitespace-nowrap px-2 md:gap-2">
         <div className="overflow-x-auto scrollbar-hide md:flex md:w-full md:justify-between">
           {categories.map((category) => (
             <button
