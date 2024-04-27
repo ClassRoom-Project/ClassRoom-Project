@@ -39,7 +39,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
   ];
 
   return (
-    <div className="rounded-md bg-white px-5 pb-6 pt-4 shadow">
+    <div className=" rounded-md bg-white px-5 pb-6 pt-4 shadow">
       <div className="flex w-full justify-between">
         <h1 className="mb-1 text-lg font-bold">선택하신 클래스</h1>
       </div>
