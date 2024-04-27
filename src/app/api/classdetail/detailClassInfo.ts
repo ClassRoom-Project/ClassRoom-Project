@@ -22,7 +22,7 @@ export const detailClassInfo = async (classId: string) => {
   }
 
   return data;
-}; //generateStaticParams 위한 class_id를 가져오는 함수
+};
 
 export const detailClassIdOnly = async (): Promise<ClassItem[]> => {
   const { data, error } = await supabase.from('class').select('class_id');

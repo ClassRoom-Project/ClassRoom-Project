@@ -3,6 +3,7 @@ import SearchFilter from '@/components/listpage/SearchFilter';
 import CategoryBtns from '@/components/listpage/CategoryBtns';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import { Suspense } from 'react';
+
 export default function ListPage() {
   return (
     <div className="responsiveHeight h-screen">
