@@ -6,6 +6,8 @@ import SetQuantityAndPay from '@/components/reserve/SetQuantityAndPay';
 import Link from 'next/link';
 import { IoIosArrowBack } from 'react-icons/io';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;
   const classInfo = await fetchReserveClassInfo(classId);

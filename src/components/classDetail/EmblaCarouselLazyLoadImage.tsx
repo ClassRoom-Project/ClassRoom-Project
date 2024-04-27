@@ -31,7 +31,7 @@ export const LazyLoadImage: React.FC<PropType> = (props) => {
             onLoad={setLoaded}
             src={inView ? imgSrc : PLACEHOLDER_SRC}
             fill={true}
-            alt="Your alt text"
+            alt="class Detail Image"
             data-src={imgSrc}
           />
         </div>
