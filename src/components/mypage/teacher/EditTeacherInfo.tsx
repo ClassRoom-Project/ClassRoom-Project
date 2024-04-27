@@ -169,6 +169,9 @@ const EditTeacherInfo = () => {
         setNewAccount(teacherInfo?.account || '');
         setNewTeacherName(teacherInfo?.teacher_name || '');
         setNewTeacherNumber(teacherInfo?.teacher_number || '');
+        setIsAvailableName(true);
+        setIsAvailableNumber(true);
+        setIsAvailableAccount(true);
       }
     }
   };
@@ -193,7 +196,7 @@ const EditTeacherInfo = () => {
   return (
     <div className="mb-16 flex w-full flex-col items-center justify-center gap-6 bg-light-purple py-4 md:mb-0 md:w-full md:justify-items-center md:p-4 lg:w-full">
       <p className="items-start pt-4 text-xl font-bold text-dark-purple-color md:hidden">선생님 정보 수정하기</p>
-      <p className=" py-4 text-center text-text-dark-gray">
+      <p className=" p-4 text-center text-text-dark-gray">
         회원님이 등록하신 강사 정보입니다. <br />
         수정을 원하시면 아래 정보 수정하기 버튼을 눌러주세요.
       </p>
@@ -203,7 +206,7 @@ const EditTeacherInfo = () => {
             <div className="flex flex-col">
               <div className="flex flex-col gap-4 p-4">
                 <p className="font-bold text-text-dark-gray">강사 이름</p>
-                <div className="flex flex-col">
+                <div className="flex w-full flex-col">
                   {isEditing ? (
                     <input
                       type="text"
@@ -218,7 +221,9 @@ const EditTeacherInfo = () => {
                   {isAvailableName ? (
                     ''
                   ) : (
-                    <p className="p-2 font-thin">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>
+                    <p className="w-[318px] p-2 font-thin md:w-[200px] lg:w-[250px]">
+                      이름은 한글, 영어 대소문자만 입력 가능합니다.
+                    </p>
                   )}
                 </div>
               </div>
@@ -236,7 +241,13 @@ const EditTeacherInfo = () => {
                   ) : (
                     <p>{newTeacherNumber}</p>
                   )}
-                  {isAvailableNumber ? '' : <p className="p-2 font-thin">휴대폰 번호의 양식에 맞게 입력해주세요.</p>}
+                  {isAvailableNumber ? (
+                    ''
+                  ) : (
+                    <p className="w-[318px] p-2 font-thin md:w-[200px] lg:w-[250px]">
+                      휴대폰 번호의 양식에 맞게 입력해주세요.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
