@@ -25,6 +25,7 @@ const Price:React.FC<PriceProps> = ({ isEditMode, initialData }) => {
     if (isNaN(value) || value < 0) value = 0;
     setPrice(value);
   };
+  
   return (
     <div className="my-4">
       <div className="flex items-center justify-between space-x-4">

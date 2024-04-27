@@ -71,7 +71,7 @@ const ClassContent: React.FC<ClassContentProps> = ({ isEditMode, initialData }) 
   ]
 
   return (
-    <div className="mt-4 h-[400px] mb-2">
+    <div className="mt-4 h-96 mb-2">
       <div className="flex flex-col md:flex-row items-start space-x-0 md:space-x-4 space-y-4 md:space-y-0 w-full">
         <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
           <span className='text-[#d63232] font-bold'>*</span> 
@@ -84,8 +84,7 @@ const ClassContent: React.FC<ClassContentProps> = ({ isEditMode, initialData }) 
           modules={modules}
           formats={formats}
           placeholder="클래스의 상세 설명을 입력해주세요"
-          className="form-input rounded flex-grow w-full text-lg"
-          style={{ height: '350px'}}
+          className="form-input rounded flex-grow w-full text-lg h-60 md:h-72 lg:h-96"
         />
       </div>
     </div>

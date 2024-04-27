@@ -39,8 +39,6 @@ const RegisterEditPage = () => {
   });
 
   const [dateData, setDateData] = useState<DateItem[]>([]);
-  const [timeData, setTimeData] = useState<string[]>([]);
-
   const path = usePathname();
   const classId = path.split('/').pop();
 
@@ -52,7 +50,6 @@ const RegisterEditPage = () => {
         console.error('Error: ', error);
         return;
       }
-      // console.log("Fetched data:", data);
       setClassData(data);
     };
 

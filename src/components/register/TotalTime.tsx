@@ -25,6 +25,7 @@ const TotalTime:React.FC<TotalTimeProps> = ({isEditMode, initialData}) => {
     if (isNaN(value) || value < 0) value = 0;
     setTotalTime(value);
   };
+  
   return (
     <div className="flex items-center space-x-2 my-4">
       <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">

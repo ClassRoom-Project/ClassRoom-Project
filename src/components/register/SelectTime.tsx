@@ -135,37 +135,36 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
         )}
       </div>
       <div className="flex flex-col my-4">
-  {selectedDates.map((date, index) => (
-    <div key={index} className="flex flex-col gap-2 my-2">
-      <div className="flex items-center gap-2">
-        <button onClick={() => handleRemoveDate(date)} className="bg-red-500 text-white w-6 h-6 rounded-full">
-          -
-        </button>
-        <p className="flex-none">{date}</p>
-        <input type="time" onChange={(e) => setTempTime(e.target.value)} className="flex-none" />
-        <button onClick={() => handleAddTime(date)} className="bg-[#6C5FF7] text-white w-6 h-6 rounded-full">
-          +
-        </button>
-      </div>
-      <div className="flex flex-row flex-wrap gap-2 justify-start">
-        {schedules
-          .find((schedule) => schedule.date === date)
-          ?.times.map((time, timeIndex) => (
-            <div key={timeIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded-md">
-              <p>{time}</p>
-              <button
-                onClick={() => handleRemoveTime(date, time)}
-                className="bg-red-500 text-white w-6 h-6 rounded-md"
-              >
-                -
-              </button>
-            </div>
-          ))}
-      </div>
+      {selectedDates.map((date, index) => (
+        <div key={index} className="flex flex-col gap-2 my-2">
+          <div className="flex items-center gap-2">
+            <button onClick={() => handleRemoveDate(date)} className="bg-red-500 text-white w-6 h-6 rounded-full">
+              -
+            </button>
+            <p className="flex-none">{date}</p>
+            <input type="time" onChange={(e) => setTempTime(e.target.value)} className="flex-none" />
+            <button onClick={() => handleAddTime(date)} className="bg-[#6C5FF7] text-white w-6 h-6 rounded-full">
+              +
+            </button>
+          </div>
+          <div className="flex flex-row flex-wrap gap-2 justify-start">
+            {schedules
+              .find((schedule) => schedule.date === date)
+              ?.times.map((time, timeIndex) => (
+                <div key={timeIndex} className="flex items-center gap-1 bg-gray-200 p-1 rounded-md">
+                  <p>{time}</p>
+                  <button
+                    onClick={() => handleRemoveTime(date, time)}
+                    className="bg-red-500 text-white w-6 h-6 rounded-md"
+                  >
+                    -
+                  </button>
+                </div>
+              ))}
+          </div>
+        </div>
+      ))}
     </div>
-  ))}
-</div>
-
   </div>
   );
 };
