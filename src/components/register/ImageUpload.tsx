@@ -60,8 +60,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   const noticeId = crypto.randomUUID();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const [deletedDates, setDeletedDates] = useState([]);
-  const [deletedTimes, setDeletedTimes] = useState([]);
 
   useEffect(() => {
     if (initialData && initialData.image && initialData.image.length > 0) {
@@ -258,24 +256,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
         console.error('error:', error);
         setIsLoading(false);
         return;
-      }
-
-      // 날짜 삭제 로직
-      for (const date of deletedDates) {
-        await supabase
-          .from('date')
-          .delete()
-          .eq('day', date)
-          .eq('class_id', classId);
-      }
-
-      // 시간 삭제 로직
-      for (const { date_id, times } of deletedTimes) {
-        await supabase
-          .from('time')
-          .delete()
-          .eq('date_id', date_id)
-          .eq('times', times);
       }
 
       // 선택된 날짜 처리
