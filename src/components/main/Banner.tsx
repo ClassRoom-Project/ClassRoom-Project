@@ -7,6 +7,10 @@ import bannerMeeting from '@/assets/images/bannerMeeting.png';
 import bannerText from '@/assets/images/bannerText.svg';
 import bannerFlower from '@/assets/images/bannerFlower.png';
 import bannerPersimmon from '@/assets/images/bannerPersimmon.png';
+import lightPurpleGraphic from '@/assets/images/lightPurpleGraphic.svg';
+import lightPurpleGraphic2 from '@/assets/images/lightPurpleGraphic2.png';
+import clRoomTextLogo from '@/assets/images/clRoomTextLogo.png';
+import purpleFlower from '@/assets/images/purpleFlower.png';
 
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
@@ -14,7 +18,7 @@ import { useCallback, useEffect, useState } from 'react';
 export const Banner = () => {
   const [current, setCurrent] = useState(0);
   // const totalSlides = 3;
-  const totalSlides = 2;
+  const totalSlides = 1;
 
   const handlePrev = () => {
     const newIndex = (current - 1 + totalSlides) % totalSlides;
@@ -53,7 +57,7 @@ export const Banner = () => {
       <div id="default-carousel" className="relative mt-2  w-full md:ml-0" data-carousel="slide">
         <div className="h-40 w-full items-center justify-center overflow-hidden rounded-lg md:h-60 xl:h-80">
           {/* 첫번째 배너 */}
-          <article data-carousel-item data-index="0">
+          {/* <article data-carousel-item data-index="0">
             <div className="relative flex h-60 flex-row items-center  justify-center bg-[#FFBA33] lg:h-80">
               <div className=" h-full w-full">
                 <Image
@@ -87,9 +91,9 @@ export const Banner = () => {
                 </Link>
               </div>
             </div>
-          </article>
+          </article> */}
           {/* 두번째 배너 */}
-          <article data-carousel-item data-index="1">
+          {/* <article data-carousel-item data-index="1">
             <div className="relative flex h-40 flex-row bg-gradient-gra1 duration-700 ease-in-out md:h-60 xl:h-80">
               <div className=" h-full w-full">
                 <Image //
@@ -108,7 +112,7 @@ export const Banner = () => {
                 </div>
               </div>
             </div>
-          </article>
+          </article> */}
           {/* 세번째배너 */}
           {/* <article data-carousel-item data-index="2">
             <div className="relative flex h-60 flex-row items-center bg-button-focus-color duration-700 ease-in-out md:h-80 md:justify-center lg:justify-end">
@@ -122,6 +126,23 @@ export const Banner = () => {
               </div>
             </div>
           </article> */}
+          <article data-carousel-item data-index="1">
+            <div className="relative flex h-40 flex-row bg-light-purple duration-700 ease-in-out md:h-60 xl:h-80">
+              <div className=" absolute left-48 top-8 z-40 w-1/4">
+                <Image style={{ objectFit: 'cover' }} src={purpleFlower} alt="h"></Image>
+              </div>
+              <div className="absolute left-[350px] top-[-160px]  h-[30%] w-[50%] ">
+                <Image src={lightPurpleGraphic2} alt="h"></Image>
+              </div>
+              <div className="absolute right-[700px] top-28 z-30 w-[10%]">
+                <Image style={{ objectFit: 'cover' }} src={clRoomTextLogo} alt="h"></Image>
+              </div>
+              <div className="absolute right-48 top-32 flex flex-col font-bold text-point-purple">
+                <p className="text-3xl">클룸을 통해서</p>
+                <p className="text-3xl">다양한 원데이 클래스를 체험해보세요!</p>
+              </div>
+            </div>
+          </article>
         </div>
         <button
           type="button"
