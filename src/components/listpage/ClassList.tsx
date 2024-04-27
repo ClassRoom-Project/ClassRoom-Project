@@ -32,6 +32,7 @@ function ClassList() {
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage //다음페이지로 넘어가는 로직
   });
+
   useEffect(() => {
     if (!targetRef.current) return;
     //IntersectionObserver 인자 2개를 받는다
@@ -49,7 +50,7 @@ function ClassList() {
     // 컴포넌트가 언마운트될 때 observer를 정리합니다.
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-  console.log('classInfos.pages', classInfos?.pages);
+
   return status === 'pending' ? (
     <div className="flex w-full flex-col items-center justify-center gap-4">
       <LoadingSpinner />
