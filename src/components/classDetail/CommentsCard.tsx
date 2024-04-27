@@ -23,11 +23,25 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
         {/* 프로필  */}
         <div className="mb-2 flex items-center gap-2 md:mb-1 ">
           <div className=" flex items-center justify-center gap-2">
-            <div className="relative h-9 w-9 flex-shrink-0 rounded-full sm:h-12 sm:w-12">
+            <div className="relative h-9 w-9 flex-shrink-0 overflow-hidden rounded-full sm:h-12 sm:w-12">
               {comment.profile_image ? (
-                <Image src={comment.profile_image} alt="Profile" fill={true} style={{ objectFit: 'cover' }} />
+                <Image
+                  src={comment.profile_image}
+                  sizes="36px"
+                  alt="Profile"
+                  fill={true}
+                  style={{ objectFit: 'cover' }}
+                  placeholder="empty"
+                />
               ) : (
-                <Image src={DefaultProfile} alt="Profile" fill={true} style={{ objectFit: 'cover' }} />
+                <Image
+                  src={DefaultProfile}
+                  alt="Profile"
+                  sizes="36px"
+                  fill={true}
+                  style={{ objectFit: 'cover' }}
+                  placeholder="empty"
+                />
               )}
             </div>
             <h5 className="text-text-dart-gray text-sm font-semibold md:text-lg">{comment.nickname}</h5>
@@ -45,9 +59,15 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
       </div>
       {comment.comment_image ? (
         <div className="flex items-center rounded-xl pl-1.5 sm:pl-12 lg:justify-center lg:pl-0">
-          <figure className="relative flex h-40 w-40 items-center justify-center overflow-hidden rounded-xl md:h-48 md:w-48">
-            <Image src={comment.comment_image} alt="uploaded image preview" fill style={{ objectFit: 'cover' }} />
-          </figure>
+          <div className="relative flex h-40 w-40 items-center justify-center overflow-hidden rounded-xl md:h-48 md:w-48">
+            <Image
+              src={comment.comment_image}
+              alt="uploaded image preview"
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 768px) 160px, 192px"
+            />
+          </div>
         </div>
       ) : (
         <></>

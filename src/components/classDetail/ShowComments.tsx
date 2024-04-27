@@ -3,7 +3,7 @@
 import { DetailCommentType } from '@/types/detailComment';
 import React, { useEffect, useState } from 'react';
 import CommentsCard from './CommentsCard';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getDetailComment } from '@/app/api/classdetail/detailComment';
 import Pagination from '../common/Pagination';
 import { useSearchParams } from 'next/navigation';
@@ -19,7 +19,7 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
   });
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' }); // 페이지 이동 시 스크롤 위치 맨 위로 초기화
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
     setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
   }, [page, currentPage]);
 

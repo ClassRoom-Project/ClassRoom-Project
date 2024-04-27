@@ -57,13 +57,8 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
                 <LazyLoadImage key={image} index={index} imgSrc={image} inView={slidesInView.indexOf(index) > -1} />
               ))
             ) : (
-              <div className="relative h-full w-full">
-                <Image
-                  fill={true}
-                  className=" h-full w-full rounded-md object-cover"
-                  src={noImage}
-                  alt="clroom no Image"
-                />
+              <div className="relative h-full w-full overflow-hidden rounded-md">
+                <Image fill={true} src={noImage} alt="clroom no Image" style={{ objectFit: 'cover' }} />
               </div>
             )}
           </div>
