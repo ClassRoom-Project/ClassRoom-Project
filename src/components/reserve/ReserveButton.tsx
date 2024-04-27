@@ -1,13 +1,13 @@
 'use client';
 
+import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
 import { sumReserveQuantityByTimeId } from '@/app/api/reserve/sumReserveQuantityByTimeId';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { invalidReserve, quantityWarning, selectDayWarning } from '../common/Toastify';
-import { insertNewReservation } from '@/app/api/reserve/insertNewReservation';
+import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../common/LoadingSpinner';
+import { invalidReserve, quantityWarning, selectDayWarning } from '../common/Toastify';
 
 type ReserveButtonParams = {
   classId: string;
@@ -20,9 +20,11 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
   const { loginUserId } = useLoginStore();
   const { setReserveInfo, reserveInfo } = useReserveStore();
   const [isFreeClassReserveLoading, setIsFreeClassReserveLoading] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     setReserveInfo({ classId, userId: loginUserId });
+    buttonRef.current?.removeAttribute('disabled');
   }, [classId, setReserveInfo, loginUserId]);
 
   const handleReserveButtonClick = async () => {
@@ -66,6 +68,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
           '해당 클래스는 무료 클래스로 결제 과정 없이 예약됩니다. 예약 정보를 확인하신 후 확인 버튼을 눌러 예약을 완료해 주세요. '
         )
       ) {
+        buttonRef.current?.setAttribute('disabled', 'true'); // 버튼을 비활성화하여 다중 제출 방지
         setIsFreeClassReserveLoading(true);
 
         try {
@@ -83,6 +86,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
           return;
         } catch (error) {
           invalidReserve();
+          buttonRef.current?.removeAttribute('disabled');
           console.log('무료 클래스 insertNewReservation 오류', error);
         }
       } else return;
@@ -103,6 +107,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
         </div>
       )}
       <button
+        ref={buttonRef}
         className={`btn w-full bg-point-purple tracking-wide text-white hover:bg-button-hover-color ${isFreeClassReserveLoading && 'btn-disabled'}`}
         onClick={handleReserveButtonClick}
       >
