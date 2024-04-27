@@ -33,15 +33,22 @@ const ClassTitleType: React.FC<ClassTitleTypeProps> = ({ isEditMode, initialData
   return (
     <div className="my-4">
       <div className="flex flex-col md:flex-row md:items-center space-x-0 md:space-x-4 space-y-4 md:space-y-0">
-        <p className="text-base text-[#3F3F3F] shrink-0 font-bold"><span className='text-[#d63232] font-bold'>*</span> 클래스명</p>
+        <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
+          <span className='text-[#d63232] font-bold'>*</span> 
+          클래스명
+        </p>
         <input
-          className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0"
-          type="text"
-          value={classTitle}
-          onChange={handleClassTitleChange}
-          placeholder="클래스명을 입력해주세요"
-        />
-        <p className="text-base text-[#3F3F3F] shrink-0 font-bold"><span className='text-[#d63232] font-bold'>*</span> 클래스타입</p>
+            className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0"
+            type="text"
+            value={classTitle}
+            onChange={handleClassTitleChange}
+            placeholder="클래스명을 입력해주세요"
+            maxLength={40}
+          />
+        <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
+          <span className='text-[#d63232] font-bold'>*</span> 
+          클래스타입
+        </p>
         <select
           value={classType}
           onChange={handleClassTypeChange}

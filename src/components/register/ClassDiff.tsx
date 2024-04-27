@@ -26,7 +26,10 @@ const ClassDiff:React.FC<ClassDiffProps> = ({ isEditMode, initialData }) => {
   return (
     <div className="my-4">
       <div className="flex items-center space-x-4">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold"><span className='text-[#d63232] font-bold'>*</span> 클래스 난이도</p>
+        <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
+          <span className='text-[#d63232] font-bold'>*</span> 
+          클래스 난이도
+        </p>
         {/* 난이도 드롭다운 */}
         <select
           value={difficulty}

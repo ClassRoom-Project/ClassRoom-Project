@@ -27,7 +27,7 @@ const ClassContent: React.FC<ClassContentProps> = ({ isEditMode, initialData }) 
     }
   }, [isEditMode, initialData, setClassContent]);
 
-  const handleClassContentChange = (value:string) => {
+  const handleClassContentChange = (value: string) => {
     setClassContent(value);
   };
 
@@ -71,18 +71,21 @@ const ClassContent: React.FC<ClassContentProps> = ({ isEditMode, initialData }) 
   ]
 
   return (
-    <div className="my-4 h-[480px]">
+    <div className="mt-4 h-[400px] mb-2">
       <div className="flex flex-col md:flex-row items-start space-x-0 md:space-x-4 space-y-4 md:space-y-0 w-full">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold"><span className='text-[#d63232] font-bold'>*</span> 클래스 설명</p>
+        <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
+          <span className='text-[#d63232] font-bold'>*</span> 
+          클래스 설명
+        </p>
         <ReactQuill
-          theme="snow" // Quill 테마 설정
+          theme="snow"
           value={classContent}
           onChange={handleClassContentChange}
           modules={modules}
           formats={formats}
           placeholder="클래스의 상세 설명을 입력해주세요"
-          className="form-input rounded flex-grow w-full bg-white text-lg"
-          style={{ height: '400px' }}
+          className="form-input rounded flex-grow w-full text-lg"
+          style={{ height: '350px'}}
         />
       </div>
     </div>
