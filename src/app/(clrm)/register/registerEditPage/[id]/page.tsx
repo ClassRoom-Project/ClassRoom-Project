@@ -114,16 +114,16 @@ const RegisterEditPage = () => {
           />
           <TotalTime isEditMode={true} initialData={{ totalTime: classData.total_time }} />
 
-          <h1 className="text-md md:text-lg lg:text-xl mt-1">클래스 세부요소 입력란</h1>
+          <h1 className="text-md md:text-lg lg:text-xl mt-16">클래스 세부요소 입력란</h1>
           <hr className="my-4 border-[#4D43B8]" />
           <Address isEditMode={true} initialData={{ address: classData.location, detailAddress: classData.detail_location }} />
           <SelectTime isEditMode={true} initialData={{ schedules: dateData.map(dateItem => ({ date: dateItem.day, times: dateItem.times })) }}/>
 
-          <h1 className="text-md md:text-lg lg:text-xl mt-1">클래스 금액</h1>
+          <h1 className="text-md md:text-lg lg:text-xl mt-16">클래스 금액</h1>
           <hr className="my-4 border-[#4D43B8]" />
           <Price isEditMode={true} initialData={{ price: classData.price }} />
 
-          <h1 className="text-md md:text-lg lg:text-xl mt-1">이미지 업로드</h1>
+          <h1 className="text-md md:text-lg lg:text-xl mt-16">이미지 업로드</h1>
           <hr className="my-4 border-[#4D43B8]" />
           <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
             <span className='text-[#d63232] font-bold'>*</span> 
