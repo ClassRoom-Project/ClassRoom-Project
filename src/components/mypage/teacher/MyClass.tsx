@@ -81,17 +81,14 @@ const MyClass = () => {
   const currentPosts = myClassInfo?.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
-    <ul className="mb-24 flex w-full flex-col items-center justify-center gap-4 md:mb-0 md:justify-items-center md:p-4 lg:w-full">
+    <ul className=" mb-24 flex w-full flex-col items-center justify-center gap-4 md:mb-0 md:justify-items-center md:p-4 lg:w-full">
       <p className="flex items-start text-xl font-bold text-dark-purple-color md:hidden ">내가 등록한 클래스</p>
       {currentPosts?.map((classInfo, classIndex) => (
-        <li
-          key={classIndex}
-          className="align-center flex w-full flex-col gap-4 md:my-4 md:flex-row md:py-4 lg:max-w-[1280px]"
-        >
+        <li key={classIndex} className="align-center flex w-full flex-col gap-4  md:flex-row md:py-4 lg:max-w-[1280px]">
           {/* 클래스 기본 정보 부분 */}
           <div className="collapse collapse-arrow cursor-pointer justify-center p-4">
-            <input type="checkbox" />
-            <div className="flex flex-col items-center gap-4  md:collapse-title sm:w-full lg:w-full lg:flex-row">
+            <input type="checkbox" className=" min-h-0 md:min-h-12" />
+            <div className="flex flex-col items-center justify-center md:collapse-title  sm:w-full lg:w-full lg:flex-row lg:gap-4">
               <div className="relative h-52 w-72 lg:w-80">
                 <Image
                   src={classInfo?.image ? classInfo?.image : NoImage}
@@ -100,9 +97,9 @@ const MyClass = () => {
                   className="h-full w-full object-cover p-4"
                 />
               </div>
-              <div className="my-4 flex flex-col md:gap-4 lg:mx-4">
+              <div className="my-4 flex flex-col md:gap-4 lg:mx-4 lg:my-0">
                 <div className="flex justify-center lg:justify-start">
-                  <p className="py-4 text-base font-bold text-dark-purple-color sm:text-lg md:text-xl">
+                  <p className="pb-4 text-base font-bold text-dark-purple-color sm:text-lg md:text-xl lg:py-4">
                     {classInfo?.title}
                   </p>
                 </div>
@@ -176,7 +173,7 @@ const MyClass = () => {
                 </div>
               ))}
             </div>
-            <section className="flex w-full items-center justify-center gap-4 p-2 md:gap-4 lg:right-4 lg:justify-end">
+            <section className="flex w-full items-center justify-center gap-4 p-4 md:gap-4 lg:right-4 lg:justify-end">
               <button
                 onClick={() => handleOnClickDeleteMyClass(classInfo.class_id)}
                 className="btn  w-1/3 text-xs hover:bg-transparent hover:text-text-dark-gray md:w-36 md:text-sm"

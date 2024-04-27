@@ -123,7 +123,7 @@ const EditProfile = () => {
   }
 
   return (
-    <div className="flex w-full flex-col items-center justify-center bg-light-purple py-4 md:w-full md:justify-items-center md:gap-6 md:p-4 lg:w-full">
+    <div className="sm mb-16 flex w-full flex-col items-center justify-center bg-light-purple py-4 md:mb-0 md:w-full md:justify-items-center md:gap-6 md:p-4 lg:w-full ">
       <p className="flex items-center justify-center p-2 text-xl font-bold text-dark-purple-color md:p-4">
         프로필 수정하기
       </p>

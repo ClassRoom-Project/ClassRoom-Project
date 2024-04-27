@@ -119,28 +119,28 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
       <div className="lg flex w-full flex-col items-center justify-center bg-pale-purple md:gap-4 lg:flex-row lg:justify-start">
         <div className="items-center justify-center">
           {comment.comment_image ? (
-            <div className="lg relative h-52 w-72">
+            <div className="relative mt-4 h-52 w-72 md:mt-8 lg:mx-8 lg:mt-0">
               <Image
                 src={comment.comment_image}
                 alt="클래스 대표 사진"
                 fill
-                className="h-full w-full object-cover p-4"
+                className="h-full w-full object-cover p-4 md:p-0"
               />
             </div>
           ) : (
-            <div className="relative hidden h-52 w-72 lg:flex">
-              <Image src={NoImage} alt="클래스 대표 사진" fill className="h-full w-full object-cover p-4" />
+            <div className=" relative mt-4 hidden h-52 w-72 md:mt-8 lg:mx-8 lg:mt-0 lg:flex">
+              <Image src={NoImage} alt="클래스 대표 사진" fill className="h-full w-full object-cover p-4 md:p-0 " />
             </div>
           )}
         </div>
-        <div className="flex h-full w-full flex-col gap-4 p-4 lg:m-4 lg:w-[960px]">
-          <section className="flex flex-col gap-4 lg:flex-row ">
+        <div className="flex h-full w-full flex-col gap-4 p-4 lg:w-[960px]">
+          <section className="flex flex-col gap-4 md:pb-4 lg:pb-0 lg:pt-8 xl:flex-row ">
             <div className="flex w-full justify-center gap-4 lg:justify-start">
-              <p className="w-full whitespace-nowrap text-lg font-bold text-dark-purple-color sm:text-xl">
+              <p className="w-full text-base font-bold text-dark-purple-color sm:whitespace-nowrap sm:text-xl">
                 {comment.title}
               </p>
             </div>
-            <p className="flex gap-4 whitespace-nowrap text-sm sm:text-base">
+            <p className="flex gap-4 text-sm text-text-dark-gray sm:whitespace-nowrap sm:text-base">
               <span>작성일 : {formattedDate}</span> <span>{formattedTime}</span>
             </p>
           </section>
