@@ -76,7 +76,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
   // supabase storage에 등록한 이미지 업로드
   const uploadFile = async (file: File) => {
     const cleanName = cleanFileName(file.name);
-    const filePath = `uploads/${crypto.randomUUID()}_${cleanName}`;
+    const filePath = `uploads/${crypto.randomUUID()}/${classId}_${cleanName}`;
     const { data, error } = await supabase.storage.from('classImages').upload(filePath, file);
     if (error) {
       return null;
@@ -139,6 +139,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
 
   // supabase에 데이터 저장
   const handleSubmit = async () => {
+    setIsLoading(true);
     // 카테고리 입력 안했을시
     if (!category) {
       noCategoryNotify();
@@ -257,37 +258,47 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
         return;
       }
 
-      // 날짜와 시간 데이터 업데이트 로직 추가
-      // 기존 날짜와 시간 데이터 삭제
-      // const deleteDate = await supabase.from('date').delete().match({ class_id: classId });
-      // if (deleteDate.error) {
-      //   console.error('date db delete error:', deleteDate.error);
-      // }
-
-      // 각 날짜에 대한 데이터 저장
+      // 선택된 날짜 처리
       for (const date of selectedDates) {
-        const dateId = crypto.randomUUID(); // 날짜마다 새로운 ID 생성
-        const { data: dateData, error: dateError } = await supabase.from('date').update([
-          {
-            date_id: dateId,
-            class_id: classId,
-            day: date
+        let dateId;
+        // 이미 존재하는 날짜인지 확인
+        const { data: existingDateData, error: existingDateError } = await supabase
+          .from('date')
+          .select('date_id')
+          .eq('day', date)
+          .eq('class_id', classId)
+          .single();
+  
+        if (existingDateError || !existingDateData) {
+          // 존재하지 않으면 새로운 날짜 추가
+          dateId = crypto.randomUUID();
+          const { error: dateInsertError } = await supabase.from('date').insert([
+            { date_id: dateId, class_id: classId, day: date }
+          ]);
+          if (dateInsertError) {
+            console.error('date db insert error:', dateInsertError);
           }
-        ]);
-        if (dateError) {
-          console.error('date db upload error:', dateError);
         } else {
-          const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
+          // 존재하면 dateId 가져오기
+          dateId = existingDateData.date_id;
+        }
+    
+        // 선택된 시간들에 대해 처리
+        const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
+        if (selectedTimes && selectedTimes.length > 0) {
+          for (const time of selectedTimes) {
+            const { data: existingTimeData, error: existingTimeError } = await supabase
+            .from('time')
+            .select('time_id')
+            .eq('date_id', dateId)
+            .eq('times', time)
+            .single();
 
-          if (selectedTimes && selectedTimes.length > 0) {
-            for (const time of selectedTimes) {
-              const timeId = crypto.randomUUID(); // 시간마다 새로운 ID 생성
-              const { data: timeData, error: timeError } = await supabase.from('time').update([
-                {
-                  time_id: timeId,
-                  date_id: dateId,
-                  times: time
-                }
+            if (existingTimeError || !existingTimeData) {
+              // 존재하지 않으면 새로운 시간 추가
+              const timeId = crypto.randomUUID();
+              const { error: timeError } = await supabase.from('time').insert([
+                { time_id: timeId, date_id: dateId, times: time }
               ]);
               if (timeError) {
                 console.error('time db upload error:', timeError);
@@ -386,7 +397,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
     <>
       {isLoading && (
         <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
-          {/* <span className="loading loading-infinity loading-lg bg-[#CAC6FC]"></span> */}
           <LoadingSpinner />
         </div>
       )}

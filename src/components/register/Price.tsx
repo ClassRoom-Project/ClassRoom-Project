@@ -25,11 +25,12 @@ const Price:React.FC<PriceProps> = ({ isEditMode, initialData }) => {
     if (isNaN(value) || value < 0) value = 0;
     setPrice(value);
   };
+  
   return (
     <div className="my-4">
       <div className="flex items-center justify-between space-x-4">
         <div>
-          <p className="text-base text-[#3F3F3F] font-bold">클래스 1인 수강 금액</p>
+          <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">클래스 1인 수강 금액</p>
         </div>
         <div className="relative w-1/3">
           <input
