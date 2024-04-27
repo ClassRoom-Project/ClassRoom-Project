@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import React, { useState, useCallback } from 'react';
 import style from './embla.module.css';
@@ -18,15 +20,14 @@ export const LazyLoadImage: React.FC<PropType> = (props) => {
     if (inView) setHasLoaded(true);
   }, [inView, setHasLoaded]);
 
-  console.log(hasLoaded ? '로딩완료' : '로딩중');
-
   return (
     <div className={style.embla__slide}>
       <div className={style.embla__slide__inner}>
-        <div className={'embla__lazy-load'.concat(hasLoaded ? ' embla__lazy-load--has-loaded' : '')}>
-          {!hasLoaded && <span className="embla__lazy-load__spinner" />}
+        {/* concat으로 이미지가 로드됐을 때 embla__lazyLoadHasLoaded 클래스를 추가 */}
+        <div className={`${style.embla__lazyLoad}`.concat(hasLoaded ? ` ${style.embla__lazyLoadHasLoaded}` : '')}>
+          {!hasLoaded && <span className={`${style.embla__lazyLoad__spinner}`} />}
           <Image
-            className="embla__lazy-load__img h-full w-full rounded-md object-cover"
+            className={`${style.embla__lazyLoad__img} h-full w-full rounded-md object-cover`}
             onLoad={setLoaded}
             src={inView ? imgSrc : PLACEHOLDER_SRC}
             fill={true}
