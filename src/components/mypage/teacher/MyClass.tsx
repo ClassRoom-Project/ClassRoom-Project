@@ -86,7 +86,7 @@ const MyClass = () => {
       {currentPosts?.map((classInfo, classIndex) => (
         <li key={classIndex} className="align-center flex w-full flex-col gap-4  md:flex-row md:py-4 lg:max-w-[1280px]">
           {/* 클래스 기본 정보 부분 */}
-          <div className="collapse collapse-arrow cursor-pointer justify-center p-4">
+          <div className="collapse collapse-arrow cursor-pointer justify-center">
             <input type="checkbox" className=" min-h-0 md:min-h-12" />
             <div className="flex flex-col items-center justify-center md:collapse-title  sm:w-full lg:w-full lg:flex-row lg:gap-4">
               <div className="relative h-52 w-72 lg:w-80">
