@@ -9,9 +9,9 @@ export interface WishIconProps {
 
 const WishIcon = ({ handleWishClick, isWished, wishCount }: WishIconProps) => {
   return (
-    <button onClick={(e) => handleWishClick(e)} className="flex gap-1 items-center justify-center text-sm ">
-      <span>{isWished ? <GoHeartFill color="red" size={18} /> : <GoHeart color="dimgray" size={20} />}</span>
-      <span>{wishCount}</span>
+    <button onClick={(e) => handleWishClick(e)} className="flex items-center justify-center gap-1 text-sm ">
+      <span>{isWished ? <GoHeartFill color="red" size={20} /> : <GoHeart color="dimgray" size={20} />}</span>
+      {<span>{wishCount}</span>}
     </button>
   );
 };
