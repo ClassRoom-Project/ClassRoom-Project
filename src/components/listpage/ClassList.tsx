@@ -32,7 +32,6 @@ function ClassList() {
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage //다음페이지로 넘어가는 로직
   });
-
   useEffect(() => {
     if (!targetRef.current) return;
     //IntersectionObserver 인자 2개를 받는다
@@ -50,7 +49,7 @@ function ClassList() {
     // 컴포넌트가 언마운트될 때 observer를 정리합니다.
     return () => observer.disconnect();
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
-
+  console.log('classInfos.pages', classInfos?.pages);
   return status === 'pending' ? (
     <div className="flex w-full flex-col items-center justify-center gap-4">
       <LoadingSpinner />
@@ -61,24 +60,30 @@ function ClassList() {
       <p>Error: {error.message}</p>
     </div>
   ) : (
-    <div className="responsive flex w-full items-center justify-center">
-      <div className="flex w-full items-center justify-center">
-        <div className="mb-16 grid grid-cols-2 sm:grid-cols-3 md:mb-0 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
-          {classInfos?.pages.map((page, i) => (
-            <React.Fragment key={i}>
-              {page.classInfos.map((classInfos: ClassAllType) => (
-                <div key={classInfos.class_id} className="p-2 md:py-6">
-                  <ClassCard key={classInfos.class_id} classInfos={classInfos} />
-                </div>
+    <>
+      {classInfos.pages[0].classInfos.length > 0 ? (
+        <div className="responsive flex w-full items-center justify-center">
+          <div className="flex w-full items-center justify-center">
+            <div className="mb-16 grid grid-cols-2 sm:grid-cols-3 md:mb-0 md:grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 2xl:grid-cols-5">
+              {classInfos?.pages.map((page, i) => (
+                <React.Fragment key={i}>
+                  {page.classInfos.map((classInfos: ClassAllType) => (
+                    <div key={classInfos.class_id} className="p-2 md:py-6">
+                      <ClassCard key={classInfos.class_id} classInfos={classInfos} />
+                    </div>
+                  ))}
+                </React.Fragment>
               ))}
-            </React.Fragment>
-          ))}
-          {/*여기서 ref값 적용*/}
-          <div ref={targetRef} className="h-5"></div>
-          {isFetching && !isFetchingNextPage && <p>로딩중입니다!</p>}
+              {/*여기서 ref값 적용*/}
+              <div ref={targetRef} className="h-5"></div>
+              {isFetching && !isFetchingNextPage && <p>로딩중입니다!</p>}
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      ) : (
+        <div>검색 결과가 없습니다.</div>
+      )}
+    </>
   );
 }
 
