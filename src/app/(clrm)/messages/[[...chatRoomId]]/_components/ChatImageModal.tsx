@@ -132,19 +132,6 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
         </div>
       )}
       <div className=" sm:1/3 md:1/5 h-2/8 flex flex-col items-center justify-center rounded-xl bg-white px-1 md:w-auto">
-        <label htmlFor="photo" className=" cursor-pointer">
-          <MdPhotoCamera className="bottom-2 right-12 mt-2 text-2xl text-main-color hover:text-button-hover-color" />
-        </label>
-        <input
-          type="file"
-          name="photo"
-          id="photo"
-          accept="image/*"
-          hidden
-          multiple
-          onChange={handleImageChange}
-          style={{ display: 'none' }}
-        />
         <div className="flex w-full flex-wrap items-center justify-center">
           {[...Array(5)].map((_, index) => {
             if (index < showImage.length) {
@@ -156,13 +143,13 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
                   onDragStart={(e) => handleDragStart(e, index)}
                   onDragOver={handleDragOver}
                   onDrop={(e) => handleOnDrop(e, index)}
-                  className="mg-5 relative ml-2 mt-2 h-[142px] w-[142px]"
+                  className="mg-5 relative ml-2 mt-2 h-24 w-24 md:h-32 md:w-32"
                 >
                   <Image
                     src={showImage[index]}
                     alt={`preview-${index}`}
                     fill
-                    className="h-full w-full rounded-[20px] border object-cover"
+                    className="h-full w-full rounded-[20px] border object-cover "
                   />
                   <button onClick={() => handleDeletePhoto(index)} className="absolute right-1 top-1 text-lg">
                     <RiCloseCircleLine className="text-3xl text-button-default-color" />
@@ -172,11 +159,23 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
             } else {
               // 이미지가 없는 빈 슬롯
               return (
-                <div
+                <label
                   key={index}
-                  className="ml-2 mt-2 h-24 w-24 rounded-lg border-2 border-dashed border-gray-300 md:h-36 md:w-36"
-                  // onClick={() => handleAddClick(index)}
-                ></div>
+                  htmlFor="photos"
+                  className=" mx-1 my-1 flex h-24 w-24 cursor-pointer items-center justify-center rounded-lg border-2 border-dashed border-gray-300 text-xs md:h-36 md:w-36"
+                >
+                  <input
+                    type="file"
+                    name="photos"
+                    id="photos"
+                    accept="image/*"
+                    hidden
+                    multiple
+                    onChange={handleImageChange}
+                    style={{ display: 'none' }}
+                  ></input>
+                  클릭!
+                </label>
               );
             }
           })}
@@ -185,14 +184,14 @@ export default function ChatImageModal({ chatId, closeModal }: ChatImageeModalTy
         <div className="mb-2 mt-3 flex w-full flex-row items-center justify-center gap-10">
           <button
             onClick={handleClose}
-            className="flex h-8 w-4/12 items-center justify-center rounded-lg bg-[#CAC6FC] hover:bg-button-hover-color md:w-2/12"
+            className="flex h-8 w-3/12 items-center justify-center rounded-lg bg-[#CAC6FC] text-sm hover:bg-button-hover-color md:w-2/12 lg:text-base"
           >
             취소
           </button>
           <button
             onClick={handleSendButton}
             type="submit"
-            className="flex h-8 w-4/12 items-center justify-center rounded-lg bg-[#CAC6FC] hover:bg-button-hover-color hover:text-white md:w-2/12"
+            className="flex h-8 w-3/12 items-center justify-center rounded-lg bg-[#CAC6FC] text-sm hover:bg-button-hover-color hover:text-white md:w-2/12 lg:text-base"
           >
             전송
           </button>

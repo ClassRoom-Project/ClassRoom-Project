@@ -188,7 +188,7 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
                     )}
                   </div>
                 ) : (
-                  <div className=" relative" style={{ width: '180px', height: '200px' }}>
+                  <div className=" relative h-24 w-24 md:h-36 md:w-36">
                     {message.images &&
                       JSON.parse(message.images).map((imgUrl: string, imgIndex: number) => (
                         <div key={imgIndex} className="image-container">

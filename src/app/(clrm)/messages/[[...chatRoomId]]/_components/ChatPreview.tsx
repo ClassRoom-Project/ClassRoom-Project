@@ -28,7 +28,7 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
       prefetch={false}
       shallow
     >
-      <div className="relative mx-2 mb-2 mt-2 flex py-4 ">
+      <div className="relative mx-2 mb-2 mt-2 flex py-3 ">
         {readleftChekcMessages === 0 ? (
           ''
         ) : (
@@ -45,12 +45,12 @@ export default function ChatPreview({ chatId, toClassId, title, image, fromUserI
             className="h-full w-full rounded-full border border-black object-cover"
           />
         </div>
-        <div className="mx-3 flex w-0 flex-1 flex-col text-xs">
-          <div className="w-40">
+        <div className="mr-2 flex w-0 flex-1 flex-col text-xs">
+          <div className="w-20">
             <p className=" truncate text-nowrap font-bold">{MakeClassUserInfo?.nickname}</p>
           </div>
           <div className="flex flex-row justify-between">
-            <div>
+            <div className="w-20 text-xs ">
               {!readLastMessages ? (
                 <p className="whitespace-nowrap text-gray-500">메시지가 없습니다</p>
               ) : (
