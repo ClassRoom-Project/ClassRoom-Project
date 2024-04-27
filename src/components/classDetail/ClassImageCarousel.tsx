@@ -14,8 +14,8 @@ import { LazyLoadImage } from './EmblaCarouselLazyLoadImage';
 import { EmblaCarouselType } from 'embla-carousel';
 
 const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | null }) => {
-  // const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 5000 })]);
+  const [slidesInView, setSlidesInView] = useState<number[]>([]);
   const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(emblaApi);
   const { prevBtnDisabled, nextBtnDisabled, onPrevButtonClick, onNextButtonClick } = usePrevNextButtons(emblaApi);
 
@@ -25,8 +25,6 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
       emblaApi.reInit();
     }
   }, [emblaApi, classData?.image]);
-
-  const [slidesInView, setSlidesInView] = useState<number[]>([]);
 
   const updateSlidesInView = useCallback((emblaApi: EmblaCarouselType) => {
     setSlidesInView((slidesInView) => {

@@ -1,7 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import React, { useState, useCallback } from 'react';
+import Image from 'next/image';
 import style from './embla.module.css';
 
 const PLACEHOLDER_SRC = `data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs%3D`;
