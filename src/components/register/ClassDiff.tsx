@@ -23,6 +23,7 @@ const ClassDiff:React.FC<ClassDiffProps> = ({ isEditMode, initialData }) => {
       setDifficulty(initialData.difficulty);
     }
   }, [isEditMode, initialData, setDifficulty]);
+  
   return (
     <div className="mt-4 md:mt-2 lg:mt-1 mb-4">
       <div className="flex items-center space-x-4">

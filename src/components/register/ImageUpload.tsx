@@ -397,7 +397,6 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
     <>
       {isLoading && (
         <div className="fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-black bg-opacity-50">
-          {/* <span className="loading loading-infinity loading-lg bg-[#CAC6FC]"></span> */}
           <LoadingSpinner />
         </div>
       )}
