@@ -7,6 +7,7 @@ import _ from 'lodash';
 import { useEffect, useState } from 'react';
 //yarn add --dev @types/lodash
 //yarn add lodash
+//yarn add autoprefixer
 
 export const SearchClass = () => {
   const { setSelectedCategory } = useCategoryFilterStore();
@@ -44,19 +45,20 @@ export const SearchClass = () => {
   }, [searchQuery, setSelectedTitle]);
 
   return (
-    <form className="mx-2 flex h-[120px] w-full items-center justify-start" onSubmit={handleSearchBtn}>
-      <div className="xl:[350px] relative flex w-[200px] items-end justify-end rounded-xl border-[1px] border-input-border-color md:w-[250px] lg:w-[300px] 2xl:w-[400px]">
+    <form className="mx-2 flex h-24 w-full items-center justify-start bg-purple-500" onSubmit={handleSearchBtn}>
+      <div className="xl:[350px] relative flex w-[150px] items-end justify-end rounded-xl border-[1px] border-input-border-color sm:w-[200px] md:w-[280px] lg:w-[400px] 2xl:w-[500px]">
+        {/*input에 플렉스 그로우를 안준 이유: 사파리에서 css가 깨지는 현상*/}
         <input
           maxLength={20}
           onChange={handleSearchChange}
           value={selectedTitle}
-          className="h-12 flex-grow rounded-xl bg-red-500 pl-2 outline-none"
+          className="h-10 w-[102px] rounded-xl outline-none sm:w-[152px] md:h-12 md:w-[232px] lg:w-[344px] 2xl:w-[436px]"
           type="text"
-          placeholder="검색하기"
+          placeholder=" 검색"
         />
         <button
           type="submit"
-          className="btn rounded-xl border-[1px] border-transparent bg-white  shadow-none  hover:bg-disable-color"
+          className="btn h-10 min-h-10 w-12 rounded-xl border-[1px] border-transparent bg-white shadow-none hover:bg-disable-color  md:h-12 md:w-14 2xl:w-16"
         >
           <IoIosSearch className="bg-slate-500 text-2xl text-icon-color" />
         </button>

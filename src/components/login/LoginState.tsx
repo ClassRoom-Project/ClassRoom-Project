@@ -34,7 +34,7 @@ export default function LoginState() {
           </div>
         ) : (
           <Link
-            className="btn mr-2 w-16 whitespace-nowrap border-main-color bg-transparent text-main-color hover:bg-main-color hover:text-white md:mr-[50px] md:w-20"
+            className="btn mr-2 w-16 whitespace-nowrap border-main-color bg-transparent text-sm text-main-color hover:bg-main-color hover:text-white md:mr-[50px] md:w-20 md:text-base"
             href="/hello"
           >
             로그인
@@ -62,7 +62,7 @@ export default function LoginState() {
       ) : (
         <div className="flex w-full justify-end">
           <Link
-            className="btn mr-2 w-16 whitespace-nowrap border-main-color bg-transparent text-main-color hover:bg-main-color hover:text-white md:mr-[50px] md:w-20"
+            className="ms:w-16 btn mr-2 h-10 min-h-10 w-12 whitespace-nowrap border-main-color bg-transparent text-xs text-main-color hover:bg-main-color hover:text-white sm:text-sm md:mr-[50px] md:h-12 md:w-20 md:text-base"
             href="/hello"
           >
             로그인
