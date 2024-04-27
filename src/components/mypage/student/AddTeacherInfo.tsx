@@ -197,7 +197,9 @@ const AddTeacherInfo = () => {
                   {isAvailableName ? (
                     ''
                   ) : (
-                    <p className="p-2 font-thin">이름은 한글, 영어 대소문자만 입력 가능합니다.</p>
+                    <p className="w-[318px] p-2 font-thin md:w-[200px] lg:w-[250px]">
+                      이름은 한글, 영어 대소문자만 입력 가능합니다.
+                    </p>
                   )}
                 </div>
               </div>
@@ -218,7 +220,9 @@ const AddTeacherInfo = () => {
                   {isAvailableNumber ? (
                     ''
                   ) : (
-                    <p className="p-2 font-thin">휴대폰 번호의 양식에 맞게 입력해주세요(- 제외).</p>
+                    <p className="w-[318px] p-2 font-thin md:w-[200px] lg:w-[250px]">
+                      휴대폰 번호의 양식에 맞게 입력해주세요(- 제외).
+                    </p>
                   )}
                 </div>
               </div>

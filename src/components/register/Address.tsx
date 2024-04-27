@@ -55,7 +55,7 @@ const Address: React.FC<AddressProps> = ({ isEditMode, initialData }) => {
   return (
     <div className="my-4">
       <div className="flex flex-wrap items-center space-y-2 sm:space-y-0 sm:space-x-2 my-2">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold mr-2">위치</p>
+        <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">위치</p>
         <input
           className="form-input px-3 py-2 border border-[#D5D5D5] rounded flex-grow sm:flex-grow-0 sm:w-auto"
           type="text"

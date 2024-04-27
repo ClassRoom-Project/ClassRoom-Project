@@ -26,9 +26,10 @@ const ClassInfos = ({ classId }: { classId: string }) => {
     };
     getClassInfos();
   }, [setClassInfo, classId]);
-  const hashtagString = classInfo?.hashtag.map((tag) => {
+  console.log('-------', classInfo?.hashtag);
+  const hashtagString = classInfo?.hashtag.map((tag, index) => {
     return (
-      <div key={classInfo.class_id} className="flex justify-center items-center">
+      <div key={`${tag}-${index}`} className="flex items-center justify-center">
         <RiHashtag className="text-main-color" />
         <p>{tag}</p>
       </div>
@@ -36,41 +37,41 @@ const ClassInfos = ({ classId }: { classId: string }) => {
   });
 
   return (
-    <div className="w-[400px] relative py-4 flex flex-col px-2  border-gray-400 border-solid border-b-[1px] justify-center items-center">
-      <div className="flex items-center w-full justify-between ">
-        <div className="rounded-2xl max-w-full flex-wrap bg-white border-main-color border-solid border-[1px] py-1 px-2 flex justify-center items-center">
+    <div className="relative flex w-[400px] flex-col items-center justify-center  border-b-[1px] border-solid border-gray-400 px-2 py-4">
+      <div className="flex w-full items-center justify-between ">
+        <div className="flex max-w-full flex-wrap items-center justify-center rounded-2xl border-[1px] border-solid border-main-color bg-white px-2 py-1">
           {hashtagString}
         </div>
         <div>
-          <div className="rounded-2xl max-w-full bg-white border-main-color border-solid border-[1px] py-1 px-2  flex justify-center items-center">
+          <div className="flex max-w-full items-center justify-center rounded-2xl border-[1px] border-solid border-main-color  bg-white px-2 py-1">
             <BiSolidCategory className="text-main-color" />
             <p>{classInfo?.category}</p>
           </div>
         </div>
       </div>
-      <div className="flex py-2 items-center w-full justify-between">
-        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2  flex justify-center items-center">
+      <div className="flex w-full items-center justify-between py-2">
+        <div className="flex items-center justify-center rounded-2xl border-[1px] border-solid border-main-color  bg-white px-2 py-1">
           <IoMdTime className="text-main-color" />
           <p>총 {classInfo?.total_time}시간</p>
         </div>
-        <div className="rounded-2xl border-main-color mx-auto bg-white border-solid border-[1px] py-1  px-2 flex justify-center items-center">
+        <div className="mx-auto flex items-center justify-center rounded-2xl border-[1px] border-solid  border-main-color bg-white px-2 py-1">
           <GiLevelEndFlag className="text-main-color" />
           <p>{classInfo?.difficulty}</p>
         </div>
 
-        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
+        <div className="flex items-center justify-center rounded-2xl border-[1px] border-solid border-main-color bg-white px-2 py-1">
           <BiBookAlt className="text-main-color" />
           <p>{classInfo?.class_type}</p>
         </div>
       </div>
-      <div className="flex items-center w-full justify-between">
-        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
+      <div className="flex w-full items-center justify-between">
+        <div className="flex items-center justify-center rounded-2xl border-[1px] border-solid border-main-color bg-white px-2 py-1">
           <MdOutlinePersonAddAlt1 className="text-main-color" />
           <p>
             인원 : 최소 {classInfo?.min_people} - 최대 {classInfo?.quantity} 명
           </p>
         </div>
-        <div className="rounded-2xl border-main-color bg-white border-solid border-[1px] py-1 px-2 flex justify-center items-center">
+        <div className="flex items-center justify-center rounded-2xl border-[1px] border-solid border-main-color bg-white px-2 py-1">
           <FaWonSign className="text-main-color" />
           <p>{classInfo?.price.toLocaleString()}원</p>
         </div>

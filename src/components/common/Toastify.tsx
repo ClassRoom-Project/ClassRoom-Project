@@ -78,6 +78,7 @@ export const invalidReserve = () =>
   toast.error('클래스 예약을 완료하는 도중 오류가 발생했습니다.', {
     position: 'top-right',
     hideProgressBar: false,
+    autoClose: 3000,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
@@ -259,7 +260,7 @@ export const LimitHashTagNotify = () =>
     progress: undefined,
     theme: 'light'
   });
-  
+
 export const LimitImageSizeNotify = () =>
   toast.error('이미지는 5MB 이하만 업로드할 수 있습니다.', {
     position: 'top-right',
@@ -284,17 +285,17 @@ export const closedClass = () =>
     theme: 'light'
   });
 
-  export const noCategoryNotify = () =>
-    toast.error('카테고리를 선택해주세요.', {
-      position: 'top-right',
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'light'
-    });
+export const noCategoryNotify = () =>
+  toast.error('카테고리를 선택해주세요.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
 
 export const noHashTagNotify = () =>
   toast.error('해시태그를 입력해주세요.', {

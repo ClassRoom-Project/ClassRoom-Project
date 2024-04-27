@@ -18,11 +18,11 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
   const { setReserveInfo } = useReserveStore();
   const { setCurrentReservedCount } = useCurrentReservedCountStore();
 
-  const datesAfterToday = classDates.filter(({ day }) => day >= format(new Date(), 'yyyy-MM-dd'));
-  const firstAvailableDay = datesAfterToday[0].day;
+  const dateListAfterToday = classDates.filter(({ day }) => day >= format(new Date(), 'yyyy-MM-dd'));
+  const firstAvailableDay = dateListAfterToday[0].day;
   const [selectedDate, setSelectedDate] = useState(firstAvailableDay);
-  const [selectedTime, setSelectedTime] = useState(datesAfterToday[0].times[0].times);
-  const [timeId, setTimeId] = useState(datesAfterToday[0].times[0].timeId);
+  const [selectedTime, setSelectedTime] = useState(dateListAfterToday[0].times[0].times);
+  const [timeId, setTimeId] = useState(dateListAfterToday[0].times[0].timeId);
   const today = new Date();
 
   useEffect(() => {
@@ -31,12 +31,12 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
 
   useEffect(() => {
     const setInitialReservedCount = async () => {
-      const initialReservedCount = await sumReserveQuantityByTimeId(classDates[0].times[0].timeId);
+      const initialReservedCount = await sumReserveQuantityByTimeId(dateListAfterToday[0].times[0].timeId);
 
       setCurrentReservedCount(initialReservedCount);
     };
     setInitialReservedCount();
-  }, [setCurrentReservedCount, classDates]);
+  }, [setCurrentReservedCount]); // dateListAfterToday 추가하면 무한 리렌더링돼서 뺐습니다
 
   if (!firstAvailableDay) {
     alert('마감된 클래스입니다.');
@@ -59,7 +59,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     setSelectedDate(formattedDate);
 
     // 일자를 선택했을 때 첫 번째 시간으로 state를 set
-    const firstAvailableTime = datesAfterToday.find(({ day }) => day === formattedDate)?.times[0];
+    const firstAvailableTime = dateListAfterToday.find(({ day }) => day === formattedDate)?.times[0];
     if (firstAvailableTime) {
       const { timeId, times } = firstAvailableTime;
       setSelectedTime(times);
