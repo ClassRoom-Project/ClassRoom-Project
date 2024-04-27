@@ -10,8 +10,6 @@ import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import Link from 'next/link';
 import { IoIosArrowBack } from 'react-icons/io';
 
-export const dynamic = 'force-dynamic';
-
 const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
