@@ -19,10 +19,10 @@ export default function MessagesPage() {
   const fromUserId = searchParams.get('fromUserId');
   const mainImage = searchParams.get('mainImage');
 
-  const firstSectionClasses = `flex flex-col w-full h-full lg:w-2/6 3xl:w-1/5 ${
+  const firstSectionClasses = `flex flex-col w-full h-full lg:w-2/5 xl:w-2/5 2xl:w-2/6 3xl:w-1/5 ${
     currentChatRoomId ? 'hidden md:hidden lg:block' : 'block'
   }`;
-  const secondSectionClasses = `flex h-full flex-col w-full lg:w-4/6 border-l border-[#CAC6FC ] 3xl:w-4/5 ${
+  const secondSectionClasses = `flex h-full flex-col w-full lg:w-3/5 xl:w-3/5 2xl:w-4/6 3xl:w-4/5 border-l border-[#CAC6FC ] ${
     currentChatRoomId ? 'block' : 'hidden md:hidden lg:block'
   }`;
 
