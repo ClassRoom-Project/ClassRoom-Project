@@ -16,7 +16,7 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
       <div className=" m-0 flex w-full   items-center bg-white p-2 text-text-dark-gray ">
         <BackButton />
       </div>
-      <div className=" relative flex w-full flex-col justify-center gap-2 bg-pale-purple  p-6 lg:min-w-[900px] lg:flex-row lg:gap-12">
+      <div className=" relative flex w-full flex-col justify-center gap-2 bg-pale-purple  p-6 lg:min-w-[950px] lg:flex-row lg:gap-12">
         <ClassImageCarousel classData={classData} />
         <ClassSummary classData={classData} userData={userData} />
       </div>

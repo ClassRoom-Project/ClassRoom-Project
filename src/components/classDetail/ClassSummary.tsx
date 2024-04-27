@@ -111,7 +111,7 @@ const ClassSummary = ({
           {classInfoLabels.map(({ icon, title, description }) => {
             return (
               <div key={title} className="flex items-center gap-2 text-text-dark-gray">
-                <div className="mt-1.5 self-start font-bold">{icon}</div>
+                <div className="mt-0.5 self-start font-bold md:mt-1.5">{icon}</div>
                 <div className={'mr-1 hidden shrink-0 self-start font-bold md:block '}>{title}</div>
                 <div className="flex flex-wrap  gap-2 text-sm font-normal md:text-base">{description}</div>
               </div>
