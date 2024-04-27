@@ -9,23 +9,26 @@ import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import Link from 'next/link';
 import { IoIosArrowBack } from 'react-icons/io';
 
+export const dynamic = 'force-dynamic';
+
 const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
+
   return (
-    <div className=" responsiveHeight mx-auto flex h-screen max-w-[1920px] flex-col items-center">
+    <div className="flex flex-col items-center">
       <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
-        <Link href={`/`} className="md:text-md flex items-center justify-center text-sm">
+        <Link href={`/`} className="flex items-center justify-center">
           <IoIosArrowBack size={18} />
           뒤로가기
         </Link>
       </div>
-      <div className="flex w-full flex-col justify-center gap-2 bg-pale-purple p-6  lg:min-w-[900px] lg:flex-row lg:gap-12">
+      <div className="flex w-full justify-between gap-12 bg-pale-purple p-6">
         <ClassImageCarousel classData={classData} />
         <ClassSummary classData={classData} userData={userData} />
       </div>
 
-      <div className="flex w-full  flex-col items-center justify-center px-6 pb-24 pt-2 lg:p-6 ">
+      <div className="flex w-full  flex-col items-center justify-center p-6">
         <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
         {classData?.location && (
           <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />
@@ -36,4 +39,5 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
+
 export default DetailPage;
