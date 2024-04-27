@@ -2,14 +2,16 @@
   width: 100%;
   height: 100%;
   margin: auto;
+  position: relative;
   --slide-height: 19rem;
   --slide-spacing: 1rem;
   --slide-size: 100%;
   --text-high-contrast: rgb(49, 49, 49);
   --text-body: rgb(54, 49, 61);
-  --text-body: rgb(54, 49, 61);
   --text-high-contrast-rgb-value: 49, 49, 49;
-  position: relative;
+  --detail-high-contrast: rgb(192, 192, 192);
+  --detail-medium-contrast: rgb(234, 234, 234);
+  --detail-medium-contrast-rgb-value: 234, 234, 234;
 }
 
 .embla__viewport {
@@ -102,7 +104,7 @@
 
 .embla__button__svg:hover {
   color: #6c5ff7;
-  transition: all 0.2s;
+  transition: all 0.4s;
 }
 
 .embla__button__svg {
@@ -130,32 +132,36 @@
   border-radius: 10px;
 }
 
-.embla__dotSelected:after {
-  box-shadow: inset 0 0 0 0.2rem var(--text-body);
-  border: 3.5px solid #6c5ff7;
-}
-
 .embla__dot {
+  appearance: none;
   background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
   cursor: pointer;
-  position: relative;
-  padding: 0;
-  outline: 0;
   border: 0;
-  width: 30px;
-  height: 30px;
-  margin-right: 7.5px;
-  margin-left: 7.5px;
+  padding: 0;
+  margin: 0;
+  width: 2.4rem;
+  height: 2.6rem;
   display: flex;
   align-items: center;
+  justify-content: center;
+  border-radius: 50%;
 }
 
 .embla__dot:after {
-  background-color: white;
-  width: 100%;
-  height: 6px;
-  border-radius: 6px;
+  box-shadow: inset 0 0 0 0.15rem var(--detail-medium-contrast);
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
   content: '';
+}
+
+.embla__dotSelected:after {
+  box-shadow: inset 0 0 0 0.15rem #6c5ff7;
 }
 
 .embla__button__svg {
@@ -170,7 +176,6 @@
 .embla__lazyLoad__spinner {
   border: 0.4rem solid rgba(var(--text-high-contrast-rgb-value), 0.2);
   border-left: 0.4rem solid var(--text-high-contrast);
-
   font-size: 1rem;
   display: inline-flex;
   position: absolute;
@@ -212,19 +217,35 @@
 
 @media (max-width: 600px) {
   .embla__dot {
+    appearance: none;
     background-color: transparent;
+    touch-action: manipulation;
+    display: inline-flex;
+    text-decoration: none;
     cursor: pointer;
-    position: relative;
-    padding: 0;
-    outline: 0;
     border: 0;
-    width: 14px;
-    height: 14px;
-    margin-right: 7.5px;
-    margin-left: 7.5px;
+    padding: 0;
+    margin: 0;
+    width: 2rem;
+    height: 2rem;
     display: flex;
     align-items: center;
-    margin-bottom: 5px;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  .embla__dot:after {
+    box-shadow: inset 0 0 0 0.15rem var(--detail-medium-contrast);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    content: '';
+  }
+
+  .embla__dotSelected:after {
+    box-shadow: inset 0 0 0 0.15rem #6c5ff7;
   }
 
   .embla__buttonPrev {
