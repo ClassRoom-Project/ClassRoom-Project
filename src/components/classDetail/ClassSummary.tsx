@@ -20,8 +20,8 @@ const ClassSummary = ({
   // 해시태그 배열 생성
   const hashtagString = classData?.hashtag.map((tag) => {
     return (
-      <div key={tag} className="flex items-center  text-gray-400">
-        <RiHashtag />
+      <div key={tag} className="mr-1.5 flex  items-center text-gray-400">
+        <RiHashtag color="#BAB4FD" />
         <p>{tag}</p>
       </div>
     );
@@ -105,7 +105,9 @@ const ClassSummary = ({
             <LuDot color="gray" />
             {classData?.category}
           </div>
-          <div className=" flex  gap-2 overflow-x-auto whitespace-nowrap ">{hashtagString}</div>
+          <div className=" flex overflow-x-auto whitespace-nowrap scrollbar-hide sm:flex-wrap sm:overflow-visible sm:whitespace-normal ">
+            {hashtagString}
+          </div>
         </div>
         <div className="flex flex-col gap-5 text-lg">
           {classInfoLabels.map(({ icon, title, description }) => {
