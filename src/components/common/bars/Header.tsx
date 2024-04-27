@@ -71,12 +71,12 @@ const Header = ({ children }: PropsWithChildren) => {
             <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
           </Link>
         </div>
-        <div className="flex flex-grow items-center justify-start bg-blue-500">
+        <div className="flex flex-grow items-center justify-start">
           <Suspense>
             <SearchClass />
           </Suspense>
         </div>
-        <div className="relative flex items-end justify-end bg-orange-500">
+        <div className="relative flex items-end justify-end">
           <div className="flex w-full items-center justify-end">
             {userEmail ? (
               <div className="flex items-end justify-end">
