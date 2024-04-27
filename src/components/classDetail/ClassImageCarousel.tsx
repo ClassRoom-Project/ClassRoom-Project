@@ -43,7 +43,12 @@ const ClassImageCarousel = ({ classData }: { classData: ListDetailClassInfo | nu
               ))
             ) : (
               <div className="relative h-full w-full">
-                <Image fill className=" h-full w-full rounded-md object-cover" src={noImage} alt="clroom no Image" />
+                <Image
+                  fill={true}
+                  className=" h-full w-full rounded-md object-cover"
+                  src={noImage}
+                  alt="clroom no Image"
+                />
               </div>
             )}
           </div>
