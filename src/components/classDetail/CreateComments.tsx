@@ -125,7 +125,7 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
   return (
     <>
       {classData?.reserve?.some((reserve) => reserve.user_id === `${loginUserId}`) ? (
-        <div className="mb-8 flex w-full flex-col items-center justify-center rounded-lg border border-solid border-button-focus-color bg-disable-color px-5 pb-4 pt-6 shadow-md md:px-6 lg:px-8 ">
+        <div className="mb-4 flex w-full flex-col items-center justify-center rounded-lg border border-solid border-button-focus-color bg-disable-color px-5 pb-4 pt-6 shadow-md md:mb-8 md:px-6 lg:px-8 ">
           <form onSubmit={handleCommentSubmit} className="flex w-full flex-col items-center justify-center">
             <div className="flex w-full flex-col-reverse items-end justify-between gap-4 lg:flex-row">
               <div className="flex w-full flex-col lg:w-[75%]">
@@ -196,8 +196,8 @@ const CreateComments = ({ classData }: { classData: ListDetailClassInfo | null }
           </form>
         </div>
       ) : (
-        <div className="mb-4 flex h-20 w-full items-center justify-center rounded-lg bg-disable-color text-sm shadow-md lg:h-40 lg:text-base">
-          클래스를 예약하신 분만 후기 등록이 가능합니다.
+        <div className="mb-4 flex h-20 w-full items-center justify-center rounded-lg bg-disable-color text-xs shadow-md md:text-sm lg:h-40 lg:text-base">
+          클래스를 예약하신 분만 후기를 등록할 수 있습니다.
         </div>
       )}
     </>

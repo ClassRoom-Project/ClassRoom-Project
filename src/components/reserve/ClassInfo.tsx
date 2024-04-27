@@ -34,12 +34,12 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
     {
       icon: <PiCurrencyKrw className="text-gray-400" />,
       title: '1인당 수강 금액',
-      description: `${classInfo.price.toLocaleString()}원`
+      description: classInfo?.price === 0 ? '무료' : `${classInfo?.price.toLocaleString()}원`
     }
   ];
 
   return (
-    <div className="rounded-md bg-white px-5 pb-6 pt-4 shadow">
+    <div className=" rounded-md bg-white px-5 pb-6 pt-4 shadow">
       <div className="flex w-full justify-between">
         <h1 className="mb-1 text-lg font-bold">선택하신 클래스</h1>
       </div>
@@ -51,6 +51,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
             src={classInfo.image}
             alt={classInfo.title}
             style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, 40vw"
           />
         ) : (
           <Image
@@ -59,6 +60,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
             src={NoImage}
             alt={classInfo.title}
             style={{ objectFit: 'cover' }}
+            sizes="(max-width: 768px) 100vw, 40vw"
           />
         )}
       </div>

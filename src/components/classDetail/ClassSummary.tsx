@@ -20,7 +20,7 @@ const ClassSummary = ({
   // 해시태그 배열 생성
   const hashtagString = classData?.hashtag.map((tag) => {
     return (
-      <div key={tag} className="flex items-center text-gray-400">
+      <div key={tag} className="flex items-center  text-gray-400">
         <RiHashtag />
         <p>{tag}</p>
       </div>
@@ -29,7 +29,7 @@ const ClassSummary = ({
 
   // 예약 가능 날짜 배열 생성
   const classDaysElements = classData?.date.map((dateInfo) => {
-    const day = dateInfo.day.slice(5);
+    const day = dateInfo.day.slice(5).split('-').join('.');
     return <div key={dateInfo.date_id}>{day} </div>;
   });
 
@@ -69,7 +69,7 @@ const ClassSummary = ({
     {
       icon: <PiCurrencyKrw className="text-main-color" />,
       title: '수강 금액',
-      description: `${classData?.price.toLocaleString()}원`
+      description: classData?.price === 0 ? '무료' : `${classData?.price.toLocaleString()}원`
     }
   ];
 
@@ -105,15 +105,15 @@ const ClassSummary = ({
             <LuDot color="gray" />
             {classData?.category}
           </div>
-          <div className="flex gap-2">{hashtagString}</div>
+          <div className=" flex  gap-2 overflow-x-auto whitespace-nowrap ">{hashtagString}</div>
         </div>
         <div className="flex flex-col gap-5 text-lg">
           {classInfoLabels.map(({ icon, title, description }) => {
             return (
               <div key={title} className="flex items-center gap-2 text-text-dark-gray">
-                <div className="font-bold ">{icon}</div>
-                <div className={'mr-1 hidden shrink-0 font-bold md:block '}>{title}</div>
-                <div className="flex gap-2 text-sm font-normal md:text-base">{description}</div>
+                <div className="mt-0.5 self-start font-bold md:mt-1.5">{icon}</div>
+                <div className={'mr-1 hidden shrink-0 self-start font-bold md:block '}>{title}</div>
+                <div className="flex flex-wrap  gap-2 text-sm font-normal md:text-base">{description}</div>
               </div>
             );
           })}

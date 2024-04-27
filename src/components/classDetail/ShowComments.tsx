@@ -30,8 +30,9 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
           ))}
         </div>
       ) : (
-        <div className="my-10 text-sm lg:my-20">
-          <p>아직 등록된 후기가 없어요. 첫 번째 후기의 주인공이 되어보세요!</p>
+        <div className="mb-12 mt-8 flex flex-col items-center justify-center gap-1 text-xs md:text-sm lg:my-20 lg:text-base">
+          <p>아직 등록된 후기가 없어요. </p>
+          <p>첫 번째 후기의 주인공이 되어보세요!</p>
         </div>
       )}
     </div>
