@@ -7,10 +7,15 @@ import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
 import BackButton from '@/components/common/BackButton';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
+import Link from 'next/link';
+import { IoIosArrowBack } from 'react-icons/io';
+
+export const dynamic = 'force-dynamic';
 
 const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
+
   return (
     <div className=" responsiveHeight relative mx-auto flex h-screen max-w-[1920px] flex-col items-center">
       <div className=" m-0 flex w-full   items-center bg-white p-2 text-text-dark-gray ">
@@ -32,4 +37,5 @@ const DetailPage = async ({ params }: { params: { id: string } }) => {
     </div>
   );
 };
+
 export default DetailPage;

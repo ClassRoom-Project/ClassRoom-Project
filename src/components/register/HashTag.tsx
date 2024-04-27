@@ -52,7 +52,10 @@ const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
   return (
     <div className="my-4">
       <div className="flex flex-col sm:flex-row items-start space-x-0 space-y-4 sm:space-x-4 sm:space-y-0 my-2">
-        <p className="text-base text-[#3F3F3F] flex-shrink-0 font-bold"><span className='text-[#d63232] font-bold'>*</span> 해시태그</p>
+        <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
+          <span className='text-[#d63232] font-bold'>*</span> 
+          해시태그
+        </p>
         <input
           className="form-input px-3 py-2 border-b border-t-0 border-r-0 border-l-0 border-[#D5D5D5] flex-grow min-w-0 w-full"
           type="text"

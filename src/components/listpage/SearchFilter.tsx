@@ -101,7 +101,7 @@ const SearchFilter = () => {
             <div className="flex w-full items-center justify-center gap-2 text-xs md:gap-3 md:text-base">
               <button
                 onClick={() => handleClassTypeBtn('온라인 클래스')}
-                className={`w-12 rounded-2xl  border-[1px] border-solid border-point-purple py-1  md:w-24 ${
+                className={`w-14 rounded-2xl  border-[1px] border-solid border-point-purple py-1  md:w-24 ${
                   ClassFilters.selectedClassType === '온라인 클래스'
                     ? 'bg-point-purple text-white'
                     : 'bg-pale-purple transition-all hover:bg-button-disable-color'
@@ -208,8 +208,8 @@ const SearchFilter = () => {
             </div>
           </div>
           <div className="divider m-0 h-0 md:h-4"></div>
-          <div className="flex w-full flex-col items-center justify-center">
-            <div className="mb-2 flex w-full items-start justify-start md:mb-3 md:w-64">
+          <div className="mb-2 w-full items-center justify-center md:mb-4">
+            <div className="mb-2 flex items-start justify-start md:mb-3 md:w-64">
               <p className="text-sm text-black md:text-base">금액</p>
             </div>
             <div className="flex w-full justify-center">
