@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
+import { supabase } from '@/app/api/supabase/supabase';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { DayPicker } from 'react-day-picker';
@@ -20,9 +21,10 @@ interface InitialDataType {
 interface SelectTimeProps {
   isEditMode: boolean;
   initialData?: InitialDataType;
+  class_Id?: string;
 }
 
-const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
+const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_Id }) => {
   const {
     schedules,
     selectedDates,
@@ -66,14 +68,37 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
   };
 
   // 선택한 날짜 삭제
-  const handleRemoveDate = (date: string) => {
+  const handleRemoveDate = async (date: string) => {
     removeSchedule(date);
     setSelectedDates(selectedDates.filter((d) => d !== date));
+
+    const { data, error } = await supabase
+    .from('date')
+    .delete()
+    .match({ day: date, class_id: class_Id });
+
+    if (error) {
+      console.error('Error removing date from Supabase:', error.message);
+    }
   };
 
   // 선택한 시간 삭제
-  const handleRemoveTime = (date: string, time: string) => {
+  const handleRemoveTime = async (date: string, time: string) => {
     removeTimeFromSchedule(date, time);
+
+    const dateData = schedules.find((schedule) => schedule.date === date);
+    if (dateData) {
+      const { dateId } = dateData;
+
+      const { data, error } = await supabase
+      .from('time')
+      .delete()
+      .match({ date_id: dateId, times: time });
+
+      if (error) {
+        console.error('Error removing time from Supabase:', error.message);
+      }
+    }
   };
 
   useEffect(() => {
