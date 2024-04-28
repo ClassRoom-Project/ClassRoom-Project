@@ -430,19 +430,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
                   onDrop={(event) => handleImageDrop(index, event)}
                 >
                   <Image
-                    // sizes='(max-width: 780px) 129px, 256px'
                     src={images[index].preview}
                     alt="uploaded"
-                    fill
                     placeholder='empty'
                     className="h-full w-full rounded-[20px] border object-cover"
-                    // style={{
-                    //   height: '100%', 
-                    //   width: '100%',
-                    //   borderRadius: '20px', // rounded-[20px]
-                    //   border: '1px solid',
-                    //   objectFit: 'cover', // object-cover
-                    // }}
                   />
                   <button
                     className="btn btn-circle btn-xs absolute right-0 top-0 mr-1 mt-1 bg-red-500 text-white"

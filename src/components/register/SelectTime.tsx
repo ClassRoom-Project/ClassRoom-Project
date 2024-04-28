@@ -94,7 +94,7 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
     .single();
 
     if (dateError) {
-      console.error('Error=:', dateError.message);
+      console.error('Error:', dateError.message);
       return;
     }
 
@@ -104,7 +104,7 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
     .match({ date_id: dateData.date_id, times: time });
 
     if (timeError) {
-      console.error('Error=:', timeError.message);
+      console.error('Error:', timeError.message);
     }
   };
 
