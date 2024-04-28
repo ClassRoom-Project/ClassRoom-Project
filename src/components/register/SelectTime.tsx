@@ -78,7 +78,7 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
     .match({ day: date, class_id: class_Id });
 
     if (error) {
-      console.error('Error removing date from Supabase:', error.message);
+      console.error('Error:', error.message);
     }
   };
 
@@ -86,18 +86,25 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
   const handleRemoveTime = async (date: string, time: string) => {
     removeTimeFromSchedule(date, time);
 
-    const dateData = schedules.find((schedule) => schedule.date === date);
-    if (dateData) {
-      const { dateId } = dateData;
+    const { data: dateData, error: dateError } = await supabase
+    .from('date')
+    .select('date_id')
+    .eq('day', date)
+    .eq('class_id', class_Id)
+    .single();
 
-      const { data, error } = await supabase
-      .from('time')
-      .delete()
-      .match({ date_id: dateId, times: time });
+    if (dateError) {
+      console.error('Error=:', dateError.message);
+      return;
+    }
 
-      if (error) {
-        console.error('Error removing time from Supabase:', error.message);
-      }
+    const { data: timeData, error: timeError } = await supabase
+    .from('time')
+    .delete()
+    .match({ date_id: dateData.date_id, times: time });
+
+    if (timeError) {
+      console.error('Error=:', timeError.message);
     }
   };
 
