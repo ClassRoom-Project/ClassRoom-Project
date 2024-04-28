@@ -1,9 +1,11 @@
 import { DetailCommentType } from '@/types/detailComment';
+import mediumZoom from 'medium-zoom';
 import Image from 'next/image';
 import DefaultProfile from '../../assets/images/profile-image.png';
 
 const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
-  // console.log(comment);
+  const zoom = mediumZoom({ background: '#00000073' });
+
   const Stars = () => {
     return [1, 2, 3, 4, 5].map((star) => (
       <input
@@ -17,13 +19,18 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
     ));
   };
 
+  const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    console.log(e);
+    zoom.attach(e.currentTarget);
+  };
+
   return (
-    <div className="flex  w-full flex-col justify-between gap-4 rounded-lg p-1 md:p-5 lg:flex-row">
+    <div className="   flex  w-full flex-col justify-between gap-4 rounded-lg p-1 md:p-5 lg:flex-row">
       <div className="flex w-full flex-col">
         {/* 프로필  */}
         <div className="mb-2 flex items-center gap-2 md:mb-1 ">
           <div className=" flex items-center justify-center gap-2">
-            <div className="relative h-9 w-9 flex-shrink-0 sm:h-12 sm:w-12">
+            <div className=" relative h-9 w-9 flex-shrink-0 sm:h-12 sm:w-12">
               {comment.profile_image ? (
                 <Image
                   src={comment.profile_image}
@@ -57,12 +64,13 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
       </div>
       {comment.comment_image ? (
         <div className="flex items-center pl-1.5 sm:pl-12 lg:justify-center lg:pl-0">
-          <div className="relative flex h-40 w-40 items-center justify-center md:h-48 md:w-48">
+          <div className="image-container relative flex h-40 w-40 items-center justify-center md:h-48 md:w-48">
             <Image
               src={comment.comment_image}
               alt="uploaded image preview"
               fill
-              className="h-full w-full rounded-xl border object-cover"
+              style={{ objectFit: 'cover', borderRadius: '18px' }}
+              onLoad={handleImageLoad}
             />
           </div>
         </div>

@@ -18,7 +18,7 @@ import { useCallback, useEffect, useState } from 'react';
 export const Banner = () => {
   const [current, setCurrent] = useState(0);
   // const totalSlides = 3;
-  const totalSlides = 1;
+  const totalSlides = 3;
 
   const handlePrev = () => {
     const newIndex = (current - 1 + totalSlides) % totalSlides;
@@ -57,7 +57,7 @@ export const Banner = () => {
       <div id="default-carousel" className="relative mt-2  w-full md:ml-0" data-carousel="slide">
         <div className="h-40 w-full items-center justify-center overflow-hidden rounded-lg md:h-60 xl:h-80">
           {/* 첫번째 배너 */}
-          {/* <article data-carousel-item data-index="0">
+          <article data-carousel-item data-index="0">
             <div className="relative flex h-60 flex-row items-center  justify-center bg-[#FFBA33] lg:h-80">
               <div className=" h-full w-full">
                 <Image
@@ -91,9 +91,9 @@ export const Banner = () => {
                 </Link>
               </div>
             </div>
-          </article> */}
+          </article>
           {/* 두번째 배너 */}
-          {/* <article data-carousel-item data-index="1">
+          <article data-carousel-item data-index="1">
             <div className="relative flex h-40 flex-row bg-gradient-gra1 duration-700 ease-in-out md:h-60 xl:h-80">
               <div className=" h-full w-full">
                 <Image //
@@ -112,7 +112,7 @@ export const Banner = () => {
                 </div>
               </div>
             </div>
-          </article> */}
+          </article>
           {/* 세번째배너 */}
           {/* <article data-carousel-item data-index="2">
             <div className="relative flex h-60 flex-row items-center bg-button-focus-color duration-700 ease-in-out md:h-80 md:justify-center lg:justify-end">
@@ -126,20 +126,31 @@ export const Banner = () => {
               </div>
             </div>
           </article> */}
-          <article data-carousel-item data-index="1">
-            <div className="relative flex h-40 flex-row bg-light-purple duration-700 ease-in-out md:h-60 xl:h-80">
-              <div className=" absolute left-48 top-8 z-40 w-1/4">
+          <article className="" data-carousel-item data-index="1">
+            <div className="relative flex h-80 flex-row bg-light-purple duration-700 ease-in-out  ">
+              {/* 꽃이미지 */}
+              <div className=" absolute left-4 top-2 z-20 hidden w-[150px] sm:left-24 sm:top-5  sm:block sm:w-[200px]  md:left-12  md:top-12 md:w-[220px]  lg:left-20 lg:top-6 lg:w-[380px] xl:left-28 xl:top-10 xl:w-[432px] 2xl:left-40 2xl:top-8">
                 <Image style={{ objectFit: 'cover' }} src={purpleFlower} alt="h"></Image>
               </div>
-              <div className="absolute left-[350px] top-[-160px]  h-[30%] w-[50%] ">
+
+              {/* 이상한도형 */}
+              <div className="absolute left-1 top-[-60px] w-[350px] sm:left-12 sm:top-[-120px]  sm:w-[380px] md:left-[140px] md:top-[-100px]  md:w-[400px] lg:left-[350px] lg:top-[-160px] lg:w-[500px] xl:w-[700px] ">
                 <Image src={lightPurpleGraphic2} alt="h"></Image>
               </div>
-              <div className="absolute right-[700px] top-28 z-30 w-[10%]">
-                <Image style={{ objectFit: 'cover' }} src={clRoomTextLogo} alt="h"></Image>
-              </div>
-              <div className="absolute right-48 top-32 flex flex-col font-bold text-point-purple">
-                <p className="text-3xl">클룸을 통해서</p>
-                <p className="text-3xl">다양한 원데이 클래스를 체험해보세요!</p>
+
+              <div className=" absolute top-8 z-30 flex w-full flex-col  items-center justify-end gap-2 sm:right-28 sm:w-fit md:right-20  md:top-16 md:items-end  md:gap-5  lg:right-24 lg:top-[50px] lg:text-base xl:right-36 xl:top-32 xl:flex-row xl:items-center 2xl:right-44">
+                {/* 클룸 텍스트 로고 */}
+                <div className=" w-[80px] flex-shrink-0 sm:w-[70px] md:w-[70px] lg:w-[100px] xl:w-[130px]">
+                  <Image style={{ objectFit: 'cover' }} quality={100} src={clRoomTextLogo} alt="h"></Image>
+                </div>
+
+                {/* 텍스트 */}
+                <div className=" flex flex-col text-center text-sm font-bold text-point-purple  md:text-right  md:text-lg lg:text-lg xl:text-left xl:text-2xl  2xl:text-3xl ">
+                  <p className="hidden lg:block">클룸을 통해서</p>
+                  <p className=" hidden lg:block">다양한 원데이 클래스를 체험해보세요!</p>
+                  <p className="lg:hidden">다양한 원데이 </p>
+                  <p className="lg:hidden">클래스를 체험해보세요!</p>
+                </div>
               </div>
             </div>
           </article>
