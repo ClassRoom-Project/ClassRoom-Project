@@ -163,35 +163,27 @@ export const Banner = () => {
 
           {/* 남색 배너 */}
           <article className="" data-carousel-item data-index="1">
-            <div className="relative flex h-80 flex-row bg-[#26234D] duration-700 ease-in-out sm:bg-orange-300 md:bg-rose-300 lg:bg-green-800 xl:bg-slate-600 ">
+            <div className="relative flex h-80 flex-row bg-[#26234D] duration-700 ease-in-out  ">
               {/* 큰 이미지 */}
               <div className=" sm:w-[16 0px] absolute left-4 top-2 z-20 hidden w-[150px]  sm:left-24 sm:top-5 sm:block  md:left-36 md:top-[-30px] md:hidden  md:w-[180px] lg:left-52  lg:top-[-30px] lg:block lg:w-[200px] xl:left-96 xl:top-[-50px] xl:w-[300px]">
                 <Image style={{ objectFit: 'cover' }} quality={100} src={candle} alt="h"></Image>
               </div>
-
               {/* 작은 이미지 */}
               <div className=" absolute left-4 top-2 z-20 hidden w-[150px] sm:left-24 sm:top-5  sm:block sm:w-[200px] md:left-12 md:top-40  md:hidden  md:w-[220px] lg:left-20  lg:top-32 lg:block lg:w-[150px] xl:left-32 xl:top-[80px] xl:w-[200px]">
                 <Image style={{ objectFit: 'cover' }} quality={100} src={soap} alt="h"></Image>
               </div>
-
-              <div className=" absolute left-4 top-12 z-20 hidden  w-[30px] sm:left-24    sm:block  md:left-12   lg:left-20 xl:left-28  xl:w-[50px]">
+              {/*  오른쪽 별 */}
+              <div className=" absolute z-20 hidden w-[30px]    sm:block md:right-20 md:top-10  md:w-[50px]   lg:right-[60px] lg:top-10  lg:w-[40px] xl:right-40 xl:top-20">
                 <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
               </div>
-
-              <div className=" absolute z-20 hidden w-[30px] sm:block  md:right-12    lg:right-16  lg:top-12   xl:right-36 xl:top-24  xl:w-[40px]">
-                <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
-              </div>
-
               {/* 왼쪽 별 */}
-              <div className=" absolute  z-20 hidden w-[30px] sm:block lg:right-72  lg:top-24    xl:right-[420px]     xl:top-32  xl:w-[50px]">
+              <div className=" absolute z-20  hidden w-[30px] sm:block md:left-28 md:top-24  md:w-[40px] lg:left-auto   lg:right-[290px] lg:top-24    xl:right-[400px]     xl:top-32  xl:w-[50px]">
                 <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
               </div>
-
               {/* 아래 별 */}
-              <div className=" absolute  z-20 hidden w-[30px] sm:block lg:right-12   lg:top-48 xl:right-36 xl:top-60  xl:w-[35px]">
+              <div className=" absolute  z-20 hidden w-[30px] sm:block md:right-[130px] md:top-48 lg:right-12   lg:top-48 xl:right-36 xl:top-60  xl:w-[35px]">
                 <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
               </div>
-
               <div className=" absolute z-30 flex flex-col items-center justify-center  gap-2 sm:right-28 sm:w-fit md:right-0 md:top-16 md:w-full md:items-center md:gap-5 lg:right-16  lg:top-16  lg:w-fit  lg:text-base  xl:right-44 xl:top-28  xl:flex-row xl:items-center ">
                 {/* 텍스트 */}
                 <div className=" flex flex-col gap-2 text-center text-sm font-bold  text-white    md:text-3xl ">
