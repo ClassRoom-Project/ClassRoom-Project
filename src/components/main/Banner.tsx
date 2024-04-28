@@ -151,7 +151,7 @@ export const Banner = () => {
                 </div>
 
                 {/* 텍스트 */}
-                <div className=" flex flex-col text-center text-sm font-bold text-point-purple  md:text-right  md:text-lg lg:text-lg xl:text-left xl:text-2xl  2xl:text-3xl ">
+                <div className=" flex flex-col text-center text-sm font-bold text-point-purple  md:text-right  md:text-lg lg:text-lg xl:text-left xl:text-2xl ">
                   <p className="hidden lg:block">클룸을 통해서</p>
                   <p className=" hidden lg:block">다양한 원데이 클래스를 체험해보세요!</p>
                   <p className="lg:hidden">다양한 원데이 </p>
@@ -169,7 +169,7 @@ export const Banner = () => {
                 <Image style={{ objectFit: 'cover' }} quality={100} src={candle} alt="h"></Image>
               </div>
               {/* 작은 이미지 */}
-              <div className=" absolute left-4 top-2 z-20 hidden sm:left-16 sm:top-20 sm:block  sm:w-[100px]  md:left-12 md:top-40  md:hidden  md:w-[220px] lg:left-20  lg:top-32 lg:block lg:w-[150px] xl:left-32 xl:top-[80px] xl:w-[200px]">
+              <div className=" absolute left-4 top-2 z-20 hidden sm:left-16 sm:top-20 sm:block  sm:w-[100px]  md:left-12 md:top-40  md:hidden  md:w-[220px] lg:left-20  lg:top-32 lg:block lg:w-[150px] xl:left-32 xl:top-[100px] xl:w-[200px]">
                 <Image style={{ objectFit: 'cover' }} quality={100} src={soap} alt="h"></Image>
               </div>
               {/*  오른쪽 별 */}
@@ -182,16 +182,28 @@ export const Banner = () => {
               </div>
               {/* 아래 별 */}
               <div className=" absolute right-24 top-[120px]  z-20 w-[20px] sm:right-20 sm:top-32  sm:w-[20px] md:right-[130px] md:top-48 md:w-[30px] lg:right-12   lg:top-48 xl:right-36 xl:top-60  xl:w-[35px]">
-                <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
+                <Image style={{ objectFit: 'cover' }} quality={100} src={orangeStar} alt="h"></Image>
               </div>
+
+              {/* Ellipse */}
+              <div className=" absolute right-24 top-20 z-20  w-[10px] sm:left-32  sm:right-auto sm:top-[60px]  sm:w-[16px] md:left-auto md:right-32 md:top-28 md:w-[18px] lg:left-[390px]   lg:top-36 lg:w-[25px] xl:left-[660px] xl:top-52  xl:w-[30px]">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={Ellipse} alt="h"></Image>
+              </div>
+
+              {/*  */}
+              <div className=" absolute left-12 top-28  z-20 w-[15px] sm:left-[160px] sm:top-[85px]  sm:w-[7px] md:left-[80px] md:top-12 md:w-[15px] lg:left-[350px]    lg:top-44 lg:w-[14px] xl:left-[600px] xl:top-64  xl:w-[16px]">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={Ellipse} alt="h"></Image>
+              </div>
+              <div className=" absolute left-20 top-32  z-20 w-[7px]  sm:hidden">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={Ellipse} alt="h"></Image>
+              </div>
+
               <div className=" absolute top-9 z-30 flex w-full flex-col  items-center justify-center gap-2 sm:right-24 sm:top-[38px] sm:w-fit sm:items-center md:right-0 md:top-16 md:w-full md:items-center md:gap-5 lg:right-16  lg:top-16  lg:w-fit  lg:text-base  xl:right-44 xl:top-28  xl:flex-row xl:items-center ">
                 {/* 텍스트 */}
                 <div className=" flex flex-col gap-2 text-center text-base font-bold text-white md:text-3xl ">
                   <p className="">클룸을 통해서</p>
                   <p className="">취미와 역량을</p>
                   <p className="">한 단계 업그레이드!</p>
-                  {/* <p className="lg:hidden">다양한 원데이 </p>
-                  <p className="lg:hidden">클래스를 체험해보세요!</p> */}
                 </div>
               </div>
             </div>
