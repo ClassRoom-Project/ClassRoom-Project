@@ -26,14 +26,16 @@ export const LazyLoadImage: React.FC<PropType> = (props) => {
         {/* concat으로 이미지가 로드됐을 때 embla__lazyLoadHasLoaded 클래스를 추가 */}
         <div className={`${style.embla__lazyLoad}`.concat(hasLoaded ? ` ${style.embla__lazyLoadHasLoaded}` : '')}>
           {!hasLoaded && <span className={`${style.embla__lazyLoad__spinner}`} />}
-          <Image
-            className={`${style.embla__lazyLoad__img} h-full w-full rounded-md object-cover`}
-            onLoad={setLoaded}
-            src={inView ? imgSrc : PLACEHOLDER_SRC}
-            fill={true}
-            alt="class Detail Image"
-            data-src={imgSrc}
-          />
+          <div className={`${style.embla__lazyLoad__img} h-full w-full rounded-md`}>
+            <Image
+              onLoad={setLoaded}
+              src={inView ? imgSrc : PLACEHOLDER_SRC}
+              fill={true}
+              alt="class Detail Image"
+              data-src={imgSrc}
+              style={{ objectFit: 'cover' }}
+            />
+          </div>
         </div>
       </div>
     </div>
