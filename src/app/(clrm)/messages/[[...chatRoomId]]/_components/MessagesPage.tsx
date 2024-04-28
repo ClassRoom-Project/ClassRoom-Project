@@ -19,11 +19,11 @@ export default function MessagesPage() {
   const fromUserId = searchParams.get('fromUserId');
   const mainImage = searchParams.get('mainImage');
 
-  const firstSectionClasses = `flex flex-col w-full h-full lg:w-2/5 lg:w-2/5 ${
-    currentChatRoomId ? 'hidden sm:hidden md:block' : 'block'
+  const firstSectionClasses = `flex flex-col w-full h-full lg:w-2/5 xl:w-2/5 2xl:w-2/6 3xl:w-1/5 ${
+    currentChatRoomId ? 'hidden md:hidden lg:block' : 'block'
   }`;
-  const secondSectionClasses = `flex h-full flex-col w-full lg:w-3/5 border-l border-gray-500 ${
-    currentChatRoomId ? 'block' : 'hidden sm:hidden md:block'
+  const secondSectionClasses = `flex h-full flex-col w-full lg:w-3/5 xl:w-3/5 2xl:w-4/6 3xl:w-4/5 border-l border-[#CAC6FC ] ${
+    currentChatRoomId ? 'block' : 'hidden md:hidden lg:block'
   }`;
 
   if (!chatroomsInfo || chatroomsInfo.length === 0) {
@@ -44,8 +44,8 @@ export default function MessagesPage() {
   }
 
   return (
-    <div className="responsiveHeight flex max-h-full flex-col md:flex-row lg:flex-row">
-      <section className={`${firstSectionClasses} md:overflow-scroll md:overflow-x-hidden`}>
+    <div className="responsiveHeight flex max-h-full w-full flex-col md:flex-row lg:flex-row">
+      <section className={`${firstSectionClasses} mb-16 md:mb-0 md:overflow-scroll md:overflow-x-hidden `}>
         {chatroomsInfo.map(({ chatId, toClassId, fromUserId, image, teacherUserId, title, makeClassUserId }) => (
           <ChatPreview
             key={chatId}

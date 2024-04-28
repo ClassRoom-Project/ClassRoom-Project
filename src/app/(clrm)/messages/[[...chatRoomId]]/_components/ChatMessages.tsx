@@ -75,14 +75,13 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
   return (
     <div className="flex h-full w-full flex-col">
       <div className="border-grey-100 sticky top-0 flex w-full justify-between border-b bg-[#EFEFFF] p-4">
-        <p className="text-sm font-bold md:text-lg">클래스명: {title}</p>
+        <p className="text-sm font-semibold md:text-base">클래스명: {title}</p>
         <button onClick={handleDelete}>
           <IoIosLogOut className="text-2xl text-button-default-color hover:text-button-hover-color" />
         </button>
       </div>
-      <button onClick={handleBack} className="flex flex-row items-center pl-2 pt-2 text-sm md:hidden">
-        뒤로가기
-        <TbArrowBack className="text-xl" />
+      <button onClick={handleBack} className="flex flex-row items-center pl-2 pt-2 text-sm lg:hidden">
+        &lt; 뒤로가기
       </button>
       <MessageBoxs
         toClassId={toClassId}
@@ -93,8 +92,8 @@ export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, t
         studentName={studentName!}
         mainImage={mainImage}
       />
-      <div className="flex w-full items-center justify-center border-t border-gray-300 bg-white py-8">
-        <div className="relative flex h-14 w-full px-4 md:w-4/5 lg:h-16 lg:py-2">
+      <div className="flex w-full items-center justify-center bg-white md:pb-4 lg:pb-8">
+        <div className="relative flex h-14 w-full px-4 py-2 md:w-4/5 lg:h-16">
           <form onSubmit={handleSubmitMessage} className="flex h-full w-full items-center rounded-md border px-2">
             <input
               type="text"
