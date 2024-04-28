@@ -22,7 +22,7 @@ const MainFooter = () => {
             <p className="text-text-dark-gray">ⓒ Bug Busters</p>
           </div>
           <div className="text-xs md:text-sm lg:text-base">
-            <Link href={'/bugBusters'} className="text-text-dark-gray hover:text-white">
+            <Link href={'/bugBusters'} className="text-text-dark-gray hover:text-main-color">
               팀 소개
             </Link>
           </div>
