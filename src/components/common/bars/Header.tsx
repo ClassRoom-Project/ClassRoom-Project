@@ -68,7 +68,14 @@ const Header = ({ children }: PropsWithChildren) => {
       <div className="fixed left-0 right-0 top-0  z-40 ml-0 flex h-20 w-full items-center justify-between  bg-white md:ml-[50px] md:px-20">
         <div className="relative ml-2 h-10 w-10 rounded-full md:ml-12 md:h-16 md:w-16">
           <Link href="/">
-            <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
+            <Image
+              className="rounded-full"
+              src={Logo}
+              alt="클룸 로고"
+              fill={true}
+              sizes="(min-width: 768px) 64px, 40px"
+              priority={false}
+            />
           </Link>
         </div>
         <div className="flex flex-grow items-center justify-start">
@@ -101,8 +108,11 @@ const Header = ({ children }: PropsWithChildren) => {
                   <Image
                     src={profileImage}
                     alt="Profile image"
-                    className="h-full w-full rounded-full object-cover"
-                    fill
+                    fill={true}
+                    sizes="(min-width: 768px) 64px, 40px"
+                    style={{ objectFit: 'cover' }}
+                    className="rounded-full"
+                    priority={false}
                   />
                 </div>
                 <ul
