@@ -11,6 +11,12 @@ import lightPurpleGraphic from '@/assets/images/lightPurpleGraphic.svg';
 import lightPurpleGraphic2 from '@/assets/images/lightPurpleGraphic2.png';
 import clRoomTextLogo from '@/assets/images/clRoomTextLogo.png';
 import purpleFlower from '@/assets/images/purpleFlower.png';
+import candle from '@/assets/images/candle.png';
+import Ellipse from '@/assets/images/Ellipse.png';
+import yellowStar from '@/assets/images/yellowStar.png';
+import orangeStar from '@/assets/images/orangeStar.png';
+import yellowStarStroke from '@/assets/images/yellowStarStroke.png';
+import soap from '@/assets/images/soap.png';
 
 import Link from 'next/link';
 import { useCallback, useEffect, useState } from 'react';
@@ -18,7 +24,7 @@ import { useCallback, useEffect, useState } from 'react';
 export const Banner = () => {
   const [current, setCurrent] = useState(0);
   // const totalSlides = 3;
-  const totalSlides = 3;
+  const totalSlides = 4;
 
   const handlePrev = () => {
     const newIndex = (current - 1 + totalSlides) % totalSlides;
@@ -43,14 +49,14 @@ export const Banner = () => {
   }, [current]);
 
   // 배너 자동으로 넘기기
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 10000);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     handleNext();
+  //   }, 10000);
 
-    //clearInterval 사용해서 타이머 초기화!
-    return () => clearInterval(interval);
-  }, [handleNext]);
+  //   //clearInterval 사용해서 타이머 초기화!
+  //   return () => clearInterval(interval);
+  // }, [handleNext]);
 
   return (
     <>
@@ -150,6 +156,50 @@ export const Banner = () => {
                   <p className=" hidden lg:block">다양한 원데이 클래스를 체험해보세요!</p>
                   <p className="lg:hidden">다양한 원데이 </p>
                   <p className="lg:hidden">클래스를 체험해보세요!</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          {/* 남색 배너 */}
+          <article className="" data-carousel-item data-index="1">
+            <div className="relative flex h-80 flex-row bg-[#26234D] duration-700 ease-in-out sm:bg-orange-300 md:bg-rose-300 lg:bg-green-800 xl:bg-slate-600 ">
+              {/* 큰 이미지 */}
+              <div className=" sm:w-[16 0px] absolute left-4 top-2 z-20 hidden w-[150px]  sm:left-24 sm:top-5 sm:block  md:left-36 md:top-[-30px] md:hidden  md:w-[180px] lg:left-52  lg:top-[-30px] lg:block lg:w-[200px] xl:left-96 xl:top-[-50px] xl:w-[300px]">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={candle} alt="h"></Image>
+              </div>
+
+              {/* 작은 이미지 */}
+              <div className=" absolute left-4 top-2 z-20 hidden w-[150px] sm:left-24 sm:top-5  sm:block sm:w-[200px] md:left-12 md:top-40  md:hidden  md:w-[220px] lg:left-20  lg:top-32 lg:block lg:w-[150px] xl:left-32 xl:top-[80px] xl:w-[200px]">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={soap} alt="h"></Image>
+              </div>
+
+              <div className=" absolute left-4 top-12 z-20 hidden  w-[30px] sm:left-24    sm:block  md:left-12   lg:left-20 xl:left-28  xl:w-[50px]">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
+              </div>
+
+              <div className=" absolute z-20 hidden w-[30px] sm:block  md:right-12    lg:right-16  lg:top-12   xl:right-36 xl:top-24  xl:w-[40px]">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
+              </div>
+
+              {/* 왼쪽 별 */}
+              <div className=" absolute  z-20 hidden w-[30px] sm:block lg:right-72  lg:top-24    xl:right-[420px]     xl:top-32  xl:w-[50px]">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
+              </div>
+
+              {/* 아래 별 */}
+              <div className=" absolute  z-20 hidden w-[30px] sm:block lg:right-12   lg:top-48 xl:right-36 xl:top-60  xl:w-[35px]">
+                <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="h"></Image>
+              </div>
+
+              <div className=" absolute z-30 flex flex-col items-center justify-center  gap-2 sm:right-28 sm:w-fit md:right-0 md:top-16 md:w-full md:items-center md:gap-5 lg:right-16  lg:top-16  lg:w-fit  lg:text-base  xl:right-44 xl:top-28  xl:flex-row xl:items-center ">
+                {/* 텍스트 */}
+                <div className=" flex flex-col gap-2 text-center text-sm font-bold  text-white    md:text-3xl ">
+                  <p className="">클룸을 통해서</p>
+                  <p className="">취미와 역량을</p>
+                  <p className="">한 단계 업그레이드!</p>
+                  {/* <p className="lg:hidden">다양한 원데이 </p>
+                  <p className="lg:hidden">클래스를 체험해보세요!</p> */}
                 </div>
               </div>
             </div>
