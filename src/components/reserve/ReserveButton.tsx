@@ -22,6 +22,12 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
   const [isFreeClassReserveLoading, setIsFreeClassReserveLoading] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
+  useEffect(() => {
+    setReserveInfo({ classId, userId: loginUserId });
+    buttonRef.current?.removeAttribute('disabled');
+  }, [classId, setReserveInfo, loginUserId]);
+
+  // 모바일 환경인지 체크하는 함수
   const isMobile = () => {
     if (typeof window !== 'undefined') {
       const { userAgent, maxTouchPoints } = window.navigator; // 유저가 접속한 환경 정보 가져오기
@@ -33,13 +39,6 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobi|mobi/i.test(userAgent);
     } else return;
   };
-
-  console.log(isMobile());
-
-  useEffect(() => {
-    setReserveInfo({ classId, userId: loginUserId });
-    buttonRef.current?.removeAttribute('disabled');
-  }, [classId, setReserveInfo, loginUserId]);
 
   const handleReserveButtonClick = async () => {
     if (!loginUserId) {
