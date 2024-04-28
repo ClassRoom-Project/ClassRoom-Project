@@ -1,5 +1,4 @@
 import { Bubble } from '@typebot.io/nextjs';
-import styles from 'react-day-picker/dist/style.css';
 
 export default function ChatBot() {
   return (

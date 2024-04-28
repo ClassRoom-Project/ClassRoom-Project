@@ -12,7 +12,7 @@ import {
   readCheckMessagesAll
 } from '@/app/api/chatRooms/getChatRooms';
 import { SendNewMessageType, SendNewPhotoMessageType } from '@/types/chat/chatTypes';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 //채팅방 목록 읽어오기
 export function useReadChatRooms(loginUserId: string) {
@@ -72,7 +72,7 @@ export function useCreateNewRoom() {
   return { createNewRoomMutate };
 }
 
-//채팅내용 가져오기
+// //채팅내용 가져오기
 export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
   const { data: readChatRoomMessages, isLoading } = useQuery({
     queryKey: ['chatMessage', chatId],
@@ -81,6 +81,34 @@ export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
   });
   return { readChatRoomMessages, isLoading };
 }
+
+//무한스크롤 테스트
+// export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
+//   const {
+//     data: readChatRoomMessages,
+//     isLoading,
+//     fetchNextPage,
+//     hasNextPage,
+//     isFetching,
+//     isFetchingNextPage,
+//     status
+//   } = useInfiniteQuery({
+//     queryKey: ['chatMessage', chatId],
+//     queryFn: ({ pageParam = null }) => getChatMessages(chatId as string, loginUserId as string, pageParam),
+//     initialPageParam: null,
+//     getNextPageParam: (lastPage) => lastPage?.[lastPage.length - 1]?.created_at || undefined,
+//     enabled: !!chatId
+//   });
+//   return {
+//     readChatRoomMessages,
+//     isLoading,
+//     fetchNextPage,
+//     hasNextPage,
+//     isFetching,
+//     isFetchingNextPage,
+//     status
+//   };
+// }
 
 //채팅방 메시지 보내기
 export function useCreateNewMessage() {

@@ -13,10 +13,10 @@ export default function SocialLogin() {
   };
 
   return (
-    <section className="flex h-full w-4/5 flex-col text-sm md:w-2/3 md:text-base lg:w-1/2 ">
+    <section className="flex h-1/2 w-4/5 flex-col text-sm md:w-2/3 md:text-base lg:w-1/2 ">
       <nav className="flex w-full flex-col items-center justify-center ">
         <button
-          className="socialIcon-field flex h-1/3 w-full items-center justify-center rounded bg-[#EBF2FF] transition-all hover:border-[#EBF2FF] hover:bg-white"
+          className="socialIcon-field flex h-1/3 w-full items-center justify-center rounded bg-[#EBF2FF] hover:border-[#EBF2FF] hover:bg-white"
           onClick={() => handleSocialSignin('google')}
         >
           <div className="flex flex-row items-center justify-center gap-5">
@@ -27,7 +27,7 @@ export default function SocialLogin() {
           </div>
         </button>
         <button
-          className="socialIcon-field flex h-1/3 w-full items-center justify-center rounded bg-yellow-300 transition-all hover:border-yellow-300  hover:bg-white"
+          className="socialIcon-field flex h-1/3 w-full items-center justify-center rounded bg-yellow-300 hover:border-yellow-300 hover:bg-white"
           onClick={() => handleSocialSignin('kakao')}
         >
           <div className="flex flex-row items-center justify-center gap-2">
@@ -38,7 +38,7 @@ export default function SocialLogin() {
           </div>
         </button>
         <button
-          className="socialIcon-field flex h-1/3 w-full items-center justify-center rounded bg-green-500 transition-all hover:border-[#8ED799]  hover:bg-white"
+          className="socialIcon-field flex h-1/3 w-full items-center justify-center rounded bg-green-500 hover:border-[#8ED799] hover:bg-white"
           onClick={() => handleSocialSignin('naver')}
         >
           <div className="flex flex-row items-center justify-center gap-2">
