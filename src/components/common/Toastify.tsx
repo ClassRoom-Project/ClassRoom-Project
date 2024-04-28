@@ -392,3 +392,16 @@ export const noTotalTimeNotify = () =>
     progress: undefined,
     theme: 'light'
   });
+
+export const quantityExceeded = () => {
+  toast.warn('정원 초과로 인해 예약할 수 없습니다.', {
+    position: 'top-right',
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'light'
+  });
+};

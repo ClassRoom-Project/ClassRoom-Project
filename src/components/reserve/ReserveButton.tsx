@@ -7,7 +7,7 @@ import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../common/LoadingSpinner';
-import { invalidReserve, quantityWarning, selectDayWarning } from '../common/Toastify';
+import { invalidReserve, quantityExceeded, quantityWarning, selectDayWarning } from '../common/Toastify';
 
 type ReserveButtonParams = {
   classId: string;
@@ -69,7 +69,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
     const currentReservedQuantity = await sumReserveQuantityByTimeId(reserveInfo.timeId);
     const currentRemainingQuantity = maxPeople - currentReservedQuantity;
     if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
-      alert('정원 초과로 인해 예약할 수 없습니다. ');
+      quantityExceeded();
       router.refresh();
       return;
     }
