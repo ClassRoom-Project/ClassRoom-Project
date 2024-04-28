@@ -69,6 +69,11 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
 
   // 선택한 날짜 삭제
   const handleRemoveDate = async (date: string) => {
+    const isConfirmed = window.confirm('해당 일정을 삭제하시겠습니까?');
+    if (!isConfirmed) {
+      return;
+    }
+
     removeSchedule(date);
     setSelectedDates(selectedDates.filter((d) => d !== date));
 
