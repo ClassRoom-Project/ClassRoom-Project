@@ -86,13 +86,13 @@ const Header = ({ children }: PropsWithChildren) => {
           <div className="flex w-full items-center justify-end">
             {userEmail ? (
               <div className="flex items-end justify-end">
-                <p className="hidden w-full whitespace-nowrap p-4 lg:block">
+                <p className="hidden w-full whitespace-nowrap p-4 xl:block">
                   {userInfo?.nickname} <span className="font-bold text-main-color">{roleName}님</span>
                 </p>
               </div>
             ) : null}
             {userEmail ? (
-              <div className="mr-[10px] hidden xl:block">
+              <div className="mr-[10px] block">
                 <Notification />
               </div>
             ) : null}
