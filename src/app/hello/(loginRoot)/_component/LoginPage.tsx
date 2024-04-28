@@ -16,16 +16,18 @@ export default function LoginPage() {
           </p>
         </section>
         <div className="flex h-full w-full flex-col items-center justify-center md:w-3/5">
-          <section className="h-1/3  w-full  items-center p-5">
-            <div className="flex w-full flex-col items-center gap-4">
-              <Image src={loginTextLogo} alt="LoginLogoImage" width={100} height={100} priority />
-              <p className="mx-auto mb-10 flex w-5/6 flex-col items-center border-t border-gray-300 pt-4 text-button-press-color sm:text-sm md:max-w-2xl md:text-xl">
-                로그인 또는 회원가입
-              </p>
-            </div>
-            <div className="mt-5 flex h-4/5 w-full flex-col items-center justify-around">
-              <div className="flex h-auto w-full flex-col items-center">
-                <SocialLogin />
+          <section className="flex h-full w-full flex-col  items-center  justify-center">
+            <div className="flex h-full w-full flex-col items-center justify-center md:h-1/2">
+              <div className="flex w-full flex-col items-center justify-center gap-4">
+                <Image src={loginTextLogo} alt="LoginLogoImage" width={100} height={100} priority />
+                <p className="mx-auto mb-5 flex w-5/6 flex-col items-center border-t border-gray-300 pt-4 text-button-press-color sm:text-sm md:max-w-2xl md:text-xl">
+                  로그인 또는 회원가입
+                </p>
+              </div>
+              <div className="mt-5 flex h-2/5 w-full flex-col items-center">
+                <div className="flex w-full flex-col items-center">
+                  <SocialLogin />
+                </div>
               </div>
             </div>
           </section>
