@@ -211,7 +211,7 @@ export const Banner = () => {
         </div>
         <button
           type="button"
-          className="group absolute  start-6 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none sm:start-0"
+          className="group absolute  top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none sm:start-0"
           data-carousel-prev
           onClick={handlePrev}
         >

@@ -20,7 +20,6 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
   };
 
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    console.log(e);
     zoom.attach(e.currentTarget);
   };
 
