@@ -3,6 +3,7 @@ import BestClass from '@/components/main/BestClass';
 import LatestClass from '@/components/main/LatestClass';
 import { Banner } from '@/components/main/Banner';
 import CategoryBtns from '@/components/listpage/CategoryBtns';
+import MainFooter from '@/components/main/MainFooter';
 
 const MainPage = () => {
   return (
@@ -15,6 +16,7 @@ const MainPage = () => {
           </Suspense>
           <BestClass />
           <LatestClass />
+          <MainFooter />
         </div>
       </div>
     </div>
