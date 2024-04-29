@@ -10,6 +10,15 @@ import MinMaxNumber from '@/components/register/MinMaxNumber';
 import ClassDiff from '@/components/register/ClassDiff';
 import ImageUpload from '@/components/register/ImageUpload';
 import TotalTime from '@/components/register/TotalTime';
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: '클룸 클래스 등록 페이지',
+  description: '나만의 클래스 정보를 입력하고 등록할 수 있는 페이지입니다. ',
+  icons: {
+    icon: '/logo.svg'
+  }
+};
 
 const RegisterPage = () => {
   return (
