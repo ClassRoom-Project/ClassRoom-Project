@@ -30,7 +30,7 @@ const NotificationComponent = () => {
 
       return data;
     },
-    enabled: !!loginUserId,
+    enabled: !!loginUserId
   });
 
   const unreadNotificationsCount = notifications.filter((notification) => !notification.isread).length;
@@ -70,25 +70,22 @@ const NotificationComponent = () => {
 
   const handleNotificationClick = async (notification: Notification) => {
     if (!notification.isread) {
-      await supabase
-        .from('notifications')
-        .update({ isread: true })
-        .eq('notice_id', notification.notice_id);
+      await supabase.from('notifications').update({ isread: true }).eq('notice_id', notification.notice_id);
       refetch();
     }
     router.push(`/list/detail/${notification.class_id}`);
   };
 
   return (
-    <div className="mr-2.5 relative" ref={notificationRef}>
+    <div className="relative mr-2.5" ref={notificationRef}>
       {unreadNotificationsCount > 0 ? (
         <GoBellFill size={30} onClick={toggleBellIcon} className="cursor-pointer" />
       ) : (
         <LuBell size={30} onClick={toggleBellIcon} className="cursor-pointer" />
       )}
       {isNotificationOpen && (
-        <div className="absolute right-[-8px] mt-2 w-80 bg-white shadow-lg rounded-md z-10">
-          <div className="px-4 py-2 font-bold border-b border-gray-200">알림</div>
+        <div className="absolute right-[-8px] z-10 mt-2 w-64 rounded-md bg-white shadow-lg md:w-80">
+          <div className="border-b border-gray-200 px-4 py-2 font-bold">알림</div>
           <div className="max-h-60 overflow-y-auto">
             {notifications.filter((notification) => !notification.isread).length > 0 ? (
               notifications
@@ -96,7 +93,7 @@ const NotificationComponent = () => {
                 .map((notification, index) => (
                   <div
                     key={index}
-                    className={`px-4 py-3 cursor-pointer flex items-center hover:bg-[#EFEFEF] 
+                    className={`flex cursor-pointer items-center px-4 py-3 hover:bg-[#EFEFEF] 
                 ${notification.isread ? 'bg-gray-300' : ''}
                 ${
                   index !== notifications.filter((notification) => !notification.isread).length - 1
@@ -105,7 +102,7 @@ const NotificationComponent = () => {
                 }`}
                     onClick={() => handleNotificationClick(notification)}
                   >
-                    <span className="h-4 w-4 bg-[#7D95FF] rounded-full mr-2 flex-shrink-0"></span>
+                    <span className="mr-2 h-4 w-4 flex-shrink-0 rounded-full bg-[#7D95FF]"></span>
                     <span className="text-sm">{notification.notice}</span>
                   </div>
                 ))
@@ -116,7 +113,7 @@ const NotificationComponent = () => {
         </div>
       )}
       {notifications.filter((notification) => !notification.isread).length > 0 && (
-        <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs">
+        <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-xs text-white">
           {notifications.filter((notification) => !notification.isread).length}
         </span>
       )}

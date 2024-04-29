@@ -80,20 +80,22 @@ const ClassSummary = ({
   return (
     <div className="mt-4 w-full px-4 md:px-0 lg:w-[40%] lg:min-w-[400px]">
       <div className=" mb-4 flex h-8 items-center gap-2">
-        <div className="relative h-8 w-8">
+        <div className="relative h-8 w-8 overflow-hidden rounded-full">
           {userData?.profile_image ? (
             <Image
               fill={true}
-              className="h-full w-full rounded-full object-cover"
               src={userData.profile_image}
               alt="profileImage"
+              sizes="32px"
+              style={{ objectFit: 'cover' }}
             />
           ) : (
             <Image
               fill={true}
-              className="h-full w-full rounded-full object-cover"
               src={defaultProfileImageSrc}
               alt="profileImage"
+              sizes="32px"
+              style={{ objectFit: 'cover' }}
             />
           )}
         </div>
