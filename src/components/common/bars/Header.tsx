@@ -74,7 +74,6 @@ const Header = ({ children }: PropsWithChildren) => {
               alt="클룸 로고"
               fill={true}
               sizes="(min-width: 768px) 64px, 40px"
-              priority={false}
             />
           </Link>
         </div>
@@ -112,7 +111,6 @@ const Header = ({ children }: PropsWithChildren) => {
                     sizes="(min-width: 768px) 64px, 40px"
                     style={{ objectFit: 'cover' }}
                     className="rounded-full"
-                    priority={false}
                   />
                 </div>
                 <ul
