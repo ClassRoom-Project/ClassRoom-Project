@@ -15,8 +15,16 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
   return (
     <li className="align-center flex w-full flex-col items-center justify-center border-b-2 md:my-4 md:flex-row md:gap-4 md:py-4 lg:max-w-[1280px]">
       <div className="flex w-full flex-col items-center bg-pale-purple md:gap-4 lg:flex-row">
-        <div className="relative h-52 w-72 md:mt-8 lg:mx-8 lg:w-1/3 ">
-          <Image src={mainImage} alt="클래스 대표 사진" fill className="h-full w-full object-cover p-4 md:p-0" />
+        <div className="relative h-52 w-72 md:mt-8 lg:mx-8 lg:w-1/3">
+          <Image
+            src={mainImage}
+            alt="클래스 대표 사진"
+            fill={true}
+            sizes="288px"
+            className="p-4 md:p-0"
+            style={{ objectFit: 'cover' }}
+            loading="lazy"
+          />
         </div>
         <div className="flex h-full w-full flex-col gap-4 p-4">
           <div className="flex items-center justify-center gap-4 md:pb-4 lg:justify-start lg:pb-0 lg:pt-8">

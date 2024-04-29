@@ -93,8 +93,11 @@ const MyClass = () => {
                 <Image
                   src={classInfo?.image ? classInfo?.image : NoImage}
                   alt="클래스 대표 사진"
-                  fill
-                  className="h-full w-full object-cover p-4"
+                  fill={true}
+                  sizes="288px"
+                  className="p-4"
+                  style={{ objectFit: 'cover' }}
+                  loading="lazy"
                 />
               </div>
               <div className="my-4 flex flex-col md:gap-4 lg:mx-4 lg:my-0">

@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
+import { supabase } from '@/app/api/supabase/supabase';
 import { format } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { DayPicker } from 'react-day-picker';
@@ -20,9 +21,10 @@ interface InitialDataType {
 interface SelectTimeProps {
   isEditMode: boolean;
   initialData?: InitialDataType;
+  class_Id?: string;
 }
 
-const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
+const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_Id }) => {
   const {
     schedules,
     selectedDates,
@@ -44,7 +46,7 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
       const formattedDate = format(selectedDate, 'yyyy-MM-dd');
-      // 이미 선택된 날짜인지 확인
+      // 이미 선택된 날짜인지 여부 확인
       if (selectedDates.includes(formattedDate)) {
         alert('이미 선택한 날짜입니다.');
       } else {
@@ -66,14 +68,49 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData }) => {
   };
 
   // 선택한 날짜 삭제
-  const handleRemoveDate = (date: string) => {
+  const handleRemoveDate = async (date: string) => {
+    const isConfirmed = window.confirm('해당 일정을 삭제하시겠습니까?');
+    if (!isConfirmed) {
+      return;
+    }
+
     removeSchedule(date);
     setSelectedDates(selectedDates.filter((d) => d !== date));
+
+    const { data, error } = await supabase
+    .from('date')
+    .delete()
+    .match({ day: date, class_id: class_Id });
+
+    if (error) {
+      console.error('Error:', error.message);
+    }
   };
 
   // 선택한 시간 삭제
-  const handleRemoveTime = (date: string, time: string) => {
+  const handleRemoveTime = async (date: string, time: string) => {
     removeTimeFromSchedule(date, time);
+
+    const { data: dateData, error: dateError } = await supabase
+    .from('date')
+    .select('date_id')
+    .eq('day', date)
+    .eq('class_id', class_Id)
+    .single();
+
+    if (dateError) {
+      console.error('Error:', dateError.message);
+      return;
+    }
+
+    const { data: timeData, error: timeError } = await supabase
+    .from('time')
+    .delete()
+    .match({ date_id: dateData.date_id, times: time });
+
+    if (timeError) {
+      console.error('Error:', timeError.message);
+    }
   };
 
   useEffect(() => {

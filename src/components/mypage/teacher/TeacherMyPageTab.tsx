@@ -69,7 +69,7 @@ const TeacherMyPageTab = () => {
   return (
     <div className="lg:w-1440px m-0 w-full max-w-[1440px] p-0 md:my-4 md:py-4">
       {/* md 이상 일 때, 가로 탭 */}
-      <div className="hidden w-full flex-row whitespace-nowrap border-y-2 sm:items-start md:flex md:items-center md:justify-start md:gap-10 lg:gap-20">
+      <div className="hidden w-full flex-row whitespace-nowrap border-b-2 sm:items-start md:flex md:items-center md:justify-start md:gap-10 lg:gap-20">
         <div className="overflow-x-scroll scrollbar-hide">
           <button
             onClick={() => handleOnClickTabBtn('editProfile')}
