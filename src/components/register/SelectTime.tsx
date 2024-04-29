@@ -144,7 +144,7 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
         <span className='text-[#d63232] font-bold'>*</span> 
         클래스 일정&시간
       </p>
-      <p className="text-sm mt-1 mb-2 text-[#7E7E7E]">
+      <p className="text-sm mt-1 mb-2 text-[#4D4D4D]">
         해당 날짜의 시간을 선택한 후 +버튼을 클릭해야 시간 정보가 추가됩니다
       </p>
       <div className="relative">
@@ -160,7 +160,6 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
               mode="single"
               onSelect={handleDateSelect}
               locale={ko}
-              // disableNavigation={true} // 한달단위
               disabled={{ before: new Date() }} // 오늘 이전 날짜 비활성화
               fromYear={new Date().getFullYear()}
               toYear={new Date().getFullYear() + 1} // 현재 년도 +1 까지만 navigate
