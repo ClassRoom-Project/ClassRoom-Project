@@ -1,12 +1,12 @@
 import PersonalCard from '@/components/bugBusters/PersonalCard';
 import React from 'react';
-import TeaWon from '@/assets/images/여태원.png';
-import Jiwon from '@/assets/images/서지원.png';
-import HyunJin from '@/assets/images/김현진.png';
-import Hyerin from '@/assets/images/임혜린.png';
-import Miju from '@/assets/images/윤미주.png';
-import Hyangji from '@/assets/images/임향지.png';
-import bugBusters from '@/assets/images/버그버스터즈.png';
+import TeaWon from '@/assets/images/Teawon.png';
+import Jiwon from '@/assets/images/Jiwon.png';
+import HyunJin from '@/assets/images/Hyunjin.png';
+import Hyerin from '@/assets/images/Hyerin.png';
+import Miju from '@/assets/images/Miju.png';
+import Hyangji from '@/assets/images/Hyangji.png';
+import bugBusters from '@/assets/images/BugBusters.png';
 import Image from 'next/image';
 
 import type { Metadata } from 'next';
