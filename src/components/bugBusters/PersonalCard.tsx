@@ -17,7 +17,7 @@ const PersonalCard: React.FC<PersonalCardProps> = ({ name, position, image, git 
           placeholder="empty"
           fill={true}
           src={image}
-          alt="클래스 이미지"
+          alt="personal image"
           style={{ objectFit: 'contain' }}
         />
       </div>

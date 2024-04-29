@@ -7,8 +7,6 @@ import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
 import BackButton from '@/components/common/BackButton';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
-import Link from 'next/link';
-import { IoIosArrowBack } from 'react-icons/io';
 
 const DetailPage = async ({ params }: { params: { id: string } }) => {
   const classData = await detailClassInfo(params.id);
