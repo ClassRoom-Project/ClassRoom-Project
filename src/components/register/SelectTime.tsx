@@ -46,7 +46,7 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
   const handleDateSelect = (selectedDate: Date | undefined) => {
     if (selectedDate) {
       const formattedDate = format(selectedDate, 'yyyy-MM-dd');
-      // 이미 선택된 날짜인지 확인
+      // 이미 선택된 날짜인지 여부 확인
       if (selectedDates.includes(formattedDate)) {
         alert('이미 선택한 날짜입니다.');
       } else {
