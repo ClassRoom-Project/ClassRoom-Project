@@ -3,6 +3,12 @@
 import SocialLogin from '@/components/login/SocialLogin';
 import Image from 'next/image';
 import loginTextLogo from '../../../../assets/images/loginTextImage.svg';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '클룸 LoginPage',
+  description: '클룸 소셜 회원가입/로그인 페이지입니다.'
+};
 
 export default function LoginPage() {
   return (
