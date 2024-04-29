@@ -8,8 +8,8 @@ import { ChatBubble } from '@/components/main/ChatBubble';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '클룸 mainPage',
-  description: '배너와 인기순 클래스,최신순 클래스를 확인할 수 있습니다'
+  title: '클룸 메인페이지',
+  description: '배너와 인기순 클래스,최신순 클래스를 확인할 수 있습니다.'
 };
 
 const MainPage = () => {
