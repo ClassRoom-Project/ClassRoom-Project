@@ -432,7 +432,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
                   <Image
                     src={images[index].preview}
                     alt="uploaded"
-                    fill
+                    placeholder='empty'
                     className="h-full w-full rounded-[20px] border object-cover"
                   />
                   <button

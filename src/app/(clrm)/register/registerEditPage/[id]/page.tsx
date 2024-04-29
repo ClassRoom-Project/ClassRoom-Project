@@ -114,7 +114,7 @@ const RegisterEditPage = () => {
           <h1 className="text-md md:text-lg lg:text-xl mt-16">클래스 세부요소 입력란</h1>
           <hr className="my-4 border-[#4D43B8]" />
           <Address isEditMode={true} initialData={{ address: classData.location, detailAddress: classData.detail_location }} />
-          <SelectTime isEditMode={true} initialData={{ schedules: dateData.map(dateItem => ({ date: dateItem.day, times: dateItem.times })) }}/>
+          <SelectTime isEditMode={true} initialData={{ schedules: dateData.map(dateItem => ({ date: dateItem.day, times: dateItem.times })) }} class_Id={classId as string}/>
 
           <h1 className="text-md md:text-lg lg:text-xl mt-16">클래스 금액</h1>
           <hr className="my-4 border-[#4D43B8]" />
