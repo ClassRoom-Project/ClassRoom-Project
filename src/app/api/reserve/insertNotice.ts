@@ -7,7 +7,7 @@ export const insertNotice = async (userId: string, classId: string, classTitle: 
     .select('*')
     .eq('user_id', userId)
     .eq('class_id', classId)
-    .maybeSingle();
+    .maybeSingle(); // userId와 classId에 대한 기존 알림이 있는지 확인
 
   if (existingError) {
     console.error('Error: ', existingError);
@@ -19,6 +19,7 @@ export const insertNotice = async (userId: string, classId: string, classTitle: 
     return;
   }
 
+  // 기존 알림이 없는 경우, 새로운 알림 생성
   const noticeId = crypto.randomUUID();
   const notice = `신청하신 "${classTitle}" 클래스 결제 신청이 완료되었습니다.`;
   const { data: noticeData, error: noticeError } = await supabase
@@ -32,7 +33,7 @@ export const insertNotice = async (userId: string, classId: string, classTitle: 
     return;
   } else {
     queryClient.invalidateQueries({
-      queryKey: ['notifications', userId]
+      queryKey: ['notifications', userId] // queryClient를 사용하여 최신 상태로 업데이트
     });
   }
 
