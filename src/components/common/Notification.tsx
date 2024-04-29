@@ -8,13 +8,14 @@ import { LuBell } from 'react-icons/lu';
 import { GoBellFill } from 'react-icons/go';
 
 const NotificationComponent = () => {
-  const { loginUserId } = useLoginStore();
+  const { loginUserId } = useLoginStore(); // 로그인한 사용자의 ID
   const [isNotificationOpen, setIsNotificationOpen] = React.useState(false);
   const notificationRef = useRef<HTMLDivElement>(null);
   const lastIconClickTimeRef = useRef<Date | null>(null);
 
   const router = useRouter();
 
+  // 알림 데이터를 불러옴. 로그인한 사용자 ID를 기반으로 쿼리
   const { data: notifications = [], refetch } = useQuery({
     queryKey: ['notifications', loginUserId],
     queryFn: async () => {
@@ -22,7 +23,7 @@ const NotificationComponent = () => {
         .from('notifications')
         .select('*')
         .eq('user_id', loginUserId)
-        .order('created_at', { ascending: false });
+        .order('created_at', { ascending: false }); // 내림차순 정렬(최신 알림 상단으로)
 
       if (error) {
         throw new Error(error.message);
@@ -33,8 +34,10 @@ const NotificationComponent = () => {
     enabled: !!loginUserId
   });
 
+  // isread값을 통해 읽지 않은 알림 수 계산
   const unreadNotificationsCount = notifications.filter((notification) => !notification.isread).length;
 
+  // 알림 아이콘을 클릭시 알림 창 토글
   const toggleBellIcon = () => {
     setIsNotificationOpen((prevState) => !prevState);
     lastIconClickTimeRef.current = new Date();
@@ -43,6 +46,7 @@ const NotificationComponent = () => {
     }
   };
 
+  // 알림창 바깥쪽 클릭시 알림창 닫기 구현
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const timeSinceLastIconClick = lastIconClickTimeRef.current
@@ -68,12 +72,13 @@ const NotificationComponent = () => {
     };
   }, [isNotificationOpen, notifications]);
 
+  // 알림 클릭 핸들러
   const handleNotificationClick = async (notification: Notification) => {
     if (!notification.isread) {
       await supabase.from('notifications').update({ isread: true }).eq('notice_id', notification.notice_id);
-      refetch();
+      refetch(); // 알림 상태 업데이트 후 데이터 다시 가져오기
     }
-    router.push(`/list/detail/${notification.class_id}`);
+    router.push(`/list/detail/${notification.class_id}`); // 해당 디테일 페이지로 이동
   };
 
   return (
