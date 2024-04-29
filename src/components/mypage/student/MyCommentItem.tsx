@@ -123,8 +123,11 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
               <Image
                 src={comment.comment_image}
                 alt="클래스 대표 사진"
-                fill
-                className="h-full w-full object-cover p-4 md:p-0"
+                fill={true}
+                sizes="288px"
+                className="p-4 md:p-0"
+                style={{ objectFit: 'cover' }}
+                loading="lazy"
               />
             </div>
           ) : (

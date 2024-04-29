@@ -36,6 +36,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
       setCurrentReservedCount(initialReservedCount);
     };
     setInitialReservedCount();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCurrentReservedCount]); // dateListAfterToday 추가하면 무한 리렌더링돼서 뺐습니다
 
   if (!firstAvailableDay) {
