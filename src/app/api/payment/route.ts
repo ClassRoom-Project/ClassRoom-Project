@@ -1,6 +1,5 @@
-import { redirect } from 'next/dist/server/api-utils';
-import { insertNewReservation } from '../reserve/insertNewReservation';
 import { NextRequest, NextResponse } from 'next/server';
+import { insertNewReservation } from '../reserve/insertNewReservation';
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);

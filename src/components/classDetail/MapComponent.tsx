@@ -39,7 +39,6 @@ const MapComponent = ({
         }
 
         const data = await response.json();
-        console.log('data', data);
 
         const fetchLongitue = data.documents[0].x; // 경도
         const fetchLatitude = data.documents[0].y; // 위도
@@ -54,9 +53,8 @@ const MapComponent = ({
 
     fetchData();
   }, [placeAddress]);
-  console.log('name', name);
   return (
-    <div className="mb-8 w-full lg:w-3/5">
+    <div className="z-0 mb-8 w-full lg:w-3/5">
       <div className="flex w-full items-center justify-center">
         {location ? (
           <div className="w-full">

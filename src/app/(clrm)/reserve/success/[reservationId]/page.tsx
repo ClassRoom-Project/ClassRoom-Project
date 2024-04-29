@@ -20,7 +20,7 @@ type ReserveInfoLabels = {
   title: string;
   description: string;
 }[];
-export const dynamic = 'force-dynamic';
+
 const ReservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
   const reservationid = params.reservationId;
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);

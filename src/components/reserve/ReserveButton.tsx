@@ -7,7 +7,7 @@ import { useReserveStore } from '@/store/reserveClassStore';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import LoadingSpinner from '../common/LoadingSpinner';
-import { invalidReserve, quantityWarning, selectDayWarning } from '../common/Toastify';
+import { invalidReserve, quantityExceeded, quantityWarning, selectDayWarning } from '../common/Toastify';
 
 type ReserveButtonParams = {
   classId: string;
@@ -27,12 +27,30 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
     buttonRef.current?.removeAttribute('disabled');
   }, [classId, setReserveInfo, loginUserId]);
 
+  // 모바일 환경인지 체크하는 함수
+  const isMobile = () => {
+    if (typeof window !== 'undefined') {
+      const { userAgent, maxTouchPoints } = window.navigator; // 유저가 접속한 환경 정보 가져오기
+      // MacOS를 실행하는 장치 중에서 터치 가능한 장치를(iPad) 확인
+      const isMac = /Macintosh/i.test(userAgent);
+
+      if (isMac && maxTouchPoints > 0) return true; // Macintosh이면서 터치 포인트가 1개 이상인 경우 iPad
+
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobi|mobi/i.test(userAgent);
+    } else return;
+  };
+
   const handleReserveButtonClick = async () => {
     if (!loginUserId) {
       if (window.confirm('로그인이 필요합니다. 로그인하시겠습니까?')) {
         router.push('/hello');
         return;
       } else return;
+    }
+
+    if (isMobile()) {
+      alert('모바일 환경에서는 테스트 결제를 지원하지 않습니다. 결제 기능을 이용하시려면 PC 버전으로 접속해주세요. 😊');
+      return;
     }
 
     if (reserveInfo.reserveQuantity === 0) {
@@ -50,7 +68,7 @@ const ReserveButton = ({ classId, title, maxPeople }: ReserveButtonParams) => {
     const currentReservedQuantity = await sumReserveQuantityByTimeId(reserveInfo.timeId);
     const currentRemainingQuantity = maxPeople - currentReservedQuantity;
     if (currentRemainingQuantity < reserveInfo.reserveQuantity) {
-      alert('정원 초과로 인해 예약할 수 없습니다. ');
+      quantityExceeded();
       router.refresh();
       return;
     }

@@ -1,8 +1,7 @@
 import { format } from 'date-fns';
-import React from 'react';
-import { CaptionProps, DayPicker, useNavigation } from 'react-day-picker';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 import { ko } from 'date-fns/locale';
+import { CaptionProps, useNavigation } from 'react-day-picker';
+import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
 
 const CustomCaption = (props: CaptionProps) => {
   const { goToMonth, nextMonth, previousMonth } = useNavigation();
@@ -12,7 +11,7 @@ const CustomCaption = (props: CaptionProps) => {
       <button
         disabled={!previousMonth}
         onClick={() => previousMonth && goToMonth(previousMonth)}
-        className="bg-point-purple rounded-full text-white w-6  flex justify-center items-center"
+        className="flex w-6 items-center justify-center  rounded-full bg-point-purple text-white"
       >
         <IoIosArrowBack size={18} className=" mr-[2px]" />
       </button>
@@ -20,7 +19,7 @@ const CustomCaption = (props: CaptionProps) => {
       <button
         disabled={!nextMonth}
         onClick={() => nextMonth && goToMonth(nextMonth)}
-        className="bg-point-purple rounded-full text-white w-6  flex justify-center items-center"
+        className="flex w-6 items-center justify-center  rounded-full bg-point-purple text-white"
       >
         <IoIosArrowForward size={18} className=" ml-[2px]" />
       </button>
