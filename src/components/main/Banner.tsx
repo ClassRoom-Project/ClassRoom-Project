@@ -136,7 +136,7 @@ export const Banner = () => {
                   width={300}
                   height={300}
                   src={banner1}
-                  priority
+                  priority={true}
                   alt="banner1"
                   style={{ objectFit: 'contain' }}
                   className="absolute -top-10 left-6 w-72 mobile:-top-10 mobile:left-16 md:-top-0 md:left-24 xl:-top-10 xl:left-32 xl:w-[450px] 2xl:-top-10  2xl:left-56 2xl:w-[500px]"
@@ -170,26 +170,44 @@ export const Banner = () => {
               </div>
               {/*  오른쪽 별 */}
               <div className=" absolute  right-16  top-8 z-20   w-[30px]  md:w-[50px]   lg:right-[60px] lg:top-10  lg:w-[40px] xl:right-40 xl:top-20">
-                <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="bannerYellowStar" />
+                <Image
+                  style={{ objectFit: 'cover' }}
+                  priority={true}
+                  quality={100}
+                  src={yellowStar}
+                  alt="bannerYellowStar"
+                />
               </div>
               {/* 왼쪽 별 */}
               <div className=" absolute left-20 top-[60px]  z-20 w-[28px] sm:left-auto sm:right-[230px] sm:top-16   md:left-28 md:top-24  md:w-[40px] lg:left-auto   lg:right-[290px] lg:top-24    xl:right-[400px]     xl:top-32  xl:w-[50px]">
-                <Image style={{ objectFit: 'cover' }} quality={100} src={yellowStar} alt="bannerYellowStar" />
+                <Image
+                  style={{ objectFit: 'cover' }}
+                  priority={true}
+                  quality={100}
+                  src={yellowStar}
+                  alt="bannerYellowStar"
+                />
               </div>
               {/* 아래 별 */}
               <div className=" absolute right-24 top-[120px]  z-20 w-[20px] sm:right-20 sm:top-32  sm:w-[20px] md:right-[130px] md:top-48 md:w-[30px] lg:right-12   lg:top-48 xl:right-36 xl:top-60  xl:w-[35px]">
-                <Image style={{ objectFit: 'cover' }} quality={100} src={orangeStar} alt="bannerOrangeStar" />
+                <Image
+                  style={{ objectFit: 'cover' }}
+                  priority={true}
+                  quality={100}
+                  src={orangeStar}
+                  alt="bannerOrangeStar"
+                />
               </div>
 
               {/* Ellipse */}
               <div className=" absolute right-24 top-20 z-20  w-[10px] sm:left-32  sm:right-auto sm:top-[60px]  sm:w-[16px] md:left-auto md:right-32 md:top-28 md:w-[18px] lg:left-[390px]   lg:top-36 lg:w-[25px] xl:left-[660px] xl:top-52  xl:w-[30px]">
-                <Image style={{ objectFit: 'cover' }} quality={100} src={Ellipse} alt="bannerEllipse" />
+                <Image style={{ objectFit: 'cover' }} priority={true} quality={100} src={Ellipse} alt="bannerEllipse" />
               </div>
               <div className=" absolute left-12 top-28  z-20 w-[15px] sm:left-[160px] sm:top-[85px]  sm:w-[7px] md:left-[80px] md:top-12 md:w-[15px] lg:left-[350px]    lg:top-44 lg:w-[14px] xl:left-[600px] xl:top-64  xl:w-[16px]">
-                <Image style={{ objectFit: 'cover' }} quality={100} src={Ellipse} alt="bannerEllipse" />
+                <Image style={{ objectFit: 'cover' }} priority={true} quality={100} src={Ellipse} alt="bannerEllipse" />
               </div>
               <div className=" absolute left-20 top-32  z-20 w-[7px]  sm:hidden">
-                <Image style={{ objectFit: 'cover' }} quality={100} src={Ellipse} alt="bannerEllipse" />
+                <Image style={{ objectFit: 'cover' }} priority={true} quality={100} src={Ellipse} alt="bannerEllipse" />
               </div>
 
               <div className=" absolute top-9 z-30 flex w-full flex-col  items-center justify-center gap-2 sm:right-24 sm:top-[38px] sm:w-fit sm:items-center md:right-0 md:top-16 md:w-full md:items-center md:gap-5 lg:right-16  lg:top-16  lg:w-fit  lg:text-base  xl:right-44 xl:top-28  xl:flex-row xl:items-center ">
