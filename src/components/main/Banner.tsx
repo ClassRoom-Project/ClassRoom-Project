@@ -64,7 +64,6 @@ export const Banner = () => {
                   priority={true}
                   src={bannerPersimmon}
                   alt="banner2"
-                  priority={true}
                   style={{ objectFit: 'contain' }}
                   className="absolute left-12 top-10 w-56 mobile:left-16 mobile:top-10 sm:left-32 sm:top-10 md:left-14 md:top-20 md:w-64 lg:left-32 lg:top-12 xl:left-28 xl:w-96 2xl:-top-10 2xl:left-40 2xl:w-[450px]"
                 />
@@ -139,7 +138,6 @@ export const Banner = () => {
                   src={banner1}
                   priority={true}
                   alt="banner1"
-                  priority={true}
                   style={{ objectFit: 'contain' }}
                   className="absolute -top-10 left-6 w-72 mobile:-top-10 mobile:left-16 md:-top-0 md:left-24 xl:-top-10 xl:left-32 xl:w-[450px] 2xl:-top-10  2xl:left-56 2xl:w-[500px]"
                 />

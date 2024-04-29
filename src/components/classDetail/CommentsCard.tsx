@@ -24,7 +24,7 @@ const CommentsCard = ({ comment }: { comment: DetailCommentType }) => {
   };
 
   return (
-    <div className="flex h-[350px] w-full flex-col justify-between gap-4 rounded-lg p-1 md:p-5 lg:h-52 lg:flex-row">
+    <div className="flex w-full flex-col justify-between gap-4 rounded-lg p-1 md:p-5 lg:flex-row">
       <div className="flex w-full flex-col">
         {/* 프로필  */}
         <div className="mb-2 flex items-center gap-2 md:mb-1 ">
