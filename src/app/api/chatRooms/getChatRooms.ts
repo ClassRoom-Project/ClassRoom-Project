@@ -173,52 +173,32 @@ export const createNewMessagesPhoto = async ({ chatId, photos, loginUserId }: Pu
 };
 
 //메시지 내용 가져오기
-export const getChatMessages = async (chatId: string, loginUserId: string): Promise<GetChatRoomMessagesType[]> => {
-  const { data, error } = await supabase
+export const getChatMessages = async (
+  chatId: string,
+  loginUserId: string,
+  cursorDate?: string
+): Promise<GetChatRoomMessagesType[]> => {
+  let query = supabase
     .from('chat_messages')
     .select('created_at, create_by, messages, images, messages_id')
-    .order('created_at', { ascending: true })
-    .eq('chat_id', chatId);
+    .eq('chat_id', chatId)
+    .order('created_at', { ascending: false })
+    .limit(20);
+
+  if (cursorDate) {
+    query.lt('created_at', cursorDate);
+  }
+
+  const { data, error } = await query;
 
   await updateCheckMessage(chatId, loginUserId);
 
   if (error) {
     throw error;
   }
-  // console.log('data', data);
+
   return data;
 };
-
-//무한스크롤 테스트
-// export const getChatMessages = async (
-//   chatId: string,
-//   loginUserId: string,
-//   cursor: null
-// ): Promise<GetChatRoomMessagesType[]> => {
-//   let query = supabase
-//     .from('chat_messages')
-//     .select('created_at, create_by, messages, images, messages_id')
-//     .eq('chat_id', chatId)
-//     .order('created_at', { ascending: false })
-//     .limit(10);
-
-//   if (cursor) {
-//     query.lt('created_at', cursor);
-//   }
-
-//   const { data, error } = await query;
-
-//   // 메시지 읽음 상태를 업데이트
-//   if (data?.length) {
-//     await updateCheckMessage(chatId, loginUserId);
-//   }
-
-//   if (error) {
-//     throw error;
-//   }
-
-//   return data ? data.reverse() : [];
-// };
 
 //메시지 읽음 처리
 const updateCheckMessage = async (chatId: string, loginUserId: string): Promise<void> => {

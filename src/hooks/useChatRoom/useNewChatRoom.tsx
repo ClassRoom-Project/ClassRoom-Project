@@ -11,8 +11,9 @@ import {
   readCheckMessages,
   readCheckMessagesAll
 } from '@/app/api/chatRooms/getChatRooms';
-import { SendNewMessageType, SendNewPhotoMessageType } from '@/types/chat/chatTypes';
+import { GetChatRoomMessagesType, SendNewMessageType, SendNewPhotoMessageType } from '@/types/chat/chatTypes';
 import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 
 //채팅방 목록 읽어오기
 export function useReadChatRooms(loginUserId: string) {
@@ -72,17 +73,21 @@ export function useCreateNewRoom() {
   return { createNewRoomMutate };
 }
 
-// //채팅내용 가져오기
+//채팅내용 가져오기
 export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
+  const [cursorDate, setCursorDate] = useState<string | undefined>(undefined);
+
+  console.log('cursorDate', cursorDate);
   const { data: readChatRoomMessages, isLoading } = useQuery({
-    queryKey: ['chatMessage', chatId],
-    queryFn: () => getChatMessages(chatId as string, loginUserId as string),
-    enabled: !!chatId
+    queryKey: ['chatMessage', chatId, cursorDate],
+    queryFn: () => getChatMessages(chatId as string, loginUserId as string, cursorDate),
+    enabled: !!chatId || cursorDate === undefined
   });
-  return { readChatRoomMessages, isLoading };
+
+  return { readChatRoomMessages, isLoading, setCursorDate };
 }
 
-//무한스크롤 테스트
+// //무한스크롤 테스트
 // export function useReadChatRoomMessages(chatId: string, loginUserId: string) {
 //   const {
 //     data: readChatRoomMessages,
