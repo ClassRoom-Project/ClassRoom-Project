@@ -12,7 +12,7 @@ import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'team description',
+  title: '클룸 팀원 description',
   description: 'bug busters personal cards'
 };
 
