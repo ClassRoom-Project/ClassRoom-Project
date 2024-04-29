@@ -178,7 +178,8 @@ const SelectTime: React.FC<SelectTimeProps> = ({ isEditMode, initialData, class_
               -
             </button>
             <p className="flex-none">{date}</p>
-            <input type="time" onChange={(e) => setTempTime(e.target.value)} className="flex-none" />
+            <label htmlFor={`time-input-${index}`} className="sr-only">시간 선택</label>
+            <input id={`time-input-${index}`} type="time" onChange={(e) => setTempTime(e.target.value)} className="flex-none" />
             <button onClick={() => handleAddTime(date)} className="bg-[#6C5FF7] text-white w-6 h-6 rounded-full">
               +
             </button>
