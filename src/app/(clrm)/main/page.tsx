@@ -4,6 +4,12 @@ import LatestClass from '@/components/main/LatestClass';
 import { Banner } from '@/components/main/Banner';
 import CategoryBtns from '@/components/listpage/CategoryBtns';
 import MainFooter from '@/components/main/MainFooter';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '클룸 mainPage',
+  description: '배너와 인기순 클래스,최신순 클래스를 확인할 수 있습니다'
+};
 
 const MainPage = () => {
   return (
