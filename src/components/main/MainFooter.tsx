@@ -4,11 +4,11 @@ import Logo from '@/assets/images/Group 1791.png';
 import Link from 'next/link';
 const MainFooter = () => {
   return (
-    <div className="h-60 w-full bg-disable-color">
+    <div className="h-60 w-full bg-background-color">
       <div className="relative flex h-full items-center justify-center p-5">
-        <div className="relative h-40 w-40">
+        <div className="relative h-24 w-24">
           <Image
-            sizes="(max-width: 768px) 128px, 256px"
+            sizes="96px"
             placeholder="empty"
             fill={true}
             src={Logo}
@@ -16,13 +16,13 @@ const MainFooter = () => {
             style={{ objectFit: 'contain' }}
           />
         </div>
-        <div className="flex flex-grow flex-col gap-3 pl-6 pr-3">
+        <div className="flex flex-grow flex-col gap-3 pl-12 pr-3">
           <div className="flex items-center justify-between text-xs md:text-sm lg:text-base">
             <p>버그 버스터즈</p>
             <p className="text-text-dark-gray">ⓒ Bug Busters</p>
           </div>
           <div className="text-xs md:text-sm lg:text-base">
-            <Link href={'/bugBusters'} className="text-text-dark-gray hover:text-main-color">
+            <Link href={'/bugBusters'} className="text-text-dark-gray hover:text-white">
               팀 소개
             </Link>
           </div>
