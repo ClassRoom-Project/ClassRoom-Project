@@ -1,4 +1,5 @@
-"use client";
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -38,13 +39,13 @@ const RegistCompletedPage = () => {
   }, [id, router]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
+    <div className="flex min-h-screen flex-col items-center justify-center">
       <FaCheck color="#6C5FF7" size="60" />
-      <h1 className="text-xl font-bold mt-4">{title} 클래스가 등록되었습니다.</h1>
-      <p className="flex flex-wrap justify-center mt-2 items-center text-center">
+      <h1 className="mt-4 text-xl font-bold">{title} 클래스가 등록되었습니다.</h1>
+      <p className="mt-2 flex flex-wrap items-center justify-center text-center">
         상세한 정보는
         <Link href={`/list/detail/${id}`} passHref>
-          <a className="text-base text-[#6C5FF7] ml-1 whitespace-nowrap">내가 등록한 클래스 보기</a>
+          <p className="ml-1 whitespace-nowrap text-base text-[#6C5FF7]">내가 등록한 클래스 보기</p>
         </Link>
         에서 확인해주세요.
       </p>
