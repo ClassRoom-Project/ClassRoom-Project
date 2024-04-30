@@ -7,7 +7,24 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: '클룸 리스트페이지',
-  description: '전체 클래스를 볼 수 있으며, 제공되는 필터를 통해 검색할 수 있습니다.'
+  description: '다채로운 매력을 지닌 원데이 클래스들을 즐겨보세요!',
+  keywords: ['OneDay Class', '원데이 클래스'],
+  creator: 'Team BugBusters',
+  openGraph: {
+    images: [
+      {
+        url: '../../assets/images/브로슈어 디자인 파이널.jpg',
+        width: 500,
+        height: 400
+      }
+    ],
+    title: '클룸 리스트페이지',
+    description: '다채로운 매력을 지닌 원데이 클래스들을 즐겨보세요!',
+    url: 'https://www.cl-room.com/list',
+    siteName: '클룸',
+    locale: 'ko_KR',
+    type: 'website'
+  }
 };
 
 export default function ListPage() {
