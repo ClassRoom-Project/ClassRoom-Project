@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /exclude
+
+# Host
+Host: https://www.cl-room.com
+
+# Sitemaps
+Sitemap: https://www.cl-room.com/sitemap.xml

@@ -79,7 +79,7 @@ const RegisterEditPage = () => {
           }
           combinedData.push({
             day: dateItem.day,
-            times: fetchedTimeData ? fetchedTimeData.map(item => item.times) : []
+            times: fetchedTimeData ? fetchedTimeData.map((item) => item.times) : []
           });
         }
       }
