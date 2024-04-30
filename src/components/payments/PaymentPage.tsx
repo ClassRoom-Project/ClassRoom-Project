@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { useAsync } from 'react-use';
 
-const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
+const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm' as string;
 
 export default function PaymentPageasync() {
   const router = useRouter();

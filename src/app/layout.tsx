@@ -15,7 +15,7 @@ type Props = { children: React.ReactNode };
 export default function RootLayout({ children }: Props) {
   const mapScriptSrc = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_API_KEY}&libraries=services,clusterer&autoload=false`;
   return (
-    <html lang="ko" className={`${pretendard.variable} font-pretendard`}>
+    <html lang="ko" className={`${pretendard.variable}`}>
       <body>
         <QueryProvider>
           <ToastContainer />
