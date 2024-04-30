@@ -4,6 +4,7 @@ import EditProfile from '@/components/mypage/EditProfile';
 import EditTeacherInfo from '@/components/mypage/teacher/EditTeacherInfo';
 import MyClass from '@/components/mypage/teacher/MyClass';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
+import { SupabaseClientOptions } from '@supabase/supabase-js';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
@@ -107,7 +108,7 @@ const TeacherMyPageTab = () => {
       {/* md 미만 일 때, 드롭다운 */}
       <div className="flex w-full justify-start px-4 md:hidden">
         <div className="dropdown dropdown-right">
-          <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
+          <div tabIndex={0} role="button" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
           </div>
           <div

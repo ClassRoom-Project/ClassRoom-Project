@@ -195,11 +195,13 @@ const EditTeacherInfo = () => {
 
   return (
     <div className="mb-16 flex w-full flex-col items-center justify-center gap-6 bg-light-purple py-4 md:mb-0 md:w-full md:justify-items-center md:p-4 lg:w-full">
-      <p className="items-start pt-4 text-xl font-bold text-dark-purple-color md:hidden">선생님 정보 수정하기</p>
-      <p className=" p-4 text-center text-text-dark-gray">
-        회원님이 등록하신 강사 정보입니다. <br />
-        수정을 원하시면 아래 정보 수정하기 버튼을 눌러주세요.
-      </p>
+      <div>
+        <p className="items-start pt-4 text-xl font-bold text-dark-purple-color md:hidden">선생님 정보 수정하기</p>
+        <p className=" p-4 text-center text-text-dark-gray">
+          회원님이 등록하신 강사 정보입니다. <br />
+          수정을 원하시면 아래 정보 수정하기 버튼을 눌러주세요.
+        </p>
+      </div>
       <div className="flex justify-center">
         <div className="flex flex-col items-start justify-center md:flex-row md:gap-10">
           <div className="flex w-[350px] flex-col items-start justify-center md:items-end">

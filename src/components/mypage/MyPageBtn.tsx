@@ -29,6 +29,7 @@ const MyPageBtn = () => {
       <button
         onClick={handleMyPageIconOnClick}
         className="flex w-full flex-col items-center whitespace-nowrap text-background-color transition ease-in hover:text-main-color md:text-icon-color"
+        aria-label="마이페이지"
       >
         <GoPerson className="text-4xl sm:text-4xl md:text-4xl" />
         <div className=" hidden sm:flex md:sm:flex">마이페이지</div>
