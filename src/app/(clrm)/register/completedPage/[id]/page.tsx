@@ -51,7 +51,7 @@ const RegistCompletedPage = () => {
         <p className="flex flex-wrap justify-center mt-2 items-center text-center">
           상세한 정보는
           <Link href={`/list/detail/${id}`} passHref>
-            <a className="text-base text-[#6C5FF7] ml-1 whitespace-nowrap">내가 등록한 클래스 보기</a>
+            <p className="text-base text-[#6C5FF7] ml-1 whitespace-nowrap">내가 등록한 클래스 보기</p>
           </Link>
           에서 확인해주세요.
         </p>
