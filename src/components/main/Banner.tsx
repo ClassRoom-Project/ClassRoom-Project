@@ -41,14 +41,14 @@ export const Banner = () => {
   }, [current]);
 
   // 배너 자동으로 넘기기
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     handleNext();
-  //   }, 10000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 10000);
 
-  //   //clearInterval 사용해서 타이머 초기화!
-  //   return () => clearInterval(interval);
-  // }, [handleNext]);
+    //clearInterval 사용해서 타이머 초기화!
+    return () => clearInterval(interval);
+  }, [handleNext]);
 
   return (
     <>
