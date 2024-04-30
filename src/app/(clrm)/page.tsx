@@ -6,9 +6,7 @@ import CategoryBtns from '@/components/listpage/CategoryBtns';
 import MainFooter from '@/components/main/MainFooter';
 import { ChatBubble } from '@/components/main/ChatBubble';
 import type { Metadata } from 'next';
-import { getMetadata, META } from '@/utils/metadata';
 
-getMetadata({});
 export const metadata: Metadata = {
   title: '클룸',
   description: '배너와 인기순 클래스,최신순 클래스를 확인할 수 있습니다',

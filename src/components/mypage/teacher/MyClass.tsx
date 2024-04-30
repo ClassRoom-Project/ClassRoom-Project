@@ -95,9 +95,9 @@ const MyClass = () => {
                   alt="클래스 대표 사진"
                   fill={true}
                   sizes="288px"
-                  className="p-4"
+                  className="p-4 md:p-0"
                   style={{ objectFit: 'cover' }}
-                  loading="lazy"
+                  priority={true}
                 />
               </div>
               <div className="my-4 flex flex-col md:gap-4 lg:mx-4 lg:my-0">
@@ -189,7 +189,7 @@ const MyClass = () => {
               </button>
 
               <button className="btn w-1/3 whitespace-nowrap  bg-point-purple text-xs text-white hover:bg-transparent hover:text-point-purple md:w-36 md:text-sm">
-                <Link href={`list/detail/${classInfo.class_id}`}>클래스 보러가기</Link>
+                <Link href={`list/detail/${classInfo.class_id}`}>클래스 상세보기</Link>
               </button>
             </section>
           </div>
