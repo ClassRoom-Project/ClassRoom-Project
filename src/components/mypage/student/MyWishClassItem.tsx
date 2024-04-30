@@ -23,6 +23,7 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
             sizes="288px"
             className="p-4 md:p-0"
             style={{ objectFit: 'cover' }}
+            priority={true}
           />
         </div>
         <div className="flex h-full w-full flex-col gap-4 p-4">

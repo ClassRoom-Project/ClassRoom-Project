@@ -97,6 +97,7 @@ const MyClass = () => {
                   sizes="288px"
                   className="p-4 md:p-0"
                   style={{ objectFit: 'cover' }}
+                  priority={true}
                 />
               </div>
               <div className="my-4 flex flex-col md:gap-4 lg:mx-4 lg:my-0">
