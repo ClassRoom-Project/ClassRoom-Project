@@ -23,7 +23,6 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
             sizes="288px"
             className="p-4 md:p-0"
             style={{ objectFit: 'cover' }}
-            loading="lazy"
           />
         </div>
         <div className="flex h-full w-full flex-col gap-4 p-4">
@@ -79,7 +78,7 @@ const MyWishClassItem = ({ classItem }: { classItem: MyWishClassType }) => {
               <Link href={`reserve?classId=${classItem.class_id}`}>클래스 신청하기</Link>
             </div>
             <div className="btn w-1/3 whitespace-nowrap bg-point-purple text-xs text-white hover:bg-transparent hover:text-point-purple md:w-36 md:text-sm">
-              <Link href={`list/detail/${classItem.class_id}`}>클래스 보러가기</Link>
+              <Link href={`list/detail/${classItem.class_id}`}>클래스 상세보기</Link>
             </div>
           </section>
         </div>

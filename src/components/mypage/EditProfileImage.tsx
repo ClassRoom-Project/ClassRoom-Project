@@ -50,14 +50,16 @@ const EditProfileImage = ({
 
   return (
     <div>
-      <div className="flex h-[125px] w-[125px] flex-col items-center gap-4 rounded-full p-4 md:h-[150px] md:w-[150px]">
+      <div className="relative flex h-[125px] w-[125px] flex-col items-center gap-4 rounded-full p-4 md:h-[150px] md:w-[150px]">
         <Image
           src={profileImage}
-          width={100}
-          height={100}
-          className="h-full w-full rounded-full object-cover"
+          fill={true}
+          sizes="(min-width : 768px) 150px, 125px"
+          style={{ objectFit: 'cover', borderRadius: '50%', padding: '8px' }}
           alt="프로필 이미지"
+          priority={true}
         />
+
         <input
           type="file"
           name="image_URL"

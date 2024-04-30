@@ -77,7 +77,7 @@ const ReservationCompletePage = ({ params }: { params: { reservationId: string }
       {
         icon: <GrLocation size={20} color="#8074FF" />,
         title: '위치',
-        description: `${classInfo.location}`
+        description: `${classInfo.location ? classInfo.location : '온라인 클래스'}`
       },
 
       {
