@@ -9,12 +9,12 @@ import BackButton from '@/components/common/BackButton';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import type { Metadata, ResolvingMetadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 type Props = {
   params: { id: string };
 };
 export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
-  const id = params.id;
-
   const classData = await detailClassInfo(params.id);
 
   const previousImages = (await parent).openGraph?.images || [];
@@ -28,7 +28,9 @@ export async function generateMetadata({ params }: Props, parent: ResolvingMetad
     title: classData?.title || 'clroom',
     description: classData?.description || 'clroom',
     openGraph: {
-      images: images
+      images: images,
+      type: 'website',
+      locale: 'ko_KR'
     }
   };
 }
