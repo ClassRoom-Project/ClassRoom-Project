@@ -61,7 +61,7 @@ const HashTag: React.FC<HashTagProps> = ({ isEditMode, initialData }) => {
           type="text"
           value={inputValue}
           onChange={handleSubCategoryChange}
-          placeholder="해시태그 최대 5개까지 입력가능합니다(ex.#태그1 #태그2 #태그3)"
+          placeholder="최대 5개까지 입력가능합니다(ex.#태그1 #태그2 #태그3)"
         />
       </div>
     </div>
