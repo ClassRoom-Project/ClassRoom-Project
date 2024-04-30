@@ -4,7 +4,7 @@ Allow: /
 Disallow: /exclude
 
 # Host
-Host: http://localhost:3000
+Host: https://www.cl-room.com
 
 # Sitemaps
-Sitemap: http://localhost:3000/sitemap.xml
+Sitemap: https://www.cl-room.com/sitemap.xml

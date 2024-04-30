@@ -10,6 +10,15 @@ import MinMaxNumber from '@/components/register/MinMaxNumber';
 import ClassDiff from '@/components/register/ClassDiff';
 import ImageUpload from '@/components/register/ImageUpload';
 import TotalTime from '@/components/register/TotalTime';
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: '클룸 클래스 등록 페이지',
+  description: '나만의 클래스 정보를 입력하고 등록할 수 있는 페이지입니다. ',
+  icons: {
+    icon: '/logo.svg'
+  }
+};
 
 const RegisterPage = () => {
   return (
@@ -19,7 +28,7 @@ const RegisterPage = () => {
         <div className="p-4 md:p-6 lg:p-8">
           <h1 className="text-md md:text-lg lg:text-xl mt-1">클래스 기본정보 입력란</h1>
           <hr className="my-4 border-[#4D43B8]" />
-          <p className='text-sm mt-1 text-[#7E7E7E]'>* 표시는 필수 입력 항목입니다</p>
+          <p className='text-sm mt-1 text-[#4D4D4D]'>* 표시는 필수 입력 항목입니다</p>
           <Category isEditMode={false} />
           <HashTag isEditMode={false} />
           <ClassTitleType isEditMode={false} />
@@ -43,7 +52,7 @@ const RegisterPage = () => {
             <span className='text-[#d63232] font-bold'>*</span> 
             클래스를 대표할 이미지를 등록해 주세요. (최소 1개 이상 등록, 최대 5개 등록 가능) 
           </p>
-          <p className='text-sm mt-1 text-[#7E7E7E]'>첫번째 이미지가 대표이미지로 업로드 됩니다. 드래그하여 순서 변경이 가능합니다</p>
+          <p className='text-sm mt-1 text-[#4D4D4D]'>첫번째 이미지가 대표이미지로 업로드 됩니다. 드래그하여 순서 변경이 가능합니다</p>
           <div className="flex justify-between items-center pt-2">
             <ImageUpload isEditMode={false} />
           </div>
