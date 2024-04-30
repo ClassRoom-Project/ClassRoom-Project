@@ -15,10 +15,9 @@ interface ClassContentProps {
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
-  loading: () => <p>Loading...</p>,
+  loading: () => <></>,
 });
 
-// 사용자 지정 툴바 컴포넌트
 const CustomToolbar = () => (
   <div id="toolbar" className="quill-toolbar">
     <span className="ql-formats">
