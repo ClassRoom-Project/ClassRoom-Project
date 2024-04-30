@@ -51,7 +51,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
             alt={classInfo.title}
             style={{ objectFit: 'cover', borderRadius: '8px' }}
             sizes="(max-width: 768px) 100vw, 40vw"
-            priority
+            priority={true}
           />
         ) : (
           <Image
@@ -61,7 +61,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
             alt={classInfo.title}
             style={{ objectFit: 'cover', borderRadius: '8px' }}
             sizes="(max-width: 768px) 80vw, 30vw"
-            priority
+            priority={true}
           />
         )}
       </div>
