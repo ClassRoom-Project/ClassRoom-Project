@@ -268,13 +268,13 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
           .eq('day', date)
           .eq('class_id', classId)
           .single();
-  
+
         if (existingDateError || !existingDateData) {
           // 존재하지 않으면 새로운 날짜 추가
           dateId = crypto.randomUUID();
-          const { error: dateInsertError } = await supabase.from('date').insert([
-            { date_id: dateId, class_id: classId, day: date }
-          ]);
+          const { error: dateInsertError } = await supabase
+            .from('date')
+            .insert([{ date_id: dateId, class_id: classId, day: date }]);
           if (dateInsertError) {
             console.error('date db insert error:', dateInsertError);
           }
@@ -282,24 +282,24 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
           // 존재하면 dateId 가져오기
           dateId = existingDateData.date_id;
         }
-    
+
         // 선택된 시간들에 대해 처리
         const selectedTimes = schedules.find((schedule) => schedule.date === date)?.times;
         if (selectedTimes && selectedTimes.length > 0) {
           for (const time of selectedTimes) {
             const { data: existingTimeData, error: existingTimeError } = await supabase
-            .from('time')
-            .select('time_id')
-            .eq('date_id', dateId)
-            .eq('times', time)
-            .single();
+              .from('time')
+              .select('time_id')
+              .eq('date_id', dateId)
+              .eq('times', time)
+              .single();
 
             if (existingTimeError || !existingTimeData) {
               // 존재하지 않으면 새로운 시간 추가
               const timeId = crypto.randomUUID();
-              const { error: timeError } = await supabase.from('time').insert([
-                { time_id: timeId, date_id: dateId, times: time }
-              ]);
+              const { error: timeError } = await supabase
+                .from('time')
+                .insert([{ time_id: timeId, date_id: dateId, times: time }]);
               if (timeError) {
                 console.error('time db upload error:', timeError);
               }
@@ -432,8 +432,10 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
                   <Image
                     src={images[index].preview}
                     alt="uploaded"
-                    placeholder='empty'
-                    className="h-full w-full rounded-[20px] border object-cover"
+                    fill={true}
+                    sizes="142px"
+                    placeholder="empty"
+                    style={{ objectFit: 'cover', borderRadius: '20px' }}
                   />
                   <button
                     className="btn btn-circle btn-xs absolute right-0 top-0 mr-1 mt-1 bg-red-500 text-white"

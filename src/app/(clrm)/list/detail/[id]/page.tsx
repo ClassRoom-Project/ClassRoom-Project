@@ -9,6 +9,8 @@ import BackButton from '@/components/common/BackButton';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
 import type { Metadata, ResolvingMetadata } from 'next';
 
+export const dynamic = 'force-dynamic';
+
 type Props = {
   params: { id: string };
 };

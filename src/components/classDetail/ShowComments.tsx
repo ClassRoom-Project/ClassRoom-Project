@@ -18,10 +18,10 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
     queryFn: () => getDetailComment(classId, currentPage, commentPerPage)
   });
 
-  useEffect(() => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
-    setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
-  }, [page, currentPage]);
+  // useEffect(() => {
+  //   window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
+  //   setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
+  // }, [page, currentPage]);
 
   if (status === 'pending') {
     return <div>Loading...</div>;
