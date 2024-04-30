@@ -61,7 +61,7 @@ const config: Config = {
       '3xl': '1743px'
     },
     fontFamily: {
-      pretendard: ['var(--font-pretendard)']
+      sans: ['var(--font-pretendard)']
     }
   },
 
