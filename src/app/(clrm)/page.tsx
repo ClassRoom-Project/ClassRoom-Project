@@ -8,8 +8,25 @@ import { ChatBubble } from '@/components/main/ChatBubble';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '클룸 메인페이지',
-  description: '배너와 인기순 클래스,최신순 클래스를 확인할 수 있습니다.'
+  title: '클룸',
+  description: '다채로운 매력을 지닌 원데이 클래스들을 즐겨보세요!',
+  keywords: ['OneDay Class', '원데이 클래스'],
+  creator: 'Team BugBusters',
+  openGraph: {
+    title: '클룸',
+    description: '다채로운 매력을 지닌 원데이 클래스들을 즐겨보세요!',
+    images: [
+      {
+        url: '../../assets/images/브로슈어 디자인 파이널.jpg',
+        width: 500,
+        height: 400
+      }
+    ],
+    url: 'https://www.cl-room.com/',
+    siteName: '클룸',
+    locale: 'ko_KR',
+    type: 'website'
+  }
 };
 
 const MainPage = () => {

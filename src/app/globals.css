@@ -39,14 +39,14 @@
 }
 
 @font-face {
-  font-family: 'yg-jalnan';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+  font-family: 'JalnanGothic';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_231029@1.1/JalnanGothic.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 .welcome-message {
-  font-family: 'yg-jalnan', sans-serif;
+  font-family: 'JalnanGothic', sans-serif;
 }
 
 body {

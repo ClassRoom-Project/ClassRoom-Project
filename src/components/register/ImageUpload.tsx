@@ -434,8 +434,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
                     alt="uploaded"
                     fill={true}
                     sizes="142px"
-                    placeholder="empty"
-                    style={{ objectFit: 'cover', borderRadius: '20px' }}
+                    placeholder='empty'
+                    style={{ objectFit: 'cover', borderRadius: '20px'}}
                   />
                   <button
                     className="btn btn-circle btn-xs absolute right-0 top-0 mr-1 mt-1 bg-red-500 text-white"
