@@ -1,7 +1,7 @@
 'use client';
 
 import { DetailCommentType } from '@/types/detailComment';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import CommentsCard from './CommentsCard';
 import { useQuery } from '@tanstack/react-query';
 import { getDetailComment } from '@/app/api/classdetail/detailComment';
@@ -17,11 +17,6 @@ const ShowComments = ({ classId }: { classId: string | undefined }) => {
     queryKey: ['getDetailComment', currentPage],
     queryFn: () => getDetailComment(classId, currentPage, commentPerPage)
   });
-
-  useEffect(() => {
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' });
-    setCurrentPage(page && parseInt(page) > 0 ? parseInt(page) : 1); // 현재 페이지 업데이트
-  }, [page, currentPage]);
 
   if (status === 'pending') {
     return <div>Loading...</div>;

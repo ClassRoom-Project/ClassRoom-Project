@@ -105,7 +105,7 @@ export const Banner = () => {
                 <Image src={lightPurpleGraphic2} priority={true} alt="graphic" />
               </div>
 
-              <div className=" absolute top-8 z-30 flex w-full flex-col  items-center justify-end gap-2 sm:right-28 sm:w-fit md:right-20  md:top-16 md:items-end  md:gap-5  lg:right-24 lg:top-[50px] lg:text-base xl:right-36 xl:top-32 xl:flex-row xl:items-center 2xl:right-44">
+              <div className=" absolute top-8 z-30 flex w-full flex-col  items-center justify-end gap-2 sm:right-28 sm:w-fit md:right-20  md:top-16 md:items-end  md:gap-5  lg:right-24 lg:top-[50px] lg:text-base xl:right-36 xl:top-32 xl:flex-row xl:items-center 2xl:right-32">
                 {/* 클룸 텍스트 로고 */}
                 <div className=" w-[80px] flex-shrink-0 sm:w-[70px] md:w-[70px] lg:w-[100px] xl:w-[130px]">
                   <Image
@@ -118,7 +118,7 @@ export const Banner = () => {
                 </div>
 
                 {/* 텍스트 */}
-                <div className=" flex flex-col text-center text-sm font-bold text-point-purple  md:text-right  md:text-lg lg:text-lg xl:text-left xl:text-2xl ">
+                <div className=" flex flex-col text-center text-sm font-bold text-point-purple  md:text-right  md:text-lg lg:text-lg xl:text-left xl:text-4xl ">
                   <p className="hidden lg:block">클룸을 통해서</p>
                   <p className=" hidden lg:block">다양한 원데이 클래스를 체험해보세요!</p>
                   <p className="lg:hidden">다양한 원데이 </p>
@@ -169,7 +169,7 @@ export const Banner = () => {
                 <Image style={{ objectFit: 'cover' }} priority={true} quality={100} src={soap} alt="bannerSoapImage" />
               </div>
               {/*  오른쪽 별 */}
-              <div className=" absolute  right-16  top-8 z-20   w-[30px]  md:w-[50px]   lg:right-[60px] lg:top-10  lg:w-[40px] xl:right-40 xl:top-20">
+              <div className=" absolute  right-16  top-8 z-20   w-[30px]  md:w-[50px]   lg:right-[60px] lg:top-10  lg:w-[40px] xl:right-44 xl:top-16">
                 <Image
                   style={{ objectFit: 'cover' }}
                   priority={true}
@@ -179,7 +179,7 @@ export const Banner = () => {
                 />
               </div>
               {/* 왼쪽 별 */}
-              <div className=" absolute left-20 top-[60px]  z-20 w-[28px] sm:left-auto sm:right-[230px] sm:top-16   md:left-28 md:top-24  md:w-[40px] lg:left-auto   lg:right-[290px] lg:top-24    xl:right-[400px]     xl:top-32  xl:w-[50px]">
+              <div className=" absolute left-20 top-[60px]  z-20 w-[28px] sm:left-auto sm:right-[230px] sm:top-16   md:left-28 md:top-24  md:w-[40px] lg:left-auto   lg:right-[310px] lg:top-24    xl:right-[510px]     xl:top-32  xl:w-[50px]">
                 <Image
                   style={{ objectFit: 'cover' }}
                   priority={true}
@@ -189,7 +189,7 @@ export const Banner = () => {
                 />
               </div>
               {/* 아래 별 */}
-              <div className=" absolute right-24 top-[120px]  z-20 w-[20px] sm:right-20 sm:top-32  sm:w-[20px] md:right-[130px] md:top-48 md:w-[30px] lg:right-12   lg:top-48 xl:right-36 xl:top-60  xl:w-[35px]">
+              <div className=" absolute right-24 top-[120px]  z-20 w-[20px] sm:right-20 sm:top-32  sm:w-[20px] md:right-[130px] md:top-48 md:w-[30px] lg:right-[68px]   lg:top-44 xl:right-36 xl:top-60  xl:w-[35px]">
                 <Image
                   style={{ objectFit: 'cover' }}
                   priority={true}
@@ -210,9 +210,9 @@ export const Banner = () => {
                 <Image style={{ objectFit: 'cover' }} priority={true} quality={100} src={Ellipse} alt="bannerEllipse" />
               </div>
 
-              <div className=" absolute top-9 z-30 flex w-full flex-col  items-center justify-center gap-2 sm:right-24 sm:top-[38px] sm:w-fit sm:items-center md:right-0 md:top-16 md:w-full md:items-center md:gap-5 lg:right-16  lg:top-16  lg:w-fit  lg:text-base  xl:right-44 xl:top-28  xl:flex-row xl:items-center ">
+              <div className=" absolute top-9 z-30 flex w-full flex-col  items-center justify-center gap-2 sm:right-24 sm:top-[38px] sm:w-fit sm:items-center md:right-0 md:top-[60px] md:w-full md:items-center md:gap-5 lg:right-24  lg:top-16  lg:w-fit   xl:right-44 xl:top-[84px]  xl:flex-row xl:items-center ">
                 {/* 텍스트 */}
-                <div className=" flex flex-col gap-2 text-center text-base font-bold text-white md:text-3xl ">
+                <div className=" flex flex-col gap-2 text-center text-base font-bold text-white md:text-3xl xl:text-5xl ">
                   <p className="">클룸을 통해서</p>
                   <p className="">취미와 역량을</p>
                   <p className="">한 단계 업그레이드!</p>

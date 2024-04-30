@@ -3,10 +3,16 @@ import ClassInfo from '@/components/reserve/ClassInfo';
 import ReservationScheduler from '@/components/reserve/ReservationScheduler';
 import ReserveUserInfo from '@/components/reserve/ReserveUserInfo';
 import SetQuantityAndPay from '@/components/reserve/SetQuantityAndPay';
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { IoIosArrowBack } from 'react-icons/io';
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+  title: '클룸 예약페이지',
+  description: '클룸 클래스 예약 페이지입니다. 지금 바로 원하는 원데이 클래스를 예약해보세요!'
+};
 
 export default async function ReservePage({ searchParams }: { searchParams: { classId: string } }) {
   const classId = searchParams.classId;

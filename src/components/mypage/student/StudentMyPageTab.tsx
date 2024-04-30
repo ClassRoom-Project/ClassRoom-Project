@@ -143,10 +143,9 @@ const StudentMyPageTab = () => {
       {/* md 미만 일 때, 드롭다운 */}
       <div className="flex w-full px-4 md:hidden">
         <div className="dropdown dropdown-right">
-          <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
+          <div tabIndex={0} role="button" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
           </div>
-
           <div
             tabIndex={0}
             className={`menu dropdown-content z-[1] flex w-52 flex-col items-start rounded-box bg-base-100 p-2 shadow `}
