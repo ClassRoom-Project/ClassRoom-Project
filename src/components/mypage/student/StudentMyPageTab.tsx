@@ -82,7 +82,7 @@ const StudentMyPageTab = () => {
   return (
     <div className="lg:w-1440px m-0 w-full max-w-[1440px] p-0  md:my-4 md:py-4">
       {/* md 이상 일 때, 가로 탭 */}
-      <div className="hidden w-full flex-row justify-between whitespace-nowrap border-y-2 sm:items-start md:flex md:items-center 2xl:justify-start 2xl:gap-20">
+      <div className="hidden w-full flex-row justify-between whitespace-nowrap border-b-2 sm:items-start md:flex md:items-center 2xl:justify-start 2xl:gap-20">
         <div className=" overflow-x-scroll scrollbar-hide">
           <button
             onClick={() => handleOnClickTabBtn('editProfile')}
@@ -143,10 +143,9 @@ const StudentMyPageTab = () => {
       {/* md 미만 일 때, 드롭다운 */}
       <div className="flex w-full px-4 md:hidden">
         <div className="dropdown dropdown-right">
-          <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
+          <div tabIndex={0} role="button" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
           </div>
-
           <div
             tabIndex={0}
             className={`menu dropdown-content z-[1] flex w-52 flex-col items-start rounded-box bg-base-100 p-2 shadow `}

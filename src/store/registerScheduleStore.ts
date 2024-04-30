@@ -3,6 +3,7 @@ import { create } from 'zustand';
 interface Schedule {
   date: string;
   times: string[];
+  dateId?: string;
 }
 
 interface RegisterScheduleStoreState {

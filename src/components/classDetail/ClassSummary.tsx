@@ -3,12 +3,11 @@ import { DetailUserInfoType } from '@/types/user';
 import Image from 'next/image';
 import { FiCalendar, FiUsers } from 'react-icons/fi';
 import { GrLocation } from 'react-icons/gr';
-import { LuClock } from 'react-icons/lu';
-import { PiCurrencyKrw } from 'react-icons/pi';
+import { LuClock, LuDot } from 'react-icons/lu';
+import { PiCubeDuotone, PiCurrencyKrw } from 'react-icons/pi';
 import { RiHashtag, RiUserLocationLine } from 'react-icons/ri';
 import defaultProfileImageSrc from '../../assets/images/profile-image.png';
 import ClassDetailBtn from './ClassDetailBtn';
-import { LuDot } from 'react-icons/lu';
 
 const ClassSummary = ({
   classData,
@@ -20,8 +19,8 @@ const ClassSummary = ({
   // 해시태그 배열 생성
   const hashtagString = classData?.hashtag.map((tag) => {
     return (
-      <div key={tag} className="flex items-center  text-gray-400">
-        <RiHashtag />
+      <div key={tag} className="mr-1.5 flex  items-center text-gray-400">
+        <RiHashtag color="#BAB4FD" />
         <p>{tag}</p>
       </div>
     );
@@ -38,6 +37,11 @@ const ClassSummary = ({
       icon: <RiUserLocationLine className="text-main-color" />,
       title: `클래스 유형`,
       description: `${classData?.class_type}`
+    },
+    {
+      icon: <PiCubeDuotone className="text-main-color" />,
+      title: `난이도`,
+      description: `${classData?.difficulty}`
     },
 
     {
@@ -76,20 +80,22 @@ const ClassSummary = ({
   return (
     <div className="mt-4 w-full px-4 md:px-0 lg:w-[40%] lg:min-w-[400px]">
       <div className=" mb-4 flex h-8 items-center gap-2">
-        <div className="relative h-8 w-8">
+        <div className="relative h-8 w-8 overflow-hidden rounded-full">
           {userData?.profile_image ? (
             <Image
               fill={true}
-              className="h-full w-full rounded-full object-cover"
               src={userData.profile_image}
               alt="profileImage"
+              sizes="32px"
+              style={{ objectFit: 'cover' }}
             />
           ) : (
             <Image
               fill={true}
-              className="h-full w-full rounded-full object-cover"
               src={defaultProfileImageSrc}
               alt="profileImage"
+              sizes="32px"
+              style={{ objectFit: 'cover' }}
             />
           )}
         </div>
@@ -101,11 +107,13 @@ const ClassSummary = ({
         <div className="text-xl font-bold">{classData?.title}</div>
         <div className="text-sm md:text-base">
           <div className="mb-0.5 flex items-center  ">
-            카테고리
+            <span>카테고리</span>
             <LuDot color="gray" />
             {classData?.category}
           </div>
-          <div className=" flex  gap-2 overflow-x-auto whitespace-nowrap ">{hashtagString}</div>
+          <div className=" flex overflow-x-auto whitespace-nowrap scrollbar-hide sm:flex-wrap sm:overflow-visible sm:whitespace-normal ">
+            {hashtagString}
+          </div>
         </div>
         <div className="flex flex-col gap-5 text-lg">
           {classInfoLabels.map(({ icon, title, description }) => {

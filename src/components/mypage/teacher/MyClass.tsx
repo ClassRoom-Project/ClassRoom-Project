@@ -93,8 +93,10 @@ const MyClass = () => {
                 <Image
                   src={classInfo?.image ? classInfo?.image : NoImage}
                   alt="클래스 대표 사진"
-                  fill
-                  className="h-full w-full object-cover p-4"
+                  fill={true}
+                  sizes="288px"
+                  className="p-4 md:p-0"
+                  style={{ objectFit: 'cover' }}
                 />
               </div>
               <div className="my-4 flex flex-col md:gap-4 lg:mx-4 lg:my-0">
@@ -186,7 +188,7 @@ const MyClass = () => {
               </button>
 
               <button className="btn w-1/3 whitespace-nowrap  bg-point-purple text-xs text-white hover:bg-transparent hover:text-point-purple md:w-36 md:text-sm">
-                <Link href={`list/detail/${classInfo.class_id}`}>클래스 보러가기</Link>
+                <Link href={`list/detail/${classInfo.class_id}`}>클래스 상세보기</Link>
               </button>
             </section>
           </div>

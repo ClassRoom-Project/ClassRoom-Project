@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { useAsync } from 'react-use';
 
-const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
+const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm' as string;
 
 export default function PaymentPageasync() {
   const router = useRouter();
@@ -64,9 +64,16 @@ export default function PaymentPageasync() {
           결제 수단을 선택하고 결제를 진행해주세요. 환불금은 예약 취소 후 2-3일 내에 결제한 카드로 입금됩니다. 아래
           버튼을 눌러 예약을 결제하세요.
         </p>
+
         {/* {(paymentWidget === null || paymentMethodsWidgetRef === null) && ''} */}
+
         <div id="payment-widget" className="w-full" />
         <div id="agreement" className="w-full" />
+        <div className="flex w-full items-center justify-center">
+          <p className=" text-red-600">
+            모바일의 경우 테스트 결제가 진행되지 않습니다. PC버전에서 시도해주시면 감사하겠습니다!
+          </p>
+        </div>
         <button
           type="button"
           className="hover:button-hover-color mt-8 rounded-md bg-button-default-color px-5 py-2 text-white"

@@ -45,8 +45,8 @@ const MyClassStudentPage = () => {
   }
 
   return (
-    <div className="m-4 mb-24 flex w-full max-w-[1280px] flex-col gap-4 p-4 md:mb-0">
-      <div className="flex w-full items-center border-y-2">
+    <div className="m-4 mb-24 flex w-full max-w-[1440px] flex-col gap-4 p-4 md:mb-0">
+      <div className="flex w-full items-center border-b-2">
         <button className="flex  items-center text-gray-500" onClick={() => router.back()}>
           <IoIosArrowBack size={20} />
         </button>

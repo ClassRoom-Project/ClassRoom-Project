@@ -4,6 +4,7 @@ import EditProfile from '@/components/mypage/EditProfile';
 import EditTeacherInfo from '@/components/mypage/teacher/EditTeacherInfo';
 import MyClass from '@/components/mypage/teacher/MyClass';
 import { useUserRoleStore } from '@/store/mypage/userRoleStore';
+import { SupabaseClientOptions } from '@supabase/supabase-js';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { IoMenu } from 'react-icons/io5';
@@ -69,7 +70,7 @@ const TeacherMyPageTab = () => {
   return (
     <div className="lg:w-1440px m-0 w-full max-w-[1440px] p-0 md:my-4 md:py-4">
       {/* md 이상 일 때, 가로 탭 */}
-      <div className="hidden w-full flex-row whitespace-nowrap border-y-2 sm:items-start md:flex md:items-center md:justify-start md:gap-10 lg:gap-20">
+      <div className="hidden w-full flex-row whitespace-nowrap border-b-2 sm:items-start md:flex md:items-center md:justify-start md:gap-10 lg:gap-20">
         <div className="overflow-x-scroll scrollbar-hide">
           <button
             onClick={() => handleOnClickTabBtn('editProfile')}
@@ -107,7 +108,7 @@ const TeacherMyPageTab = () => {
       {/* md 미만 일 때, 드롭다운 */}
       <div className="flex w-full justify-start px-4 md:hidden">
         <div className="dropdown dropdown-right">
-          <div tabIndex={0} role="button" className="m-1" onMouseDown={(e) => checkAndCloseDropDown(e)}>
+          <div tabIndex={0} role="button" onMouseDown={(e) => checkAndCloseDropDown(e)}>
             <IoMenu size={30} />
           </div>
           <div

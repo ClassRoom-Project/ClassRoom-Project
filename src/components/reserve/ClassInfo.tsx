@@ -46,12 +46,12 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
       <div className="relative mb-2 h-[210px] w-full ">
         {classInfo.image ? (
           <Image
-            className="rounded-lg"
             fill={true}
             src={classInfo.image}
             alt={classInfo.title}
-            style={{ objectFit: 'cover' }}
+            style={{ objectFit: 'cover', borderRadius: '8px' }}
             sizes="(max-width: 768px) 100vw, 40vw"
+            priority={true}
           />
         ) : (
           <Image
@@ -59,8 +59,9 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
             fill={true}
             src={NoImage}
             alt={classInfo.title}
-            style={{ objectFit: 'cover' }}
-            sizes="(max-width: 768px) 100vw, 40vw"
+            style={{ objectFit: 'cover', borderRadius: '8px' }}
+            sizes="(max-width: 768px) 80vw, 30vw"
+            priority={true}
           />
         )}
       </div>

@@ -259,7 +259,6 @@
   .embla__lazyLoad__spinner {
     border: 0.35rem solid rgba(var(--text-high-contrast-rgb-value), 0.2);
     border-left: 0.35rem solid var(--text-high-contrast);
-
     font-size: 1rem;
     display: inline-flex;
     position: absolute;

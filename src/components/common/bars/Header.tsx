@@ -66,9 +66,17 @@ const Header = ({ children }: PropsWithChildren) => {
   return (
     <>
       <div className="fixed left-0 right-0 top-0  z-40 ml-0 flex h-20 w-full items-center justify-between  bg-white md:ml-[50px] md:px-20">
-        <div className="relative ml-2 h-10 w-10 rounded-full md:ml-12 md:h-16 md:w-16">
+        <div className="ml-2  md:ml-12 ">
           <Link href="/">
-            <Image className="rounded-full" src={Logo} alt="클룸 로고" fill />
+            <div className="relative h-10 w-10 overflow-hidden rounded-full md:h-16 md:w-16">
+              <Image
+                src={Logo}
+                alt="클룸 로고"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 768px) 40px, 64px"
+              />
+            </div>
           </Link>
         </div>
         <div className="flex flex-grow items-center justify-start">
@@ -80,13 +88,13 @@ const Header = ({ children }: PropsWithChildren) => {
           <div className="flex w-full items-center justify-end">
             {userEmail ? (
               <div className="flex items-end justify-end">
-                <p className="hidden w-full whitespace-nowrap p-4 lg:block">
+                <p className="hidden w-full whitespace-nowrap p-4 xl:block">
                   {userInfo?.nickname} <span className="font-bold text-main-color">{roleName}님</span>
                 </p>
               </div>
             ) : null}
             {userEmail ? (
-              <div className="mr-[10px] hidden xl:block">
+              <div className="mr-[10px] block">
                 <Notification />
               </div>
             ) : null}
@@ -96,13 +104,14 @@ const Header = ({ children }: PropsWithChildren) => {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="relative mr-2 h-10 w-10 rounded-full md:mr-12 md:h-16 md:w-16"
+                  className="relative mr-2 h-10 w-10 overflow-hidden rounded-full md:mr-12 md:h-16 md:w-16"
                 >
                   <Image
                     src={profileImage}
                     alt="Profile image"
-                    className="h-full w-full rounded-full object-cover"
+                    sizes="(max-width: 768px) 40px, 64px"
                     fill
+                    style={{ objectFit: 'cover' }}
                   />
                 </div>
                 <ul

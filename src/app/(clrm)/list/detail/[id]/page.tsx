@@ -7,12 +7,33 @@ import DetailComments from '@/components/classDetail/DetailComments';
 import MapComponent from '@/components/classDetail/MapComponent';
 import BackButton from '@/components/common/BackButton';
 import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
-import Link from 'next/link';
-import { IoIosArrowBack } from 'react-icons/io';
+import type { Metadata, ResolvingMetadata } from 'next';
 
-export const dynamic = 'force-dynamic';
+type Props = {
+  params: { id: string };
+};
+export async function generateMetadata({ params }: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const id = params.id;
 
-const DetailPage = async ({ params }: { params: { id: string } }) => {
+  const classData = await detailClassInfo(params.id);
+
+  const previousImages = (await parent).openGraph?.images || [];
+
+  let images = previousImages;
+  if (classData?.image) {
+    const newImages = Array.isArray(classData.image) ? classData.image : [classData.image];
+    images = [...newImages.map((url) => ({ url: url })), ...images];
+  }
+  return {
+    title: classData?.title || 'clroom',
+    description: classData?.description || 'clroom',
+    openGraph: {
+      images: images
+    }
+  };
+}
+
+const DetailPage = async ({ params }: Props) => {
   const classData = await detailClassInfo(params.id);
   const userData = await getDetailUserInfo(classData?.user_id);
 

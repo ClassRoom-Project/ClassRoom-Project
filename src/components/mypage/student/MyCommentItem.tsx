@@ -123,8 +123,10 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
               <Image
                 src={comment.comment_image}
                 alt="클래스 대표 사진"
-                fill
-                className="h-full w-full object-cover p-4 md:p-0"
+                fill={true}
+                sizes="288px"
+                className="p-4 md:p-0"
+                style={{ objectFit: 'cover' }}
               />
             </div>
           ) : (
@@ -202,24 +204,10 @@ const MyCommentItem = ({ comment }: { comment: MyCommentType }) => {
               {isEditing ? '완료하기' : '수정하기'}
             </button>
             <button className="btn w-1/3 whitespace-nowrap  bg-point-purple text-xs text-white hover:bg-transparent hover:text-point-purple md:w-36 md:text-sm">
-              <Link href={`list/detail/${comment.class_id}`}>클래스 보러가기 </Link>
+              <Link href={`list/detail/${comment.class_id}`}>클래스 상세보기</Link>
             </button>
           </section>
         </div>
-        {/* <div className="hidden items-center justify-center md:flex">
-          {comment.comment_image ? (
-            <div className="lg relative h-52 w-72">
-              <Image
-                src={comment.comment_image}
-                alt="클래스 대표 사진"
-                fill
-                className="h-full w-full object-cover p-4"
-              />
-            </div>
-          ) : (
-            <></>
-          )}
-        </div> */}
       </div>
     </li>
   );

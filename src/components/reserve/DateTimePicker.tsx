@@ -36,6 +36,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
       setCurrentReservedCount(initialReservedCount);
     };
     setInitialReservedCount();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setCurrentReservedCount]); // dateListAfterToday 추가하면 무한 리렌더링돼서 뺐습니다
 
   if (!firstAvailableDay) {
@@ -80,6 +81,11 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
     4: 'grid-cols-4'
   };
 
+  const defaultMonth = {
+    year: new Date(firstAvailableDay).getFullYear(),
+    month: new Date(firstAvailableDay).getMonth()
+  };
+
   return (
     <div className="mb-2 flex w-full flex-col items-center justify-center">
       <p className="mb-1 w-full text-left text-lg font-bold">수강일 선택하기</p>
@@ -87,6 +93,7 @@ const DateTimePicker = ({ classDates }: { classDates: DateList[] }) => {
         <DayPicker
           mode="single"
           required
+          defaultMonth={new Date(defaultMonth.year, defaultMonth.month)}
           selected={new Date(selectedDate as string)}
           onSelect={handleDateChange}
           disabled={[{ before: new Date() }, (day) => !availableDays.includes(format(day, 'yyyy-MM-dd'))]}
