@@ -432,7 +432,8 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ isEditMode, initialData, clas
                   <Image
                     src={images[index].preview}
                     alt="uploaded"
-                    fill
+                    fill={true}
+                    sizes="142px"
                     placeholder="empty"
                     style={{ objectFit: 'cover', borderRadius: '20px' }}
                   />
