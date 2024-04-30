@@ -10,7 +10,7 @@ import { IoLogoSnapchat } from 'react-icons/io';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: '클룸 ChatPage',
+  title: '클룸 채팅페이지',
   description: '클래스를 등록한 선생님에게 1:1 실시간 문의를 하고 답변을 받을 수 있습니다.'
 };
 

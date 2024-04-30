@@ -7,10 +7,11 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { useAsync } from 'react-use';
 
+// const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
 
 export const metadata: Metadata = {
-  title: '클룸 PaymentPage',
+  title: '클룸 결제페이지',
   description:
     '결제 페이지입니다. 실제 결제와 동일한 환경에서 진행되기 때문에 실제로 결제 하는듯한 경험을 할 수 있습니다.'
 };
