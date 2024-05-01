@@ -924,97 +924,112 @@ zustand persist를 사용하지 않아도 되기 때문에 보안 강화
   <div markdown="1">
 
 ## **기술적 의사결정**
-    
-    ### **🤔 문제 상황**
-    
-    클래스 예약 시스템을 구축하는 과정에서, 예상치 못한 문제에 직면했습니다. 초기 설계에서는 클래스의 일자와 시간을 클래스 테이블에 배열 형태로 저장하고, 예약된 인원 수를 **`count`** 필드를 사용해 관리하며, 남은 자리를 클래스의 최대 인원에서 예약 인원 수를 빼서 보여주는 방식을 채택했습니다.
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/7a1e4d31-9f5b-40d1-9d7d-569c07e6c2df/Untitled.png)
-    
-    ### **❗발견된 문제**
-    
-    클래스에 다수의 시간대가 존재할 경우, 각 회차별로 남은 자리를 별도로 관리해야 할 필요가 있는데, 현재의 테이블 설계로는 이를 관리할 수 없었습니다. 이는 일자와 시간의 종속 관계를 제대로 반영하지 못한 설계 오류였습니다.
-    
-    ### **💫 제안된 의견**
-    
-    ```bash
+
+### **🤔 문제 상황**
+
+클래스 예약 시스템을 구축하는 과정에서, 예상치 못한 문제에 직면했습니다. 초기 설계에서는 클래스의 일자와 시간을 클래스 테이블에 배열 형태로 저장하고, 예약된 인원 수를 **`count`** 필드를 사용해 관리하며, 남은 자리를 클래스의 최대 인원에서 예약 인원 수를 빼서 보여주는 방식을 채택했습니다.
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/7a1e4d31-9f5b-40d1-9d7d-569c07e6c2df/Untitled.png)
+
+### **❗발견된 문제**
+
+클래스에 다수의 시간대가 존재할 경우, 각 회차별로 남은 자리를 별도로 관리해야 할 필요가 있는데, 현재의 테이블 설계로는 이를 관리할 수 없었습니다. 이는 일자와 시간의 종속 관계를 제대로 반영하지 못한 설계 오류였습니다.
+
+### **💫 제안된 의견**
+
+```bash
     1. 객체 형태로 관리하기 (클래스 - 일자 - 회차)
     장점👍
     - 직관적이다
     클래스 하나를 선택했을 때, 그 안에 포함된 일자와 회차까지 한 번에 조회할 수 있다.
-    
+
     단점😰
     - 관계형 데이터베이스에 맞지 않는 설계
-    
-    2. 날짜, 시간 테이블을 따로 만들기
+
+    1. 날짜, 시간 테이블을 따로 만들기
     장점👍
     - 데이터 무결성
     각 테이블이 독립적이고 관계를 통해 연결되어 있기 때문에, 데이터 무결성을 유지하면서 관리하기가 용이하다.
-    
+
     - 확장성
     구조를 변경할 필요 없이 새로운 관계를 정의하거나 기존 관계를 수정할 수 있다
     ex) 만약 클래스의 회차별로 정원을 따로 관리하는 기능을 추가해야 할 때 갈아엎을 필요없이 테이블을 추가, 수정하면 된다.
-    
+
     단점😰
     - 조회 성능 저하
     각 세션의 정보를 조회하기 위해서 여러 테이블을 조인해야한다. 따라서 조회 성능이 하락한다.
-    
+
     - 기존 api 함수 다 갈아엎어야함.. 😂
-    ```
-    
-    ### **✅ 결정한 방식**
-    
-    **날짜, 시간 테이블을 따로 만들기**
-    
-    지금까지 json-server나 firebase같은 NoSQL 형식의 DB를 사용했기 때문에 1번 방식에 익숙하고, supabase에서도 객체를 담는식으로 구현할 수도 있지만 관계형 DB인 supabase를 사용하기로 결정한 만큼 그에 맞는 설계를 하는 것이 맞다고 판단했습니다.
-    
- ## **DB 테이블 설계**
-    
-    **1. Date, Time 테이블 만들기**
-    
-    **Date 테이블**
-    
-    !https://blog.kakaocdn.net/dn/dbP7kK/btsGsVbFyC8/eXKxg22EFcUqgNtjyHsGe0/img.png
-    
-    date 테이블에는 어떤 클래스에 등록 된 일자인지 알아야 하기때문에 class_id를 외래키로 넣어줬고, 일자인 day 필드를 넣었습니다.
-    
-    **Time 테이블**
-    
-    !https://blog.kakaocdn.net/dn/dPKe36/btsGq8peUXE/FBnmoj9gN4tQTh3lVZUd0K/img.png
-    
-    Time 테이블에는 이 시간이 어떤 일자에 종속되어있는지 알아야 하기 때문에 date_id를 외래키로 넣었습니다.
-    
-    ### 테이블 연결 관계
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/9fb9daa3-13c3-4f1d-8aea-41a79caca3b9/Untitled.png)
-    
-    - **DB ERD 설명**
-        - **`reserve`** 테이블과 **`class`** 테이블은 **`class_id`**로 연결됩니다.
-        - **`date`** 테이블은 **`class_id`**로 **`class`** 테이블과 연결됩니다.
-        - **`reserve`** 테이블과 **`time`** 테이블은 **`time_id`**로 연결됩니다.
-        - **`time`** 테이블은 **`date_id`**로 **`date`** 테이블과 연결됩니다.
-    
+```
+
+### **✅ 결정한 방식**
+
+**날짜, 시간 테이블을 따로 만들기**
+
+지금까지 json-server나 firebase같은 NoSQL 형식의 DB를 사용했기 때문에 1번 방식에 익숙하고, supabase에서도 객체를 담는식으로 구현할 수도 있지만 관계형 DB인 supabase를 사용하기로 결정한 만큼 그에 맞는 설계를 하는 것이 맞다고 판단했습니다.
+
+<br>
+
+## **DB 테이블 설계**
+
+**1. Date, Time 테이블 만들기**
+
+**Date 테이블**
+
+!https://blog.kakaocdn.net/dn/dbP7kK/btsGsVbFyC8/eXKxg22EFcUqgNtjyHsGe0/img.png
+
+date 테이블에는 어떤 클래스에 등록 된 일자인지 알아야 하기때문에 class_id를 외래키로 넣어줬고, 일자인 day 필드를 넣었습니다.
+
+**Time 테이블**
+
+!https://blog.kakaocdn.net/dn/dPKe36/btsGq8peUXE/FBnmoj9gN4tQTh3lVZUd0K/img.png
+
+Time 테이블에는 이 시간이 어떤 일자에 종속되어있는지 알아야 하기 때문에 date_id를 외래키로 넣었습니다.
+
+### 테이블 연결 관계
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/9fb9daa3-13c3-4f1d-8aea-41a79caca3b9/Untitled.png)
+
+- **DB ERD 설명**
+- **`reserve`** 테이블과 **`class`** 테이블은 **`class_id`**로 연결됩니다.
+- **`date`** 테이블은 **`class_id`**로 **`class`** 테이블과 연결됩니다.
+- **`reserve`** 테이블과 **`time`** 테이블은 **`time_id`**로 연결됩니다.
+- **`time`** 테이블은 **`date_id`**로 **`date`** 테이블과 연결됩니다.
+
+<br>
+
 ## **테이블 조인을 활용한 예약 정보 불러오기**
-    
-    설계한 ERD를 바탕으로 예약정보의 클래스 정보, 시간, 일자를 받아오기 위한 과정은 다음과 같습니다.
-    
-    1. **클래스 정보 조인**:
-        - 예약 정보의 **`class_id`**를 사용하여 **`class`** 테이블과 조인하고, 예약된 클래스의 **`title`**, **`total_time`**, **`location`** 정보를 가져옵니다.
-    2. **시간 정보 조인**:
-        - 예약 정보의 **`time_id`**를 사용하여 **`time`** 테이블과 조인하고, 예약된 시간(**`times`**) 정보를 가져옵니다.
-    3. **일자 정보 조인**:
-        - **`time`** 테이블에서 가져온 **`date_id`**를 사용하여 **`date`** 테이블과 조인하고, 해당하는 일자의 **`day`** 정보를 가져옵니다.
-    
-    ### supabase 메서드를 활용한 조인
-    
-    supabase 메서드를 사용해 조인하는 함수입니다. 이 함수는 **`reserve_id`**를 받아 **`reserve`** 테이블에서 해당 예약에 대한 정보를 불러오며, **`class`**와 **`time`**, 그리고 **`date`** 테이블을 조인하여 필요한 정보를 불러오게 됩니다.
-    
-    ```tsx
-    // reserve 테이블과 class 테이블을 class_id로 inner조인하고, class 테이블에서 title, total_time, location만 선택하여 결과에 포함
-    // time 테이블을 time_id로 조인
-    // time테이블에서 time_id가 일치하는 레코드의 date_id로 date 테이블 inner조인하고, date 테이블에서 day만 선택하여 결과에 포함
-    
-    export const fetchReservationDetails = async (reserveId: string) => {
+ 
+
+설계한 ERD를 바탕으로 예약정보의 클래스 정보, 시간, 일자를 받아오기 위한 과정은 다음과 같습니다.
+
+1. **클래스 정보 조인**:
+
+- 예약 정보의 **`class_id`** 를 사용하여 **`class`** 테이블과 조인하고, 예약된 클래스의 **`title`**, **`total_time`**, **`location`** 정보를 가져옵니다.
+
+2. **시간 정보 조인**:
+
+- 예약 정보의 **`time_id`**를 사용하여 **`time`** 테이블과 조인하고, 예약된 시간(**`times`**) 정보를 가져옵니다.
+
+3. **일자 정보 조인**:
+
+- **`time`** 테이블에서 가져온 **`date_id`** 를 사용하여 **`date`** 테이블과 조인하고, 해당하는 일자의 **`day`** 정보를 가져옵니다.
+
+<br>
+
+### supabase 메서드를 활용한 조인
+
+
+supabase 메서드를 사용해 조인하는 함수입니다. 이 함수는 **`reserve_id`**를 받아 **`reserve`** 테이블에서 해당 예약에 대한 정보를 불러오며, **`class`**와 **`time`**, 그리고 **`date`** 테이블을 조인하여 필요한 정보를 불러오게 됩니다.
+
+
+```tsx
+
+// reserve 테이블과 class 테이블을 class_id로 inner조인하고, class 테이블에서 title, total_time, location만 선택하여 결과에 포함
+// time 테이블을 time_id로 조인
+// time테이블에서 time_id가 일치하는 레코드의 date_id로 date 테이블 inner조인하고, date 테이블에서 day만 선택하여 결과에 포함
+
+export const fetchReservationDetails = async (reserveId: string) => {
       const { data, error }: PostgrestSingleResponse<DBReservationDetailsType> = await supabase
         .from('reserve')
         .select(
@@ -1026,27 +1041,29 @@ zustand persist를 사용하지 않아도 되기 때문에 보안 강화
         )
         .eq('reserve_id', reserveId)
         .single();
-    
+
       if (error) {
         console.log('fetchReservationDetails error =>', error);
         return;
       }
-      
+
       return data;
       };
-    ```
-    
-    함수의 반환값은 다음과 같이 출력됩니다.
-    
-    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/0c65ac63-5b6d-40c1-b38d-45fb3689697d/Untitled.png)
-    
+```
+
+
+함수의 반환값은 다음과 같이 출력됩니다.
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/0c65ac63-5b6d-40c1-b38d-45fb3689697d/Untitled.png)
+
+
 ## **결론**
     
 😊 결론
     
-    관계형 데이터베이스에 적합한 설계를 통해 각 테이블이 독립적인 역할을 할 수 있도록 하고, 외래 키 관계로 연결되도록 하여 데이터의 무결성을 지킬 수 있었습니다. 
+관계형 데이터베이스에 적합한 설계를 통해 각 테이블이 독립적인 역할을 할 수 있도록 하고, 외래 키 관계로 연결되도록 하여 데이터의 무결성을 지킬 수 있었습니다. 
     
-    또한 이 경험을 통해 초기 설계의 중요성을 깊이 느꼈습니다. 철저한 초기 분석과 설계는 나중에 발생할 수 있는 많은 문제를 예방할 수 있다는 것을 배웠습니다.
+또한 이 경험을 통해 초기 설계의 중요성을 깊이 느꼈습니다. 철저한 초기 분석과 설계는 나중에 발생할 수 있는 많은 문제를 예방할 수 있다는 것을 배웠습니다.
 
 </div>
 </details>
