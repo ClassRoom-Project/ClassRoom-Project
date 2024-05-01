@@ -56,11 +56,12 @@
 <div> 
 <img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
 <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">   
-<img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
 </div>
 
  
-그 외 : Zustand, DOMPurify
+<div>
+그 외 : Zustand, DOMPurify, typebot.i, Embla-carousel, React-Quill, Toastify, Medium-zoom, Date-fns, React-day-picker, DOMPurify
+</div>
 
 <br><br>
 
