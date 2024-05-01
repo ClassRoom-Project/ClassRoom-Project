@@ -91,336 +91,220 @@
 <br>
 
 # 화면 구성 및 기능
-<br><br>
 
-## 1. 로그인페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-  <h3> 1-1. 메인  상품 리스트 </h3>
+## 1. 메인페이지
+  <h3> 1-1. 메인페이지 </h3>
       <ul>
         <li>화면 렌더링 시 로딩 페이지 구현 </li>
-        <li>tailwind 라이브러리를 활용한 슬라이드 구성</li>
-        <li>메인 배너 슬라이더가 자동으로 이동</li>
-        <li>상품을 각각의 카테고리 분류하였고 카테고리 선택 시 해당 페이지로 이동</li>
-        <li>등록일 기준으로 상품 리스트를 정렬하여 출력</li>
-          </ul>
+        <li>헤더와 사이드바를 통한 사용자 편의성 개선</li>
+        <li>카테고리 버튼 클릭시 리스트 페이지로 이동 후 필터링</li>
+        <li>Embla-Carousel 라이브러리를 이용하여 카드를 캐러셀 형태로 표시</li>
+        <li>반응형 배너</li>
+      </ul>
+
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715)|
+
+<h3> 1-2. 리스트페이지 </h3>
+      <ul>
+        <li>supabase 쿼리 메서드를 사용한 데이터 필터링</li>
+        <li>useInfiniteQuery api와 IntersectionObserver 로직을 이용한 클래스 리스트 무한스크롤 기능</li>
+      </ul>
+
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/6f94f455-0882-4ac1-b119-db4866e418e8)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/61c2aa57-67d4-4fe4-ad72-250e28202bd0)|
+
+<br><br>
+
+## 2. 클래스 디테일페이지
+  <h3> 2-1. 클래스 정보 디테일페이지 </h3>
+      <ul>
+        <li>클래스 상세 정보 표기</li>
+        <li>Embla-Carousel 라이브러리를 이용하여 카드를 캐러셀 형태로 표시</li>
+        <li>평점을 입력할 수 있는 후기 기능</li>
+        <li>클래스를 찜하면 마이페이지 위시리스트에 추가</li>
+        <li>카카오 Map API를 통한 클래스 위치 표기 </li>
+      </ul>
+
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d1030a1f-255a-491b-a3cc-aa65455f2730)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/a2912189-c1ca-45df-899d-dc3adfbb5580)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/34c5c763-29e4-4902-8e35-067ce19b124f)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/2f656700-2846-41e8-ab14-50f129ee1f41)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/31dafdf2-765e-4efc-b741-89e5c97ac46c)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/bbc32c89-c3db-4405-aa64-8cc48fc11296)|
+
+
       
 <br><br>
 
-## 2. 메인페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-## 3. 메인페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-## 4. 메인페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-## 5. 메인페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-## 6. 메인페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-## 7. 메인페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-## 8. 메인페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-## 9. 결제제페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-## 10. 채팅페이지
-| 기본 | 반응형 |
-| :---: | :---: |
-|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
-
-<br><br>
-
-<table>
-  <thead>
-    <tr>
-      <th>
-        로그인
-      </th>
-      <th>
-        회원가입
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-       <img src="public/assets/README/loginPage/login.png"/>
-      </td>
-      <td>
-       <img src="public/assets/README/loginPage/join.png"/>
-      </td>
-    </tr>
-  </tbody>
-</table>
-   <h3> 1-2. 로그인 / 회원가입 / 접근 제한 </h3>
-  <ul>
-    <li>
-     firebase authentication 및 firestore를 사용한 로그인 및 회원가입 기능 구현
-     <li>
-      <h4>로그인</h4>
+## 3. 로그인/회원가입
+  <h3> 3-1. 로그인/회원가입 </h3>
       <ul>
-            <li>
-            로그인 아이콘 클릭 시  로그인 모달창 활성화
-            </li>
-            <li>
-           이메일/비밀번호 로그인: 회원 존재 여부 확인 후 로그인
-            </li>
-            <li>
-             구글 및 깃허브 소셜 로그인
-            </li>
-            </k>
+        <li>NextAuth를 이용한 사용자 인증</li>
+        <li>Json Web Token을 활용해 사용자 세션 관리</li>
+        <li>서버사이드 미들웨어로 경로별 접근 권한 제어</li>
+        <li>로그인 여부에 따라 적절한 페이지 리다이렉션 처리 자동화</li>
       </ul>
-    </li>
-     <li>
-      <h4>회원가입</h4>
-      <ul>
-        <li>회원가입 아이콘 클릭 시  회원가입 모달창 활성화 </li>
-        <li>이메일 형식 여부 및 아이디 중복 여부, 비밀번호 일치여부를 확인</li>
-      </ul>
-    </li>
-     <li>
-      <h5>접근 제한</h5>
-      <ul>
-        <li>관리자일 경우에만 관리자 페이지로 접근 및 URL창에 직접 접근하는 것을 제한</li>
-      </ul>
-    </li>
-  </ul>
-  <br><br>
 
-<table>
-  <thead>
-    <tr>
-      <th>
-        장바구니 버튼
-      </th>
-      <th>
-        장바구니에 담긴 상품 개수 표시
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-       <img src="public/assets/README/cartPage/cartButton.png "  width ="900"/>
-      </td>
-      <td>
-       <img src="public/assets/README/cartPage/cartHeaderMenuState.png" width ="1150"  />
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3> 1-3. 장바구니 버튼 및 장바구니 담긴 상품 개수 표시 </h3>
-<ul>
-<li>장바구니 버튼</li>
-<ul>
-<li>사용자 로그인 시 사용자의 고유 아이디를 기준으로 장바구니 버튼 클릭 시 상품의 정보를 담을 수 있도록 설계</li>
-</ul>
-<li>장바구니 담긴 상품 개수 표시</li>
- <ul>
-<li>장바구니 버튼 클릭 시 현재 장바구니에 담긴 상품의 개수를 확인할 수 있도록 구현</li>
-</ul>
-</ul>
-
-<br><br><br><br>
-
-## 2. 상품 리스트 페이지
-
- <table>
-<thead>
-  <tr>
-    </thead>
-  <tbody>
-  </tr>
-  <tr>
-    <td>
-      <img src="public/assets/README/listPage/listPage.png"/>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
- <ul>
- <li>`useQuery`훅을 사용하여 키워드를 기준으로 firebase에 저장된 데이터를 가져와 리스트로 보여준다.</li>  
- <li> 상품 가격을 기준으로 오름차순 및 내림차순으로 상품 정렬 </li>
- <li> 상품 클릭 시 상품별 상세 페이지로 이동</li>
- 
- </ul>
-
- <br>
-<br><br><br><br>
-
-## 3. 상품 상세 페이지
-
-  <table>
-<thead>
-    </thead>
-  <tbody>
-  </tr>
-  <tr>
-    <td>
-      <img src="public/assets/README/detailPage/detailList.png"/>
-    </td>
-  </tr>
-  </tbody>
-</table>
-<h3> 3-1. 상품 상세 정보 </h3>
-<ul>
- <li>`useQuery`훅을 사용하여 상품 Id를 기준으로 firebase에 저장된 데이터를 가져와 상품의 정보를 보여준다.</li>  
- </ul>
-<br><br>
-
-
-<h3> 3-2. 후기 및 문의 작성</h3>
-  <table>
-  <tbody>
-  <tr>
-    <td>
-        <img src="public/assets/README/detailPage/notLogin.png" width=500 height= 250/>
-    </td>
-    <td>
-      <img src="public/assets/README/detailPage/review.png" width=500/>
-    </td>
-  </tr>
-  </tbody>
-</table>
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/b5f26d3a-5a69-4e8f-bd2b-f9005c67065b)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/a49c6e6d-1770-45e1-8fe3-1b4c7d099439)|
   
-  <ul>
-  <li>해당 상품에 후기,문의 작성 가능은 로그인된 유저만 사용할 수 있게끔 활성화 시키고 비회원일 경우에는 비활성화 시킨다.</li>
-  <li>현재 로그인된 유저와 해당 글을 작성한 유저의 일치 여부를 검사한 후 일치할 경우에만 글 수정 삭제 
-  </ul>
-<br>
+<br><br>
 
-  <table>
-  <tbody>
-  <tr>
-    <td>
-        <img src="public/assets/README/detailPage/askAnswer.png" width=500 height= 250/>
-    </td>
-    <td>
-      <img src="public/assets/README/detailPage/askNotAnswer.png" width=500/>
-    </td>
-  </tr>
-  </tbody>
-</table>
-   
-  <li>문의 글에서는 관리자일 경우에만 사용자의 글에 대한 답변 작성버튼 활성화 및 답변 작성 시에는 체크박스로 표시한다.</li>
-    <li>후기 및 문의 글 작성 시 "비밀 글 등록" 체크박스를 체크할 경우 작성 유저와 관리자만 열람 가능</li>
+## 4. 마이페이지
+  <h3> 4-1. 마이페이지 - 수강생 </h3>
+      <ul>
+        <li>프로필 수정</li>
+        <li>예약한 클래스 확인</li>
+        <li>내가 작성한 후기 수정 및 삭제</li>
+        <li>즐겨찾기한 클래스 위시 리스트</li>
+        <li>강사 정보 등록하기 및 유효성 검사</li>
+      </ul>
 
-<br><br><br><br>
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/2f834b73-3ba2-42a1-83ab-d7dded55d5aa)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/effe4df1-793c-42c1-b6f5-089b824c19d6)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/5f339583-d631-400a-97b4-f493db975963)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/23bc765a-7e88-4407-bf2b-a271738cf918)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/cdfc9366-89e5-43f8-87e4-a6d1e5aa53d3)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/dc907b32-595c-4684-810e-a599f991c1af)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/01f79c34-aa2e-41bf-87a5-a89c9ff57587)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/58e1c0f5-5d01-4da5-acd2-ad6906e04976)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/855892c3-44a9-4e46-9f25-5bb0c1b73fcb)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/cca8e40c-6205-4d73-b319-2b851db94399)|
 
-## 4. 장바구니 페이지
+<h3> 4-2. 마이페이지 - 강사 </h3>
+      <ul>
+        <li>프로필 수정</li>
+        <li>강사 정보 수정하기</li>
+        <li>내가 등록한 클래스 보기 및 삭제</li>
+        <li>내 클래스 예약한 수강생 보기</li>
+      </ul>
+      <ul>
+        <li>supabase api 호출</li>
+        <li>Supabase Storage를 활용하여 이미지 파일 업로드</li>
+        <li>Supabase SQP Editor를 활용하여 DB Join을 통해 data api 호출</li>
+      </ul>
 
-  <table>
-    <td>
-     <img src="public/assets/README/cartPage/cartPage.png" />
-    </td>
-</table>
-<br>
-<ul>
-<li> `useQuery`훅을 사용하여 해당 userId를 기준으로 firebase에 저장된 상품데이터를 가져와 장바구니에 담았던 상품을 보여주는 페이지 </li>
-<br>
-<li> 수량 버튼: 상품 등록 시 quantity값을 가지고 등록. 초기값은 1로 수량 체크. 수량이 1개인 경우 "-"버튼을 누를 수 없고, 2개 이상인 경우 "-"버튼 활성화 </li>
-<br>
-<li>금액창: quantity의 개수가 늘어남에 따라 금액이 변동되고, 상품이 없는 경우에는 텍스트 이외 금액은 보이지 않도록 구현 </li>
-<br>
-<li> 삭제버튼(X):  X버튼 클릭 시 장바구니에서 상품이 삭제</li>
-</ul>
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/97160618-f429-4b9d-945b-6d5fa10c0385)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/effe4df1-793c-42c1-b6f5-089b824c19d6)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/1ef25d93-61a0-44fd-aabf-cd7f8b43b279)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d21a5095-41b0-458d-919a-47830ed84c85)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/4891387f-b1ee-4923-8261-b896004dcdcd)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/dd480512-21b9-41ce-aff7-80181debb55b)|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d9330115-3037-4559-a8f4-b7097ea41cb5)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/92a99aa7-c39f-43f8-b116-8b53a08e9222)|
 
 <br><br>
 
-## 5. 마이페이지
+## 5. 클래스 등록/수정 페이지
+  <h3> 5-1. 클래스 등록 페이지 </h3>
+      <ul>
+        <li>클래스 이름, 설명 등 기본적인 정보 입력</li>
+        <li>여러 날짜와 시간 선택</li>
+        <li>최대 5개의 이미지 업로드 가능</li>
+        <li>업로드된 이미지 드래그하여 순서 변경</li>
+        <li>첫번째 이미지 클래스 이미지 설정</li>
+        <li>React Quill 텍스트 에디터 라이브러리를 통한 클래스 설명 입력</li>
+        <li>카카오 우편 조회 API 활용 위치 정보 입력</li>
+        <li>React Day picker 라이브러리를 통한 날짜 선택 기능</li>
+      </ul>
 
-  <table>
-<thead>
-    </thead>
-  <tbody>
-  </tr>
-  <tr>
-    <td>
-     <img src="public/assets/README/profilePage/profilePage.png"/>
-    </td>
-  </tr>
-  </tbody>
-</table>
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/e724d92a-3ab7-4728-9621-8221252019a5)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/dccc276d-c32b-4152-bd0d-7b58fc6950dc)|
 
-<ul>
-<li>`useQuery`훅을 사용하여 해당 user의 정보를 가져오며 작성한 글을 클릭할 시 해당 글의 상품 페이지로 이동</li>
-<li> middleware를 사용하여 마이페이지에서 로그아웃을 하거나, 로그인을 하지 않은 상태에서 마이페이지(/mypage)에 접근할 경우 홈으로 이동 </li>
+  <h3> 5-2. 클래스 수정 페이지 </h3>
 
-</ul>
-<br><br><br><br>
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/71cfae6b-15f1-435a-84a3-b384243119ea)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/9021872f-714b-4c18-904b-0b036e1f66ef)|
 
-## 6. 관리자 페이지
+  <h3> 5-3. 클래스 등록/수정 완료 페이지 </h3>
+  
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/afa518b3-47fa-4230-a0c5-311e5a384d9f)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/7f7b01b4-c180-4113-853f-371f66d9cf1e)|
+ 
+<br><br>
 
-<br>
+## 6. 클래스 예약 페이지
+  <h3> 6. 클래스 예약 페이지 </h3>
+      <ul>
+        <li>달력에서 예약 가능한 일자와 시간, 예약 인원 수를 선택하고 예약을 진행합니다</li>
+        <li>클래스의 일자 정보를 관리하기 위해 date와 time 테이블을 생성하였고, 선택한 클래스 ID를 기준으로 date와 time 테이블을 조인하여 데이터를 불러옵니다.</li>
+        <li>사용자가 선택한 시간의 고유 id값에 해당하는 레코드의 예약 인원수를 총합하여 세션별로 남은자리를 체크합니다.</li>
+        <li>무료 클래스의 경우 결제과정 없이 바로 예약됩니다.</li>
+      </ul>
 
-<img src="public/assets/README/header//header_admin.png"  />
-<li> 사용자 로그인 시 admin 계정을 확인 후 헤더에 관리자창 버튼을 활성화 시킨다.</li>
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/24a0973b-d794-44ec-9265-c99a4a480cb7)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/21d60298-2a06-4ba0-875e-c4af853958f9)|
+      
+<br><br>
 
-<br>
+## 7. 클래스 결제 페이지
+  <h3> 7-1. 클래스 결제 페이지 </h3>
+      <ul>
+        <li>예약하기 클릭 시 URL 파라미터를 사용해 동적으로 결제금액을 받아 위젯에 반영</li>
+        <li>원하는 결제 수단 클릭 후 결제진행</li>
+        <li>결제 성공 시 라우트 핸들러로 리다이렉트</li>
+      </ul>
 
-  <table>
-<thead>
-    </thead>
-  <tbody>
-  </tr>
-  <tr>
-    <td>
-     <img src="public/assets/README/adminPage/adminPage.png" height= 500 />
-    </td>
-  </tr>
-  </tbody>
-</table>
+|기본형|
+|------|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/e784f9f0-0e1b-4a93-b194-a5a988654f54)|
 
-<ul>
-<li> 해당 웹 어플리케이션에 상품을 등록하기 위해서는 위의 사진처럼 관리자 권환이 있는 별도의 페이지로 이동해야하며 상품 등록 시 firebase에 저장된다.  </li>
+  <h3> 7-2. 클래스 결제 완료 </h3>
+      <ul>
+        <li>사용자가 결제를 완료하면 route handler에서 결제 승인 api를 호출하여 결제 승인 여부를 판단하고 적절하게 리다이렉트합니다</li>
+        <li>예약이 성공적으로 완료되면 예약한 정보를 보여주고, 예약 상세보기를 통해 마이페이지에서 상세 정보를 확인할 수 있습니다</li>
+      </ul>
+  
+|기본형|
+|------|
+![image](https://github.com/limhyerin/StudyNote/assets/70150896/642887de-f886-4a2c-a70e-ba6e2fc6acd3)
 
-<br>
+      
+<br><br>
 
-</ul>
-<br><br><br><br>
+## 8. 클래스 채팅 페이지
+  <h3> 8-1. 채팅기능 </h3>
+      <ul>
+        <li>채팅방에서 사용자 간의 대화를 표시하고, 각 메시지에는 보낸 시간과 함께 이미지 또는 텍스트 메시지 표시</li>
+        <li>채팅목록을 표시하고 각 채팅방에서 마지막 메시지를 미리 볼 수 있습니다.</li>
+        <li>Optional Catch-all Segments를 이용해 채팅방 리스트와 상세 채팅 화면사이의 원활한 전환 제공</li>
+        <li>드래그 앤 드롭으로 업로드할 이미지 순서 변경, 이미지를 첨부하고 순서를 드래그앤 드롭으로 조정 가능</li>
+      </ul>
+
+|기본형|반응형|
+|------|---|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/03e5971f-81b8-4b8f-8538-6674a4512ae6)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/4e2c388b-7d45-4a4c-b25f-2561015d59c7)|
+      
+<br><br>
+
+## 9. 알림/좋아요
+  <h3> 9-1. 알림창 기능 </h3>
+      <ul>
+        <li>supabase 테이블에서 현재 로그인한 계정의 등록/결제 알림 데이터 가져오기</li>
+        <li>알림을 클릭시 해당 클래스 디테일 페이지 이동</li>
+        <li>알림 최신순 정렬</li>
+        <li>IsRead 값을 통해 아직 읽지 않은 알림(false) 개수와 목록 표시</li>
+        <li>알림 아이콘 토글, 바깥 영역 클릭 감지(닫기)</li>
+      </ul>
+
+|기본형|
+|------|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/ed4a9888-5d3a-4c21-a51a-5f5dc674c7a1) ![image](https://github.com/limhyerin/StudyNote/assets/70150896/c61d3a14-0093-4489-9ee4-fbbc7997aa9d)|
+
+  <h3> 9-2. 좋아요 기능 </h3>
+      <ul>
+        <li>리스트페이지, 디테일 페이지에서 하트 이모티콘을 클릭하여 좋아요 기능</li>
+        <li>좋아요 기능을 통한 위시리스트 추가</li>
+      </ul>
+
+|위시리스트페이지|리스트페이지|
+|------|------|
+|![image](https://github.com/limhyerin/StudyNote/assets/70150896/3f758630-600f-4c80-b322-339c63e9d240)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/195a2482-b7b6-40ff-9432-2bafd552b691)|
+   
+<br><br>
+
 
 # 트러블슈팅
 <br><br>
