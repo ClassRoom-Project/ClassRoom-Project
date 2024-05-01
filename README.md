@@ -276,20 +276,23 @@
       
 <br><br>
 
-## 8. 클래스 채팅 페이지
-  <h3> 8-1. 채팅기능 </h3>
-      <ul>
+## 9. 클래스 채팅페이지
+<div>
+	<ul>
         <li>채팅방에서 사용자 간의 대화를 표시하고, 각 메시지에는 보낸 시간과 함께 이미지 또는 텍스트 메시지 표시</li>
         <li>채팅목록을 표시하고 각 채팅방에서 마지막 메시지를 미리 볼 수 있습니다.</li>
         <li>Optional Catch-all Segments를 이용해 채팅방 리스트와 상세 채팅 화면사이의 원활한 전환 제공</li>
         <li>드래그 앤 드롭으로 업로드할 이미지 순서 변경, 이미지를 첨부하고 순서를 드래그앤 드롭으로 조정 가능</li>
       </ul>
+</div>
 
-|기본형|반응형|
-|------|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/03e5971f-81b8-4b8f-8538-6674a4512ae6" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/4e2c388b-7d45-4a4c-b25f-2561015d59c7" style="width:300px;" /> |
-      
-<br><br>
+
+|채팅 목록|채팅 방|
+|---|---|
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9882f6c7-6ab2-4e6d-8467-f7d80710528e" style="width:300px;" /> |<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/83626f63-0163-4757-9043-367acb5be665" style="width:300px;" /> |
+
+<br><br>![image_480]()
+
 
 ## 9. 알림/좋아요
   <h3> 9-1. 알림창 기능 </h3>
