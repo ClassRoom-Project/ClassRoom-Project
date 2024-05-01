@@ -3,7 +3,7 @@
 
 <br>
 
-# 프로젝트 소개
+# 💡프로젝트 소개
 
 - 프로젝트 명 : 클룸
 - 프로젝트 기간 : 2024년 3월 26일 ~ 2024년 5월 1일
@@ -64,7 +64,7 @@
 
 <br><br>
 
-# 와이어프레임
+# 🍀와이어프레임
 
 | 로그인페이지 | 메인페이지 |
 | :---: | :---: |
@@ -90,11 +90,11 @@
 
 <br>
 
-# 화면 구성 및 기능
+# 🖥️화면 구성 및 기능
 
 ## 1. 메인페이지
-  <h3> 1-1. 메인페이지 </h3>
-      <ul>
+<div>
+        <ul>
         <li>화면 렌더링 시 로딩 페이지 구현 </li>
         <li>헤더와 사이드바를 통한 사용자 편의성 개선</li>
         <li>카테고리 버튼 클릭시 리스트 페이지로 이동 후 필터링</li>
@@ -102,23 +102,31 @@
         <li>반응형 배너</li>
       </ul>
 
+</div>
+
+|반응형|
+|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
+
+<br><br><br><br>
+
+## 2. 리스트페이지
 |기본형|반응형|
 |------|---|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715)|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/6f94f455-0882-4ac1-b119-db4866e418e8" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/61c2aa57-67d4-4fe4-ad72-250e28202bd0" style="width:300px;" /> |
 
 <h3> 1-2. 리스트페이지 </h3>
       <ul>
         <li>supabase 쿼리 메서드를 사용한 데이터 필터링</li>
         <li>useInfiniteQuery api와 IntersectionObserver 로직을 이용한 클래스 리스트 무한스크롤 기능</li>
       </ul>
+<br><br><br><br>
 
-|기본형|반응형|
-|------|---|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/6f94f455-0882-4ac1-b119-db4866e418e8)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/61c2aa57-67d4-4fe4-ad72-250e28202bd0)|
-
-<br><br>
-
-## 2. 클래스 디테일페이지
+## 3. 클래스 디테일페이지
+|클래스 요약|클래스 설명란|댓글|
+|---|---|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/a2912189-c1ca-45df-899d-dc3adfbb5580" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/2f656700-2846-41e8-ab14-50f129ee1f41)" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/bbc32c89-c3db-4405-aa64-8cc48fc11296" style="width:300px;" /> |
+  
   <h3> 2-1. 클래스 정보 디테일페이지 </h3>
       <ul>
         <li>클래스 상세 정보 표기</li>
@@ -128,15 +136,9 @@
         <li>카카오 Map API를 통한 클래스 위치 표기 </li>
       </ul>
 
-|기본형|반응형|
-|------|---|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d1030a1f-255a-491b-a3cc-aa65455f2730)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/a2912189-c1ca-45df-899d-dc3adfbb5580)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/34c5c763-29e4-4902-8e35-067ce19b124f)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/2f656700-2846-41e8-ab14-50f129ee1f41)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/31dafdf2-765e-4efc-b741-89e5c97ac46c)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/bbc32c89-c3db-4405-aa64-8cc48fc11296)|
-
 
       
-<br><br>
+<br><br><br><br>
 
 ## 3. 로그인/회원가입
   <h3> 3-1. 로그인/회원가입 </h3>
@@ -149,12 +151,13 @@
 
 |기본형|반응형|
 |------|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/b5f26d3a-5a69-4e8f-bd2b-f9005c67065b)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/a49c6e6d-1770-45e1-8fe3-1b4c7d099439)|
   
-<br><br>
+<br><br><br><br>
 
-## 4. 마이페이지
-  <h3> 4-1. 마이페이지 - 수강생 </h3>
+## 4. 마이페이지 - 수강생
+<div>
       <ul>
         <li>프로필 수정</li>
         <li>예약한 클래스 확인</li>
@@ -162,14 +165,13 @@
         <li>즐겨찾기한 클래스 위시 리스트</li>
         <li>강사 정보 등록하기 및 유효성 검사</li>
       </ul>
+</div>
 
-|기본형|반응형|
-|------|---|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/2f834b73-3ba2-42a1-83ab-d7dded55d5aa)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/effe4df1-793c-42c1-b6f5-089b824c19d6)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/5f339583-d631-400a-97b4-f493db975963)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/23bc765a-7e88-4407-bf2b-a271738cf918)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/cdfc9366-89e5-43f8-87e4-a6d1e5aa53d3)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/dc907b32-595c-4684-810e-a599f991c1af)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/01f79c34-aa2e-41bf-87a5-a89c9ff57587)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/58e1c0f5-5d01-4da5-acd2-ad6906e04976)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/855892c3-44a9-4e46-9f25-5bb0c1b73fcb)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/cca8e40c-6205-4d73-b319-2b851db94399)|
+|프로필 수정하기|내가 예약한 클래스 보기|내가 쓴 후기|클래스 위시리스트|선생님 정보 등록하기|
+|---|---|---|---|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/effe4df1-793c-42c1-b6f5-089b824c19d6" style="width:200px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/23bc765a-7e88-4407-bf2b-a271738cf918" style="width:200px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/dc907b32-595c-4684-810e-a599f991c1af" style="width:200px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/58e1c0f5-5d01-4da5-acd2-ad6906e04976" style="width:200px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/cca8e40c-6205-4d73-b319-2b851db94399" style="width:200px;" /> |
+
+<br><br><br><br>      
 
 <h3> 4-2. 마이페이지 - 강사 </h3>
       <ul>
@@ -186,6 +188,10 @@
 
 |기본형|반응형|
 |------|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/97160618-f429-4b9d-945b-6d5fa10c0385)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/effe4df1-793c-42c1-b6f5-089b824c19d6)|
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/1ef25d93-61a0-44fd-aabf-cd7f8b43b279)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d21a5095-41b0-458d-919a-47830ed84c85)|
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/4891387f-b1ee-4923-8261-b896004dcdcd)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/dd480512-21b9-41ce-aff7-80181debb55b)|
@@ -208,18 +214,21 @@
 
 |기본형|반응형|
 |------|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/e724d92a-3ab7-4728-9621-8221252019a5)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/dccc276d-c32b-4152-bd0d-7b58fc6950dc)|
 
   <h3> 5-2. 클래스 수정 페이지 </h3>
 
 |기본형|반응형|
 |------|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/71cfae6b-15f1-435a-84a3-b384243119ea)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/9021872f-714b-4c18-904b-0b036e1f66ef)|
 
   <h3> 5-3. 클래스 등록/수정 완료 페이지 </h3>
   
 |기본형|반응형|
 |------|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/afa518b3-47fa-4230-a0c5-311e5a384d9f)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/7f7b01b4-c180-4113-853f-371f66d9cf1e)|
  
 <br><br>
@@ -235,6 +244,7 @@
 
 |기본형|반응형|
 |------|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/24a0973b-d794-44ec-9265-c99a4a480cb7)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/21d60298-2a06-4ba0-875e-c4af853958f9)|
       
 <br><br>
@@ -249,6 +259,7 @@
 
 |기본형|
 |------|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
 |![image](https://github.com/limhyerin/StudyNote/assets/70150896/e784f9f0-0e1b-4a93-b194-a5a988654f54)|
 
   <h3> 7-2. 클래스 결제 완료 </h3>
@@ -259,6 +270,7 @@
   
 |기본형|
 |------|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
 ![image](https://github.com/limhyerin/StudyNote/assets/70150896/642887de-f886-4a2c-a70e-ba6e2fc6acd3)
 
       
@@ -275,7 +287,7 @@
 
 |기본형|반응형|
 |------|---|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/03e5971f-81b8-4b8f-8538-6674a4512ae6)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/4e2c388b-7d45-4a4c-b25f-2561015d59c7)|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/03e5971f-81b8-4b8f-8538-6674a4512ae6" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/4e2c388b-7d45-4a4c-b25f-2561015d59c7" style="width:300px;" /> |
       
 <br><br>
 
@@ -291,7 +303,7 @@
 
 |기본형|
 |------|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/ed4a9888-5d3a-4c21-a51a-5f5dc674c7a1) ![image](https://github.com/limhyerin/StudyNote/assets/70150896/c61d3a14-0093-4489-9ee4-fbbc7997aa9d)|
+|<img src="(https://github.com/limhyerin/StudyNote/assets/70150896/ed4a9888-5d3a-4c21-a51a-5f5dc674c7a1" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/c61d3a14-0093-4489-9ee4-fbbc7997aa9d" style="width:300px;" /> |
 
   <h3> 9-2. 좋아요 기능 </h3>
       <ul>
@@ -301,7 +313,8 @@
 
 |위시리스트페이지|리스트페이지|
 |------|------|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/3f758630-600f-4c80-b322-339c63e9d240)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/195a2482-b7b6-40ff-9432-2bafd552b691)|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/3f758630-600f-4c80-b322-339c63e9d240" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/195a2482-b7b6-40ff-9432-2bafd552b691" style="width:300px;" /> |
+
    
 <br><br>
 
