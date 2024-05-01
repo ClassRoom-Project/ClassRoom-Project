@@ -14,8 +14,8 @@
 
 | 윤미주 | 김현진 | 여태원 | 서지원 | 임혜린 | 임향 | 
 | :---: | :---: | :---: | :---: | :---: | :---: |
-| <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/5339e860-0ea5-42bb-8492-d37ece275d41" style="width:90px;" /></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/cbdd9c03-3660-4fad-8ef0-1ceb3555af8a" style="width:100px;"/></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/d68505f3-4bd7-4964-9a0e-b703009de1c0" style="width:160px;" /></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/a1a8a95a-1683-44a5-92f3-8c730adde31b" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/0289b460-2f36-4f1c-b079-391ee8b841bc" style="width:120px;" /></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/259f0eaa-e74a-4df6-bc75-ef6591cefab5" style="width:90px;" /></p> |
-| [@LeeJunGoo](https://github.com/LeeJunGoo) | [@LeeJunGoo](https://github.com/LeeJunGoo) | [@LeeJunGoo](https://github.com/LeeJunGoo) | [@LeeJunGoo](https://github.com/LeeJunGoo) | [@LeeJunGoo](https://github.com/LeeJunGoo) | [@LeeJunGoo](https://github.com/LeeJunGoo) |
+| <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/5339e860-0ea5-42bb-8492-d37ece275d41" style="width:90px;" /></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/cbdd9c03-3660-4fad-8ef0-1ceb3555af8a" style="width:100px;"/></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/d68505f3-4bd7-4964-9a0e-b703009de1c0" style="width:140px;" /></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/a1a8a95a-1683-44a5-92f3-8c730adde31b" style="width:100px; border-radius: 50%" /></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/0289b460-2f36-4f1c-b079-391ee8b841bc" style="width:120px;" /></p> | <p align="center"><img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/259f0eaa-e74a-4df6-bc75-ef6591cefab5" style="width:90px;" /></p> |
+| [@anywhereim](https://github.com/anywhereim) | [@hyun0zin](https://github.com/hyun0zin) | [@ccccliff](https://github.com/ccccliff) | [@seopport](https://github.com/seopport) | [@Hyerin](https://github.com/limhyerin) | - |
 | 팀장 | 부팀장 | 팀원 | 팀원 | 팀원 | 디자이너 |
 | - 로그인/회원가입<br> - 채팅/챗봇 <br> - 결제페이지 | - 마이페이지 <br> - 대시보드 | - 메인페이지 <br> - 리스트페이지 <br> - 디테일페이지 | - 클래스 예약페이지 <br> - 좋아요 | - 클래스 등록페이지 <br> - 클래스 수정페이지 <br> - 알림창 | - 와이어프레임 <br> - 배너, 로고 디자인 |
 
@@ -32,24 +32,35 @@
 <h3>Development</h3> 
 <div>
 <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white"> 
-<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
-<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+<img src="https://img.shields.io/badge/nextauth-000000?style=for-the-badge&logo=nextjs&logoColor=white">
 </div>
 
 <h3>Database</h3> 
-<div><img src="https://img.shields.io/badge/firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"> </div>
+<div>
+<img src="https://img.shields.io/badge/supabase-3FCF8E?style=for-the-badge&logo=supabase&logoColor=white"> 
+</div>
 
 <h3>Design</h3> 
-<div><img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white"> </div>
+<div>
+<img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
+<img src="https://img.shields.io/badge/daisyui-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=white">
+<img src="https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white">
+</div>
+
+<h3>Deployment</h3> 
+<div>
+ <img src="https://img.shields.io/badge/vercel-000000?style=for-the-badge&logo=vercel&logoColor=white">
+</div>
 
 <h3>Library</h3> 
 <div> 
-  <img src="https://img.shields.io/badge/redux-764ABC?style=for-the-badge&logo=redux&logoColor=white">
-  <img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">   
+<img src="https://img.shields.io/badge/reactquery-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">
+<img src="https://img.shields.io/badge/react query-FF4154?style=for-the-badge&logo=reactquery&logoColor=white">   
 <img src="https://img.shields.io/badge/tailwindcss-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white">
 </div>
+
  
-그 외 : Redux Toolkit, React-icon
+그 외 : Zustand, DOMPurify
 
 <br><br>
 
