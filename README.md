@@ -333,7 +333,8 @@
 
 build 시 위 이미지와 같이 어떠한 에러인지 정확하게 보여주지 않고 build error만 발생
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/b8898ec8-e909-408e-a686-cd3bcde7512e/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/405f763c-800a-4281-a7f1-e7a9fddc5ac9)
+
 
 ### 🛠️ 문제 해결 과정
 
@@ -469,7 +470,8 @@ export default CheckPage;
 
 토스 api의 결제 처리 방식은 아래 사진과 같습니다. 사용자가 결제를 완료하면 리다이렉트 되는 주소를 라우트 핸들러로 받고, 라우트 핸들러에서 결제 승인 api를 호출해서 결제 성공 여부를 판단하기로 결정했습니다.
 
-![토스 api 결제 과정](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/11292ef1-c904-43d3-bcd2-7f00fa532372/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/e25bcc41-c94e-492c-aa81-97a14b9bef02)
+
 
 토스 api 결제 과정
 
@@ -676,7 +678,8 @@ export default DetailPage;
 
 ```
 
-![스크린샷 2024-04-26 오후 9.33.27.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/4443cd29-382d-456c-b634-7331c212dbe9/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-26_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.33.27.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/1e805ffa-d2a2-400c-8399-7179c884472e)
+
 
      그 결과 lighthouse에서 검색엔진 최적화 만점!
 
@@ -728,9 +731,10 @@ zustand의 persist 미들웨어를 이용해서 상태를 저장소(localStorage
 
 [zustand/docs/integrations/persisting-store-data.md at main · pmndrs/zustand](https://github.com/pmndrs/zustand/blob/main/docs/integrations/persisting-store-data.md)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/01e0bfbe-93af-4ccd-9ebf-33980bb36ecf/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/2b7a95c2-ba90-45db-9fc6-fe6fbf7dec2b)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/d92dac12-03f5-48d4-85ab-d2fe3c889db7/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/9963e406-f8b6-4bf4-85f4-eb8e787518f6)
+
 
 🚨하지만 여기서 문제가..!
 
@@ -1081,7 +1085,8 @@ export const fetchReservationDetails = async (reserveId: string) => {
 
 SPA에서 같은 라이브러리를 각 페이지에서 사용할 경우 현재 페이지의 CSS가 이전 페이지의 CSS로 적용되는 CSS 충돌 발생🛠️ 문제 해결 과정
 
-![image (2).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/822cba63-da67-4dcc-9a8e-6ffd5c97358d/image_(2).png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/1856aa61-bc6e-46e2-82ec-3a49a4f96fc0)
+
 
 css가 정상적으로 작동! 이걸 토대로 구글링을 해본 결과 SPA에서는 CSS 충돌이  빈번하기 때문에 사전에 조치를 취해야 된다는 결론이 나왔습니다.
 
@@ -1100,7 +1105,8 @@ css가 정상적으로 작동! 이걸 토대로 구글링을 해본 결과 SPA�
 
 **기존  방식**
 
-![스크린샷 2024-04-27 오후 6.13.53.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/a7d2a74e-5b34-469a-923e-39dc1042a536/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.13.53.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/e8f1426d-b25f-4967-af6e-54fb64e85efe)
+
 
 []()
 
@@ -1111,7 +1117,8 @@ css가 정상적으로 작동! 이걸 토대로 구글링을 해본 결과 SPA�
 
 처음에는 디테일 페이지와 메인 페이지만 embla 캐러셀을 사용하기 때문에 메인 페이지의 캐러셀 css를 비활성화 시켜보았다 그 결과
 
-![image (3).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/6126de9f-03f6-4295-a62e-2b64680c2d45/image_(3).png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/dd19138a-f763-41ee-a96d-cf94dbea8216)
+
 
 css를 직접 임포트하는 방식
 
@@ -1124,15 +1131,17 @@ CSS 모듈화
 
 1. 파일 이름 변경
 
-![스크린샷 2024-04-27 오후 6.10.44.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/a67e0c84-9262-4eb3-b27f-ec58b341e815/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.10.44.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/5f14aafa-a7ee-478c-bb83-1ee7dec3e797)
+
 
 2. 임포트 방식 변경
 
-![스크린샷 2024-04-27 오후 6.10.58.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/59f83dec-c156-494b-bb87-fddf37f5c329/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.10.58.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/cf61e182-aa6b-43ae-a000-6d69bf0db140)
 
 3. 모듈 사용 방법
 
-![스크린샷 2024-04-27 오후 6.16.57.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/f63caa5e-e07a-4637-a07a-5889354e79de/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.16.57.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/7ff841f2-9d82-4a1d-a1b0-a450e567aa9b)
+
 
 이러한 방법으로 CSS 충돌을 해결했습니다.
 
@@ -1164,9 +1173,10 @@ console.log를 계속 찍어서 확인도 해보고, 이미지 url도 복사해�
 />
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/e8ba6d9d-3c7e-4c97-9213-7314b69f3f5d/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/5efe4daf-7e4f-4219-8ce5-7d076833b3bd)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/5fe98bd3-c7eb-4785-8367-86ca82403fdc/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/61ba19ea-6891-411a-8b38-b1d9a28ec9fe)
+
 
 <br>
 
@@ -1174,7 +1184,8 @@ console.log를 계속 찍어서 확인도 해보고, 이미지 url도 복사해�
 
 다른 mainpage에서는 image로 url을 잘 받아오고 있고, 메인 화면에서도 잘 뜨고 있음… 뭐지..
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/6b27b419-0057-4a8c-b67f-dda1acff9acf/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/5f0322a7-ec5b-4924-9234-53307e6633d4)
+
 
 둘의 차이점이 무엇일까 비교하던 중 문제점 파악!!
 
@@ -1226,7 +1237,8 @@ $$ LANGUAGE sql STABLE;
 
 하지만 기존의 함수에서 바로 수정을 하니 error를 뱉어서 새로운 `New query`를 생성해서 함수를 생성해주었다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/4bdc7c8d-0fb6-4a37-8e5a-cef879863171/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/838617ff-17ca-486a-baed-f040448b7b64)
+
 
 `ERROR:  42P13: cannot change return type of existing function`
 `DETAIL:  Row type defined by OUT parameters is different.`
@@ -1234,7 +1246,8 @@ $$ LANGUAGE sql STABLE;
 
 새로운 query 생성해서 하니 잘 작동하였고, 값도 배열로 아주 잘 받아져오는걸 확인 할 수 있었다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/8b952fc0-9d76-4273-b945-6307c1bf7828/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/bb23ea5c-afe7-4675-8d89-42a97a9818d7)
+
 
 image가 배열 형태로 아주 잘 들어오는걸 확인 할 수 있었다!!
 
@@ -1242,7 +1255,8 @@ image가 배열 형태로 아주 잘 들어오는걸 확인 할 수 있었다!!
 image : ['https://d1x9f5mf11b8gz.cloudfront.net/class/20220308/ec9fa67b-0040-413d-ae8b-258d46df07c4.jpg']
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/8bd9036d-9c14-4601-87f4-f939f992fc23/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/2238f048-a606-4592-afc3-ce6ee9f78d3c)
+
 
 🔥 typescript를 통해 type error를 많이 잡을 수 있었지만, SQL query에서 image type을 text로 작성해주는 것까지 잡아주지는 못 했다..!! 
 
@@ -1258,7 +1272,8 @@ supabase storage에서 이미지 파일을 업로드한 다음 table `image` dat
 image : ["https://hdurwturhsczrdeugmon.supabase.co/storage/v1/object/public/uploads/b06db7ba-911e-4f4f-993e-147d47118307_143777_149131_434.jpg", …]
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/6fbfa9cc-165c-47bf-8b48-ed0944734e6a/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/74d2a056-58c9-4c4a-a2c5-7f2a0ce8be0d)
+
 
 <br>
 
@@ -1268,7 +1283,8 @@ image : ["https://hdurwturhsczrdeugmon.supabase.co/storage/v1/object/public/uplo
 
 일단 지난번 팀 프로젝트에서 supabase를 한 번 사용해 본 적이 있었고, 그때 storage를 담당하던 팀원분께서 엄청 고생을 많이 하시고 해당 url을 확인하는 방법을 찾아내서 알려주신 적이 있었다. 
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/8a748eb7-c764-47f1-9747-39da7902b689/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/2cecb4ef-bfb3-4670-ae21-b9eee180cd3c)
+
 
 그래서 아래 `GET URL` 을 통해 주소를 확인해보니 다음과 같았다.
 
@@ -1322,7 +1338,7 @@ const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/cl
 const filePath = uploads/${uuidv4()}_${cleanName};
 ```
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/9ee03fa2-643d-49dc-a1a9-980f9b4e74b4/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/be02ebbb-9244-4a68-8fe7-01ee7adae91b)
 
 </div>
 </details>
@@ -1349,7 +1365,8 @@ const filePath = uploads/${uuidv4()}_${cleanName};
 
 ⇒ size 및 time 확인
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/1162b68b-3fd3-4eb0-b406-6e80e9c2dd61/23ecb335-e61a-4551-a3b4-df939e3c8d07.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/fb395e44-8af5-48c6-94c5-f76300022716)
+
 
 대체적으로 **120~216 ms 정도**의 시간이 걸림
 
@@ -1367,8 +1384,9 @@ const filePath = uploads/${uuidv4()}_${cleanName};
 ```
 
 ⇒ size 및 time 확인
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/154870548/6f76476f-dfba-439d-af27-b5cdcedb7aa8)
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/2286272d-dfdf-4c37-87c6-62b172b6b8fe/05512135-052c-4d2e-892f-e5ea625cdae2.png)
+
 
 대체적으로 **10~100ms 이하의 시간**으로 이미지가 로딩되는 시간이 줄어든 것을 확인할 수 있다.
 
@@ -1439,7 +1457,7 @@ const filePath = uploads/${uuidv4()}_${cleanName};
 </details>
 
 <details>
-<summary>임향지</summary>
+<summary>임향지(디자이너)</summary>
 <div>
 
 저는 개발자 팀과 협업하여 웹사이트를 디자인하고 배포하는 프로젝트에 참여했습니다. 
