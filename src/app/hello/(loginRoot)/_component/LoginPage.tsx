@@ -10,7 +10,7 @@ export default function LoginPage() {
       <div className="mx-auto flex  h-full w-full flex-col rounded-md border  md:flex-row ">
         <section className="  hidden w-full flex-col items-center justify-center bg-login-background md:flex md:w-2/5">
           <Image src="/loginLogo.svg" alt="LoginLogoImage" width={250} height={100} priority />
-          <p className="mb:text-sm  welcome-message px-4 pt-10 text-center font-semibold text-[#4D43B8] lg:text-3xl">
+          <p className="mb:text-sm  welcome-message px-4 pt-10 text-center text-[#4D43B8] lg:text-3xl">
             클룸에 오신걸 환영합니다!
             <br /> 다양한 원데이 클래스를 체험해보세요!
           </p>

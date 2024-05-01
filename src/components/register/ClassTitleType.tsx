@@ -45,11 +45,12 @@ const ClassTitleType: React.FC<ClassTitleTypeProps> = ({ isEditMode, initialData
             placeholder="클래스명을 입력해주세요"
             maxLength={40}
           />
-        <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
+        <label htmlFor="classType" className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
           <span className='text-[#d63232] font-bold'>*</span> 
           클래스타입
-        </p>
+        </label>
         <select
+          id="classType"
           value={classType}
           onChange={handleClassTypeChange}
           className="border border-[#D5D5D5] rounded-md p-2 text-gray-700"

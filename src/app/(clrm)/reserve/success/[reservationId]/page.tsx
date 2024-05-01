@@ -24,11 +24,12 @@ type ReserveInfoLabels = {
 const ReservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
   const reservationid = params.reservationId;
   const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
-  const [dataSaved, setDataSaved] = useState(false);
-  const queryClient = useQueryClient();
+  const [dataSaved, setDataSaved] = useState(false); // 알림 데이터 저장 여부 관리
+  const queryClient = useQueryClient(); // Query Client를 사용하여 캐시 관리 및 데이터 무효화
 
   useEffect(() => {
     if (!isLoading && !isError && reservationDetails && !dataSaved) {
+      // 예약 완료 정보를 기반으로 알림 저장 함수 호출
       insertNotice(reservationDetails.userId, reservationDetails.classId, reservationDetails.class.title, queryClient)
         .then((noticeData) => {
           setDataSaved(true);
