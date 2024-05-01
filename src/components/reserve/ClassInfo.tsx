@@ -50,7 +50,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
             src={classInfo.image}
             alt={classInfo.title}
             style={{ objectFit: 'cover', borderRadius: '8px' }}
-            sizes="(max-width: 768px) 100vw, 40vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={true}
           />
         ) : (
@@ -60,7 +60,7 @@ const ClassInfo = ({ classInfo }: { classInfo: ReserveClassType }) => {
             src={NoImage}
             alt={classInfo.title}
             style={{ objectFit: 'cover', borderRadius: '8px' }}
-            sizes="(max-width: 768px) 80vw, 30vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={true}
           />
         )}
