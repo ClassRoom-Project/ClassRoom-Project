@@ -459,70 +459,312 @@ Github를 효율적으로 관리하기 위해 issue, projects를 사용하였으
 
 ```
 📦src
- ┣ 📂api
- ┃ ┣ 📜cartFirebaseApi.ts
- ┃ ┣ 📜cookie.ts
- ┃ ┣ 📜fiebaseApi.ts
- ┃ ┗ 📜login.ts
  ┣ 📂app
- ┃ ┣ 📂admin
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂cart
- ┃ ┃ ┗ 📂[userId]
+ ┃ ┣ 📂(clrm)
+ ┃ ┃ ┣ 📂(mypage)
+ ┃ ┃ ┃ ┣ 📂myClassStudentList
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┣ 📂studentMypage
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┗ 📂teacherMypage
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂bugBusters
  ┃ ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂home
- ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂products
- ┃ ┃ ┣ 📂[id]
+ ┃ ┃ ┣ 📂list
+ ┃ ┃ ┃ ┣ 📂detail
+ ┃ ┃ ┃ ┃ ┗ 📂[id]
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
  ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂messages
+ ┃ ┃ ┃ ┗ 📂[[...chatRoomId]]
+ ┃ ┃ ┃ ┃ ┣ 📂_components
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ChatImageModal.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ChatMessages.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜ChatPreview.tsx
+ ┃ ┃ ┃ ┃ ┃ ┣ 📜MessageBoxs.tsx
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜MessagesPage.tsx
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂payment
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂register
+ ┃ ┃ ┃ ┣ 📂completedPage
+ ┃ ┃ ┃ ┃ ┗ 📂[id]
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┣ 📂registerEditPage
+ ┃ ┃ ┃ ┃ ┗ 📂[id]
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📂reserve
+ ┃ ┃ ┃ ┣ 📂fail
+ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┣ 📂success
+ ┃ ┃ ┃ ┃ ┗ 📂[reservationId]
+ ┃ ┃ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┃ ┣ 📜error.tsx
+ ┃ ┃ ┣ 📜layout.tsx
  ┃ ┃ ┗ 📜page.tsx
- ┃ ┣ 📂profile
- ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📂api
+ ┃ ┃ ┣ 📂auth
+ ┃ ┃ ┃ ┗ 📂[...nextauth]
+ ┃ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂chatRooms
+ ┃ ┃ ┃ ┗ 📜getChatRooms.ts
+ ┃ ┃ ┣ 📂classdetail
+ ┃ ┃ ┃ ┣ 📜detailClassInfo.ts
+ ┃ ┃ ┃ ┣ 📜detailComment.ts
+ ┃ ┃ ┃ ┣ 📜detailCommentsInfo.ts
+ ┃ ┃ ┃ ┗ 📜detailUserInfo.ts
+ ┃ ┃ ┣ 📂listpage
+ ┃ ┃ ┃ ┣ 📜classInfoForList.ts
+ ┃ ┃ ┃ ┗ 📜determineAMPM.ts
+ ┃ ┃ ┣ 📂mainpage
+ ┃ ┃ ┃ ┗ 📜getClassAllInfo.ts
+ ┃ ┃ ┣ 📂mypage
+ ┃ ┃ ┃ ┣ 📜fetchMyClasses.ts
+ ┃ ┃ ┃ ┣ 📜my-class-api.ts
+ ┃ ┃ ┃ ┣ 📜my-comments-api.ts
+ ┃ ┃ ┃ ┗ 📜user-api.ts
+ ┃ ┃ ┣ 📂payment
+ ┃ ┃ ┃ ┗ 📜route.ts
+ ┃ ┃ ┣ 📂reserve
+ ┃ ┃ ┃ ┣ 📜checkIsReserved.ts
+ ┃ ┃ ┃ ┣ 📜fetchReservationDetails.ts
+ ┃ ┃ ┃ ┣ 📜fetchReserveClassInfo.ts
+ ┃ ┃ ┃ ┣ 📜insertNewReservation.ts
+ ┃ ┃ ┃ ┣ 📜insertNotice.ts
+ ┃ ┃ ┃ ┗ 📜sumReserveQuantityByTimeId.ts
+ ┃ ┃ ┣ 📂supabase
+ ┃ ┃ ┃ ┗ 📜supabase.ts
+ ┃ ┃ ┣ 📂userEmail
+ ┃ ┃ ┃ ┗ 📜loginUserId.ts
+ ┃ ┃ ┗ 📂wish
+ ┃ ┃ ┃ ┗ 📜wishApi.ts
+ ┃ ┣ 📂hello
+ ┃ ┃ ┗ 📂(loginRoot)
+ ┃ ┃ ┃ ┣ 📂_component
+ ┃ ┃ ┃ ┃ ┗ 📜LoginPage.tsx
+ ┃ ┃ ┃ ┣ 📜layout.tsx
+ ┃ ┃ ┃ ┗ 📜page.tsx
+ ┃ ┣ 📜global-error.tsx
  ┃ ┣ 📜globals.css
  ┃ ┣ 📜layout.tsx
- ┃ ┣ 📜page.tsx
+ ┃ ┣ 📜not-found.tsx
  ┃ ┗ 📜provider.tsx
+ ┣ 📂assets
+ ┃ ┗ 📂images
+ ┃ ┃ ┣ 📜bannerCookie.png
+ ┃ ┃ ┣ 📜bannerFlower.png
+ ┃ ┃ ┣ 📜bannerImage1.png
+ ┃ ┃ ┣ 📜bannerMeeting.png
+ ┃ ┃ ┣ 📜bannerPersimmon.png
+ ┃ ┃ ┣ 📜bannerText.svg
+ ┃ ┃ ┣ 📜BugBusters.png
+ ┃ ┃ ┣ 📜candle.png
+ ┃ ┃ ┣ 📜clRoomTextLogo.png
+ ┃ ┃ ┣ 📜clroom_no_img_purple.png
+ ┃ ┃ ┣ 📜clroom_no_img_purple_wide.png
+ ┃ ┃ ┣ 📜clroom_no_img_white.png
+ ┃ ┃ ┣ 📜Ellipse.png
+ ┃ ┃ ┣ 📜failIcon.gif
+ ┃ ┃ ┣ 📜filterIcon.svg
+ ┃ ┃ ┣ 📜Frame 1775.svg
+ ┃ ┃ ┣ 📜Group 1791.png
+ ┃ ┃ ┣ 📜Group 1805.svg
+ ┃ ┃ ┣ 📜Hyangji.png
+ ┃ ┃ ┣ 📜Hyerin.png
+ ┃ ┃ ┣ 📜Hyunjin.png
+ ┃ ┃ ┣ 📜Jiwon.png
+ ┃ ┃ ┣ 📜lightPurpleGraphic.svg
+ ┃ ┃ ┣ 📜lightPurpleGraphic2.png
+ ┃ ┃ ┣ 📜loginLogo.svg
+ ┃ ┃ ┣ 📜loginMetadataImage.png
+ ┃ ┃ ┣ 📜loginTextImage.svg
+ ┃ ┃ ┣ 📜logo.svg
+ ┃ ┃ ┣ 📜Miju.png
+ ┃ ┃ ┣ 📜no_img.jpg
+ ┃ ┃ ┣ 📜orangeStar.png
+ ┃ ┃ ┣ 📜profile-image.png
+ ┃ ┃ ┣ 📜purpleFlower.png
+ ┃ ┃ ┣ 📜soap.png
+ ┃ ┃ ┣ 📜Teawon.png
+ ┃ ┃ ┣ 📜yellowStar.png
+ ┃ ┃ ┣ 📜yellowStarStroke.png
+ ┃ ┃ ┗ 📜브로슈어 디자인 파이널.jpg
  ┣ 📂components
- ┃ ┣ 📂cart
- ┃ ┃ ┣ 📜CartButton.tsx
- ┃ ┃ ┣ 📜CartItem.tsx
- ┃ ┃ ┗ 📜CartStatus.tsx
+ ┃ ┣ 📂bugBusters
+ ┃ ┃ ┗ 📜PersonalCard.tsx
+ ┃ ┣ 📂chatbot
+ ┃ ┃ ┗ 📜ChatBot.tsx
+ ┃ ┣ 📂chatRooms
+ ┃ ┃ ┣ 📜AskButton.tsx
+ ┃ ┃ ┗ 📜ChatButton.tsx
+ ┃ ┣ 📂classDetail
+ ┃ ┃ ┣ 📜ClassDetailBtn.tsx
+ ┃ ┃ ┣ 📜ClassDetailContainer.tsx
+ ┃ ┃ ┣ 📜ClassDetailDayPicker.tsx
+ ┃ ┃ ┣ 📜ClassImageCarousel.tsx
+ ┃ ┃ ┣ 📜ClassInfoBox.tsx
+ ┃ ┃ ┣ 📜ClassInfos.tsx
+ ┃ ┃ ┣ 📜ClassSummary.tsx
+ ┃ ┃ ┣ 📜CommentsCard.tsx
+ ┃ ┃ ┣ 📜CreateComments.tsx
+ ┃ ┃ ┣ 📜DetailComments.tsx
+ ┃ ┃ ┣ 📜DetailWishButton.tsx
+ ┃ ┃ ┣ 📜embla.module.css
+ ┃ ┃ ┣ 📜EmblaCarouselArrowButtons.tsx
+ ┃ ┃ ┣ 📜EmblaCarouselDotButton.tsx
+ ┃ ┃ ┣ 📜EmblaCarouselLazyLoadImage.tsx
+ ┃ ┃ ┣ 📜MapComponent.tsx
+ ┃ ┃ ┗ 📜ShowComments.tsx
  ┃ ┣ 📂common
- ┃ ┃ ┗ 📜Header.tsx
- ┃ ┣ 📂detail
- ┃ ┃ ┣ 📂ask
- ┃ ┃ ┃ ┗ 📜Ask.tsx
- ┃ ┃ ┗ 📂review
- ┃ ┃ ┃ ┗ 📜Review.tsx
+ ┃ ┃ ┣ 📂bars
+ ┃ ┃ ┃ ┣ 📂categories
+ ┃ ┃ ┃ ┃ ┗ 📜SearchClass.tsx
+ ┃ ┃ ┃ ┣ 📜ConvertBtn.tsx
+ ┃ ┃ ┃ ┣ 📜Header.tsx
+ ┃ ┃ ┃ ┣ 📜SideBar.tsx
+ ┃ ┃ ┃ ┗ 📜SideBarBtn.tsx
+ ┃ ┃ ┣ 📜AlertModal.tsx
+ ┃ ┃ ┣ 📜BackButton.tsx
+ ┃ ┃ ┣ 📜CustomCaption.tsx
+ ┃ ┃ ┣ 📜day-picker.css
+ ┃ ┃ ┣ 📜LoadingSpinner.tsx
+ ┃ ┃ ┣ 📜LoginError.tsx
+ ┃ ┃ ┣ 📜Modal.tsx
+ ┃ ┃ ┣ 📜Notification.tsx
+ ┃ ┃ ┣ 📜Pagination.tsx
+ ┃ ┃ ┣ 📜Stars.tsx
+ ┃ ┃ ┣ 📜Toastify.tsx
+ ┃ ┃ ┗ 📜WishIcon.tsx
+ ┃ ┣ 📂listpage
+ ┃ ┃ ┣ 📜CategoryBtns.tsx
+ ┃ ┃ ┣ 📜ClassList.tsx
+ ┃ ┃ ┣ 📜listpageBtns.tsx
+ ┃ ┃ ┣ 📜ListPageWishButton.tsx
+ ┃ ┃ ┣ 📜MoveToTopBtn.tsx
+ ┃ ┃ ┗ 📜SearchFilter.tsx
+ ┃ ┣ 📂login
+ ┃ ┃ ┣ 📜LoginState.tsx
+ ┃ ┃ ┗ 📜SocialLogin.tsx
  ┃ ┣ 📂main
- ┃ ┃ ┣ 📜Join.tsx
- ┃ ┃ ┣ 📜Login.tsx
- ┃ ┃ ┣ 📜MainProductItems.tsx
- ┃ ┃ ┗ 📜SlideShow.tsx
- ┃ ┗ 📂products
- ┃ ┃ ┗ 📜ProductItems.tsx
+ ┃ ┃ ┣ 📜Banner.tsx
+ ┃ ┃ ┣ 📜BestClass.tsx
+ ┃ ┃ ┣ 📜ChatBubble.tsx
+ ┃ ┃ ┣ 📜ClassCard.tsx
+ ┃ ┃ ┣ 📜ClassSlick.tsx
+ ┃ ┃ ┣ 📜DeadlineClass.tsx
+ ┃ ┃ ┣ 📜emblaCarousel.module.css
+ ┃ ┃ ┣ 📜LatestClass.tsx
+ ┃ ┃ ┗ 📜MainFooter.tsx
+ ┃ ┣ 📂mypage
+ ┃ ┃ ┣ 📂student
+ ┃ ┃ ┃ ┣ 📜AddTeacherInfo.tsx
+ ┃ ┃ ┃ ┣ 📜MyCommentItem.tsx
+ ┃ ┃ ┃ ┣ 📜MyComments.tsx
+ ┃ ┃ ┃ ┣ 📜MyPageWishButton.tsx
+ ┃ ┃ ┃ ┣ 📜MyReservedClass.tsx
+ ┃ ┃ ┃ ┣ 📜MyReservedClassItem.tsx
+ ┃ ┃ ┃ ┣ 📜MyWishClass.tsx
+ ┃ ┃ ┃ ┣ 📜MyWishClassItem.tsx
+ ┃ ┃ ┃ ┗ 📜StudentMyPageTab.tsx
+ ┃ ┃ ┣ 📂teacher
+ ┃ ┃ ┃ ┣ 📜EditTeacherInfo.tsx
+ ┃ ┃ ┃ ┣ 📜MyClass.tsx
+ ┃ ┃ ┃ ┣ 📜MyClassStudentList.tsx
+ ┃ ┃ ┃ ┣ 📜MyClassStudentPage.tsx
+ ┃ ┃ ┃ ┗ 📜TeacherMyPageTab.tsx
+ ┃ ┃ ┣ 📜EditProfile.tsx
+ ┃ ┃ ┣ 📜EditProfileImage.tsx
+ ┃ ┃ ┣ 📜MyPageBtn.tsx
+ ┃ ┃ ┗ 📜SelectOption.tsx
+ ┃ ┣ 📂payments
+ ┃ ┃ ┣ 📜PaymentFailPage.tsx
+ ┃ ┃ ┗ 📜PaymentPage.tsx
+ ┃ ┣ 📂register
+ ┃ ┃ ┣ 📜Address.tsx
+ ┃ ┃ ┣ 📜Category.tsx
+ ┃ ┃ ┣ 📜ClassContent.tsx
+ ┃ ┃ ┣ 📜ClassDiff.tsx
+ ┃ ┃ ┣ 📜ClassTitleType.tsx
+ ┃ ┃ ┣ 📜CreateBtn.tsx
+ ┃ ┃ ┣ 📜HashTag.tsx
+ ┃ ┃ ┣ 📜ImageUpload.tsx
+ ┃ ┃ ┣ 📜MinMaxNumber.tsx
+ ┃ ┃ ┣ 📜Price.tsx
+ ┃ ┃ ┣ 📜SelectTime.tsx
+ ┃ ┃ ┗ 📜TotalTime.tsx
+ ┃ ┗ 📂reserve
+ ┃ ┃ ┣ 📂reservationComplete
+ ┃ ┃ ┃ ┗ 📜NavigationButtons.tsx
+ ┃ ┃ ┣ 📜ClassInfo.tsx
+ ┃ ┃ ┣ 📜CurrentReserveQuantity.tsx
+ ┃ ┃ ┣ 📜DateTimePicker.tsx
+ ┃ ┃ ┣ 📜PriceCalculator.tsx
+ ┃ ┃ ┣ 📜ReservationScheduler.tsx
+ ┃ ┃ ┣ 📜ReserveButton.tsx
+ ┃ ┃ ┣ 📜ReserveInfo.tsx
+ ┃ ┃ ┣ 📜ReserveUserInfo.tsx
+ ┃ ┃ ┗ 📜SetQuantityAndPay.tsx
+ ┣ 📂constants
+ ┃ ┣ 📜options.ts
+ ┃ ┗ 📜QueryKeys.ts
+ ┣ 📂hooks
+ ┃ ┣ 📂useChatRoom
+ ┃ ┃ ┗ 📜useNewChatRoom.tsx
+ ┃ ┣ 📂useLogin
+ ┃ ┃ ┣ 📜useLoginUserId.tsx
+ ┃ ┃ ┣ 📜useSessionStorageUserEmail.tsx
+ ┃ ┃ ┣ 📜useSetEmailToApi.tsx
+ ┃ ┃ ┣ 📜useSetStorage.tsx
+ ┃ ┃ ┣ 📜useTeacherInfo.tsx
+ ┃ ┃ ┗ 📜useUserEmail.tsx
+ ┃ ┣ 📂usePayment
+ ┃ ┃ ┗ 📜usePayment.tsx
+ ┃ ┣ 📂useReserve
+ ┃ ┃ ┗ 📜useFetchReservationDetail.ts
+ ┃ ┣ 📂useWish
+ ┃ ┃ ┗ 📜useWishQueries.ts
+ ┃ ┣ 📜test.tsx
+ ┃ ┗ 📜useEditComment.ts
  ┣ 📂store
- ┃ ┣ 📂config
- ┃ ┃ ┗ 📜configStore.ts
- ┃ ┗ 📂modules
- ┃ ┃ ┣ 📜isModalToggle.ts
- ┃ ┃ ┗ 📜user.ts
+ ┃ ┣ 📂login
+ ┃ ┃ ┗ 📜loginUserIdStore.ts
+ ┃ ┣ 📂mypage
+ ┃ ┃ ┣ 📜myClassInfoStore.ts
+ ┃ ┃ ┣ 📜userInfoStore.ts
+ ┃ ┃ ┗ 📜userRoleStore.ts
+ ┃ ┣ 📜classFilterStore.ts
+ ┃ ┣ 📜classInfoStore.ts
+ ┃ ┣ 📜modalstore.ts
+ ┃ ┣ 📜registerScheduleStore.ts
+ ┃ ┣ 📜registerStore.ts
+ ┃ ┗ 📜reserveClassStore.ts
  ┣ 📂types
- ┃ ┣ 📜cart-type.ts
- ┃ ┣ 📜product-type.ts
- ┃ ┗ 📜user-type.ts
- ┣ 📂utill
- ┃ ┗ 📂hooks
- ┃ ┃ ┣ 📂cart
- ┃ ┃ ┃ ┗ 📜useCart.ts
- ┃ ┃ ┣ 📂detail
- ┃ ┃ ┃ ┣ 📜useAskInput.ts
- ┃ ┃ ┃ ┗ 📜useReviewInput.ts
- ┃ ┃ ┣ 📂input
- ┃ ┃ ┃ ┗ 📜useInput.ts
- ┃ ┃ ┗ 📂redux
- ┃ ┃ ┃ ┗ 📜useRedux.ts
+ ┃ ┣ 📂authUser
+ ┃ ┃ ┗ 📜authUserTypes.ts
+ ┃ ┣ 📂chat
+ ┃ ┃ ┗ 📜chatTypes.ts
+ ┃ ┣ 📜class.ts
+ ┃ ┣ 📜classFilter.ts
+ ┃ ┣ 📜comments.ts
+ ┃ ┣ 📜date.ts
+ ┃ ┣ 📜detailComment.ts
+ ┃ ┣ 📜editClass.ts
+ ┃ ┣ 📜notice.ts
+ ┃ ┣ 📜reactSlick.ts
+ ┃ ┣ 📜register.ts
+ ┃ ┣ 📜reserve.ts
+ ┃ ┗ 📜user.ts
+ ┣ 📂utils
+ ┃ ┣ 📂fonts
+ ┃ ┃ ┣ 📜fonts.ts
+ ┃ ┃ ┗ 📜PretendardVariable.woff2
+ ┃ ┣ 📂supabase
+ ┃ ┃ ┣ 📜client.ts
+ ┃ ┃ ┣ 📜middleware.ts
+ ┃ ┃ ┗ 📜server.ts
+ ┃ ┗ 📜convertTimeTo12HourClock.ts
  ┗ 📜middleware.ts
-
 
 ```****
