@@ -66,70 +66,37 @@
 
 # 와이어프레임
 
-<table>
-  <thead>
-    <tr>
-      <th>
-        메인 페이지
-      </th>
-      <th>
-        상품 리스트 페이지
-      </th>
-      <th>
-        상품 상세 페이지
-      </th>
-      <th>
-        장바구니 페이지
-      </th>
-      <th>
-        마이 페이지
-      </th>
-       <th>
-        관리자 페이지
-      </th>
-    </thead>
-  <tbody>
-  </tr>
-  <tr>
-    <td>
-      <img src="public/assets/README/wireframe/wireframe_main.png"  width ="1000"/>
-    </td>
-    <td>
-      <img src="public/assets/README/wireframe/wireframe_list.png" width ="1000"/>
-    </td>
-    <td>
-     <img src="public/assets/README/wireframe/wireframe_detail.png" width ="1000"/>
-    </td>
-       <td>
-       <img src="public/assets/README/wireframe/wireframe_cart.png" width ="1000"/>
-    </td>
-       <td>
-      <img src="public/assets/README/wireframe/wireframe_profile.png" width ="1000"/>
-    </td>
-    <td>
-      <img src="public/assets/README/wireframe/wireframe_admin.png" width ="1000"/>
-    </td>
-  </tr>
-  </tbody>
-</table>
-
+| 로그인페이지 | 메인페이지 |
+| :---: | :---: |
+| <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/4b19f3ea-5d63-4ec9-8cca-890271ddfeb8" style="width:500px;" /> | <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/76c44adc-bac6-4366-81ee-c2ecd0c90a4a" style="width:500px;" /> |
+| 리스트페이지 | 디테일페이지 |
+| <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/e949cf05-a032-4963-9834-c668450cd8f7" style="width:500px;" /> | <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/2160e193-14f5-4695-9d8b-2ea57cfaf115" style="width:500px;" /> 
+| 예약페이지 | 클래스 등록페이지 |
+ <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/eb1b2f3c-70de-4eee-98e5-bf67c128914a" style="width:500px;" /> | <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/10120681-8aa8-4885-a9b3-279adc32c4a0" style="width:500px;" /> |
+| 선생님 마이페이지 | 수강생 마이페이지 |
+ <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/3c32da94-5ab9-4051-a85f-5f843c7db5f4" style="width:500px;" /> | <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/7a24d80a-2631-44cb-b5f0-1f2dbdaaf98e" style="width:500px;" /> | 
+| 결제 페이지 | 채팅페이지 | 
+ <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/f24bb26d-5a4a-4073-9ae8-5fefef40849e" style="width:500px;" /> | <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" /> |
 <br>
+
 
 ### 피그마
 
-[@피그마 링크](https://www.figma.com/file/7w574txyHxeKElZ3F3GFyQ/4조_shoppy?type=whiteboard&node-id=6309-577&t=N0pDM0v6orUo507w-0)
+[@피그마 링크](https://www.figma.com/file/tVbCtSi7sCy5xHcwgPVOJM/%ED%81%B4%EB%A3%B8-%EC%B5%9C%EC%A2%85?type=design&node-id=0-1&mode=design)
 
 ### 시연 영상
 
-[@시연 영상 링크](https://www.youtube.com/watch?v=qmjdzvGL8Vk)
+[@시연 영상 링크](https://www.youtube.com/watch?v=sMSf1lvgwZI)
 
 <br>
 
 # 화면 구성 및 기능
 <br><br>
 
-## 1. 메인페이지
-  <img src="public/assets/README/mainPage/mainPage.png"/>
+## 1. 로그인페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
   <h3> 1-1. 메인  상품 리스트 </h3>
       <ul>
         <li>화면 렌더링 시 로딩 페이지 구현 </li>
@@ -139,6 +106,69 @@
         <li>등록일 기준으로 상품 리스트를 정렬하여 출력</li>
           </ul>
       
+<br><br>
+
+## 2. 메인페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
+<br><br>
+
+## 3. 메인페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
+<br><br>
+
+## 4. 메인페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
+<br><br>
+
+## 5. 메인페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
+<br><br>
+
+## 6. 메인페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
+<br><br>
+
+## 7. 메인페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
+<br><br>
+
+## 8. 메인페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
+<br><br>
+
+## 9. 결제제페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
+<br><br>
+
+## 10. 채팅페이지
+| 기본 | 반응형 |
+| :---: | :---: |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" />||
+
 <br><br>
 
 <table>
@@ -392,74 +422,79 @@
 </ul>
 <br><br><br><br>
 
+# 트러블슈팅
+<br><br>
+
+
 # 회고
 
 <details>
 <summary>윤미주</summary>
 <div>
 
-욕심많게 시작했던 프로젝트이기에 팀원들에게 부담이되고 많이 힘들었을 것 같다고 생각합니다.
-
-다들 본인이 맞는 기능에 대해서 잘 만들어주시고 최선을 다해주시고 조금 더 나은 방향으로 가기 위해 의견도 물으시고 모르는 부분이나 에러가 발생이 되면 다함께 해결해나가는
-
-팀원이었어서 너무 즐겁고 재미있는 프로젝트가 되었던 것 같습니다.
-
-만들다보니 각자 욕심을 가지고 기능들에 대해 욕심을 가지고 해주셔서 또 너무 감사했던 팀원들이었습니다.
-
-이번 프로젝트를 하면서 처음 접해보는 프레임워크(Next.js), 또 아직은 낯선 라이브러리(TypeScript, Tailwind) 그리고 이전에 만들어보지 못했던 기능들이었기에 만들면서 재미도 있었고
-
-해결해 나가면서도 참 재미있었던 것 같습니다.
-
-항상 늦게까지 남아서 본인의 기능이 아니더라도 함께 머리를 맞대고 해결해 나가던 팀원들이었어서 기억에 정말 많이 남을 것 같습니다.
-
-앞으로 팀프로젝트를 하면서 어떻게 해나가면 좋을지 또 어떻게 소통하면 좋을지에 대해서 가장 많이 배울 수 있었던 팀원분들을 만나 너무 감사한 팀 프로젝트 경험을 만들 수 있었습니다.
+욕심많게 시작했던 프로젝트이기에 팀원들에게 부담이되고 많이 힘들었을 것 같다고 생각합니다.<br>
+한 달이 조금 넘는 기간 동안 함께 프로젝트를 만들기 위해 밤낮없이 회의하면서도 마지막까지 웃으며 프로젝트를 마무리할 수 있게 되어 팀원분들께 감사한 마음뿐입니다!🙏<br>
+부족한 리더였던 것 같은데  다들 너무 잘 따라주셔서 감사했고 너무 고생 많으셨습니다!💕
 
 </div>
 </details>
 
 <details>
-<summary>이준구</summary>
+<summary>김현진</summary>
 <div>
 
-Github를 효율적으로 관리하기 위해 issue, projects를 사용하였으며, 팀원 개개인의 작업 및 프로젝트의 진척도를 쉽게 파악할 수 있었다.
-정해진 팀회의 시간 이외에도 지속적인 소통시간을 가졌으며, 발생하는 에러를 즉각적으로 대응할 수 있었다.
-이전에 시도해보지 않았던 로그인과 회원가입 기능을 도전함으로써 많이 배웠습니다. 또한, 익숙하지 않았던 Next.js와 TypeScript를 사용하면서 많은 문법 에러가 발생했지만, 팀원들과 함께 늦은 시간까지 남아 에러를 해결해 나갔습니다.
-끝으로 1주일이라는 시간이 누군가에겐 짧게 늦겨질 수 있지만 프로젝트를 진행하는 동안에는 정말 긴 시간이었고 긴 시간동안 혼자가아닌 팀원분들과 함께 프로젝트 진행 할 수 있어 정말 재밌고 행복했습니다.
+한 달이 넘는 시간 동안 좋은 팀원분들과 함께 프로젝트에 집중하여 마무리까지 올 수 있어서 너무 값지고 행복한 시간이었습니다! <br>
+실력적으로 많이 부족하여 팀에 도움이 될 수 있을까 많은 걱정을 가지고 시작한 프로젝트였는데, 정말 멋진 팀원분들이 없었다면 여기까지 올 수 없었다고 생각합니다. <br>
+또한 소통하고 함께 코드 리뷰를 하면서 공유하는 개발 문화와 함께 저또한 성장할 수 있는 좋은 경험이라고 생각합니다. <br>
+튜터님들, 디자이너님, 팀원분들 모두 고생하셨습니다!
 
 </div>
 </details>
 
 <details>
-<summary>서가희</summary>
+<summary>여태원</summary>
 <div>
 
-프로젝트를 진행하며 Github의 Project 기능을 활용하여 개인의 작업과 프로젝트 진척 상황을 체계적으로 파악할 수 있었고,
-에러가 발생하면 바로 공유하여 문제를 같이 해결할 수 있었습니다 적극적인 소통과 노력 덕분에 프로젝트를 원활히 진행할 수 있었습니다
-찜 기능 등 다른 기능을 더 만들고 싶었지만 시간 부족으로 결국 만들지 못해 원하던 것보다 적은 결과를 만든 것 같아 아쉽지만 많은 것을 배울 수 있었습니다
-좋은 팀을 만나 즐겁게 작업할 수 있었고 저의 부족한 부분을 이해해 주고 격려해 주어 너무 감사합니다 덕분에 많은 동기부여를 받았습니다
+한달동안 동고동락하면서 같이 지낸 팀원분들 정말 재밌었습니다!! <br> 
+처음에 기획하면서 부터 개발 끝마칠 때 까지 우여곡절이 많았지만 그래서 더 좋았던거 같습니다! <br>
+다 같이 고생하면서 모두 열심히 한 걸 알기 때문에, 그래서 더 시원섭섭한 것 같아요..ㅎㅎ  <br>
+또한 프로젝트를 도와주신 튜터님들도 정말 감사합니다 덕분에 많이 배워서 가는거 같아요!! 모두 앞으로 개발자의 길을 걸어갈 때, 이 경험이 든든한 밑거름이 되길 희망하면서 다시 한번 함께 해준 모든 분들께 진심으로 감사드립니다
 
 </div>
 </details>
 
 <details>
-<summary>김연재</summary>
+<summary>서지원</summary>
 <div>
 
-프로젝트의 초기 세팅을 이렇게까지 해야 되는 건가라고 처음에 생각을 하였습니다.
+한 달이라는 시간 동안 훌륭한 팀원 분들과 함께할 수 있어서 너무 좋았습니다! <br>
+매일 다 같이 새벽까지 잠 못 자고 작업한 걸 알기 때문에 프로젝트에 더 애착이 가는 것 같아요! <br>
+최종프로젝트 마지막까지 열심히 같이 달려주신 팀원 분들께 정말정말 감사하고 매일 함께 데일리 스크럼 하면서 많은 도움 주신 창식 튜터님께도 감사드립니다!!! 😊🧡
 
-하지만 프로젝트를 진행을 하면서 초기 세팅의 중요성을 점차 깨닫게 되었습니다.
+</div>
+</details>
 
-맡은 기능 구현을 하나 끝내면 그다음 뭐 하지가 아닌 피그마를 통해 디자인, api 명세서를 보고 바로 다음 기능을 시작할 수 있어
+<details>
+<summary>임혜린</summary>
+<div>
 
-쓸데없는 곳에 시간을 버리지 않아서 좋았고 엄청 편했습니다.
+혼자서 한가지 문제를 계속 붙잡고 있었던 때가 있었는데 팀원 분들이 비슷한 경험하셨고 어떻게 해결하셨는지 공유해주시면서 혼자서는 풀리지 않던 문제들이 쉽게 풀리는 것을 경험할 수 있었고 공유의 중요성을 깨달을 수 있었습니다. <br>
+그리고 팀원 분들 모두 매일 잠도 못 자가며 피곤하셨을 텐데도 늘 팀 분위기를 밝게 조성해주셔서 힘들더라도 힘내서 열심히 임할 수 있었던 것 같습니다. <br>
+진심으로 팀원분들과 튜터님, 디자이너님 너무 감사해요❤️
 
-거기다 많은 기능 구현에도 불구하고 더 하겠다고 나서는 팀원들을 보면서 뜨거운 열정을 배울 수 있었습니다.
+</div>
+</details>
 
-그런 팀원분들이 있었기에 저의 부족한 부분을 채워줘서 프로젝트를 무사히 마칠 수 있었습니다.
+<details>
+<summary>임향지</summary>
+<div>
 
-시작이 반이라는 말이 괜히 있는 게 아닌 것 같습니다.
-
-팀원분들에게 많이 배우고 이전의 저의 자세에 대해 반성하게 되는 뜻깊은 프로젝트였습니다.
+저는 개발자 팀과 협업하여 웹사이트를 디자인하고 배포하는 프로젝트에 참여했습니다. 
+이 프로젝트를 통해 웹 개발 프로세스에 대한 실무 경험을 쌓고 팀워크의 중요성을 다시 한번 느낄 수 있었습니다. 
+디자인 회의에 적극적으로 참여하고, 개발 과정에서 발생하는 문제들을 개발자분들과 함께 해결하기 위해 노력했습니다. 
+팀원들과의 열린 소통과 협력을 통해 어려움에도 능동적으로 대처하고 최적의 해결책을 모색할 수 있었습니다. 
+덕분에 원데이 클래스 웹사이트를 완성할 수 있었습니다. 저는 앞으로도 개발자 팀원들과의 소통을 가장 중요하게 생각하고, 협력을 통해 더욱 발전된 디자이너가 되도록 노력하겠습니다. 
+이번 프로젝트에 참여해주신 개발자 팀원들과 모든 관계자분들께 진심으로 감사드립니다. 💕
 
 </div>
 </details>
