@@ -320,7 +320,1038 @@
 
 
 # 트러블슈팅
-<br><br>
+<br>
+
+<details>
+<summary style="font-weight: bold;">1.팀 전체 build 시, error 발생 및 해결과정</summary>
+  <div markdown="1">
+
+### 🚨 문제 발생
+
+build 시 위 이미지와 같이 어떠한 에러인지 정확하게 보여주지 않고 build error만 발생
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/b8898ec8-e909-408e-a686-cd3bcde7512e/Untitled.png)
+
+### 🛠️ 문제 해결 과정
+
+소거법을 이용해 폴더, 파일, 코드들을 하나씩 비활성화 하면서 문제 원인 분석
+
+### 🔥 찾아낸 문제점
+
+1. 클라이언트 사이드 전용 객체(예: window, localstorage)에 서버사이드 렌더링이나 빌드 시간에 접근하려고 할 때 문제 발생
+
+☠️기존 코드
+
+```ts
+/* src > store > useRoleStore */
+export const useUserRoleStore = create<UserRoleState>((set) => ({
+  isTeacher:  sessionStorage.getItem('isTeacher') === 'true' ,
+
+    setIsTeacher: (value: boolean) => {
+        set({ isTeacher: value });
+        sessionStorage.setItem('isTeacher', value.toString());
+        }
+    }
+}));
+```
+
+2.  useSearchParams를 사용할 경우 해당 페이지가 클라이언트 사이드에서 렌더링되어 빌드 시점에 HTML이 비어있을 수 있어 오류 발생
+
+#### 🪙 해결 방법
+
+1. useEffect를 사용하여 렌더링 후 실행되도록 하거나 typeof window !== undefined 인 경우 체크
+
+```ts
+export default function PaymentSuspensePage() {
+  return (
+    <Suspense>
+      <PaymentPageasync />
+    </Suspense>
+  );
+}
+```
+
+</div>
+</details>
+
+<details>
+  <summary style="font-weight: bold;">2.라우트 핸들러를 활용한 서버 사이드에서의 결제 승인 처리</summary>
+  <div markdown="1">
+
+<br/>
+
+### 🤔 문제 상황
+
+- **초기 상태**: 사용자가 예약 버튼을 클릭하면 바로 예약 완료 페이지로 넘어가며, 추가 검증 절차가 없었습니다.
+- **변경 후**: 토스 api 테스트 결제 기능이 추가되어, 예약 과정에서 결제 성공 여부에 따라 예약을 진행하도록 변경해야 했습니다.
+
+### 1. 리다이렉트 주소를 받는 페이지 만들기
+
+첫번째로 구현한 방법은 리다이렉트 주소를 받는 페이지 컴포넌트를 만들었습니다.  이 페이지는 결제 완료 후 토스 API로부터 사용자를 리다이렉트하는 URL을 받아서 추가적인 검증 로직을 수행하여 결제의 성공 또는 실패를 판단하려고 했습니다.
+
+- 사용자가 예약 버튼을 클릭할 때, 오더 ID와 예약 정보를 로컬 스토리지에 저장합니다.
+- 토스 API로부터 받은 오더 ID와 로컬 스토리지의 오더 ID를 비교하여 결제의 성공 또는 실패를 검증합니다.
+- 성공 시, 데이터베이스에 정보를 업로드하고 예약 완료 페이지로 리다이렉트합니다.
+
+```tsx
+// successUrl: `${window.location.origin}/reserve/checkPay`,
+// 토스 api에서 사용자가 결제 완료 시 리다이렉트로 보내주는 url
+/* ex) http://localhost:3000/reserve/checkPay?paymentType=NORMAL&orderId=7e773321-2610-49fc-807c-b2e08730b0c8&
+paymentKey=tviva20240412020401crrz7&amount=55000 */
+
+const CheckPage = () => {
+  const searchParams = useSearchParams();
+  const queryOrderId = searchParams.get('orderId');
+  const storageOrderId = typeof window !== 'undefined' && window.localStorage.getItem('orderId');
+  const [reserveId, setReserveId] = useState('');
+  const [isLoaidng, setIsLoaidng] = useState(true);
+
+  const [reservationRequest, setReservationRequest] = useState<ReserveInfo>();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // 로컬 스토리지에서 예약 정보 가져와서 set
+      const storageData = window.localStorage.getItem('reservationInfo');
+      const reserveInfo: ReserveInfo = storageData ? JSON.parse(storageData) : null; // null 처리
+      setReservationRequest(reserveInfo);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (reservationRequest) {
+      const submitReservation = async () => {
+        // db에 예약 정보  insert
+        const responseReserveId = await insertNewReservation(reservationRequest);
+        if (responseReserveId) {
+          setReserveId(responseReserveId);
+          setIsLoaidng(false);
+        }
+      };
+      submitReservation();
+    } else {
+      // 요청 인자가 없으면 에러 메세지 출력을 위한 state set
+      //  setIsInvalidRequest(true);
+    }
+  }, [reservationRequest]);
+
+  useEffect(() => {
+    if (queryOrderId === storageOrderId) {
+      if (reserveId) {
+        router.push(`/reserve/success/${reserveId}`);
+      }
+    }
+  }, [reserveId]);
+
+  return <div>CheckPage</div>;
+};
+
+export default CheckPage;
+```
+
+그러나 checkPay 페이지에서 새로고침하면 예약 정보를 데이터베이스에 중복으로 등록할 수 있으며, 사용자가 쿼리스트링을 조작할 수 있다는 문제점도 존재했습니다.
+
+### ❗문제점
+
+- 사용자 또는 악의적인 제3자가 로컬 스토리지를 조작할 수 있으며 로컬 스토리지는 보안에 취약하다는 단점이 있습니다.
+- 사용자가 결제 대기 페이지 URL을 복사하거나 조작하여 checkPay 페이지에 접속할 경우, 실제로 결제를 거치지 않고도 예약 정보가 계속해서 데이터베이스에 등록될 수 있습니다.
+- 사용자가 브라우저 캐시를 지우거나 다른 브라우저/비공개 모드를 사용하는 경우 로컬 스토리지 데이터가 유실되어 결제가 비정상적으로 처리될 수 있습니다.
+
+<br/>
+
+### ✅ 해결 방안 - API 라우트 핸들러를 활용한 서버사이드 결제 승인 처리
+
+클라이언트 측에서 결제 로직을 처리하기에는 보안 문제와 결제 처리에 한계가 있다고 판단했고, Next에서 제공하는 라우트 핸들러를 통해 결제 성공 여부를 서버 사이드에서 처리하기로 결정했습니다.
+
+토스 api의 결제 처리 방식은 아래 사진과 같습니다. 사용자가 결제를 완료하면 리다이렉트 되는 주소를 라우트 핸들러로 받고, 라우트 핸들러에서 결제 승인 api를 호출해서 결제 성공 여부를 판단하기로 결정했습니다.
+
+![토스 api 결제 과정](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/11292ef1-c904-43d3-bcd2-7f00fa532372/Untitled.png)
+
+토스 api 결제 과정
+
+- **토스 requestPayment의 successUrl 설정**
+
+  - 토스 결제 성공 시 사용자를 리다이렉트하는 URL을 라우트 핸들러로 설정합니다.
+
+  ```jsx
+   try {
+   await paymentWidget?.requestPayment({
+    orderId: orderId as string,
+    orderName: title as string,
+    // 라우트 핸들러로 예약 정보 전송
+    successUrl: `${window.location.origin}/api/payment?classId=${reserveInfo.classId}&reserveQuantity=${reserveInfo.reserveQuantity}&timeId=${reserveInfo.timeId}&userId=${reserveInfo.userId}`,
+    //fail 시 보여줄 페이지 만들기
+    failUrl: `${window.location.origin}/fail?orderId=${orderId}&classId=${classId}`
+  });
+  ```
+
+- **쿼리스트링으로 예약정보 받아오기**
+
+  예약 정보와 결제 승인 호출에 필요한 orderId, amount, paymentKey를 추출합니다.
+
+  ```jsx
+  // api/payment/route.ts
+
+  export async function GET(request: NextRequest) {
+    const { searchParams } = new URL(request.url);
+
+    const orderId = searchParams.get('orderId');
+    const paymentKey = searchParams.get('paymentKey');
+    const amount = searchParams.get('amount');
+    const reserveQuantity = searchParams.get('reserveQuantity');
+    const timeId = searchParams.get('timeId');
+    const userId = searchParams.get('userId');
+    const classId = searchParams.get('classId');
+  ```
+
+- **결제 승인 API 호출**
+
+  orderId, amount, paymentKey를 사용하여 토스의 결제 승인 API를 호출합니다.
+
+  ```jsx
+  if (!orderId || !classId || !amount || !reserveQuantity || !timeId || !userId) {
+    // 값이 없으면 실패 페이지로 리다이렉트
+    return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/fail`));
+  }
+
+  const response = await fetch('https://api.tosspayments.com/v1/payments/confirm', {
+    method: 'POST',
+    body: JSON.stringify({ orderId: orderId, amount: amount, paymentKey: paymentKey }),
+    headers: {
+      Authorization: `Basic ${Buffer.from(`${process.env.TOSS_SECRET_KEY}:`).toString('base64')}`,
+      'Content-Type': 'application/json'
+    }
+  });
+  ```
+
+- **결제 승인 시 데이터베이스 처리**
+
+  - 결제가 승인되었다면, 데이터베이스에 사용자의 예약 정보를 저장합니다.
+  - 정보 저장이 성공하면, 완료 페이지로 사용자를 리다이렉트하면서 오더 ID를 URL 파라미터로 포함시킵니다.
+  - 결제 승인이 거절되거나 정보 저장에 실패할 경우, 사용자는 실패 페이지로 리다이렉트됩니다.
+
+  ```jsx
+  const res = await response.json();
+
+  if (response.ok) {
+    try {
+      //DB에 예약 정보 insert
+      await insertNewReservation({
+        reserveId: res.orderId,
+        classId,
+        reservePrice: res.totalAmount,
+        reserveQuantity: Number(reserveQuantity),
+        timeId,
+        userId
+      });
+
+      return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/success/${res.orderId}`));
+    } catch (error) {
+      console.log('라우트 핸들러의 insertNewReservation 오류 => ', error);
+      return NextResponse.redirect(new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/fail`));
+    }
+  } else {
+    return NextResponse.redirect(
+      new URL(`${process.env.NEXT_PUBLIC_BASE_URL}/reserve/fail?code=${res.code}&statusText=${res.message}`)
+    );
+  }
+  ```
+
+- **완료 페이지에서 데이터 처리**:
+
+      완료 페이지에서는 URL에서 오더 ID를 추출하여, 해당 오더 ID로 데이터베이스에서 예약 정보를 조회하여 출력합니다.
+      ```ts
+          const ReservationCompletePage = ({ params }: { params: { reservationId: string } }) => {
+          const reservationid = params.reservationId;
+          const { reservationDetails, isError, isLoading } = useFetchReservationDetail(reservationid);
+          // 중략
+      ```
+
+
+      ### 😊 결론
+      라우트 핸들러를 사용한 서버 사이드에서 결제 성공여부를 판단하여 보안을 향상시키고, 사용자의 실수나 악의적인 조작으로 인한 문제를 최소화할 수 있었습니다.
+
+    </div>
+  </details>
+
+  <details>
+<summary style="font-weight: bold;">3.디테일 페이지 렌더링 방식 결정</summary>
+  <div markdown="1">
+
+### 🚨 문제 발생
+
+nextjs가 13버전으로오면서 AppRoute 디테일 페이지를 코딩하던 중에 문득 디테일 페이지는 프로젝트
+
+***SEO가 중요하다***는 말이 떠올랐습니다.  디테일 페이지는 프로젝트 핵심 제품에 대한 정보를 상세히 담고 있고, 이러한 정보들이 검색 엔진 알고리즘을 통해 SEO 순위가 정해집니다.
+
+제가 짜고 있던 코드는 다음과 같습니다.
+
+```jsx
+User
+import React from 'react';
+import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
+import { useQuery } from '@tanstack/react-query';
+
+const page = async ({ params }: { params: { classId: string } }) => {
+  const classId = decodeURIComponent(params.classId);
+
+  const { data, status, error } = useQuery({
+    queryKey: ['detailClass'],
+    queryFn: detailClassInfo(classId),
+  });
+  if (status === 'pending') {
+    return <span>로딩중 입니다.</span>;
+  }
+
+  if (status === 'error') {
+    return <span>Error: {error.message}</span>;
+  }
+
+  .....
+};
+
+export default page;
+```
+
+     CSR 페이지로 렌더링 속도가 늦고, SEO가 좋지 않습니다.
+
+<br/>
+
+### 🛠️ 문제 해결 과정
+
+SSG, ISR, SSR중 하나를 골라 페이지를 구성해야됩니다. SSG,ISR은 보통 렌딩 페이지, 소개 페이지 등 **데이터가 변하지** 않는 페이지에 사용됩니다.
+
+반면, SSR은 데이터의 변화가 있으면서도 SEO를 챙기는 페이지, 즉 디테일 페이지에 적합하기 때문에 SSR로 페이지를 구성했습니다.
+
+코드는 다음과 같습니다.
+
+```jsx
+import { detailClassInfo } from '@/app/api/classdetail/detailClassInfo';
+import { getDetailUserInfo } from '@/app/api/classdetail/detailUserInfo';
+import ClassDetailContainer from '@/components/classDetail/ClassDetailContainer';
+import ClassImageCarousel from '@/components/classDetail/ClassImageCarousel';
+import ClassSummary from '@/components/classDetail/ClassSummary';
+import DetailComments from '@/components/classDetail/DetailComments';
+import MapComponent from '@/components/classDetail/MapComponent';
+import MoveToTopBtn from '@/components/listpage/MoveToTopBtn';
+import Link from 'next/link';
+import { IoIosArrowBack } from 'react-icons/io';
+
+export const dynamic = 'force-dynamic';
+
+const DetailPage = async ({ params }: { params: { id: string } }) => {
+  const classData = await detailClassInfo(params.id);
+  const userData = await getDetailUserInfo(classData?.user_id);
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="m-0 flex w-full  items-center bg-white p-2 text-text-dark-gray">
+        <Link href={`/`} className="flex items-center justify-center">
+          <IoIosArrowBack size={18} />
+          뒤로가기
+        </Link>
+      </div>
+      <div className="flex w-full justify-between gap-12 bg-pale-purple p-6">
+        <ClassImageCarousel classData={classData} />
+        <ClassSummary classData={classData} userData={userData} />
+      </div>
+
+      <div className="flex w-full  flex-col items-center justify-center p-6">
+        <ClassDetailContainer classTitle={classData?.title} classDescription={classData?.description} />
+        {classData?.location && (
+          <MapComponent location={classData?.location} detailLocation={classData?.detail_location} />
+        )}
+        <DetailComments classData={classData} />
+      </div>
+      <MoveToTopBtn />
+    </div>
+  );
+};
+
+export default DetailPage;
+
+```
+
+![스크린샷 2024-04-26 오후 9.33.27.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/4443cd29-382d-456c-b634-7331c212dbe9/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-26_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_9.33.27.png)
+
+     그 결과 lighthouse에서 검색엔진 최적화 만점!
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-weight: bold;">4.선생님/수강생 role 전환 시, 문제 및 해결과정</summary>
+  <div markdown="1">
+
+### 🚨문제 발생
+
+zustand에 isTeacher 값을 넣어서 상태를 유지 시켰는데, 새로고침 시 다시 제자리로 돌아옴…🥲
+
+### 해결 과정
+
+<br/>
+
+### 시도 1. `zustand persist`를 이용해서 isTeacher 값을 localStorage에 저장한다.
+
+수강생↔강사 전환 버튼 시, isTeacher 값이 localStorage에서 바뀌는 것을 확인할 수 있다. 
+
+```tsx
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+
+interface UserRoleState {
+  isTeacher: boolean | null;
+  setIsTeacher: (value: boolean) => void;
+}
+
+export const useUserRoleStore = create(
+  persist<UserRoleState>(
+    (set) => ({
+      isTeacher: false,
+      setIsTeacher: (value: boolean) => {
+        set({ isTeacher: value });
+      }
+    }),
+    {
+      name: 'userRoleStorage'
+    }
+  )
+);
+```
+
+zustand의 persist 미들웨어를 이용해서 상태를 저장소(localStorage, SessionStorage 등)에 저장하여 데이터를 유지 시킬 수 있다. 
+
+[zustand/docs/integrations/persisting-store-data.md at main · pmndrs/zustand](https://github.com/pmndrs/zustand/blob/main/docs/integrations/persisting-store-data.md)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/01e0bfbe-93af-4ccd-9ebf-33980bb36ecf/Untitled.png)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/d92dac12-03f5-48d4-85ab-d2fe3c889db7/Untitled.png)
+
+🚨하지만 여기서 문제가..!
+
+persist를 이용해서 localStorage에 상태를 저장했고, 해당 상태가 zustand에 그대로 남아있기 때문에, 로그아웃을 하고 새로 로그인을 하여도 그대로 상태가 유지된다. 
+
+하지만 문제가… 우리는 지금 하나의 id로 로그인 할 경우에는 해당 id에 맞는 상태가 저장되는데, 카카오 로그인을 했을 때 마지막 상태가 isTeacher : true인 선생님 상태로 로그아웃을 하더라도, 이후 구글 로그인으로 처음 사이트에 로그인을 하게 되면 isTeacher : false인 수강생으로 시작해야하는데, localStorage에 남아있는 isTeacher : true 값 때문에 처음 로그인한 회원도 선생님 상태가 되어버린다…!
+
+즉,,, 로그인 한 유저의 id에 따라 zustand에 상태가 유지되어야 한다는 말..!
+
+<br/>
+
+### 시도 2. 처음부터 로그인한 사람의 isTeacher 값을 db로 부터 받아와서 zustand에 저장하자
+
+: `role-based authentication`으로 access control을 하는 방법 중 하나이다.
+
+```tsx
+export default function useSetSessionStorage() {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (!session) return;
+
+    const userEmail = session?.user?.email ?? null;
+
+    if (userEmail) {
+      sessionStorage.setItem('userEmail', userEmail);
+    }
+
+    // supabase에서 isTeacher 값 불러오기
+    const fetchUserRole = async () => {
+      if (!userEmail) {
+        console.error('이메일 값을 받아오지 못합니다.');
+        return;
+      }
+      try {
+        const userRole = await getUserRole(userEmail);
+				const isTeacher = userRole?.isTeacher ?? false;
+				
+				//zustand에 상태 저장
+        useUserRoleStore.setState({ isTeacher });
+      } catch (error) {
+        console.error('Failed to fetch user role', error);
+      }
+    };
+    fetchUserRole();
+  }, [session]);
+  return;
+}
+```
+
+로그인 시 저장되는 session에서 userEmail 값을 이용해서 유저를 구분해주는 것!
+
+유저의 email이 있을 경우, getUserRole을 통해 users 테이블에서 isTeacher의 초기값(false)을 불러와서 `useUserRoleStore` 에 저장한다!
+
+따라서 해당 값은 user의 email에 따라서 zustand에 다르게 저장되고, 이에 따라서 유저가 다른 아이디로 로그인 하더라도 해당 로그인한 유저의 isTeacher 값은 독립적으로 움직인다는 말!!
+
+role이 다른 경우, zustand에 값을 저장해서 비교해나가자🔥
+
+</div>
+</details>
+
+
+<details>
+<summary style="font-weight: bold;">5.로그인 프로세스와 관련된 문제 해결 </summary>
+  <div markdown="1">
+
+처음 로그인 페이지 기획 시 로그인 단계는 총 3단계로 구현하기로 기획
+
+DB > supabase
+
+auth > nextAuth
+
+모달 > paraller, InterCepting Routes
+
+<br>
+
+1단계 모달 : 선생님 또는 수강생선택
+
+2단계 모달 : 선생님 선택 시 2단계 모달로 이동되며 직업, 분야를 추가로 받기
+
+3단계 모달 : 실제 회원가입 창 (이메일, 소셜로그인)
+
+<br>
+
+
+### 구현 방법
+
+1. zustand를 이용해 각각의 단계(1단계 2단계)에서 받은 내용을 스토어를 이용해 저장
+
+2. 3단계에서 소셜 회원가입 버튼을 누르면 각각의 소셜에서 주는 유저의 정보를 담아 스토어에 저장
+
+3. 유효성을 이용해 3개의 단계에서 받은 데이터가 잘 들어왔는 지 확인 후 수퍼베이스에 전송
+
+<br>
+
+
+### 🚨문제발생
+
+- 위 기획 단계를 모두 구현 후 실제 값이 잘 들어가는지 확인해 보았으나 값이 들어가지 않음
+
+<br>
+
+
+### 🛠️문제해결 과정
+
+✅ 1,2 단계 값이 잘 담기는지 확인
+
+✅  소셜 회원가입 후 값이 잘 담기는지 확인
+
+✅  소셜 로그인 시 스토어에 모든 값이 잘 담겨 있는지 확인
+
+
+<br>
+
+### 🔥찾아낸 문제점
+
+- 1,2 단계에서 값이 잘 담기는 것을 확인하였으나 문제는 소셜 회원가입 시 화면이 리렌더링 되어 스토어에서 담고 있던 값들이 모두 초기화 되는 문제점
+- 소셜 회원가입은 회원가입과 로그인을 동시에 처리
+
+즉, 회원가입 후 로그인이 동시에 처리되기 때문에 화면이 리렌더링 될 수 밖에 없고 로그인 후 유저의 정보를 받아 올 수 있음
+
+
+<br>
+
+
+### 해결 방법 모색
+
+1. zustand persist 사용하기
+
+2. 회원가입 순서 갈아업기 (회원가입 후 별도의 페이지에서 추가 (직업, 비즈니스 분야)  정보 받기)
+
+
+<br>
+
+❓zustand persist 사용하기
+
+스토어의 상태를 로컬스토리지나 세션스토리지와 같은 영구 저장소에 값을 저장하고 있다가
+
+슈퍼베이스에 전송을 하는 방법이다.
+
+
+<br>
+
+
+⚠️해당 방법을 채택하는 경우
+
+- 하드코딩
+
+1. 처음 사용자의 정보가 없는 상태에서 사용자의 정보를 zustand persist(직업, 비즈니스 분야) 이용해 저장
+
+2. 소셜로그인이 되면 세션으로 받은 사용자의 정보를 상태값에서 따로 저장 (서버 컴포넌트에서 세션에 저장된 값을 불러와 상태값을 따로 저장 불가 때문에 사용자가 로그인 후 클라이언트 컴포넌트에서 세션을 통해 들어온 값을 불러 zustand에 저장하는 과정 필요)
+
+3.  2번 단계에서 받은 값을 zustand에 추가로 저장4. 이후  zustand persist에 저장된 값을 supabase에 전달.5. 회원가입 완료 후에 선생님 정보로 필요한 데이터를 따로 입력 필요
+
+
+- 보안 취약
+
+치명적 단점으로 zustand persist를 이용하는 경우 loclastorage에 모든 값이 저장되므로 보안에 취약해진다.
+
+<br>
+
+
+❓회원가입 순서 갈아업기
+
+소셜로그인 후 사용자의 정보를 가지고 그 사용자의 정보를 추가로 받는 방법
+
+⚠️해당 방법을 채택하는 경우
+
+zustand persist를 사용하지 않아도 되기 때문에 보안 강화
+
+코드 간편화
+
+<br>
+
+
+### 💡결론
+
+채택은 회원가입 순서 갈아업기
+
+그래서 작성해둔 코드가 너무 깝고 속상하지만 페러렐라우터와 인터셉터를 배웠다는 것으로 만족하기로 했다.
+
+과연 다른 방법도 있는지 알아보고 싶으나 더 이상의 시간 소요는 할 수 없다고 판단 하였다.
+
+소셜 로그인(학생으로 회원가입) > 마이페이지에서 강사로 전환 후 추가 데이터 받기
+
+</div>
+</details>
+
+<details>
+<summary style="font-weight: bold;">6.클래스 예약 시스템의 데이터 구조 개선</summary>
+  <div markdown="1">
+
+## **기술적 의사결정**
+    
+    ### **🤔 문제 상황**
+    
+    클래스 예약 시스템을 구축하는 과정에서, 예상치 못한 문제에 직면했습니다. 초기 설계에서는 클래스의 일자와 시간을 클래스 테이블에 배열 형태로 저장하고, 예약된 인원 수를 **`count`** 필드를 사용해 관리하며, 남은 자리를 클래스의 최대 인원에서 예약 인원 수를 빼서 보여주는 방식을 채택했습니다.
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/7a1e4d31-9f5b-40d1-9d7d-569c07e6c2df/Untitled.png)
+    
+    ### **❗발견된 문제**
+    
+    클래스에 다수의 시간대가 존재할 경우, 각 회차별로 남은 자리를 별도로 관리해야 할 필요가 있는데, 현재의 테이블 설계로는 이를 관리할 수 없었습니다. 이는 일자와 시간의 종속 관계를 제대로 반영하지 못한 설계 오류였습니다.
+    
+    ### **💫 제안된 의견**
+    
+    ```bash
+    1. 객체 형태로 관리하기 (클래스 - 일자 - 회차)
+    장점👍
+    - 직관적이다
+    클래스 하나를 선택했을 때, 그 안에 포함된 일자와 회차까지 한 번에 조회할 수 있다.
+    
+    단점😰
+    - 관계형 데이터베이스에 맞지 않는 설계
+    
+    2. 날짜, 시간 테이블을 따로 만들기
+    장점👍
+    - 데이터 무결성
+    각 테이블이 독립적이고 관계를 통해 연결되어 있기 때문에, 데이터 무결성을 유지하면서 관리하기가 용이하다.
+    
+    - 확장성
+    구조를 변경할 필요 없이 새로운 관계를 정의하거나 기존 관계를 수정할 수 있다
+    ex) 만약 클래스의 회차별로 정원을 따로 관리하는 기능을 추가해야 할 때 갈아엎을 필요없이 테이블을 추가, 수정하면 된다.
+    
+    단점😰
+    - 조회 성능 저하
+    각 세션의 정보를 조회하기 위해서 여러 테이블을 조인해야한다. 따라서 조회 성능이 하락한다.
+    
+    - 기존 api 함수 다 갈아엎어야함.. 😂
+    ```
+    
+    ### **✅ 결정한 방식**
+    
+    **날짜, 시간 테이블을 따로 만들기**
+    
+    지금까지 json-server나 firebase같은 NoSQL 형식의 DB를 사용했기 때문에 1번 방식에 익숙하고, supabase에서도 객체를 담는식으로 구현할 수도 있지만 관계형 DB인 supabase를 사용하기로 결정한 만큼 그에 맞는 설계를 하는 것이 맞다고 판단했습니다.
+    
+ ## **DB 테이블 설계**
+    
+    **1. Date, Time 테이블 만들기**
+    
+    **Date 테이블**
+    
+    !https://blog.kakaocdn.net/dn/dbP7kK/btsGsVbFyC8/eXKxg22EFcUqgNtjyHsGe0/img.png
+    
+    date 테이블에는 어떤 클래스에 등록 된 일자인지 알아야 하기때문에 class_id를 외래키로 넣어줬고, 일자인 day 필드를 넣었습니다.
+    
+    **Time 테이블**
+    
+    !https://blog.kakaocdn.net/dn/dPKe36/btsGq8peUXE/FBnmoj9gN4tQTh3lVZUd0K/img.png
+    
+    Time 테이블에는 이 시간이 어떤 일자에 종속되어있는지 알아야 하기 때문에 date_id를 외래키로 넣었습니다.
+    
+    ### 테이블 연결 관계
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/9fb9daa3-13c3-4f1d-8aea-41a79caca3b9/Untitled.png)
+    
+    - **DB ERD 설명**
+        - **`reserve`** 테이블과 **`class`** 테이블은 **`class_id`**로 연결됩니다.
+        - **`date`** 테이블은 **`class_id`**로 **`class`** 테이블과 연결됩니다.
+        - **`reserve`** 테이블과 **`time`** 테이블은 **`time_id`**로 연결됩니다.
+        - **`time`** 테이블은 **`date_id`**로 **`date`** 테이블과 연결됩니다.
+    
+## **테이블 조인을 활용한 예약 정보 불러오기**
+    
+    설계한 ERD를 바탕으로 예약정보의 클래스 정보, 시간, 일자를 받아오기 위한 과정은 다음과 같습니다.
+    
+    1. **클래스 정보 조인**:
+        - 예약 정보의 **`class_id`**를 사용하여 **`class`** 테이블과 조인하고, 예약된 클래스의 **`title`**, **`total_time`**, **`location`** 정보를 가져옵니다.
+    2. **시간 정보 조인**:
+        - 예약 정보의 **`time_id`**를 사용하여 **`time`** 테이블과 조인하고, 예약된 시간(**`times`**) 정보를 가져옵니다.
+    3. **일자 정보 조인**:
+        - **`time`** 테이블에서 가져온 **`date_id`**를 사용하여 **`date`** 테이블과 조인하고, 해당하는 일자의 **`day`** 정보를 가져옵니다.
+    
+    ### supabase 메서드를 활용한 조인
+    
+    supabase 메서드를 사용해 조인하는 함수입니다. 이 함수는 **`reserve_id`**를 받아 **`reserve`** 테이블에서 해당 예약에 대한 정보를 불러오며, **`class`**와 **`time`**, 그리고 **`date`** 테이블을 조인하여 필요한 정보를 불러오게 됩니다.
+    
+    ```tsx
+    // reserve 테이블과 class 테이블을 class_id로 inner조인하고, class 테이블에서 title, total_time, location만 선택하여 결과에 포함
+    // time 테이블을 time_id로 조인
+    // time테이블에서 time_id가 일치하는 레코드의 date_id로 date 테이블 inner조인하고, date 테이블에서 day만 선택하여 결과에 포함
+    
+    export const fetchReservationDetails = async (reserveId: string) => {
+      const { data, error }: PostgrestSingleResponse<DBReservationDetailsType> = await supabase
+        .from('reserve')
+        .select(
+          `
+            class_id, reserve_quantity, reserve_price, time_id, user_id,
+            class(title, total_time, location),
+            time (times, date(day))
+      `
+        )
+        .eq('reserve_id', reserveId)
+        .single();
+    
+      if (error) {
+        console.log('fetchReservationDetails error =>', error);
+        return;
+      }
+      
+      return data;
+      };
+    ```
+    
+    함수의 반환값은 다음과 같이 출력됩니다.
+    
+    ![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/0c65ac63-5b6d-40c1-b38d-45fb3689697d/Untitled.png)
+    
+## **결론**
+    
+😊 결론
+    
+    관계형 데이터베이스에 적합한 설계를 통해 각 테이블이 독립적인 역할을 할 수 있도록 하고, 외래 키 관계로 연결되도록 하여 데이터의 무결성을 지킬 수 있었습니다. 
+    
+    또한 이 경험을 통해 초기 설계의 중요성을 깊이 느꼈습니다. 철저한 초기 분석과 설계는 나중에 발생할 수 있는 많은 문제를 예방할 수 있다는 것을 배웠습니다.
+
+</div>
+</details>
+
+<details>
+<summary style="font-weight: bold;">7.라이브러리 css 충돌 해결과정</summary>
+  <div markdown="1">
+
+### 🚨 문제 발생
+
+SPA에서 같은 라이브러리를 각 페이지에서 사용할 경우 현재 페이지의 CSS가 이전 페이지의 CSS로 적용되는 CSS 충돌 발생🛠️ 문제 해결 과정
+
+![image (2).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/822cba63-da67-4dcc-9a8e-6ffd5c97358d/image_(2).png)
+
+css가 정상적으로 작동! 이걸 토대로 구글링을 해본 결과 SPA에서는 CSS 충돌이  빈번하기 때문에 사전에 조치를 취해야 된다는 결론이 나왔습니다.
+
+<br>
+
+🪙 해결 방법
+
+1. useEffect를 사용해서 css 적용 - 성능을 저하시키기 때문에 x
+2. Css 모듈화 - 가장 대중적으로 쓰이면서 유지 보수성, 재사용성도 높아지기 때문에 O
+3. useState로 조건부 css 적용 - css충돌 때문에 상태관리 까지 사용하면 비용적인 측면에서 x
+
+이러한 이유로 CSS 모듈화를 선택했습니다. 
+
+<br>
+
+
+**기존  방식**
+
+![스크린샷 2024-04-27 오후 6.13.53.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/a7d2a74e-5b34-469a-923e-39dc1042a536/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.13.53.png)
+
+[]()
+
+<br>
+
+
+🛠️ 문제 해결 과정
+
+처음에는 디테일 페이지와 메인 페이지만 embla 캐러셀을 사용하기 때문에 메인 페이지의 캐러셀 css를 비활성화 시켜보았다 그 결과
+
+![image (3).png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/6126de9f-03f6-4295-a62e-2b64680c2d45/image_(3).png)
+
+css를 직접 임포트하는 방식
+
+<br>
+
+
+---
+
+CSS 모듈화
+
+1. 파일 이름 변경
+
+![스크린샷 2024-04-27 오후 6.10.44.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/a67e0c84-9262-4eb3-b27f-ec58b341e815/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.10.44.png)
+
+2. 임포트 방식 변경
+
+![스크린샷 2024-04-27 오후 6.10.58.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/59f83dec-c156-494b-bb87-fddf37f5c329/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.10.58.png)
+
+3. 모듈 사용 방법
+
+![스크린샷 2024-04-27 오후 6.16.57.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/f63caa5e-e07a-4637-a07a-5889354e79de/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2024-04-27_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_6.16.57.png)
+
+이러한 방법으로 CSS 충돌을 해결했습니다.
+
+</div>
+</details>
+
+<details>
+<summary style="font-weight: bold;">8.Image url은 있는데 사진이 안 뜨는 문제 해결 (with supabase)</summary>
+  <div markdown="1">
+
+### 트러블 슈팅🔥
+
+### 문제 1) image url은 잘 들어오는데 사진이 안 뜨는 상황
+
+댓글을 작성하는 페이지에서 다른 값들은 다 comment에 잘 담겨서 들어와서 해당 data를 렌더링 해주는데 문제가 없었는데, 이미지만 잘 안 불러와지는 문제가 생겼었다.
+
+console.log를 계속 찍어서 확인도 해보고, 이미지 url도 복사해서 넣어보고 하니 사진이 잘 뜨는데 
+
+`src={comment.image[0]}` 에서만 사진을 불러오지 못하고 있었다.
+
+```tsx
+<img
+		src={comment.image[0]}
+		alt="클래스 대표 사진"
+		width={300}
+		height={200}
+		className="w-full h-full p-4"
+		style={{ objectFit: 'contain' }}
+/>
+```
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/e8ba6d9d-3c7e-4c97-9213-7314b69f3f5d/Untitled.png)
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/5fe98bd3-c7eb-4785-8367-86ca82403fdc/Untitled.png)
+
+<br>
+
+### 문제 원인 파악)
+
+다른 mainpage에서는 image로 url을 잘 받아오고 있고, 메인 화면에서도 잘 뜨고 있음… 뭐지..
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/6b27b419-0057-4a8c-b67f-dda1acff9acf/Untitled.png)
+
+둘의 차이점이 무엇일까 비교하던 중 문제점 파악!!
+
+내가 위에서 받아오고 있던 후기 작성하기에서는 image 자체를 `‘ ’` 바로 이 따옴표 안에서 `string` 으로 받아오고 있었기 때문…!!!
+
+우리는 image 파일 여러 개를 넣기 위해 type을 `array`로 선택하였고, 그 중에서도 첫 번째 사진을 대표 사진으로 생각하고 `src={comment.image[0]}` 이렇게 사진을 넣으려고 했다.
+
+하지만 현재 image 데이터 자체가 string 이기 때문에, 배열의 기능을 상실하고 index 0의 경우 그냥 `{` 만 들어오고 있었던 셈…! 
+
+~~왜 이부분만 따로 콘솔 찍어볼 생각을 못했을까…~~
+
+```tsx
+image: '{https://d1x9f5mf11b8gz.cloudfront.net/class/20220308/ec9fa67b-0040-413d-ae8b-258d46df07c4.jpg}'
+```
+
+근데 여기서 image data가 string으로 들어오고 있던 이유는 바로 db join을 통해서 데이터를 받고 있었는데, image를 `array`가 아닌 `text`로 받아오고 있었기 때문…!!! 
+
+```sql
+CREATE OR REPLACE FUNCTION fetch_class_info_on_comment(p_user_id uuid) 
+RETURNS TABLE (
+  class_id uuid,
+  comment_id uuid,
+  title text,
+  image text,
+  content text,
+  create_at timestamp
+) AS $$
+SELECT
+  c.class_id,
+  m.comment_id,
+  c.title,
+  c.image,
+  m.content,
+  m.create_at
+FROM
+  comments m
+JOIN
+  class c ON m.class_id = c.class_id
+WHERE
+  m.user_id = p_user_id;
+$$ LANGUAGE sql STABLE;
+```
+
+<br>
+
+### 문제 해결)
+
+여기서 `image text` 이 부분을 `image text[]`  이렇게 image가 array로 들어오도록 해주면 바로 값이 배열에 담긴채 들어오고 있는 걸 확인 할 수 있었다!!
+
+하지만 기존의 함수에서 바로 수정을 하니 error를 뱉어서 새로운 `New query`를 생성해서 함수를 생성해주었다.
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/4bdc7c8d-0fb6-4a37-8e5a-cef879863171/Untitled.png)
+
+`ERROR:  42P13: cannot change return type of existing function`
+`DETAIL:  Row type defined by OUT parameters is different.`
+`HINT:  Use DROP FUNCTION fetch_class_info_on_comment(uuid) first.`
+
+새로운 query 생성해서 하니 잘 작동하였고, 값도 배열로 아주 잘 받아져오는걸 확인 할 수 있었다.
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/8b952fc0-9d76-4273-b945-6307c1bf7828/Untitled.png)
+
+image가 배열 형태로 아주 잘 들어오는걸 확인 할 수 있었다!!
+
+```tsx
+image : ['https://d1x9f5mf11b8gz.cloudfront.net/class/20220308/ec9fa67b-0040-413d-ae8b-258d46df07c4.jpg']
+```
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/8bd9036d-9c14-4601-87f4-f939f992fc23/Untitled.png)
+
+🔥 typescript를 통해 type error를 많이 잡을 수 있었지만, SQL query에서 image type을 text로 작성해주는 것까지 잡아주지는 못 했다..!! 
+
+결국은 처음 설정한 type을 잘 지켜주는 것이 매우 중요하다. 정신차리고 코딩하자~~
+
+<br>
+
+### 문제 2) supabase storage에 업로드한 이미지 url이 `404 not found` ?!?!
+
+supabase storage에서 이미지 파일을 업로드한 다음 table `image` data에 추가도 되었고, 콘솔에도 image url이 잘만 뜨는데 왜 404가 뜨는지… 봐도봐도 친해지지 못하는 `404 not found` 
+
+```tsx
+image : ["https://hdurwturhsczrdeugmon.supabase.co/storage/v1/object/public/uploads/b06db7ba-911e-4f4f-993e-147d47118307_143777_149131_434.jpg", …]
+```
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/6fbfa9cc-165c-47bf-8b48-ed0944734e6a/Untitled.png)
+
+<br>
+
+### 문제 원인 파악
+
+원인 파악을 위해 우선 image url이 실제 storage에 저장된 url과 같은지 확인해보아야 한다. 
+
+일단 지난번 팀 프로젝트에서 supabase를 한 번 사용해 본 적이 있었고, 그때 storage를 담당하던 팀원분께서 엄청 고생을 많이 하시고 해당 url을 확인하는 방법을 찾아내서 알려주신 적이 있었다. 
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/8a748eb7-c764-47f1-9747-39da7902b689/Untitled.png)
+
+그래서 아래 `GET URL` 을 통해 주소를 확인해보니 다음과 같았다.
+
+~~(저 버튼을 클릭하면 url 주소가 복사되므로 해당 url을 주소창에 넣어서 확인해보자..)~~
+
+```
+https://hdurwturhsczrdeugmon.supabase.co/storage/v1/object/public/classImages/uploads/'b06db7ba-911e-4f4f-993e-147d47118307_143777_149131_434.jpg
+
+https://hdurwturhsczrdeugmon.supabase.co/storage/v1/object/public/uploads/b06db7ba-911e-4f4f-993e-147d47118307_143777_149131_434.jpg
+```
+
+
+얼핏 보기엔 두 url 주소가 비슷해보여서 같은 주소가 맞는데 왜 값이 이미지를 못 불러오지? 라고 생각할 수 있는데… 진짜 자~알 뜯어보니 두 주소가 다른 걸 확인할 수 있었다. 
+
+→ 바로 `public/classImages/uploads` 와 `public/uploads` 이 부분이었다..  처음부터 url path 설정을 해줄 때 ‘classImages’(bucket name) 를 추가해주지 않았고, 제대로된 경로가 아니므로 이미지 파일을 찾을 수 없다고 뜨고 있었다. 
+
+```tsx
+  // supabase storage에 등록한 이미지 업로드
+  const uploadFile = async (file: File) => {
+    const cleanName = cleanFileName(file.name);
+    const filePath = `uploads/${uuidv4()}_${cleanName}`;
+    const { data, error } = await supabase.storage.from('classImages').upload(filePath, file);
+    if (error) {
+      console.error('파일 업로드 실패:', error);
+      return null;
+    } else {
+      const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/${data.path}`;
+      return url;
+    }
+  };
+```
+
+<br>
+
+### 문제 해결) 정확한 경로로 url 접근하기
+
+🔥 제대로된 url 주소만 따로 보면 다음과 같다.
+
+```tsx
+const url = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/storage/v1/object/public/classImages/${data.path}`;
+```
+
+여기서 url 주소를 만들어주는 부분이 있는데, 
+
+1. `${process.env.NEXT_PUBLIC_SUPABASE_URL}`  : 초기 설정한 supabase의 url 주소
+2. `/storage/v1/object/public`  : supabase 내에서 storage에 접근하는 주소
+3. `/classImages`  : storage bucket 이름을 작성
+4. `/${data.path}` : 내가 설정한 filePath를 가장 마지막에 붙여준다.
+
+```tsx
+const filePath = uploads/${uuidv4()}_${cleanName};
+```
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/9ee03fa2-643d-49dc-a1a9-980f9b4e74b4/Untitled.png)
+
+</div>
+</details>
+
+<details>
+<summary style="font-weight: bold;">9.Image 최적화 및 성능</summary>
+  <div markdown="1">
+
+### 이미지 속도 최적화하기
+
+### `fill + className` v.s `fill + sizes + objectFit`
+
+1. Image 컴포넌트 내에서 fill 속성 사용  + className으로 object-cover 속성 사용
+
+```tsx
+/* MainPage */
+<Image
+  fill={true}
+  src={classInfos.image && classInfos.image.length > 0 ? classInfos.image[0] : noImage}
+  alt="클래스 이미지"
+  style={{ objectFit: 'cover' }}
+/>
+```
+
+⇒ size 및 time 확인
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/1162b68b-3fd3-4eb0-b406-6e80e9c2dd61/23ecb335-e61a-4551-a3b4-df939e3c8d07.png)
+
+대체적으로 **120~216 ms 정도**의 시간이 걸림
+
+1. Image 컴포넌트 내에서 fill 속성 + sizes 속성 함께 사용 + placeholder 속성 추가
+
+```tsx
+<Image
+  sizes="(max-width: 768px) 128px, 256px"
+  placeholder="empty"
+  fill={true}
+  src={classInfos.image && classInfos.image.length > 0 ? classInfos.image[0] : noImage}
+  alt="클래스 이미지"
+  style={{ objectFit: 'cover' }}
+/>
+```
+
+⇒ size 및 time 확인
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/2286272d-dfdf-4c37-87c6-62b172b6b8fe/05512135-052c-4d2e-892f-e5ea625cdae2.png)
+
+대체적으로 **10~100ms 이하의 시간**으로 이미지가 로딩되는 시간이 줄어든 것을 확인할 수 있다.
+
+</div>
+</details>
+
+
+<br>
 
 
 # 회고
