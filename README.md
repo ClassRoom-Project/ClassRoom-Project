@@ -929,7 +929,8 @@ zustand persist를 사용하지 않아도 되기 때문에 보안 강화
 
 클래스 예약 시스템을 구축하는 과정에서, 예상치 못한 문제에 직면했습니다. 초기 설계에서는 클래스의 일자와 시간을 클래스 테이블에 배열 형태로 저장하고, 예약된 인원 수를 **`count`** 필드를 사용해 관리하며, 남은 자리를 클래스의 최대 인원에서 예약 인원 수를 빼서 보여주는 방식을 채택했습니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/7a1e4d31-9f5b-40d1-9d7d-569c07e6c2df/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/103973797/786d1ae5-77aa-4de6-85fe-54ae5acb46d5)
+
 
 ### **❗발견된 문제**
 
@@ -976,19 +977,22 @@ zustand persist를 사용하지 않아도 되기 때문에 보안 강화
 
 **Date 테이블**
 
-!https://blog.kakaocdn.net/dn/dbP7kK/btsGsVbFyC8/eXKxg22EFcUqgNtjyHsGe0/img.png
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/103973797/3b1aa236-55d3-46f9-ba9e-a4c4f67b3e8e)
+
 
 date 테이블에는 어떤 클래스에 등록 된 일자인지 알아야 하기때문에 class_id를 외래키로 넣어줬고, 일자인 day 필드를 넣었습니다.
 
 **Time 테이블**
 
-!https://blog.kakaocdn.net/dn/dPKe36/btsGq8peUXE/FBnmoj9gN4tQTh3lVZUd0K/img.png
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/103973797/863cc2d8-e9bc-4a78-b793-86f067fb160b)
+
 
 Time 테이블에는 이 시간이 어떤 일자에 종속되어있는지 알아야 하기 때문에 date_id를 외래키로 넣었습니다.
 
 ### 테이블 연결 관계
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/9fb9daa3-13c3-4f1d-8aea-41a79caca3b9/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/103973797/aa2de79b-552d-43a1-ac55-d4070b022315)
+
 
 - **DB ERD 설명**
 - **`reserve`** 테이블과 **`class`** 테이블은 **`class_id`**로 연결됩니다.
@@ -1020,7 +1024,7 @@ Time 테이블에는 이 시간이 어떤 일자에 종속되어있는지 알아
 ### supabase 메서드를 활용한 조인
 
 
-supabase 메서드를 사용해 조인하는 함수입니다. 이 함수는 **`reserve_id`**를 받아 **`reserve`** 테이블에서 해당 예약에 대한 정보를 불러오며, **`class`**와 **`time`**, 그리고 **`date`** 테이블을 조인하여 필요한 정보를 불러오게 됩니다.
+supabase 메서드를 사용해 조인하는 함수입니다. 이 함수는 를 **`reserve_id`**를 받아 **`reserve`** 테이블에서 해당 예약에 대한 정보를 불러오며, **`class`**와 **`time`**, 그리고 **`date`** 테이블을 조인하여 필요한 정보를 불러오게 됩니다.
 
 
 ```tsx
@@ -1054,7 +1058,8 @@ export const fetchReservationDetails = async (reserveId: string) => {
 
 함수의 반환값은 다음과 같이 출력됩니다.
 
-![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/83c75a39-3aba-4ba4-a792-7aefe4b07895/0c65ac63-5b6d-40c1-b38d-45fb3689697d/Untitled.png)
+![image](https://github.com/ClassRoom-Project/ClassRoom-Project/assets/103973797/be50a856-015a-4435-9ae5-4408b046a5cd)
+
 
 
 ## **결론**
