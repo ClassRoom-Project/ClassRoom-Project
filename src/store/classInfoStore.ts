@@ -15,6 +15,7 @@ export type DetailClassStoreType = {
   classInfo: ListDetailClassInfo | null;
   setClassInfo: (classInfo: ListDetailClassInfo | null) => void;
 };
+
 export const useLatestClassInfoStore = create<LatestClassInfoType>((set) => ({
   LatestClassInfos: [],
 
