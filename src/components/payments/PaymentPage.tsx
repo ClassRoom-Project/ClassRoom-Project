@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 import { useAsync } from 'react-use';
 
-const clientKey = 'test_ck_QbgMGZzorzKxLWD9qNkk8l5E1em4' as string;
+const clientKey = 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm' as string;
 
 export default function PaymentPageasync() {
   const router = useRouter();
@@ -57,9 +57,11 @@ export default function PaymentPageasync() {
   }, [price]);
 
   return (
-    <div className="mx-auto my-20 max-w-2xl px-4">
-      <div className="mt-4 flex flex-col gap-2">
-        <h1 className="text-button-default-colo text-lg font-semibold md:text-2xl">확인 및 결제</h1>
+    <div className=" mx-auto my-20 flex h-screen max-w-2xl items-center justify-center px-4">
+      <div className="mt-4 flex flex-col  gap-2">
+        <h1 className="text-button-default-colo flex w-full justify-center text-lg font-semibold md:text-2xl">
+          확인 및 결제
+        </h1>
         <p className="text-grey-600 mb-4">
           결제 수단을 선택하고 결제를 진행해주세요. 환불금은 예약 취소 후 2-3일 내에 결제한 카드로 입금됩니다. 아래
           버튼을 눌러 예약을 결제하세요.
