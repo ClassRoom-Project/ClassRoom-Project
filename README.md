@@ -76,9 +76,8 @@
 | 선생님 마이페이지 | 수강생 마이페이지 |
  <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/3c32da94-5ab9-4051-a85f-5f843c7db5f4" style="width:500px;" /> | <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/7a24d80a-2631-44cb-b5f0-1f2dbdaaf98e" style="width:500px;" /> | 
 | 결제 페이지 | 채팅페이지 | 
- <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/f24bb26d-5a4a-4073-9ae8-5fefef40849e" style="width:500px;" /> | <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" /> |
+ <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/189375d2-4046-4f57-9097-20cdf3ee11e2" style="width:500px;" /> | <img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9949ca48-2abe-4661-864b-98c1556f422f" style="width:500px;" /> |
 <br>
-
 
 ### 피그마
 
@@ -111,23 +110,23 @@
 <br><br><br><br>
 
 ## 2. 리스트페이지
-|기본형|반응형|
-|------|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/6f94f455-0882-4ac1-b119-db4866e418e8" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/61c2aa57-67d4-4fe4-ad72-250e28202bd0" style="width:300px;" /> |
 
-<h3> 1-2. 리스트페이지 </h3>
-      <ul>
-        <li>supabase 쿼리 메서드를 사용한 데이터 필터링</li>
-        <li>useInfiniteQuery api와 IntersectionObserver 로직을 이용한 클래스 리스트 무한스크롤 기능</li>
-      </ul>
+<div>
+ <ul>
+	<li>supabase 쿼리 메서드를 사용한 데이터 필터링</li>
+	<li>useInfiniteQuery api와 IntersectionObserver 로직을 이용한 클래스 리스트 무한스크롤 기능</li>
+ </ul>
+</div>
+      
+|반응형|
+|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/61c2aa57-67d4-4fe4-ad72-250e28202bd0" style="width:300px;" /> |
+
 <br><br><br><br>
 
 ## 3. 클래스 디테일페이지
-|클래스 요약|클래스 설명란|댓글|
-|---|---|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/a2912189-c1ca-45df-899d-dc3adfbb5580" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/2f656700-2846-41e8-ab14-50f129ee1f41)" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/bbc32c89-c3db-4405-aa64-8cc48fc11296" style="width:300px;" /> |
-  
-  <h3> 2-1. 클래스 정보 디테일페이지 </h3>
+
+<div>
       <ul>
         <li>클래스 상세 정보 표기</li>
         <li>Embla-Carousel 라이브러리를 이용하여 카드를 캐러셀 형태로 표시</li>
@@ -135,28 +134,33 @@
         <li>클래스를 찜하면 마이페이지 위시리스트에 추가</li>
         <li>카카오 Map API를 통한 클래스 위치 표기 </li>
       </ul>
+</div>
 
-
-      
+|클래스 요약|클래스 설명란|댓글|
+|---|---|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/a2912189-c1ca-45df-899d-dc3adfbb5580" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/2f656700-2846-41e8-ab14-50f129ee1f41)" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/bbc32c89-c3db-4405-aa64-8cc48fc11296" style="width:300px;" /> |
+        
 <br><br><br><br>
 
 ## 3. 로그인/회원가입
-  <h3> 3-1. 로그인/회원가입 </h3>
+<div>
       <ul>
         <li>NextAuth를 이용한 사용자 인증</li>
         <li>Json Web Token을 활용해 사용자 세션 관리</li>
         <li>서버사이드 미들웨어로 경로별 접근 권한 제어</li>
         <li>로그인 여부에 따라 적절한 페이지 리다이렉션 처리 자동화</li>
       </ul>
+</div>
 
-|기본형|반응형|
-|------|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/b5f26d3a-5a69-4e8f-bd2b-f9005c67065b)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/a49c6e6d-1770-45e1-8fe3-1b4c7d099439)|
+
+|로그인/회원가입 페이지|
+|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/a49c6e6d-1770-45e1-8fe3-1b4c7d099439" style="width:300px;" /> |
   
 <br><br><br><br>
 
-## 4. 마이페이지 - 수강생
+## 4. 마이페이지
+<h3> 4-1. 마이페이지 - 수강생 </h3>
 <div>
       <ul>
         <li>프로필 수정</li>
@@ -180,28 +184,17 @@
         <li>내가 등록한 클래스 보기 및 삭제</li>
         <li>내 클래스 예약한 수강생 보기</li>
       </ul>
-      <ul>
-        <li>supabase api 호출</li>
-        <li>Supabase Storage를 활용하여 이미지 파일 업로드</li>
-        <li>Supabase SQP Editor를 활용하여 DB Join을 통해 data api 호출</li>
-      </ul>
 
-|기본형|반응형|
-|------|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/97160618-f429-4b9d-945b-6d5fa10c0385)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/effe4df1-793c-42c1-b6f5-089b824c19d6)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/1ef25d93-61a0-44fd-aabf-cd7f8b43b279)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d21a5095-41b0-458d-919a-47830ed84c85)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/4891387f-b1ee-4923-8261-b896004dcdcd)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/dd480512-21b9-41ce-aff7-80181debb55b)|
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/d9330115-3037-4559-a8f4-b7097ea41cb5)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/92a99aa7-c39f-43f8-b116-8b53a08e9222)|
+|프로필 수정하기|선생님 정보 수정하기|내가 등록한 클래스|예약한 수강생 리스트|
+|---|---|---|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/effe4df1-793c-42c1-b6f5-089b824c19d6" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d21a5095-41b0-458d-919a-47830ed84c85" style="width:300px;" />|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/dd480512-21b9-41ce-aff7-80181debb55b" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/92a99aa7-c39f-43f8-b116-8b53a08e9222" style="width:300px;" /> |
 
 <br><br>
 
 ## 5. 클래스 등록/수정 페이지
-  <h3> 5-1. 클래스 등록 페이지 </h3>
-      <ul>
+
+<div>
+	      <ul>
         <li>클래스 이름, 설명 등 기본적인 정보 입력</li>
         <li>여러 날짜와 시간 선택</li>
         <li>최대 5개의 이미지 업로드 가능</li>
@@ -211,30 +204,18 @@
         <li>카카오 우편 조회 API 활용 위치 정보 입력</li>
         <li>React Day picker 라이브러리를 통한 날짜 선택 기능</li>
       </ul>
+</div>
 
-|기본형|반응형|
-|------|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/e724d92a-3ab7-4728-9621-8221252019a5)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/dccc276d-c32b-4152-bd0d-7b58fc6950dc)|
-
-  <h3> 5-2. 클래스 수정 페이지 </h3>
-
-|기본형|반응형|
-|------|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/71cfae6b-15f1-435a-84a3-b384243119ea)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/9021872f-714b-4c18-904b-0b036e1f66ef)|
-
-  <h3> 5-3. 클래스 등록/수정 완료 페이지 </h3>
-  
-|기본형|반응형|
-|------|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/afa518b3-47fa-4230-a0c5-311e5a384d9f)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/7f7b01b4-c180-4113-853f-371f66d9cf1e)|
+|클래스 등록 페이지|클래스 수정 페이지|클래스 등록/수정 완료 페이지|
+|---|---|---|
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/dccc276d-c32b-4152-bd0d-7b58fc6950dc" style="width:300px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/9021872f-714b-4c18-904b-0b036e1f66ef" style="width:300px;" />|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/7f7b01b4-c180-4113-853f-371f66d9cf1e" style="width:300px;" /> |
  
 <br><br>
 
 ## 6. 클래스 예약 페이지
-  <h3> 6. 클래스 예약 페이지 </h3>
+<div>
+
+</div>
       <ul>
         <li>달력에서 예약 가능한 일자와 시간, 예약 인원 수를 선택하고 예약을 진행합니다</li>
         <li>클래스의 일자 정보를 관리하기 위해 date와 time 테이블을 생성하였고, 선택한 클래스 ID를 기준으로 date와 time 테이블을 조인하여 데이터를 불러옵니다.</li>
@@ -242,11 +223,10 @@
         <li>무료 클래스의 경우 결제과정 없이 바로 예약됩니다.</li>
       </ul>
 
-|기본형|반응형|
-|------|---|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/24a0973b-d794-44ec-9265-c99a4a480cb7)|![image](https://github.com/limhyerin/StudyNote/assets/70150896/21d60298-2a06-4ba0-875e-c4af853958f9)|
-      
+|클래스 예약 페이지|
+|---|
+ |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/21d60298-2a06-4ba0-875e-c4af853958f9" style="width:300px;" /> |
+
 <br><br>
 
 ## 7. 클래스 결제 페이지
@@ -255,28 +235,36 @@
         <li>예약하기 클릭 시 URL 파라미터를 사용해 동적으로 결제금액을 받아 위젯에 반영</li>
         <li>원하는 결제 수단 클릭 후 결제진행</li>
         <li>결제 성공 시 라우트 핸들러로 리다이렉트</li>
+	<li>결제 실패 시 라우트 핸들러로 리다이렉트</li>
+	<li>모바일의 경우 결제 테스트가 제공되지 않아 안내문구 기재 </li>
       </ul>
-
-|기본형|
-|------|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-|![image](https://github.com/limhyerin/StudyNote/assets/70150896/e784f9f0-0e1b-4a93-b194-a5a988654f54)|
 
   <h3> 7-2. 클래스 결제 완료 </h3>
       <ul>
         <li>사용자가 결제를 완료하면 route handler에서 결제 승인 api를 호출하여 결제 승인 여부를 판단하고 적절하게 리다이렉트합니다</li>
         <li>예약이 성공적으로 완료되면 예약한 정보를 보여주고, 예약 상세보기를 통해 마이페이지에서 상세 정보를 확인할 수 있습니다</li>
       </ul>
-  
-|기본형|
-|------|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/d6b9f69f-3bf1-41e5-826b-29368f47d29a" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/05ed52bc-3d6e-4ea0-ad53-78ce8713f715" style="width:300px;" /> |
-![image](https://github.com/limhyerin/StudyNote/assets/70150896/642887de-f886-4a2c-a70e-ba6e2fc6acd3)
+
+
+|클래스 결제 완료|
+|---|
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/63fd856b-cf4c-4ab8-b979-b05af370c29b" style="width:300px;" /> |
+
+  <h3> 7-3. 클래스 결제 실패 </h3>
+      <ul>
+        <li>사용자가 결제를 완료하면 route handler에서 결제 승인 api를 호출하여 결제 승인 여부를 판단하고 적절하게 리다이렉트</li>
+        <li>예약이 실패하는 경우 메인페이지 또는 예약하던 클래스 페이지로 리다이렉트</li>
+      </ul>
+      
+|클래스 결제 실패|
+|---|
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/be3106f6-bbfc-4cef-8c7f-948f06551ac8" style="width:300px;" /> |
+
 
       
 <br><br>
 
-## 9. 클래스 채팅페이지
+## 8. 클래스 채팅페이지
 <div>
 	<ul>
         <li>채팅방에서 사용자 간의 대화를 표시하고, 각 메시지에는 보낸 시간과 함께 이미지 또는 텍스트 메시지 표시</li>
@@ -291,7 +279,7 @@
 |---|---|
 |<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/9882f6c7-6ab2-4e6d-8467-f7d80710528e" style="width:300px;" /> |<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/83626f63-0163-4757-9043-367acb5be665" style="width:300px;" /> |
 
-<br><br>![image_480]()
+<br><br>
 
 
 ## 9. 알림/좋아요
@@ -304,9 +292,9 @@
         <li>알림 아이콘 토글, 바깥 영역 클릭 감지(닫기)</li>
       </ul>
 
-|기본형|
+|알림창 기능|
 |------|
-|<img src="(https://github.com/limhyerin/StudyNote/assets/70150896/ed4a9888-5d3a-4c21-a51a-5f5dc674c7a1" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/c61d3a14-0093-4489-9ee4-fbbc7997aa9d" style="width:300px;" /> |
+|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/c61d3a14-0093-4489-9ee4-fbbc7997aa9d" style="width:300px;" /> |
 
   <h3> 9-2. 좋아요 기능 </h3>
       <ul>
@@ -316,9 +304,8 @@
 
 |위시리스트페이지|리스트페이지|
 |------|------|
-|<img src="https://github.com/limhyerin/StudyNote/assets/70150896/3f758630-600f-4c80-b322-339c63e9d240" style="width:500px;" /> |<img src="https://github.com/limhyerin/StudyNote/assets/70150896/195a2482-b7b6-40ff-9432-2bafd552b691" style="width:300px;" /> |
+|<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/24b3f91e-b887-453d-a46a-53dad7e72512" style="width:300px;" /> |<img src="https://github.com/ClassRoom-Project/ClassRoom-Project/assets/134301942/90148bda-0560-45b5-af1b-ec46847a918a" style="width:300px;" /> |
 
-   
 <br><br>
 
 
