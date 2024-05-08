@@ -1,11 +1,9 @@
 import { DragEvent, useRef, useState } from 'react';
-import { MdPhotoCamera } from 'react-icons/md';
 import { RiCloseCircleLine } from 'react-icons/ri';
 import { useCreateNewPhotoMessage } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import Image from 'next/image';
 import { uploadPhotosToSupabase } from '@/app/api/chatRooms/getChatRooms';
-import { BsSend } from 'react-icons/bs';
 import { ChatImageeModalType } from '@/types/chat/chatTypes';
 import LoadingSpinner from '@/components/common/LoadingSpinner';
 

@@ -1,6 +1,5 @@
 import { Metadata } from 'next';
 import LoginPage from './_component/LoginPage';
-import loginMetadataImage from '@/assets/images/loginMetadataImage.png';
 
 export const metadata: Metadata = {
   title: '클룸 회원가입/로그인페이지',
@@ -12,7 +11,7 @@ export const metadata: Metadata = {
     description: '다채로운 매력을 지닌 원데이 클래스들을 즐기기 위해 로그인을 해보세요!',
     images: [
       {
-        url: '../../assets/images/loginMetadataImage.jpg',
+        url: '../../assets/images/loginMetadataImage.png',
         width: 500,
         height: 400
       }

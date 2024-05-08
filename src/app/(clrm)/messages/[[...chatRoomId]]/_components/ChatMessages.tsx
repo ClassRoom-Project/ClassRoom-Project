@@ -13,7 +13,6 @@ import { useRouter } from 'next/navigation';
 import { MdPhotoCamera } from 'react-icons/md';
 import { IoIosLogOut } from 'react-icons/io';
 import { BsSend } from 'react-icons/bs';
-import { TbArrowBack } from 'react-icons/tb';
 
 export default function ChatMessages({ mainImage, fromUserId, chatId, otherId, title, toClassId }: ChatMessagesType) {
   const [imageModal, setImageModal] = useState(false);
