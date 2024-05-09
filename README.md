@@ -146,7 +146,7 @@
 <div>
       <ul>
         <li>NextAuth를 이용한 사용자 인증</li>
-        <li>Json Web Token을 활용해 사용자 세션 관리</li>
+        <li>Json Web Token을 활용해 사용자 상태 관리</li>
         <li>서버사이드 미들웨어로 경로별 접근 권한 제어</li>
         <li>로그인 여부에 따라 적절한 페이지 리다이렉션 처리 자동화</li>
       </ul>
