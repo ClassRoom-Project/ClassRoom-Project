@@ -44,13 +44,13 @@ const handler = NextAuth({
       };
       return true;
     },
-    async session({ session, token, user }) {
-      if (user && session.user) {
-        session.user.image = user.image;
-        session.user.email = user.email;
-      }
-      return session;
-    },
+    // async session({ session, token, user }) {
+    //   if (user && session.user) {
+    //     session.user.image = user.image;
+    //     session.user.email = user.email;
+    //   }
+    //   return session;
+    // },
     async jwt({ token, user }) {
       if (user) {
         token.uid = user.id;

@@ -1,5 +1,4 @@
 'use client';
-import ChatBot from '@/components/chatbot/ChatBot';
 import MainPage from './main/page';
 import { Bubble } from '@typebot.io/nextjs';
 

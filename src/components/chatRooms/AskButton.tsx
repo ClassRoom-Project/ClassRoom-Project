@@ -1,6 +1,6 @@
 'use client';
 
-import { useCreateNewRoom } from '@/hooks/useChatRoom/useNewChatRoom';
+import { useCreateNewRoom, useReadChatRooms } from '@/hooks/useChatRoom/useNewChatRoom';
 import { useLoginStore } from '@/store/login/loginUserIdStore';
 import { useRouter } from 'next/navigation';
 
@@ -16,6 +16,7 @@ export default function AskButton({
   const router = useRouter();
   const { loginUserId } = useLoginStore();
   const { createNewRoomMutate } = useCreateNewRoom();
+  const { chatroomsInfo } = useReadChatRooms(loginUserId!);
 
   const onhandleClick = () => {
     if (!loginUserId) {
@@ -33,7 +34,19 @@ export default function AskButton({
       },
       {
         onSuccess: () => {
-          router.replace('/messages');
+          const chatroom = chatroomsInfo?.find(
+            ({ fromUserId, teacherUserId, toClassId }) =>
+              (fromUserId === loginUserId || teacherUserId === loginUserId) && toClassId === classId
+          );
+
+          if (chatroom) {
+            const { fromUserId, teacherUserId, chatId, title, toClassId, image } = chatroom;
+            const otherId = loginUserId === teacherUserId ? fromUserId : teacherUserId;
+            const mainImage = image && image.length > 0 ? image[0] : '';
+            router.replace(
+              `/messages?fromUserId=${fromUserId}&chatId=${chatId}&otherId=${otherId}&title=${title}&toClassId=${toClassId}&mainImage=${mainImage}`
+            );
+          }
         },
         onError: (error: any) => {
           console.error(error);

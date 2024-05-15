@@ -3,15 +3,13 @@
 import useLoginUserId from '@/hooks/useLogin/useLoginUserId';
 import { useReadLoginUserId } from '@/hooks/useLogin/useSetEmailToApi';
 import useSetSessionStorage from '@/hooks/useLogin/useSetStorage';
-import useSessionStorageUserEmail from '@/hooks/useLogin/useSessionStorageUserEmail';
+import { getToken } from 'next-auth/jwt';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { Suspense } from 'react';
 
 export default function LoginState() {
   const { data: session, status } = useSession();
 
-  // const userEmail = session?.user?.email ?? null;
   const userEmail = session?.user?.email ?? null;
 
   useSetSessionStorage();

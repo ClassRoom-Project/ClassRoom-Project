@@ -93,11 +93,6 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
     };
   }, [chatId, loginUserId, queryClient]);
 
-  const handleMessageDelete = (messageId: number) => {
-    deleteMessageMutate(messageId);
-    deleteMessage();
-  };
-
   //새로운 메시지 들어오는 경우 자동으로 스크롤 하단으로 이동
   useEffect(() => {
     let timerId: NodeJS.Timeout | number | undefined;
@@ -116,6 +111,11 @@ export default function MessageBoxs({ toClassId, title, chatId, otherId, student
     //setTimeout 사용하는 경우 clearTimeout을 이용해 꼭 초기화 해주어야함
     return () => clearTimeout(timerId);
   }, [readChatRoomMessages]);
+
+  const handleMessageDelete = (messageId: number) => {
+    deleteMessageMutate(messageId);
+    deleteMessage();
+  };
 
   //medium-zoom
   const handleImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {

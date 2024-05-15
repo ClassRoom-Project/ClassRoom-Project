@@ -42,6 +42,7 @@ export interface ChatRoom {
   makeClassUserId: string;
   nickName: string;
   profileImg: string;
+  mainImage:string
 }
 
 export interface ChatPreviewType {

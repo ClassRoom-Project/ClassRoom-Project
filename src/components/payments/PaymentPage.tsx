@@ -57,9 +57,9 @@ export default function PaymentPageasync() {
   }, [price]);
 
   return (
-    <div className=" mx-auto my-20 flex h-screen max-w-2xl items-center justify-center px-4">
+    <div className=" responsiveHeight mx-auto my-20 flex max-w-2xl items-center justify-center px-4">
       <div className="mt-4 flex flex-col  gap-2">
-        <h1 className="text-button-default-colo flex w-full justify-center text-lg font-semibold md:text-2xl">
+        <h1 className="flex w-full justify-center text-lg font-semibold text-button-default-color md:text-2xl">
           확인 및 결제
         </h1>
         <p className="text-grey-600 mb-4">
