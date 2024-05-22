@@ -65,7 +65,7 @@ export const SearchClass = () => {
           maxLength={20}
           onChange={handleSearchChange}
           value={selectedTitle}
-          className="h-10 w-[152px] min-w-0 rounded-xl text-sm outline-none mobile:w-[202px] sm:w-[232px] md:h-12 md:w-[224px] md:text-base lg:w-[264px] 2xl:w-[436px]"
+          className="h-10 w-[152px] min-w-0 rounded-xl pl-4 text-sm outline-none mobile:w-[202px] sm:w-[232px] md:h-12 md:w-[224px] md:text-base lg:w-[264px] 2xl:w-[436px]"
           type="text"
           placeholder={placeHolder}
         />
