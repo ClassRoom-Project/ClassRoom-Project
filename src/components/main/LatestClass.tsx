@@ -10,6 +10,8 @@ import { useLatestClassInfoStore } from '@/store/classInfoStore';
 import { getLatestClassInfo } from '@/app/api/mainpage/getClassAllInfo';
 import style from './emblaCarousel.module.css';
 
+export const dynamic = 'force-dynamic';
+
 const LatestClass = () => {
   const { LatestClassInfos, setLatestClassInfos } = useLatestClassInfoStore();
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 3000 })]);

@@ -1,6 +1,6 @@
 'use client';
 import dynamic from 'next/dynamic';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import useRegisterStore from '@/store/registerStore';
 import 'react-quill/dist/quill.snow.css';
 
@@ -15,7 +15,7 @@ interface ClassContentProps {
 
 const ReactQuill = dynamic(() => import('react-quill'), {
   ssr: false,
-  loading: () => <></>,
+  loading: () => <></>
 });
 
 const CustomToolbar = () => (
@@ -64,20 +64,20 @@ const ClassContent: React.FC<ClassContentProps> = ({ isEditMode, initialData }) 
   };
 
   return (
-    <div className="mt-4 h-96 mb-2 md:mb-1 lg:mb-1">
-      <div className="flex flex-col md:flex-row items-start space-x-0 md:space-x-4 space-y-4 md:space-y-0 w-full">
-        <p className="text-sm md:text-base lg:text-base text-[#3F3F3F] flex-shrink-0 font-bold">
-          <span className='text-[#d63232] font-bold'>*</span> 클래스 설명
+    <div className="mb-2 mt-4 h-96 md:mb-1 lg:mb-1">
+      <div className="flex w-full flex-col items-start space-x-0 space-y-4 md:flex-row md:space-x-4 md:space-y-0">
+        <p className="flex-shrink-0 text-sm font-bold text-[#3F3F3F] md:text-base lg:text-base">
+          <span className="font-bold text-[#d63232]">*</span>클래스 설명
         </p>
-        <div className="flex-grow w-full">
+        <div className="w-full flex-grow">
           <CustomToolbar />
           <ReactQuill
             theme="snow"
             value={classContent}
             onChange={handleClassContentChange}
             modules={{
-              toolbar: {container: "#toolbar"},
-              clipboard: {matchVisual: false},
+              toolbar: { container: '#toolbar' },
+              clipboard: { matchVisual: false }
             }}
             formats={[
               'header',
@@ -89,11 +89,11 @@ const ClassContent: React.FC<ClassContentProps> = ({ isEditMode, initialData }) 
               'indent',
               'link',
               'color',
-              'background', 
-              'clean',
+              'background',
+              'clean'
             ]}
             placeholder="클래스의 상세 설명을 입력해주세요"
-            className="form-input rounded text-lg h-60 md:h-72 lg:h-92"
+            className="form-input lg:h-92 h-60 rounded text-lg md:h-72"
           />
         </div>
       </div>

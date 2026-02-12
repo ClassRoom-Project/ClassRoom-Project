@@ -10,8 +10,11 @@ import { useBestClassInfoStore } from '@/store/classInfoStore';
 import { getBestClassInfo } from '@/app/api/mainpage/getClassAllInfo';
 import style from './emblaCarousel.module.css';
 
+export const dynamic = 'force-dynamic';
+
 const BestClass = () => {
   const { BestClassInfos, setBestClassInfos } = useBestClassInfoStore();
+  console.log('BestClassInfos', BestClassInfos);
   const [emblaRef, embla] = useEmblaCarousel({ loop: true, align: 'start' }, [Autoplay({ delay: 3000 })]);
 
   //카드들이 제대로 나오지 않는 경우가 있는 경우 방지
@@ -30,6 +33,7 @@ const BestClass = () => {
 
     fetchClassInfo();
   }, [setBestClassInfos]);
+
   return (
     <div className="mb-8 mt-3 flex w-full flex-col">
       <div className="ml-2 w-full">
